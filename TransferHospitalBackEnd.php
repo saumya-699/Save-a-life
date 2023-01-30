@@ -1,0 +1,66 @@
+
+
+<?php 
+session_start();
+
+?>
+
+    
+
+<?php
+
+require 'conp.php';            //make connection here
+if(isset($_POST['BtnSubmit']))
+{
+  //here getting result from the post array after submitting the form.
+    
+	$Hospital_ID=  $_POST["Hospital_ID"];
+    $HName=$_POST["HName"];
+	$Transfer=$_POST["Transfer"];
+	$TransferBy=$_POST["TransferBy"];
+	$date=$_POST["date"];
+    $x= $_SESSION["ID"];
+     			
+			
+  $mql="update hospital set Remark='Non-functioning',Director_ID=' $x' WHERE Hospital_ID='$Hospital_ID'";
+//insert the user into the database.
+    $sql="insert into transferdetails(Transfer_ID,Hospital_ID,HospitalName,Transfered_to,Transfered_By,Date)VALUES('','$Hospital_ID','$HName','$Transfer','$TransferBy','$date')";
+    if($conn->query($sql))
+     {
+      
+	     echo '<script type="text/javascript">';
+		 echo 'alert("Trasfereing is successfully");';
+          echo 'window.location.href="DeactivateOrUpdateHospital.php";';
+
+		 echo '</script>';
+
+	  
+	  
+	  
+     }
+     else
+	 {
+		 
+		   
+		 echo '<script type="text/javascript">';
+		  echo "Error in ".$sql."<br>".$conn->error;
+		
+		 echo 'alert("Error in entering try again!");';
+     
+		 echo '</script>';
+		  
+ 
+		 
+	 }
+	 
+ 
+ 
+ 
+ 		 // echo "Error in ".$sql."<br>".$conn->error;
+	
+		
+}
+ 
+$conn->close();
+
+?>
