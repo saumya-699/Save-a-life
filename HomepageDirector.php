@@ -25,6 +25,16 @@ require 'mj.php'
         <link rel="stylesheet" type="text/css" href="styles/styles.css">
         
         
+      <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css'>
+    <link rel="stylesheet" href="style.css">  
+	<link rel="stylesheet" href="css/nbtssl/nbtssl.min.css">
+    <link rel="stylesheet" href="css/fontawesome-free-5.15.4/css/all.css">
+    <link rel="stylesheet" href="css/mediaquery.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+    <!-- Style CSS -->
+   
+
+     
 
 
      
@@ -377,6 +387,124 @@ td, th {
 
 
 
+.top li {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  font-weight: 500;
+  font-style: italic;
+  font-family:Open Sans, sans-serif;
+}
+
+
+.logo-massaviu {
+  position: fixed;
+  padding-left: 0px;
+  background: transparent;
+  overflow: hidden;
+  z-index: 1;
+  width: 198px;
+  padding-top:9px;
+  padding-left:6px;
+}
+
+.top-right
+{
+ display: flex;
+ margin-bottom:1px;
+ margin-left:1020px;
+  padding-left:300px;
+ 
+ 
+}
+.name{
+display: flex;
+ margin-bottom:-10px;
+ cursor: pointer;
+
+}
+
+.person{
+   cursor: pointer;
+}
+
+.notification{
+  cursor: pointer;
+}
+
+
+.welcome{
+ margin-left:400px;
+
+}
+
+.dropdownx{
+   cursor: pointer;
+
+}
+
+.dropdownx:hover{  
+  color: black;
+}
+
+
+.dropdownx-content {
+  display: none;
+  position: absolute;
+  background-color: #C14246;
+  min-width: 90px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdownx-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdownx-content a:hover {background-color: #f5646c}
+
+.dropdownx:hover .dropdownx-content {
+  display: block;
+}
+
+.dropdownx:hover .dropbtn {
+  background-color: #3e8e41;
+}
+
+
+.top {
+  list-style-type: none;
+  margin-top:-8px;
+  padding-bottom:0px;
+  overflow: hidden;
+  padding-top:10px;
+  background-color:#E56262;
+  width:100%;
+  height:57px;
+  position:fixed;
+  top:0;
+  
+}
+
+
+
+.name li {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 1px 16px;
+  font-weight: 500;
+  font-style: italic;
+  font-family:Open Sans, sans-serif;
+  position:fixed;
+}
+
 
 
  </style>
@@ -399,7 +527,58 @@ td, th {
     <body>
        <!--Header-->
         
-        
+        <div class="logo-massaviu">
+  &nbsp; &nbsp; 
+</div>
+<div class="top">
+<ul class="name" >
+
+  <li>&nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <font size="5.2px"> National Blood Transfusion Service  </font size></li>
+ 
+
+ <li>
+<div class="top-right">
+            <div class="notification">
+                <span class="material-icons licon">
+                    notifications
+                </span>
+            </div>
+			&nbsp; 
+			<div class="person">
+                <span class="material-icons licon">
+                    person
+                </span>
+            </div>
+			&nbsp;
+	<div class="name">
+    <?php
+      // session_start();
+     echo " " . $_SESSION['Name'];
+    ?>
+	<br>Director</div>
+	
+			
+  <div class="dropdownx">
+               <span class="material-icons licon">
+                    arrow_drop_down
+                </span> 
+				<div class="dropdownx-content">
+  <a href="#"> <span class="material-icons licon">
+  person
+                </span> Profile</a>
+  <a href="logout.php">
+  <span class="material-icons licon">
+  exit_to_app
+                </span>  
+  Log out</a>
+  </div>
+            </div>
+ </li>
+ </div>
+</ul>
+
+
+</div>
 
 	<div id="main">
 
@@ -455,24 +634,24 @@ td, th {
 	    <th>No of donations</th>
 	  </tr>
 	  <tr>
-	    <td>Alfreds Futterkiste</td>
-	    <td>Maria Anders</td>
-	    <td>Germany</td>
+	    <td></td>
+	    <td></td>
+	    <td></td>
 	  </tr>
 	  <tr>
-	    <td>Centro comercial Moctezuma</td>
-	    <td>Francisco Chang</td>
-	    <td>Mexico</td>
+	    <td></td>
+	    <td></td>
+	    <td></td>
 	  </tr>
 	  <tr>
-	    <td>Ernst Handel</td>
-	    <td>Roland Mendel</td>
-	    <td>Austria</td>
+	    <td></td>
+	    <td></td>
+	    <td></td>
 	  </tr>
 	  <tr>
-	    <td>Island Trading</td>
-	    <td>Helen Bennett</td>
-	    <td>UK</td>
+	    <td></td>
+	    <td></td>
+	    <td></td>
 	  </tr>
 	  
 	  

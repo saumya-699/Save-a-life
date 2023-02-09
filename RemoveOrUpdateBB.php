@@ -16,12 +16,73 @@ include 'mj.php';
 <html>
 
 <head>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css'>
+
+    <link rel="stylesheet" href="style.css">  
+	<link rel="stylesheet" href="css/nbtssl/nbtssl.min.css">
+    <link rel="stylesheet" href="css/fontawesome-free-5.15.4/css/all.css">
+    <link rel="stylesheet" href="css/mediaquery.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
 
 
 </head>
 <body>
 <br><br>
+<!--Header-->
+	      <div class="logo-massaviu">
+  &nbsp; &nbsp; 
+</div>
+<div class="top">
+<ul class="name" >
+
+  <li>&nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <font size="5.2px"> National Blood Transfusion Service  </font size></li>
+ 
+
+ <li>
+<div class="top-right">
+            <div class="notification">
+                <span class="material-icons licon">
+                    notifications
+                </span>
+            </div>
+			&nbsp; 
+			<div class="person">
+                <span class="material-icons licon">
+                    person
+                </span>
+            </div>
+			&nbsp;
+	<div class="name">
+    <?php
+      // session_start();
+     echo " " . $_SESSION['Name'];
+    ?>
+	<br>Director</div>
+	
+			
+  <div class="dropdownx">
+               <span class="material-icons licon">
+                    arrow_drop_down
+                </span> 
+				<div class="dropdownx-content">
+  <a href="#"> <span class="material-icons licon">
+  person
+                </span> Profile</a>
+  <a href="logout.php">
+  <span class="material-icons licon">
+  exit_to_app
+                </span>  
+  Log out</a>
+  </div>
+            </div>
+ </li>
+ </div>
+</ul>
+
+
+</div>
+			   
  
  <form method="post" action="SearchBB.php">
  
@@ -57,7 +118,7 @@ include 'mj.php';
 
 require 'conp.php';
     
-$sql= "select * from BloodBank_doctor";
+$sql= "select * from BloodBank_doctor where Remark!='Removed'";
 $result = $conn->query($sql);
 
 if($result->num_rows>0)
@@ -84,7 +145,7 @@ if($result->num_rows>0)
                 <input type=hidden name=BloodBank_doctor_ID  value=".$row['BloodBank_doctor_ID'].">
                 <button type=submit value=update name=update  class='f1'><img src=edit.png width=26 height=26></button>
                 </form>
-                <form method='POST' action ='Delete_BB.php'>
+                <form method='POST' action ='Delete_BB.php'  onsubmit='return myConfirm()'>
                 <input type=hidden  name=BloodBank_doctor_ID  value=".$row['BloodBank_doctor_ID']." >
                 <button type=submit value=Delete name=delete class='f2' ><img src=dx.png width=30 height=33></button>
                 </form>
@@ -116,7 +177,17 @@ $conn->close();
 ?>
 
 
+<script>
+function myConfirm() {
+  var result = confirm("Want to delete?");
+  if (result==true) {
+   return true;
+  } else {
+   return false;
+  }
+}
 
+</script>
 
 
 <style>
@@ -241,10 +312,11 @@ h1{
 				  
 				  
 				  
+				    
 				    .f2{
 					      //background-color:red;
 						    margin-left:90px;
-							margin-top:-50px;
+							margin-top:-30px;
 							background-color:transparent;
 							 border: none;
 						   cursor:pointer;
@@ -273,7 +345,7 @@ h1{
 					 
 					  //background-color:green;
 					  margin-right:100px;
-					  margin-top:16px;
+					  margin-top:1px;
 					 
 					  margin-bottom:-53px;
 					  background-color:transparent;
@@ -283,6 +355,8 @@ h1{
 					  
 					  
 				  }
+			   
+			   
 			   
 			   
 			   .tab{
@@ -322,7 +396,149 @@ h1{
 		
 	}
 		
-		
+		.name li {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 1px 16px;
+  font-weight: 500;
+  font-style: italic;
+  font-family:Open Sans, sans-serif;
+  position:fixed;
+}
+
+
+.logo-massaviu {
+  position: fixed;
+  padding-left: 0px;
+  background: transparent;
+  overflow: hidden;
+  z-index: 1;
+  width: 198px;
+  padding-top:9px;
+  padding-left:6px;
+}
+
+
+
+.top li {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  font-weight: 500;
+  font-style: italic;
+  font-family:Open Sans, sans-serif;
+}
+
+
+.logo-massaviu {
+  position: fixed;
+  padding-left: 0px;
+  background: transparent;
+  overflow: hidden;
+  z-index: 1;
+  width: 198px;
+  padding-top:9px;
+  padding-left:6px;
+}
+
+.top-right
+{
+    display: flex;
+ margin-bottom:1px;
+ margin-left:1020px;
+ padding-left:300px;
+ 
+}
+.name{
+display: flex;
+ margin-bottom:-10px;
+ cursor: pointer;
+
+}
+
+.person{
+   cursor: pointer;
+}
+
+.notification{
+  cursor: pointer;
+}
+
+
+.welcome{
+ margin-left:400px;
+
+}
+
+.dropdownx{
+   cursor: pointer;
+
+}
+
+.dropdownx:hover{  
+  color: black;
+}
+
+
+.dropdownx-content {
+  display: none;
+  position: absolute;
+  background-color: #C14246;
+  min-width: 90px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdownx-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdownx-content a:hover {background-color: #f5646c}
+
+.dropdownx:hover .dropdownx-content {
+  display: block;
+}
+
+.dropdownx:hover .dropbtn {
+  background-color: #3e8e41;
+}
+
+
+
+.top {
+  list-style-type: none;
+  margin-top:-8px;
+  padding-bottom:0px;
+  overflow: hidden;
+  padding-top:10px;
+  background-color:#E56262;
+  width:100%;
+  height:57px;
+  position:fixed;
+  top:0;
+  
+}
+
+
+
+.name li {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 1px 16px;
+  font-weight: 500;
+  font-style: italic;
+  font-family:Open Sans, sans-serif;
+  position:fixed;
+}	   
 			   
 </style>
 

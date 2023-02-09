@@ -21,7 +21,182 @@ require 'mj.php'
  
     <head>
 
-        
+   
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css'>
+
+    <link rel="stylesheet" href="style.css">  
+	<link rel="stylesheet" href="css/nbtssl/nbtssl.min.css">
+    <link rel="stylesheet" href="css/fontawesome-free-5.15.4/css/all.css">
+    <link rel="stylesheet" href="css/mediaquery.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+	
+<style>
+
+		
+.top {
+  list-style-type: none;
+  margin-top:-10px;
+  padding-bottom:0px;
+  overflow: hidden;
+  background-color:#E56262;
+  width:100%;
+  height:57px;
+  position:fixed;
+  top:0;
+  
+}
+
+
+
+.name li {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 1px 16px;
+  font-weight: 500;
+  font-style: italic;
+  font-family:Open Sans, sans-serif;
+  position:fixed;
+}
+
+
+.logo-massaviu {
+  position: fixed;
+  padding-left: 0px;
+  background: transparent;
+  overflow: hidden;
+  z-index: 1;
+  width: 198px;
+  padding-top:0px;
+  padding-left:6px;
+  margin-top:-75px;
+}
+
+
+
+
+
+.top li {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  font-weight: 500;
+  font-style: italic;
+  font-family:Open Sans, sans-serif;
+}
+
+
+.logo-massaviu {
+  position: fixed;
+  padding-left: 0px;
+  background: transparent;
+  overflow: hidden;
+  z-index: 1;
+  width: 198px;
+  padding-top:10px;
+  padding-left:6px;
+}
+
+
+.top-right
+{
+    display: flex;
+ margin-bottom:1px;
+ margin-left:1020px;
+ padding-left:300px;
+ 
+}
+.name{
+display: flex;
+ margin-bottom:-10px;
+ cursor: pointer;
+
+}
+
+.person{
+   cursor: pointer;
+}
+
+.notification{
+  cursor: pointer;
+}
+
+
+.welcome{
+ margin-left:400px;
+
+}
+
+.dropdownx{
+   cursor: pointer;
+
+}
+
+.dropdownx:hover{  
+  color: black;
+}
+
+
+.dropdownx-content {
+  display: none;
+  position: absolute;
+  background-color: #C14246;
+  min-width: 90px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdownx-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdownx-content a:hover {background-color: #f5646c}
+
+.dropdownx:hover .dropdownx-content {
+  display: block;
+}
+
+.dropdownx:hover .dropbtn {
+  background-color: #3e8e41;
+}
+
+
+.top {
+  list-style-type: none;
+  margin-top:-8px;
+  padding-bottom:0px;
+  overflow: hidden;
+  padding-top:10px;
+  background-color:#E56262;
+  width:100%;
+  height:57px;
+  position:fixed;
+  top:0;
+  
+}
+
+
+
+.name li {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 1px 16px;
+  font-weight: 500;
+  font-style: italic;
+  font-family:Open Sans, sans-serif;
+  position:fixed;
+}
+
+
+</style> 
         
 
 
@@ -30,7 +205,8 @@ require 'mj.php'
    <style>
    
           .yu{
-			  width:80px;
+			  width:200px;
+			  height:30px;
 			  
 			  
 		  }
@@ -111,11 +287,7 @@ require 'mj.php'
 
                  }  
 
-            .container{
-                          
-                         margin:0px 40px 60px 100px;
-
-                 }
+            
                     
                span.prof{
                             float:right;
@@ -206,62 +378,112 @@ a {text-decoration: none;}
     </head>
     <body>
        <!--Header-->
+       <!--Header-->
+      <div class="logo-massaviu">
+  &nbsp; &nbsp; 
+</div>
+<div class="top">
+<ul class="name" >
+
+  <li>&nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <font size="5.2px"> National Blood Transfusion Service  </font size></li>
+ 
+
+ <li>
+<div class="top-right">
+            <div class="notification">
+                <span class="material-icons licon">
+                    notifications
+                </span>
+            </div>
+			&nbsp; 
+			<div class="person">
+                <span class="material-icons licon">
+                    person
+                </span>
+            </div>
+			&nbsp;
+	<div class="name">
+    <?php
+      // session_start();
+     echo " " . $_SESSION['Name'];
+    ?>
+	<br>Director</div>
+	
+			
+  <div class="dropdownx">
+               <span class="material-icons licon">
+                    arrow_drop_down
+                </span> 
+				<div class="dropdownx-content">
+  <a href="#"> <span class="material-icons licon">
+  person
+                </span> Profile</a>
+  <a href="logout.php">
+  <span class="material-icons licon">
+  exit_to_app
+                </span>  
+  Log out</a>
+  </div>
+            </div>
+ </li>
+ </div>
+</ul>
+
+
+</div>  
         
-        
 
 
 
-<div class="slider">
-<br> <br>
-
-
-
-
-<div class="midiv"> 
-   <div class="passwordDiv">
+ 
+    
+    <div class="container frm-login">
+        <div class="card frm-form">
+            <div class="card-body frm-body">
 
    
-       
-    
+   
      <form method="post" action="ReportGeneration.php">
         
-                           <center> <b> <font size=8> Report Generation</font></b><br></center>
+                          
 						   
-						   <br> <br> <br><br> <br>
-						   
-                              
-                            
-							 <b> <font size=5> Report name </font></b>   <select name= "report" class="select">
-                             <option value="Statistic">Statistic</option>
-                             
-                             <option value="Karapitiya Teaching Hospital">Karapitiya&nbsp;Teaching&nbsp;Hospital</option>
-                             <option value="Galle_general_hospital" selected>Galle_general_hospital</option>
-                             </select>
-							 <br><br><br>
+						  
 							   
+							   
+                              <h1 class="txt-l">Report Generation</h1>
+
+                       <label for="exampleFormControlInput1" class="form-label lbl star">  Report name </label>
+                       <select name="report" id="" class="form-control txt-input" required>
+                       <option value="N" selected>Statistic</option>
+
+                        <option value="F">Annual</option >
+                       </select>
 							    
-							 <b> <font size=5> Hospital name </font></b>   <select name= "HName" class="select">
-                             <option value="Statistic">Statistic</option>
-                             
-                             <option value="Karapitiya Teaching Hospital">Karapitiya&nbsp;Teaching&nbsp;Hospital</option>
-                             <option value="Galle_general_hospital" selected>Galle_general_hospital</option>
-                             </select>
-							 <br><br><br>
+
+                       <label for="exampleFormControlInput1" class="form-label lbl star">  Hospital name</label>
+                       <select name="report" id="" class="form-control txt-input" required>
+                       <option value="Karapitiya Teaching Hospital">Karapitiya&nbsp;Teaching&nbsp;Hospital</option>
+                       <option value="Galle_general_hospital" selected>Galle General Hospital</option>
+						 </select>
+							    
+						     
+							
+					     <label for="exampleFormControlInput1" class="form-label lbl star">   Export method</label>
+                         <select name="report" id="" class="form-control txt-input" required>
+                         <option value="Karapitiya Teaching Hospital">pdf</option>
+						  <option value="Karapitiya Teaching Hospital">doc</option>
+                         <option value="Galle_general_hospital" selected>jpeg</option>
+						  <option value="Galle_general_hospital" selected>png</option>
+							  </select>
+							    
 							 
-							     
-							 <b> <font size=5> Export method </font></b>   <select name= "HName" class="select">
-                             <option value="Statistic">Statistic</option>
-                             
-                             <option value="Karapitiya Teaching Hospital">Karapitiya&nbsp;Teaching&nbsp;Hospital</option>
-                             <option value="Galle_general_hospital" selected>Galle_general_hospital</option>
-                             </select>
-							 <br><br><br>
 							 
-							      <b> <font size=5> Time period </font></b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							 
+							    <label for="exampleFormControlInput1" class="form-label lbl star">   Time period</label><br>
                             
                             
-                             From<input type="date" placeholder="From" name="From" id="From" class="yu">&nbsp;&nbsp;
-							      To<input type="date" placeholder="To" name="To" id="To" class="yu"><br><br><br>
+                             From &nbsp;<input type="date" placeholder="From" name="From" id="From" class="yu">&nbsp;&nbsp;
+							      To &nbsp;<input type="date" placeholder="To" name="To" id="To" class="yu"><br><br><br>
         
                                
 							   
@@ -276,17 +498,10 @@ a {text-decoration: none;}
    
   </div>
  
-  <div  class="container">
-  
-
-     <button type="submit"  name="BtnSubmit" id="saveChanges" class="b1" ><b>Generate</b></button>
-	  
-	   <button type="button"  name="btnCancel" id="Cancel" class="b2" ><b><a href="home.php"><font color="white">Cancel</font></a></b></button>
-   
-      </div>
-      </form> 
   </div>
-
+ 
+  </form> 
+ 
 
 
 </body>

@@ -22,15 +22,33 @@ if(isset($_POST['BtnSubmit']))
     $x= $_SESSION["ID"];
      			
 			
-  $mql="update hospital set Remark='Non-functioning',Director_ID=' $x' WHERE Hospital_ID='$Hospital_ID'";
+  $mql="update hospital set Remark='Non-functioning',Director_ID='$x+1' WHERE Hospital_ID='$Hospital_ID'";
+  
+  if($conn->query($mql))
+     {
+      
+	     echo '<script type="text/javascript">';
+		 echo 'alert("updated successfully");';
+          echo 'window.location.href="DeactivateOrUpdateHospital.php";';
+
+		 echo '</script>';
+
+	  
+	  
+	  
+     }
 //insert the user into the database.
     $sql="insert into transferdetails(Transfer_ID,Hospital_ID,HospitalName,Transfered_to,Transfered_By,Date)VALUES('','$Hospital_ID','$HName','$Transfer','$TransferBy','$date')";
+	vql="update nurse set Remark='Removed' where Hospital_ID = '$Hospital_ID'";
+	cql="update mlt set Remark='Removed' where Hospital_ID = '$Hospital_ID'";
+	gql="update bloodbank_doctor set Remark='Removed' where Hospital_ID = '$Hospital_ID'";
+	wql="update warddoctor set Remark='Removed' where Hospital_ID = '$Hospital_ID'";
     if($conn->query($sql))
      {
       
 	     echo '<script type="text/javascript">';
 		 echo 'alert("Trasfereing is successfully");';
-          echo 'window.location.href="DeactivateOrUpdateHospital.php";';
+         echo 'window.location.href="DeactivateOrUpdateHospital.php";';
 
 		 echo '</script>';
 

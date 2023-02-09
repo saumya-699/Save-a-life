@@ -23,8 +23,19 @@ require 'mj.php'
 
         
         
+ <!-- Vanilla Datepicker CSS -->
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css'>
 
+    <link rel="stylesheet" href="style.css">  
+	<link rel="stylesheet" href="css/nbtssl/nbtssl.min.css">
+    <link rel="stylesheet" href="css/fontawesome-free-5.15.4/css/all.css">
+    <link rel="stylesheet" href="css/mediaquery.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
+    <!-- Style CSS -->
+   
+
+ 
      
       
    <style>
@@ -107,11 +118,7 @@ require 'mj.php'
 
                  }  
 
-            .container{
-                          
-                         margin:0px 40px 60px 100px;
-
-                 }
+           
                     
                span.prof{
                             float:right;
@@ -183,6 +190,156 @@ a {text-decoration: none;}
 	        
       }
 
+
+
+.top {
+  list-style-type: none;
+  margin-top:-10px;
+  padding-bottom:0px;
+  overflow: hidden;
+  background-color:#E56262;
+  width:100%;
+  height:57px;
+  position:fixed;
+  top:0;
+  
+}
+
+
+
+
+.logo-massaviu {
+  position: fixed;
+  padding-left: 0px;
+  background: transparent;
+  overflow: hidden;
+  z-index: 1;
+  width: 198px;
+  padding-top:0px;
+  padding-left:6px;
+  margin-top:-75px;
+}
+
+
+
+.top li {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  font-weight: 500;
+  font-style: italic;
+  font-family:Open Sans, sans-serif;
+}
+
+
+.logo-massaviu {
+  position: fixed;
+  padding-left: 0px;
+  background: transparent;
+  overflow: hidden;
+  z-index: 1;
+  width: 198px;
+  padding-top:9px;
+  padding-left:6px;
+}
+
+.top-right
+{
+    display: flex;
+ margin-bottom:1px;
+ margin-left:1020px;
+ padding-left:300px;
+ 
+}
+.name{
+display: flex;
+ margin-bottom:-10px;
+ cursor: pointer;
+
+}
+
+.person{
+   cursor: pointer;
+}
+
+.notification{
+  cursor: pointer;
+}
+
+
+.welcome{
+ margin-left:400px;
+
+}
+
+.dropdownx{
+   cursor: pointer;
+
+}
+
+.dropdownx:hover{  
+  color: black;
+}
+
+
+.dropdownx-content {
+  display: none;
+  position: absolute;
+  background-color: #C14246;
+  min-width: 90px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdownx-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdownx-content a:hover {background-color: #f5646c}
+
+.dropdownx:hover .dropdownx-content {
+  display: block;
+}
+
+.dropdownx:hover .dropbtn {
+  background-color: #3e8e41;
+}
+
+
+
+.top {
+  list-style-type: none;
+  margin-top:-8px;
+  padding-bottom:0px;
+  overflow: hidden;
+  padding-top:10px;
+  background-color:#E56262;
+  width:100%;
+  height:57px;
+  position:fixed;
+  top:0;
+  
+}
+
+
+
+.name li {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 1px 16px;
+  font-weight: 500;
+ 
+  font-family:Open Sans;
+  position:fixed;
+}
+
  </style>
 
 
@@ -202,40 +359,107 @@ a {text-decoration: none;}
     </head>
     <body>
        <!--Header-->
+      <div class="logo-massaviu">
+  &nbsp; &nbsp; 
+</div>
+<div class="top">
+<ul class="name" >
+
+  <li>&nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <font size="5.2px"> National Blood Transfusion Service  </font size></li>
+ 
+
+ <li>
+<div class="top-right">
+            <div class="notification">
+                <span class="material-icons licon">
+                    notifications
+                </span>
+            </div>
+			&nbsp; 
+			<div class="person">
+                <span class="material-icons licon">
+                    person
+                </span>
+            </div>
+			&nbsp;
+	<div class="name">
+    <?php
+      // session_start();
+     echo " " . $_SESSION['Name'];
+    ?>
+	<br>Director</div>
+	
+			
+  <div class="dropdownx">
+               <span class="material-icons licon">
+                    arrow_drop_down
+                </span> 
+				<div class="dropdownx-content">
+  <a href="#"> <span class="material-icons licon">
+  person
+                </span> Profile</a>
+  <a href="logout.php">
+  <span class="material-icons licon">
+  exit_to_app
+                </span>  
+  Log out</a>
+  </div>
+            </div>
+ </li>
+ </div>
+</ul>
+
+
+</div>
         
-        
 
 
+       <?php
 
+       
+function generate_pw() {
+  $pw;
+  // Set random length for password
+  $password_length = rand(8, 16);
+  $pw = '';
+
+  for($i = 0; $i < $password_length; $i++) {
+    $pw .= chr(rand(32, 126));
+  }
+  return $pw;
+}
+
+
+$hel = generate_pw();
+?>
 <?php
 require 'conp.php';
 $date =date("Y/m/d");
-echo "<div class='slider'>
-<br> <br>
+echo "
 
 
 
-
-<div class='midiv'> 
-   <div class='passwordDiv'>
+    <div class='container frm-login'>
+        <div class='card frm-form'>
+            <div class='card-body frm-body'>
 
    
        
     
      <form method='post' action='addNurseBackEnd.php' id='FormName'>
-        
-                           <center> <b> <font size=8> Add nurse</font></b><br></center>
+                           <center> <b>  <h1 class='txt-l'>Add Nurse</h1></b></center>
+         
 						   
-						   <br> <br> <br>
+						 
 						   
                               
                               
-                             <b> <font size=5> Name with initials</font></b><br><br>
-                             <input type='text' placeholder='Enter the name' name='Name' id='name' class='box' required><br><br><br>
+                           <label for='exampleFormControlInput1' class='form-label lbl star'>Name with Initials</label>
+                           <input type='text' placeholder='Enter the name' name='Name' id='name' class='form-control txt-input' required>
 							 
 							 
-							  <b> <font size=5> NIC number</font></b><br><br>
-                             <input type='text' placeholder='Enter the name' name='NIC' id='NIC' class='box'  onchange='myFunction1()' required><br><br><br>";
+					    <label for='exampleFormControlInput1' class='form-label lbl star'>NIC Number</label>
+                        <input type='text' placeholder='Enter the NIC number' name='NIC' id='NIC' class='form-control txt-input'  onchange='myFunction1()' required>";
 							
 
 ?>
@@ -251,10 +475,12 @@ echo "<div class='slider'>
    {     
    
 
-          	      echo "<b> <font size=5> Hospital name </font></b>";
+          	      echo "<label for='exampleFormControlInput1' class='form-label lbl star'>Hospital name</label>";
 				  
 	     echo 
-		   "<select name='hospital' class='select' required>";
+		   "<select name='hospital' class='form-control txt-input' required>
+		     <option value='Not Provided'> None</option>";
+                      
 	  
 	 
       while($row=$result->fetch_assoc())
@@ -275,45 +501,52 @@ echo "<div class='slider'>
 	
 	<?php
 	
-             echo "<br><br><br>";  
-	        echo   "<b><font size=5> Position </font></b><select id='position' name='position' class='select' required>
-                             <option value='Head nurse'>Head&nbsp;nurse</option>
-                             
-                             <option value='Nurse'>Nurse</option>
-                             
-                             </select>
-							 <br><br><br>
-                             
-                             
+             
+	        echo   "<label for='exampleFormControlInput1' class='form-label lbl star'>Position</label>
+                         <select id='position' name='position'  class='form-control txt-input' required>
+						   <option value=;Not Provided'> None</option>
+                         <option value='Head nurse'> Head&nbsp;nurse
+						 </option>
+                         <option value='Nurse'> Nurse</option>
+                        
+                        
+                         </select>
+                          
                              
                            
                               
                            
-                             <b> <font size=5> DOB</font></b><br><br>
-                             <input type='date' name='DOB' id='DOB' class='box' required><br><br><br>
+                              <label for='exampleFormControlInput1' class='form-label lbl star'>DOB</label>
+                             
+							   <div class='input-group mb-4'>
+                        <i class='fas fa-calendar-alt input-group-text'></i>
+
+                        <input type='datetime' name='DOB' id='DOB' class='datepicker_input form-control txt-input' placeholder='Select Date' required>
+                    </div>
+
         
         
-                             <b> <font size=5> SLMC number </font></b><br><br>
-                             <input type='text' placeholder='Enter the SLMC number' name='SLMC' id='slmc' class='box'  onchange='myFunction()' required><br><br><br>
+                              <label for='exampleFormControlInput1' class='form-label lbl star'>SLMC Number</label>
+                             <input type='text' placeholder='Enter the SLMC number' name='SLMC' id='slmc' class='form-control txt-input'  onchange='myFunction()' required>
                              
 					
-                             <b> <font size=5> Email </font></b><br><br>
-                             <input type='email' placeholder='Enter the Email' name='Email' class='box' id='Email'  required><br><br><br>
+                           <label for='exampleFormControlInput1' class='form-label lbl star'>Email</label>
+                             <input type='email' placeholder='Enter the Email' name='Email' class='form-control txt-input' id='Email'  required>
         
                              
-                            <b><font size=5> Contact number</font></b><br><br>
-                            <input type='tel' placeholder='Enter the contact number' name='contactNumber'  class='box'  id='contact' pattern='[0-9]{10}' required><br><br><br>
+                           <label for='exampleFormControlInput1' class='form-label lbl star'>Contact Number</label>
+                            <input type='tel' placeholder='Enter the contact number' name='contactNumber'  class='form-control txt-input'  id='contact' pattern='[0-9]{10}' required>
 							
-							 <b><font size=5> Date of appoinment</font></b><br><br>
-                             <input type='text'  name='DOA' id='DOA' class='box' value='$date'><br><br><br>
+							 <label for='exampleFormControlInput1' class='form-label lbl star'>Date of Appoinment</label>
+                             <input type='text'  name='DOA' id='DOA' class='form-control txt-input' value='$date'>
 				
-							 <b> <font size=5> User name</font></b><br><br>
-                             <input type='text' name='Uname' id='Uname' class='box' required><br><br><br>
+							 <label for='exampleFormControlInput1' class='form-label lbl star'>User Name</label>
+                             <input type='text' name='Uname' id='Uname' class='form-control txt-input' required>
                            
 						   
 						   <script type='text/javascript'>
                       
-					  function myFunction(){
+					 function myFunction(){
                      var x = document.forms['FormName']['slmc'].value;
                      
                     
@@ -321,38 +554,25 @@ echo "<div class='slider'>
                      }
                       </script>
                                
-                            <b><font size=5> Password</font></b><br><br>
-                            <input type='password'  name='password'  class='box'  id='Pw'  required>
+                      <label for='exampleFormControlInput1' class='form-label lbl star'>Password</label>
+                      <input type='password'  name='password'  class='form-control txt-input'  value='$hel'  required>
 
-                   
-						   <script type='text/javascript'>
-                      
-					  function myFunction1(){
-                     var y = document.forms['FormName']['NIC'].value;
-                     
-                    
-					 document.getElementById('Pw').value = y;  
-                     }
-                      </script>
+                  <div class='row btn-buttons'>
+                        
+                        <div class='col btn-but'> <input type='submit' name='BtnSubmit' value='Add' class='btn btn-danger btn-reg'></div>
+                        <div class='col btn-but'> <a href='RemoveORUpdateWardDoctor.php'><input type='submit' name='btnCancel' value='Cancel' class='btn btn-secondary btn-can'></a></div>
+                    </div>
+					
+					</form>
           </div>
 		
-
+   </div>
    
-  </div>
-  
- 
-  <div  class='container'>
-  
-
-     <button type='submit'  name='BtnSubmit' id='saveChanges' class='b1' ><b>Add</b></button>
-	  
-	   <button type='button'  name='btnCancel' id='Cancel' class='b2' ><b><a href='home.php'><font color='white'>Cancel</font></a></b></button>
-   
-      </div>
-      </form> 
   </div>";
 
 ?>
+
+
 
 </body>
 
@@ -373,3 +593,47 @@ echo "<div class='slider'>
 	 }
  
 ?>
+
+
+
+    <!-- nbtssl 5 JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/nbtssl@5.1.0/dist/js/nbtssl.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+    <!-- Vanilla Datepicker JS -->
+    <script src='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/js/datepicker-full.min.js'></script>
+
+    <script>
+        /* nbtssl 5 JS included */
+        /* vanillajs-datepicker 1.1.4 JS included */
+
+        const getDatePickerTitle = elem => {
+            // From the label or the aria-label
+            const label = elem.nextElementSibling;
+            let titleText = '';
+            if (label && label.tagName === 'LABEL') {
+                titleText = label.textContent;
+            } else {
+                titleText = elem.getAttribute('aria-label') || '';
+            }
+            return titleText;
+        }
+
+        const elems = document.querySelectorAll('.datepicker_input');
+        for (const elem of elems) {
+            const datepicker = new Datepicker(elem, {
+                'format': 'dd/mm/yyyy', // UK format
+                title: getDatePickerTitle(elem)
+            });
+        }
+		
+		
+		
+		function go(){
+			
+		echo "window.location.href='RemoveORUpdateWardDoctor.php'";
+		
+			
+			
+			
+		}
+    </script>

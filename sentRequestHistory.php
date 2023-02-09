@@ -19,6 +19,14 @@ include 'cj.php';
 
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         
+   <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css'>
+
+    <link rel="stylesheet" href="style.css">  
+	<link rel="stylesheet" href="css/nbtssl/nbtssl.min.css">
+    <link rel="stylesheet" href="css/fontawesome-free-5.15.4/css/all.css">
+    <link rel="stylesheet" href="css/mediaquery.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+
 
 
 
@@ -65,22 +73,19 @@ if($result->num_rows>0)
 
 	   
 	   echo  "<div class='tab'>";
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Request_ID"."</th>"."<th style='text-align:center;width:120px;'>"."Requested_hospital_name"."</th>"."<th>"."Requested_by"."</th>"."<th>"."Requeired_blood_group"."</th>"."<th>"."Requeired_blood_component"."</th>"."<th style='width:120px;'>"."Action"."</th>"."</tr>";
+	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Request_ID"."</th>"."<th style='text-align:center;width:120px;'>"."Requested_hospital_name"."</th>"."<th>"."Requested_by"."</th>"."<th>"."Requeired_blood_group"."<th style='width:120px;'>"."Action"."</th>"."</tr>";
       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
    while($row = $result->fetch_assoc())
    
    {     
      
-	  echo  "<tr>"."<td>".$row["Request_ID"]."</td>"."<td>".$row["Requested_hospital_name"]."</td>"."<td>".$row["Requested_by"]."</td>"."<td>".$row["Requeired_blood_group"]."</td>"."<td>".$row["Requeired_blood_component"]."</td>";
-	   echo "<td><form method='POST' action ='showAllSentHistory.php'>
+	  echo  "<tr>"."<td>".$row["Request_ID"]."</td>"."<td>".$row["Requested_hospital_name"]."</td>"."<td>".$row["Requested_by"]."</td>"."<td>".$row["Requeired_blood_group"]."</td>";
+	   echo "<td><form method='POST' action ='ShowAllSentRequest.php'>
                 <input type=hidden name=Request_ID value=".$row["Request_ID"].">
                 <button type=submit value=view name=view  class='fp'><img src=eye.png width=43 height=37></button>
                 </form>
 	
-                <form method='POST' action ='DeleteHistory.php'>
-                <input type=hidden  name=Request_ID value=".$row["Request_ID"]." >
-                <button type=submit value=Delete name=delete class='f2' ><img src=dx.png width=30 height=33></button>
-                </form>
+               
                 </td>";
 				 echo "</tr>";
 	 
@@ -198,7 +203,7 @@ h1{
                     background-color:transparent;
                     
                     //margin-left:396px;
-                   // margin-right:325px;
+                   margin-right:0px;
                     margin-bottom:-52px;
                     padding:2px 90px 30px 10px;
 					margin-top:10px;
@@ -245,9 +250,9 @@ h1{
 				  
 				  
 				    .f2{
-					      //background-color:red;
+					      background-color:red;
 						    margin-left:90px;
-							margin-top:-50px;
+							margin-top:-7px;
 							background-color:transparent;
 							 border: none;
 						   cursor:pointer;
@@ -259,13 +264,15 @@ h1{
 				  
 				  .f1{
 					     // background-color:yellow;
-						      background-color:transparent;
-						  margin-left:55px;
-						    margin-right:60px;
+						      //background-color:transparent;
+						  
+						    margin-right:70px;
 							margin-bottom:0px;
 							margin-top:2px;
 						   border: none;
 						   cursor:pointer;
+//background-color:red;
+
 						  
 						  
 				  }
@@ -275,10 +282,10 @@ h1{
 					  
 					 
 					  //background-color:green;
-					  margin-right:100px;
-					  margin-top:16px;
+					  margin-right:0px;
+					  margin-top:0px;
 					 
-					  margin-bottom:-53px;
+					  margin-bottom:-8px;
 					  background-color:transparent;
 					   border: none;
 					   cursor:pointer;
@@ -329,22 +336,8 @@ h1{
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
-.top {
-  list-style-type: none;
-  margin-top:-10px;
-  padding-bottom:0px;
-  overflow: hidden;
-  background-color:#E56262;
-  width:100%;
-  height:57px;
-  position:fixed;
-  top:0;
-  
-}
 
-
-
-.name li {
+		.name li {
   float: left;
   display: block;
   color: white;
@@ -368,14 +361,6 @@ h1{
   padding-left:6px;
 }
 
-body {
-  background-image: url("ki.png");
-  background-repeat: no-repeat;
-  background-position:top;
-  background-attachment: fixed;
-  
-  
-}
 
 
 .top li {
@@ -406,6 +391,7 @@ body {
     display: flex;
  margin-bottom:1px;
  margin-left:1020px;
+ padding-left:300px;
  
 }
 .name{
@@ -465,19 +451,14 @@ display: flex;
   background-color: #3e8e41;
 }
 
-body {
-  background-image: url("ki.png");
-  background-repeat: no-repeat;
-  background-position:top;
-  
-  
-}
+
 
 .top {
   list-style-type: none;
-  margin-top:-10px;
+  margin-top:-8px;
   padding-bottom:0px;
   overflow: hidden;
+  padding-top:10px;
   background-color:#E56262;
   width:100%;
   height:57px;
@@ -498,8 +479,8 @@ body {
   font-style: italic;
   font-family:Open Sans, sans-serif;
   position:fixed;
-}
-
+}	   
+			 
 
 		
 			   
@@ -535,7 +516,7 @@ body {
       // session_start();
      echo " " . $_SESSION['Name'];
     ?>
-	<br>Director</div>
+	<br>Blood bank doctor</div>
 	
 			
   <div class="dropdownx">

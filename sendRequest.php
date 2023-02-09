@@ -53,7 +53,181 @@ $resultd = $conn->query($vql);
     <head>
 
         
-        
+           
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css'>
+
+    <link rel="stylesheet" href="style.css">  
+	<link rel="stylesheet" href="css/nbtssl/nbtssl.min.css">
+    <link rel="stylesheet" href="css/fontawesome-free-5.15.4/css/all.css">
+    <link rel="stylesheet" href="css/mediaquery.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+	
+   
+	
+<style>
+
+		
+.top {
+  list-style-type: none;
+  margin-top:-10px;
+  padding-bottom:0px;
+  overflow: hidden;
+  background-color:#E56262;
+  width:100%;
+  height:57px;
+  position:fixed;
+  top:0;
+  
+}
+
+
+
+.name li {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 1px 16px;
+ 
+  position:fixed;
+}
+
+
+.logo-massaviu {
+  position: fixed;
+  padding-left: 0px;
+  background: transparent;
+  overflow: hidden;
+  z-index: 1;
+  width: 198px;
+  padding-top:0px;
+  padding-left:6px;
+  margin-top:-75px;
+}
+
+
+
+.top li {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  font-weight: 500;
+  font-style: italic;
+  font-family:Open Sans, sans-serif;
+}
+
+
+.logo-massaviu {
+  position: fixed;
+  padding-left: 0px;
+  background: transparent;
+  overflow: hidden;
+  z-index: 1;
+  width: 198px;
+  padding-top:10px;
+  padding-left:6px;
+}
+
+
+.top-right
+{
+    display: flex;
+ margin-bottom:1px;
+ margin-left:1020px;
+ padding-left:300px;
+ 
+}
+.name{
+display: flex;
+ margin-bottom:-10px;
+ cursor: pointer;
+
+}
+
+.person{
+   cursor: pointer;
+}
+
+.notification{
+  cursor: pointer;
+}
+
+
+.welcome{
+ margin-left:400px;
+
+}
+
+.dropdownx{
+   cursor: pointer;
+
+}
+
+.dropdownx:hover{  
+  color: black;
+}
+
+
+.dropdownx-content {
+  display: none;
+  position: absolute;
+  background-color: #C14246;
+  min-width: 90px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdownx-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdownx-content a:hover {background-color: #f5646c}
+
+.dropdownx:hover .dropdownx-content {
+  display: block;
+}
+
+.dropdownx:hover .dropbtn {
+  background-color: #3e8e41;
+}
+
+
+
+.top {
+  list-style-type: none;
+  margin-top:-8px;
+  padding-bottom:0px;
+  overflow: hidden;
+  padding-top:10px;
+  background-color:#E56262;
+  width:100%;
+  height:57px;
+  position:fixed;
+  top:0;
+  
+}
+
+
+
+.name li {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 1px 16px;
+  font-weight: 500;
+  font-style: italic;
+  font-family:Open Sans, sans-serif;
+  position:fixed;
+}
+
+
+</style> 
 
 
      
@@ -138,12 +312,7 @@ $resultd = $conn->query($vql);
 
                  }  
 
-            .container{
-                          
-                         margin:0px 40px 60px 100px;
-
-                 }
-                    
+            
                span.prof{
                             float:right;
                             margin-left:50px;
@@ -232,7 +401,59 @@ a {text-decoration: none;}
 
     </head>
     <body>
-       <!--Header-->
+        <!--Header-->
+      <div class="logo-massaviu">
+  &nbsp; &nbsp; 
+</div>
+<div class="top">
+<ul class="name" >
+
+  <li>&nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <font size="5.2px"> National Blood Transfusion Service  </font size></li>
+ 
+
+ <li>
+<div class="top-right">
+            <div class="notification">
+                <span class="material-icons licon">
+                    notifications
+                </span>
+            </div>
+			&nbsp; 
+			<div class="person">
+                <span class="material-icons licon">
+                    person
+                </span>
+            </div>
+			&nbsp;
+	<div class="name">
+    <?php
+      // session_start();
+     echo " " . $_SESSION['Name'];
+    ?>
+	<br>Blood bank doctor</div>
+	
+			
+  <div class="dropdownx">
+               <span class="material-icons licon">
+                    arrow_drop_down
+                </span> 
+				<div class="dropdownx-content">
+  <a href="#"> <span class="material-icons licon">
+  person
+                </span> Profile</a>
+  <a href="logout.php">
+  <span class="material-icons licon">
+  exit_to_app
+                </span>  
+  Log out</a>
+  </div>
+            </div>
+ </li>
+ </div>
+</ul>
+
+
+</div> 
         
         
 
@@ -241,22 +462,16 @@ a {text-decoration: none;}
 <?php
 require 'conp.php';
 $date =date("Y/m/d");
-echo "<div class='slider'>
-<br> <br>
+echo "
 
-
-
-<div class='midiv'> 
-   <div class='passwordDiv'>
-
-   
+<div class='container frm-login'>
+        <div class='card frm-form'>
+            <div class='card-body frm-body'>
        
     
      <form method='post' action='sendRequestbackEnd.php' id='FormName'>
         
-                           <center> <b> <font size=8> External request <br><br><br>for components</font></b><br></center>
-						   
-						   <br> <br> <br>";
+                            <h1 class='txt-l'>External request for <br>components</h1>";
 						   
                               
                               
@@ -270,8 +485,8 @@ echo "<div class='slider'>
 	<?php
 	
              echo "<br><br><br>";  
-	        echo  "<b><font size=5>  Requesting hospital name </font></b><br><br>
-          <input type='text'  name='H1Name' id='DOA' class='box' value='$tz'><br><br><br>";
+	        echo    "<label for='exampleFormControlInput1' class='form-label lbl star'> Requesting hospital name </label>
+          <input type='text'  name='H1Name' id='DOA' class='form-control txt-input' value='$tz'>";
 ?>
     
     
@@ -286,10 +501,10 @@ if($result->num_rows>0)
 {     
 
 
-      echo "<b> <font size=5> Requested hospital name </font></b><br><br>";
+      echo "<label for='exampleFormControlInput1' class='form-label lbl star'> Requested hospital name </label>";
 
 echo 
-"<select name='H2Name' class='box' required>";
+"<select name='H2Name' class='form-control txt-input' required>";
 
 
 while($row=$result->fetch_assoc())
@@ -310,16 +525,25 @@ echo "</select>";
 
           
   <?php      
-          echo "<br><br><br>
+          echo "
+    
         
-                             <b> <font size=5>Reuesting blood bank doctor name</font></b><br><br>
-                             <input type='text' name='RBDN' id='slmc' class='box' value='$nm' required>
-                             <br><br><br>
-                             <b><font size=5> Required blood component</font></b><br><br><select id='position' name='RBC' class='box' required>
-                             <option value='RBC'>Head&nbsp;nurse</option></select>
-                             <br><br><br>
-                             <b><font size=5> Required blood group</font></b><br><br><select id='position' name='RBG' class='box' required>
-                             <option value='A+'>A+</option>
+                            <label for='exampleFormControlInput1' class='form-label lbl star'>Reuesting blood bank doctor name</label>
+                            <input type='text' name='RBDN' id='slmc' class='form-control txt-input' value='$nm' required> 
+                           
+                             <label for='exampleFormControlInput1' class='form-label lbl star'> Required blood component</label>	 
+	                         <select id='position' name='RBC'  class='form-control txt-input' required>
+                             <option value='Head nurse'> 
+						    </option>
+                            <option value='Nurse'> Nurse</option>
+                            </select>
+                          
+                             
+							 
+							 <label for='exampleFormControlInput1' class='form-label lbl star'> Required blood group</label>	 
+	                         <select id='position' name='RBG'  class='form-control txt-input' required>
+                              <option value='None'>None</option>
+							 <option value='A+'>A+</option>
                              <option value='A-'>A-</option>
                              <option value='B+'>B+</option>
                              <option value='B-'>B-</option>
@@ -327,36 +551,33 @@ echo "</select>";
                              <option value='O-'>O-</option>
                              <option value='AB+'>AB+</option>
                              <option value='AB-'>AB-</option>
-                             
-                             
-                             </select>
-                             <br><br><br>
-                             <b><font size=5> Required no of packs</font></b><br><br><select id='position' name='RBP' class='box' required>
-                             <option value='1'>1</option>
+                            </select>
+						
+							 
+							 <label for='exampleFormControlInput1' class='form-label lbl star'> Required no of packs</label>	 
+	                         <select id='position' name='RBP'  class='form-control txt-input' required>
+                             <option value='None'>None</option>
+							<option value='1'>1</option>
                              <option value='2'>2</option>
                              <option value='3'>3</option>
                              <option value='4'>4</option>
-                             </select> 
-                             <br><br><br>
-							               <b><font size=5>  Date</font></b><br><br>
-                             <input type='text'  name='Date' id='DOA' class='box' value='$date'><br><br><br>
- 
+                            </select>
+							              
+							 <label for='exampleFormControlInput1' class='form-label lbl star'> Date</label>	 
+                             <input type='text'  name='Date' id='DOA' class='form-control txt-input' value='$date'>
+							 
+                         <div class='row btn-buttons'>
+                        
+                        <div class='col btn-but'> <input type='submit' name='BtnSubmit' value='Send' class='btn btn-danger btn-reg'></div>
+                        <div class='col btn-but'> <input type='submit' name='btnCancel' value='Cancel' class='btn btn-secondary btn-can'></div>
+                    </div>
+					
+  </form> 
           </div>
 		
 
   </div>
-  
- 
-  <div  class='container'>
-  
-
-     <button type='submit'  name='BtnSubmit' id='saveChanges' class='b1' ><b>Send</b></button>
-	  
-	   <button type='button'  name='btnCancel' id='Cancel' class='b2' ><b><a href='home.php'><font color='white'>Cancel</font></a></b></button>
-   
-      </div>
-      </form> 
-  </div>";
+    </div>";
 
 
 }

@@ -15,13 +15,13 @@ require 'conp.php';
 if(isset($_POST["BtnSubmit"]))
 	{
 	
-       $Director_ID =$_POST["Director_ID"];
+       $NIC =$_POST["NIC"];
         
 
        $Password=$_POST["Password"];
 
   
-      $sql= "select * from director where Director_ID='$Director_ID' and Password='$Password'";
+      $sql= "select * from director where NIC='$NIC' and Password='$Password'";
 	  
         $result= $conn->query($sql);
 

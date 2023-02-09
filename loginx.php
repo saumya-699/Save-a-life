@@ -1,7 +1,7 @@
 
 <?php 
 session_start();
-include 'mj.php';
+include 'gj.php';
 
 
 ?>
@@ -182,8 +182,8 @@ a {text-decoration: none;}
                      <form method="post" action="loginxBackEnd.php">
                   
          
-                        <b> <label class="lb"><font size=6><font color= #ff0000>User ID</font></font><label></b><br>
-                             <input type="text" placeholder="Enter Director ID" name="Director_ID" class="validation" id="User ID" required><br>
+                        <b> <label class="lb"><font size=6><font color= #ff0000>User name</font></font><label></b><br>
+                             <input type="text" placeholder="Enter NIC number" name="NIC" class="validation" id="User ID" required><br>
 							 
                       
 
@@ -203,7 +203,7 @@ a {text-decoration: none;}
 
            <font size=4> <button type="button"  name="cancelBtn" id="cancelID" class="can" ><a href="home.php"> cancel</a></button>
 		   
-		    <font size=4> <button type="button"  name="forgetPassword" id="forgetPassword" class="fg" ><a href="home.php"> forget password</a></button>
+		    <font size=4> <button type="button"  name="forgetPassword" id="forgetPassword" class="fg" ><a href="DirectorSignUp.php"> sign up</a></button>
            
         </form>  
      

@@ -8,8 +8,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css">
+
 <style>
 
 
@@ -32,6 +31,7 @@
   font-weight:600;
 }
 
+a {text-decoration: none;}
 
 .sidenav a, .dropdown-btn {
   padding: 26px 8px 6px 16px;
@@ -114,56 +114,10 @@
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
-.top {
-  list-style-type: none;
-  margin-top:-10px;
-  padding-bottom:0px;
-  overflow: hidden;
-  background-color:#E56262;
-  width:100%;
-  height:57px;
-  position:fixed;
-  top:0;
-  
-}
 
 
 
-.name li {
-  float: left;
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 1px 16px;
-  font-weight: 500;
-  font-style: italic;
-  font-family:Open Sans, sans-serif;
-  position:fixed;
-}
 
-
-.logo-massaviu {
-  position: fixed;
-  padding-left: 0px;
-  background: transparent;
-  overflow: hidden;
-  z-index: 1;
-  width: 198px;
-  padding-top:9px;
-  padding-left:6px;
-}
-
-body {
-  background-image: url("ki.png");
-  background-repeat: no-repeat;
-  background-position:top;
-  background-attachment: fixed;
-  
-  
-}
-
-
-	
 
 </style>
 </head>
@@ -264,21 +218,16 @@ body {
   
   
  
-  <button class="dropdown-btn">Donor 
-    <i class="fa fa-caret-down"></i>
+
+  <button class="dropdown-btn" id="myButtonx">Donors
+  
   </button>
-  <div class="dropdown-container">
-  
-    <a href="#">Donor info</a>
-    <a href="#">Remove</a>
-  
-	
-  </div>
+   
  
   
   
  
-  <button class="dropdown-btn" id="myButton">reports
+  <button class="dropdown-btn" id="myButton"> reports
   
   </button>
    
@@ -292,6 +241,10 @@ body {
 <script>
    document.getElementById("myButton").onclick = function () {
         location.href = "ReportGeneration.php";
+    };
+	
+	document.getElementById("myButtonx").onclick = function () {
+        location.href = "View_Donors.php";
     };
 
 

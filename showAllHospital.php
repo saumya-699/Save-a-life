@@ -18,11 +18,68 @@ include 'mj.php';
 
 <head>
 
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css'>
 
+    <link rel="stylesheet" href="style.css">  
+	<link rel="stylesheet" href="css/nbtssl/nbtssl.min.css">
+    <link rel="stylesheet" href="css/fontawesome-free-5.15.4/css/all.css">
+    <link rel="stylesheet" href="css/mediaquery.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
 </head>
 <body>
+   <div class="logo-massaviu">
+  &nbsp; &nbsp; 
+</div>
+<div class="top">
+<ul class="name" >
 
+  <li>&nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <font size="5.2px"> National Blood Transfusion Service  </font size></li>
+ 
+
+ <li>
+<div class="top-right">
+            <div class="notification">
+                <span class="material-icons licon">
+                    notifications
+                </span>
+            </div>
+			&nbsp; 
+			<div class="person">
+                <span class="material-icons licon">
+                    person
+                </span>
+            </div>
+			&nbsp;
+	<div class="name">
+    <?php
+      // session_start();
+     echo " " . $_SESSION['Name'];
+    ?>
+	<br>Director</div>
+	
+			
+  <div class="dropdownx">
+               <span class="material-icons licon">
+                    arrow_drop_down
+                </span> 
+				<div class="dropdownx-content">
+  <a href="#"> <span class="material-icons licon">
+  person
+                </span> Profile</a>
+  <a href="logout.php">
+  <span class="material-icons licon">
+  exit_to_app
+                </span>  
+  Log out</a>
+  </div>
+            </div>
+ </li>
+ </div>
+</ul>
+
+
+</div>
 
 
  <form method="post" action="searchHospital.php">
@@ -66,7 +123,7 @@ if(isset($_POST['view']))
    
 
           
-	   echo  "<div class='tab'>";
+	  echo  "<div style='overflow-x:auto;' class='tab'>";
 	    
 	   echo  "<table border=1>"."<tr>"."<th>"."Hospital_ID"."</th>"."<th style='width:165px;'>"."HospitalName"."</th>"."<th style='width:115px;'>"."Type"."</th>"."<th style='width:105px;'>"."District"."</th>"."<th>"."Head_Of_Hospital"."</th>"."<th>"."Address"."</th>"."<th>"."Landline number"."</th>"."<th>"."Contact number of hospital head"."</th>"."<th>"."Director ID"."</th>"."<th>"."Remark"."</th>"."<th>"."Action"."</th>"."</tr>";
        echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=5'>"."</td>"."</tr>";
@@ -108,8 +165,24 @@ $conn->close();
 
 
 
-
+<button type="submit" name="data" id="data" class="bx"><a href="DeactivateOrUpdateHospital.php"><font color="white"><font size="3">Back</font></font></a></button>
 <style>
+
+   .bx{
+					      height:25px;
+				          width:100px;
+										   
+						    color:#FFF5F3;
+							margin-left:1185px; 
+							 border-radius:30px;
+                             margin-top:30px;
+                           background-color:#F35050;
+						   border: none;
+						   cursor:pointer;
+						   
+				            
+				  
+				  }
 table{
 	
 	
@@ -233,7 +306,7 @@ h1{
 				    .f2{
 					      //background-color:red;
 						    margin-left:90px;
-							margin-top:-50px;
+							margin-top:-30px;
 							background-color:transparent;
 							 border: none;
 						   cursor:pointer;
@@ -249,7 +322,7 @@ h1{
 						  margin-left:55px;
 						    margin-right:60px;
 							margin-bottom:0px;
-							margin-top:2px;
+							margin-top:12px;
 						   border: none;
 						   cursor:pointer;
 						  
@@ -312,7 +385,156 @@ h1{
 	}
 	
 		
-		
+	.top {
+  list-style-type: none;
+  margin-top:-10px;
+  padding-bottom:0px;
+  overflow: hidden;
+  background-color:#E56262;
+  width:100%;
+  height:57px;
+  position:fixed;
+  top:0;
+  
+}
+
+
+
+
+.logo-massaviu {
+  position: fixed;
+  padding-left: 0px;
+  background: transparent;
+  overflow: hidden;
+  z-index: 1;
+  width: 198px;
+  padding-top:0px;
+  padding-left:6px;
+  margin-top:-75px;
+}
+
+
+
+.top li {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  font-weight: 500;
+  font-style: italic;
+  font-family:Open Sans, sans-serif;
+}
+
+
+.logo-massaviu {
+  position: fixed;
+  padding-left: 0px;
+  background: transparent;
+  overflow: hidden;
+  z-index: 1;
+  width: 198px;
+  padding-top:9px;
+  padding-left:6px;
+}
+
+.top-right
+{
+    display: flex;
+ margin-bottom:1px;
+ margin-left:1020px;
+ padding-left:300px;
+ 
+}
+.name{
+display: flex;
+ margin-bottom:-10px;
+ cursor: pointer;
+
+}
+
+.person{
+   cursor: pointer;
+}
+
+.notification{
+  cursor: pointer;
+}
+
+
+.welcome{
+ margin-left:400px;
+
+}
+
+.dropdownx{
+   cursor: pointer;
+
+}
+
+.dropdownx:hover{  
+  color: black;
+}
+
+
+.dropdownx-content {
+  display: none;
+  position: absolute;
+  background-color: #C14246;
+  min-width: 90px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdownx-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdownx-content a:hover {background-color: #f5646c}
+
+.dropdownx:hover .dropdownx-content {
+  display: block;
+}
+
+.dropdownx:hover .dropbtn {
+  background-color: #3e8e41;
+}
+
+
+
+.top {
+  list-style-type: none;
+  margin-top:-8px;
+  padding-bottom:0px;
+  overflow: hidden;
+  padding-top:10px;
+  background-color:#E56262;
+  width:100%;
+  height:57px;
+  position:fixed;
+  top:0;
+  
+}
+
+
+
+.name li {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 1px 16px;
+  font-weight: 500;
+ 
+  font-family:Open Sans;
+  position:fixed;
+  
+  
+   
+}	
 			   
 </style>
 

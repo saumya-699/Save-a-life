@@ -12,10 +12,68 @@ include 'mj.php';
 
 <head>
 
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css'>
 
+    <link rel="stylesheet" href="style.css">  
+	<link rel="stylesheet" href="css/nbtssl/nbtssl.min.css">
+    <link rel="stylesheet" href="css/fontawesome-free-5.15.4/css/all.css">
+    <link rel="stylesheet" href="css/mediaquery.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
 </head>
 <body>
+<div class="logo-massaviu">
+  &nbsp; &nbsp; 
+</div>
+<div class="top">
+<ul class="name" >
+
+  <li>&nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <font size="5.2px"> National Blood Transfusion Service  </font size></li>
+ 
+
+ <li>
+<div class="top-right">
+            <div class="notification">
+                <span class="material-icons licon">
+                    notifications
+                </span>
+            </div>
+			&nbsp; 
+			<div class="person">
+                <span class="material-icons licon">
+                    person
+                </span>
+            </div>
+			&nbsp;
+	<div class="name">
+    <?php
+      // session_start();
+     echo " " . $_SESSION['Name'];
+    ?>
+	<br>Director</div>
+	
+			
+  <div class="dropdownx">
+               <span class="material-icons licon">
+                    arrow_drop_down
+                </span> 
+				<div class="dropdownx-content">
+  <a href="#"> <span class="material-icons licon">
+  person
+                </span> Profile</a>
+  <a href="logout.php">
+  <span class="material-icons licon">
+  exit_to_app
+                </span>  
+  Log out</a>
+  </div>
+            </div>
+ </li>
+ </div>
+</ul>
+
+
+</div>
 <br><br>
  
  <form method="post" action="SearchBB.php">
@@ -64,7 +122,7 @@ if(isset($_POST['view']))
           //echo "<font color=red>";
 	      //echo "<font size=6>";
 	   
-	   echo  "<div class='tab'>";
+	  echo  "<div style='overflow-x:auto;' class='tab'>";
 	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Doctor_ID"."</th>"."<th style='text-align:center;width:70px;'>"."Name_With_Initials"."</th>"."<th>"."Hospital name"."</th>"."<th>"."SLMC number"."</th>"."<th>"."Email"."</th>"."<th style='text-align:center;width90px;'>"."Contact number"."</th>"."<th>"."Remark"."</th>"."<th>"."Director_ID"."</th>"."<th style='text-align:left:width:20px;'>"."Action"."</th>"."</tr>";
       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=10'>"."</td>"."</tr>";
    while($row = $result->fetch_assoc())
@@ -228,14 +286,14 @@ h1{
 				  
 				  
 				  
-				    .f2{
+				 
+				  .f2{
 					      //background-color:red;
 						    margin-left:90px;
-							margin-top:-54px;
+							margin-top:-30px;
 							background-color:transparent;
 							 border: none;
-							  cursor:pointer;
-						  
+						   cursor:pointer;
 						   
 				            
 				  
@@ -247,12 +305,16 @@ h1{
 						      background-color:transparent;
 						  margin-left:55px;
 						    margin-right:60px;
-							margin-bottom:5px;
-							margin-top:20px;
+							margin-bottom:0px;
+							margin-top:12px;
 						   border: none;
 						   cursor:pointer;
 						  
+						  
 				  }
+			   
+			   
+				  
 				  
 				  
 			   
@@ -317,6 +379,123 @@ h1{
 				   text-decoration:none;
 			   }
 			   
+			   
+			      .top li {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  font-weight: 500;
+  font-style: italic;
+  font-family:Open Sans, sans-serif;
+}
+
+
+.logo-massaviu {
+  position: fixed;
+  padding-left: 0px;
+  background: transparent;
+  overflow: hidden;
+  z-index: 1;
+  width: 198px;
+  padding-top:9px;
+  padding-left:6px;
+}
+
+.top-right
+{
+    display: flex;
+ margin-bottom:1px;
+ margin-left:1020px;
+ padding-left:300px;
+ 
+}
+.name{
+display: flex;
+ margin-bottom:-10px;
+ cursor: pointer;
+
+}
+
+.person{
+   cursor: pointer;
+}
+
+.notification{
+  cursor: pointer;
+}
+
+
+.welcome{
+ margin-left:400px;
+
+}
+
+.dropdownx{
+   cursor: pointer;
+
+}
+
+.dropdownx:hover{  
+  color: black;
+}
+
+
+.dropdownx-content {
+  display: none;
+  position: absolute;
+  background-color: #C14246;
+  min-width: 90px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdownx-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdownx-content a:hover {background-color: #f5646c}
+
+.dropdownx:hover .dropdownx-content {
+  display: block;
+}
+
+.dropdownx:hover .dropbtn {
+  background-color: #3e8e41;
+}
+
+
+.top {
+  list-style-type: none;
+  margin-top:-8px;
+  padding-bottom:0px;
+  overflow: hidden;
+  padding-top:10px;
+  background-color:#E56262;
+  width:100%;
+  height:57px;
+  position:fixed;
+  top:0;
+  
+}
+
+
+
+.name li {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 1px 16px;
+  font-weight: 500;
+ 
+  font-family:Open Sans;
+  position:fixed;
+}	
 </style>
 
 </body>

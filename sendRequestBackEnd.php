@@ -5,8 +5,9 @@ if(isset($_POST['BtnSubmit']))
 {
   //here getting result from the post array after submitting the form.
     
-   // $H1Name=$_POST["H1Name"];
-    $H2Name=$_POST["H2Name"];
+   $H1Name=$_POST["H1Name"];
+   
+   $H2Name=$_POST["H2Name"];
     $RBDN=$_POST["RBDN"];
 	$RBC=$_POST["RBC"];
 	$RBG=$_POST["RBG"];
@@ -17,7 +18,7 @@ if(isset($_POST['BtnSubmit']))
 			
 
 //insert the user into the database.
-    $sql="insert into sent_request(Request_ID,Requested_hospital_name,Requested_by,Requeired_blood_group ,Requeired_blood_component,Requeired_no_of_packs,Date)VALUES(' ','$H2Name','$RBDN','$RBC','$$RBG','$RBP','$Date')";
+    $sql="insert into sent_request(Request_ID,Requesting_hospital_name,Requested_hospital_name,Requested_by,Requeired_blood_group ,Requeired_blood_component,Requeired_no_of_packs,Date)VALUES(' ','$H1Name','$H2Name','$RBDN','$RBC','$$RBG','$RBP','$Date')";
     if($conn->query($sql))
      {
       

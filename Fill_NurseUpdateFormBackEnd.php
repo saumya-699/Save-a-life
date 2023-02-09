@@ -17,7 +17,13 @@ include 'mj.php';
 
 <head>
 
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css'>
 
+<link rel="stylesheet" href="style.css">  
+<link rel="stylesheet" href="css/nbtssl/nbtssl.min.css">
+<link rel="stylesheet" href="css/fontawesome-free-5.15.4/css/all.css">
+<link rel="stylesheet" href="css/mediaquery.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
 </head>
 <body>

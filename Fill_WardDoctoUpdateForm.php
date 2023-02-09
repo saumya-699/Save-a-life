@@ -17,11 +17,68 @@ include 'mj.php';
 
 <head>
 
-
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css'>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="css/nbtssl/nbtssl.min.css">
+<link rel="stylesheet" href="css/fontawesome-free-5.15.4/css/all.css">
+<link rel="stylesheet" href="css/mediaquery.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
 </head>
 <body>
+     <!--Header-->
+     <div class="logo-massaviu">
+  &nbsp; &nbsp;
+</div>
+<div class="top">
+<ul class="name" >
 
+  <li>&nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <font size="5.2px"> National Blood Transfusion Service  </font size></li>
+
+
+ <li>
+<div class="top-right">
+            <div class="notification">
+                <span class="material-icons licon">
+                    notifications
+                </span>
+            </div>
+			&nbsp;
+			<div class="person">
+                <span class="material-icons licon">
+                    person
+                </span>
+            </div>
+			&nbsp;
+	<div class="name">
+    <?php
+// session_start();
+    echo " " . $_SESSION['Name'];
+    ?>
+	<br>Director</div>
+
+
+  <div class="dropdownx">
+               <span class="material-icons licon">
+                    arrow_drop_down
+                </span>
+				<div class="dropdownx-content">
+  <a href="#"> <span class="material-icons licon">
+  person
+                </span> Profile</a>
+  <a href="logout.php">
+  <span class="material-icons licon">
+  exit_to_app
+                </span>
+  Log out</a>
+  </div>
+            </div>
+ </li>
+ </div>
+</ul>
+
+
+</div>
 
 <?php
 
@@ -47,114 +104,68 @@ if(isset($_POST['update']))
 	 // echo   $row["WardDoctor_ID"]."</td>"."<td>".$row["Name_With_Initials"]."</td>"."<td>".$row["HospitalName"]."</td>"."<td>".$row["Specialization"]."</td>"."<td>".$row["SLMC_Number"]."</td>"."<td>".$row["Email"]."</td>"."<td>".$row["ContactNumber"]."</td>";
 	   
 	   
-echo "<div class='midiv'> 
-   <div class='passwordDiv'>
+echo "<div class='container frm-login'>
+<div class='card frm-form'>
+    <div class='card-body frm-body'>
 
      <form method='post' action='UpdateWardDoctorBackEnd.php'>
         
-                           <center> <b> <font size=8> Update ward doctor</font></b><br></center>
+               <center> <b>  <h1 class='txt-l'>Update Ward doctor</h1></b></center>
 						   
-						   <br> <br> <br>
-						   
+						  
+						               
                               
-                               <input type='hidden' value=".$row["WardDoctor_ID"]." name='WardDoctor_ID' id='WardDoctor_ID' class='box'><br><br><br>
-                             <b> <font size=5> Name with initials</font></b><br><br>
-                             <input type='text' value=".$row["Name_With_Initials"]." name='Name' id='name' class='box'><br><br><br>
+                               <input type='hidden' value=".$row["WardDoctor_ID"]." name='WardDoctor_ID' id='WardDoctor_ID' class='box'>
+                              <label for='exampleFormControlInput1' class='form-label lbl star'>Name with Initials</label> 
+                             <input type='text' value=".$row["Name_With_Initials"]." name='Name' id='name' class='form-control txt-input'>
 							 
-							 <b> <font size=5> Hospital name </font></b>   <select name= 'hospital' class='select'>
-                             <option value='Richway arya hospital'>Richway arya hospital</option>
-                             
-                     
-                             <option value=".$row["HospitalName"]." selected> ".$row["HospitalName"]." </option>
-                             </select>
-							 <br><br><br>
-							   
-							  <b> <font size=5> Specialization </font></b><select id='Specialization' name='Specialization' class='select'>
+                             <label for='exampleFormControlInput1' class='form-label lbl star'>Hospital name </label>
+                             <select name= 'hospital' class='form-control txt-input' required>
+                            
+                             <option value=" . $row["HospitalName"] . " selected> " . $row["HospitalName"] . " </option>
+
+                             </select> 
+							
+							        <br>
+                             <label for='exampleFormControlInput1' class='form-label lbl star'>Specialization </label><select id='Specialization' name='Specialization' class='form-control txt-input'>
                              <option value=".$row["Specialization"]."> ".$row["Specialization"]." </option>
                              
-                             <option value='Nurse'>Nurse</option>
-                             
-                            </select>
-							<br><br><br>
-                              
-
-        
-                             <b> <font size=5> SLMC number </font></b><br><br>
-                             <input type='text' value=".$row["SLMC_Number"]." name='SLMC' id='slmc' class='box'><br><br><br>
+                         
+    
+                             </select>
+						
+                           
+                            <label for='exampleFormControlInput1' class='form-label lbl star'>SLMC Number</label>
+                             <input type='text' value=".$row["SLMC_Number"]." name='SLMC' id='slmc' class='form-control txt-input'>
         
                               
-                             <b> <font size=5> Email </font></b><br><br>
-                             <input type='text' value=".$row["Email"]." name='Email' class='box' id='Email' ><br><br><br>
+                             <label for='exampleFormControlInput1' class='form-label lbl star'>Email</label>
+                             <input type='text' value=".$row["Email"]." name='Email' class='form-control txt-input' id='Email' >
         
 
-                            <b><font size=5> Contact number</font></b><br><br>
-                            <input type='text' value=".$row["ContactNumber"]." name='contactNumber'  class='box' id='contact' ><br><br><br>
+                             <label for='exampleFormControlInput1' class='form-label lbl star'>Contact Number</label>
+                            <input type='text' value=".$row["ContactNumber"]." name='contactNumber'  class='form-control txt-input' id='contact' >
 				
-							 <b> <font size=5> User name</font></b><br><br>
-                             <input type='text' value=".$row["UserName"]." name='Uname' id='Uname' class='box'><br><br><br>
+                            <label for='exampleFormControlInput1' class='form-label lbl star'>User Name</label>
+                             <input type='text' value=".$row["UserName"]." name='Uname' id='Uname' class='form-control txt-input'>
 
-                            <b><font size=5> Password</font></b><br><br>
-                            <input type='password' value=".$row["Password"]." name='password'  class='box'  id='pw' required> 
+                            <label for='exampleFormControlInput1' class='form-label lbl star'>Password</label>
+                            <input type='password' value=".$row["Password"]." name='password'  class='form-control txt-input'  id='pw' required> 
 
-     
-          </div>
-		
-
-   
-  </div>
- 
-  <div  class=container'>
+                            <div class='row btn-buttons'>
+                        
+                            <div class='col btn-but'> <input type='submit' name='BtnSubmit' value='Update' class='btn btn-danger btn-reg'></div>
+                            <div class='col btn-but'> <input type='submit' name='btnCancel' value='Cancel' class='btn btn-secondary btn-can'></div>
+                           </div>
   
-
-     <button type=submit  name=BtnSubmit id=saveChanges class=b1 ><b>Update</b></button>
-	  
-	   <button type=button  name=btnCancel id=Cancel class=b2 ><b><a href=RemoveOrUpdateWardDoctor.php><font color=white>Cancel</font></a></b></button>
-   
-      </div>
       </form> 
+  </div>
+  </div>
   </div>";
   
+  
 	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-	   
-			 
-			 
+		 
 			 
 	}
 	
@@ -182,10 +193,7 @@ $conn->close();
 
       
    <style>
-   
-   
-   
-   
+
            .midiv{
 
                     background-color:transparent;
@@ -261,12 +269,7 @@ $conn->close();
 
                  }  
 
-            .container{
-                          
-                         margin:0px 40px 60px 100px;
-
-                 }
-                    
+           
                span.prof{
                             float:right;
                             margin-left:50px;
@@ -336,7 +339,154 @@ a {text-decoration: none;}
 	
 	        
       }
+ 
+      .top {
+  list-style-type: none;
+  margin-top:-10px;
+  padding-bottom:0px;
+  overflow: hidden;
+  background-color:#E56262;
+  width:100%;
+  height:57px;
+  position:fixed;
+  top:0;
 
+}
+
+
+
+
+.logo-massaviu {
+  position: fixed;
+  padding-left: 0px;
+  background: transparent;
+  overflow: hidden;
+  z-index: 1;
+  width: 198px;
+  padding-top:0px;
+  padding-left:6px;
+  margin-top:-75px;
+}
+
+
+
+
+.top li {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  font-weight: 500;
+  font-style: italic;
+  font-family:Open Sans, sans-serif;
+}
+
+
+.logo-massaviu {
+  position: fixed;
+  padding-left: 0px;
+  background: transparent;
+  overflow: hidden;
+  z-index: 1;
+  width: 198px;
+  padding-top:9px;
+  padding-left:6px;
+}
+
+.top-right
+{
+    display: flex;
+ margin-bottom:1px;
+ margin-left:1020px;
+ padding-left:300px;
+
+}
+.name{
+display: flex;
+ margin-bottom:-10px;
+ cursor: pointer;
+
+}
+
+.person{
+   cursor: pointer;
+}
+
+.notification{
+  cursor: pointer;
+}
+
+
+.welcome{
+ margin-left:400px;
+
+}
+
+.dropdownx{
+   cursor: pointer;
+
+}
+
+.dropdownx:hover{
+  color: black;
+}
+
+
+.dropdownx-content {
+  display: none;
+  position: absolute;
+  background-color: #C14246;
+  min-width: 90px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdownx-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdownx-content a:hover {background-color: #f5646c}
+
+.dropdownx:hover .dropdownx-content {
+  display: block;
+}
+
+.dropdownx:hover .dropbtn {
+  background-color: #3e8e41;
+}
+
+
+.top {
+  list-style-type: none;
+  margin-top:-8px;
+  padding-bottom:0px;
+  overflow: hidden;
+  padding-top:10px;
+  background-color:#E56262;
+  width:100%;
+  height:57px;
+  position:fixed;
+  top:0;
+
+}
+
+
+
+.name li {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 1px 16px;
+  font-weight: 500;
+
+  font-family:Open Sans;
+  position:fixed;
+}
  </style>
 </body>
 </html>

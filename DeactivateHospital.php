@@ -15,13 +15,186 @@ session_start();
 
 <?php
 
-//include 'mj.php';
+include 'mj.php';
 ?>
 <html>
 
 <head>
 
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css'>
 
+    <link rel="stylesheet" href="style.css">  
+	<link rel="stylesheet" href="css/nbtssl/nbtssl.min.css">
+    <link rel="stylesheet" href="css/fontawesome-free-5.15.4/css/all.css">
+    <link rel="stylesheet" href="css/mediaquery.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+	
+<style>
+
+		
+.top {
+  list-style-type: none;
+  margin-top:-10px;
+  padding-bottom:0px;
+  overflow: hidden;
+  background-color:#E56262;
+  width:100%;
+  height:57px;
+  position:fixed;
+  top:0;
+  
+}
+
+
+
+.name li {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 1px 16px;
+  font-weight: 500;
+  font-style: italic;
+  font-family:Open Sans, sans-serif;
+  position:fixed;
+}
+
+
+.logo-massaviu {
+  position: fixed;
+  padding-left: 0px;
+  background: transparent;
+  overflow: hidden;
+  z-index: 1;
+  width: 198px;
+  padding-top:0px;
+  padding-left:6px;
+  margin-top:-75px;
+}
+
+
+
+
+.top li {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  font-weight: 500;
+  font-style: italic;
+  font-family:Open Sans, sans-serif;
+}
+
+
+.logo-massaviu {
+  position: fixed;
+  padding-left: 0px;
+  background: transparent;
+  overflow: hidden;
+  z-index: 1;
+  width: 198px;
+  padding-top:10px;
+  padding-left:6px;
+}
+
+
+.top-right
+{
+    display: flex;
+ margin-bottom:1px;
+ margin-left:1020px;
+ padding-left:300px;
+ 
+}
+.name{
+display: flex;
+ margin-bottom:-10px;
+ cursor: pointer;
+
+}
+
+.person{
+   cursor: pointer;
+}
+
+.notification{
+  cursor: pointer;
+}
+
+
+.welcome{
+ margin-left:400px;
+
+}
+
+.dropdownx{
+   cursor: pointer;
+
+}
+
+.dropdownx:hover{  
+  color: black;
+}
+
+
+.dropdownx-content {
+  display: none;
+  position: absolute;
+  background-color: #C14246;
+  min-width: 90px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdownx-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdownx-content a:hover {background-color: #f5646c}
+
+.dropdownx:hover .dropdownx-content {
+  display: block;
+}
+
+.dropdownx:hover .dropbtn {
+  background-color: #3e8e41;
+}
+
+
+.top {
+  list-style-type: none;
+  margin-top:-8px;
+  padding-bottom:0px;
+  overflow: hidden;
+  padding-top:10px;
+  background-color:#E56262;
+  width:100%;
+  height:57px;
+  position:fixed;
+  top:0;
+  
+}
+
+
+
+.name li {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 1px 16px;
+  font-weight: 500;
+  font-style: italic;
+  font-family:Open Sans, sans-serif;
+  position:fixed;
+}
+
+
+</style> 
 
 </head>
 <body>
@@ -54,38 +227,68 @@ if(isset($_POST['delete']))
 	 // echo   $row["Nurse_ID"]."</td>"."<td>".$row["Name_With_Initials"]."</td>"."<td>".$row["HospitalName"]."</td>"."<td>".$row["Position"]."</td>"."<td>".$row["SLMC_Number"]."</td>"."<td>".$row["Email"]."</td>"."<td>".$row["ContactNumber"]."</td>";
 	   
 	   
-echo "<div class='midiv'> 
-   <div class='passwordDiv'>
+echo "  <div class='container frm-login'>
+        <div class='card frm-form'>
+            <div class='card-body frm-body'>
+
 
      <form method='post' action='TransferHospitalBackEnd.php'>
         
                            <center> <b> <font size=7> Deactivation </font></b><br></center>
 						   
-						   <br> <br> <br>
+						 
 						    
-                             <b> <font size=5> Hospital ID  </font></b><br><br>
-                               <input type='text' value=".$row["Hospital_ID"]." name='Hospital_ID' id='Hospital_ID' class='box'><br><br><br>
+                           
+                              <label for='exampleFormControlInput1' class='form-label lbl star'>Hospital ID </label>
+                               <input type='text' value=".$row["Hospital_ID"]." name='Hospital_ID' id='Hospital_ID' class='form-control txt-input'>
 						    <b> <font size=5> Hospital Name </font></b><br><br>
-                             <input type='text' value=".$row["HospitalName"]." name='HName' id='H_Name' class='box'><br><br><br>
+                             <input type='text' value=".$row["HospitalName"]." name='HName' id='H_Name' class='form-control txt-input'>
 							 
 							 
-							 <b> <font size=5> Stock ID </font></b><br><br>
-                             <input type='text' value=".$row["Hospital_ID"]." name='StockName' id='StockID' class='box' ><br><br><br>
+							  <label for='exampleFormControlInput1' class='form-label lbl star'>Stock ID </label>
+                             <input type='text' value=".$row["Hospital_ID"]." name='StockName' id='StockID' class='form-control txt-input' >";
 							 
-							 <b> <font size=5> Transfer to </font></b>   <select name= 'Transfer' class='select'>
-                             <option value='h1'>general</option>
-                             
-                             <option value='h2'>Teaching </option>
-                       
-                             </select>
-							 <br><br><br>
-							   
+							 
+							 
+							 
+
+						  $sql= 'select *from hospital' ;
+                           $result = $conn->query($sql);
+
+      if($result->num_rows>0)
+
+   {     
+   
+
+          	      echo "<label for='exampleFormControlInput1' class='form-label lbl star'>Transfer to </label>";
+				  
+	     echo 
+		   "<select name='Transfer' class='form-control txt-input' required>";
+                      
+	  
+	 
+      while($row=$result->fetch_assoc())
+   
+   {     
+     
+	      echo 
+		   
+         " <option value='$row[HospitalName]'>$row[HospitalName]</option>";
+	   
+	  
+	}
+   }                      
+      echo "</select>";     
+							 
+							 
+						echo	 "
 							
-                             <b> <font size=5>Transfer by </font></b><br><br>
-                             <input type='text' value='$x' name='TransferBy' class='box' id='Transfer' ><br><br><br>
+                            <label for='exampleFormControlInput1' class='form-label lbl star'>Transfer by </label>
+                             <input type='text' value='$x' name='TransferBy' class='form-control txt-input' id='Transfer' >
                                
-                             <b> <font size=5>Date </font></b><br><br>
-                             <input type='text' value='$date' name='date' class='box' id='date' ><br><br><br>
+                           
+                            <label for='exampleFormControlInput1' class='form-label lbl star'>Date  </label>
+                             <input type='text' value='$date' name='date' class='form-control txt-input' id='date' >
         
 
                            
@@ -93,23 +296,21 @@ echo "<div class='midiv'>
                               
                                
                              
-
+ <div class='row btn-buttons'>
+                        
+                        <div class='col btn-but'> <input type='submit' name='BtnSubmit' value='Transfer' class='btn btn-danger btn-reg'></div>
+                        <div class='col btn-but'> <input type='submit' name='btnCancel' value='Cancel' class='btn btn-secondary btn-can'></div>
+                    </div>
      
           </div>
 		
 
    
-  </div>
+    </div>
  
-  <div  class=container'>
-  
-
-     <button type=submit  name=BtnSubmit id=saveChanges class=b1 ><b>Transfer</b></button>
-	  
-	   <button type=button  name=btnCancel id=Cancel class=b2 ><b><a href='home.php'><font color='white'>Cancel</font></a></b></button>
-   
+     </form> 
       </div>
-      </form> 
+   </div>
   </div>";
   
 	   
@@ -259,11 +460,7 @@ $conn->close();
 
                  }  
 
-            .container{
-                          
-                         margin:0px 40px 60px 100px;
-
-                 }
+         
                     
                span.prof{
                             float:right;
