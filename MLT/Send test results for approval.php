@@ -2,7 +2,7 @@
 
 include "config.php";
 
-$sql = "SELECT * FROM blood_testing_result GROUP BY batch_number order by process_date";
+$sql = "SELECT process_date, batch_number FROM blood_testing_result GROUP BY process_date, batch_number order by process_date DESC";
 
 $result = $conn->query($sql);
 
@@ -171,6 +171,7 @@ $result = $conn->query($sql);
     
 	 echo "<td class='tb'><form method='POST' action ='Send test results for approval1.php'>
      <input type=hidden name=RequestID value=".$row["batch_number"]." >
+
      <button type=submit value=view name=view  class='fp'><img src=eye.png width=40 height=37></button>
      </form>    	
 

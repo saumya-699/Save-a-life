@@ -3,7 +3,6 @@
 include "config.php";
 
 $sql = "SELECT * FROM blood_testing_result";
-
 $result = $conn->query($sql);
 
 ?>
@@ -159,7 +158,7 @@ if(isset($_POST['view']))
 {	
 
    $did=$_POST['RequestID'];
-   $sql = "SELECT * FROM blood_testing_result where batch_number='$did' ";
+   $sql = "SELECT * FROM blood_testing_result where batch_number='$did'";
    $result = $conn->query($sql);
 
 

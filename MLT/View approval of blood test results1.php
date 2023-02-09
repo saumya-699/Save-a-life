@@ -2,7 +2,7 @@
 
 include "config.php";
 
-$sql = "SELECT * FROM blood_testing_result GROUP BY batch_number order by process_date";
+$sql = "SELECT process_date, batch_number FROM blood_testing_result GROUP BY process_date, batch_number order by process_date DESC";
 
 $result = $conn->query($sql);
 
