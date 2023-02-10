@@ -135,7 +135,7 @@
 				<div class="dropdown-content">
   <a href="Edit ProfileMlt.php"> <span class="material-icons licon">
   person
-                </span> Edit Profile</a>
+                </span>Profile</a>
   <a href="logout.php">
   <span class="material-icons licon">
   exit_to_app
@@ -229,20 +229,21 @@
                             <option value="Plasma">Plasma</option>
                         </select>
 
-                            <label for="exampleFormControlInput1 " class="form-label lbl star " name="processed_date ">Processed date</label>
-                            <div class="input-group mb-4 ">
-                                <input type="date" name="processed_date" placeholder="processed_date" required="" processed_date="<?= date('Y-m-d') ?>">                                </div>
-
-                            
-                        
+                           
+                                <label for="exampleFormControlInput1 " class="form-label lbl star " name="processed_date">Processed date</label>
+                                <div class="input-group mb-4 ">
+                                <i class="fas fa-calendar-alt input-group-text"></i>
+                                <input type="date" class="datepicker_input form-control txt-input" name="processed_date" placeholder="Select Date" required="" processed_date="<?= date('Y-m-d') ?>">
+                               </div> 
                          
 
+                               <label for="exampleFormControlInput1 " class="form-label lbl star " name="Expiry date">Expiry date (MM/DD/YYYY)</label>
+                                <div class="input-group mb-4 ">
+                                <i class="fas fa-calendar-alt input-group-text"></i>
+                                <input type="date" class="datepicker_input form-control txt-input" name="expiry_date" placeholder="Select Date" required="" min="<?= date('Y-m-d') ?>">
+                               </div>
                             
-                            
-                        <label for="exampleFormControlInput1 " class="form-label lbl star " name="Expiry date ">Expiry date (MM/DD/YYYY)</label>
-                            <div class="input-group mb-4 ">
-                                <input type="date" name="expiry_date" placeholder="expiry_date" required="" min="<?= date('Y-m-d') ?>">                                </div>
-
+                        
 
 
                             <div class="row btn-buttons ">

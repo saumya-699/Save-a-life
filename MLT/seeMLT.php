@@ -134,7 +134,7 @@
 				<div class="dropdown-content">
   <a href="Edit ProfileMlt.php"> <span class="material-icons licon">
   person
-                </span> Edit Profile</a>
+                </span>Profile</a>
   <a href="logout.php">
   <span class="material-icons licon">
   exit_to_app
@@ -199,8 +199,8 @@
                            
                             <h1 class="txt-l ">Welcome back to NBTS</h1>
                             <h1 class="txt-l ">Dear Mr.<?php
-     echo " " . $_SESSION['name_with_initials'];
-    ?></h1>
+                              echo " " . $_SESSION['name_with_initials'];
+                                   ?></h1>
                             <h2 class="txt-l ">You have sucessfully accessed to your MLT Account</h1>
                                                                
                                             

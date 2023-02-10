@@ -66,7 +66,7 @@ $result = $conn->query($sql);
                     <div class="dropdown-content">
                         <a href="Edit ProfileMlt.php"> <span class="material-icons licon">
                                 person
-                            </span> Edit Profile</a>
+                            </span>Profile</a>
                         <a href="logout.php">
                             <span class="material-icons licon">
                                 exit_to_app
@@ -169,7 +169,7 @@ $result = $conn->query($sql);
      
      echo  "<tr>"."<td>".$row["process_date"]."</td>"."<td>".$row["batch_number"]."</td>";   
     
-	 echo "<td class='tb'><form method='POST' action ='View approval of blood test results2.php'>
+	 echo "<td class='tb'><form method='POST' action ='view donated blood information1.php'>
      <input type=hidden name=RequestID value=".$row["batch_number"]." >
      <button type=submit value=view name=view  class='fp'><img src=eye.png width=40 height=37></button>
      </form>    	

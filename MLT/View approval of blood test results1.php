@@ -66,7 +66,7 @@ $result = $conn->query($sql);
                     <div class="dropdown-content">
                         <a href="Edit ProfileMlt.php"> <span class="material-icons licon">
                                 person
-                            </span> Edit Profile</a>
+                            </span> Profile</a>
                         <a href="logout.php">
                             <span class="material-icons licon">
                                 exit_to_app

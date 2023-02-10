@@ -227,7 +227,7 @@ body {
 				<div class="dropdown-content">
   <a href="Edit Profile.php"> <span class="material-icons licon">
   person
-                </span> Edit Profile</a>
+                </span>Profile</a>
   <a href="logout.php">
   <span class="material-icons licon">
   exit_to_app
