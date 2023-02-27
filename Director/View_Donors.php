@@ -323,7 +323,7 @@ if($result->num_rows>0)
                 <input type=hidden name=Donor_Id value=".$row["Donor_Id"]." >
                 <button type=submit value=view name=view  class='fp'><img src=eye.png width=43 height=37></button>
                 </form>
-				<form method='POST' action ='DeleteMLT.php' onsubmit='return myConfirm()'>
+				<form method='POST' action ='DeleteDonor.php' onsubmit='return myConfirm()'>
                 <input type=hidden name=Donor_Id value=".$row["Donor_Id"]." >
                 <button type=submit value=update name=update  class='f1'><img src=dx.png width=30 height=33></button>
                 </form>
