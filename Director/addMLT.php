@@ -533,7 +533,7 @@ echo "<div class='container frm-login'>
         
                              
                            <label for='exampleFormControlInput1' class='form-label lbl star'>Contact Number</label>
-                            <input type='tel' placeholder='Enter the Contact number' name='contactNumber'  class='form-control txt-input'  id='contact' pattern='[0-9]{10}' required>
+                            <input type='tel' placeholder='Enter the Contact number' name='contactNumber'  class='form-control txt-input'  id='contact' required>
 							
 							 <label for='exampleFormControlInput1' class='form-label lbl star'>Date of Appoinment</label>
                              <input type='text'  name='DOA' id='DOA' class='form-control txt-input' value='$date'>

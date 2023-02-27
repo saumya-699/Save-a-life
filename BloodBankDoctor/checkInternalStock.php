@@ -400,9 +400,9 @@ display: flex;
 							 
 							 <td> <select name= "Component_type" class="select">
                              <option value='None'>None</option>							 
-                             <option value="Red">Red</option>    
-                             <option value="Karapitiya Teaching Hospital">Karapitiya&nbsp;Teaching&nbsp;Hospital</option>
-                             <option value="Galle_general_hospital">Galle_general_hospital</option>
+                             <option value="Red">Red Blood Cells</option>    
+                             <option value="White Blood Cells">White Blood Cells</option>
+                             <option value="Plasma">Plasma</option>
                              </select></td>
 							 
 							 

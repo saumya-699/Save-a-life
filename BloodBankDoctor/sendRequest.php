@@ -532,10 +532,11 @@ echo "</select>";
                             <input type='text' name='RBDN' id='slmc' class='form-control txt-input' value='$nm' required> 
                            
                              <label for='exampleFormControlInput1' class='form-label lbl star'> Required blood component</label>	 
-	                         <select id='position' name='RBC'  class='form-control txt-input' required>
-                             <option value='Head nurse'> 
-						    </option>
-                            <option value='Nurse'> Nurse</option>
+	                         <select id='component' name='RBC'  class='form-control txt-input' required>
+                            <option value='None'>None</option>							 
+                             <option value='Red Blood Cells'>Red Blood Cells</option>    
+                             <option value='White Blood Cells'>White Blood Cells</option>
+                             <option value='Plasma'>Plasma</option>
                             </select>
                           
                              
