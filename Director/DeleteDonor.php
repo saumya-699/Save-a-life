@@ -32,7 +32,7 @@ require "conp.php";
 	   
 		  
 							$did=$_POST['Donor_Id'];
-							$query="update Donor set Remark='Removed' where Donor_Id='$did'";
+							$query="update Donor set username='Removed' where Donor_Id='$did'";
 							$result= $conn->query($query);
 					  
 						
