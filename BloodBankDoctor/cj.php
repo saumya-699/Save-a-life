@@ -149,7 +149,8 @@ a {text-decoration: none;}
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-  
+    
+	    <a href="checkInternalRequest.php">Check internal requests</a>
     <a href="checkExternalRequest.php">Check external requests</a>
     <a href="sendRequest.php">Send requests</a>
     <a href="sentRequestHistory.php">Sent request history</a>
