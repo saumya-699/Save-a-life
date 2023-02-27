@@ -7,7 +7,7 @@ session_start();
  
 <?php
 
-include 'mj.php';
+include 'cj.php';
 ?>
 <html>
 
