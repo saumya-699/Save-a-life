@@ -24,15 +24,15 @@ require "conp.php";
                  
 		   echo '<script type="text/javascript">';
 		// echo 'alert("Added successfully");';
-         echo 'window.location.href="RemoveORUpdateMLT.php";';
+         echo 'window.location.href="View_Donors.php";';
 	
 		 echo '</script>';
 		
  
 	   
 		  
-							$did=$_POST['MLT_ID'];
-							$query="update MLT set Remark='Removed' where MLT_ID='$did'";
+							$did=$_POST['Donor_Id'];
+							$query="update Donor set Remark='Removed' where Donor_Id='$did'";
 							$result= $conn->query($query);
 					  
 						
