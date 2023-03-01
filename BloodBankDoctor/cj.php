@@ -149,13 +149,23 @@ a {text-decoration: none;}
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-  
+    
+	    <a href="checkInternalRequest.php">Check internal requests</a>
     <a href="checkExternalRequest.php">Check external requests</a>
     <a href="sendRequest.php">Send requests</a>
     <a href="sentRequestHistory.php">Sent request history</a>
     
   </div>
+    <button class="dropdown-btn">Test results 
+    <i class="fa fa-caret-down"></i>
+  </button>
+  <div class="dropdown-container">
   
+    <a href="stock.php">Stock info</a>
+    <a href="checkInternalStock.php">Internal stock availability</a>
+	 <a href="checkExternalStock.php">External stock availability</a>
+	
+	</div>
    
   
   <button class="dropdown-btn"  id="myButtonx">Donors
