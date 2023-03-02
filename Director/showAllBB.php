@@ -162,6 +162,17 @@ $conn->close();
 
 
 <button type="submit" name="data" id="data" class="bx"><a href="RemoveOrUpdateBB.php"><font color="white"><font size="3">Back</font></font></a></button>
+<script>
+function myConfirm() {
+  var result = confirm("Want to delete?");
+  if (result==true) {
+   return true;
+  } else {
+   return false;
+  }
+}
+
+</script>
 
 
 <style>
