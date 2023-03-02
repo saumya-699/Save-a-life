@@ -76,6 +76,7 @@ if($result->num_rows>0)
    
    {     
      
+	  echo  "<tr>"."<td>".$row["Donor_Id"]."</td>"."<td>".$row["Weight"]."</td>"."<td>".$row["Height"]."</td>"."<td>".$row["Blood_Pressure"]."</td>"."<td>".$row["Hemoglobine"]."</td>"."<td><i class='fa-solid fa-trash'></i></td>";
 	   
 		echo "</tr>";
 	  
