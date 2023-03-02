@@ -15,7 +15,6 @@ if(isset($_POST['BtnSubmit']))
     $Donor_Id=$_POST["donorid"];
     $Weight=$_POST["weight"];
     $Height=$_POST["height"];
-	$Blood_Group = $_POST["blood"];
 	$Blood_Pressure=$_POST["bpressure"];
 	$Hemoglobine=$_POST["hemoglobine"];
 	
