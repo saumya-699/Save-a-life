@@ -22,7 +22,7 @@ if(isset($_POST['BtnSubmit']))
     //database connection
 
         $sql = "INSERT INTO pre_medical (Donor_Id,Weight,Height,Blood_Group,Blood_Pressure,Hemoglobine)
-VALUES ('$Donor_Id','$Weight','$Height','$Blood_Group','$Blood_Pressure','$Hemoglobine')";
+VALUES ('$Donor_Id','$Weight','$Height','$Blood_Pressure','$Hemoglobine')";
 
 if($conn->query($sql)){
       
