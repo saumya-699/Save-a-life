@@ -384,7 +384,7 @@ td {
     padding: 15px 10px 30px 20px;
     margin-top: 10px;
     outline: none;
-    width: 864.1px;
+    width: 849px;
                   }
                   
       
