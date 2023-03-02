@@ -14,7 +14,7 @@ include 'see.php';
 <head>
 	
 <link rel="stylesheet" href="https://kit.fontawesome.com/87928bc990.css" crossorigin="anonymous">
-
+<script src="https://kit.fontawesome.com/87928bc990.js" crossorigin="anonymous"></script>
 
 </head>
 <body>
