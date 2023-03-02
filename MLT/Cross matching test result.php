@@ -197,10 +197,10 @@
                         <div class="card-body frm-body ">
 
                             <h1 class="txt-l "> Cross matching test result</h1>
-                                <form action="create.php " method="POST">
+                                <form action="Create_Cross matching test result.php" method="POST">
    
                                 <label for="exampleFormControlInput1 " class="form-label lbl star ">Request ID</label>
-                                <input type="text" class="form-control txt-input " name="request_id"placeholder="Enter request id" >
+                                <input type="text" class="form-control txt-input " name="request_id" placeholder="Enter request id" >
 
                                 
                             <label for="exampleFormControlInput1 " class="form-label lbl star ">Blood Group test result</label>
@@ -225,8 +225,6 @@
                             </select>
 
             
-
-
                                 <div class="row btn-buttons ">
                                     <button class="b1" name="submit" value="submit"><font size="2px">Add</font></button> &nbsp; &nbsp; &nbsp; &nbsp;
       &nbsp; &nbsp; &nbsp; &nbsp;  <button class="b1" name="cancel" value="cancel"><a href="Cross matching test result.php"><font size="2px">Cancel</font></a></button>
