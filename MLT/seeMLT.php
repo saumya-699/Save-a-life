@@ -124,7 +124,7 @@
 			&nbsp;
       <div class="name"><?php
        session_start();
-     echo " " . $_SESSION['name_with_initials'];
+     echo " " . $_SESSION['Name_With_Initials'];
     ?>
 	<br>MLT</div>
 		 <div class="dropdown">
@@ -199,7 +199,7 @@
                            
                             <h1 class="txt-l ">Welcome back to NBTS</h1>
                             <h1 class="txt-l ">Dear Mr.<?php
-                              echo " " . $_SESSION['name_with_initials'];
+                              echo " " . $_SESSION['Name_With_Initials'];
                                    ?></h1>
                             <h2 class="txt-l ">You have sucessfully accessed to your MLT Account</h1>
                                                                
