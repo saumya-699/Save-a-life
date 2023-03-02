@@ -56,7 +56,7 @@ if($result->num_rows>0)
 	     echo '<script type="text/javascript">';
 		 echo 'alert("Registration is successfully");';
          
-	
+	      echo 'window.location.href="addMLT.php";';
 		 echo '</script>';
 
 	  

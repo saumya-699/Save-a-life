@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 09, 2023 at 09:01 AM
+-- Generation Time: Mar 02, 2023 at 09:52 AM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -41,26 +41,27 @@ CREATE TABLE `blood_request` (
   `reason` varchar(200) NOT NULL,
   `ward_number` varchar(50) NOT NULL,
   `remark` varchar(200) NOT NULL,
-  `status` text NOT NULL
+  `status` text NOT NULL,
+  `Hospital_ID` int(50) NOT NULL,
+  `WardDoctor_ID` int(50) NOT NULL,
+  `BloodBankDoctor_ID` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `blood_request`
 --
 
-INSERT INTO `blood_request` (`requeste_id`, `patient_name`, `date_of_birth`, `patient_age`, `patient_gender`, `blood_group`, `blood_component`, `required_amount`, `expected_date`, `requested_date`, `reason`, `ward_number`, `remark`, `status`) VALUES
-(7, 'Abishek', NULL, 44, 'Male', 'O-', 'Red cell', 2, '2022-11-20', '2022-11-20', 'Car accident', '3', '', 'Pending'),
-(8, 'Gautham Nandini', NULL, 49, 'Female', 'A+', 'Whole blood', 1, '2022-11-21', '2022-11-20', 'Kidney transplant ', '02', '', 'Pending'),
-(9, 'Dilan Perera', NULL, 55, 'Male', 'B+', 'Whole blood', 1, '2022-11-22', '2022-11-20', 'surgery', '1', '', 'Pending'),
-(10, 'Vijay devarakonda', NULL, 49, 'Male', 'B+', 'Whole blood', 1, '2022-11-24', '2022-11-23', 'surgery', '05', '', 'Pending'),
-(11, 'Darren Henry', NULL, 34, 'Male', 'B-', 'Whole blood', 1, '2022-12-05', '2022-12-05', 'surgery', '06', '', 'Pending'),
-(12, 'Rohini Aadhi', NULL, 60, 'Female', 'B+', 'Whole blood', 1, '2022-12-11', '2022-12-10', 'surgery', '05', '', 'Pending'),
-(13, 'Ravi shankar', NULL, 34, 'Male', 'O-', 'Whole blood', 1, '2022-12-12', '2022-12-10', 'surgery', '1', 'He have allergy', 'Pending'),
-(14, 'Rasan Dilikshana', NULL, 40, 'Male', 'B+', 'Whole blood', 2, '2022-12-13', '2022-12-10', 'surgery', '09', 'no', 'Pending'),
-(28, 'Aniston Liam', '2021-06-16', 1, 'Male', 'O-', 'Whole blood', 1, '2022-12-17', '2022-12-16', 'jfgjm', '09', '', 'Pending'),
-(29, 'THARSANA', '1999-09-09', 23, 'Female', 'O-', 'Whole blood', 1, '2022-12-19', '2022-12-19', 'DFESF', '09', 'RFE', 'Pending'),
-(33, 'Keethi Suresh', '1979-01-31', 44, 'Female', 'AB+', 'Red cell', 1, '2023-02-05', '2023-02-05', 'uygilujhoi', '09', 'yjgulik', 'Pending'),
-(38, 'hgkhl.', '2023-02-09', 0, 'Male', 'AB+', 'Whole blood', 1, '2023-02-09', '2023-02-09', 'wsed', '09', 'ed', 'Pending');
+INSERT INTO `blood_request` (`requeste_id`, `patient_name`, `date_of_birth`, `patient_age`, `patient_gender`, `blood_group`, `blood_component`, `required_amount`, `expected_date`, `requested_date`, `reason`, `ward_number`, `remark`, `status`, `Hospital_ID`, `WardDoctor_ID`, `BloodBankDoctor_ID`) VALUES
+(7, 'Abishek', '1978-05-23', 44, 'Male', 'O-', 'Red cell', 2, '2022-11-20', '2022-11-20', 'Car accident', '3', '', 'Pending', 2, 7, 0),
+(8, 'Gautham Nandini', '1974-02-09', 49, 'Female', 'A+', 'Whole blood', 1, '2022-11-21', '2022-11-20', 'Kidney transplant ', '02', '', 'Pending', 2, 7, 0),
+(9, 'Dilan Perera', '1968-07-20', 55, 'Male', 'B+', 'Whole blood', 1, '2022-11-22', '2022-11-20', 'surgery', '1', '', 'Pending', 5, 8, 0),
+(10, 'Vijay devarakonda', '1974-02-11', 49, 'Male', 'B+', 'Whole blood', 1, '2022-11-24', '2022-11-23', 'surgery', '05', '', 'Pending', 5, 8, 0),
+(11, 'Darren Henry', '1989-02-01', 34, 'Male', 'B-', 'Whole blood', 1, '2022-12-05', '2022-12-05', 'surgery', '06', '', 'Pending', 5, 8, 0),
+(12, 'Rohini Aadhi', '1962-10-09', 60, 'Female', 'B+', 'Whole blood', 1, '2022-12-11', '2022-12-10', 'surgery', '05', '', 'Pending', 5, 8, 0),
+(13, 'Ravi shankar', '1988-10-01', 34, 'Male', 'O-', 'Whole blood', 1, '2022-12-12', '2022-12-10', 'surgery', '1', 'He have allergy', 'Pending', 5, 8, 0),
+(14, 'Rasan Dilikshana', '1982-04-09', 40, 'Male', 'B+', 'Whole blood', 2, '2022-12-13', '2022-12-10', 'surgery', '09', 'no', 'Pending', 5, 8, 0),
+(65, 'Aniston Liam', '1990-07-08', 32, 'Male', 'B-', 'Red cell', 4, '2023-03-02', '2023-03-02', 'fever', '10', '', 'Pending', 2, 3, 0),
+(66, 'Ravi shalini', '1993-02-04', 30, 'Female', 'AB-', 'Whole blood', 1, '2023-03-02', '2023-03-02', 'surgery', '06', '', 'Pending', 2, 7, 0);
 
 --
 -- Indexes for dumped tables
@@ -80,7 +81,7 @@ ALTER TABLE `blood_request`
 -- AUTO_INCREMENT for table `blood_request`
 --
 ALTER TABLE `blood_request`
-  MODIFY `requeste_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+  MODIFY `requeste_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

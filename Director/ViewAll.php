@@ -308,17 +308,17 @@ if(isset($_POST['view']))
 	      //echo "<font size=6>";
 	   
 	   echo  "<div style='overflow-x:auto;' class='tab'>";
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Donor_ID"."</th>"."<th style='text-align:center;width:100px;'>"."Full name"."</th>"."<th>"."Name with initials"."</th>"."<th>"."NIC"."</th>"."<th>"."DOB"."</th>"."<th>"."Blood_Group"."</th>"."<th style='text-align:center;width90px;'>"."Address"."</th>"."<th>"."Province"."</th>"."<th>"."Postal Code"."</th>"."<th>"."Gender"."</th>"."<th>"."E-mail"."</th>"."<th style='text-align:left:width:50px;'>"."Contact Number"."</th>"."<th style='text-align:left:width:50px;'>"."Action"."</th>"."</tr>";
+  echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Donor_ID"."</th>"."<th style='text-align:center;width:100px;'>"."Full name"."</th>"."<th>"."Name with initials"."</th>"."<th>"."NIC"."</th>"."<th width:100px;>"."DOB"."<th style='text-align:center;width:90px;'>"."Address"."</th>"."<th>"."Province"."</th>"."<th>"."Postal Code"."</th>"."<th>"."Gender"."</th>"."<th>"."E-mail"."</th>"."<th style='text-align:left:width:50px;'>"."Contact Number"."</th>"."<th style='text-align:left:width:50px;'>"."Action"."</th>"."</tr>";
       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=10'>"."</td>"."</tr>";
    while($row = $result->fetch_assoc())
    
    {     
      
-	  echo  "<tr>"."<td>".$row["Donor_Id"]."</td>"."<td>".$row["Prefix"].".".$row["First_Name"]." ".$row["Middle_Name"]." ".$row["Last_Name"]."</td>"."<td>".$row["Initials"]."</td>"."<td>".$row["NIC_Number"]."</td>"."<td>".$row["DOB"]."</td>"."<td>".$row["Blood_Group"]."</td>"."<td>".$row["Address"]."</td>"."<td>".$row["province"]."</td>"."<td>".$row["postal"]."</td>"."<td>".$row["Gender"]."</td>"."<td>".$row["Email"]."</td>"."<td>".$row["Contact_Number"]."</td>";
+	  echo  "<tr>"."<td>".$row["Donor_Id"]."</td>"."<td>".$row["Prefix"].".".$row["Full_Name"]."</td>"."<td>".$row["Initials"]."</td>"."<td>".$row["NIC_Number"]."</td>"."<td>".$row["DOB"]."</td>"."<td>".$row["Address"]."</td>"."<td>".$row["province"]."</td>"."<td>".$row["postal"]."</td>"."<td>".$row["Gender"]."</td>"."<td>".$row["Email"]."</td>"."<td>".$row["mobile_number"]."<br/>".$row["land_number"]."</td>";
 	   echo "<td>
-				<form method='POST' action ='#'>
+				<form method='POST' action ='DeleteDonor.php' onsubmit='return myConfirm()'>
                 <input type=hidden name=Donor_Id value=".$row["Donor_Id"]." >
-                <button type=submit value=update name=update  class='f1'><img src=edit.png width=26 height=26></button>
+                <button type=submit value=delete name=delete  class='f1'><img src=dx.png width=30 height=33></button>
                 </form>
                 
                 </td>";
@@ -344,7 +344,17 @@ $conn->close();
 
 
 <button type="submit" name="data" id="data" class="bx"><a href="View_Donors.php"><font color="white"><font size="3">Back</font></font></a></button>
+<script>
+function myConfirm() {
+  var result = confirm("Want to delete?");
+  if (result==true) {
+   return true;
+  } else {
+   return false;
+  }
+}
 
+</script>
 
 <style>
 
@@ -489,7 +499,7 @@ h1{
 						  margin-left:55px;
 						    margin-right:60px;
 							margin-bottom:5px;
-							margin-top:20px;
+							margin-top:10px;
 						   border: none;
 						   cursor:pointer;
 						  
