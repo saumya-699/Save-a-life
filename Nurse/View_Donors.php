@@ -13,6 +13,7 @@ include 'see.php';
 
 <head>
 
+<script src="https://kit.fontawesome.com/87928bc990.js" crossorigin="anonymous"></script>
 
 
 </head>
