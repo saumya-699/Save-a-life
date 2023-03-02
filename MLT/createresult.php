@@ -29,7 +29,7 @@ include "config.php";
 
     $y= $_SESSION['MLT_ID'];
 
-    $sql= "INSERT INTO blood_testing_result (donar_id, blood_group, malaria_result, hiv_result, hbv_result,hcv_result,vdrl_result,batch_number,process_date,status,MLT_ID,Hospital_ID) VALUES ('$donation_id','$blood_group','$malaria_result', '$hiv_result','$hbv_result','$hcv_result','$vdrl_result','$batch_number','$process_date','$status','$y','$x')";
+    $sql= "INSERT INTO blood_testing_result (donar_id, blood_group, malaria_result, hiv_result, hbv_result,hcv_result,vdrl_result,batch_number,process_date,status,MLT_ID,Hospital_ID) VALUES ('$donar_id','$blood_group','$malaria_result', '$hiv_result','$hbv_result','$hcv_result','$vdrl_result','$batch_number','$process_date','$status','$y','$x')";
   
    $result = $conn->query($sql);
 

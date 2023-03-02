@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 02, 2023 at 08:17 PM
+-- Generation Time: Mar 02, 2023 at 09:33 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -60,10 +60,13 @@ INSERT INTO `blood_testing_result` (`test_result_id`, `Hospital_ID`, `MLT_ID`, `
 (9, 1, 1, 0, 9, 'A-', 'Negative', 'Negative', 'Negative', 'Negative', 'Negative', '2023-02-08', 2, 'Pending'),
 (10, 1, 1, 0, 10, 'B-', 'Negative', 'Negative', 'Negative', 'Negative', 'Negative', '2023-02-08', 2, 'Pending'),
 (16, 2, 3, 0, 16, 'O+', 'Negative', 'Negative', 'Negative', 'Negative', 'Negative', '2023-02-09', 1, 'Pending'),
-(17, 2, 3, 0, 0, 'A-', 'Negative', 'Negative', 'Negative', 'Negative', 'Negative', '2023-03-02', 1, 'Pending'),
-(18, 2, 3, 0, 0, 'O-', 'Negative', 'Negative', 'Negative', 'Negative', 'Negative', '2023-03-02', 1, 'Pending'),
-(19, 1, 1, 0, 0, 'O-', 'Positive', 'Negative', 'Negative', 'Negative', 'Negative', '2023-03-02', 1, 'Pending'),
-(20, 2, 3, 0, 0, 'O+', 'Negative', 'Positive', 'Negative', 'Negative', 'Negative', '2023-03-02', 1, 'Pending');
+(17, 2, 3, 0, 11, 'A-', 'Negative', 'Negative', 'Negative', 'Negative', 'Negative', '2023-03-02', 1, 'Pending'),
+(18, 2, 3, 0, 12, 'O-', 'Negative', 'Negative', 'Negative', 'Negative', 'Negative', '2023-03-02', 1, 'Pending'),
+(19, 1, 1, 0, 13, 'O-', 'Positive', 'Negative', 'Negative', 'Negative', 'Negative', '2023-03-02', 1, 'Pending'),
+(20, 2, 3, 0, 6, 'O+', 'Negative', 'Positive', 'Negative', 'Negative', 'Negative', '2023-03-02', 1, 'Pending'),
+(21, 2, 3, 0, 17, 'B-', 'Negative', 'Negative', 'Negative', 'Negative', 'Negative', '2023-03-02', 1, 'Pending'),
+(22, 2, 3, 0, 15, 'O+', 'Negative', 'Negative', 'Negative', 'Negative', 'Negative', '2023-03-02', 1, 'Pending'),
+(23, 2, 3, 0, 19, 'B-', 'Negative', 'Positive', 'Negative', 'Negative', 'Negative', '2023-03-02', 2, 'Pending');
 
 --
 -- Indexes for dumped tables
@@ -83,7 +86,7 @@ ALTER TABLE `blood_testing_result`
 -- AUTO_INCREMENT for table `blood_testing_result`
 --
 ALTER TABLE `blood_testing_result`
-  MODIFY `test_result_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `test_result_id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
