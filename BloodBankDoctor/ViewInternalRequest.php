@@ -109,7 +109,7 @@ include 'cj.php';
 <?php
 
 require 'conp.php';
- $query="select * from bloodbank_doctor where BloodBank_doctor_ID='$x'";
+$query="select * from bloodbank_doctor where Name_With_Initials='$x'";
    $result= $conn->query($query);
      
   if($result->num_rows>0)
@@ -119,14 +119,16 @@ require 'conp.php';
       while($row = $result->fetch_assoc())
  
        {   
-     	  $s= $row[Hospital_ID];
+     	  $s= $row["Hospital_ID"];
 		 
        }
 	   
 	   
 	  $rql ="select * from blood_request where Hospital_ID ='$s'";
+	   $resultx= $conn->query($rql);
+	  
 	 
-	  if($result->num_rows>0)
+	  if($resultx->num_rows>0)
 		  
 		  {
 
@@ -144,7 +146,7 @@ require 'conp.php';
 	    // echo  "<div class='hat'>";
 	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:100px;'>"."Request_ID"."</th>"."<th style='text-align:center;width:120px;'>"."Patient Name"."</th>"."<th style='text-align:center;width:100px;'>"."Patient Age"."</th>"."<th>"."Patient Gender"."</th>"."<th>"."Blood Group"."</th>"."<th style='text-align:center;width:120px;'>"."Required Blood Component"."</th>"."<th>"."Required Amount (packets)"."</th>"."<th style='text-align:center;width:120px;'>"."Expected date to receive"."</th>"."<th style='text-align:center;width:90px;'>"."Requested_date to receive"."</th>"."<th style='text-align:center;width:120px;'>"."Reason for the request"."</th>"."<th>"."Ward number"."</th>"."<th>"."Remark"."</th>"."<th>"."Status"."</th>"."<th style='text-align:center:width:40px;'>"."Action"."</th>"."</tr>";
       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=10'>"."</td>"."</tr>";
-   while($row = $result->fetch_assoc())
+   while($row = $resultx->fetch_assoc())
    
    {     
      
@@ -171,6 +173,15 @@ require 'conp.php';
    
    }
 
+
+else
+
+{
+  echo "Error in ".$query."<br>".$conn->error;
+
+ echo "no results";
+
+}
 
 $conn->close();
 ?>
