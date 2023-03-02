@@ -398,7 +398,7 @@ td {
     padding: 15px 10px 30px 20px;
     margin-top: 10px;
     outline: none;
-    width: 926px;
+    width: 910px;
                   }
                   
                   
