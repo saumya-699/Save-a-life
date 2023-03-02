@@ -324,9 +324,9 @@ if($result->num_rows>0)
                 <input type=hidden name=Donor_Id value=".$row["Donor_Id"]." >
                 <button type=submit value=view name=view  class='fp'><img src=eye.png width=43 height=37></button>
                 </form>
-				<form method='POST' action ='DeleteDonor'>
+				<form method='POST' action ='DeleteDonor.php'>
                 <input type=hidden name=Donor_Id value=".$row["Donor_Id"]." >
-                <button type=submit value=update name=update  class='f1'><img src=dx.png width=30 height=33></button>
+                <button type=submit value=delete name=delete  class='f1'><img src=dx.png width=30 height=33></button>
                 </form>
             </td>";
 				 echo "</tr>";
@@ -357,7 +357,17 @@ $conn->close();
 
 
 
+<script>
+function myConfirm() {
+  var result = confirm("Want to delete?");
+  if (result==true) {
+   return true;
+  } else {
+   return false;
+  }
+}
 
+</script>
 
 <style>
 
