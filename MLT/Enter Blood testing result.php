@@ -202,7 +202,7 @@
 
                     
                             <label for="exampleFormControlInput1 " class="form-label lbl star ">Donar ID</label>
-                            <input type="text" class="form-control txt-input " name="donation_id"placeholder="Type donation id" required="" >
+                            <input type="text" class="form-control txt-input " name="donar_id"placeholder="Type donar id" required="" >
 
                             
                         <label for="exampleFormControlInput1 " class="form-label lbl star ">Blood Group</label>
