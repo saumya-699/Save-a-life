@@ -56,9 +56,9 @@
             <form action="login.php" method="POST">
               
                     <i class="far fa-user-circle user"></i>
-                    <h3 class="txt-l"><b>MLT Login</b></h3>
+                    <h3 class="txt-l"><b>Ward doctor Login</b></h3>
                     <label for="exampleFormControlInput1" class="form-label lbl" ><b>Username</b></label>
-                    <input type="text" class="form-control txt-input" placeholder="Enter the SLMC number" name="UserName" style="width:280px" >
+                    <input type="text" class="form-control txt-input" placeholder="Enter the user name" name="UserName" style="width:280px" >
                     <div style="position:absolute;  color:red;">
                 <?php if (isset($_GET["error1"])){
 						$error1=$_GET["error1"];

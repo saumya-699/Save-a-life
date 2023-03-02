@@ -124,7 +124,7 @@
 			&nbsp;
       <div class="name"><?php
        session_start();
-     echo " " . $_SESSION['name_with_initials'];
+     echo " " . $_SESSION['Name_With_Initials'];
     ?>
 	<br>MLT</div>
 		 <div class="dropdown">
@@ -198,10 +198,7 @@
 
                             <h1 class="txt-l "> Cross matching test result</h1>
                                 <form action="create.php " method="POST">
-
-                                <label for="exampleFormControlInput1 " class="form-label lbl star ">Test result ID</label>
-                                <input type="text" class="form-control txt-input " name="test_result_id"placeholder="auto generate" required="">
-                                
+   
                                 <label for="exampleFormControlInput1 " class="form-label lbl star ">Request ID</label>
                                 <input type="text" class="form-control txt-input " name="request_id"placeholder="Enter request id" >
 
