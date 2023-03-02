@@ -64,8 +64,6 @@ if($result->num_rows>0)
 	      //echo "<font size=6>";
 	   
 	   echo  "<div class='tab'>";
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Donor_ID"."</th>"."
-       <th style='text-align:center;width:120px;'>"."Weight"."
        <th style='text-align:center;width:120px;'>"."Height"."</th>"."
        <th>"."Blood Pressure"."</th>"."
        <th>"."Hemoglobine Level"."</th>"."
