@@ -161,9 +161,9 @@ a {text-decoration: none;}
   </button>
   <div class="dropdown-container">
   
-    <a href="stock.php">Stock info</a>
-    <a href="checkInternalStock.php">Internal stock availability</a>
-	 <a href="checkExternalStock.php">External stock availability</a>
+    <a href="stock.php">Blood test</a>
+    <a href="checkInternalStock.php">Cross matching</a>
+	
 	
 	</div>
    

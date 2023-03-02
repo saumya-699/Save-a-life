@@ -12,7 +12,6 @@ include 'see.php';
 <html>
 
 <head>
-
 <script src="https://kit.fontawesome.com/87928bc990.js" crossorigin="anonymous"></script>
 
 
@@ -48,7 +47,7 @@ include 'see.php';
 <?php
 
 
-require 'conection.php';
+require 'conp.php';
     
 $sql= "select * from donors" ;
 $result = $conn->query($sql);
@@ -63,12 +62,13 @@ if($result->num_rows>0)
 	   
 	   echo  "<div class='tab'>";
 	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Donor_ID"."</th>"."
-       <th style='text-align:center;width:120px;'>"."Donor Name"."
+       <th style='text-align:center;width:200px;'>"."Donor Name"."
        <th style='text-align:center;width:120px;'>"."NIC Number"."</th>"."
        <th>"."Gender"."</th>"."
        <th>"."Cotact Number"."</th>"."
 	   <th>"."province"."</th>"."
-       <th style='width:120px;'>"."Action"."</th>"."
+       <th>"."Action"."</th>"."
+	   <th >"." "."</th>"."
        </tr>";
       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
    while($row = $result->fetch_assoc())
@@ -78,12 +78,12 @@ if($result->num_rows>0)
 	  echo  "<tr>"."<td>".$row["Donor_Id"]."</td>"."<td>".$row["Prefix"].".".$row["Full_Name"]."</td>"."<td>".$row["NIC_Number"]."</td>"."<td>".$row["Gender"]."</td>"."<td>".$row["mobile_number"]."</td>"."<td>".$row["province"]."</td>";
 	   echo "<td><form method='POST' action ='ViewAll.php'>
                 <input type=hidden name=Donor_Id value=".$row["Donor_Id"]." >
-                <button type=submit value=view name=view  class='fp'><img src=eye.png width=43 height=37></button>
-                </form>
-				<form method='POST' action =''>
+                <button type=submit value=view name=view id=btn style=display: inline-block><i class='fa-sharp fa-solid fa-eye'></i></button>
+                </form>"."
+				<form method='POST' action =''> 
                 <input type=hidden name=Donor_Id value=".$row["Donor_Id"]." >
-                <button type=submit value=update name=update  class='f1'><img src=edit.png width=26 height=26></button>
-                </form>
+                <button type=submit value=update name=update id=btn ><i class='fa-regular fa-pen-to-square'></i></i></button>
+                </form>"."
             </td>";
 				 echo "</tr>";
 	 
@@ -121,7 +121,7 @@ table{
 	
 	
 	//margin-left:440px;
-	width:800px;
+	width:1050px;
 	height:20px;
 	border-collapse: collapse;	
 	margin-top:50px;
@@ -233,63 +233,19 @@ h1{
 				            
 				  
 				  }
-				  
-				  
-				  
-				  
-				    .f2{
-					      //background-color:red;
-						    margin-left:90px;
-							margin-top:-50px;
-							background-color:transparent;
-							 border: none;
-						   cursor:pointer;
-						   
-				            
-				  
-				  }
-				  
-				  
-				  .f1{
-					     // background-color:yellow;
-						      background-color:transparent;
-						  margin-left:55px;
-						    margin-right:60px;
-							margin-bottom:0px;
-							margin-top:-100px;
-						   border: none;
-						   cursor:pointer;
-						  
-						  
-				  }
-				  
-				  .fp{
-					  
-					  
-					 
-					  //background-color:green;
-					  margin-right:100px;
-					  margin-top:0px;
-					 
-					  margin-bottom:-53px;
-					  background-color:transparent;
-					   border: none;
-					   cursor:pointer;
-					  
-					  
-					  
-				  }
 			   
 			   
 			   .tab{
 				   
 				   background-color:#F5F5F5;
 				    margin-top:0px;
-					margin-left:370px;
-					//padding:10px;
+					margin-left:320px;
+					padding-right:10px;
 					margin-right:265px;
 					padding-left:37px;
                    padding-right:60px;
+				   width:1050px;
+				   
 					 
 				   
 				   
@@ -300,12 +256,13 @@ h1{
 				   
 				   background-color:#F5F5F5;
 				  
-				   
+				   width:1100px;
 				   margin-top:50px;
 				   margin-bottom:0px;
-				  margin-left:370px;
+				  margin-left:320px;
 				  margin-right:265px;
 				  padding-left:30px;
+				  padding-right: 17px;
 				   
 				   
 				   
@@ -316,6 +273,17 @@ h1{
 		background-color:white;
 		
 		
+	}
+
+	#btn i {
+  			display: inline-block;
+			}
+
+
+	#btn{
+		border:none;
+		background-color: transparent;
+		cursor:pointer;
 	}
 		
 		
