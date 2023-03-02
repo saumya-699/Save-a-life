@@ -167,7 +167,7 @@ if(isset($_POST['view']))
                     while($row = $result->fetch_assoc())
    
                     {         
-                    echo  "<tr>"."<td>".$row["test_result_id"]."</td>"."<td>".$row["donation_id"]."</td>"."<td>".$row["blood_group"]."</td>"."<td>".$row["malaria_result"]."</td>"."<td>".$row["hiv_result"]."</td>"."<td>".$row["hbv_result"]."</td>"."<td>".$row["hcv_result"]."</td>"."<td>".$row["vdrl_result"]."</td>"."<td>".$row["process_date"]."</td>"."<td>".$row["batch_number"]."</td>";
+                    echo  "<tr>"."<td>".$row["test_result_id"]."</td>"."<td>".$row["donar_id"]."</td>"."<td>".$row["blood_group"]."</td>"."<td>".$row["malaria_result"]."</td>"."<td>".$row["hiv_result"]."</td>"."<td>".$row["hbv_result"]."</td>"."<td>".$row["hcv_result"]."</td>"."<td>".$row["vdrl_result"]."</td>"."<td>".$row["process_date"]."</td>"."<td>".$row["batch_number"]."</td>";
 	  
                     echo "</tr>";
 
