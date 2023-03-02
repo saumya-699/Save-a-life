@@ -1,9 +1,10 @@
-
 <?php 
 session_start();
 
 ?>
 
+
+ 
 <?php
 
 include 'mj.php';
@@ -11,7 +12,8 @@ include 'mj.php';
 <html>
 
 <head>
- <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css'>
+   
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css'>
 
     <link rel="stylesheet" href="style.css">  
 	<link rel="stylesheet" href="css/nbtssl/nbtssl.min.css">
@@ -199,11 +201,8 @@ body {
 
 
 </style> 
-
-
-
-
 </head>
+
 
 <body>
 
@@ -271,8 +270,8 @@ body {
   <div class="passwordDiv">
  
 
-  <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
-                             <option value="Donor_Id" selected><b> Donor Id</b></option>
+ <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
+ <option value="Donor_Id" selected><b> Donor Id</b></option>
                              <option value="Donor_Name"><b> Donor Name</b></option>
                              <option value="NIC"><b>NIC</b></option>
                              <option value="Blood_Group"><b>Blood Group</b></option>
@@ -292,39 +291,47 @@ body {
 </form>
 <?php
 
+
 require 'conection.php';
-if(isset($_POST['view']))  
+    
+$sql= "select * from donors" ;
+$result = $conn->query($sql);
 
-{	
-   $did=$_POST['Donor_Id'];
-   $query="select * from donors where Donor_Id='$did'";
-   $result= $conn->query($query);
-   
+if($result->num_rows>0)
 
-  
+{     
    
 
           //echo "<font color=red>";
 	      //echo "<font size=6>";
 	   
-	   echo  "<div style='overflow-x:auto;' class='tab'>";
-  echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Donor_ID"."</th>"."<th style='text-align:center;width:100px;'>"."Full name"."</th>"."<th>"."Name with initials"."</th>"."<th>"."NIC"."</th>"."<th width:100px;>"."DOB"."<th style='text-align:center;width:90px;'>"."Address"."</th>"."<th>"."Province"."</th>"."<th>"."Postal Code"."</th>"."<th>"."Gender"."</th>"."<th>"."E-mail"."</th>"."<th style='text-align:left:width:50px;'>"."Contact Number"."</th>"."<th style='text-align:left:width:50px;'>"."Action"."</th>"."</tr>";
-      echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=10'>"."</td>"."</tr>";
+	   echo  "<div class='tab'>";
+	  echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Donor_ID"."</th>"."
+       <th style='text-align:center;width:120px;'>"."Donor Name"."
+       <th style='text-align:center;width:120px;'>"."NIC Number"."</th>"."
+       <th>"."Gender"."</th>"."
+       <th>"."Cotact Number"."</th>"."
+	   <th>"."province"."</th>"."
+       <th style='width:120px;'>"."Action"."</th>"."
+       </tr>";
+      echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
    while($row = $result->fetch_assoc())
    
    {     
      
-	  echo  "<tr>"."<td>".$row["Donor_Id"]."</td>"."<td>".$row["Prefix"].".".$row["Full_Name"]."</td>"."<td>".$row["Initials"]."</td>"."<td>".$row["NIC_Number"]."</td>"."<td>".$row["DOB"]."</td>"."<td>".$row["Address"]."</td>"."<td>".$row["province"]."</td>"."<td>".$row["postal"]."</td>"."<td>".$row["Gender"]."</td>"."<td>".$row["Email"]."</td>"."<td>".$row["mobile_number"]."<br/>".$row["land_number"]."</td>";
-	   echo "<td>
-				<form method='POST' action ='#'>
+	  echo  "<tr>"."<td>".$row["Donor_Id"]."</td>"."<td>".$row["Prefix"].".".$row["Full_Name"]."</td>"."<td>".$row["NIC_Number"]."</td>"."<td>".$row["Gender"]."</td>"."<td>".$row["mobile_number"]."</td>"."<td>".$row["province"]."</td>";
+	   echo "<td><form method='POST' action ='ViewAll.php'>
+                <input type=hidden name=Donor_Id value=".$row["Donor_Id"]." >
+                <button type=submit value=view name=view  class='fp'><img src=eye.png width=43 height=37></button>
+                </form>
+				<form method='POST' action =''>
                 <input type=hidden name=Donor_Id value=".$row["Donor_Id"]." >
                 <button type=submit value=update name=update  class='f1'><img src=dx.png width=30 height=33></button>
                 </form>
-                
-                </td>";
+            </td>";
 				 echo "</tr>";
 	 
-	   echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=10'>"."</td>"."</tr>";
+	   echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
 	  
 	}
 	
@@ -334,8 +341,14 @@ if(isset($_POST['view']))
 	 echo "</div>";
 	
 	
-	
+}	
 
+else
+
+{
+  echo "Error in ".$sql."<br>".$conn->error;
+
+ echo "no results";
 
 }
 
@@ -343,11 +356,10 @@ $conn->close();
 ?>
 
 
-<button type="submit" name="data" id="data" class="bx"><a href="View_Donors.php"><font color="white"><font size="3">Back</font></font></a></button>
+
 
 
 <style>
-
 
 table{
 	
@@ -386,7 +398,7 @@ td {
 
 h1{
 	
-		margin-top:70px;	
+		margin-top:0px;	
 		margin-left:200px;
 		margin-bottom:100px;
 }
@@ -422,11 +434,11 @@ h1{
 
                     background-color:transparent;
                     
-                   // margin-left:396px;
-                    //margin-right:325px;
+                    //margin-left:396px;
+                   // margin-right:325px;
                     margin-bottom:-52px;
                     padding:2px 90px 30px 10px;
-					margin-top:10px;
+					margin-top:-10px;
 					outline:none;
 					border-radius: 25px;
 
@@ -468,15 +480,14 @@ h1{
 				  
 				  
 				  
-				  
+				 
 				    .f2{
 					      //background-color:red;
 						    margin-left:90px;
-							margin-top:-54px;
+							margin-top:-50px;
 							background-color:transparent;
 							 border: none;
-							  cursor:pointer;
-						  
+						   cursor:pointer;
 						   
 				            
 				  
@@ -488,25 +499,43 @@ h1{
 						      background-color:transparent;
 						  margin-left:55px;
 						    margin-right:60px;
-							margin-bottom:5px;
-							margin-top:10px;
+							margin-bottom:0px;
+							margin-top:0px;
 						   border: none;
 						   cursor:pointer;
 						  
+						  
 				  }
 				  
-				  
+				  .fp{
+					  
+					  
+					 
+					  //background-color:green;
+					  margin-right:100px;
+					  margin-top:0px;
+					 
+					  margin-bottom:-53px;
+					  background-color:transparent;
+					   border: none;
+					   cursor:pointer;
+					  
+					  
+					  
+				  }
+			   
+			   
 			   
 			   
 			   .tab{
 				   
 				   background-color:#F5F5F5;
 				    margin-top:0px;
-					margin-left:285px;
+					margin-left:370px;
 					//padding:10px;
-					margin-right:90px;
-					padding-left:1px;
-                  // padding-right:1000px;
+					margin-right:265px;
+					padding-left:37px;
+                   padding-right:60px;
 					 
 				   
 				   
@@ -518,10 +547,10 @@ h1{
 				   background-color:#F5F5F5;
 				  
 				   
-				   margin-top:90px;
+				   margin-top:50px;
 				   margin-bottom:0px;
-				  margin-left:285px;
-				  margin-right:90px;
+				  margin-left:370px;
+				  margin-right:265px;
 				  padding-left:30px;
 				   
 				   
@@ -536,29 +565,9 @@ h1{
 	}
 		
 		
-		
-                  .bx{
-					      height:25px;
-				          width:100px;
-										   
-						    color:#FFF5F3;
-							margin-left:1426px;
-							 border-radius:30px;
-                             margin-top:30px;
-                           background-color:#F35050;
-						   border: none;
-						   cursor:pointer;
-						   
-				            
-				  
-				  }
-				  
-               a{
-				   
-				   text-decoration:none;
-			   }
 			   
 </style>
 
 </body>
 </html>
+	
