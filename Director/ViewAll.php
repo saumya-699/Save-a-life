@@ -316,7 +316,7 @@ if(isset($_POST['view']))
      
 	  echo  "<tr>"."<td>".$row["Donor_Id"]."</td>"."<td>".$row["Prefix"].".".$row["Full_Name"]."</td>"."<td>".$row["Initials"]."</td>"."<td>".$row["NIC_Number"]."</td>"."<td>".$row["DOB"]."</td>"."<td>".$row["Address"]."</td>"."<td>".$row["province"]."</td>"."<td>".$row["postal"]."</td>"."<td>".$row["Gender"]."</td>"."<td>".$row["Email"]."</td>"."<td>".$row["mobile_number"]."<br/>".$row["land_number"]."</td>";
 	   echo "<td>
-				<form method='POST' action ='#'>
+				<form method='POST' action ='DeleteDonor.php' onsubmit='return myConfirm()'>
                 <input type=hidden name=Donor_Id value=".$row["Donor_Id"]." >
                 <button type=submit value=delete name=delete  class='f1'><img src=dx.png width=30 height=33></button>
                 </form>
@@ -344,7 +344,17 @@ $conn->close();
 
 
 <button type="submit" name="data" id="data" class="bx"><a href="View_Donors.php"><font color="white"><font size="3">Back</font></font></a></button>
+<script>
+function myConfirm() {
+  var result = confirm("Want to delete?");
+  if (result==true) {
+   return true;
+  } else {
+   return false;
+  }
+}
 
+</script>
 
 <style>
 
