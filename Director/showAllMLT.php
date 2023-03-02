@@ -135,7 +135,7 @@ if(isset($_POST['view']))
                 <input type=hidden name=MLT_ID value=".$row["MLT_ID"]." >
                 <button type=submit value=update name=update  class='f1'><img src=edit.png width=26 height=26></button>
                 </form>
-                <form method='POST' action ='DeleteMLT.php'>
+                <form method='POST' action ='DeleteMLT.php' onsubmit='return myConfirm()'>
                 <input type=hidden  name=MLT_ID value=".$row["MLT_ID"]." >
                 <button type=submit value=Delete name=delete class='f2' ><img src=dx.png width=30 height=33></button>
                 </form>
