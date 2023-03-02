@@ -318,7 +318,7 @@ if(isset($_POST['view']))
 	   echo "<td>
 				<form method='POST' action ='#'>
                 <input type=hidden name=Donor_Id value=".$row["Donor_Id"]." >
-                <button type=submit value=update name=delete  class='f1'><img src=dx.png width=30 height=33></button>
+                <button type=submit value=delete name=delete  class='f1'><img src=dx.png width=30 height=33></button>
                 </form>
                 
                 </td>";
