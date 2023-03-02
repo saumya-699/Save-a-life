@@ -1,0 +1,52 @@
+/* Extra small devices (phones, 600px and down) */
+
+@media only screen and (max-width: 600px) {
+    .logo img {
+        height: 100px;
+        margin-top: 30px;
+    }
+    .container-fulid {
+        height: 150px;
+    }
+    .txt-nbt-head h1 {
+        text-align: center;
+        font-size: 1.8rem;
+        margin-top: -92px;
+        margin-left: 11rem;
+    }
+    .frm-login {
+        display: flex;
+        justify-content: center;
+        margin-top: 40%;
+    }
+    .card {
+        border: none !important;
+    }
+    body {
+        height: 100%;
+        /* background-image: url(../img/LOGOF\ .png); */
+        background-image: none;
+    }
+    .circle-bg {
+        left: 39%;
+        border-radius: 50px;
+    }
+}
+
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+
+@media only screen and (min-width: 600px) {
+    .example {
+        background: green;
+    }
+}
+
+
+/* Medium devices (landscape tablets, 768px and up) */
+
+@media only screen and (min-width: 768px) {
+    .example {
+        background: blue;
+    }
+}
