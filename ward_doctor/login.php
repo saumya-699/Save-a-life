@@ -3,6 +3,7 @@ session_start();
 include "db_conn.php";
 
 if(isset($_POST['UserName']) && isset($_POST['Password'])){
+    
 
    function validate($data){
         $data =trim($data);
@@ -24,7 +25,7 @@ elseif(empty($Password)){
 }
 else{
 
-$sql ="SELECT *FROM warddoctor WHERE UserName='$UserName' AND password='$Password'";
+$sql ="SELECT * FROM warddoctor WHERE UserName='$UserName' AND password='$Password'";
 
 $result = mysqli_query($con,$sql);
 
@@ -37,7 +38,9 @@ if(mysqli_num_rows($result)===1){
         $_SESSION['UserName'] =$row['UserName'];
         $_SESSION['Name_With_Initials'] =$row['Name_With_Initials'];
         $_SESSION['WardDoctor_ID'] =$row['WardDoctor_ID'];
-		 header("Location: see.php");
+        $_SESSION['Hospital_ID'] =$row['Hospital_ID'];
+        
+		header("Location: see.php");
         exit();
     } 
 }  else {
