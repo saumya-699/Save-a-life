@@ -61,7 +61,7 @@ if($result->num_rows>0)
 	     echo '<script type="text/javascript">';
 		 echo 'alert("Added successfully");';
          
-	     echo 'window.location.href="HomepageDirector.php";';
+	     echo 'window.location.href="AddNurse.php";';
 		 echo '</script>';
 
 	  
