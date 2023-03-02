@@ -47,7 +47,7 @@ include 'see.php';
 <?php
 
 
-require 'conection.php';
+require 'conp.php';
     
 $sql= "select * from donors" ;
 $result = $conn->query($sql);
