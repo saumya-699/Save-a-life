@@ -57,7 +57,7 @@ $result = $conn->query($sql);
                 &nbsp;
                 <div class="name"><?php
                                     session_start();
-                                    echo " " . $_SESSION['name_with_initials'];
+                                    echo " " . $_SESSION['Name_With_Initials'];
                                     ?>
                     <br>Ward doctor
                 </div>

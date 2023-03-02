@@ -24,19 +24,20 @@ elseif(empty($Password)){
 }
 else{
 
-$sql ="SELECT *FROM user_nbts WHERE User_name='$UserName' AND password='$Password'";
+$sql ="SELECT *FROM mlt WHERE UserName='$UserName' AND Password='$Password'";
 
 $result = mysqli_query($con,$sql);
 
 if(mysqli_num_rows($result)===1){
     $row= mysqli_fetch_assoc($result);
-    if($row['user_name']===$UserName && $row['password'] ===$Password){
+    if($row['UserName']===$UserName && $row['Password'] ===$Password){
         //echo "logged in";
         
 
-        $_SESSION['UserName'] =$row['User_name'];
-        $_SESSION['name_with_initials'] =$row['name_with_initials'];
-        $_SESSION['id'] =$row['id'];
+        $_SESSION['UserName'] =$row['UserName'];
+        $_SESSION['Name_With_Initials'] =$row['Name_With_Initials'];
+        $_SESSION['MLT_ID'] =$row['MLT_ID'];
+        $_SESSION['Hospital_ID'] =$row['Hospital_ID'];
 		 header("Location: seeMLT.php");
         exit();
     } 

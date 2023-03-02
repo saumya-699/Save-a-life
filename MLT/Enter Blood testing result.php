@@ -125,7 +125,7 @@
 			&nbsp;
       <div class="name"><?php
        session_start();
-     echo " " . $_SESSION['name_with_initials'];
+     echo " " . $_SESSION['Name_With_Initials'];
     ?>
 	<br>MLT</div>
 		 <div class="dropdown">
@@ -202,7 +202,7 @@
 
                     
                             <label for="exampleFormControlInput1 " class="form-label lbl star ">Donar ID</label>
-                            <input type="text" class="form-control txt-input " name="donation_id"placeholder="Type donation id" required="" >
+                            <input type="text" class="form-control txt-input " name="donar_id"placeholder="Type donar id" required="" >
 
                             
                         <label for="exampleFormControlInput1 " class="form-label lbl star ">Blood Group</label>
@@ -263,9 +263,6 @@
                <option value=" " diabled>Select batch_number </option>
                <option value="1">1</option>
                 <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
             
             </select>
 

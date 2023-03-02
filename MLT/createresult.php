@@ -5,10 +5,7 @@ include "config.php";
 
   if (isset($_POST['submit'])) {
 
-
-    $test_result_id=$_POST['test_result_id'];
-
-    $donation_id = $_POST['donation_id'];
+    $donar_id = $_POST['donar_id'];
 
     $blood_group = $_POST['blood_group'];
 
@@ -28,7 +25,11 @@ include "config.php";
 	
     $status= ("Pending");
 
-    $sql= "INSERT INTO blood_testing_result (test_result_id, donation_id, blood_group, malaria_result, hiv_result, hbv_result,hcv_result,vdrl_result,batch_number,process_date,status) VALUES ('$test_result_id',' $donation_id','$blood_group','$malaria_result', '$hiv_result','$hbv_result','$hcv_result','$vdrl_result','$batch_number','$process_date','$status')";
+    $x = $_SESSION['Hospital_ID'];
+
+    $y= $_SESSION['MLT_ID'];
+
+    $sql= "INSERT INTO blood_testing_result (donar_id, blood_group, malaria_result, hiv_result, hbv_result,hcv_result,vdrl_result,batch_number,process_date,status,MLT_ID,Hospital_ID) VALUES ('$donar_id','$blood_group','$malaria_result', '$hiv_result','$hbv_result','$hcv_result','$vdrl_result','$batch_number','$process_date','$status','$y','$x')";
   
    $result = $conn->query($sql);
 
