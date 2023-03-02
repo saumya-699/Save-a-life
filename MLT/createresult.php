@@ -6,8 +6,6 @@ include "config.php";
   if (isset($_POST['submit'])) {
 
 
-    $test_result_id=$_POST['test_result_id'];
-
     $donar_id = $_POST['donar_id'];
 
     $blood_group = $_POST['blood_group'];
