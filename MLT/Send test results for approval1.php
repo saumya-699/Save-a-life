@@ -162,7 +162,7 @@ if(isset($_POST['view']))
    $result = $conn->query($sql);
 
 
-                    echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:200px;'>"."Test result ID"."</th>"."<th style='text-align:center;width:120px;'>"."Donation ID"."</th>"."<th style='text-align:center;width:100px;'>"."Blood group"."</th>"."<th>"."Malaria result"."</th>"."<th>"." HIV result"."</th>"."<th>"."HBV result"."</th>"."<th>"."HCV result"."</th>"."<th>"."VDRL result"."</th>"."<th>"."Date"."</th>"."<th>"."Batch number"."</th>"."</tr>";
+                    echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:200px;'>"."Test result ID"."</th>"."<th style='text-align:center;width:120px;'>"."Donar ID"."</th>"."<th style='text-align:center;width:100px;'>"."Blood group"."</th>"."<th>"."Malaria result"."</th>"."<th>"." HIV result"."</th>"."<th>"."HBV result"."</th>"."<th>"."HCV result"."</th>"."<th>"."VDRL result"."</th>"."<th>"."Date"."</th>"."<th>"."Batch number"."</th>"."</tr>";
                     echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=11'>"."</td>"."</tr>";
                     while($row = $result->fetch_assoc())
    
