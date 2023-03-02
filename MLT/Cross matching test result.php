@@ -124,7 +124,7 @@
 			&nbsp;
       <div class="name"><?php
        session_start();
-     echo " " . $_SESSION['name_with_initials'];
+     echo " " . $_SESSION['Name_With_Initials'];
     ?>
 	<br>MLT</div>
 		 <div class="dropdown">
