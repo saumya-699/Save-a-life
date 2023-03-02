@@ -163,12 +163,12 @@ if(isset($_POST['view']))
    $result = $conn->query($sql);
 
 
-                    echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:200px;'>"."Test result ID"."</th>"."<th style='text-align:center;width:120px;'>"."Donation ID"."</th>"."<th style='text-align:center;width:100px;'>"."Blood group"."</th>"."<th>"."Malaria result"."</th>"."<th>"." HIV result"."</th>"."<th>"."HBV result"."</th>"."<th>"."HCV result"."</th>"."<th>"."VDRL result"."</th>"."<th>"."Date"."</th>"."<th>"."Batch number"."</th>"."<th>"."Status"."</th>"."</tr>";
+                    echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:200px;'>"."Test result ID"."</th>"."<th style='text-align:center;width:120px;'>"."Donar ID"."</th>"."<th style='text-align:center;width:100px;'>"."Blood group"."</th>"."<th>"."Malaria result"."</th>"."<th>"." HIV result"."</th>"."<th>"."HBV result"."</th>"."<th>"."HCV result"."</th>"."<th>"."VDRL result"."</th>"."<th>"."Date"."</th>"."<th>"."Batch number"."</th>"."<th>"."Status"."</th>"."</tr>";
                     echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=11'>"."</td>"."</tr>";
                     while($row = $result->fetch_assoc())
    
                     {         
-                    echo  "<tr>"."<td>".$row["test_result_id"]."</td>"."<td>".$row["donation_id"]."</td>"."<td>".$row["blood_group"]."</td>"."<td>".$row["malaria_result"]."</td>"."<td>".$row["hiv_result"]."</td>"."<td>".$row["hbv_result"]."</td>"."<td>".$row["hcv_result"]."</td>"."<td>".$row["vdrl_result"]."</td>"."<td>".$row["process_date"]."</td>"."<td>".$row["batch_number"]."</td>"."<td>".$row["status"]."</td>";
+                    echo  "<tr>"."<td>".$row["test_result_id"]."</td>"."<td>".$row["donar_id"]."</td>"."<td>".$row["blood_group"]."</td>"."<td>".$row["malaria_result"]."</td>"."<td>".$row["hiv_result"]."</td>"."<td>".$row["hbv_result"]."</td>"."<td>".$row["hcv_result"]."</td>"."<td>".$row["vdrl_result"]."</td>"."<td>".$row["process_date"]."</td>"."<td>".$row["batch_number"]."</td>"."<td>".$row["status"]."</td>";
 	  
                     echo "</tr>";
 
