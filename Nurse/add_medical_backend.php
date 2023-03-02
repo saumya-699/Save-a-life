@@ -12,22 +12,23 @@ require 'conection.php';
 if(isset($_POST['BtnSubmit']))
 {
   
-    $Donor_ID=$_POST["Donor_ID"];
-    $Weight=$_POST["Weight"];
-    $Height=$_POST["Height"];
-	$Blood_Pressure=$_POST["Blood_Pressure"];
-	$Hemoglobine=$_POST["Hemoglobine"];
+    $Donor_Id=$_POST["donorid"];
+    $Weight=$_POST["weight"];
+    $Height=$_POST["height"];
+	$Blood_Group = $_POST["blood"];
+	$Blood_Pressure=$_POST["bpressure"];
+	$Hemoglobine=$_POST["hemoglobine"];
 	
     
     //database connection
 
-        $sql = "INSERT INTO pre_medical (Donor_ID,Weight,Height,Blood_Pressure,Hemoglobine)
-VALUES ('$Donor_ID','$Weight','$Height','$Blood_Pressure','$Hemoglobine')";
+        $sql = "INSERT INTO pre_medical (Donor_Id,Weight,Height,Blood_Group,Blood_Pressure,Hemoglobine)
+VALUES ('$Donor_Id','$Weight','$Height','$Blood_Group','$Blood_Pressure','$Hemoglobine')";
 
 if($conn->query($sql)){
       
 	echo '<script type="text/javascript">';	 
-	echo 'alert("Registration is successfully");';
+	echo 'alert("Added successfully");';
          
 	
 		 echo '</script>';

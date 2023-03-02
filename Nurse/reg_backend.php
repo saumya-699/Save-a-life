@@ -25,7 +25,7 @@ if(isset($_POST['BtnSubmit']))
 	$mobile_number=$_POST["mobile"];
 	$land_number=$_POST["land"];
 	$username = $_POST["username"];
-	$password = $_["password"];
+	$password = $_POST["password"];
     
    
     

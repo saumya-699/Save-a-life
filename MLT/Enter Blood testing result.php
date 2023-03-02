@@ -201,7 +201,7 @@
                             <form action="createresult.php " method="POST">
 
                     
-                            <label for="exampleFormControlInput1 " class="form-label lbl star ">Donation ID</label>
+                            <label for="exampleFormControlInput1 " class="form-label lbl star ">Donar ID</label>
                             <input type="text" class="form-control txt-input " name="donation_id"placeholder="Type donation id" required="" >
 
                             
