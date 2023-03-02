@@ -34,10 +34,17 @@ include "config.php";
     $remark = $_POST['remark'];
 
     $requested_date=date("Y/m/d");
-	
+
+    $y= $_SESSION['WardDoctor_ID'];
+
+    $vql = "SELECT * FROM warddoctor"; 
+    $result = $conn->query($vql);
+   
+    $x = $_SESSION['Hospital_ID'];
+    
     $status= ("Pending");
 
-    $sql= "INSERT INTO blood_request (patient_name, date_Of_birth, patient_age, patient_gender, blood_group, blood_component,required_amount,expected_date,requested_date,reason,ward_number,remark,status) VALUES ('$patient_name',' $date_Of_birth','$Age','$patient_gender', '$blood_group','$blood_component','$required_amount','$expected_date','$requested_date','$reason','$ward_number','$remark','$status')";
+    $sql= "INSERT INTO blood_request (patient_name, date_Of_birth, patient_age, patient_gender, blood_group, blood_component,required_amount,expected_date,requested_date,reason,ward_number,remark,status,Hospital_ID,WardDoctor_ID) VALUES ('$patient_name',' $date_Of_birth','$Age','$patient_gender', '$blood_group','$blood_component','$required_amount','$expected_date','$requested_date','$reason','$ward_number','$remark','$status','$x','$y')";
   
    $result = $conn->query($sql);
 
@@ -54,6 +61,7 @@ include "config.php";
   }
 
 
+  
 
  /* 
 echo $patient_gender;
