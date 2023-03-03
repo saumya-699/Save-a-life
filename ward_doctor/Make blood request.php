@@ -47,6 +47,7 @@
       <div class="name"><?php
        session_start();
      echo " " . $_SESSION['Name_With_Initials'];
+    
     ?>
 	<br>Ward doctor</div>
 		 <div class="dropdown">
@@ -54,9 +55,9 @@
                     arrow_drop_down
                 </span> 
 				<div class="dropdown-content">
-  <a href="Edit Profile.php"> <span class="material-icons licon">
+  <a href="Profile.php"> <span class="material-icons licon">
   person
-                </span> Edit Profile</a>
+                </span> Profile</a>
   <a href="logout.php">
   <span class="material-icons licon">
   exit_to_app
@@ -91,10 +92,13 @@
                                 <label for="exampleFormControlInput1 " class="form-label lbl star ">Patient Name</label>
                                 <input type="text" class="form-control txt-input " name="patient_name"placeholder="Type patient name " required="">
 
-                                <label for="exampleFormControlInput1 " class="form-label lbl star " name="date_Of_birth ">Patient's Date of birth (MM/DD/YYYY)</label>
+                                
+                                <label for="exampleFormControlInput1 " class="form-label lbl star " name="date_Of_birth">Patient's Date of birth (MM/DD/YYYY)</label>
                                 <div class="input-group mb-4 ">
-                                    <input type="date" name="date_Of_birth" placeholder="Date_of_birth" required="" max="<?= date('Y-m-d') ?>">                                </div>
-
+                                <i class="fas fa-calendar-alt input-group-text"></i>
+                                <input type="date" name="date_Of_birth" class="datepicker_input form-control txt-input" placeholder="Select Date" required=""  max="<?= date('Y-m-d') ?>">
+                                </div>
+                                
                                 
                                 <label for="exampleFormControlInput1" class="form-label lbl star ">Patient Gender</label>
                                 <select name="patient_gender" id=" "  class="form-control txt-input " required="">
@@ -135,16 +139,14 @@
 	                           <option value="03">03</option>
                                 <option value="04">04</option>
 	                          <option value="05">05</option>
-                              <option value="06">06</option>
-
                             </select>
 
                                 
-                                
                             <label for="exampleFormControlInput1 " class="form-label lbl star " name="expected_date">Expected date to receive (MM/DD/YYYY)</label>
                                 <div class="input-group mb-4 ">
-                                    <input type="date" name="expected_date" placeholder="Expected_date" required="" min="<?= date('Y-m-d') ?>">                                </div>
-
+                                <i class="fas fa-calendar-alt input-group-text"></i>
+                                <input type="date" class="datepicker_input form-control txt-input" name="expected_date" placeholder="Select Date" required="" min="<?= date('Y-m-d') ?>">
+                               </div>
 
                                 <label for="exampleFormControlInput1 " class="form-label lbl star " name="reason">Reason for the request</label>
                                 <textarea name="reason" id=" " cols="30 " rows="10 " class="form-control txt-input " placeholder="Type reason " required=""></textarea>
@@ -183,8 +185,6 @@
         </div>
         <div class="col " width="10 "></div>
     </div>
-
-
 
 </body>
 

@@ -13,9 +13,7 @@ include "config.php";
     $diff = date_diff(date_create($date_Of_birth), date_create($today));
     $Age= $diff->format('%y');
 
-   
-
-    $patient_age = $_POST['$Age'];
+    $patient_age = '$Age';
 
     $patient_gender = $_POST['patient_gender'];
 

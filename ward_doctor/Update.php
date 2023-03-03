@@ -6,7 +6,7 @@ if(isset($_POST['update']))  {
   $did=$_POST['RequestID'];
   $sql = "SELECT * FROM blood_request where requeste_id='$did' ";
   $result = $conn->query($sql);
- 
+   
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,7 +65,7 @@ if(isset($_POST['update']))  {
 				<div class="dropdown-content">
   <a href="Edit Profile.php"> <span class="material-icons licon">
   person
-                </span> Edit Profile</a>
+                </span>Profile</a>
   <a href="logout.php">
   <span class="material-icons licon">
   exit_to_app
@@ -86,6 +86,9 @@ if(isset($_POST['update']))  {
   
   </div>
 
+
+
+
  </ul>
 </div>
 <br>
@@ -97,6 +100,8 @@ if(isset($_POST['update']))  {
                                 <h1 class="txt-l ">Edit Blood Request</h1>
 
                                 <?php
+
+                                //print_r($row)
                              if ($result->num_rows > 0) {
                                while ($rows = $result->fetch_assoc()) {
                                  ?>
@@ -107,7 +112,12 @@ if(isset($_POST['update']))  {
                                    
                                 <input type="hidden" name="user_id" value="<?php echo $rows['requeste_id']; ?>">
                                 
-                                 
+                                      
+                            <label for="exampleFormControlInput1 " class="form-label lbl star " name="date_of_birth">Patient's Date of birth (MM/DD/YYYY)</label>
+                                <div class="input-group mb-4 ">
+                                    <input type="date" name="date_of_birth" placeholder="date_of_birth" value="<?php echo $rows['date_of_birth']; ?>" max="<?= date('Y-m-d') ?>">                                </div>
+                                    
+
                                 <label for="exampleFormControlInput1" class="form-label lbl star ">Patient Gender</label>
                                 <select name="patient_gender" id=" "  class="form-control txt-input " required="">
                                <option value="<?php echo $rows['patient_gender']; ?>">  <?php echo $rows['patient_gender']; ?> </option>
@@ -159,7 +169,7 @@ if(isset($_POST['update']))  {
 
 
                                 <label for="exampleFormControlInput1 " class="form-label lbl star " name="reason">Reason for the request</label>
-                                <textarea name="reason" id=" " cols="30 " rows="10 " class="form-control txt-input " placeholder="Type reason " required=""></textarea>
+                                <input type="text" class="form-control txt-input " name="reason" value="<?php echo $rows['reason']; ?>"required="">
 
                                 <label for="exampleFormControlInput1 " class="form-label lbl star ">Ward number</label>
                                 <select name="ward_number" id=" " class="form-control txt-input " required="">
@@ -179,7 +189,7 @@ if(isset($_POST['update']))  {
                             </select>
 
                             <label for="exampleFormControlInput1 "  name="remark " class="form-label lbl ">Remark</label>
-                                <textarea name="remark" id=" " cols="30 " rows="10 " class="form-control txt-input " placeholder="Type remark " ></textarea>
+                                <input type="text" class="form-control txt-input " name="remark" value="<?php echo $rows['remark']; ?>">
 
                                 <label for="exampleFormControlInput1" class="form-label lbl star ">Status</label>
                                 <select name="status" id=" "  class="form-control txt-input " required="">
