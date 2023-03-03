@@ -12,7 +12,7 @@ session_start();
    {
 	
 	
-?>
+
 <?php
 
 require 'cj.php';
@@ -25,25 +25,14 @@ $resultx = $conn->query($vql);
    
    {     
      
-	  $ty=$row["HospitalName"];
+	  $tz=$row["HospitalName"];
     $nm = $row["Name_With_Initials"];
 	 
 	  
 	  
 	}
 
-//$dql ="select * from hospital where Hospital_ID ='$ty'";
-/*$resultd = $conn->query($vql);
 
- while($row = $resultd->fetch_assoc())
-   
-   {     
-     
-	  $tz=$row['HospitalName'];
-	  //echo $tz;
-	  
-	  
-	}*/
 
 
 ?>
@@ -486,7 +475,7 @@ echo "
 	
              echo "<br><br><br>";  
 	        echo    "<label for='exampleFormControlInput1' class='form-label lbl star'> Requesting hospital name </label>
-          <input type='text'  name='H1Name' id='DOA' class='form-control txt-input' value='$ty'>";
+          <input type='text'  name='H1Name' id='DOA' class='form-control txt-input' value='$tz'>";
 ?>
     
     
