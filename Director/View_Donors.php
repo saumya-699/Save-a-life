@@ -292,7 +292,7 @@ body {
 <?php
 
 
-require 'conection.php';
+require 'conp.php';
     
 $sql= "select * from donors where username!='Removed'" ;
 $result = $conn->query($sql);
