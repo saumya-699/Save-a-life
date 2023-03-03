@@ -6,12 +6,12 @@ session_start();
 
 
  <?php
-   if(isset($_SESSION["ID"])) 
+   if(isset($_SESSION["ID"])) {
    $x= $_SESSION["ID"]; 
    
-   {
+   
 	
-	
+	?>
 
 <?php
 
@@ -570,8 +570,8 @@ echo "</select>";
     </div>";
 
 
-}
 ?>
+
 </body>
 
 
@@ -582,16 +582,5 @@ echo "</select>";
 	
 
 <?php
-
-/*else 
-	 
-	 {
-    
-    echo '<script type="text/javascript">';
-		 echo 'alert("Please log in first");';
-         
-		echo 'window.location.href="userloginFront.php";';
-  echo '</script>';
-	 }
- 
-?>*/
+}
+?>

@@ -358,7 +358,7 @@ if($result->num_rows>0)
 	
 }	
 
-else
+/*else
 
 {
   echo "Error in ".$sql."<br>".$conn->error;
@@ -366,7 +366,7 @@ else
  echo "no results";
 
 }
-
+*/
 $conn->close();
 ?>
 
@@ -598,14 +598,14 @@ h1{
 <?php
 	
 }
- else 
+ /*else 
 	 
 	 {echo '<script type="text/javascript">';
 		 echo 'alert("Please log in first");';
          
 		echo 'window.location.href="userloginFront.php";';
   echo '</script>';
-	 }
+	 }*/
  
 ?>
 
