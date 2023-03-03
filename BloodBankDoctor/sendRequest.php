@@ -15,7 +15,7 @@ session_start();
 ?>
 <?php
 
-//require 'cj.php';
+require 'cj.php';
 
 require 'conp.php';
 $vql ="select * from bloodbank_doctor where BloodBank_doctor_ID ='$x'";

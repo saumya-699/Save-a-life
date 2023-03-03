@@ -235,7 +235,7 @@ body {
       // session_start();
      echo " " . $_SESSION['Name'];
     ?>
-	<br>Director</div>
+	<br>Blood bank doctor</div>
 	
 			
   <div class="dropdownx">
@@ -306,7 +306,7 @@ if($result->num_rows>0)
 	      //echo "<font size=6>";
 	   
 	   echo  "<div class='tab'>";
-	  echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Donor_ID"."</th>"."
+	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Donor_ID"."</th>"."
        <th style='text-align:center;width:120px;'>"."Donor Name"."
        <th style='text-align:center;width:120px;'>"."NIC Number"."</th>"."
        <th>"."Gender"."</th>"."
