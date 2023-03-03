@@ -2,7 +2,7 @@
 
 include "config.php";
 
-$sql = "SELECT process_date, batch_number FROM blood_testing_result GROUP BY process_date, batch_number order by process_date DESC";
+$sql = "SELECT process_date, batch_number,status FROM blood_testing_result GROUP BY process_date, batch_number order by process_date DESC";
 
 $result = $conn->query($sql);
 
@@ -162,12 +162,11 @@ View approval of the blood test results    </div>
                 if ($result->num_rows > 0) {
 
                     echo  "<div class='tab'>";
-                    echo  "<table border=1>"."<tr>"."<th style='text-align:center;'>"."Date"."</th>"."<th style='text-align:center;'>"."Batch number"."</th>"."<th style='text-align:center;width:120px;'>"."Click button to view more information"."</th>"."</tr>";
+                    echo  "<table border=1>"."<tr>"."<th style='text-align:center;'>"."Date"."</th>"."<th style='text-align:center;'>"."Batch number"."</th>"."<th style='text-align:center;'>"."Status"."</th>"."<th style='text-align:center;width:120px;'>"."Click button to view more information"."</th>"."</tr>";
                     echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
                  while($row = $result->fetch_assoc()) {    
                            
-     
-     echo  "<tr>"."<td>".$row["process_date"]."</td>"."<td>".$row["batch_number"]."</td>";   
+     echo  "<tr>"."<td>".$row["process_date"]."</td>"."<td>".$row["batch_number"]."</td>"."<td>".$row["status"]."</td>";   
     
 	 echo "<td class='tb'><form method='POST' action ='View approval of blood test results2.php'>
      <input type=hidden name=RequestID value=".$row["batch_number"]." >
