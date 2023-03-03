@@ -1,5 +1,6 @@
 <?php 
 session_start();
+$x= $_SESSION["Name"];
 
 ?>
 
@@ -63,7 +64,7 @@ include 'cj.php';
 
 require 'conp.php';
     
-$sql= "select * from sent_request";
+$sql= "select * from sent_request where Requested_by='$x'";
 $result = $conn->query($sql);
 
 if($result->num_rows>0)

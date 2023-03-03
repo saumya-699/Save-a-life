@@ -15,7 +15,7 @@ session_start();
 ?>
 <?php
 
-require 'cj.php';
+//require 'cj.php';
 
 require 'conp.php';
 $vql ="select * from bloodbank_doctor where BloodBank_doctor_ID ='$x'";
@@ -25,25 +25,25 @@ $resultx = $conn->query($vql);
    
    {     
      
-	  $ty=$row["Hospital_ID"];
+	  $ty=$row["HospitalName"];
     $nm = $row["Name_With_Initials"];
 	 
 	  
 	  
 	}
 
-$dql ="select * from hospital where Hospital_ID ='$ty'";
-$resultd = $conn->query($vql);
+//$dql ="select * from hospital where Hospital_ID ='$ty'";
+/*$resultd = $conn->query($vql);
 
  while($row = $resultd->fetch_assoc())
    
    {     
      
-	  $tz=$row["HospitalName"];
-	 
+	  $tz=$row['HospitalName'];
+	  //echo $tz;
 	  
 	  
-	}
+	}*/
 
 
 ?>
@@ -486,7 +486,7 @@ echo "
 	
              echo "<br><br><br>";  
 	        echo    "<label for='exampleFormControlInput1' class='form-label lbl star'> Requesting hospital name </label>
-          <input type='text'  name='H1Name' id='DOA' class='form-control txt-input' value='$tz'>";
+          <input type='text'  name='H1Name' id='DOA' class='form-control txt-input' value='$ty'>";
 ?>
     
     
