@@ -1,12 +1,13 @@
 
 <?php 
 session_start();
+$x= $_SESSION["Name"];
 
 ?>
 
 <?php
 
-include 'mj.php';
+include 'cj.php';
 ?>
 <html>
 
@@ -22,8 +23,7 @@ include 'mj.php';
 
 </head>
 <body>
-
- <div class="logo-massaviu">
+<div class="logo-massaviu">
   &nbsp; &nbsp; 
 </div>
 <div class="top">
@@ -51,7 +51,7 @@ include 'mj.php';
       // session_start();
      echo " " . $_SESSION['Name'];
     ?>
-	<br>Director</div>
+	<br>Blood bank doctor</div>
 	
 			
   <div class="dropdownx">
@@ -77,7 +77,7 @@ include 'mj.php';
 </div>
 <br><br>
  
- <form method="post" action="searchMLT.php">
+ <form method="post" action="SearchBB.php">
  
 <div class="ta">
 <div class="midiv">
@@ -86,13 +86,13 @@ include 'mj.php';
  
 
  <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
-                              <option value="MLT_ID"><b> MLT_ID</b></option>
+                           <option value="BloodBank_doctor_ID"><b> BloodBank_doctor_ID</b></option>
 							   <option value="Name_With_Initials"><b>Name_With_Initials</b></option>
 						        <option value="HospitalName"><b> Hospital Name</b></option>
 							   <option value="SLMC_number"><b> SLMC_number</b></option>
                              <option value="Email" selected><b>Email</b></option>
 		                    <option value="ContactNumber" selected><b> Contact number</b></option>
-						  <option value="Remark" selected><b>Remark</b></option>
+						    <option value="Remark" selected><b>Remark</b></option>
 						  	  <option value="Director_ID" selected><b>Director_ID</b></option>
 							
                              </select>
@@ -109,35 +109,52 @@ include 'mj.php';
 <?php
 
 require 'conp.php';
-if(isset($_POST['view']))  
-
-{	
-   $did=$_POST['MLT_ID'];
-   $query="select * from MLT where MLT_ID='$did'";
+$query="select * from bloodbank_doctor where Name_With_Initials='$x'";
    $result= $conn->query($query);
-   
+     
+  if($result->num_rows>0)
+
+   {     
+
+      while($row = $result->fetch_assoc())
+ 
+       {   
+     	  $s= $row["Hospital_ID"];
+		 
+       }
+	   
+	   
+	  $rql ="select * from blood_request where Hospital_ID ='$s'";
+	   $resultx= $conn->query($rql);
+	  
+	 
+	  if($resultx->num_rows>0)
+		  
+		  {
+
+
+
+ 
 
   
    
 
           //echo "<font color=red>";
 	      //echo "<font size=6>";
-	     echo  "<div style='overflow-x:auto;' class='tab'>";
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."MLT_ID"."</th>"."<th style='text-align:center;width:100px;'>"."Name_With_Initials"."</th>"."<th>"."Hospital name"."</th>"."<th>"."SLMC number"."</th>"."<th>"."Email"."</th>"."<th style='text-align:center;width90px;'>"."Contact number"."</th>"."<th>"."Remark"."</th>"."<th>"."Director_ID"."</th>"."<th style='text-align:left:width:50px;'>"."Action"."</th>"."</tr>";
+	   
+	   echo  "<div style='overflow-x:auto; ' class='tab'> ";
+	    // echo  "<div class='hat'>";
+	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:100px;'>"."Request_ID"."</th>"."<th style='text-align:center;width:120px;'>"."Patient Name"."</th>"."<th style='text-align:center;width:100px;'>"."Patient Age"."</th>"."<th>"."Patient Gender"."</th>"."<th>"."Blood Group"."</th>"."<th style='text-align:center;width:120px;'>"."Required Blood Component"."</th>"."<th>"."Required Amount (packets)"."</th>"."<th style='text-align:center;width:120px;'>"."Expected date to receive"."</th>"."<th style='text-align:center;width:90px;'>"."Requested_date to receive"."</th>"."<th style='text-align:center;width:120px;'>"."Reason for the request"."</th>"."<th>"."Ward number"."</th>"."<th>"."Remark"."</th>"."<th>"."Status"."</th>"."<th style='text-align:center:width:40px;'>"."Action"."</th>"."</tr>";
       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=10'>"."</td>"."</tr>";
-   while($row = $result->fetch_assoc())
+   while($row = $resultx->fetch_assoc())
    
    {     
      
-	  echo  "<tr>"."<td>".$row["MLT_ID"]."</td>"."<td>".$row["Name_With_Initials"]."</td>"."<td>".$row["HospitalName"]."</td>"."<td>".$row["SLMC_Number"]."</td>"."<td>".$row["Email"]."</td>"."<td>".$row["ContactNumber"]."</td>"."<td>".$row["Remark"]."</td>"."<td>".$row["Director_ID"]."</td>";
+	  echo  "<tr>"."<td>".$row["requeste_id"]."</td>"."<td>".$row["patient_name"]."</td>"."<td>".$row["patient_age"]."</td>"."<td>".$row["patient_gender"]."</td>"."<td>".$row["blood_group"]."</td>"."<td>".$row["blood_component"]."</td>"."<td>".$row["required_amount"]."</td>"."<td>".$row["expected_date"]."</td>"."<td>".$row["requested_date"]."</td>"."<td>".$row["reason"]."</td>"."<td>".$row["ward_number"]."</td>"."<td>".$row["remark"]."</td>"."<td>".$row["status"]."</td>";
 	   echo "<td>
-				<form method='POST' action ='Fill_MLTUpdateFormBackEnd.php'>
-                <input type=hidden name=MLT_ID value=".$row["MLT_ID"]." >
+				<form method='POST' action ='Update.php'>
+                <input type=hidden name=RequestID value=".$row["requeste_id"]." >
                 <button type=submit value=update name=update  class='f1'><img src=edit.png width=26 height=26></button>
-                </form>
-                <form method='POST' action ='DeleteMLT.php' onsubmit='return myConfirm()'>
-                <input type=hidden  name=MLT_ID value=".$row["MLT_ID"]." >
-                <button type=submit value=Delete name=delete class='f2' ><img src=dx.png width=30 height=33></button>
                 </form>
                 </td>";
 				 echo "</tr>";
@@ -150,10 +167,19 @@ if(isset($_POST['view']))
 	 echo  "</font>";   
 	 echo "</table>";
 	 echo "</div>";
+	// echo "</div>";
 	
-	
-	
+		  }
+   
+   }
 
+
+else
+
+{
+  echo "Error in ".$query."<br>".$conn->error;
+
+ echo "no results";
 
 }
 
@@ -161,8 +187,7 @@ $conn->close();
 ?>
 
 
-<button type="submit" name="data" id="data" class="bx"><a href="RemoveOrUpdateMLT.php"><font color="white"><font size="3">Back</font></font></a></button>
-
+<button type="submit" name="data" id="data" class="bx"><a href="RemoveOrUpdateBB.php"><font color="white"><font size="3">Back</font></font></a></button>
 <script>
 function myConfirm() {
   var result = confirm("Want to delete?");
@@ -174,6 +199,7 @@ function myConfirm() {
 }
 
 </script>
+
 
 <style>
 
@@ -297,7 +323,7 @@ h1{
 				  
 				  
 				  
-			  
+				 
 				  .f2{
 					      //background-color:red;
 						    margin-left:90px;
@@ -327,6 +353,7 @@ h1{
 			   
 				  
 				  
+				  
 			   
 			   
 			   .tab{
@@ -336,7 +363,7 @@ h1{
 					margin-left:285px;
 					//padding:10px;
 					margin-right:60px;
-					padding-left:20px;
+					padding-left:8px;
                   // padding-right:1000px;
 					 
 				   
@@ -390,10 +417,7 @@ h1{
 			   }
 			   
 			   
-			   
-			   	   
-			   
-			   .top li {
+			      .top li {
   float: left;
   display: block;
   color: white;
@@ -482,7 +506,6 @@ display: flex;
 }
 
 
-
 .top {
   list-style-type: none;
   margin-top:-8px;
@@ -510,8 +533,6 @@ display: flex;
   font-family:Open Sans;
   position:fixed;
 }	
-	
-			   
 </style>
 
 </body>

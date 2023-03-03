@@ -150,7 +150,7 @@ a {text-decoration: none;}
   </button>
   <div class="dropdown-container">
     
-	    <a href="checkInternalRequest.php">Check internal requests</a>
+	    <a href="ViewInternalRequest.php">Check internal requests</a>
     <a href="checkExternalRequest.php">Check external requests</a>
     <a href="sendRequest.php">Send requests</a>
     <a href="sentRequestHistory.php">Sent request history</a>

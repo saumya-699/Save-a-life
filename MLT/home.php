@@ -3,7 +3,7 @@
 
 session_start();
 
-if (isset($_SESSION['ward_doctor_id']) && isset($_SESSION['user_id'])) {
+if (isset($_SESSION['MLT_ID']) && isset($_SESSION['user_id'])) {
 
  ?>
 

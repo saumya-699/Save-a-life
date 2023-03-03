@@ -14,7 +14,7 @@ include 'see.php';
 <head>
 	
 <link rel="stylesheet" href="https://kit.fontawesome.com/87928bc990.css" crossorigin="anonymous">
-
+<script src="https://kit.fontawesome.com/87928bc990.js" crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -64,11 +64,11 @@ if($result->num_rows>0)
 	      //echo "<font size=6>";
 	   
 	   echo  "<div class='tab'>";
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Donor_ID"."</th>"."
-       <th style='text-align:center;width:120px;'>"."Weight"."
-       <th style='text-align:center;width:120px;'>"."Height"."</th>"."
-       <th>"."Blood Pressure"."</th>"."
-       <th>"."Hemoglobine Level"."</th>"."
+	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Donor ID"."</th>"."
+       <th style='text-align:center;width:120px;'>"."Weight(Kg)"."
+       <th style='text-align:center;width:120px;'>"."Height(cm)"."</th>"."
+       <th>"."Blood Pressure(mm Hg)"."</th>"."
+       <th>"."Hemoglobine Level(g/dL)"."</th>"."
        <th style='width:120px;'>"."Action"."</th>"."
        </tr>";
       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
@@ -76,9 +76,10 @@ if($result->num_rows>0)
    
    {     
      
-	  echo  "<tr>"."<td>".$row["Donor_Id"]."</td>"."<td>".$row["Weight"]."</td>"."<td>".$row["Height"]."</td>"."<td>".$row["Blood_Pressure"]."</td>"."<td>".$row["Hemoglobine"]."</td>"."<td><button><i class='fa-solid fa-trash'></i></button></td>";
+	  echo  "<tr>"."<td>".$row["Donor_Id"]."</td>"."<td>".$row["Weight"]."</td>"."<td>".$row["Height"]."</td>"."<td>".$row["Blood_Pressure"]."</td>"."<td>".$row["Hemoglobine"]."</td>"."<td><i class='fa-solid fa-trash'></i></td>";
 	   
 		echo "</tr>";
+		echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=10'>"."</td>"."</tr>";
 	  
 	}
 	

@@ -515,7 +515,7 @@ echo "
                              
                            
                               
-                           
+                        
                               <label for='exampleFormControlInput1' class='form-label lbl star'>DOB</label>
                              
 							   <div class='input-group mb-4'>
@@ -596,7 +596,7 @@ echo "
 
 
 
-    <!-- nbtssl 5 JavaScript Bundle with Popper -->
+       <!-- nbtssl 5 JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/nbtssl@5.1.0/dist/js/nbtssl.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 
     <!-- Vanilla Datepicker JS -->
@@ -625,15 +625,4 @@ echo "
                 title: getDatePickerTitle(elem)
             });
         }
-		
-		
-		
-		function go(){
-			
-		echo "window.location.href='RemoveORUpdateWardDoctor.php'";
-		
-			
-			
-			
-		}
     </script>
