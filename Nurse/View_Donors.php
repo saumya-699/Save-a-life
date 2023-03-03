@@ -47,7 +47,7 @@ include 'see.php';
 <?php
 
 
-require 'conp.php';
+require 'conection.php';
     
 $sql= "select * from donors" ;
 $result = $conn->query($sql);
@@ -79,7 +79,7 @@ if($result->num_rows>0)
 	   echo "<td><form method='POST' action ='ViewAll.php'>
                 <input type=hidden name=Donor_Id value=".$row["Donor_Id"]." >
                 <button type=submit value=view name=view id=btn style=display: inline-block><i class='fa-sharp fa-solid fa-eye'></i></button>
-                </form>"."
+                </form>"."</td>"."<td>
 				<form method='POST' action =''> 
                 <input type=hidden name=Donor_Id value=".$row["Donor_Id"]." >
                 <button type=submit value=update name=update id=btn ><i class='fa-regular fa-pen-to-square'></i></i></button>

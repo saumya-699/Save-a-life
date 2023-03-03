@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,15 +16,16 @@
 <link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="style1.css">
 
 <style>
-    .sidenav a.active {
+
+
+.sidenav a.active {
       background-color: red;
       color: white;
     }
     .sidenav {
-      height: 150%;
+      height: 250%;
       width: 246px;
       position: absolute;
       z-index: 1;
@@ -95,8 +97,95 @@
       .sidenav {padding-top: 15px;}
       .sidenav a {font-size: 18px;}
     }
-    
-</style>    
+.top {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color:#E56262;
+  height: 55px;
+}
+
+
+
+.top li {
+  float: left;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  font-weight: 500;
+  font-style: italic;
+  font-family:Open Sans, sans-serif;
+}
+
+
+.logo-massaviu {
+  position: fixed;
+  padding-left: 0px;
+  background: transparent;
+  overflow: hidden;
+  z-index: 1;
+  width: 198px;
+  padding-top:9px;
+  padding-left:6px;
+  margin-top: 10px;
+}
+
+.top-right
+{
+    display: flex;
+ margin-bottom:1px;
+ margin-left:500.5px;
+ 
+}
+.name{
+display: flex;
+ margin-bottom:-10px;
+ cursor: pointer;
+
+}
+
+.person{
+   cursor: pointer;
+}
+
+.notification{
+  cursor: pointer;
+}
+
+
+.wel{
+ margin-left:300px;
+ margin-top: 100px;
+
+}
+
+
+.b1 {
+  background-color: red;
+  color: white;
+  border: 6px solid red;
+border-radius: 15px;
+width: 90px
+}
+a{
+  text-decoration:none;
+  color: white;
+}
+
+
+
+body {
+  background-image: url("ki.png");
+  background-repeat: no-repeat;
+  background-position:top;
+  
+  
+}
+
+	
+</style>
 </head>
 <body style="background-color:#FFC3BF;">
  
@@ -106,7 +195,7 @@
 </div>
 <ul class="top">
 
-  <li>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <font size="5px"> National Blood Transfusion Service  </font size></li>
+<li>&nbsp; &nbsp;   &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <font size="5px"> National Blood Transfusion Service  </font size></li>
 
  <li>
 <div class="top-right">
@@ -122,17 +211,20 @@
                 </span>
             </div>
 			&nbsp;
-      <div class="name"><?php
+	<div class="name">
+    <?php
        session_start();
      echo " " . $_SESSION['Name_With_Initials'];
     ?>
-	<br>MLT</div>
-		 <div class="dropdown">
+	<br>Ward doctor</div>
+	
+			
+  <div class="dropdown">
                <span class="material-icons licon">
                     arrow_drop_down
                 </span> 
 				<div class="dropdown-content">
-  <a href="Edit ProfileMlt.php"> <span class="material-icons licon">
+  <a href="Edit Profile.php"> <span class="material-icons licon">
   person
                 </span>Profile</a>
   <a href="logout.php">
@@ -145,6 +237,8 @@
  </li>
  </div>
 </ul>
+
+  
 <div class="sidenav">
     <button class="dropdown-btn" ><a href="seeMLT.php">Home</a>
     </button>
@@ -153,17 +247,15 @@
   <a href="view donated blood information.php">View donated blood</a>  </button>
   	
 
-  <button class="dropdown-btn1" style=background-color:#DB2A54;><a href="Enter test result.php">Enter test result </a>
+  <button class="dropdown-btn1" >Enter test result 
     <i class="fa fa-caret-down"></i>
   </button>
   <div class="dropdown-container">
-  
   <a href="Enter Blood testing result.php">Blood test</a>    
-  <a href="Cross matching test result.php" style=background-color:#5793CA>Cross matching</a>
-
+  <a href="Cross matching test result.php">Cross matching</a>
   </div>
  
-  <button class="dropdown-btn" >
+  <button class="dropdown-btn"  >
   <a href="Send test results for approval.php">Send test results for approval</a>
   </button>
   
@@ -176,7 +268,7 @@
         </button>
         
         <button class="dropdown-btn"  >
-        <a href="Blood stock.php"> Blood stock</a>
+        <a href="Blood stock.php">Blood stock</a>
             </button>
             
     
@@ -186,61 +278,14 @@
    
   
   </div>
- </ul>
  
+ <br>
+ <div class="wel">
+ <p><b> <font size="2px">Successfully entered</font></b></p>
+ <button class="b1" name="back" value="back"><a href="Cross matching test result.php"><font size="2px">go back</font></a></button>
  
 </div>
-<br>
-<div class="col-9 ">
-                <div class="frm-login ">
-                    <div class="card frm-form ">
-                        <div class="card-body frm-body ">
-
-                            <h1 class="txt-l "> Cross matching test result</h1>
-                                <form action="Create_Cross matching test result.php" method="POST">
-   
-                                <label for="exampleFormControlInput1 " class="form-label lbl star ">Request ID</label>
-                                <input type="text" class="form-control txt-input " name="request_id" placeholder="Enter request id" >
-
-                                
-                            <label for="exampleFormControlInput1 " class="form-label lbl star ">Blood Group test result</label>
-                            <select name="blood_group" id=" " class="form-control txt-input " required="">
-                           <option value=" " diabled> Select group </option>
-                           <option value="O-">O-</option>
-                            <option value="O+">O+</option>
-                            <option value="A-">A-</option>
-                            <option value="A+">A+</option>
-                            <option value="B-">B-</option>
-                            <option value="B+">B+</option>
-                            <option value="AB-">AB-</option>
-                           <option value="AB+">AB+</option>
-                        </select>
-                                
-                        <label for="exampleFormControlInput1 " class="form-label lbl star ">Cross matching result</label>
-                                <select name="Cross_matching_test_result" id=" " class="form-control txt-input " required="">
-                               <option value=" " diabled>Select test result </option>
-                               <option value="Matched">Matched</option>
-                                <option value="Unmatched">Unmatched</option>
-	                            
-                            </select>
-
-            
-                                <div class="row btn-buttons ">
-                                    <button class="b1" name="submit" value="submit"><font size="2px">Add</font></button> &nbsp; &nbsp; &nbsp; &nbsp;
-      &nbsp; &nbsp; &nbsp; &nbsp;  <button class="b1" name="cancel" value="cancel"><a href="Cross matching test result.php"><font size="2px">Cancel</font></a></button>
-                                </div>
-                            </form>
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col " width="10 "></div>
-    </div>
-
-    <script>
+<script>
         var dropdown = document.getElementsByClassName("dropdown-btn1");
        var i;
        
@@ -257,9 +302,6 @@
        }
        
        </script>
-       
-       
-
 </body>
 
 </html>
