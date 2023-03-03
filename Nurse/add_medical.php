@@ -48,19 +48,6 @@ require 'see.php'
                    <label for="exampleFormControlInput1" class="form-label lbl">Height</label>
                     <input type="text" class="form-control txt-input" placeholder="Height" name="height" required >
 
-                    <label for="exampleFormControlInput1" class="form-label lbl star">Blood Group</label>
-                    <select name="blood" id="" class="form-control txt-input" required>Blood Group
-                    <option selected disabled value="">Blood Group</option>
-                        <option value="A+">A+</option>
-                        <option value="A-">A-</option>
-                        <option value="B+">B+</option>
-                        <option value="B-">B-</option>
-                        <option value="AB+">AB+</option>
-                        <option value="AB-">AB-</option>
-                        <option value="O+">O+</option>
-                        <option value="O-">O-</option>
-                    </select>
-
                     <label for="exampleFormControlInput1" class="form-label lbl star">Blood Pressure</label>
                     <input type="text"name="bpressure" class="form-control txt-input" placeholder="Blood Pressure" required>
 

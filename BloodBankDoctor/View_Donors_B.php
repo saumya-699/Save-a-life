@@ -294,7 +294,7 @@ body {
 
 require 'conp.php';
     
-$sql= "select * from donors" ;
+$sql= "select * from donors where username!='Removed'" ;
 $result = $conn->query($sql);
 
 if($result->num_rows>0)
@@ -306,27 +306,25 @@ if($result->num_rows>0)
 	      //echo "<font size=6>";
 	   
 	   echo  "<div class='tab'>";
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Donor_ID"."</th>"."
+	  echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Donor_ID"."</th>"."
        <th style='text-align:center;width:120px;'>"."Donor Name"."
        <th style='text-align:center;width:120px;'>"."NIC Number"."</th>"."
        <th>"."Gender"."</th>"."
        <th>"."Cotact Number"."</th>"."
-       <th style='width:120px;'>"."Action"."</th>"."
+	   <th>"."province"."</th>"."
+       <th style='width:100px;'>"."Action"."</th>"."
        </tr>";
       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
    while($row = $result->fetch_assoc())
    
    {     
      
-	  echo  "<tr>"."<td>".$row["Donor_Id"]."</td>"."<td>".$row["Prefix"].".".$row["First_Name"]." ".$row["Middle_Name"]." ".$row["Last_Name"]."</td>"."<td>".$row["NIC_Number"]."</td>"."<td>".$row["Gender"]."</td>"."<td>".$row["Contact_Number"]."</td>";
-	   echo "<td><form method='POST' action ='ViewAll.php'>
+	  echo  "<tr>"."<td>".$row["Donor_Id"]."</td>"."<td>".$row["Prefix"].".".$row["Full_Name"]."</td>"."<td>".$row["NIC_Number"]."</td>"."<td>".$row["Gender"]."</td>"."<td>".$row["mobile_number"]."</td>"."<td>".$row["province"]."</td>";
+	   echo "<td><form method='POST' action ='ViewAll_B.php'>
                 <input type=hidden name=Donor_Id value=".$row["Donor_Id"]." >
                 <button type=submit value=view name=view  class='fp'><img src=eye.png width=43 height=37></button>
                 </form>
-				<form method='POST' action =''>
-                <input type=hidden name=Donor_Id value=".$row["Donor_Id"]." >
-                <button type=submit value=update name=update  class='f1'><img src=dx.png width=30 height=33></button>
-                </form>
+				
             </td>";
 				 echo "</tr>";
 	 
@@ -356,7 +354,17 @@ $conn->close();
 
 
 
+<script>
+function myConfirm() {
+  var result = confirm("Want to delete?");
+  if (result==true) {
+   return true;
+  } else {
+   return false;
+  }
+}
 
+</script>
 
 <style>
 
@@ -479,7 +487,7 @@ h1{
 				  
 				  
 				  
-				  
+				 
 				    .f2{
 					      //background-color:red;
 						    margin-left:90px;
@@ -511,10 +519,10 @@ h1{
 					  
 					 
 					  //background-color:green;
-					  margin-right:100px;
+					  margin-right:90px;
 					  margin-top:0px;
-					 
-					  margin-bottom:-53px;
+					 padding-left:10px;
+					  margin-bottom:8px;
 					  background-color:transparent;
 					   border: none;
 					   cursor:pointer;
@@ -522,6 +530,8 @@ h1{
 					  
 					  
 				  }
+			   
+			   
 			   
 			   
 			   .tab{

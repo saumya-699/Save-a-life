@@ -292,7 +292,7 @@ body {
 </form>
 <?php
 
-require 'conection.php';
+require 'conp.php';
 if(isset($_POST['view']))  
 
 {	

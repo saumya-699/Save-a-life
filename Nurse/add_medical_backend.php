@@ -15,7 +15,6 @@ if(isset($_POST['BtnSubmit']))
     $Donor_Id=$_POST["donorid"];
     $Weight=$_POST["weight"];
     $Height=$_POST["height"];
-	$Blood_Group = $_POST["blood"];
 	$Blood_Pressure=$_POST["bpressure"];
 	$Hemoglobine=$_POST["hemoglobine"];
 	
@@ -23,7 +22,7 @@ if(isset($_POST['BtnSubmit']))
     //database connection
 
         $sql = "INSERT INTO pre_medical (Donor_Id,Weight,Height,Blood_Group,Blood_Pressure,Hemoglobine)
-VALUES ('$Donor_Id','$Weight','$Height','$Blood_Group','$Blood_Pressure','$Hemoglobine')";
+VALUES ('$Donor_Id','$Weight','$Height','$Blood_Pressure','$Hemoglobine')";
 
 if($conn->query($sql)){
       
