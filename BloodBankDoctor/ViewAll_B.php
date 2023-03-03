@@ -236,7 +236,7 @@ body {
       // session_start();
      echo " " . $_SESSION['Name'];
     ?>
-	<br>Director</div>
+	<br>Blood bank doctor</div>
 	
 			
   <div class="dropdownx">

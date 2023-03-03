@@ -12,7 +12,7 @@ session_start();
    {
 	
 	
-?>
+
 <?php
 
 require 'cj.php';
@@ -25,25 +25,14 @@ $resultx = $conn->query($vql);
    
    {     
      
-	  $ty=$row["Hospital_ID"];
+	  $tz=$row["HospitalName"];
     $nm = $row["Name_With_Initials"];
 	 
 	  
 	  
 	}
 
-$dql ="select * from hospital where Hospital_ID ='$ty'";
-$resultd = $conn->query($vql);
 
- while($row = $resultd->fetch_assoc())
-   
-   {     
-     
-	  $tz=$row["HospitalName"];
-	 
-	  
-	  
-	}
 
 
 ?>

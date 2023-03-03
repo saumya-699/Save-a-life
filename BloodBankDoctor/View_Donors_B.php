@@ -4,7 +4,12 @@ session_start();
 ?>
 
 
- 
+ <?php
+   if(isset($_SESSION["ID"])) {
+   $x= $_SESSION["ID"]; 
+   
+   
+	?>
 <?php
 
 include 'cj.php';
@@ -235,7 +240,7 @@ body {
       // session_start();
      echo " " . $_SESSION['Name'];
     ?>
-	<br>Director</div>
+	<br>Blood bank doctor</div>
 	
 			
   <div class="dropdownx">
@@ -293,8 +298,21 @@ body {
 
 
 require 'conp.php';
-    
-$sql= "select * from donors where username!='Removed'" ;
+ $vql ="select * from bloodbank_doctor where BloodBank_doctor_ID ='$x'";
+$resultx = $conn->query($vql);
+
+ while($row = $resultx->fetch_assoc())
+   
+   {     
+     
+	  $tz=$row["Hospital_ID"];
+   
+	 
+	  
+	  
+	}
+   
+$sql= "select * from donors where username!='Removed' and Hospital_ID=$tz" ;
 $result = $conn->query($sql);
 
 if($result->num_rows>0)
@@ -306,7 +324,7 @@ if($result->num_rows>0)
 	      //echo "<font size=6>";
 	   
 	   echo  "<div class='tab'>";
-	  echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Donor_ID"."</th>"."
+	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Donor_ID"."</th>"."
        <th style='text-align:center;width:120px;'>"."Donor Name"."
        <th style='text-align:center;width:120px;'>"."NIC Number"."</th>"."
        <th>"."Gender"."</th>"."
@@ -577,4 +595,17 @@ h1{
 
 </body>
 </html>
+<?php
 	
+}
+ else 
+	 
+	 {echo '<script type="text/javascript">';
+		 echo 'alert("Please log in first");';
+         
+		echo 'window.location.href="userloginFront.php";';
+  echo '</script>';
+	 }
+ 
+?>
+
