@@ -198,44 +198,34 @@
                         <div class="card-body frm-body ">
 
                             <h1 class="txt-l "> Add blood components</h1>
-                            <form action="create.php " method="POST">
+                            <form action="Create_bloodComponent.php " method="POST">
 
-                            <label for="exampleFormControlInput1 " class="form-label lbl star ">Donation ID</label>
-                            <input type="text" class="form-control txt-input " name="donation_id"placeholder="Type donation id" required="">
+                            <label for="exampleFormControlInput1 " class="form-label lbl star ">Donar ID</label>
+                            <input type="text" class="form-control txt-input " name="donar_id"placeholder="Type donar id" required="">
+         
                             
-                            <label for="exampleFormControlInput1 " class="form-label lbl star ">Blood bag ID</label>
-                            <input type="text" class="form-control txt-input " name="bloodbag_id"placeholder="Auto generate" >
+                            <label for="exampleFormControlInput1 " class="form-label lbl star ">Blood Group</label>
+                                <select name="blood_group" id=" " class="form-control txt-input " required="">
+                               <option value=" " diabled> Select group </option>
+                               <option value="O-">O-</option>
+                                <option value="O+">O+</option>
+                                <option value="A-">A-</option>
+	                            <option value="A+">A+</option>
+                                <option value="B-">B-</option>
+                                <option value="B+">B+</option>
+	                            <option value="AB-">AB-</option>
+                               <option value="AB+">AB+</option>
+                                
+                            </select>
+                            
+                    <label for="exampleFormControlInput1 " class="form-label lbl star ">Required Blood Component</label>
+                                <select name="blood_component" id=" " class="form-control txt-input " required="">
+                               <option value=" " diabled>Select component </option>
+                                <option value="Red cell">Red cell</option>
+	                            <option value="Platelet">Platelet</option>
+                                <option value="Plasma">Plasma</option>
+                            </select>
 
-                            
-                        <label for="exampleFormControlInput1 " class="form-label lbl star ">Blood Group</label>
-                        <select name="blood_group" id=" " class="form-control txt-input " required="">
-                       <option value=" " diabled> Select group </option>
-                       <option value="O-">O-</option>
-                        <option value="O+">O+</option>
-                        <option value="A-">A-</option>
-                        <option value="A+">A+</option>
-                        <option value="B-">B-</option>
-                        <option value="B+">B+</option>
-                        <option value="AB-">AB-</option>
-                       <option value="AB+">AB+</option>
-                    </select>
-                            
-                    <label for="exampleFormControlInput1 " class="form-label lbl star ">Blood Component</label>
-                            <select name="blood_component" id=" " class="form-control txt-input " required="">
-                           <option value=" " diabled>Select component </option>
-                           <option value="Whole blood">Whole blood</option>
-                            <option value="Red cell">Red cell</option>
-                            <option value="Platelet">Platelet</option>
-                            <option value="Plasma">Plasma</option>
-                        </select>
-
-                           
-                                <label for="exampleFormControlInput1 " class="form-label lbl star " name="processed_date">Processed date</label>
-                                <div class="input-group mb-4 ">
-                                <i class="fas fa-calendar-alt input-group-text"></i>
-                                <input type="date" class="datepicker_input form-control txt-input" name="processed_date" placeholder="Select Date" required="" processed_date="<?= date('Y-m-d') ?>">
-                               </div> 
-                         
 
                                <label for="exampleFormControlInput1 " class="form-label lbl star " name="Expiry date">Expiry date (MM/DD/YYYY)</label>
                                 <div class="input-group mb-4 ">
