@@ -158,7 +158,21 @@ $query="select * from bloodbank_doctor where Name_With_Initials='$x'";
                 <input type=hidden name=RequestID value=".$row["requeste_id"]." >
                 <button type=submit value=update name=update  class='f1'><img src=edit.png width=26 height=26></button>
                 </form>
-                </td>";
+                
+				<form method='POST' action ='ViewInternalRequest.php'>
+                <input type=hidden name=Request_ID value=".$row["requeste_id"].">
+                <button type=submit name=Accept  class='f1'><img src=eye.png width=43 height=37></button>
+                </form>
+				
+				<form method='POST' action ='ViewInternalRequest.php'>
+                <input type=hidden   name=Request_ID value=".$row["requeste_id"]." >
+                <button type=submit  name=Available  class='f1'><img src=edit.png width=26 height=26></button>
+                </form> 
+				
+				<form method='POST' action ='ViewInternalRequest.php'>
+                <input type=hidden name=Request_ID value=".$row["requeste_id"].">
+                <button type=submit name=NotAvailable  class='f1'><img src=eye.png width=43 height=37></button>
+                </form>   </td>" ;
 				 echo "</tr>";
 	 
 	   echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=10'>"."</td>"."</tr>";
@@ -189,7 +203,7 @@ else
 
 
 
-if(isset($_POST['update']))  
+/*if(isset($_POST['update']))  
 
 {	
 
@@ -215,6 +229,124 @@ if(isset($_POST['update']))
                               echo '<script type="text/javascript">';
 		                     // echo 'alert("Error in updating details.Try again!");';
                               // echo "Error in ".$query."<br>".$conn->error;
+		                      echo 'window.location.href="updateAccount.php";';
+		                      echo '</script>';
+
+                            }
+							
+							
+							
+							
+ 
+}*/
+
+
+
+
+if(isset($_POST['Accept']))  
+
+{	
+
+     $status="Processing";
+   $did=$_POST['Request_ID'];
+   $sql="update blood_request set status ='$status' where requeste_id ='$did'";
+   
+   
+   
+     if ($conn->query($sql) === TRUE) 
+				   {
+                          
+                           echo '<script type="text/javascript">';
+		                  //echo 'alert("Details updated successfully");';
+         
+		                     echo 'window.location.href="ViewInternalRequest.php";';
+		                  echo '</script>';
+
+                   } 
+					 
+					 else 
+			               {  
+                              echo '<script type="text/javascript">';
+		                     // echo 'alert("Error in updating details.Try again!");';
+                              echo "Error in ".$query."<br>".$conn->error;
+		                      echo 'window.location.href="updateAccount.php";';
+		                      echo '</script>';
+
+                            }
+							
+							
+							
+							
+ 
+}
+
+
+
+if(isset($_POST['Available']))  
+
+{	
+
+     $status="Available";
+   $did=$_POST['Request_ID'];
+   $sql="update blood_request set status ='$status' where requeste_id ='$did'";
+   
+   
+   
+     if ($conn->query($sql) === TRUE) 
+				   {
+                          
+                           echo '<script type="text/javascript">';
+		                  //echo 'alert("Details updated successfully");';
+         
+		              echo 'window.location.href="ViewInternalRequest.php";';
+		                  echo '</script>';
+
+                   } 
+					 
+					 else 
+			               {  
+                              echo '<script type="text/javascript">';
+		                     // echo 'alert("Error in updating details.Try again!");';
+                              echo "Error in ".$query."<br>".$conn->error;
+		                      echo 'window.location.href="updateAccount.php";';
+		                      echo '</script>';
+
+                            }
+							
+							
+							
+							
+ 
+}
+
+
+
+if(isset($_POST['NotAvailable']))  
+
+{	
+
+     $status="NotAvailable";
+   $did=$_POST['Request_ID'];
+   $sql="update blood_request set status ='$status' where requeste_id ='$did'";
+   
+   
+   
+     if ($conn->query($sql) === TRUE) 
+				   {
+                          
+                           echo '<script type="text/javascript">';
+		                  //echo 'alert("Details updated successfully");';
+         
+		                 echo 'window.location.href="ViewInternalRequest.php";';
+		                  echo '</script>';
+
+                   } 
+					 
+					 else 
+			               {  
+                              echo '<script type="text/javascript">';
+		                     // echo 'alert("Error in updating details.Try again!");';
+                              echo "Error in ".$query."<br>".$conn->error;
 		                      echo 'window.location.href="updateAccount.php";';
 		                      echo '</script>';
 

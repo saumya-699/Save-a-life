@@ -135,7 +135,7 @@ if($resultr->num_rows>0)
 
 
 	   
-       $y= $rowx["HospitalName"];
+       $y= $rowx["Hospital_ID"];
 
 	
 
@@ -147,7 +147,7 @@ if($resultr->num_rows>0)
   
 
 
-$sql= "select * from sent_request where Requested_hospital_name ='$y' ORDER BY status DESC" ;
+$sql= "select * from cross_matching_testing_result where Hospital_ID='$y' ORDER BY status DESC" ;
 $result = $conn->query($sql);
 
 if($result->num_rows>0)
@@ -158,27 +158,19 @@ if($result->num_rows>0)
           //echo "<font color=red>";
 	      //echo "<font size=6>";
 	   
-	   echo  "<div style='overflow-x:auto;' class='tab'>";
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Requesting_hospital_name"."</th>"."<th>"."Requested_hospital_name"."</th>"."<th>"."Requested_by"."</th>"."<th>"."Requeired_blood_group"."</th>"."<th style='width:120px;'>"."Requeired_blood_component"."</th>"."<th>"."Requeired_no_of_packs"."</th>"."<th style='width:220px;'>"."Date"."</th>"."<th>"."Status"."</th>"."<th style='width:120px;'>"."Action"."</th>"."</tr>";
+	   echo  "<div  class='tab'>";
+	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Blood group"."</th>"."<th>"."Test result"."</th>"."<th>"."process date"."</th>"."<th>"."Status"."</th>"."<th style='width:120px;'>"."Action"."</th>"."</tr>";
       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
    while($row = $result->fetch_assoc())
    
    {     
      
-	  echo  "<tr>"."<td>".$row["Requesting_hospital_name"]."</td>"."<td>".$row["Requested_hospital_name"]."</td>"."<td>".$row["Requested_by"]."</td>"."<td>".$row["Requeired_blood_group"]."</td>"."<td>".$row["Requeired_blood_component"]."</td>"."<td>".$row["Requeired_no_of_packs"]."</td>"."<td>".$row["Date"]."</td>"."<td>".$row["status"]."</td>";
+	  echo  "<tr>"."<td>".$row["blood_group"]."</td>"."<td>".$row["test_result"]."</td>"."<td>".$row["process_date"]."</td>"."<td>".$row["Status"]."</td>";
 	   echo "<td><form method='POST' action ='checkExternalRequest.php'>
                 <input type=hidden name=Request_ID value=".$row["Request_ID"]." >
-                <button type=submit name=Accept  class='fp'><img src=eye.png width=43 height=37></button>
+                <button type=submit name=update  class='fp'><img src=eye.png width=43 height=37></button>
                 </form>
-				<form method='POST' action ='checkExternalRequest.php'>
-                <input type=hidden   name=Request_ID value=".$row["Request_ID"]." >
-                <button type=submit  name=Available  class='f1'><img src=edit.png width=26 height=26></button>
-                </form> 
 				
-				<form method='POST' action ='checkExternalRequest.php'>
-                <input type=hidden name=Request_ID value=".$row["Request_ID"].">
-                <button type=submit name=NotAvailable  class='f1'><img src=eye.png width=43 height=37></button>
-                </form> 
                 </td>";
 				 echo "</tr>";
 	 
@@ -210,13 +202,13 @@ else
 
 
 
-if(isset($_POST['Accept']))  
+if(isset($_POST['update']))  
 
 {	
 
-     $status="Processing";
+        $status="checked";
    $did=$_POST['Request_ID'];
-   $sql="update sent_request set status ='$status' where Request_ID='$did'";
+   $sql="update cross_matching_testing_result set status ='$status' where Request_ID='$did'";
    
    
    
@@ -249,82 +241,12 @@ if(isset($_POST['Accept']))
 
 
 
-
-if(isset($_POST['Available']))  
-
-{	
-
-     $status="Available";
-   $did=$_POST['Request_ID'];
-   $sql="update sent_request set status ='$status' where Request_ID='$did'";
-   
-   
-   
-     if ($conn->query($sql) === TRUE) 
-				   {
-                          
-                           echo '<script type="text/javascript">';
-		                  //echo 'alert("Details updated successfully");';
-         
-		              echo 'window.location.href="checkExternalRequest.php";';
-		                  echo '</script>';
-
-                   } 
-					 
-					 else 
-			               {  
-                              echo '<script type="text/javascript">';
-		                     // echo 'alert("Error in updating details.Try again!");';
-                              echo "Error in ".$query."<br>".$conn->error;
-		                      echo 'window.location.href="updateAccount.php";';
-		                      echo '</script>';
-
-                            }
 							
 							
 							
 							
  
-}
 
-
-
-if(isset($_POST['NotAvailable']))  
-
-{	
-
-     $status="NotAvailable";
-   $did=$_POST['Request_ID'];
-   $sql="update sent_request set status ='$status' where Request_ID='$did'";
-   
-   
-   
-     if ($conn->query($sql) === TRUE) 
-				   {
-                          
-                           echo '<script type="text/javascript">';
-		                  //echo 'alert("Details updated successfully");';
-         
-		                 echo 'window.location.href="checkExternalRequest.php";';
-		                  echo '</script>';
-
-                   } 
-					 
-					 else 
-			               {  
-                              echo '<script type="text/javascript">';
-		                     // echo 'alert("Error in updating details.Try again!");';
-                              echo "Error in ".$query."<br>".$conn->error;
-		                      echo 'window.location.href="updateAccount.php";';
-		                      echo '</script>';
-
-                            }
-							
-							
-							
-							
- 
-}
 $conn->close();
 
 
