@@ -162,7 +162,7 @@ a {text-decoration: none;}
   <div class="dropdown-container">
   
     <a href="stock.php">Blood test</a>
-    <a href="checkInternalStock.php">Cross matching</a>
+    <a href="CheckCrossMatchingResults.php">Cross matching</a>
 	
 	
 	</div>

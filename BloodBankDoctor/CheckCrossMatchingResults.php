@@ -166,7 +166,7 @@ if($result->num_rows>0)
    {     
      
 	  echo  "<tr>"."<td>".$row["blood_group"]."</td>"."<td>".$row["test_result"]."</td>"."<td>".$row["process_date"]."</td>"."<td>".$row["Status"]."</td>";
-	   echo "<td><form method='POST' action ='checkExternalRequest.php'>
+	   echo "<td><form method='POST' action ='CheckCrossMatchingResults.php'>
                 <input type=hidden name=Request_ID value=".$row["Request_ID"]." >
                 <button type=submit name=update  class='fp'><img src=eye.png width=43 height=37></button>
                 </form>
@@ -218,7 +218,7 @@ if(isset($_POST['update']))
                            echo '<script type="text/javascript">';
 		                  //echo 'alert("Details updated successfully");';
          
-		                     echo 'window.location.href="checkExternalRequest.php";';
+		                     echo 'window.location.href="CheckCrossMatchingResults.php";';
 		                  echo '</script>';
 
                    } 
@@ -426,7 +426,7 @@ h1{
 					  margin-right:100px;
 					  margin-top:1px;
 					 
-					  margin-bottom:-53px;
+					  margin-bottom:-3px;
 					  background-color:transparent;
 					   border: none;
 					   cursor:pointer;
