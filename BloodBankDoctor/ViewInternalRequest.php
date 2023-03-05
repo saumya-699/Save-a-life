@@ -109,6 +109,8 @@ include 'cj.php';
 <?php
 
 require 'conp.php';
+$date =date("Y/m/d");
+
 $query="select * from bloodbank_doctor where Name_With_Initials='$x'";
    $result= $conn->query($query);
      
@@ -124,7 +126,7 @@ $query="select * from bloodbank_doctor where Name_With_Initials='$x'";
        }
 	   
 	   
-	  $rql ="select * from blood_request where Hospital_ID ='$s'";
+	  $rql ="select * from blood_request where Hospital_ID ='$s' and requested_date ='$date' ORDER BY status DESC";
 	   $resultx= $conn->query($rql);
 	  
 	 
@@ -213,7 +215,7 @@ if(isset($_POST['update']))
                               echo '<script type="text/javascript">';
 		                     // echo 'alert("Error in updating details.Try again!");';
                               // echo "Error in ".$query."<br>".$conn->error;
-		                      //echo 'window.location.href="updateAccount.php";';
+		                      echo 'window.location.href="updateAccount.php";';
 		                      echo '</script>';
 
                             }
