@@ -34,9 +34,7 @@ include 'mj.php';
  <form method="post" action="searchNurse.php">
  
 <div class="ta">
-<div class="midiv">
 
-  <div class="passwordDiv">
  
 
  <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
@@ -50,8 +48,6 @@ include 'mj.php';
 <input type="text" placeholder="type here" name="data" id="data" class="box">
 
  <button type="submit"  name="BtnSubmit" id="search" class="b1" ><b>Search</b></button>
-</div>
-</div>
 </div>
 
 </form>

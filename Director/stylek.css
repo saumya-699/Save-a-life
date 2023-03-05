@@ -16,7 +16,7 @@ a {
 .container-shadow {
   position: absolute;
   width: 525px;
-  height:1458px;
+  height:1388px;
   left: 50%;
   margin-left: -262.5px;
   margin-top: 60px;
@@ -26,7 +26,7 @@ a {
 .container {
   position: absolute;
   width: 590px;
-  height:1450px;
+  height:1380px;
   left: 50%;
   margin-left: -298.5px;
   margin-top: 60px;
@@ -102,6 +102,45 @@ input {
 }
 
 
+                  .b1{
+					  
+					        width:130px;
+                            height:40px;						   
+						    //color:#FFF5F3;
+							
+							//margin:: 0px 21px 27px 215px;
+							margin-top:0px;
+							margin-bottom:0px;
+							margin-left:50px;
+							margin-right:0px;
+							
+							
+							 border-radius:30px;
+                            
+                           background-color:#F35050;
+						    border: none;
+						   cursor:pointer;
+				            
+				  
+				  }
+				  
+				  .b2{
+					    margin-top:-39px;
+							margin-bottom:0px;
+							margin-left:200px;
+							margin-right:0px;
+							
+					      
+					        width:130px;
+                            height:40px;					   
+						    //color:#FFF5F3;
+							//margin:0px 0px 12px 57px;
+							 border-radius:30px;
+                             border: none;
+                             //background-color:#F35050;
+				    
+				  
+				  }
 
 
 select {
@@ -173,10 +212,10 @@ input[type='checkbox'] + span {
 }
 
 input[type='submit'] {
-  width: 100%;
+  //width: 100%;
   background: #4082f5;
   text-transform: uppercase;
-  padding: 12px;
+ // padding: 12px;
   cursor: pointer;
   box-shadow: 0px 10px 40px 0px rgba(17, 97, 237, 0.4);
 }

@@ -26,7 +26,7 @@ session_start();
 <body>
 <!-- partial:index.partial.html -->
 <div class="layout has-sidebar fixed-sidebar fixed-header">
-      <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
+        <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
         <a id="btn-collapse" class="sidebar-collapser"><i class="ri-arrow-left-s-line"></i></a>
         <div class="sidebar-layout">
           <div class="sidebar-header">
@@ -228,11 +228,11 @@ session_start();
   <div class="container">
     <div class="wrap">
       <div class="headings">
-        <center><span><h1>Add Nurse</h1></span><center>
+        <center><span><h1>Add Ward Doctor</h1></span><center>
       
       </div>
      
-             <?php
+        <?php
 
        
 function generate_pw() {
@@ -243,25 +243,28 @@ function generate_pw() {
 
   for($i = 0; $i < $password_length; $i++) {
     $pw .= chr(rand(32, 126));
-  }
+  } 
   return $pw;
 }
 
 
 $hel = generate_pw();
 ?>
-		<?php
+
+<?php
 require 'conp.php';
 $date =date("Y/m/d");
+
+
+
+
 echo "
-
-
-
-  
+   
        
     
-     <form method='post' action='addNurseBackEnd.php' id='FormName'>
-                          
+     <form method='post' action='AddWardDoctorBackEnd.php' id='FormName'>
+                        
+         
 						   
 						 
 						   
@@ -272,7 +275,7 @@ echo "
 							 
 							 
 					    <label for='exampleFormControlInput1' class='form-label lbl star'>NIC Number</label>
-                        <input type='text' placeholder='Enter the NIC number' name='NIC' id='NIC' class='form-control txt-input'  onchange='myFunction1()' required>";
+                        <input type='text' placeholder='Enter the NIC Number' name='NIC' id='NIC' class='form-control txt-input'  onchange='myFunction1()' required>";
 							
 
 ?>
@@ -292,6 +295,7 @@ echo "
 				  
 	     echo 
 		   "<select name='hospital' class='form-control txt-input' required>
+		   
 		     <option value='Not Provided'> None</option>";
                       
 	  
@@ -315,12 +319,17 @@ echo "
 	<?php
 	
              
-	        echo   "<label for='exampleFormControlInput1'>Position</label>
-                         <select id='position' name='position'  class='x' required>
-						   <option value=Not Provided' class='items'> None</option>
-                         <option value='Head nurse' class='items'> Head&nbsp;nurse
+	        echo   "<label for='exampleFormControlInput1' class='form-label lbl star'>Specialization</label>
+                         <select id='Specialization' name='Specialization'  class='form-control txt-input' required>
+						   <option value='Not Provided'> None</option>
+                         <option value='General Medicine'> General Medicine
 						 </option>
-                         <option value='Nurse' class='items'> Nurse</option>
+                         <option value='General Surgery'> General Surgery</option>
+						 <option value='Pediatrics'> Pediatrics</option>
+						 <option value='Obstetrics & Gynecology'>Obstetrics & Gynecology</option>
+						  <option value='Dermatology'>Dermatology</option>
+						  <option value='ENT'>ENT</option>
+                          <option value='Psychiatry'>Psychiatry</option>
                         
                         
                          </select>
@@ -328,19 +337,19 @@ echo "
                              
                            
                               
-                        
+                           
                               <label for='exampleFormControlInput1' class='form-label lbl star'>DOB</label>
                              
 							   <div class='input-group mb-4'>
                         <i class='fas fa-calendar-alt input-group-text'></i>
 
-                        <input type='date' name='DOB' id='DOB' class='datepicker_input form-control txt-input' placeholder='Select Date' required>
+                        <input type='datetime' name='DOB' id='DOB' class='datepicker_input form-control txt-input' placeholder='Select Date' required>
                     </div>
 
         
         
                               <label for='exampleFormControlInput1' class='form-label lbl star'>SLMC Number</label>
-                             <input type='text' placeholder='Enter the SLMC number' name='SLMC' id='slmc' class='form-control txt-input'  onchange='myFunction()' required>
+                             <input type='text' placeholder='Enter the SLMC Number' name='SLMC' id='slmc' class='form-control txt-input'  onchange='myFunction()' required>
                              
 					
                            <label for='exampleFormControlInput1' class='form-label lbl star'>Email</label>
@@ -348,7 +357,7 @@ echo "
         
                              
                            <label for='exampleFormControlInput1' class='form-label lbl star'>Contact Number</label>
-                            <input type='tel' placeholder='Enter the contact number' name='contactNumber'  class='form-control txt-input'  id='contact' pattern='[0-9]{10}' required>
+                            <input type='tel' placeholder='Enter the Contact Number' name='contactNumber'  class='form-control txt-input'  id='contact' pattern='[0-9]{10}' required>
 							
 							 <label for='exampleFormControlInput1' class='form-label lbl star'>Date of Appoinment</label>
                              <input type='text'  name='DOA' id='DOA' class='form-control txt-input' value='$date'>
@@ -369,23 +378,18 @@ echo "
                                
                       <label for='exampleFormControlInput1' class='form-label lbl star'>Password</label>
                       <input type='password'  name='password'  class='form-control txt-input'  value='$hel'  required>
-                   <br><br><br><br>
+                        <br><br><br><br>
                   <div class='row btn-buttons'>
                         
                         <div class='col btn-but'> <input type='submit' name='BtnSubmit' value='Add' class='b1'></div>
-                        <div class='col btn-but'> <a href='RemoveORUpdateWardDoctor.php'><input type='submit' name='btnCancel' value='Cancel' class='b2'></a></div>
+                        <div class='col btn-but'> <input type='submit' name='btnCancel' value='Cancel' class='b2'></div>
                     </div>
 					
-					</form>";
+					</form>
+";
 
 ?>
 
-
-		
-		
-		
-		
-		
 		
 		
 		
@@ -401,6 +405,7 @@ echo "
 
 </body>
 </html>
+
 <?php
 	
 }
