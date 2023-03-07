@@ -74,13 +74,13 @@ if($result->num_rows>0)
 
 	   
 	   echo  "<div class='tab'>";
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Request_ID"."</th>"."<th style='text-align:center;width:120px;'>"."Requested_hospital_name"."</th>"."<th>"."Requested_by"."</th>"."<th>"."Requeired_blood_group"."<th style='width:120px;'>"."Action"."</th>"."</tr>";
+	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Request_ID"."</th>"."<th style='text-align:center;width:120px;'>"."Requested_hospital_name"."</th>"."<th>"."Requested_by"."</th>"."<th>"."Requeired_blood_group"."</th>"."<th style='width:120px;'>"."Status"."</th>"."<th style='width:120px;'>"."Action"."</th>"."</tr>";
       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
    while($row = $result->fetch_assoc())
    
    {     
      
-	  echo  "<tr>"."<td>".$row["Request_ID"]."</td>"."<td>".$row["Requested_hospital_name"]."</td>"."<td>".$row["Requested_by"]."</td>"."<td>".$row["Requeired_blood_group"]."</td>";
+	  echo  "<tr>"."<td>".$row["Request_ID"]."</td>"."<td>".$row["Requested_hospital_name"]."</td>"."<td>".$row["Requested_by"]."</td>"."<td>".$row["Requeired_blood_group"]."</td>"."<td>".$row["status"]."</td>";
 	   echo "<td><form method='POST' action ='ShowAllSentRequest.php'>
                 <input type=hidden name=Request_ID value=".$row["Request_ID"].">
                 <button type=submit value=view name=view  class='fp'><img src=eye.png width=43 height=37></button>

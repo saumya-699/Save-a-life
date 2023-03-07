@@ -555,11 +555,10 @@ echo "<div class='container frm-login'>
                       <label for='exampleFormControlInput1' class='form-label lbl star'>Password</label>
                       <input type='password'  name='password'  class='form-control txt-input'  value='$hel'  required>
 
-                  <div class='row btn-buttons'>
                         
                         <div class='col btn-but'> <input type='submit' name='BtnSubmit' value='Add' class='btn btn-danger btn-reg'></div>
                         <div class='col btn-but'> <input type='submit' name='btnCancel' value='Cancel' class='btn btn-secondary btn-can'></div>
-                    </div>
+                    
 					
 					</form>
           </div>

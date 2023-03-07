@@ -7,19 +7,15 @@ session_start();
  <?php
    if(isset($_SESSION["ID"]))   {
 	
-	
+	 $x= $_SESSION["ID"];
 ?>
 <?php
-
 include 'cj.php';
 ?>
 <html>
 
 <head>
-
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-        
-   <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css'>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css'>
 
     <link rel="stylesheet" href="style.css">  
 	<link rel="stylesheet" href="css/nbtssl/nbtssl.min.css">
@@ -28,13 +24,66 @@ include 'cj.php';
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
 
-
-
 </head>
 <body>
 <br><br>
+
+ <!--Header-->
+	      <div class="logo-massaviu">
+  &nbsp; &nbsp; 
+</div>
+<div class="top">
+<ul class="name" >
+
+  <li>&nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <font size="5.2px"> National Blood Transfusion Service  </font size></li>
  
- <form method="post" action="searchNurse.php">
+
+ <li>
+<div class="top-right">
+            <div class="notification">
+                <span class="material-icons licon">
+                    notifications
+                </span>
+            </div>
+			&nbsp; 
+			<div class="person">
+                <span class="material-icons licon">
+                    person
+                </span>
+            </div>
+			&nbsp;
+	<div class="name">
+    <?php
+      // session_start();
+     echo " " . $_SESSION['Name'];
+    ?>
+	<br>Blood bank doctor</div>
+	
+			
+  <div class="dropdownx">
+               <span class="material-icons licon">
+                    arrow_drop_down
+                </span> 
+				<div class="dropdownx-content">
+  <a href="#"> <span class="material-icons licon">
+  person
+                </span> Profile</a>
+  <a href="logout.php">
+  <span class="material-icons licon">
+  exit_to_app
+                </span>  
+  Log out</a>
+  </div>
+            </div>
+ </li>
+ </div>
+</ul>
+
+
+</div>
+        
+ 
+ <form method="post" action="SearchWardD.php">
  
 <div class="ta">
 <div class="midiv">
@@ -43,10 +92,16 @@ include 'cj.php';
  
 
  <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
-                             <option value="Position"><b> position</b></option>
-                             <option value="Nurse_ID"><b> Nurse_ID</b></option>
+                                  <option value="WardDoctor_ID"><b> WardDoctor_ID</b></option>
+							   <option value="Name_With_Initials"><b>Name_With_Initials</b></option>
+						        <option value="HospitalName"><b> Hospital Name</b></option>
+                             <option value="Specialization"><b> Specialization</b></option>
+							   <option value="SLMC_number"><b> SLMC_number</b></option>
                              <option value="Email" selected><b>Email</b></option>
 		                    <option value="ContactNumber" selected><b> Contact number</b></option>
+						  <option value="Remark" selected><b>Remark</b></option>
+						  	  <option value="Director_ID" selected><b>Director_ID</b></option>
+							
                              </select>
 
 
@@ -62,8 +117,37 @@ include 'cj.php';
 
 
 require 'conp.php';
+
+		$vql="select * from bloodbank_doctor where BloodBank_doctor_ID='$x'";	
+		
+		$resultr = $conn->query($vql);
+		 
+		//  echo "Error in ".$vql."<br>".$conn->error;
+
+if($resultr->num_rows>0)
+
+{        
     
-$sql= "select * from sent_request";
+   while($rowx = $resultr->fetch_assoc())
+   
+   {
+	    
+
+
+	   
+       $y= $rowx["Hospital_ID"];
+
+	
+
+	  
+	}
+	
+      
+	
+  
+
+
+$sql= "select * from cross_matching_testing_result where Hospital_ID='$y' ORDER BY status DESC" ;
 $result = $conn->query($sql);
 
 if($result->num_rows>0)
@@ -71,17 +155,22 @@ if($result->num_rows>0)
 {     
    
 
+          //echo "<font color=red>";
+	      //echo "<font size=6>";
 	   
-	
-	  echo  "<div style='overflow-x:auto;' class='tab'>";
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Request_ID"."</th>"."<th style='text-align:center;width:120px;'>"."Requested_hospital_name"."</th>"."<th>"."Requested_by"."</th>"."<th>"."Requeired_blood_group"."</th>"."<th>"."Requeired_blood_component"."</th>"."<th>"."Requeired_no_of_packs"."</th>"."<th>"."Date"."</th>"."<th>"."Status"."</th>"."</tr>";
+	   echo  "<div  class='tab'>";
+	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Blood group"."</th>"."<th>"."Test result"."</th>"."<th>"."process date"."</th>"."<th>"."Status"."</th>"."<th style='width:120px;'>"."Action"."</th>"."</tr>";
       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
    while($row = $result->fetch_assoc())
    
    {     
      
-	  echo  "<tr>"."<td>".$row["Request_ID"]."</td>"."<td>".$row["Requested_hospital_name"]."</td>"."<td>".$row["Requested_by"]."</td>"."<td>".$row["Requeired_blood_group"]."</td>"."<td>".$row["Requeired_blood_component"]."</td>"."<td>".$row["Requeired_no_of_packs"]."</td>"."<td>".$row["Date"]."</td>"."<td>".$row["status"]."</td>";
-	   echo "<td>
+	  echo  "<tr>"."<td>".$row["blood_group"]."</td>"."<td>".$row["test_result"]."</td>"."<td>".$row["process_date"]."</td>"."<td>".$row["Status"]."</td>";
+	   echo "<td><form method='POST' action ='CheckCrossMatchingResults.php'>
+                <input type=hidden name=Request_ID value=".$row["Request_ID"]." >
+                <button type=submit name=update  class='fp'><img src=eye.png width=43 height=37></button>
+                </form>
+				
                 </td>";
 				 echo "</tr>";
 	 
@@ -97,17 +186,74 @@ if($result->num_rows>0)
 	
 }	
 
+
 else
 
 {
   //echo "Error in ".$sql."<br>".$conn->error;
 
- echo "no results";
+ echo "no requests";
 
 }
+}
+
+
+
+
+
+
+if(isset($_POST['update']))  
+
+{	
+
+        $status="checked";
+   $did=$_POST['Request_ID'];
+   $sql="update cross_matching_testing_result set status ='$status' where Request_ID='$did'";
+   
+   
+   
+     if ($conn->query($sql) === TRUE) 
+				   {
+                          
+                           echo '<script type="text/javascript">';
+		                  //echo 'alert("Details updated successfully");';
+         
+		                     echo 'window.location.href="CheckCrossMatchingResults.php";';
+		                  echo '</script>';
+
+                   } 
+					 
+					 else 
+			               {  
+                              echo '<script type="text/javascript">';
+		                     // echo 'alert("Error in updating details.Try again!");';
+                              echo "Error in ".$query."<br>".$conn->error;
+		                      echo 'window.location.href="updateAccount.php";';
+		                      echo '</script>';
+
+                            }
+							
+							
+							
+							
+ 
+}
+
+
+
+							
+							
+							
+							
+ 
 
 $conn->close();
+
+
+
+
 ?>
+
 
 
 <script>
@@ -121,6 +267,7 @@ function myConfirm() {
 }
 
 </script>
+
 
 
 <style>
@@ -199,7 +346,7 @@ h1{
                     background-color:transparent;
                     
                     //margin-left:396px;
-                   margin-right:0px;
+                   // margin-right:325px;
                     margin-bottom:-52px;
                     padding:2px 90px 30px 10px;
 					margin-top:10px;
@@ -246,9 +393,9 @@ h1{
 				  
 				  
 				    .f2{
-					      background-color:red;
+					      //background-color:red;
 						    margin-left:90px;
-							margin-top:-7px;
+							margin-top:-30px;
 							background-color:transparent;
 							 border: none;
 						   cursor:pointer;
@@ -260,15 +407,13 @@ h1{
 				  
 				  .f1{
 					     // background-color:yellow;
-						      //background-color:transparent;
-						  
-						    margin-right:70px;
+						      background-color:transparent;
+						  margin-left:55px;
+						    margin-right:60px;
 							margin-bottom:0px;
 							margin-top:2px;
 						   border: none;
 						   cursor:pointer;
-//background-color:red;
-
 						  
 						  
 				  }
@@ -278,10 +423,10 @@ h1{
 					  
 					 
 					  //background-color:green;
-					  margin-right:0px;
-					  margin-top:-6px;
+					  margin-right:100px;
+					  margin-top:1px;
 					 
-					  margin-bottom:-53px;
+					  margin-bottom:-3px;
 					  background-color:transparent;
 					   border: none;
 					   cursor:pointer;
@@ -314,7 +459,7 @@ h1{
 				   margin-top:90px;
 				   margin-bottom:0px;
 				  margin-left:370px;
-				  margin-right:265px;
+				  margin-right:264px;
 				  padding-left:30px;
 				   
 				   
@@ -328,12 +473,11 @@ h1{
 		
 	}
 		
-		@media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
-}
+		
+		
 
-		.name li {
+
+.name li {
   float: left;
   display: block;
   color: white;
@@ -356,6 +500,7 @@ h1{
   padding-top:9px;
   padding-left:6px;
 }
+
 
 
 .top li {
@@ -447,7 +592,6 @@ display: flex;
 }
 
 
-
 .top {
   list-style-type: none;
   margin-top:-8px;
@@ -475,66 +619,11 @@ display: flex;
   font-family:Open Sans, sans-serif;
   position:fixed;
 }	   
-			 
-
+		
 		
 			   
 </style>
- <body style="background-color:#FFC3BF;">
- 
 
-<div class="logo-massaviu">
-  &nbsp; &nbsp; 
-</div>
-<div class="top">
-<ul class="name" >
-
-  <li>&nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <font size="5.2px"> National Blood Transfusion Service  </font size></li>
- 
-
- <li>
-<div class="top-right">
-            <div class="notification">
-                <span class="material-icons licon">
-                    notifications
-                </span>
-            </div>
-			&nbsp; 
-			<div class="person">
-                <span class="material-icons licon">
-                    person
-                </span>
-            </div>
-			&nbsp;
-	<div class="name">
-    <?php
-      // session_start();
-     echo " " . $_SESSION['Name'];
-    ?>
-	<br>Blood bank doctor</div>
-	
-			
-  <div class="dropdownx">
-               <span class="material-icons licon">
-                    arrow_drop_down
-                </span> 
-				<div class="dropdownx-content">
-  <a href="#"> <span class="material-icons licon">
-  person
-                </span> Profile</a>
-  <a href="logout.php">
-  <span class="material-icons licon">
-  exit_to_app
-                </span>  
-  Log out</a>
-  </div>
-            </div>
- </li>
- </div>
-</ul>
-
-
-</div>
 </body>
 </html>
 	<?php
@@ -545,7 +634,7 @@ display: flex;
 	 {echo '<script type="text/javascript">';
 		 echo 'alert("Please log in first");';
          
-		echo 'window.location.href="loginx.php";';
+		echo 'window.location.href="userloginFront.php";';
   echo '</script>';
 	 }
  
