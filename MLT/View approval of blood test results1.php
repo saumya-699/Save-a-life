@@ -2,9 +2,9 @@
 session_start();
 include "config.php";
 
-$x = $_SESSION['Hospital_ID'];
+$x = $_SESSION['MLT_ID'];
 
-$sql = "SELECT process_date, batch_number,status FROM blood_testing_result Where Hospital_ID='$x' GROUP BY process_date, batch_number  order by process_date DESC ";
+$sql = "SELECT process_date, batch_number,status FROM blood_testing_result Where MLT_ID='$x' GROUP BY process_date, batch_number  order by process_date DESC ";
 
 $result = $conn->query($sql);
 
