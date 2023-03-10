@@ -223,10 +223,7 @@ session_start();
 	
  <form method="post" action="searchHospital.php">
  <div class="ta">
-<div class="midiv">
 
-  <div class="passwordDiv">
- 
 
  <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
                              <option value="Transfer_ID"><b> Transfer_ID</b></option>
@@ -241,8 +238,7 @@ session_start();
  <button type="submit"  name="BtnSubmit" id="search" class="b1" ><b>Search</b></button>
 
 </div>
-</div>
-</div>
+
 </form>
 <?php
 
@@ -258,7 +254,7 @@ if($result->num_rows>0)
    
 
           
-	   echo  "<div class='tab'>";
+	   //echo  "<div class='tab'>";
 	    
 	   echo  "<table border=1>"."<tr>"."<th>"."Transfer_ID"."</th>"."<th style='width:165px;'>"."Hospital_ID"."</th>"."<th style='width:115px;'>"."HospitalName"."</th>"."<th style='width:105px;'>"."Transfered_to"."</th>"."<th>"."Transfered_by"."</th>"."<th style='width:115px;'>"."Date"."</th>"."</tr>";
        echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=5'>"."</td>"."</tr>";

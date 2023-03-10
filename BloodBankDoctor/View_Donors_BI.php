@@ -197,10 +197,7 @@ session_start();
  <form method="post" action="search_donor.php">
  
 <div class="ta">
-<div class="midiv">
 
-  <div class="passwordDiv">
- 
 
  <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
  <option value="Donor_Id" selected><b> Donor Id</b></option>
@@ -217,8 +214,7 @@ session_start();
 
  <button type="submit"  name="BtnSubmit" id="search" class="b1" ><b>Search</b></button>
 </div>
-</div>
-</div>
+
 
 </form>
 <?php
@@ -250,7 +246,7 @@ if($result->num_rows>0)
           //echo "<font color=red>";
 	      //echo "<font size=6>";
 	   
-	   echo  "<div class='tab'>";
+	   //echo  "<div class='tab'>";
 	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Donor_ID"."</th>"."
        <th style='text-align:center;width:120px;'>"."Donor Name"."
        <th style='text-align:center;width:120px;'>"."NIC Number"."</th>"."

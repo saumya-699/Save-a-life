@@ -24,7 +24,7 @@ require "conp.php";
                  
 		   echo '<script type="text/javascript">';
 		// echo 'alert("Added successfully");';
-         echo 'window.location.href="RemoveORUpdateWardDoctor.php";';
+         echo 'window.location.href="RemoveORUpdateWardDoctorI.php";';
 	
 		 echo '</script>';
 		

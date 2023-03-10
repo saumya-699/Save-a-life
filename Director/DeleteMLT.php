@@ -24,7 +24,7 @@ require "conp.php";
                  
 		   echo '<script type="text/javascript">';
 		// echo 'alert("Added successfully");';
-         echo 'window.location.href="RemoveORUpdateMLT.php";';
+         echo 'window.location.href="RemoveORUpdateMLTI.php";';
 	
 		 echo '</script>';
 		
