@@ -140,7 +140,7 @@ $resultx = $conn->query($vql);
  //echo $row["Hospital_ID"];
 
 	
-$sql= "select * from stock where Hospital_ID='$ty' and ExpiryDate <'$today'";
+$sql= "select * from stock where Hospital_ID='$ty' and No_of_packs <= 2";
 $result = $conn->query($sql);
 
 if($result->num_rows>0)
@@ -181,9 +181,9 @@ if($result->num_rows>0)
 else
 
 {
-  //echo "Error in ".$sql."<br>".$conn->error;
+ // echo "Error in ".$sql."<br>".$conn->error;
 
-// echo "no results";
+ //echo "no results";
 
 }
 //echo "Error in ".$vql."<br>".$conn->error;
