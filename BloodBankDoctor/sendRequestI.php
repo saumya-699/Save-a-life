@@ -50,19 +50,20 @@ $resultx = $conn->query($vql);
 <body>
 <!-- partial:index.partial.html -->
 <div class="layout has-sidebar fixed-sidebar fixed-header">
-      <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
+    <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
         <a id="btn-collapse" class="sidebar-collapser"><i class="ri-arrow-left-s-line"></i></a>
+        
         <div class="sidebar-layout">
           <div class="sidebar-header">
             <div class="pro-sidebar-logo">
               <div><img src="logo.png" alt="logo"></div>
-              <h5>Save a Life</h5>
+              <h5>Save A Life</h5>
             </div>
           </div>
           <div class="sidebar-content">
             <nav class="menu open-current-submenu">
               <ul>
-                <li class="menu-header"></li>
+                <li class="menu-header"><span>  </span></li>
                 <li class="menu-item">
                   <a href="#">
                     <span class="menu-icon">
@@ -70,91 +71,43 @@ $resultx = $conn->query($vql);
                     </span>
                     <span class="menu-title">Home</span>
                   </a>
-                 </li>
+                  </li>
                 <li class="menu-item sub-menu">
                   <a href="#">
                     <span class="menu-icon">
-                      <i class="ri-user-add-fill"></i>
+                      <i class="ri-hospital-line"></i>
                     </span>
-                    <span class="menu-title">Employee</span>
+                    <span class="menu-title">Blood Stock</span>
                   </a>
                   <div class="sub-menu-list">
                     <ul>
-                       <li class="menu-item sub-menu">
-                        <a href="#">
-                          <span class="menu-title">Blood Bank Doctor</span>
+                      <li class="menu-item">
+                        <a href="stockI.php">
+                          <span class="menu-title">Stock Info</span>
                         </a>
-                        <div class="sub-menu-list">
-                          <ul>
-                            <li class="menu-item">
-                              <a href="Add_bbI.php">
-                                <span class="menu-title">Add</span>
-                              </a>
-                            </li>
-                            <li class="menu-item">
-                              <a href="RemoveOrUpdateBBI.php">
-                                <span class="menu-title">Remove/Update</span>
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
                       </li>
-                      <li class="menu-item sub-menu">
-                        <a href="#">
-                          <span class="menu-title">MLT</span>
+                      <li class="menu-item">
+                        <a href="checkInternalStockI.php">
+                          <span class="menu-title">Internal Stock Availability</span>
                         </a>
-                        <div class="sub-menu-list">
-                          <ul>
-                            <li class="menu-item">
-                              <a href="AddMLTI.php">
-                                <span class="menu-title">Add</span>
-                              </a>
-                            </li>
-                            <li class="menu-item">
-                              <a href="RemoveOrUpdateMLTI.php">
-                                <span class="menu-title">Remove/Update</span>
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
                       </li>
-                      <li class="menu-item sub-menu">
-                        <a href="#">
-                          <span class="menu-title">Ward Doctor</span>
+                      <li class="menu-item">
+                        <a href="checkExternalStockI.php">
+                          <span class="menu-title">External Stock Availability</span>
                         </a>
-                        <div class="sub-menu-list">
-                          <ul>
-                            <li class="menu-item">
-                              <a href="AddWardDoctorI.php">
-                                <span class="menu-title">Add</span>
-                              </a>
-                            </li>
-                            <li class="menu-item">
-                              <a href="RemoveOrUpdateWardDoctorI.php">
-                                <span class="menu-title">Remove/Update</span>
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
                       </li>
-                      <li class="menu-item sub-menu">
-                        <a href="#">
-                          <span class="menu-title">Nurse</span>
+					  
+					    <li class="menu-item">
+                        <a href="LessStockComponentsI.php">
+                          <span class="menu-title">Low stock blood components</span>
                         </a>
-                        <div class="sub-menu-list">
-                          <ul>
-                            <li class="menu-item">
-                              <a href="AddNurseI.php">
-                                <span class="menu-title">Add</span>
-                              </a>
-                            </li>
-                            <li class="menu-item">
-                              <a href="RemoveOrUpdateNurseI.php">
-                                <span class="menu-title">Remove/Update</span>
-                              </a>
-                            </li>
-                          </ul>
-                        </div>
+                      </li>
+	
+					  
+					     <li class="menu-item">
+                        <a href="ExpiredComponentsI.php">
+                          <span class="menu-title">Blood expiry Information</span>
+                        </a>
                       </li>
                     </ul>
                   </div>
@@ -162,50 +115,76 @@ $resultx = $conn->query($vql);
                 <li class="menu-item sub-menu">
                   <a href="#">
                     <span class="menu-icon">
-                      <i class="ri-hospital-fill"></i>
+                      <i class="ri-message-2-fill"></i>
                     </span>
-                    <span class="menu-title">Hospital</span>
+                    <span class="menu-title">Request</span>
                   </a>
                   <div class="sub-menu-list">
                     <ul>
                       <li class="menu-item">
-                        <a href="AddHospitalI.php">
-                          <span class="menu-title">Add</span>
+                        <a href="ViewInternalRequestI.php">
+                          <span class="menu-title">Check Internal Requests</span>
                         </a>
                       </li>
                       <li class="menu-item">
-                        <a href="DeactivateOrUpdateHospitalI.php">
-                          <span class="menu-title">Update/Deactivte</span>
+                        <a href="checkExternalRequestI.php">
+                          <span class="menu-title">Check External Requests</span>
                         </a>
                       </li>
                       <li class="menu-item">
-                        <a href="DeactivationInfoI.php">
-                          <span class="menu-title">Deactivation Info</span>
+                        <a href="sendRequestI.php">
+                          <span class="menu-title">Send requests</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="sentRequestHistoryI.php">
+                          <span class="menu-title">Send Request History</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li class="menu-item sub-menu">
+                  <a href="#">
+                    <span class="menu-icon">
+                      <i class="ri-article-fill"></i>
+                    </span>
+                    <span class="menu-title">Test Results</span>
+                  </a>
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="BloodREsultsI.php">
+                          <span class="menu-title">Blood Test</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="CheckCrossMatchingResultsI.php">
+                          <span class="menu-title">Cross Matching</span>
                         </a>
                       </li>
                     </ul>
                   </div>
                 </li>
                 <li class="menu-item">
-                  <a href="ViewDonorsDI.php">
+                  <a href="View_Donors_BI.php">
                     <span class="menu-icon">
                       <i class="ri-user-heart-fill"></i>
                     </span>
                     <span class="menu-title">Donors</span>
                   </a>
-                </li>
+                 </li>
                 <li class="menu-item">
-                  <a href="ReportDI.php">
+                  <a href="ReportGeneration_BI.php">
                     <span class="menu-icon">
                       <i class="ri-file-chart-line"></i>
                     </span>
                     <span class="menu-title">Reports</span>
                   </a>
                  </li>
-                
-                <li class="menu-header" style="padding-top: 40px"><span> </span></li>
+                <li class="menu-header" style="padding-top: 40px"><span>  </span></li>
                 <li class="menu-item">
-                  <a href="profileDI.php">
+                  <a href="profileBI.php">
                     <span class="menu-icon">
                       <i class="ri-user-line"></i>
                     </span>
@@ -229,6 +208,7 @@ $resultx = $conn->query($vql);
                     <span class="menu-title">Log Out</span>
                   </a>
                 </li>
+
               </ul>
             </nav>
           </div>

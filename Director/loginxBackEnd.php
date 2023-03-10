@@ -46,7 +46,7 @@ if(isset($_POST["BtnSubmit"]))
 			{
 
      
-        header("Location:HomepageDirector.php");
+        header("Location:AddNurseI.php");
 				 //printf("Query failed: %s\n", $conn->error);
 
     }	 
