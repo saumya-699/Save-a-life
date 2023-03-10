@@ -122,7 +122,7 @@ include 'cj.php';
 
 
 require 'conp.php';
-   $today =date("Y/m/d"); 
+   $today =date("Y-m-d"); 
 $vql ="select * from bloodbank_doctor where BloodBank_doctor_ID ='$x'";
 $resultx = $conn->query($vql);
 
@@ -140,7 +140,7 @@ $resultx = $conn->query($vql);
  //echo $row["Hospital_ID"];
 
 	
-$sql= "select * from stock where Hospital_ID='$ty' ExpiryDate >'$today'";
+$sql= "select * from stock where Hospital_ID='$ty' and ExpiryDate <'$today'";
 $result = $conn->query($sql);
 
 if($result->num_rows>0)
@@ -150,13 +150,13 @@ if($result->num_rows>0)
 
 	   
 	   echo  "<div class='tab'>";
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Blood_bagID"."</th>"."<th style='text-align:center;width:120px;'>"."Blood_group"."</th>"."<th>"."Component_type"."</th>"."<th>"."No_of_packs"."</th>"."<th>"."Expiry date"."</th>"."<th style='width:120px;'>"."Action"."</th>"."</tr>";
+	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Blood_bagID"."</th>"."<th style='text-align:center;width:120px;'>"."Blood_group"."</th>"."<th>"."Component_type"."</th>"."<th>"."No_of_packs"."</th>"."<th>"."Expiry date"."</th>"."<th>"."Action"."</th>"."</tr>";
       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
      while($row = $result->fetch_assoc())
    
    {     
      
-	  echo  "<tr>"."<td>".$row["Blood_bagID"]."</td>"."<td>".$row["Blood_group"]."</td>"."<td>".$row["Component_type"]."</td>"."<td>".$row["No_of_packs"]."</td>"."<td>".$row["No_of_packs"]."</td>"."<td>".$row["No_of_packs"]."</td>";
+	  echo  "<tr>"."<td>".$row["Blood_bagID"]."</td>"."<td>".$row["Blood_group"]."</td>"."<td>".$row["Component_type"]."</td>"."<td>".$row["No_of_packs"]."</td>"."<td>".$row["ExpiryDate"]."</td>";
 	   echo "<td>
 				<form method='POST' action =' Fill_MLTUpdateForm.php'>
                 <input type=hidden name=Blood_bagID  value=".$row['Blood_bagID'].">
@@ -181,9 +181,9 @@ if($result->num_rows>0)
 else
 
 {
-  echo "Error in ".$sql."<br>".$conn->error;
+  //echo "Error in ".$sql."<br>".$conn->error;
 
- echo "no results";
+// echo "no results";
 
 }
 //echo "Error in ".$vql."<br>".$conn->error;

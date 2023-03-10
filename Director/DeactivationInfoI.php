@@ -19,7 +19,8 @@ session_start();
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./AddbbStyle.css">
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
+ <link rel="stylesheet" href="StyleSearch.css"> 
 
 
 </head>
@@ -219,161 +220,96 @@ session_start();
           </div>
           
           
-		  
-		  
-		  
-		  
-		   <div class="container-shadow">
-  </div>
-  <div class="container">
-    <div class="wrap">
-      <div class="headings">
-        <center><span><h1>Add blood bank doctor</h1></span><center>
-      
-      </div>
-     
-    
-           <?php
-
-       
-function generate_pw() {
-  $pw;
-  // Set random length for password
-  $password_length = rand(8, 16);
-  $pw = '';
-
-  for($i = 0; $i < $password_length; $i++) {
-    $pw .= chr(rand(32, 126));
-  }
-  return $pw;
-}
+	
+ <form method="post" action="searchHospital.php">
+ <div class="ta">
 
 
-$hel = generate_pw();
-?>
+ <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
+                             <option value="Transfer_ID"><b> Transfer_ID</b></option>
+                             <option value="Transfered_by"><b> Transfered_by</b></option>
+                             <option value="Transfered_to" selected><b>Transfered_to</b></option>
+		                    <option value="HospitalName" selected><b>Hospital_Name</b></option>
+                             </select>
+
+
+<input type="text" placeholder="type here" name="data" id="data" class="box">
+
+ <button type="submit"  name="BtnSubmit" id="search" class="b1" ><b>Search</b></button>
+
+</div>
+
+</form>
 <?php
+
+
 require 'conp.php';
-$date =date("Y/m/d");
-echo "
-   
-       
     
-     <form method='post' action='Add_bb_backEnd.php' id='FormName'>
-                         
-         
-						   
-						 
-						   
-                              
-                              
-                           <label for='exampleFormControlInput1' class='form-label lbl star'>Name with Initials</label>
-                           <input type='text' placeholder='Enter the name' name='Name' id='name' class='form-control txt-input' required>
-							 
-							 
-					    <label for='exampleFormControlInput1' class='form-label lbl star'>NIC Number</label>
-                        <input type='text' placeholder='Enter the NIC Number' name='NIC' id='NIC' class='form-control txt-input'  onchange='myFunction1()' required>";
-							
+$sql= "select * from transferdetails" ;
+$result = $conn->query($sql);
 
-?>
-	
-<?php
-	
+if($result->num_rows>0)
 
-						  $sql= 'select *from hospital' ;
-                           $result = $conn->query($sql);
-
-      if($result->num_rows>0)
-
-   {     
+{     
    
 
-          	      echo "<label for='exampleFormControlInput1' class='form-label lbl star'>Hospital Name</label>";
-				  
-	     echo 
-		   "<select name='hospital' class='form-control txt-input' required>";
-                      
-	  
-	 
-      while($row=$result->fetch_assoc())
+          
+	   //echo  "<div class='tab'>";
+	    
+	   echo  "<table border=1>"."<tr>"."<th>"."Transfer_ID"."</th>"."<th style='width:165px;'>"."Hospital_ID"."</th>"."<th style='width:115px;'>"."HospitalName"."</th>"."<th style='width:105px;'>"."Transfered_to"."</th>"."<th>"."Transfered_by"."</th>"."<th style='width:115px;'>"."Date"."</th>"."</tr>";
+       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=5'>"."</td>"."</tr>";
+   while($row = $result->fetch_assoc())
    
    {     
      
-	      echo 
-		   
-         " <option value='$row[HospitalName]'>$row[HospitalName]</option>";
+	  echo  "<tr>"."<td>".$row["Transfer_ID"]."</td>"."<td>".$row["Hospital_ID"]."</td>"."<td>".$row["HospitalName"]."</td>"."<td>".$row["Transfered_to"]."</td>"."<td>".$row["Transfered_by"]."</td>"."<td>".$row["Date"]."</td>";
+	   echo "<td class='cv'>
+                
+                </td>";
+				 echo "</tr>";
+				 
+				   echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=5'>"."</td>"."</tr>";
+	 
 	   
 	  
 	}
-   }                      
-      echo "</select>";                      
 	
-	?>
+	 echo "</font>";
+	 echo  "</font>";   
+	 echo "</table>";
+	echo "</div>";
 	
-	
-	<?php
-	
-             
-	        echo   "
-                             
-                           
-                              
-                           
-                              <label for='exampleFormControlInput1' class='form-label lbl star'>DOB</label>
-                             
-							   <div class='input-group mb-4'>
-                        <i class='fas fa-calendar-alt input-group-text'></i>
+}	
 
-                        <input type='datetime' name='DOB' id='DOB' class='datepicker_input form-control txt-input' placeholder='Select Date' required>
-                    </div>
+else
 
-        
-        
-                              <label for='exampleFormControlInput1' class='form-label lbl star'>SLMC Number</label>
-                             <input type='text' placeholder='Enter the SLMC Number' name='SLMC' id='slmc' class='form-control txt-input'  onchange='myFunction()' required>
-                             
-					
-                           <label for='exampleFormControlInput1' class='form-label lbl star'>Email</label>
-                             <input type='email' placeholder='Enter the Email' name='Email' class='form-control txt-input' id='Email'  required>
-        
-                             
-                           <label for='exampleFormControlInput1' class='form-label lbl star'>Contact Number</label>
-                            <input type='tel' placeholder='Enter the Contact Number' name='contactNumber'  class='form-control txt-input'  id='contact' pattern='[0-9]{10}' required>
-							
-							 <label for='exampleFormControlInput1' class='form-label lbl star'>Date of Appoinment</label>
-                             <input type='text'  name='DOA' id='DOA' class='form-control txt-input' value='$date'>
-				
-							 <label for='exampleFormControlInput1' class='form-label lbl star'>User Name</label>
-                             <input type='text' name='Uname' id='Uname' class='form-control txt-input' required>
-                           
-						   
-						   <script type='text/javascript'>
-                      
-					 function myFunction(){
-                     var x = document.forms['FormName']['slmc'].value;
-                     
-                    
-					 document.getElementById('Uname').value = x;  
-                     }
-                      </script>
-                               
-                      <label for='exampleFormControlInput1' class='form-label lbl star'>Password</label>
-                      <input type='password'  name='password'  class='form-control txt-input'  value='$hel'  required>
-                   <br><br><br><br>
-                         
-                        <div class='col btn-but'> <input type='submit' name='BtnSubmit' value='Add' class='b1'></div>
-                        <div class='col btn-but'> <input type='submit' name='btnCancel' value='Cancel' class='b2'></div>
-                   
-					
-					</form>
-   ";
+{
+  echo "Error in ".$sql."<br>".$conn->error;
+
+ echo "no results";
+
+}
+
+$conn->close();
 ?>
 
 
 
-		
-		
-		
-		
+
+<script>
+function myConfirm() {
+  var result = confirm("Want to delete?");
+  if (result==true) {
+   return true;
+  } else {
+   return false;
+  }
+}
+
+</script>
+		  
+     
+             
 		
 		
 		
@@ -383,8 +319,7 @@ echo "
 		
 		  
         </main>
-      </div>
-    </div>
+      
 <!-- partial -->
   <script src='https://unpkg.com/@popperjs/core@2'></script><script  src="./script.js"></script>
 

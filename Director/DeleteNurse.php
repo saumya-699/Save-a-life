@@ -22,7 +22,7 @@ require "conp.php";
                  
 		   echo '<script type="text/javascript">';
 		// echo 'alert("Added successfully");';
-         echo 'window.location.href="RemoveOrUpdateNurse.php";';
+         echo 'window.location.href="RemoveOrUpdateNurseI.php";';
 	
 		 echo '</script>';
 		

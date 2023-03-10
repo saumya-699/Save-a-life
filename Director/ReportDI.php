@@ -19,14 +19,14 @@ session_start();
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./AddbbStyle.css">
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
 
 
 </head>
 <body>
 <!-- partial:index.partial.html -->
 <div class="layout has-sidebar fixed-sidebar fixed-header">
-      <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
+        <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
         <a id="btn-collapse" class="sidebar-collapser"><i class="ri-arrow-left-s-line"></i></a>
         <div class="sidebar-layout">
           <div class="sidebar-header">
@@ -228,156 +228,62 @@ session_start();
   <div class="container">
     <div class="wrap">
       <div class="headings">
-        <center><span><h1>Add blood bank doctor</h1></span><center>
+        <center><span><h1>Report Generation</h1></span><center>
       
       </div>
-     
-    
-           <?php
-
-       
-function generate_pw() {
-  $pw;
-  // Set random length for password
-  $password_length = rand(8, 16);
-  $pw = '';
-
-  for($i = 0; $i < $password_length; $i++) {
-    $pw .= chr(rand(32, 126));
-  }
-  return $pw;
-}
-
-
-$hel = generate_pw();
-?>
-<?php
-require 'conp.php';
-$date =date("Y/m/d");
-echo "
-   
-       
-    
-     <form method='post' action='Add_bb_backEnd.php' id='FormName'>
-                         
-         
+         <form method="post" action="ReportGeneration.php">
+        
+                          
 						   
-						 
-						   
-                              
-                              
-                           <label for='exampleFormControlInput1' class='form-label lbl star'>Name with Initials</label>
-                           <input type='text' placeholder='Enter the name' name='Name' id='name' class='form-control txt-input' required>
-							 
-							 
-					    <label for='exampleFormControlInput1' class='form-label lbl star'>NIC Number</label>
-                        <input type='text' placeholder='Enter the NIC Number' name='NIC' id='NIC' class='form-control txt-input'  onchange='myFunction1()' required>";
+						  
+							   
 							
 
-?>
-	
-<?php
-	
+                       <label for="exampleFormControlInput1" class="form-label lbl star">  Report name </label>
+                       <select name="report" id="" class="form-control txt-input" required>
+                       <option value="N" selected>Statistic</option>
 
-						  $sql= 'select *from hospital' ;
-                           $result = $conn->query($sql);
+                        <option value="F">Annual</option >
+                       </select>
+							    
 
-      if($result->num_rows>0)
-
-   {     
-   
-
-          	      echo "<label for='exampleFormControlInput1' class='form-label lbl star'>Hospital Name</label>";
-				  
-	     echo 
-		   "<select name='hospital' class='form-control txt-input' required>";
-                      
-	  
-	 
-      while($row=$result->fetch_assoc())
-   
-   {     
-     
-	      echo 
-		   
-         " <option value='$row[HospitalName]'>$row[HospitalName]</option>";
-	   
-	  
-	}
-   }                      
-      echo "</select>";                      
-	
-	?>
-	
-	
-	<?php
-	
-             
-	        echo   "
-                             
-                           
-                              
-                           
-                              <label for='exampleFormControlInput1' class='form-label lbl star'>DOB</label>
-                             
-							   <div class='input-group mb-4'>
-                        <i class='fas fa-calendar-alt input-group-text'></i>
-
-                        <input type='datetime' name='DOB' id='DOB' class='datepicker_input form-control txt-input' placeholder='Select Date' required>
-                    </div>
-
-        
-        
-                              <label for='exampleFormControlInput1' class='form-label lbl star'>SLMC Number</label>
-                             <input type='text' placeholder='Enter the SLMC Number' name='SLMC' id='slmc' class='form-control txt-input'  onchange='myFunction()' required>
-                             
-					
-                           <label for='exampleFormControlInput1' class='form-label lbl star'>Email</label>
-                             <input type='email' placeholder='Enter the Email' name='Email' class='form-control txt-input' id='Email'  required>
-        
-                             
-                           <label for='exampleFormControlInput1' class='form-label lbl star'>Contact Number</label>
-                            <input type='tel' placeholder='Enter the Contact Number' name='contactNumber'  class='form-control txt-input'  id='contact' pattern='[0-9]{10}' required>
+                       <label for="exampleFormControlInput1" class="form-label lbl star">  Hospital name</label>
+                       <select name="report" id="" class="form-control txt-input" required>
+                       <option value="Karapitiya Teaching Hospital">Karapitiya&nbsp;Teaching&nbsp;Hospital</option>
+                       <option value="Galle_general_hospital" selected>Galle General Hospital</option>
+						 </select>
+							    
+						     
 							
-							 <label for='exampleFormControlInput1' class='form-label lbl star'>Date of Appoinment</label>
-                             <input type='text'  name='DOA' id='DOA' class='form-control txt-input' value='$date'>
-				
-							 <label for='exampleFormControlInput1' class='form-label lbl star'>User Name</label>
-                             <input type='text' name='Uname' id='Uname' class='form-control txt-input' required>
-                           
-						   
-						   <script type='text/javascript'>
-                      
-					 function myFunction(){
-                     var x = document.forms['FormName']['slmc'].value;
-                     
-                    
-					 document.getElementById('Uname').value = x;  
-                     }
-                      </script>
+					     <label for="exampleFormControlInput1" class="form-label lbl star">   Export method</label>
+                         <select name="report" id="" class="form-control txt-input" required>
+                         <option value="Karapitiya Teaching Hospital">pdf</option>
+						  <option value="Karapitiya Teaching Hospital">doc</option>
+                         <option value="Galle_general_hospital" selected>jpeg</option>
+						  <option value="Galle_general_hospital" selected>png</option>
+							  </select>
+							    
+							 
+							 
+							 
+							    <label for="exampleFormControlInput1" class="form-label lbl star">   Time period</label><br>
+                            
+                            
+                             From &nbsp;<input type="date" placeholder="From" name="From" id="From" class="yu">&nbsp;&nbsp;
+							      To &nbsp;<input type="date" placeholder="To" name="To" id="To" class="yu"><br><br><br>
+        
                                
-                      <label for='exampleFormControlInput1' class='form-label lbl star'>Password</label>
-                      <input type='password'  name='password'  class='form-control txt-input'  value='$hel'  required>
-                   <br><br><br><br>
-                         
-                        <div class='col btn-but'> <input type='submit' name='BtnSubmit' value='Add' class='b1'></div>
-                        <div class='col btn-but'> <input type='submit' name='btnCancel' value='Cancel' class='b2'></div>
-                   
-					
-					</form>
-   ";
-?>
+							   
+							
+                              
 
+        
+                            
+          </div>
+		
 
-
-		
-		
-		
-		
-		
-		
-		
-		
+   
+  </form> 
 		
 		
 		

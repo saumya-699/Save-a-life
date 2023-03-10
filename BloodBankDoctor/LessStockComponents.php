@@ -7,30 +7,35 @@ session_start();
  <?php
    if(isset($_SESSION["ID"]))   {
 	
-	
+	 $x= $_SESSION["ID"];
+     			
 ?>
 <?php
 
-include 'mj.php';
+
+include 'cj.php';
 ?>
 <html>
 
 <head>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css'>
+
+
+
+
+   <!-- Vanilla Datepicker CSS -->
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css'>
 
     <link rel="stylesheet" href="style.css">  
 	<link rel="stylesheet" href="css/nbtssl/nbtssl.min.css">
     <link rel="stylesheet" href="css/fontawesome-free-5.15.4/css/all.css">
     <link rel="stylesheet" href="css/mediaquery.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-
+  
 
 </head>
 <body>
-<br><br>
 
- <!--Header-->
-	      <div class="logo-massaviu">
+<div class="logo-massaviu">
   &nbsp; &nbsp; 
 </div>
 <div class="top">
@@ -58,7 +63,7 @@ include 'mj.php';
       // session_start();
      echo " " . $_SESSION['Name'];
     ?>
-	<br>Director</div>
+	<br>Blood bank doctor</div>
 	
 			
   <div class="dropdownx">
@@ -82,9 +87,9 @@ include 'mj.php';
 
 
 </div>
-        
+<br><br>
  
- <form method="post" action="SearchWardD.php">
+ <form method="post" action="searchNurse.php">
  
 <div class="ta">
 <div class="midiv">
@@ -93,10 +98,9 @@ include 'mj.php';
  
 
  <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
-                                  <option value="WardDoctor_ID"><b> WardDoctor_ID</b></option>
+                            <option value="MLT_ID"><b> MLT_ID</b></option>
 							   <option value="Name_With_Initials"><b>Name_With_Initials</b></option>
 						        <option value="HospitalName"><b> Hospital Name</b></option>
-                             <option value="Specialization"><b> Specialization</b></option>
 							   <option value="SLMC_number"><b> SLMC_number</b></option>
                              <option value="Email" selected><b>Email</b></option>
 		                    <option value="ContactNumber" selected><b> Contact number</b></option>
@@ -110,15 +114,33 @@ include 'mj.php';
 
  <button type="submit"  name="BtnSubmit" id="search" class="b1" ><b>Search</b></button>
 </div>
-
+</div>
+</div>
 
 </form>
 <?php
 
 
 require 'conp.php';
-    
-$sql= "select * from warddoctor where Remark!='Removed'" ;
+   $today =date("Y-m-d"); 
+$vql ="select * from bloodbank_doctor where BloodBank_doctor_ID ='$x'";
+$resultx = $conn->query($vql);
+
+ while($row = $resultx->fetch_assoc())
+   
+   {     
+     
+	 $ty=$row["Hospital_ID"];
+	  
+	  
+	}
+	
+	
+
+ //echo $row["Hospital_ID"];
+
+	
+$sql= "select * from stock where Hospital_ID='$ty' and No_of_packs <= 2";
 $result = $conn->query($sql);
 
 if($result->num_rows>0)
@@ -126,30 +148,21 @@ if($result->num_rows>0)
 {     
    
 
-          //echo "<font color=red>";
-	      //echo "<font size=6>";
 	   
-	  // echo  "<div class='tab'>";
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Doctor_ID"."</th>"."<th style='text-align:center;width:120px;'>"."Name_With_Initials"."</th>"."<th>"."Hospital name"."</th>"."<th>"."Specialization"."</th>"."<th>"."SLMC number"."</th>"."<th style='width:120px;'>"."Action"."</th>"."</tr>";
+	   echo  "<div class='tab'>";
+	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Blood_bagID"."</th>"."<th style='text-align:center;width:120px;'>"."Blood_group"."</th>"."<th>"."Component_type"."</th>"."<th>"."No_of_packs"."</th>"."<th>"."Expiry date"."</th>"."<th>"."Action"."</th>"."</tr>";
       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
-   while($row = $result->fetch_assoc())
+     while($row = $result->fetch_assoc())
    
    {     
      
-	  echo  "<tr>"."<td>".$row["WardDoctor_ID"]."</td>"."<td>".$row["Name_With_Initials"]."</td>"."<td>".$row["HospitalName"]."</td>"."<td>".$row["Specialization"]."</td>"."<td>".$row["SLMC_Number"]."</td>";
-	   echo "<td><form method='POST' action ='showAllWardDoctor.php'>
-                <input type=hidden name=WardDoctor_ID value=".$row["WardDoctor_ID"]." >
-                <button type=submit value=view name=view  class='fp'><img src=eye.png width=43 height=37></button>
-                </form>
-				<form method='POST' action ='Fill_WardDoctoUpdateForm.php'>
-                <input type=hidden name=WardDoctor_ID value=".$row["WardDoctor_ID"]." >
+	  echo  "<tr>"."<td>".$row["Blood_bagID"]."</td>"."<td>".$row["Blood_group"]."</td>"."<td>".$row["Component_type"]."</td>"."<td>".$row["No_of_packs"]."</td>"."<td>".$row["ExpiryDate"]."</td>";
+	   echo "<td>
+				<form method='POST' action =' Fill_MLTUpdateForm.php'>
+                <input type=hidden name=Blood_bagID  value=".$row['Blood_bagID'].">
                 <button type=submit value=update name=update  class='f1'><img src=edit.png width=26 height=26></button>
                 </form>
-                <form method='POST' action ='DeleteWardDoctor.php' onsubmit='return myConfirm()'>
-               
-                <button type=submit value=Delete name=delete class='f2' ><img src=dx.png width=30 height=33></button>
-				 <input type=hidden  name=WardDoctor_ID value=".$row["WardDoctor_ID"]." >
-                </form>
+                
                 </td>";
 				 echo "</tr>";
 	 
@@ -168,28 +181,16 @@ if($result->num_rows>0)
 else
 
 {
-  //echo "Error in ".$sql."<br>".$conn->error;
+ // echo "Error in ".$sql."<br>".$conn->error;
 
- echo "no results";
+ //echo "no results";
 
 }
-
+//echo "Error in ".$vql."<br>".$conn->error;
 $conn->close();
 ?>
 
 
-
-<script>
-function myConfirm() {
-  var result = confirm("Want to delete?");
-  if (result==true) {
-   return true;
-  } else {
-   return false;
-  }
-}
-
-</script>
 
 
 
@@ -318,7 +319,7 @@ h1{
 				    .f2{
 					      //background-color:red;
 						    margin-left:90px;
-							margin-top:-30px;
+							margin-top:-50px;
 							background-color:transparent;
 							 border: none;
 						   cursor:pointer;
@@ -347,9 +348,9 @@ h1{
 					 
 					  //background-color:green;
 					  margin-right:100px;
-					  margin-top:1px;
+					  margin-top:2 px;
 					 
-					  margin-bottom:-53px;
+					  margin-bottom:-35px;
 					  background-color:transparent;
 					   border: none;
 					   cursor:pointer;
@@ -382,7 +383,7 @@ h1{
 				   margin-top:90px;
 				   margin-bottom:0px;
 				  margin-left:370px;
-				  margin-right:264px;
+				  margin-right:265px;
 				  padding-left:30px;
 				   
 				   
@@ -396,21 +397,20 @@ h1{
 		
 	}
 		
-		
-		
-
-
-.name li {
-  float: left;
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 1px 16px;
-  font-weight: 500;
-  font-style: italic;
-  font-family:Open Sans, sans-serif;
+.top {
+  list-style-type: none;
+  margin-top:-10px;
+  padding-bottom:0px;
+  overflow: hidden;
+  background-color:#E56262;
+  width:100%;
+  height:57px;
   position:fixed;
+  top:0;
+  
 }
+
+
 
 
 .logo-massaviu {
@@ -420,9 +420,11 @@ h1{
   overflow: hidden;
   z-index: 1;
   width: 198px;
-  padding-top:9px;
+  padding-top:0px;
   padding-left:6px;
+  margin-top:-4px;
 }
+
 
 
 .top li {
@@ -444,9 +446,10 @@ h1{
   overflow: hidden;
   z-index: 1;
   width: 198px;
-  padding-top:9px;
+  padding-top:10px;
   padding-left:6px;
 }
+
 
 .top-right
 {
@@ -538,13 +541,11 @@ display: flex;
   text-align: center;
   padding: 1px 16px;
   font-weight: 500;
-  font-style: italic;
-  font-family:Open Sans, sans-serif;
+
+  font-family:Open Sans;
   position:fixed;
-}	   
-		
-		
-			   
+}
+		   
 </style>
 
 </body>

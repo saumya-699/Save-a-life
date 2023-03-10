@@ -1,17 +1,32 @@
-<!DOCTYPE html>
+<?php 
+session_start();
+
+?>
+
+
+ <?php
+   if(isset($_SESSION["ID"]))   {
+	
+	
+?>
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>side bar- blood bank doctor</title>
-  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
+  <title>side bar-director</title>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
 <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
-<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./styleMS.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./styleM.css">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
+
 
 </head>
 <body>
 <!-- partial:index.partial.html -->
 <div class="layout has-sidebar fixed-sidebar fixed-header">
-      <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
+        <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
         <a id="btn-collapse" class="sidebar-collapser"><i class="ri-arrow-left-s-line"></i></a>
         
         <div class="sidebar-layout">
@@ -43,18 +58,31 @@
                   <div class="sub-menu-list">
                     <ul>
                       <li class="menu-item">
-                        <a href="#">
+                        <a href="stockI.php">
                           <span class="menu-title">Stock Info</span>
                         </a>
                       </li>
                       <li class="menu-item">
-                        <a href="#">
+                        <a href="checkInternalStockI.php">
                           <span class="menu-title">Internal Stock Availability</span>
                         </a>
                       </li>
                       <li class="menu-item">
-                        <a href="#">
+                        <a href="checkExternalStockI.php">
                           <span class="menu-title">External Stock Availability</span>
+                        </a>
+                      </li>
+					  
+					    <li class="menu-item">
+                        <a href="LessStockComponentsI.php">
+                          <span class="menu-title">Low stock blood components</span>
+                        </a>
+                      </li>
+	
+					  
+					     <li class="menu-item">
+                        <a href="ExpiredComponentsI.php">
+                          <span class="menu-title">Blood expiry Information</span>
                         </a>
                       </li>
                     </ul>
@@ -70,22 +98,22 @@
                   <div class="sub-menu-list">
                     <ul>
                       <li class="menu-item">
-                        <a href="#">
+                        <a href="ViewInternalRequestI.php">
                           <span class="menu-title">Check Internal Requests</span>
                         </a>
                       </li>
                       <li class="menu-item">
-                        <a href="#">
+                        <a href="checkExternalRequestI.php">
                           <span class="menu-title">Check External Requests</span>
                         </a>
                       </li>
                       <li class="menu-item">
-                        <a href="#">
+                        <a href="sendRequestI.php">
                           <span class="menu-title">Send requests</span>
                         </a>
                       </li>
                       <li class="menu-item">
-                        <a href="#">
+                        <a href="sentRequestHistoryI.php">
                           <span class="menu-title">Send Request History</span>
                         </a>
                       </li>
@@ -102,12 +130,12 @@
                   <div class="sub-menu-list">
                     <ul>
                       <li class="menu-item">
-                        <a href="#">
+                        <a href="BloodREsultsI.php">
                           <span class="menu-title">Blood Test</span>
                         </a>
                       </li>
                       <li class="menu-item">
-                        <a href="#">
+                        <a href="CheckCrossMatchingResultsI.php">
                           <span class="menu-title">Cross Matching</span>
                         </a>
                       </li>
@@ -115,7 +143,7 @@
                   </div>
                 </li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="View_Donors_BI.php">
                     <span class="menu-icon">
                       <i class="ri-user-heart-fill"></i>
                     </span>
@@ -123,16 +151,16 @@
                   </a>
                  </li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="ReportGeneration_BI.php">
                     <span class="menu-icon">
                       <i class="ri-file-chart-line"></i>
                     </span>
                     <span class="menu-title">Reports</span>
                   </a>
                  </li>
-                <li class="menu-header" style="padding-top: 40px"><span> | </span></li>
+                <li class="menu-header" style="padding-top: 40px"><span>  </span></li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="profileBI.php">
                     <span class="menu-icon">
                       <i class="ri-user-line"></i>
                     </span>
@@ -140,7 +168,7 @@
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="Notifications.php">
                     <span class="menu-icon">
                       <i class="ri-notification-line"></i>
                     </span>
@@ -149,7 +177,7 @@
                 </li>
 
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="logoutI.php">
                     <span class="menu-icon">
                       <i class="ri-logout-box-r-line"></i>
                     </span>
@@ -167,9 +195,85 @@
         <main class="content">
           <div>
             <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
-             <!--add your content from here-->
-            <h1>Hi</h1>
           
+          </div>
+          
+          
+		  
+		  
+		  
+		  
+		   <div class="container-shadow">
+  </div>
+  <div class="container">
+    <div class="wrap">
+      <div class="headings">
+        <center><span><h1>Report Generation</h1></span><center>
+      
+      </div>
+     
+        
+     <form method="post" action="ReportGeneration.php">
+        
+                          
+						   
+						  
+							   
+						
+                       <label for="exampleFormControlInput1" class="form-label lbl star">  Report name </label>
+                       <select name="report" id="" class="form-control txt-input" required>
+                       <option value="N" selected>Statistic</option>
+                        <option value="F">Annual</option >
+                       </select>
+							    
+
+                       <label for="exampleFormControlInput1" class="form-label lbl star">  Hospital name</label>
+                       <select name="report" id="" class="form-control txt-input" required>
+                       <option value="Karapitiya Teaching Hospital">Karapitiya&nbsp;Teaching&nbsp;Hospital</option>
+                       <option value="Galle_general_hospital" selected>Galle General Hospital</option>
+						 </select>
+							    
+						     
+							
+					     <label for="exampleFormControlInput1" class="form-label lbl star">   Export method</label>
+                         <select name="report" id="" class="form-control txt-input" required>
+                           <option value="Karapitiya Teaching Hospital">pdf</option>
+						  <option value="Karapitiya Teaching Hospital">doc</option>
+                         <option value="Galle_general_hospital" selected>jpeg</option>
+						  <option value="Galle_general_hospital" selected>png</option>
+							  </select>
+							    
+							 
+							 
+							 
+							    <label for="exampleFormControlInput1" class="form-label lbl star">   Time period</label><br>
+                            
+                            
+                             From &nbsp;<input type="date" placeholder="From" name="From" id="From" class="yu">&nbsp;&nbsp;
+							      To &nbsp;<input type="date" placeholder="To" name="To" id="To" class="yu"><br><br><br>
+        
+                               
+							   
+							
+                              
+
+        
+                            
+          </div>
+		
+
+   
+  </div>
+ 
+  </div>
+ 
+  </form> 
+ 
+
+  
+  
+		
+		  
         </main>
       </div>
     </div>
@@ -178,3 +282,8 @@
 
 </body>
 </html>
+<?php
+	
+}
+ 
+?>

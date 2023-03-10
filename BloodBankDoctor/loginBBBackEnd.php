@@ -47,7 +47,7 @@ if(isset($_POST["BtnSubmit"]))
 			{
 
      
-        header("Location:HomepageBB.php");
+        header("Location:stockI.php");
 				 //printf("Query failed: %s\n", $conn->error);
 
     }	 

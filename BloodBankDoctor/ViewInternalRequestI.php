@@ -1,20 +1,20 @@
-
 <?php 
 session_start();
-$x= $_SESSION["Name"];
 
 ?>
 
-<?php
 
-include 'cj.php';
+ <?php
+   if(isset($_SESSION["ID"]))   {
+	
+	 $x= $_SESSION["ID"];
+     			
 ?>
-<html>
-
+<html lang="en" >
 <head>
-
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css'>
+  <meta charset="UTF-8">
   <title>side bar- blood bank doctor</title>
+    <title>side bar- blood bank doctor</title>
  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
 <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
 <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./styleM.css">
@@ -26,60 +26,178 @@ include 'cj.php';
 
 </head>
 <body>
-<div class="logo-massaviu">
-  &nbsp; &nbsp; 
-</div>
-<div class="top">
-<ul class="name" >
-
-  <li>&nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <font size="5.2px"> National Blood Transfusion Service  </font size></li>
- 
-
- <li>
-<div class="top-right">
-            <div class="notification">
-                <span class="material-icons licon">
-                    notifications
-                </span>
+<!-- partial:index.partial.html -->
+<div class="layout has-sidebar fixed-sidebar fixed-header">
+      <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
+        <a id="btn-collapse" class="sidebar-collapser"><i class="ri-arrow-left-s-line"></i></a>
+        
+        <div class="sidebar-layout">
+          <div class="sidebar-header">
+            <div class="pro-sidebar-logo">
+              <div><img src="logo.png" alt="logo"></div>
+              <h5>Save A Life</h5>
             </div>
-			&nbsp; 
-			<div class="person">
-                <span class="material-icons licon">
-                    person
-                </span>
-            </div>
-			&nbsp;
-	<div class="name">
-    <?php
-      // session_start();
-     echo " " . $_SESSION['Name'];
-    ?>
-	<br>Blood bank doctor</div>
+          </div>
+          <div class="sidebar-content">
+            <nav class="menu open-current-submenu">
+              <ul>
+                <li class="menu-header"><span>  </span></li>
+                <li class="menu-item">
+                  <a href="#">
+                    <span class="menu-icon">
+                      <i class="ri-home-fill"></i>
+                    </span>
+                    <span class="menu-title">Home</span>
+                  </a>
+                  </li>
+                <li class="menu-item sub-menu">
+                  <a href="#">
+                    <span class="menu-icon">
+                      <i class="ri-hospital-line"></i>
+                    </span>
+                    <span class="menu-title">Blood Stock</span>
+                  </a>
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="stockI.php">
+                          <span class="menu-title">Stock Info</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="checkInternalStockI.php">
+                          <span class="menu-title">Internal Stock Availability</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="checkExternalStockI.php">
+                          <span class="menu-title">External Stock Availability</span>
+                        </a>
+                      </li>
+					  
+					    <li class="menu-item">
+                        <a href="LessStockComponentsI.php">
+                          <span class="menu-title">Low stock blood components</span>
+                        </a>
+                      </li>
 	
-			
-  <div class="dropdownx">
-               <span class="material-icons licon">
-                    arrow_drop_down
-                </span> 
-				<div class="dropdownx-content">
-  <a href="#"> <span class="material-icons licon">
-  person
-                </span> Profile</a>
-  <a href="logout.php">
-  <span class="material-icons licon">
-  exit_to_app
-                </span>  
-  Log out</a>
-  </div>
-            </div>
- </li>
- </div>
-</ul>
+					  
+					     <li class="menu-item">
+                        <a href="ExpiredComponentsI.php">
+                          <span class="menu-title">Blood expiry Information</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li class="menu-item sub-menu">
+                  <a href="#">
+                    <span class="menu-icon">
+                      <i class="ri-message-2-fill"></i>
+                    </span>
+                    <span class="menu-title">Request</span>
+                  </a>
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="ViewInternalRequestI.php">
+                          <span class="menu-title">Check Internal Requests</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="checkExternalRequestI.php">
+                          <span class="menu-title">Check External Requests</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="sendRequestI.php">
+                          <span class="menu-title">Send requests</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="sentRequestHistoryI.php">
+                          <span class="menu-title">Send Request History</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li class="menu-item sub-menu">
+                  <a href="#">
+                    <span class="menu-icon">
+                      <i class="ri-article-fill"></i>
+                    </span>
+                    <span class="menu-title">Test Results</span>
+                  </a>
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="BloodREsultsI.php">
+                          <span class="menu-title">Blood Test</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="CheckCrossMatchingResultsI.php">
+                          <span class="menu-title">Cross Matching</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li class="menu-item">
+                  <a href="View_Donors_BI.php">
+                    <span class="menu-icon">
+                      <i class="ri-user-heart-fill"></i>
+                    </span>
+                    <span class="menu-title">Donors</span>
+                  </a>
+                 </li>
+                <li class="menu-item">
+                  <a href="ReportGeneration_BI.php">
+                    <span class="menu-icon">
+                      <i class="ri-file-chart-line"></i>
+                    </span>
+                    <span class="menu-title">Reports</span>
+                  </a>
+                 </li>
+                <li class="menu-header" style="padding-top: 40px"><span>  </span></li>
+                <li class="menu-item">
+                  <a href="profileBI.php">
+                    <span class="menu-icon">
+                      <i class="ri-user-line"></i>
+                    </span>
+                    <span class="menu-title">Profile</span>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="Notifications.php">
+                    <span class="menu-icon">
+                      <i class="ri-notification-line"></i>
+                    </span>
+                    <span class="menu-title">Notifications</span>
+                  </a>
+                </li>
 
+                <li class="menu-item">
+                  <a href="logoutI.php">
+                    <span class="menu-icon">
+                      <i class="ri-logout-box-r-line"></i>
+                    </span>
+                    <span class="menu-title">Log Out</span>
+                  </a>
+                </li>
 
-</div>
-<br><br>
- 
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </aside>
+      <div id="overlay" class="overlay"></div>
+      <div class="layout">
+        <main class="content">
+          <div>
+            <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a></div>
+             <!--add your content from here-->
  <form method="post" action="SearchBB.php">
  
 <div class="ta">
@@ -378,339 +496,26 @@ function myConfirm() {
 </script>
 
 
-<style>
-
-table{
-	
-	
-	//margin-left:440px;
-	width:800px;
-	height:20px;
-	border-collapse: collapse;	
-		margin-top:50px;
-   border:0px transparent;		
- 	
-}
 
 
-th{
-	
-	
-	  white-space: nowrap; overflow: hidden; text-overflow:ellipsis;
-	  text-align: center;
-	   padding-top:25px;
-	     padding-bottom:25px;
-	   padding-left:20px;
-	    padding-right:10px;
-	     border:0px transparent;	
-	
-}
-
-td {
-  text-align: center;
-  padding:1px;
-
-
-}
-
-
-
-h1{
-	
-		margin-top:70px;	
-		margin-left:200px;
-		margin-bottom:100px;
-}
-
-.select{
-	
-	 
- height:35px;
- width:138px;
- border-radius:20px;
- background-color:#56CE94;
-  border: none;
- text-align:center;
-                     
-  
-						
-	
-}
-
-
-         .passwordDiv{
-
-                     
-                     //margin: 25px 0px 2px 95px;
-					 line-height:92%;
-					 padding-top:20px;
-
-               }                 
-
-
-
-           .midiv{
-
-                    background-color:transparent;
-                    
-                    //margin-left:396px;
-                   // margin-right:325px;
-                    margin-bottom:-52px;
-                    padding:2px 90px 30px 10px;
-					margin-top:10px;
-					outline:none;
-					border-radius: 25px;
-
-               }
-			   
-			   
-			   .box{
-                  
-                    
-                    height:35px;
-					width:200px;
-					
-					margin-left:20px;
-					margin-top:0px;
-				   border-radius:20px;
-				   border: none;
-				   text-align:center;
-                     
-           
-               }
-			   
-			   
-			   
-                  .b1{
-					      height:35px;
-                          width:130px;
-                          
-						  color:#FFF5F3;
-						  margin-left:20px;
-						   border-radius:20px;
-                           
-                           background-color:#F3506D;
-						   border: none;
-						   cursor:pointer;
-						   
-				            
-				  
-				  }
-				  
-				  
-				  
-				  
-				 
-				  .f2{
-					      //background-color:red;
-						    margin-left:90px;
-							margin-top:-30px;
-							background-color:transparent;
-							 border: none;
-						   cursor:pointer;
-						   
-				            
-				  
-				  }
-				  
-				  
-				  .f1{
-					     // background-color:yellow;
-						      background-color:transparent;
-						  margin-left:55px;
-						    margin-right:60px;
-							margin-bottom:0px;
-							margin-top:12px;
-						   border: none;
-						   cursor:pointer;
-						  
-						  
-				  }
-			   
-			   
-				  
-				  
-				  
-			   
-			   
-			   .tab{
-				   
-				   background-color:#F5F5F5;
-				    margin-top:0px;
-					margin-left:285px;
-					//padding:10px;
-					margin-right:60px;
-					padding-left:8px;
-                  // padding-right:1000px;
-					 
-				   
-				   
-			   }
-			  
-	 
-			   .ta{
-				   
-				   background-color:#F5F5F5;
-				  
-				   
-				   margin-top:90px;
-				   margin-bottom:0px;
-				  margin-left:285px;
-				  margin-right:60px;
-				  padding-left:30px;
-				   
-				   
-				   
-			   }
-			  
-	tr{
-		
-		background-color:white;
-		
-		
-	}
-		
-		
-		
-                  .bx{
-					      height:25px;
-				          width:100px;
-										   
-						    color:#FFF5F3;
-							margin-left:1384px;
-							 border-radius:30px;
-                             margin-top:30px;
-                           background-color:#F35050;
-						   border: none;
-						   cursor:pointer;
-						   
-				            
-				  
-				  }
-				  
-               a{
-				   
-				   text-decoration:none;
-			   }
-			   
-			   
-			      .top li {
-  float: left;
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  font-weight: 500;
-  font-style: italic;
-  font-family:Open Sans, sans-serif;
-}
-
-
-.logo-massaviu {
-  position: fixed;
-  padding-left: 0px;
-  background: transparent;
-  overflow: hidden;
-  z-index: 1;
-  width: 198px;
-  padding-top:9px;
-  padding-left:6px;
-}
-
-.top-right
-{
-    display: flex;
- margin-bottom:1px;
- margin-left:1020px;
- padding-left:300px;
- 
-}
-.name{
-display: flex;
- margin-bottom:-10px;
- cursor: pointer;
-
-}
-
-.person{
-   cursor: pointer;
-}
-
-.notification{
-  cursor: pointer;
-}
-
-
-.welcome{
- margin-left:400px;
-
-}
-
-.dropdownx{
-   cursor: pointer;
-
-}
-
-.dropdownx:hover{  
-  color: black;
-}
-
-
-.dropdownx-content {
-  display: none;
-  position: absolute;
-  background-color: #C14246;
-  min-width: 90px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdownx-content a {
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdownx-content a:hover {background-color: #f5646c}
-
-.dropdownx:hover .dropdownx-content {
-  display: block;
-}
-
-.dropdownx:hover .dropbtn {
-  background-color: #3e8e41;
-}
-
-
-.top {
-  list-style-type: none;
-  margin-top:-8px;
-  padding-bottom:0px;
-  overflow: hidden;
-  padding-top:10px;
-  background-color:#E56262;
-  width:100%;
-  height:57px;
-  position:fixed;
-  top:0;
-  
-}
-
-
-
-.name li {
-  float: left;
-  display: block;
-  color: white;
-  text-align: center;
-  padding: 1px 16px;
-  font-weight: 500;
- 
-  font-family:Open Sans;
-  position:fixed;
-}	
-</style>
+          
+        </main>
+     
+<!-- partial -->
+  <script src='https://unpkg.com/@popperjs/core@2'></script><script  src="./script.js"></script>
 
 </body>
 </html>
+	<?php
+	
+}
+ else 
+	 
+	 {echo '<script type="text/javascript">';
+		 echo 'alert("Please log in first");';
+         
+		echo 'window.location.href="userloginFront.php";';
+  echo '</script>';
+	 }
+ 
+?>
