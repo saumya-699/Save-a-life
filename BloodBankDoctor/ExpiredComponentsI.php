@@ -14,10 +14,16 @@ session_start();
 <head>
   <meta charset="UTF-8">
   <title>side bar- blood bank doctor</title>
-  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
+   <title>side bar- blood bank doctor</title>
+ <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
 <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
 <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./styleM.css">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
  <link rel="stylesheet" href="StyleSearch.css"> 
+
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -195,10 +201,7 @@ session_start();
   <form method="post" action="searchNurse.php">
  
 <div class="ta">
-<div class="midiv">
 
-  <div class="passwordDiv">
- 
 
  <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
                             <option value="MLT_ID"><b> MLT_ID</b></option>
@@ -217,8 +220,7 @@ session_start();
 
  <button type="submit"  name="BtnSubmit" id="search" class="b1" ><b>Search</b></button>
 </div>
-</div>
-</div>
+
 
 </form>
 <?php
