@@ -19,7 +19,7 @@ session_start();
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./AddbbStyle.css">
 
 
 </head>
@@ -359,11 +359,10 @@ echo "
                       <label for='exampleFormControlInput1' class='form-label lbl star'>Password</label>
                       <input type='password'  name='password'  class='form-control txt-input'  value='$hel'  required>
                    <br><br><br><br>
-                  <div class='row btn-buttons'>
-                        
+                         
                         <div class='col btn-but'> <input type='submit' name='BtnSubmit' value='Add' class='b1'></div>
                         <div class='col btn-but'> <input type='submit' name='btnCancel' value='Cancel' class='b2'></div>
-                    </div>
+                   
 					
 					</form>
    ";
