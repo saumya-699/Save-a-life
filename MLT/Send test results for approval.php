@@ -1,8 +1,10 @@
 <?php
-
+session_start();
 include "config.php";
 
-$sql = "SELECT process_date, batch_number FROM blood_testing_result GROUP BY process_date, batch_number order by process_date DESC";
+$x = $_SESSION['Hospital_ID'];
+
+$sql = "SELECT process_date, batch_number,status FROM blood_testing_result Where Hospital_ID='$x' GROUP BY process_date, batch_number  order by process_date DESC ";
 
 $result = $conn->query($sql);
 
@@ -53,7 +55,6 @@ $result = $conn->query($sql);
                 </div>
                 &nbsp;
                 <div class="name"><?php
-                                    session_start();
                                     echo " " . $_SESSION['Name_With_Initials'];
                                     ?>
                     <br>MLT
@@ -158,7 +159,6 @@ $result = $conn->query($sql);
         <form action="Send test results for approval1.php" method="POST">
            
                 <?php
-
                 if ($result->num_rows > 0) {
 
                     echo  "<div class='tab'>";
@@ -170,15 +170,16 @@ $result = $conn->query($sql);
      echo  "<tr>"."<td>".$row["process_date"]."</td>"."<td>".$row["batch_number"]."</td>";   
     
 	 echo "<td class='tb'><form method='POST' action ='Send test results for approval1.php'>
-     <input type=hidden name=RequestID value=".$row["batch_number"]." >
-
+   <input type=hidden name=Requestbatch value=".$row["batch_number"]." >
+   <input type=hidden name=RequestID value=".$row["process_date"]." >
      <button type=submit value=view name=view  class='fp'><img src=eye.png width=40 height=37></button>
      </form>    	
 
     </td>"; 
     echo "<td class=''><form method='POST' action =''>
-     <input type=hidden name=RequestID value=".$row["batch_number"]." >
-     <button type=submit value=submit   class='b2'>Send</button>
+    <input type=hidden name=RequestID value=".$row["process_date"]." >
+    <input type=hidden name=Requestbatch value=".$row["batch_number"]." >
+    <button type=submit value=submit   class='b2'>Send</button>
      </form>    	
 
     </td>"; 

@@ -1,8 +1,10 @@
 <?php
-
+session_start();
 include "config.php";
 
-$sql = "SELECT process_date, batch_number,status FROM blood_testing_result GROUP BY process_date, batch_number order by process_date DESC";
+$x = $_SESSION['Hospital_ID'];
+
+$sql = "SELECT process_date, batch_number,status FROM blood_testing_result Where Hospital_ID='$x' GROUP BY process_date, batch_number  order by process_date DESC ";
 
 $result = $conn->query($sql);
 
@@ -53,7 +55,6 @@ $result = $conn->query($sql);
                 </div>
                 &nbsp;
                 <div class="name"><?php
-                                    session_start();
                                     echo " " . $_SESSION['Name_With_Initials'];
                                     ?>
                     <br>MLT
@@ -169,11 +170,12 @@ View approval of the blood test results    </div>
      echo  "<tr>"."<td>".$row["process_date"]."</td>"."<td>".$row["batch_number"]."</td>"."<td>".$row["status"]."</td>";   
     
 	 echo "<td class='tb'><form method='POST' action ='View approval of blood test results2.php'>
-     <input type=hidden name=RequestID value=".$row["batch_number"]." >
+     <input type=hidden name=RequestID value=".$row["process_date"]." >
+     <input type=hidden name=Requestbatch value=".$row["batch_number"]." >
      <button type=submit value=view name=view  class='fp'><img src=eye.png width=40 height=37></button>
      </form>    	
-
     </td>"; 
+
     echo "</div>";	
      echo "</tr>";
 
