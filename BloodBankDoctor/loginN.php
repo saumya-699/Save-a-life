@@ -1,11 +1,8 @@
-<?php 
-session_start();
 
-?>
 
 
  <?php
-   if(isset($_SESSION["ID"]))   {
+   
 	
 	
 ?>
@@ -15,11 +12,11 @@ session_start();
   <title>side bar-director</title>
 <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
 <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
-<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./styleM.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="Director/styleM.css">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="Director/stylek2.css">
 
 
 </head>
@@ -228,169 +225,37 @@ session_start();
   <div class="container">
     <div class="wrap">
       <div class="headings">
-        <center><span><h1>Add Ward Doctor</h1></span><center>
+        <center><span><h1>login</h1></span><center>
       
       </div>
      
-        <?php
-
-       
-function generate_pw() {
-  $pw;
-  // Set random length for password
-  $password_length = rand(8, 16);
-  $pw = '';
-
-  for($i = 0; $i < $password_length; $i++) {
-    $pw .= chr(rand(32, 126));
-  } 
-  return $pw;
-}
-
-
-$hel = generate_pw();
-?>
-
-<?php
-require 'conp.php';
-$date =date("Y/m/d");
-
-
-
-
-echo "
-   
-       
-    
-     <form method='post' action='AddWardDoctorBackEnd.php' id='FormName'>
-                        
-         
-						   
-						 
-						   
-                              
-                              
-                           <label for='exampleFormControlInput1' class='form-label lbl star'>Name with Initials</label>
-                           <input type='text' placeholder='Enter the name' name='Name' id='name' class='form-control txt-input' required>
-							 
-							 
-					    <label for='exampleFormControlInput1' class='form-label lbl star'>NIC Number</label>
-                        <input type='text' placeholder='Enter the NIC Number' name='NIC' id='NIC' class='form-control txt-input'  onchange='myFunction1()' required>";
-							
-
-?>
-	
-<?php
-	
-
-						  $sql= 'select *from hospital' ;
-                           $result = $conn->query($sql);
-
-      if($result->num_rows>0)
-
-   {     
-   
-
-          	      echo "<label for='exampleFormControlInput1' class='form-label lbl star'>Hospital name</label>";
-				  
-	     echo 
-		   "<select name='hospital' class='form-control txt-input' required>
-		   
-		     <option value='Not Provided'> None</option>";
-                      
-	  
-	 
-      while($row=$result->fetch_assoc())
-   
-   {     
-     
-	      echo 
-		   
-         " <option value='$row[HospitalName]'>$row[HospitalName]</option>";
-	   
-	  
-	}
-   }                      
-      echo "</select>";                      
-	
-	?>
-	
-	
-	<?php
-	
              
-	        echo   "<label for='exampleFormControlInput1' class='form-label lbl star'>Specialization</label>
-                         <select id='Specialization' name='Specialization'  class='form-control txt-input' required>
-						   <option value='Not Provided'> None</option>
-                         <option value='General Medicine'> General Medicine
-						 </option>
-                         <option value='General Surgery'> General Surgery</option>
-						 <option value='Pediatrics'> Pediatrics</option>
-						 <option value='Obstetrics & Gynecology'>Obstetrics & Gynecology</option>
-						  <option value='Dermatology'>Dermatology</option>
-						  <option value='ENT'>ENT</option>
-                          <option value='Psychiatry'>Psychiatry</option>
-                        
-                        
-                         </select>
-                          
-                             
-                           
-                              
-                           
-                              <label for='exampleFormControlInput1' class='form-label lbl star'>DOB</label>
-                             
-							   <div class='input-group mb-4'>
-                        <i class='fas fa-calendar-alt input-group-text'></i>
-
-                        <input type='datetime' name='DOB' id='DOB' class='datepicker_input form-control txt-input' placeholder='Select Date' required>
-                    </div>
-
-        
-        
-                              <label for='exampleFormControlInput1' class='form-label lbl star'>SLMC Number</label>
-                             <input type='text' placeholder='Enter the SLMC Number' name='SLMC' id='slmc' class='form-control txt-input'   required>
-                             
-					
-                           <label for='exampleFormControlInput1' class='form-label lbl star'>Email</label>
-                             <input type='email' placeholder='Enter the Email' name='Email' class='form-control txt-input' id='Email' onchange='myFunction()' required>
-        
-                             
-                           <label for='exampleFormControlInput1' class='form-label lbl star'>Contact Number</label>
-                            <input type='tel' placeholder='Enter the Contact Number' name='contactNumber'  class='form-control txt-input'  id='contact' pattern='[0-9]{10}' required>
-							
-							 <label for='exampleFormControlInput1' class='form-label lbl star'>Date of Appoinment</label>
-                             <input type='text'  name='DOA' id='DOA' class='form-control txt-input' value='$date'>
-				
-							 <label for='exampleFormControlInput1' class='form-label lbl star'>User Name</label>
-                             <input type='text' name='Uname' id='Uname' class='form-control txt-input' required>
-                           
-						   
-						   <script type='text/javascript'>
+       
+                     <form method="post" action="loginBackEnd.php" >
+                  
+         
+                        <b> <label class="lb"><font size=6><font color= #ff0000>User name</font></font><label></b><br>
+                             <input type="text" placeholder="user name" name="UserName" class="validation" id="User name" required><br>
+							 
                       
-					 function myFunction(){
-                     var x = document.forms['FormName']['Email'].value;
-                     
-                    
-					 document.getElementById('Uname').value = x;  
-                     }
-                      </script>
-                               
-                      <label for='exampleFormControlInput1' class='form-label lbl star'>Password</label>
-                      <input type='password'  name='password'  class='form-control txt-input'  value='$hel'  required>
-                        <br><br><br><br>
-                  <div class='row btn-buttons'>
-                        
-                        <div class='col btn-but'> <input type='submit' name='BtnSubmit' value='Add' class='b1'></div>
-                        <div class='col btn-but'> <input type='submit' name='btnCancel' value='Cancel' class='b2'></div>
-                    </div>
-					
-					</form>
-";
 
-?>
+                       <b><label class="lb"><font size=6><font color="green">Password</font></font><label></b><br>
+                            <input type="password" placeholder="Password" name="Password"  class="validation"  id="password"  required>
+                              
+     
+         
 
-		
+<button type="submit" name="BtnSubmit" class="log" id="LoginBtn"> <font size=5><font color="white"><b>Login</b></font></font></button><br>
+   
+ 
+     
+     <!-- <input type="checkbox" checked="checked" name="remember" class="checkBox" id="checkBOX"><font color=#80ccff><font size=4>Remember</font> </font><br>-->
+
+   
+
+           <font size=4> <button type="button"  name="cancelBtn" id="cancelID" class="can" ><a href="home.php"> cancel</a></button>
+           
+        </form>  
 		
 		
 		
@@ -405,9 +270,3 @@ echo "
 
 </body>
 </html>
-
-<?php
-	
-}
- 
-?>

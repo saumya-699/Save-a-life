@@ -61,10 +61,10 @@ if(isset($_POST["BtnSubmit"]))
                  header("Location:stockI.php");}
 			 
 			   else if($_SESSION["Type"]   == '4'){
-			   header("Location:stockI.php");}
+			   header("Location:");}
 			 
 			 else if($_SESSION["Type"]   == '5'){
-			 header("Location:AddNurseI.php");}
+			 header("Location:Director/AddMLTI.php");}
 			 
 			 else {
 			 header("Location:stockI.php");}

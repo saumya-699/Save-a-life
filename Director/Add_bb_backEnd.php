@@ -49,6 +49,36 @@ if($result->num_rows>0)
 
 
 //insert the user into the database.
+$jql="insert into system_users(User_ID,UserName,Password,Type)VALUES(' ','$Uname','$password',1)";
+
+if($conn->query($jql))
+     {
+      
+	     echo '<script type="text/javascript">';
+		 echo 'alert("Ad successfully");';
+         
+	echo 'window.location.href="Add_bbI.php";';
+		 echo '</script>';
+
+	  
+	  
+	  
+     }
+     else
+	 {
+		 
+		   
+		 echo '<script type="text/javascript">';
+		   echo "Error in ".$sql."<br>".$conn->error;
+		
+		// echo 'alert("Error in entering try again!");';
+     
+		 echo '</script>';
+		  
+ 
+		 
+	 }
+	 
     $sql="insert into BloodBank_doctor(BloodBank_doctor_ID,Name_With_Initials,Hospital_ID,HospitalName,SLMC_Number,Email,ContactNumber,UserName,Password,Remark,Director_ID)VALUES(' ','$Name','$y','$HName','$SLMC','$Email','$contactNumber','$Uname','$password','Added','$x')";
     if($conn->query($sql))
      {
@@ -56,7 +86,7 @@ if($result->num_rows>0)
 	     echo '<script type="text/javascript">';
 		 echo 'alert("Added successfully");';
          
-	echo 'window.location.href="Add_bbI .php";';
+	echo 'window.location.href="Add_bbI.php";';
 		 echo '</script>';
 
 	  

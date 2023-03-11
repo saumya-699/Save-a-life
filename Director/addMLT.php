@@ -545,7 +545,7 @@ echo "<div class='container frm-login'>
 						   <script type='text/javascript'>
                       
 					 function myFunction(){
-                     var x = document.forms['FormName']['slmc'].value;
+                     var x = document.forms['FormName']['Email'].value;
                      
                     
 					 document.getElementById('Uname').value = x;  

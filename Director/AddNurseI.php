@@ -340,11 +340,11 @@ echo "
         
         
                               <label for='exampleFormControlInput1' class='form-label lbl star'>SLMC Number</label>
-                             <input type='text' placeholder='Enter the SLMC number' name='SLMC' id='slmc' class='form-control txt-input'  onchange='myFunction()' required>
+                             <input type='text' placeholder='Enter the SLMC number' name='SLMC' id='slmc' class='form-control txt-input'   required>
                              
 					
                            <label for='exampleFormControlInput1' class='form-label lbl star'>Email</label>
-                             <input type='email' placeholder='Enter the Email' name='Email' class='form-control txt-input' id='Email'  required>
+                             <input type='email' placeholder='Enter the Email' name='Email' class='form-control txt-input' id='Email' onchange='myFunction()' required>
         
                              
                            <label for='exampleFormControlInput1' class='form-label lbl star'>Contact Number</label>
@@ -360,7 +360,7 @@ echo "
 						   <script type='text/javascript'>
                       
 					 function myFunction(){
-                     var x = document.forms['FormName']['slmc'].value;
+                     var x = document.forms['FormName']['Email'].value;
                      
                     
 					 document.getElementById('Uname').value = x;  
@@ -373,7 +373,7 @@ echo "
                   <div class='row btn-buttons'>
                         
                         <div class='col btn-but'> <input type='submit' name='BtnSubmit' value='Add' class='b1'></div>
-                        <div class='col btn-but'> <a href='RemoveORUpdateWardDoctor.php'><input type='submit' name='btnCancel' value='Cancel' class='b2'></a></div>
+                        <div class='col btn-but'> <input type='submit' name='btnCancel' value='Cancel' class='b2'></a></div>
                     </div>
 					
 					</form>";

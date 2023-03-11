@@ -22,7 +22,7 @@ if(isset($_POST["BtnSubmit"]))
        $Password=$_POST["Password"];
 
   
-      $sql= "select * from users where UserName='$UserName' and Password='$Password'";
+      $sql= "select * from system_users where UserName='$UserName' and Password='$Password'";
 	  
         $result= $conn->query($sql);
 
@@ -49,7 +49,7 @@ if(isset($_POST["BtnSubmit"]))
 
                   if( $_SESSION["Type"]   == '1')
 				  {
-                 header("Location:stockI.php");
+                 header("Location:BloodBankDoctor/stockI.php");
 				 //printf("Query failed: %s\n", $conn->error);
 				  }
 				 
@@ -61,10 +61,10 @@ if(isset($_POST["BtnSubmit"]))
                  header("Location:stockI.php");}
 			 
 			   else if($_SESSION["Type"]   == '4'){
-			   header("Location:stockI.php");}
+			   header("Location:");}
 			 
 			 else if($_SESSION["Type"]   == '5'){
-			 header("Location:AddNurseI.php");}
+			 header("Location:Director/AddMLTI.php");}
 			 
 			 else {
 			 header("Location:stockI.php");}

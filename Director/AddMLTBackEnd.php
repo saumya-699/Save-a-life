@@ -47,8 +47,39 @@ if($result->num_rows>0)
       
 }	
 
-
+$Type=2;
 //insert the user into the database.
+$jql="insert into system_users(User_ID,UserName,Password,Type)VALUES('','$Uname','$password',2)";
+
+
+if($conn->query($jql))
+{
+ 
+	echo '<script type="text/javascript">';
+	echo 'alert("user successfully");';
+	
+	 echo 'window.location.href="AddMLTI.php";';
+	echo '</script>';
+
+ 
+ 
+ 
+}
+else
+{
+	
+	  
+	echo '<script type="text/javascript">';
+	  echo "Error in ".$jql."<br>".$conn->error;
+   
+	echo 'alert("Error in entering try again!");';
+
+	echo '</script>';
+	 
+
+	
+}
+
     $sql="insert into MLT(MLT_ID,Name_With_Initials,Hospital_ID,HospitalName,SLMC_Number,Email,ContactNumber,UserName,Password,Remark,Director_ID)VALUES(' ','$Name','$y','$HName','$SLMC','$Email','$contactNumber','$Uname','$password','Added','$x')";
     if($conn->query($sql))
      {
@@ -70,7 +101,7 @@ if($result->num_rows>0)
 		 echo '<script type="text/javascript">';
 		   echo "Error in ".$sql."<br>".$conn->error;
 		
-		// echo 'alert("Error in entering try again!");';
+		 echo 'alert("Error in entering try again!");';
      
 		 echo '</script>';
 		  
