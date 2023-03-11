@@ -153,14 +153,14 @@ Send blood test results for approval   </div>
  
  </form>
  <?php
-  $x = $_SESSION['Hospital_ID'];
+  $x = $_SESSION['MLT_ID'];
 require 'config.php';
 if(isset($_POST['view']))  
 
 {	 
    $did= $_POST['RequestID'];
    $batchid= $_POST['Requestbatch'];
-   $sql = "SELECT * FROM blood_testing_result where process_date ='$did' AND Hospital_ID='$x' AND batch_number='$batchid'";
+   $sql = "SELECT * FROM blood_testing_result where process_date ='$did' AND MLT_ID='$x' AND batch_number='$batchid'";
    $result = $conn->query($sql);
 
 
