@@ -24,7 +24,7 @@ if(isset($_POST['BtnSubmit']))
       
 	     echo '<script type="text/javascript">';
 		 echo 'alert("Insrtion is successfully");';
-	     echo 'window.location.href="sendRequest.php";';
+	     echo 'window.location.href="sendRequestI.php";';
 		 echo '</script>';
 
 	  

@@ -22,7 +22,7 @@ if(isset($_POST['BtnSubmit']))
      {
       
 	     echo '<script type="text/javascript">';
-		 echo 'alert("Registration is successfully");';
+		 echo 'alert("Added successfully");';
          
 	
 		 echo '</script>';

@@ -19,7 +19,7 @@ session_start();
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./AddHosStyle.css">
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek2.css">
 
 
 </head>
@@ -228,88 +228,37 @@ session_start();
   <div class="container">
     <div class="wrap">
       <div class="headings">
-        <center><span><h1>Add Hospital</h1></span><center>
+        <center><span><h1>login</h1></span><center>
       
       </div>
      
-          
-     <form method="post" action="AddHospitalBackEnd.php">
-        
-                         
-                              
-                              
-                            <label for="exampleFormControlInput1" class="form-label lbl star">Hospital Name</label>
-                             <input type="text" placeholder="Enter the Hospital Name" name="HName" id="H_id" class="form-control txt-input">
-							 
-							   
-							 <label for="exampleFormControlInput1" class="form-label lbl star"> Type </label>
-                             <select name="district" class="form-control txt-input" required>
-							   <option value="Not Provided"> None</option>
-                             <option value="general">District General</option>
-                             
-                             <option value="Teaching">Teaching </option>
-							 <option value="Teaching">Base Hospital A </option>
-						     <option value="Teaching">Base Hospital B </option>
-							 <option value="Teaching">Primary Medical Care </option>
-							 <option value="Teaching"> </option>
-                              </select>
-
-							 
-					     <label for="exampleFormControlInput1" class="form-label lbl star">District </label>
-                          <select name="district" class="form-control txt-input" required>
-						    <option value="Not Provided"> None</option>
-                        <option value="Matara">Matara</option>
-						 	 <option value="Galle">Galle</option>
-							 <option value="Anuradhapura">Anuradhapura</option>
-							 <option value="kandy">kandy</option>
-							 <option value="Nuwaraeliya">Nuwaraeliya</option>
-							 <option value="Kalutara">Kalutara</option>
-							 <option value="Colombo">Colombo</option>
-							  <option value="Gampaha">Gampaha</option>
-							   <option value="Kandy">Kandy</option>
-							     <option value="Badulla">Badulla</option>
-								  <option value="Monaragala">Monaragala</option>
-								  <option value="Hambantota">Hambantota</option>
-								  <option value="Hambantota">Hambantota</option>
-								 <option value="Hambantota">Puttalam</option>
-									  <option value="Hambantota">Kurunegala</option>
-									  
-                          </select>
-
-                    
-
-        
-                           <label for="exampleFormControlInput1" class="form-label lbl star">Head of Hospital</label>
-                             <input type="text" placeholder="Enter the name of Hospital Head " name="headName" id="headID" class="form-control txt-input" " >
-        
-                            
-                            <label for="exampleFormControlInput1" class="form-label lbl star">Address</label>
-                             <input type="text" placeholder="Enter the Address" name="address" class="form-control txt-input" id="adddress" >
-        
-
-                         <label for="exampleFormControlInput1" class="form-label lbl star">Land Line Number</label>
-                            <input type="text" placeholder="Enter the Land Line Number" name="number1"  class="form-control txt-input"  id="numb1" >
-							
-					   <label for="exampleFormControlInput1" class="form-label lbl star"> Contact Number of Hospital Head</label>
-                            <input type="text" placeholder="Enter the Contact Number of Hospital Head" name="number2" id="numb2" class="form-control txt-input">
-<br><br><br>                             
-
              
-                        
-                        <div class='col btn-but'> <input type='submit' name='BtnSubmit' value='Add' class='b1'></div>
-                        <div class='col btn-but'> <input type='submit' name='btnCancel' value='Cancel' class='b2'></div>
-                    						  
+       
+                     <form method="post" >
+                  
+         
+                        <b> <label class="lb"><font size=6><font color= #ff0000>User name</font></font><label></b><br>
+                             <input type="text" placeholder="user name" name="UserName" class="validation" id="User name" required><br>
+							 
+                      
 
+                       <b><label class="lb"><font size=6><font color="green">Password</font></font><label></b><br>
+                            <input type="password" placeholder="Password" name="Password"  class="validation"  id="password"  required>
+                              
      
-          </div>
-		
+         
+
+<button type="submit" name="BtnSubmit" class="log" id="LoginBtn"> <font size=5><font color="white"><b>Login</b></font></font></button><br>
+   
+ 
+     
+     <!-- <input type="checkbox" checked="checked" name="remember" class="checkBox" id="checkBOX"><font color=#80ccff><font size=4>Remember</font> </font><br>-->
 
    
-  </div>
- 
-    </div>
-      </form> 
 
+           <font size=4> <button type="button"  name="cancelBtn" id="cancelID" class="can" ><a href="home.php"> cancel</a></button>
+           
+        </form>  
 		
 		
 		

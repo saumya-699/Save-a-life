@@ -137,7 +137,7 @@ if($result->num_rows>0)
    {     
      
 	  echo  "<tr>"."<td>".$row["WardDoctor_ID"]."</td>"."<td>".$row["Name_With_Initials"]."</td>"."<td>".$row["HospitalName"]."</td>"."<td>".$row["Specialization"]."</td>"."<td>".$row["SLMC_Number"]."</td>";
-	   echo "<td><form method='POST' action ='showAllWardDoctor.php'>
+	   echo "<td><form method='POST' action ='showAllWardDoctorI.php'>
                 <input type=hidden name=WardDoctor_ID value=".$row["WardDoctor_ID"]." >
                 <button type=submit value=view name=view  class='fp'><img src=eye.png width=43 height=37></button>
                 </form>

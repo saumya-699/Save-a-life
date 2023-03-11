@@ -23,7 +23,7 @@ require "conp.php";
                  
 		   echo '<script type="text/javascript">';
 		// echo 'alert("Added successfully");';
-         echo 'window.location.href="RemoveORUpdateBB.php";';
+         echo 'window.location.href="RemoveORUpdateBBI.php";';
 	
 		 echo '</script>';
 		

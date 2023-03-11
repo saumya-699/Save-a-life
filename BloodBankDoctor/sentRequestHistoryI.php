@@ -7,7 +7,7 @@ session_start();
  <?php
    if(isset($_SESSION["ID"]))   {
 	
-	 $x= $_SESSION["ID"];
+	 $x= $_SESSION["Name"];
      			
 ?>
 <html lang="en" >
@@ -201,9 +201,7 @@ session_start();
  <form method="post" action="searchNurse.php">
  
 <div class="ta">
-<div class="midiv">
 
-  <div class="passwordDiv">
  
 
  <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
@@ -218,8 +216,7 @@ session_start();
 
  <button type="submit"  name="BtnSubmit" id="search" class="b1" ><b>Search</b></button>
 </div>
-</div>
-</div>
+
 
 </form>
 <?php
@@ -236,7 +233,7 @@ if($result->num_rows>0)
    
 
 	   
-	   echo  "<div class='tab'>";
+	   //echo  "<div class='tab'>";
 	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Request_ID"."</th>"."<th style='text-align:center;width:120px;'>"."Requested_hospital_name"."</th>"."<th>"."Requested_by"."</th>"."<th>"."Requeired_blood_group"."</th>"."<th style='width:120px;'>"."Status"."</th>"."<th style='width:120px;'>"."Action"."</th>"."</tr>";
       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
    while($row = $result->fetch_assoc())
@@ -260,7 +257,7 @@ if($result->num_rows>0)
 	 echo "</font>";
 	 echo  "</font>";   
 	 echo "</table>";
-	 echo "</div>";
+	// echo "</div>";
 	
 	
 }	
@@ -268,7 +265,7 @@ if($result->num_rows>0)
 else
 
 {
-  //echo "Error in ".$sql."<br>".$conn->error;
+  echo "Error in ".$sql."<br>".$conn->error;
 
  echo "no results";
 

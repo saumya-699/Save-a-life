@@ -201,9 +201,7 @@ session_start();
  <form method="post" action="SearchWardD.php">
  
 <div class="ta">
-<div class="midiv">
 
-  <div class="passwordDiv">
  
 
  <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
@@ -224,8 +222,7 @@ session_start();
 
  <button type="submit"  name="BtnSubmit" id="search" class="b1" ><b>Search</b></button>
 </div>
-</div>
-</div>
+
 
 </form>
 <?php
@@ -273,14 +270,14 @@ if($result->num_rows>0)
           //echo "<font color=red>";
 	      //echo "<font size=6>";
 	   
-	   echo  "<div style='overflow-x:auto;' class='tab'>";
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Requesting_hospital_name"."</th>"."<th>"."Requested_hospital_name"."</th>"."<th>"."Requested_by"."</th>"."<th>"."Requeired_blood_group"."</th>"."<th style='width:120px;'>"."Requeired_blood_component"."</th>"."<th>"."Requeired_no_of_packs"."</th>"."<th style='width:220px;'>"."Date"."</th>"."<th>"."Status"."</th>"."<th style='width:120px;'>"."Action"."</th>"."</tr>";
+	  // echo  "<div style='overflow-x:auto;' class='tab'>";
+	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:100px;'>"."Requesting <br>hospital name"."</th>"."<th>"."Requested_by"."</th>"."<th>"."Requeired <br> blood_group"."</th>"."<th style='width:120px;'>"."Requeired <br>blood_component"."</th>"."<th>"."Requeired <br> no_of_packs"."</th>"."<th style='width:200px;'>"."Date"."</th>"."<th>"."Status"."</th>"."<th style='width:100px;'>"."Action"."</th>"."</tr>";
       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
    while($row = $result->fetch_assoc())
    
    {     
      
-	  echo  "<tr>"."<td>".$row["Requesting_hospital_name"]."</td>"."<td>".$row["Requested_hospital_name"]."</td>"."<td>".$row["Requested_by"]."</td>"."<td>".$row["Requeired_blood_group"]."</td>"."<td>".$row["Requeired_blood_component"]."</td>"."<td>".$row["Requeired_no_of_packs"]."</td>"."<td>".$row["Date"]."</td>"."<td>".$row["status"]."</td>";
+	  echo  "<tr>"."<td>".$row["Requesting_hospital_name"]."</td>"."</td>"."<td>".$row["Requested_by"]."</td>"."<td>".$row["Requeired_blood_group"]."</td>"."<td>".$row["Requeired_blood_component"]."</td>"."<td>".$row["Requeired_no_of_packs"]."</td>"."<td>".$row["Date"]."</td>"."<td>".$row["status"]."</td>";
 	   echo "<td><form method='POST' action ='checkExternalRequest.php'>
                 <input type=hidden name=Request_ID value=".$row["Request_ID"]." >
                 <button type=submit name=Accept  class='fp'><img src=eye.png width=43 height=37></button>

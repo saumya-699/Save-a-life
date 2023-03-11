@@ -11,13 +11,15 @@ include 'cj.php';
 <html>
 
 <head>
- <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css'>
+ <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
+<link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./styleM.css">
 
-    <link rel="stylesheet" href="style.css">  
-	<link rel="stylesheet" href="css/nbtssl/nbtssl.min.css">
-    <link rel="stylesheet" href="css/fontawesome-free-5.15.4/css/all.css">
-    <link rel="stylesheet" href="css/mediaquery.css">
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
+ <link rel="stylesheet" href="StyleSearch.css"> 
+
 
 <style>
 

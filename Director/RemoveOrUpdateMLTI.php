@@ -267,14 +267,11 @@ if($result->num_rows>0)
    {     
      
 	  echo  "<tr>"."<td>".$row["MLT_ID"]."</td>"."<td>".$row["Name_With_Initials"]."</td>"."<td>".$row["HospitalName"]."</td>"."<td>".$row["SLMC_Number"]."</td>";
-	   echo "<td><form method='POST' action ='showAllMLT.php'>
+	   echo "<td><form method='POST' action ='showAllMLTI.php'>
                 <input type=hidden name='MLT_ID' value=".$row["MLT_ID"]." >
                 <button type=submit value=view name=view  class='fp'><img src=eye.png width=43 height=37></button>
                 </form>
-				<form method='POST' action =' Fill_MLTUpdateForm.php'>
-                <input type=hidden name=MLT_ID  value=".$row['MLT_ID'].">
-                <button type=submit value=update name=update  class='f1'><img src=edit.png width=26 height=26></button>
-                </form>
+				
                 <form method='POST' action ='DeleteMLT.php' onsubmit='return myConfirm()'>
                 <input type=hidden  name=MLT_ID  value=".$row['MLT_ID']." >
                 <button type=submit value=Delete name=delete class='f2' ><img src=dx.png width=30 height=33></button>

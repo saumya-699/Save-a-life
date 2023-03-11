@@ -54,7 +54,7 @@ if($result->num_rows>0)
      {
       
 	     echo '<script type="text/javascript">';
-		 echo 'alert("Registration is successfully");';
+		 echo 'alert("Added successfully");';
          
 	      echo 'window.location.href="AddMLTI.php";';
 		 echo '</script>';

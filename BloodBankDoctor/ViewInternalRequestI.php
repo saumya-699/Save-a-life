@@ -201,10 +201,7 @@ session_start();
  <form method="post" action="SearchBB.php">
  
 <div class="ta">
-<div class="midiv">
 
-  <div class="passwordDiv">
- 
 
  <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
                            <option value="BloodBank_doctor_ID"><b> BloodBank_doctor_ID</b></option>
@@ -223,8 +220,7 @@ session_start();
 
  <button type="submit"  name="BtnSubmit" id="search" class="b1" ><b>Search</b></button>
 </div>
-</div>
-</div>
+
 
 </form>
 <?php
@@ -265,7 +261,7 @@ $query="select * from bloodbank_doctor where Name_With_Initials='$x'";
           //echo "<font color=red>";
 	      //echo "<font size=6>";
 	   
-	   echo  "<div style='overflow-x:auto; ' class='tab'> ";
+	   //echo  "<div style='overflow-x:auto; ' class='tab'> ";
 	    // echo  "<div class='hat'>";
 	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:100px;'>"."Request_ID"."</th>"."<th style='text-align:center;width:120px;'>"."Patient Name"."</th>"."<th style='text-align:center;width:100px;'>"."Patient Age"."</th>"."<th>"."Patient Gender"."</th>"."<th>"."Blood Group"."</th>"."<th style='text-align:center;width:120px;'>"."Required Blood Component"."</th>"."<th>"."Required Amount (packets)"."</th>"."<th style='text-align:center;width:120px;'>"."Expected date to receive"."</th>"."<th style='text-align:center;width:90px;'>"."Requested_date to receive"."</th>"."<th style='text-align:center;width:120px;'>"."Reason for the request"."</th>"."<th>"."Ward number"."</th>"."<th>"."Remark"."</th>"."<th style='text-align:center:width:40px;'>"."Status"."</th>"."<th style='text-align:center;width:100px;'>"."Action"."</th>"."</tr>";
       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=10'>"."</td>"."</tr>";
@@ -303,7 +299,7 @@ $query="select * from bloodbank_doctor where Name_With_Initials='$x'";
 	 echo "</font>";
 	 echo  "</font>";   
 	 echo "</table>";
-	 echo "</div>";
+	// echo "</div>";
 	// echo "</div>";
 	
 		  }
@@ -314,9 +310,9 @@ $query="select * from bloodbank_doctor where Name_With_Initials='$x'";
 else
 
 {
-  echo "Error in ".$query."<br>".$conn->error;
+  //echo "Error in ".$query."<br>".$conn->error;
 
- echo "no results";
+ //echo "no results";
 
 }
 

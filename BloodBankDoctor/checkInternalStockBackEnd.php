@@ -32,7 +32,7 @@ if($Procedure==='Check external stock and send e-msg')
 		
 		
 		
-		header( "Location:checkExternalStock.php" );
+		header( "Location:checkExternalStockI.php" );
 	}
 	
 	else{

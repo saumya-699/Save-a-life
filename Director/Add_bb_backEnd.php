@@ -54,9 +54,9 @@ if($result->num_rows>0)
      {
       
 	     echo '<script type="text/javascript">';
-		 echo 'alert("added successfully");';
+		 echo 'alert("Added successfully");';
          
-	echo 'window.location.href="Add_bbI.php";';
+	echo 'window.location.href="Add_bbI .php";';
 		 echo '</script>';
 
 	  

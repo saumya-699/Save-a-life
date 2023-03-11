@@ -39,7 +39,7 @@ if(isset($_POST['BtnSubmit']))
      }
 //insert the user into the database.
     $sql="insert into transferdetails(Transfer_ID,Hospital_ID,HospitalName,Transfered_to,Transfered_By,Date)VALUES('','$Hospital_ID','$HName','$Transfer','$TransferBy','$date')";
-	vql="update nurse set Remark='Removed' where Hospital_ID = '$Hospital_ID'";
+	vql="update nurse set Remark='Removed' where Hospital_ID ='$Hospital_ID'";
 	cql="update mlt set Remark='Removed' where Hospital_ID = '$Hospital_ID'";
 	gql="update bloodbank_doctor set Remark='Removed' where Hospital_ID = '$Hospital_ID'";
 	wql="update warddoctor set Remark='Removed' where Hospital_ID = '$Hospital_ID'";

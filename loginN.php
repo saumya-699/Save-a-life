@@ -1,11 +1,8 @@
-<?php 
-session_start();
 
-?>
 
 
  <?php
-   if(isset($_SESSION["ID"]))   {
+   
 	
 	
 ?>
@@ -19,15 +16,14 @@ session_start();
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
- <link rel="stylesheet" href="StyleSearch.css"> 
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek2.css">
 
 
 </head>
 <body>
 <!-- partial:index.partial.html -->
 <div class="layout has-sidebar fixed-sidebar fixed-header">
-      <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
+        <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
         <a id="btn-collapse" class="sidebar-collapser"><i class="ri-arrow-left-s-line"></i></a>
         <div class="sidebar-layout">
           <div class="sidebar-header">
@@ -220,108 +216,46 @@ session_start();
           </div>
           
           
-		  <form method="post" action="searchNurse.php">
- 
-<div class="ta">
-
-
-
-
- <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
-                             <option value="Hospital Name"><b> Hospital Name</b></option>
-                             <option value="Type"><b> Type</b></option>
-                             <option value="District" selected><b>District</b></option>
-		                    <option value="Head_Of_Hospital" selected><b>Head_Of_Hospital</b></option>
-                             </select>
-
-<input type="text" placeholder="type here" name="data" id="data" class="box">
-
- <button type="submit"  name="BtnSubmit" id="search" class="b1" ><b>Search</b></button>
-
-</div>
-
-</form>
-
-
-<?php
-
-
-require 'conp.php';
-    
-$sql= "select * from hospital where Remark !='Non-functioning'" ;
-$result = $conn->query($sql);
-
-if($result->num_rows>0)
-
-
-{     
-   
-
-          
-	   //echo  "<div class='tab'>";
-	    
-	   echo  "<table border=1>"."<tr>"."<th>"."Hospital_ID"."</th>"."<th style='width:165px;'>"."HospitalName"."</th>"."<th style='width:115px;'>"."Type"."</th>"."<th style='width:105px;'>"."District"."</th>"."<th>"."Head_Of_Hospital"."</th>"."<th>"."Action"."</th>"."</tr>";
-       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=6'>"."</td>"."</tr>";
-   while($row = $result->fetch_assoc())
-   
-   {     
-     
-	  echo  "<tr>"."<td>".$row["Hospital_ID"]."</td>"."<td>".$row["HospitalName"]."</td>"."<td>".$row["Type"]."</td>"."<td>".$row["District"]."</td>"."<td>".$row["Head_Of_Hospital"]."</td>";
-	   echo "<td class='cv'><form method='POST' action ='showAllHospitalI.php'>
-                <input type=hidden name=Hospital_ID value=".$row["Hospital_ID"]." >
-                <button type=submit value=view name=view  class='fp'><img src=eye.png width=43 height=37></button>
-                </form>
-				
-                <form method='POST' action ='DeactivateHospitalI.php'>
-                <input type=hidden name=Hospital_ID value=".$row["Hospital_ID"]." >
-                <button type=submit value=Delete name=delete class='f2' ><img src=dx.png width=30 height=33></button>
-                </form>
-                </td>";
-				 echo "</tr>";
-				 
-				   echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=6'>"."</td>"."</tr>";
-	 
-	   
-	  
-	}
-	
-	 echo "</font>";
-	 echo  "</font>";   
-	 echo "</table>";
-	//echo "</div>";
-	
-}	
-
-else
-
-{
- // echo "Error in ".$sql."<br>".$conn->error;
-
-// echo "no results";
-
-}
-
-$conn->close();
-?>
-
-
-
-<script>
-function myConfirm() {
-  var result = confirm("Want to delete?");
-  if (result==true) {
-   return true;
-  } else {
-   return false;
-  }
-}
-
-</script>
 		  
+		  
+		  
+		  
+		   <div class="container-shadow">
+  </div>
+  <div class="container">
+    <div class="wrap">
+      <div class="headings">
+        <center><span><h1>login</h1></span><center>
+      
+      </div>
      
              
-		
-		
+       
+                     <form method="post" action="loginBackEnd.php" >
+                  
+         
+                        <b> <label class="lb"><font size=6><font color= #ff0000>User name</font></font><label></b><br>
+                             <input type="text" placeholder="user name" name="UserName" class="validation" id="User name" required><br>
+							 
+                      
+
+                       <b><label class="lb"><font size=6><font color="green">Password</font></font><label></b><br>
+                            <input type="password" placeholder="Password" name="Password"  class="validation"  id="password"  required>
+                              
+     
+         
+
+<button type="submit" name="BtnSubmit" class="log" id="LoginBtn"> <font size=5><font color="white"><b>Login</b></font></font></button><br>
+   
+ 
+     
+     <!-- <input type="checkbox" checked="checked" name="remember" class="checkBox" id="checkBOX"><font color=#80ccff><font size=4>Remember</font> </font><br>-->
+
+   
+
+           <font size=4> <button type="button"  name="cancelBtn" id="cancelID" class="can" ><a href="home.php"> cancel</a></button>
+           
+        </form>  
 		
 		
 		
@@ -329,16 +263,10 @@ function myConfirm() {
 		
 		  
         </main>
-      
+      </div>
+    </div>
 <!-- partial -->
   <script src='https://unpkg.com/@popperjs/core@2'></script><script  src="./script.js"></script>
 
 </body>
-
-
 </html>
-<?php
-	
-}
- 
-?>

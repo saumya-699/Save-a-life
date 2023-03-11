@@ -19,7 +19,7 @@ session_start();
 
 <?php
 
-include 'mj.php';
+//include 'mj.php';
 ?>
 
   <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css'>
@@ -286,7 +286,7 @@ display: flex;
 
 require 'conp.php';
     
-$sql= "select * from hospital where Remark='Non-functioning'" ;
+$sql= "select * from hospital where Remark !='Non-functioning'" ;
 $result = $conn->query($sql);
 
 if($result->num_rows>0)

@@ -1,4 +1,17 @@
-
+   .tab{
+				   
+				   background-color:#F5F5F5;
+				    margin-top:0px;
+					margin-left:285px;
+					//padding:10px;
+					margin-right:90px;
+					padding-left:1px;
+                  // padding-right:1000px;
+					 
+				   
+				   
+			   }
+			  
 table{
 	
 	
@@ -121,8 +134,8 @@ h1{
 				  
 				      .f2{
 					      //background-color:red;
-						    margin-left:90px;
-							margin-top:-30px;
+						    margin-left:10px;
+							margin-top:-15px;
 							background-color:transparent;
 							 border: none;
 						   cursor:pointer;
@@ -163,23 +176,16 @@ h1{
 				  }
 			   
 			   
-			  
-	
-			   .ta{
-				   
-				   background-color:#F5F5F5;
-				  
-				   
-				   margin-top:90px;
-				   margin-bottom:0px;
-				  margin-left:160px;
-				  margin-right:137px;
-				  padding-left:30px;
-				   
-				   
-				   
-			   }
-			  
+				  .ta {
+					background-color:transparent;
+					margin-top: 90px;
+					margin-bottom: 0px;
+					margin-left: 156px;
+					margin-right: 182px;
+					padding-left: 35px;
+
+
+				  }
 	tr{
 		
 		background-color:white;

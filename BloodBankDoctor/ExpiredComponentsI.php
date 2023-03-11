@@ -254,7 +254,7 @@ if($result->num_rows>0)
    
 
 	   
-	   echo  "<div class='tab'>";
+	 //  echo  "<div class='tab'>";
 	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Blood_bagID"."</th>"."<th style='text-align:center;width:120px;'>"."Blood_group"."</th>"."<th>"."Component_type"."</th>"."<th>"."No_of_packs"."</th>"."<th>"."Expiry date"."</th>"."<th>"."Action"."</th>"."</tr>";
       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
      while($row = $result->fetch_assoc())
@@ -278,7 +278,7 @@ if($result->num_rows>0)
 	 echo "</font>";
 	 echo  "</font>";   
 	 echo "</table>";
-	 echo "</div>";
+	// echo "</div>";
 	
 	
 }	

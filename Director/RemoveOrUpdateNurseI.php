@@ -264,14 +264,11 @@ if($result->num_rows>0)
    {     
      
 	  echo  "<tr>"."<td>".$row["Nurse_ID"]."</td>"."<td>".$row["Name_With_Initials"]."</td>"."<td>".$row["HospitalName"]."</td>"."<td>".$row["Position"]."</td>"."<td>".$row["SLMC_Number"]."</td>";
-	   echo "<td><form method='POST' action ='showAllNurse.php'>
+	   echo "<td><form method='POST' action ='showAllNurseI.php'>
                 <input type=hidden name=Nurse_ID value=".$row["Nurse_ID"]." >
                 <button type=submit value=view name=view  class='fp'><img src=eye.png width=43 height=37></button>
                 </form>
-		<form method='POST' action ='Fill_NurseUpdateForm.php'>
-                <input type=hidden name=Nurse_ID value=".$row["Nurse_ID"]." >
-                <button type=submit value=update name=update  class='f1' ><img src=edit.png width=26 height=26></button>
-                </form>
+		
                <form method='POST' action ='DeleteNurse.php' onsubmit='return myConfirm()'>
                 <button type=submit value=Delete name=delete class='f2'><img src=dx.png width=30 height=33></button>
 				
