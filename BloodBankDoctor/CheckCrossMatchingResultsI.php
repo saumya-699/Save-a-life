@@ -6,8 +6,37 @@ session_start();
 
  <?php
    if(isset($_SESSION["ID"]))   {
-	
-	 $x= $_SESSION["ID"];
+    require "conp.php";
+    $m= $_SESSION["Name"];
+    $query = "select * from bloodbank_doctor where UserName ='$m'";
+    
+    
+           
+    $resultd = $conn->query($query);
+    
+    //echo "Error in ".$vql."<br>".$conn->error;
+    
+    if($resultd->num_rows>0)
+    
+    {        
+    
+    while($row = $resultd->fetch_assoc())
+    
+    {
+    
+    
+    
+    
+    $x= $row["BloodBank_doctor_ID"];
+    
+    
+    
+    
+    
+    }
+    
+    
+    }
      			
 ?>
 <html lang="en" >
@@ -283,7 +312,7 @@ if($result->num_rows>0)
    {     
      
 	  echo  "<tr>"."<td>".$row["blood_group"]."</td>"."<td>".$row["test_result"]."</td>"."<td>".$row["process_date"]."</td>"."<td>".$row["Status"]."</td>";
-	   echo "<td><form method='POST' action ='CheckCrossMatchingResults.php'>
+	   echo "<td><form method='POST' action ='CheckCrossMatchingResultsI.php'>
                 <input type=hidden name=Request_ID value=".$row["Request_ID"]." >
                 <button type=submit name=update  class='fp'><img src=eye.png width=43 height=37></button>
                 </form>
@@ -335,7 +364,7 @@ if(isset($_POST['update']))
                            echo '<script type="text/javascript">';
 		                  //echo 'alert("Details updated successfully");';
          
-		                     echo 'window.location.href="CheckCrossMatchingResults.php";';
+		                     echo 'window.location.href="CheckCrossMatchingResultsI.php";';
 		                  echo '</script>';
 
                    } 

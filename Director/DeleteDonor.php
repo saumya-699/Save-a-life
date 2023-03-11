@@ -14,6 +14,37 @@ session_start();
 <?php
 require "conp.php";
 
+$m= $_SESSION["Name"];
+$query = "select * from director where UserName ='$m'";
+
+
+   		
+$resultd = $conn->query($query);
+
+//echo "Error in ".$vql."<br>".$conn->error;
+
+if($resultd->num_rows>0)
+
+{        
+
+while($row = $resultd->fetch_assoc())
+
+{
+
+
+
+
+$x= $row["Director_ID"];
+
+
+
+
+
+}
+
+
+}
+	
 	
 
 	
@@ -30,6 +61,10 @@ require "conp.php";
 		
  
 	   
+		                      
+		                   $ty ="update donors set Director_ID ='$x'";
+
+						   $result= $conn->query($ty);
 		  
 							$did=$_POST['Donor_Id'];
 							$query="update donors set username='Removed' where Donor_Id='$did'";

@@ -6,7 +6,37 @@ session_start();
 
  <?php
    if(isset($_SESSION["ID"]))   {
-	 $x= $_SESSION["ID"];
+    require "conp.php";
+    $m= $_SESSION["Name"];
+    $query = "select * from bloodbank_doctor where UserName ='$m'";
+    
+    
+           
+    $resultd = $conn->query($query);
+    
+    //echo "Error in ".$vql."<br>".$conn->error;
+    
+    if($resultd->num_rows>0)
+    
+    {        
+    
+    while($row = $resultd->fetch_assoc())
+    
+    {
+    
+    
+    
+    
+    $x= $row["BloodBank_doctor_ID"];
+    
+    
+    
+    
+    
+    }
+    
+    
+    }
 	
 ?>
 
@@ -302,7 +332,7 @@ echo "</select>";
           
   <?php      
           echo "
-    
+        
         
                             <label for='exampleFormControlInput1' class='form-label lbl star'>Reuesting blood bank doctor name</label>
                             <input type='text' name='RBDN' id='slmc' class='form-control txt-input' value='$nm' required> 

@@ -14,6 +14,39 @@ session_start();
 
 <?php
 require "conp.php";
+
+$m= $_SESSION["Name"];
+$query = "select * from director where UserName ='$m'";
+
+
+   		
+$resultd = $conn->query($query);
+
+//echo "Error in ".$vql."<br>".$conn->error;
+
+if($resultd->num_rows>0)
+
+{        
+
+while($row = $resultd->fetch_assoc())
+
+{
+
+
+
+
+$x= $row["Director_ID"];
+
+
+
+
+
+}
+
+
+}
+	
+
  //echo '<script type="text/javascript">';
 
        if(isset($_POST['delete'])){
@@ -27,7 +60,11 @@ require "conp.php";
 		 echo '</script>';
 		
  
-	   
+	                  
+		 $ty ="update Nurse set Director_ID ='$x'";
+
+		 $result= $conn->query($ty);
+
 		  
 							$did=$_POST['Nurse_ID'];
 							 $query="update nurse set Remark='Removed' where Nurse_ID='$did'";

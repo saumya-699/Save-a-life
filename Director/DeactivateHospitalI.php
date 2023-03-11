@@ -30,7 +30,7 @@ if($resultd->num_rows>0)
 
 
    
-	 $x= $row["Director_ID"];
+	 $x= $row["Name_With_Initials"];
    
   
   

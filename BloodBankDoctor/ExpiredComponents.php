@@ -6,8 +6,9 @@ session_start();
 
  <?php
    if(isset($_SESSION["ID"]))   {
-	
-	 $x= $_SESSION["ID"];
+   
+   
+     		
      			
 ?>
 <?php

@@ -1,3 +1,8 @@
+
+<?php 
+session_start();
+
+?>
 <?php
 
 require 'conp.php';            //make connection here
@@ -57,7 +62,7 @@ if($resultd->num_rows>0)
 	     echo '<script type="text/javascript">';
 		 echo 'alert("Added successfully");';
          
-	
+		 echo 'window.location.href="AddHospitalI.php";';
 		 echo '</script>';
 
 	  

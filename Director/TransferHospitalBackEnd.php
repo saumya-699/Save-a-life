@@ -59,7 +59,7 @@ if($resultd->num_rows>0)
      {
       
 	     echo '<script type="text/javascript">';
-		 echo 'alert("updated successfully");';
+		 echo 'alert("Transfered successfully");';
           echo 'window.location.href="DeactivateOrUpdateHospitalI.php";';
 
 		 echo '</script>';

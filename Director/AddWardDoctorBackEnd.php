@@ -48,8 +48,8 @@ if($resultd->num_rows>0)
 	
   }
   
-	
-}	
+		
+}
 
 
      			

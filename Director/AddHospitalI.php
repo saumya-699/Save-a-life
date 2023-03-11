@@ -256,7 +256,7 @@ session_start();
 
 							 
 					     <label for="exampleFormControlInput1" class="form-label lbl star">District </label>
-                          <select name="district" class="form-control txt-input" required>
+                          <select name="Type" class="form-control txt-input" required>
 						    <option value="Not Provided"> None</option>
                         <option value="Matara">Matara</option>
 						 	 <option value="Galle">Galle</option>

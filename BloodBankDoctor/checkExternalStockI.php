@@ -6,8 +6,38 @@ session_start();
 
  <?php
    if(isset($_SESSION["ID"]))   {
-	
-	 $x= $_SESSION["ID"];
+    require "conp.php";
+    $m= $_SESSION["Name"];
+    $query = "select * from bloodbank_doctor where UserName ='$m'";
+    
+    
+           
+    $resultd = $conn->query($query);
+    
+    //echo "Error in ".$vql."<br>".$conn->error;
+    
+    if($resultd->num_rows>0)
+    
+    {        
+    
+    while($row = $resultd->fetch_assoc())
+    
+    {
+    
+    
+    
+    
+    $x= $row["BloodBank_doctor_ID"];
+    
+    
+    
+    
+    
+    }
+    
+    
+    }
+    
      			
 ?>
 <html lang="en" >

@@ -7,7 +7,8 @@ session_start();
  <?php
    if(isset($_SESSION["ID"]))   {
 	
-	 $x= $_SESSION["ID"];
+    require "conp.php";
+    
      			
 ?>
 <html lang="en" >
@@ -227,6 +228,37 @@ session_start();
 
 
 require 'conp.php';
+
+$m= $_SESSION["Name"];
+    $query = "select * from bloodbank_doctor where UserName ='$m'";
+    
+    
+           
+    $resultd = $conn->query($query);
+    
+    //echo "Error in ".$vql."<br>".$conn->error;
+    
+    if($resultd->num_rows>0)
+    
+    {        
+    
+    while($row = $resultd->fetch_assoc())
+    
+    {
+    
+    
+    
+    
+    $x= $row["BloodBank_doctor_ID"];
+    
+    
+    
+    
+    
+    }
+    
+    
+    }
  $vql ="select * from bloodbank_doctor where BloodBank_doctor_ID ='$x'";
 $resultx = $conn->query($vql);
 
@@ -240,7 +272,9 @@ $resultx = $conn->query($vql);
 	  
 	  
 	}
-   
+  
+  
+
 $sql= "select * from donors where username!='Removed' and Hospital_ID=$tz" ;
 $result = $conn->query($sql);
 
