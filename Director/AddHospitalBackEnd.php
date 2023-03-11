@@ -12,7 +12,40 @@ if(isset($_POST['BtnSubmit']))
 	$address=$_POST["address"];
 	$number1=$_POST["number1"];
 	$number2=$_POST["number2"];
-         $x= $_SESSION["ID"];
+	$m= $_SESSION["Name"];
+
+
+	$query = "select * from director where UserName ='$m'";
+
+
+   		
+		$resultd = $conn->query($query);
+		
+		//echo "Error in ".$vql."<br>".$conn->error;
+
+if($resultd->num_rows>0)
+
+{        
+  
+ while($row = $resultd->fetch_assoc())
+ 
+ {
+	  
+
+
+   
+	 $x= $row["Director_ID"];
+   
+  
+  
+
+	
+  }
+  
+	
+}	
+
+
      			
 			
 

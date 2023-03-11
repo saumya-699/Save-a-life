@@ -6,7 +6,9 @@ session_start();
 
 <?php
 
-require 'conp.php';            //make connection here
+require 'conp.php';    
+
+//make connection here
 if(isset($_POST['BtnSubmit']))
 {
   //here getting result from the post array after submitting the form.
@@ -17,7 +19,41 @@ if(isset($_POST['BtnSubmit']))
 	$contactNumber=$_POST["contactNumber"];
 	$Uname=$_POST["Uname"];
 	$password=$_POST["password"];
-    $x= $_SESSION["ID"];
+    $m= $_SESSION["Name"];
+
+
+	$query = "select * from director where UserName ='$m'";
+
+
+   		
+		$resultd = $conn->query($query);
+		
+		//echo "Error in ".$vql."<br>".$conn->error;
+
+if($resultd->num_rows>0)
+
+{        
+  
+ while($row = $resultd->fetch_assoc())
+ 
+ {
+	  
+
+
+   
+	 $x= $row["Director_ID"];
+   
+  
+  
+
+	
+  }
+  
+	
+}	
+
+
+
      			
 		$vql="select *from hospital where HospitalName='$HName'";	
 		
@@ -50,6 +86,8 @@ if($result->num_rows>0)
 
 //insert the user into the database.
 $jql="insert into system_users(User_ID,UserName,Password,Type)VALUES(' ','$Uname','$password',1)";
+
+
 
 if($conn->query($jql))
      {

@@ -14,6 +14,36 @@ session_start();
 <?php
 require "conp.php";
 
+$m= $_SESSION["Name"];
+$query = "select * from director where UserName ='$m'";
+
+
+   		
+$resultd = $conn->query($query);
+
+//echo "Error in ".$vql."<br>".$conn->error;
+
+if($resultd->num_rows>0)
+
+{        
+
+while($row = $resultd->fetch_assoc())
+
+{
+
+
+
+
+$x= $row["Director_ID"];
+
+
+
+
+
+}
+
+
+}
 	
 
 	
@@ -29,7 +59,10 @@ require "conp.php";
 		 echo '</script>';
 		
  
-	   
+	                        
+		                   $ty ="update MLT set Director_ID ='$x'";
+
+						   $result= $conn->query($ty);
 		  
 							$did=$_POST['MLT_ID'];
 							$query="update MLT set Remark='Removed' where MLT_ID='$did'";

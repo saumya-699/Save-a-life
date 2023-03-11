@@ -17,7 +17,40 @@ if(isset($_POST['BtnSubmit']))
 	$contactNumber=$_POST["contactNumber"];
 	$Uname=$_POST["Uname"];
 	$password=$_POST["password"];
-    $x= $_SESSION["ID"];
+	$m= $_SESSION["Name"];
+
+
+	$query = "select * from director where UserName ='$m'";
+
+
+   		
+		$resultd = $conn->query($query);
+		
+		//echo "Error in ".$vql."<br>".$conn->error;
+
+if($resultd->num_rows>0)
+
+{        
+  
+ while($row = $resultd->fetch_assoc())
+ 
+ {
+	  
+
+
+   
+	 $x= $row["Director_ID"];
+   
+  
+  
+
+	
+  }
+  
+	
+}	
+
+
      			
 		$vql="select *from hospital where HospitalName='$HName'";	
 		

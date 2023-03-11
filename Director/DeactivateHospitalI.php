@@ -1,13 +1,47 @@
 <?php 
 session_start();
 
+require 'conp.php';
 ?>
 
 
  <?php
    if(isset($_SESSION["ID"]))   {
 	
-    $x= $_SESSION["ID"];
+    $m= $_SESSION["Name"];
+
+
+	$query = "select * from director where UserName ='$m'";
+
+
+   		
+		$resultd = $conn->query($query);
+		
+		//echo "Error in ".$vql."<br>".$conn->error;
+
+if($resultd->num_rows>0)
+
+{        
+  
+ while($row = $resultd->fetch_assoc())
+ 
+ {
+	  
+
+
+   
+	 $x= $row["Director_ID"];
+   
+  
+  
+
+	
+  }
+  
+	
+}	
+
+
 ?>
 <html lang="en" >
 <head>
@@ -238,7 +272,6 @@ session_start();
 <?php
 $date =date("Y/m/d");
 
-require 'conp.php';
 if(isset($_POST['delete']))  
 
 {	
