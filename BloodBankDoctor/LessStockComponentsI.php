@@ -227,31 +227,7 @@ session_start();
           <div>
             <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a></div>
              <!--add your content from here-->
-   <form method="post" action="searchNurse.php">
- 
-<div class="ta">
-
-
- <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
-                            <option value="MLT_ID"><b> MLT_ID</b></option>
-							   <option value="Name_With_Initials"><b>Name_With_Initials</b></option>
-						        <option value="HospitalName"><b> Hospital Name</b></option>
-							   <option value="SLMC_number"><b> SLMC_number</b></option>
-                             <option value="Email" selected><b>Email</b></option>
-		                    <option value="ContactNumber" selected><b> Contact number</b></option>
-						  <option value="Remark" selected><b>Remark</b></option>
-						  	  <option value="Director_ID" selected><b>Director_ID</b></option>
-							
-                             </select>
-
-
-<input type="text" placeholder="type here" name="data" id="data" class="box">
-
- <button type="submit"  name="BtnSubmit" id="search" class="b1" ><b>Search</b></button>
-</div>
-
-
-</form>
+  
 <?php
 
 
@@ -273,14 +249,42 @@ $resultx = $conn->query($vql);
 
  //echo $row["Hospital_ID"];
 
+$tql ="select Hospital_ID,Blood_bagID,Blood_group,Component_type,ExpiryDate,Count(*) AS count
+from stock
+group by Blood_group,Component_type
+HAVING COUNT(*) < 4 AND Hospital_ID='$ty'";
+
+$result = $conn->query($tql);
+
 	
-$sql= "select * from stock where Hospital_ID='$ty' and No_of_packs <= 2";
-$result = $conn->query($sql);
+//$sql= "select * from stock where Hospital_ID='$ty' and No_of_packs <= 2";
+//$result = $conn->query($sql);
 
 if($result->num_rows>0)
 
 {     
+  echo  "<form method='post' action='searchNurse.php'>
+ 
+  <div class='ta'>
+  
    
+  
+   <font size=3> Search by </font></b>  <br/> <br/><select name= 'search' class='select'>
+                               <option value='Position'><b> position</b></option>
+                               <option value='Nurse_ID'><b> Nurse_ID</b></option>
+                               <option value='Email' selected><b>Email</b></option>
+                          <option value='ContactNumber' selected><b> Contact number</b></option>
+                               </select>
+  
+  
+  <input type='text' placeholder='type here' name='data' id='data' class='box'>
+  
+   <button type='submit'  name='BtnSubmit' id='search' class='b1' ><b>Search</b></button>
+  </div>
+  
+  
+  </form>";
+     
 
 	   
 	   //echo  "<div class='tab'>";
@@ -290,7 +294,7 @@ if($result->num_rows>0)
    
    {     
      
-	  echo  "<tr>"."<td>".$row["Blood_bagID"]."</td>"."<td>".$row["Blood_group"]."</td>"."<td>".$row["Component_type"]."</td>"."<td>".$row["No_of_packs"]."</td>"."<td>".$row["ExpiryDate"]."</td>";
+	  echo  "<tr>"."<td>".$row["Blood_bagID"]."</td>"."<td>".$row["Blood_group"]."</td>"."<td>".$row["Component_type"]."</td>"."<td>".$row["count"]."</td>"."<td>".$row["ExpiryDate"]."</td>";
 	   echo "<td>
 				<form method='POST' action =' Fill_MLTUpdateForm.php'>
                 <input type=hidden name=Blood_bagID  value=".$row['Blood_bagID'].">
@@ -315,9 +319,9 @@ if($result->num_rows>0)
 else
 
 {
- // echo "Error in ".$sql."<br>".$conn->error;
+ //echo "Error in ".$tql."<br>".$conn->error;
 
- //echo "no results";
+ echo "<center><b>no results</b></center>";
 
 }
 //echo "Error in ".$vql."<br>".$conn->error;

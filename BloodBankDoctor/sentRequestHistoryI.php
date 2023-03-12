@@ -227,27 +227,7 @@ session_start();
           <div>
             <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a></div>
              <!--add your content from here-->
- <form method="post" action="searchNurse.php">
  
-<div class="ta">
-
- 
-
- <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
-                             <option value="Position"><b> position</b></option>
-                             <option value="Nurse_ID"><b> Nurse_ID</b></option>
-                             <option value="Email" selected><b>Email</b></option>
-		                    <option value="ContactNumber" selected><b> Contact number</b></option>
-                             </select>
-
-
-<input type="text" placeholder="type here" name="data" id="data" class="box">
-
- <button type="submit"  name="BtnSubmit" id="search" class="b1" ><b>Search</b></button>
-</div>
-
-
-</form>
 <?php
 
 
@@ -259,6 +239,28 @@ $result = $conn->query($sql);
 if($result->num_rows>0)
 
 {     
+
+ echo  "<form method='post' action='searchNurse.php'>
+ 
+<div class='ta'>
+
+ 
+
+ <font size=3> Search by </font></b>  <br/> <br/><select name= 'search' class='select'>
+                             <option value='Position'><b> position</b></option>
+                             <option value='Nurse_ID'><b> Nurse_ID</b></option>
+                             <option value='Email' selected><b>Email</b></option>
+		                    <option value='ContactNumber' selected><b> Contact number</b></option>
+                             </select>
+
+
+<input type='text' placeholder='type here' name='data' id='data' class='box'>
+
+ <button type='submit'  name='BtnSubmit' id='search' class='b1' ><b>Search</b></button>
+</div>
+
+
+</form>";
    
 
 	   
@@ -294,9 +296,9 @@ if($result->num_rows>0)
 else
 
 {
-  echo "Error in ".$sql."<br>".$conn->error;
+  //echo "Error in ".$sql."<br>".$conn->error;
 
- echo "no results";
+ echo "<br> <br><center> <b>No results</b></center>";
 
 }
 

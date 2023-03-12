@@ -292,13 +292,13 @@ $query="select * from bloodbank_doctor where Name_With_Initials='$x'";
 	   
 	   //echo  "<div style='overflow-x:auto; ' class='tab'> ";
 	    // echo  "<div class='hat'>";
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:100px;'>"."Request_ID"."</th>"."<th style='text-align:center;width:120px;'>"."Patient Name"."</th>"."<th style='text-align:center;width:100px;'>"."Patient Age"."</th>"."<th>"."Patient Gender"."</th>"."<th>"."Blood Group"."</th>"."<th style='text-align:center;width:120px;'>"."Required Blood Component"."</th>"."<th>"."Required Amount (packets)"."</th>"."<th style='text-align:center;width:120px;'>"."Expected date to receive"."</th>"."<th style='text-align:center;width:90px;'>"."Requested_date to receive"."</th>"."<th style='text-align:center;width:120px;'>"."Reason for the request"."</th>"."<th>"."Ward number"."</th>"."<th>"."Remark"."</th>"."<th style='text-align:center:width:40px;'>"."Status"."</th>"."<th style='text-align:center;width:100px;'>"."Action"."</th>"."</tr>";
+	   echo  "<table border=1>"."<tr>"."<th>"."Blood Group"."</th>"."<th style='text-align:center;width:120px;'>"."Required<br> Blood Component"."</th>"."<th>"."Required <br>Amount (packets)"."</th>"."<th style='text-align:center;width:120px;'>"."Expected date <br> to receive"."</th>"."<th style='text-align:center;width:120px;'>"."Reason"."</th>"."<th style='text-align:center:width:40px;'>"."Status"."</th>"."<th style='text-align:center;width:100px;'>"."Action"."</th>"."</tr>";
       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=10'>"."</td>"."</tr>";
    while($row = $resultx->fetch_assoc())
    
    {     
      
-	  echo  "<tr>"."<td>".$row["requeste_id"]."</td>"."<td>".$row["patient_name"]."</td>"."<td>".$row["patient_age"]."</td>"."<td>".$row["patient_gender"]."</td>"."<td>".$row["blood_group"]."</td>"."<td>".$row["blood_component"]."</td>"."<td>".$row["required_amount"]."</td>"."<td>".$row["expected_date"]."</td>"."<td>".$row["requested_date"]."</td>"."<td>".$row["reason"]."</td>"."<td>".$row["ward_number"]."</td>"."<td>".$row["remark"]."</td>"."<td>".$row["status"]."</td>";
+	  echo  "<tr>"."<td>".$row["blood_group"]."</td>"."<td>".$row["blood_component"]."</td>"."<td>".$row["required_amount"]."</td>"."<td>".$row["expected_date"]."</td>"."<td>".$row["reason"]."</td>"."<td>".$row["status"]."</td>";
 	   echo "<td>
 				<form method='POST' action ='ViewInternalRequest.php'>
                 <input type=hidden name=RequestID value=".$row["requeste_id"]." >

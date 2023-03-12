@@ -285,23 +285,17 @@ if($result->num_rows>0)
 
 	   
 	  // echo  "<div class='tab'>";
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Blood_bagID"."</th>"."<th style='text-align:center;width:120px;'>"."Blood_group"."</th>"."<th>"."Component_type"."</th>"."<th>"."No_of_packs"."</th>"."<th style='width:120px;'>"."Action"."</th>"."</tr>";
-      echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
+	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Blood_bagID"."</th>"."<th style='text-align:center;width:120px;'>"."Blood_group"."</th>"."<th style='text-align:center;width:120px;'>"."Component_type"."</th>"."<th style='width:120px;'>"."Expiry date"."</th>"."</tr>";
+      echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=7'>"."</td>"."</tr>";
      while($row = $result->fetch_assoc())
    
    {     
      
-	  echo  "<tr>"."<td>".$row["Blood_bagID"]."</td>"."<td>".$row["Blood_group"]."</td>"."<td>".$row["Component_type"]."</td>"."<td>".$row["No_of_packs"]."</td>";
-	   echo "<td>
-				<form method='POST' action =' Fill_MLTUpdateForm.php'>
-                <input type=hidden name=Blood_bagID  value=".$row['Blood_bagID'].">
-                <button type=submit value=update name=update  class='f1'><img src=edit.png width=26 height=26></button>
-                </form>
-                
-                </td>";
+	  echo  "<tr>"."<td>".$row["Blood_bagID"]."</td>"."<td>".$row["Blood_group"]."</td>"."<td>".$row["Component_type"]."</td>"."<td>".$row["ExpiryDate"]."</td>";
+	  
 				 echo "</tr>";
 	 
-	   echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
+	   echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=7'>"."</td>"."</tr>";
 	  
 	}
 	
