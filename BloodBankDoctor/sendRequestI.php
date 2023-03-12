@@ -270,7 +270,7 @@ $resultx = $conn->query($vql);
 		
 		     
 <?php
-require 'conp.php';
+//Srequire 'conp.php';
 $date =date("Y/m/d");
 echo "
 
