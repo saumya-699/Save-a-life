@@ -55,19 +55,19 @@ if(isset($_POST["BtnSubmit"]))
 				 
 				 
 				  else if($_SESSION["Type"]   == '2'){
-                 header("Location:stockI.php");
+                 header("Location:MLT/Report.php");
 				  }
 				 else if($_SESSION["Type"]   == '3'){
-                 header("Location:stockI.php");}
+                 header("Location:ward_doctor/Make blood request.php");}
 			 
 			   else if($_SESSION["Type"]   == '4'){
-			   header("Location:");}
+			   header("Location:Nurse/add_medical.php");}
 			 
 			 else if($_SESSION["Type"]   == '5'){
 			 header("Location:Director/AddMLTI.php");}
 			 
 			 else {
-			 header("Location:stockI.php");}
+			 header("Location:donorhome.php");}
 			 
 			 
     }	 

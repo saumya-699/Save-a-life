@@ -24,7 +24,7 @@ if(isset($_POST['BtnSubmit']))
 	$password=$_POST["password"];
 	$m= $_SESSION["Name"];
 
-
+	
 	$query = "select * from director where UserName ='$m'";
 
 
@@ -86,15 +86,17 @@ if($result->num_rows>0)
 }	
 
 
-//insert the user into the database.
+   //insert the user into the database.
 $jql="insert into system_users(User_ID,UserName,Password,Type)VALUES('','$Uname','$password',4)";
+
+
 if($conn->query($jql))
 {
  
 	echo '<script type="text/javascript">';
 	echo 'alert("user successfully");';
 	
-	 echo 'window.location.href="AddNurseI.php";';
+	 echo 'window.location.href="AddMLTI.php";';
 	echo '</script>';
 
  
@@ -115,7 +117,8 @@ else
 
 	
 }
-    $sql="insert into system_users(Nurse_ID,Name_With_Initials,NIC,Hospital_ID,HospitalName,Position,DOB,SLMC_Number,Email,ContactNumber,Date_of_appoinment,UserName,Password,Remark,Director_ID)VALUES(' ','$Name','$NIC','$y','$HName','$position','$DOB','$SLMC','$Email','$contactNumber','$DOA','$Uname','md5($password)','Added','$x')";
+
+    $sql="insert into nurse(Nurse_ID,Name_With_Initials,NIC,Hospital_ID,HospitalName,Position,DOB,SLMC_Number,Email,ContactNumber,Date_of_appoinment,UserName,Password,Remark,Director_ID)VALUES(' ','$Name','$NIC','$y','$HName','$position','$DOB','$SLMC','$Email','$contactNumber','$DOA','$Uname','md5($password)','Added','$x')";
     if($conn->query($sql))
      {
       

@@ -226,6 +226,9 @@ session_start();
         <main class="content">
           <div>
             <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a></div>
+
+
+		
              <!--add your content from here-->
  <form method="post" action="SearchBB.php">
  
@@ -318,6 +321,12 @@ $query="select * from bloodbank_doctor where Name_With_Initials='$x'";
 				<form method='POST' action ='ViewInternalRequest.php'>
                 <input type=hidden name=Request_ID value=".$row["requeste_id"].">
                 <button type=submit name=NotAvailable  class='f1'><img src=eye.png width=43 height=37></button>
+                </form>  
+
+              
+                <form method='POST' action ='ViewAllInternal.php'>
+                <input type=hidden name=Request_ID value=".$row["requeste_id"].">
+                <button type=submit name=view  class='f1'><img src=eye.png width=43 height=67></button>
                 </form>   </td>" ;
 				 echo "</tr>";
 	 

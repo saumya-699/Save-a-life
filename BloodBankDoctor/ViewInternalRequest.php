@@ -172,9 +172,9 @@ $query="select * from bloodbank_doctor where Name_With_Initials='$x'";
                 <button type=submit  name=Available  class='f1'><img src=edit.png width=26 height=26></button>
                 </form> 
 				
-				<form method='POST' action ='ViewInternalRequest.php'>
+				<form method='POST' action ='ViewAllInternal.php'>
                 <input type=hidden name=Request_ID value=".$row["requeste_id"].">
-                <button type=submit name=NotAvailable  class='f1'><img src=eye.png width=43 height=37></button>
+                <button type=submit name=view  class='f1'><img src=eye.png width=43 height=67></button>
                 </form>   </td>" ;
 				 echo "</tr>";
 	 

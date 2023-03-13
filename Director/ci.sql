@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 12, 2023 at 03:40 AM
+-- Generation Time: Mar 13, 2023 at 06:39 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 7.4.27
 
@@ -84,7 +84,7 @@ INSERT INTO `blood_request` (`requeste_id`, `patient_name`, `date_of_birth`, `pa
 (8, 'Gautham Nandini', '1974-02-09', 49, 'Female', 'A+', 'Whole blood', 1, '2022-11-21', '2023-03-04', 'Kidney transplant ', '02', '', ' checked', 2, 7, 0),
 (9, 'Dilan Perera', '1968-07-20', 55, 'Male', 'B+', 'Whole blood', 1, '2023-03-12', '2023-03-12', 'surgery', '1', '', 'Pending', 4, 8, 0),
 (10, 'Vijay devarakonda', '1974-02-11', 49, 'Male', 'B+', 'Whole blood', 1, '2022-11-24', '2023-03-04', 'surgery', '05', '', ' checked', 2, 8, 0),
-(11, 'Darren Henry', '1989-02-01', 34, 'Male', 'B-', 'Whole blood', 1, '2022-12-05', '2023-03-05', 'surgery', '06', '', 'NotAvailable', 2, 8, 0),
+(11, 'Darren Henry', '1989-02-01', 34, 'Male', 'B-', 'Whole blood', 1, '2023-03-13', '2023-03-13', 'surgery', '06', '', 'NotAvailable', 5, 8, 0),
 (12, 'Rohini Aadhi', '1962-10-09', 60, 'Female', 'B+', 'Whole blood', 1, '2022-12-11', '2022-12-10', 'surgery', '05', '', 'Pending', 5, 8, 0),
 (13, 'Ravi shankar', '1988-10-01', 34, 'Male', 'O-', 'Whole blood', 1, '2023-03-04', '2023-03-04', 'surgery', '1', 'He have allergy', 'Pending', 2, 8, 0),
 (14, 'Rasan Dilikshana', '1982-04-09', 40, 'Male', 'B+', 'Whole blood', 2, '2022-12-13', '2022-12-10', 'surgery', '09', 'no', 'Pending', 5, 8, 0),
@@ -305,6 +305,13 @@ CREATE TABLE `nurse` (
   `Director_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `nurse`
+--
+
+INSERT INTO `nurse` (`Nurse_ID`, `Name_With_Initials`, `NIC`, `Hospital_ID`, `HospitalName`, `Position`, `DOB`, `SLMC_Number`, `Email`, `ContactNumber`, `Date_of_appoinment`, `UserName`, `Password`, `Remark`, `Director_ID`) VALUES
+(2, 'D.N.Ishini', '992314556', 9, 'Karapitiya Teaching Hospital', 'Head nurse', '2023-03-03', 'SLMC499', 'ishini3@gmail.com', '0762711567', '2023-03-13', 'ishini3@gmail.com', 'md5(Wv)y%z/dzT`-)', 'Added', 0);
+
 -- --------------------------------------------------------
 
 --
@@ -376,7 +383,7 @@ CREATE TABLE `stock` (
 --
 
 INSERT INTO `stock` (`Hospital_ID`, `Blood_bagID`, `Blood_group`, `Component_type`, `MLT_ID`, `ExpiryDate`) VALUES
-(2, 456, 'A+', 'Red', 1, '2022-02-18'),
+(5, 456, 'A+', 'Red', 1, '2022-02-18'),
 (5, 458, 'A+', 'Red', 2, '2022-10-05');
 
 -- --------------------------------------------------------
@@ -397,26 +404,15 @@ CREATE TABLE `system_users` (
 --
 
 INSERT INTO `system_users` (`User_ID`, `UserName`, `Password`, `Type`) VALUES
-(1, 'km@gmail.com', '#Rxu&ZkRDfN&_O', 1),
-(2, 'km@gmail.com', '2j@xXE.Uh', 2),
-(3, 'Tharuki98@gmail.com', '#xdc<`Yi', 3),
-(4, 'km@gmail.com', 'bQ4', 4),
 (5, 'sewmi@gmail.com', '89', 5),
-(6, 'Asiri8@gmail.com', 'v$|Wt9-9LL<u%[.', 2),
-(7, 'Tharuki98@gmail.com', 'J{D1~ 4i7#JZq^j', 2),
-(8, 'yu@gmail.com', '\"mLip]DC7}7eO{?', 2),
-(9, 'Asiri8@gmail.com', '+0DjTm%or', 2),
-(10, 'Asiri8@gmail.com', '/?AT-cQl|4ml', 2),
-(11, 'Asiri8@gmail.com', '7F;{(/dtkTQiw', 2),
-(12, 'Asiri8@gmail.com', 'S~$ml#', 2),
 (13, 'Hiruni3@gmail.com', ',Hos(],PM8m K_o-', 2),
 (14, 'Nayomi4@gmail.com', 'pF)@(q7K', 2),
-(15, 'Ishini5@gmail.com', 'C\"@jh>r[', 4),
-(16, 'devindya5@gmail.com', '1[4ir2v]?<', 4),
 (17, 'Dawe6@gmail.com', 'T&<:A_6Y,B$*:h[h', 3),
 (18, 'rashi8@gmail.com', '80osz&u;', 3),
 (19, 'kanishka5@gmail.com', 'cKj21Iu,,a', 1),
-(20, 'sandu6@gmail.com', 'okAxb(-0Z0{Z!5rf', 1);
+(20, 'sandu6@gmail.com', 'okAxb(-0Z0{Z!5rf', 1),
+(21, 'devindya3@gmail.com', 'u\"c.,q#SLq', 2),
+(25, 'ishini3@gmail.com', 'Wv)y%z/dzT`-', 4);
 
 -- --------------------------------------------------------
 
@@ -466,7 +462,6 @@ CREATE TABLE `warddoctor` (
 --
 
 INSERT INTO `warddoctor` (`WardDoctor_ID`, `Name_With_Initials`, `Hospital_ID`, `HospitalName`, `Specialization`, `SLMC_Number`, `Email`, `ContactNumber`, `UserName`, `Password`, `Remark`, `Director_ID`) VALUES
-(1, 'D.N.Thilakarathne', 5, 'Galle general hospital', 'General Surgery', 'SLMC670', 'Dawe6@gmail.com', '0762711600', 'Dawe6@gmail.com', 'T&<:A_6Y,B$*:h[h', 'Added', 7),
 (2, 'J.K.Rashini', 4, 'Richway arya hospital', 'Dermatology', 'SLMC680', 'rashi8@gmail.com', '0762711701', 'rashi8@gmail.com', '80osz&u;', 'Added', 7);
 
 --
@@ -619,7 +614,7 @@ ALTER TABLE `mlt`
 -- AUTO_INCREMENT for table `nurse`
 --
 ALTER TABLE `nurse`
-  MODIFY `Nurse_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Nurse_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `sent_request`
@@ -631,7 +626,7 @@ ALTER TABLE `sent_request`
 -- AUTO_INCREMENT for table `system_users`
 --
 ALTER TABLE `system_users`
-  MODIFY `User_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `User_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `transferdetails`

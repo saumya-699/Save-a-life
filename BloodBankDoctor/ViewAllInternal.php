@@ -6,44 +6,14 @@ session_start();
 
  <?php
    if(isset($_SESSION["ID"]))   {
-    require "conp.php";
-	  $m= $_SESSION["Name"];
-    $query = "select * from bloodbank_doctor where UserName ='$m'";
-    
-    
-           
-    $resultd = $conn->query($query);
-    
-    //echo "Error in ".$vql."<br>".$conn->error;
-    
-    if($resultd->num_rows>0)
-    
-    {        
-    
-    while($row = $resultd->fetch_assoc())
-    
-    {
-    
-    
-    
-    
-    $x= $row["BloodBank_doctor_ID"];
-    
-    
-    
-    
-    
-    }
-    
-    
-    }
-     			
+	
+	
 ?>
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
   <title>side bar- blood bank doctor</title>
-   <title>side bar- blood bank doctor</title>
+    <title>side bar- blood bank doctor</title>
  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
 <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
 <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./styleM.css">
@@ -227,102 +197,146 @@ session_start();
           <div>
             <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a></div>
              <!--add your content from here-->
-  <form method="post" action="searchNurse.php">
- 
-<div class="ta">
-
-
- <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
-                            <option value="MLT_ID"><b> MLT_ID</b></option>
-							   <option value="Name_With_Initials"><b>Name_With_Initials</b></option>
-						        <option value="HospitalName"><b> Hospital Name</b></option>
-							   <option value="SLMC_number"><b> SLMC_number</b></option>
-                             <option value="Email" selected><b>Email</b></option>
-		                    <option value="ContactNumber" selected><b> Contact number</b></option>
-						  <option value="Remark" selected><b>Remark</b></option>
-						  	  <option value="Director_ID" selected><b>Director_ID</b></option>
-							
-                             </select>
-
-
-<input type="text" placeholder="type here" name="data" id="data" class="box">
-
- <button type="submit"  name="BtnSubmit" id="search" class="b1" ><b>Search</b></button>
-</div>
-
-
-</form>
-<?php
+          
+		  
+		  	  
+             <div class="container-shadow">
+  </div>
+  <div class="container">
+    <div class="wrap">
+     
+   <div class="headings">
+       <span><h1>Blood request</h1></span>
+      
+      </div>
+		
+		
+ <?php
 
 
 require 'conp.php';
-   $today =date("Y-m-d"); 
-$vql ="select * from bloodbank_doctor where BloodBank_doctor_ID ='$x'";
-$resultx = $conn->query($vql);
+if(isset($_POST['view']))  
 
- while($row = $resultx->fetch_assoc())
+{	
+   $did=$_POST['Request_ID'];
+   $query="select * from blood_request where requeste_id='$did'";
+   $result= $conn->query($query);
+   
+  if($result->num_rows>0)
+
+  {     
+   
+
+       
+    while($row = $result->fetch_assoc())
    
    {     
      
-	 $ty=$row["Hospital_ID"];
-	  
-	  
-	}
-	
-	
-
- //echo $row["Hospital_ID"];
-
-	
-$sql= "select * from stock where Hospital_ID='$ty' and ExpiryDate <'$today'";
-$result = $conn->query($sql);
-
-if($result->num_rows>0)
-
-{     
-   
-
+	 // echo   $row["WardDoctor_ID"]."</td>"."<td>".$row["Name_With_Initials"]."</td>"."<td>".$row["HospitalName"]."</td>"."<td>".$row["Specialization"]."</td>"."<td>".$row["SLMC_Number"]."</td>"."<td>".$row["Email"]."</td>"."<td>".$row["ContactNumber"]."</td>";
 	   
-	 //  echo  "<div class='tab'>";
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Blood_bagID"."</th>"."<th style='text-align:center;width:120px;'>"."Blood_group"."</th>"."<th>"."Component_type"."</th>"."<th>"."Expiry date"."</th>"."</tr>";
-      echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
-     while($row = $result->fetch_assoc())
-   
-   {     
-     
-	  echo  "<tr>"."<td>".$row["Blood_bagID"]."</td>"."<td>".$row["Blood_group"]."</td>"."<td>".$row["Component_type"]."</td>"."<td>".$row["ExpiryDate"]."</td>";
-	 
-				 echo "</tr>";
-	 
-	   echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
-	  
+	   
+echo "
+
+     <form action='ViewAllInternal.php' method='POST'>
+	                <input type='hidden' value=".$row["requeste_id"]." name='requeste_id' id='requeste_id' class='box'>
+
+                                <label >Patient Name</label>
+                                <input type='text'  value=".$row["patient_name"]." name='patient_name'>
+
+                                
+                                <label name='date_Of_birth'>Patient's Date of birth (MM/DD/YYYY)</label>
+								 <input type='text'  name=".$row["date_of_birth"].">
+                               
+                                
+                                
+                                <label>Patient Gender</label>
+                                <select name='patient_gender'>
+                               <option value=".$row["patient_age"].">  </option>
+                             
+               
+                            </select>
+                            
+                             
+                            <label>Blood Group</label>
+                                <select name='blood_group'>
+                               <option value=".$row["blood_group"]."> Select group </option>
+                                
+                            </select>
+
+                            <label >Required Blood Component</label>
+                                <select name='blood_component'>
+                              
+                                <option value=".$row["blood_component"].">Red cell</option>
+	                            
+                            </select>
+
+                            <label>Required Amount (packets)</label>
+                                <select name='required_amount'>
+                               <option value=".$row["required_amount"]." > </option>
+                              
+                            </select>
+
+                                
+                            <label name='expected_date'>Expected date to receive (MM/DD/YYYY)</label>
+                              	<input type='text'  name=".$row["date_of_birth"].">
+                               
+
+							   <label name='reason'>Reason for the request</label>
+								 <input type='text'  name='patient_name' value=".$row["reason"].">
+                                
+                                <label>Ward number</label>
+                                <select name='ward_number'>
+                                <option value=".$row["ward_number"].">  </option>
+                               
+                            </select>
+
+                            <label name='remark'>Remark</label>
+                             <input type='text'  name='patient_name' value=".$row["remark"].">
+
+                                <br><br>
+                                    <button class='b1'name='submit' value='submit'>Request</button> &nbsp; &nbsp; &nbsp; &nbsp;
+      &nbsp; &nbsp; &nbsp; &nbsp;  <button class='b2' name='cancel' value='cancel'><a href='Make blood request.php'>Cancel</a></button>
+                             
+                            </form>
+
+ ";
+  
+  
+	   
+		 
+			 
 	}
 	
-	 echo "</font>";
-	 echo  "</font>";   
-	 echo "</table>";
-	// echo "</div>";
+	
 	
 	
 }	
 
-else
+ else
 
-{
-  //echo "Error in ".$sql."<br>".$conn->error;
+ {
+  //echo "Error in ".$query."<br>".$conn->error;
 
-// echo "no results";
+ echo "no results";
+
+ }
 
 }
-//echo "Error in ".$vql."<br>".$conn->error;
+
 $conn->close();
 ?>
+
+
+<!--<button type="submit" name="data" id="data" class="bx"><a href="RemoveOrUpdateBB.php"><font color="white"><font size="3">Back</font></font></a></button>-->
+
 
 
 
 
           
-        </main>
+        </main>   </div>
+    </div>
+
      
 <!-- partial -->
   <script src='https://unpkg.com/@popperjs/core@2'></script><script  src="./script.js"></script>
