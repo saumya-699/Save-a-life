@@ -206,7 +206,7 @@ session_start();
     <div class="wrap">
      
    <div class="headings">
-       <span><h1>Blood request</h1></span>
+       <span><h1><center>Blood request</center></h1></span>
       
       </div>
 		
@@ -245,13 +245,13 @@ echo "
 
                                 
                                 <label name='date_Of_birth'>Patient's Date of birth (MM/DD/YYYY)</label>
-								 <input type='text'  name=".$row["date_of_birth"].">
+								 <input type='text'  value=".$row["date_of_birth"].">
                                
                                 
                                 
                                 <label>Patient Gender</label>
                                 <select name='patient_gender'>
-                               <option value=".$row["patient_age"].">  </option>
+                               <option value=".$row["patient_age"]."> ".$row["patient_age"]." </option>
                              
                
                             </select>
@@ -259,26 +259,26 @@ echo "
                              
                             <label>Blood Group</label>
                                 <select name='blood_group'>
-                               <option value=".$row["blood_group"]."> Select group </option>
+                               <option value=".$row["blood_group"]."> ". $row["blood_group"] ."  </option>
                                 
                             </select>
 
                             <label >Required Blood Component</label>
                                 <select name='blood_component'>
                               
-                                <option value=".$row["blood_component"].">Red cell</option>
+                                <option value=".$row["blood_component"].">". $row["blood_component"] ." </option>
 	                            
                             </select>
 
                             <label>Required Amount (packets)</label>
                                 <select name='required_amount'>
-                               <option value=".$row["required_amount"]." > </option>
+                               <option value=".$row["required_amount"]." >". $row["required_amount"] ." </option>
                               
                             </select>
 
                                 
                             <label name='expected_date'>Expected date to receive (MM/DD/YYYY)</label>
-                              	<input type='text'  name=".$row["date_of_birth"].">
+                              	<input type='text'  value=".$row["date_of_birth"].">
                                
 
 							   <label name='reason'>Reason for the request</label>
@@ -286,7 +286,7 @@ echo "
                                 
                                 <label>Ward number</label>
                                 <select name='ward_number'>
-                                <option value=".$row["ward_number"].">  </option>
+                                <option value=".$row["ward_number"].">  " . $row["ward_number"] . " </option>
                                
                             </select>
 
@@ -294,9 +294,11 @@ echo "
                              <input type='text'  name='patient_name' value=".$row["remark"].">
 
                                 <br><br>
-                                    <button class='b1'name='submit' value='submit'>Request</button> &nbsp; &nbsp; &nbsp; &nbsp;
-      &nbsp; &nbsp; &nbsp; &nbsp;  <button class='b2' name='cancel' value='cancel'><a href='Make blood request.php'>Cancel</a></button>
-                             
+                                <div class='row btn-buttons'>
+                          
+                           
+                                <div class='col btn-but'> <input type='submit' name='btnCancel' value='Cancel' class='b2'></div>
+                               </div>
                             </form>
 
  ";

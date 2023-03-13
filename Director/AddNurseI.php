@@ -272,7 +272,7 @@ echo "
 							 
 							 
 					    <label for='exampleFormControlInput1' class='form-label lbl star'>NIC Number</label>
-                        <input type='text' placeholder='Enter the NIC number' name='NIC' id='NIC' class='form-control txt-input'  onchange='myFunction1()' required>";
+                        <input type='text' placeholder='Enter the NIC number' name='NIC' id='NIC' class='form-control txt-input'  onchange='myFunction1()' pattern='[0-9]{9}[vVxX]' required title='Please enter a valid Sri Lankan NIC number (9 digits followed by a 'v', 'V', 'x', or 'X' character)''>";
 							
 
 ?>
@@ -344,7 +344,7 @@ echo "
                              
 					
                            <label for='exampleFormControlInput1' class='form-label lbl star'>Email</label>
-                             <input type='email' placeholder='Enter the Email' name='Email' class='form-control txt-input' id='Email' onchange='myFunction()' required>
+                             <input type='email' placeholder='Enter the Email' name='Email' class='form-control txt-input' id='Email' onchange='myFunction()' required title="Please enter a valid email address in the format of example@domain.com">
         
                              
                            <label for='exampleFormControlInput1' class='form-label lbl star'>Contact Number</label>
