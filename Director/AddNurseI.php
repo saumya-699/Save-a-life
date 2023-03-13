@@ -344,7 +344,7 @@ echo "
                              
 					
                            <label for='exampleFormControlInput1' class='form-label lbl star'>Email</label>
-                             <input type='email' placeholder='Enter the Email' name='Email' class='form-control txt-input' id='Email' onchange='myFunction()' required title="Please enter a valid email address in the format of example@domain.com">
+                             <input type='email' placeholder='Enter the Email' name='Email' class='form-control txt-input' id='Email' onchange='myFunction()' required title='Please enter a valid email address in the format of example@domain.com'>
         
                              
                            <label for='exampleFormControlInput1' class='form-label lbl star'>Contact Number</label>

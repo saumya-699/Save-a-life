@@ -65,22 +65,22 @@ $resultx = $conn->query($vql);
 ?>
 <html lang="en" >
 <head>
-  <meta charset="UTF-8">
-  <title>side bar-director</title>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
+<title>side bar- blood bank doctor</title>
+    <title>side bar- blood bank doctor</title>
+ <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
 <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
 <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./styleM.css">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./sendStyle.css">
-
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
+ <link rel="stylesheet" href="StyleSearch.css"> 
 
 </head>
 <body>
 <!-- partial:index.partial.html -->
 <div class="layout has-sidebar fixed-sidebar fixed-header">
-    <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
+      <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
         <a id="btn-collapse" class="sidebar-collapser"><i class="ri-arrow-left-s-line"></i></a>
         
         <div class="sidebar-layout">
@@ -248,9 +248,8 @@ $resultx = $conn->query($vql);
       <div class="layout">
         <main class="content">
           <div>
-            <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
-          
-          </div>
+            <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a></div>
+             <!--add your content from here-->
           
           
 		  
@@ -263,7 +262,7 @@ $resultx = $conn->query($vql);
     <div class="wrap">
      
    <div class="headings">
-        <center><span><h1>External request for <br>components</h1></span><center>
+       <span><h1>External request for <br>components</h1></span>
       
       </div>
 		
