@@ -1,0 +1,22 @@
+
+	#btn{
+		border:none;
+		background-color: transparent;
+		cursor:pointer;
+	}
+		.x{
+
+      margin-top:20px; 
+      font-size: 17px;  
+      font-size: 21px;
+      margin-right:30px;
+
+    }
+    
+    .y{
+
+           margin-left:50px;
+           margin-top:-40px;
+           font-size: 22px;
+
+    }
