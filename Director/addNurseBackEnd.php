@@ -24,10 +24,25 @@ if(isset($_POST['BtnSubmit']))
 	$password=$_POST["password"];
 	$m= $_SESSION["Name"];
 
-	 $check1= "select * from director where Email ='$Email'";
+	 $check1= "select * from system_users where UserName ='$Email'";
+	 $resultc1 = $conn->query($check1);
+	 if(!empty($resultc1) && $resultc1->num_rows>0)
+
+	 {
+
+
+		echo '<script type="text/javascript">';
+		echo 'alert("Email already exists");';
+		
+		 echo 'window.location.href="addNurseI.php";';
+		echo '</script>';
+
+
+
+	 }
 
     
-     $resultc1 = $conn->query($check1);
+    /* $resultc1 = $conn->query($check1);
      
 	  
   if(!empty($resultc1) && $resultc1->num_rows>0)
@@ -101,7 +116,7 @@ if(isset($_POST['BtnSubmit']))
 	 echo 'window.location.href="addNurseI.php";';
 	echo '</script>';
 
-			 }
+			 }*/
 			
 			   else
 			   {
@@ -238,15 +253,9 @@ else
 		  
 			   }  
 			
-			} 
+			}  
 		
-		} 
 	
-	}
-
-
-
-   }
  
 
 
@@ -261,7 +270,7 @@ else
  
  
 	
-}
+
  
 $conn->close();
 
