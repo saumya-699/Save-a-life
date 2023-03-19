@@ -64,7 +64,7 @@ if(isset($_POST["BtnSubmit"]))
 			   header("Location:Nurse/add_medical.php");}
 			 
 			 else if($_SESSION["Type"]   == '5'){
-			 header("Location:Director/AddMLTI.php");}
+			 header("Location:Director/Home.php");}
 			 
 			 else {
 			 header("Location:donorhome.php");}

@@ -20,7 +20,7 @@ a {
   left: 50%;
   margin-left: -262.5px;
   margin-top: 60px;
-  box-shadow: 0px 30px 50px -20px #000;
+  box-shadow: 0px 30px 50px -20px #0e771c;
 }
 
 .container {
@@ -32,11 +32,16 @@ a {
   margin-top: 60px;
 /*   background: url('https://bit.ly/2kBRtBE'); */
 /*   background: #673AB7; */
-background-color:#0c1e35;
+/*background-color:#E0F1FF;*/
+background-color:#B2C0E0;
+
+
 /*background-image: linear-gradient(315deg, #ffffff 0%, #85C1E9 50%);*/
 
   box-shadow: 0px 0px 50px -20px #000;
 }
+
+
 
 .wrap {
   position: relative;
@@ -77,27 +82,28 @@ background-color:#0c1e35;
 }
 
 label {
-  color: rgba(255, 255, 255, 0.8);
+  color: #0c1e35;
   text-transform: uppercase;
   padding: 13px 20px;
   position: relative;
   display: block;
   font-size: 14px;
+  
 }
 
 input {
   width: 100%;
-  color: #fff;
+  color:black;
   font-weight: 700;
   font-size: 14px;
   letter-spacing: 1px;
-  background: rgba(255, 255, 255, 0.1);
+  background-color:white;
   padding: 10px 20px;
   border: none;
   border-radius: 20px;
   outline: none;
   box-sizing: border-box;
-  border: 2px solid rgba(255, 255, 255, 0);
+  border-color:#0c1e35;
   margin-bottom: 10px;
 }
 
@@ -145,18 +151,18 @@ input {
 
 select {
   width: 100%;
- color: #fff;
+  background-color:white;;
    
   font-weight: 700;
   font-size: 14px;
   letter-spacing: 1px;
-  background: rgba(255, 255, 255, 0.1);
+ 
   padding: 10px 20px;
   border: none;
   border-radius: 20px;
   outline: none;
   box-sizing: border-box;
-  border: 2px solid rgba(255, 255, 255, 0);
+  border-color:#0c1e35;
   margin-bottom: 10px;
   
 }
@@ -164,6 +170,7 @@ select {
 select option{
 	
 	background:#4082f5;
+  color:#0c1e35;
 	
 }
 
@@ -177,7 +184,7 @@ input:focus {
 }
 
 #password + i {
-  color: rgba(255, 255, 255, 0.7);
+  color:#0c1e35;
   font-size: 25px;
   float: right;
   position: relative;

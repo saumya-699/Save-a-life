@@ -255,7 +255,7 @@ if($result->num_rows>0)
 {     
    
 
-          //echo "<font color=red>";
+     //echo "<font color=red>";
 	      //echo "<font size=6>";
 	   
 	  // echo  "<div class='tab'>";
