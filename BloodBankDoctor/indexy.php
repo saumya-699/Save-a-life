@@ -1,148 +1,32 @@
-
 <?php 
 session_start();
 
 ?>
 
-<?php
 
-require 'conp.php';            //make connection here
-if(isset($_POST['BtnSubmit']))
-{
-  //here getting result from the post array after submitting the form.
-    $Name=$_POST["Name"];
-    $HName=$_POST["hospital"];
-	$SLMC=$_POST["SLMC"];
-	$Email=$_POST["Email"];
-	$contactNumber=$_POST["contactNumber"];
-	$Uname=$_POST["Uname"];
-	$password=$_POST["password"];
-	$m= $_SESSION["Name"];
-
-
-	$query = "select * from director where UserName ='$m'";
-
-
-   		
-		$resultd = $conn->query($query);
-		
-		//echo "Error in ".$vql."<br>".$conn->error;
-
-if($resultd->num_rows>0)
-
-{        
-  
- while($row = $resultd->fetch_assoc())
- 
- {
-	  
-
-
-   
-	 $x= $row["Director_ID"];
-   
-  
-  
-
-	
-  }
-  
-	
-}	
-
-
-     			
-		$vql="select *from hospital where HospitalName='$HName'";	
-		
-		$result = $conn->query($vql);
-		
-		  //echo "Error in ".$vql."<br>".$conn->error;
-
-if($result->num_rows>0)
-
-{        
-    
-   while($row = $result->fetch_assoc())
-   
-   {
-	    
-
-
-	 
-       $y= $row["Hospital_ID"];
-	 
+ <?php
+   if(isset($_SESSION["ID"]))   {
 	
 	
-
-	  
-	}
-	
-      
-}	
-
-$Type=2;
-//insert the user into the database.
-$jql="insert into system_users(User_ID,UserName,Password,Type)VALUES('','$Uname','$password',2)";
-
-
-if($conn->query($jql))
-{
- 
-	echo '<script type="text/javascript">';
-	//echo 'alert("user successfully");';
-	
-	// echo 'window.location.href="AddMLTI.php";';
-	echo '</script>';
-
- 
- 
- 
-}
-else
-{
-	
-	  
-	echo '<script type="text/javascript">';
-	  echo "Error in ".$jql."<br>".$conn->error;
-   
-	echo 'alert("Error in entering try again!");';
-
-	echo '</script>';
-	 
-
-	
-}
-
-    $sql="insert into MLT(MLT_ID,Name_With_Initials,Hospital_ID,HospitalName,SLMC_Number,Email,ContactNumber,UserName,Password,Remark,Director_ID)VALUES(' ','$Name','$y','$HName','$SLMC','$Email','$contactNumber','$Uname','$password','Added','$x')";
-    if($conn->query($sql))
-     {
-      
-	     echo '<script type="text/javascript">';
-		// echo 'alert("Added successfully");';
-         
-	      //echo 'window.location.href="AddMLTI.php";';
-		 echo '</script>';
-
-	?>  
-	
-
-
-
+?>
 <html lang="en" >
 <head>
-<title>side bar- blood bank doctor</title>
+  <meta charset="UTF-8">
+  <title>side bar- blood bank doctor</title>
     <title>side bar- blood bank doctor</title>
  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
 <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
-<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./styleM.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="styleM.css">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="stylek.css">
+<script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
  <link rel="stylesheet" href="StyleSearch.css"> 
 
 </head>
 <body>
+<!-- partial:index.partial.html -->
 <div class="layout has-sidebar fixed-sidebar fixed-header">
       <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
         <a id="btn-collapse" class="sidebar-collapser"><i class="ri-arrow-left-s-line"></i></a>
@@ -317,136 +201,180 @@ else
           
 		  
 		 
-          
-          
-		  
-		  
-		  
-		  
-	 <div class="container-shadow">
-  </div>
-  <div class="container">
-    <div class="wrap">
-     
-   <div class="headings">
-       <span><h1>Email</h1></span>
-      
-      </div>
 		
-		<style>
-textarea {
-  width: 100%;
+      <?php
  
-  padding: 12px 20px;
-  box-sizing: border-box;
-  border: 2px solid #ccc;
-  border-radius: 12px;
-  background-color: #f8f8f8;
-  font-size: 16px;
-  resize: none;
-}	
-		</style>
-		     
-<?php
-//Srequire 'conp.php';
-$date =date("Y/m/d");
-echo "
-
+ echo "<form action='indexy.php' method='POST'><button name='send'>send </button></form>";
+ require 'conp.php';
+ if(isset($_POST['send']))  
+ 
+ {	
+ 
+ 
+     $m= $_SESSION["Name"];
+     $queryx = "select * from bloodbank_doctor where UserName ='$m'";
+     
+     
+            
+     $resultd = $conn->query($queryx);
+     
+     //echo "Error in ".$vql."<br>".$conn->error;
+     
+     if($resultd->num_rows>0)
+     
+     {        
+     
+     while($row = $resultd->fetch_assoc())
+     
+     {
+     
+     
+     
+     
+     $x= $row["BloodBank_doctor_ID"];
+     
+     
+     
+     
+     
+     }
+     
+     
+     } 
+    $query="select * from blood_testing_result,donors where donors.Donor_Id =blood_testing_result.Donor_Id and (BloodBank_doctor_ID='$x' and (malaria_result='positive' or hiv_result='positive' or hbv_result='positive' or hcv_result='positive' or vdrl_result='positive'))"; //where BloodBank_doctor_ID='$x' and malaria_result='positive' or hiv_result='positive' or hbv_result='positive' or hbv_result='positive' or hbv_result='positive'
+    $result= $conn->query($query);
     
-     <form method='post' action='index.php' id='FormName'>
+   if($result->num_rows>0)
+ 
+   {     
+    
+    echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Email"."</th>"."<th>"."Full Name"."</th>"."<th>"."Identified desease"."</th>"."<th>"."Action"."</th>"."</tr>";
+    echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=5'>"."</td>"."</tr>";
         
-                            ";
-						   
-                              
-                              
-                             
-
-?>
-	
-
-	
-	
-	
+     while($row = $result->fetch_assoc())
     
+    {     
+      
+       echo   "<tr>"."<td>".$row["Email"]."</td>"."<td>".$row["Full_Name"]."</td>"
+  ;
+       
+       
+       
+       if($row["malaria_result"]=='positive')
+       {
+   echo  "<td>"."Malaria"."</td>";
+           
+       }
+
+      else if($row["hiv_result"]=='positive')
+       {
+   echo  "HIV";
+       }
     
+       else if($row["hbv_result"]=='positive')
+       {
+   echo  "<td>"."Hbv"."<td>";
+       }
+     
+       else if($row["hcv_result"]=='positive')
+       {
+   echo  "<td>"."HCV"."<td>";
+       }
+       else if($row["vdrl_result"]=='positive')
+       {
+   echo  "VDRL";
+       }
+       
+       
+       echo "</td>"."<td>".
+       
+       
+       "<form method='POST' action ='index.php'>
+                <input type=hidden name=Request_ID value=".$row["Donor_Id"].">
+                <input type='hidden' name='email' value=".$row["Email"]."><br>
+                  <input type='hidden' name='subject' value='Desease diagnosis'><br>";
+
+                  if($row["malaria_result"]='positive')
+                  {
+              echo  "<input type='hidden' name='message' value='Hello you have been recognized with malaria disease.Please take care of ur health. '><br>";
+                      
+                  }
+
+                 else if($row["hiv_result"]='positive')
+                  {
+              echo  "<input type='hidden' name='message' value='Hello you have been recognized with xdisease.Please take care of ur health. '><br>";
+                  }
+               
+                  else if($row["hbv_result"]='positive')
+                  {
+              echo  "<input type='hidden' name='message' value='Hello you have been recognized with tdisease.Please take care of ur health. '><br>";
+                  }
+                
+                  else if($row["hcv_result"]='positive')
+                  {
+              echo  "<input type='hidden' name='message' value='Hello you have been recognized with ydisease.Please take care of ur health. '><br>";
+                  }
+                  else if($row["vdrl_result"]='positive')
+                  {
+              echo  "<input type='hidden' name='message' value='Hello you have been recognized with idisease.Please take care of ur health. '><br>";
+                  }
+
+
+               echo "<button type=submit name=send  id=btn class=u><i class='fa-solid fa-envelope-circle-check'></i></button>
+                </form> "."</td>"."</tr>";
+        
+        
+     echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=5'>"."</td>"."</tr>";
+              
+     }
+     
+     
+    echo "</font>";
+	 echo  "</font>";   
+	 echo "</table>";  
+     
+ }	
+ 
+  else
+ 
+  {
+   echo "Error in ".$query."<br>".$conn->error;
+ 
+  //echo "no results";
+ 
+  }
+ 
+ }
+ 
+ $conn->close();
+ ?>
+
+<!--<button type="submit" name="data" id="data" class="bx"><a href="RemoveOrUpdateBB.php"><font color="white"><font size="3">Back</font></font></a></button>-->
+
+
+
 
 
           
-  <?php                  
-          
-          echo "      <label for='exampleFormControlInput1' class='form-label lbl star'>Email</label>
-		  <input type='text'  name='email' value='$Email'> 
-		  <label for='exampleFormControlInput1' class='form-label lbl star'>Subject</label>
-                      <input type='text'  name='subject' value='Regarding Appoinment'> 
-					  
-
-                     <label for='exampleFormControlInput1' class='form-label lbl star'>Message</label>
-                             <textarea rows = '10' cols = '60' name='message'>
-            Hello $Name   We are pleased to inform that you have been appointed to the system and your user name is $Uname and your password is $password.Please change the user name and password once you get the e mail 
-
-                          
-         </textarea> 
-                          
-                    <br><br>    
-                        <div class='col btn-but'> <input type='submit' name='BtnSubmit' value='Send' class='b1'></div>
-                        <div class='col btn-but'> <input type='submit' name='btnCancel' value='Cancel' class='b2'></div>
-                   
-					
-  </form> 
-  ";
-
-
-?>
-
-		                                                                    
-		
-		
-		
-		
-		
-		
-		
-		  
-        </main>
-      </div>
+        </main>   </div>
     </div>
+
+     
 <!-- partial -->
   <script src='https://unpkg.com/@popperjs/core@2'></script><script  src="./script.js"></script>
 
 </body>
 </html>
-
-
-
-
-
-
-<?php
-	  
-     }
-     else
-	 {
-		 
-		   
-		 echo '<script type="text/javascript">';
-		   echo "Error in ".$sql."<br>".$conn->error;
-		
-		 echo 'alert("Error in entering try again!");';
-     
-		 echo '</script>';
-		  
- 
-		 
-	 }
-	 
- 
- //  echo "Error in ".$sql."<br>".$conn->error;
- 
- 
+	<?php
 	
 }
+ else 
+	 
+	 {echo '<script type="text/javascript">';
+		 echo 'alert("Please log in first");';
+         
+		echo 'window.location.href="userloginFront.php";';
+  echo '</script>';
+	 }
  
-$conn->close();
-
 ?>
-
