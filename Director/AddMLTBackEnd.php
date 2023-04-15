@@ -138,26 +138,28 @@ else
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./styleEmail.css">
  <link rel="stylesheet" href="StyleSearch.css"> 
 
 </head>
 <body>
+
+		  
+		  
 <div class="layout has-sidebar fixed-sidebar fixed-header">
-      <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
+        <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
         <a id="btn-collapse" class="sidebar-collapser"><i class="ri-arrow-left-s-line"></i></a>
-        
         <div class="sidebar-layout">
           <div class="sidebar-header">
             <div class="pro-sidebar-logo">
               <div><img src="logo.png" alt="logo"></div>
-              <h5>Save A Life</h5>
+              <h5>Save a Life</h5>
             </div>
           </div>
           <div class="sidebar-content">
             <nav class="menu open-current-submenu">
               <ul>
-                <li class="menu-header"><span>  </span></li>
+                <li class="menu-header"></li>
                 <li class="menu-item">
                   <a href="#">
                     <span class="menu-icon">
@@ -165,43 +167,91 @@ else
                     </span>
                     <span class="menu-title">Home</span>
                   </a>
-                  </li>
+                 </li>
                 <li class="menu-item sub-menu">
                   <a href="#">
                     <span class="menu-icon">
-                      <i class="ri-hospital-line"></i>
+                      <i class="ri-user-add-fill"></i>
                     </span>
-                    <span class="menu-title">Blood Stock</span>
+                    <span class="menu-title">Employee</span>
                   </a>
                   <div class="sub-menu-list">
                     <ul>
-                      <li class="menu-item">
-                        <a href="stockI.php">
-                          <span class="menu-title">Stock Info</span>
+                       <li class="menu-item sub-menu">
+                        <a href="#">
+                          <span class="menu-title">Blood Bank Doctor</span>
                         </a>
+                        <div class="sub-menu-list">
+                          <ul>
+                            <li class="menu-item">
+                              <a href="Add_bbI.php">
+                                <span class="menu-title">Add</span>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a href="RemoveOrUpdateBBI.php">
+                                <span class="menu-title">Remove/Update</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
                       </li>
-                      <li class="menu-item">
-                        <a href="checkInternalStockI.php">
-                          <span class="menu-title">Internal Stock Availability</span>
+                      <li class="menu-item sub-menu">
+                        <a href="#">
+                          <span class="menu-title">MLT</span>
                         </a>
+                        <div class="sub-menu-list">
+                          <ul>
+                            <li class="menu-item">
+                              <a href="AddMLTI.php">
+                                <span class="menu-title">Add</span>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a href="RemoveOrUpdateMLTI.php">
+                                <span class="menu-title">Remove/Update</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
                       </li>
-                      <li class="menu-item">
-                        <a href="checkExternalStockI.php">
-                          <span class="menu-title">External Stock Availability</span>
+                      <li class="menu-item sub-menu">
+                        <a href="#">
+                          <span class="menu-title">Ward Doctor</span>
                         </a>
+                        <div class="sub-menu-list">
+                          <ul>
+                            <li class="menu-item">
+                              <a href="AddWardDoctorI.php">
+                                <span class="menu-title">Add</span>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a href="RemoveOrUpdateWardDoctorI.php">
+                                <span class="menu-title">Remove/Update</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
                       </li>
-					  
-					    <li class="menu-item">
-                        <a href="LessStockComponentsI.php">
-                          <span class="menu-title">Low stock blood components</span>
+                      <li class="menu-item sub-menu">
+                        <a href="#">
+                          <span class="menu-title">Nurse</span>
                         </a>
-                      </li>
-	
-					  
-					     <li class="menu-item">
-                        <a href="ExpiredComponentsI.php">
-                          <span class="menu-title">Blood expiry Information</span>
-                        </a>
+                        <div class="sub-menu-list">
+                          <ul>
+                            <li class="menu-item">
+                              <a href="AddNurseI.php">
+                                <span class="menu-title">Add</span>
+                              </a>
+                            </li>
+                            <li class="menu-item">
+                              <a href="RemoveOrUpdateNurseI.php">
+                                <span class="menu-title">Remove/Update</span>
+                              </a>
+                            </li>
+                          </ul>
+                        </div>
                       </li>
                     </ul>
                   </div>
@@ -209,76 +259,50 @@ else
                 <li class="menu-item sub-menu">
                   <a href="#">
                     <span class="menu-icon">
-                      <i class="ri-message-2-fill"></i>
+                      <i class="ri-hospital-fill"></i>
                     </span>
-                    <span class="menu-title">Request</span>
+                    <span class="menu-title">Hospital</span>
                   </a>
                   <div class="sub-menu-list">
                     <ul>
                       <li class="menu-item">
-                        <a href="ViewInternalRequestI.php">
-                          <span class="menu-title">Check Internal Requests</span>
+                        <a href="AddHospitalI.php">
+                          <span class="menu-title">Add</span>
                         </a>
                       </li>
                       <li class="menu-item">
-                        <a href="checkExternalRequestI.php">
-                          <span class="menu-title">Check External Requests</span>
+                        <a href="DeactivateOrUpdateHospitalI.php">
+                          <span class="menu-title">Update/Deactivte</span>
                         </a>
                       </li>
                       <li class="menu-item">
-                        <a href="sendRequestI.php">
-                          <span class="menu-title">Send requests</span>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a href="sentRequestHistoryI.php">
-                          <span class="menu-title">Send Request History</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-                <li class="menu-item sub-menu">
-                  <a href="#">
-                    <span class="menu-icon">
-                      <i class="ri-article-fill"></i>
-                    </span>
-                    <span class="menu-title">Test Results</span>
-                  </a>
-                  <div class="sub-menu-list">
-                    <ul>
-                      <li class="menu-item">
-                        <a href="BloodREsultsI.php">
-                          <span class="menu-title">Blood Test</span>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a href="CheckCrossMatchingResultsI.php">
-                          <span class="menu-title">Cross Matching</span>
+                        <a href="DeactivationInfoI.php">
+                          <span class="menu-title">Deactivation Info</span>
                         </a>
                       </li>
                     </ul>
                   </div>
                 </li>
                 <li class="menu-item">
-                  <a href="View_Donors_BI.php">
+                  <a href="ViewDonorsDI.php">
                     <span class="menu-icon">
                       <i class="ri-user-heart-fill"></i>
                     </span>
                     <span class="menu-title">Donors</span>
                   </a>
-                 </li>
+                </li>
                 <li class="menu-item">
-                  <a href="ReportGeneration_BI.php">
+                  <a href="ReportDI.php">
                     <span class="menu-icon">
                       <i class="ri-file-chart-line"></i>
                     </span>
                     <span class="menu-title">Reports</span>
                   </a>
                  </li>
-                <li class="menu-header" style="padding-top: 40px"><span>  </span></li>
+                
+                <li class="menu-header" style="padding-top: 40px"><span> </span></li>
                 <li class="menu-item">
-                  <a href="profileBI.php">
+                  <a href="profileDI.php">
                     <span class="menu-icon">
                       <i class="ri-user-line"></i>
                     </span>
@@ -302,7 +326,6 @@ else
                     <span class="menu-title">Log Out</span>
                   </a>
                 </li>
-
               </ul>
             </nav>
           </div>
@@ -312,16 +335,11 @@ else
       <div class="layout">
         <main class="content">
           <div>
-            <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a></div>
-             <!--add your content from here-->
+            <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
           
-		  
-		 
+          </div>
           
           
-		  
-		  
-		  
 		  
 	 <div class="container-shadow">
   </div>
@@ -353,7 +371,7 @@ $date =date("Y/m/d");
 echo "
 
     
-     <form method='post' action='index.php' id='FormName'>
+     <form method='post' action='indexs.php' id='FormName'>
         
                             ";
 						   
@@ -387,7 +405,7 @@ echo "
                           
          </textarea> 
                           
-                    <br><br>    
+                    <br><br><br>    
                         <div class='col btn-but'> <input type='submit' name='BtnSubmit' value='Send' class='b1'></div>
                         <div class='col btn-but'> <input type='submit' name='btnCancel' value='Cancel' class='b2'></div>
                    

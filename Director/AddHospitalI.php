@@ -243,7 +243,7 @@ session_start();
 							 
 							   
 							 <label for="exampleFormControlInput1" class="form-label lbl star"> Type </label>
-                             <select name="district" class="form-control txt-input" required>
+                             <select name="Type" class="form-control txt-input" required>
 							   <option value="Not Provided"> None</option>
                              <option value="general">District General</option>
                              
@@ -256,7 +256,7 @@ session_start();
 
 							 
 					     <label for="exampleFormControlInput1" class="form-label lbl star">District </label>
-                          <select name="Type" class="form-control txt-input" required>
+                          <select name="district" class="form-control txt-input" required>
 						    <option value="Not Provided"> None</option>
                         <option value="Matara">Matara</option>
 						 	 <option value="Galle">Galle</option>
@@ -293,7 +293,8 @@ session_start();
 					   <label for="exampleFormControlInput1" class="form-label lbl star"> Contact Number of Hospital Head</label>
                             <input type="text" placeholder="Enter the Contact Number of Hospital Head" name="number2" id="numb2" class="form-control txt-input">
                               
-s
+                            <br><br><br><br>
+               
                   <div class='row btn-buttons'>
                         
                         <div class='col btn-but'> <input type='submit' name='BtnSubmit' value='Add' class='b1'></div>
