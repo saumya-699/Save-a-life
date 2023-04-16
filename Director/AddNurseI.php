@@ -268,11 +268,9 @@ echo "
                               
                               
                            <label for='exampleFormControlInput1' class='form-label lbl star'>Name with Initials</label>
-                           <input type='text' placeholder='Enter the name' name='Name' id='name' class='form-control txt-input' required>
+                           <input type='text' placeholder='Enter the name' name='Name' id='name' class='form-control txt-input' pattern ='^[a-zA-Z\.]{2,}$' required>"
 							 
-							 
-					    <label for='exampleFormControlInput1' class='form-label lbl star'>NIC Number</label>
-                        <input type='text' placeholder='Enter the NIC number' name='NIC' id='NIC' class='form-control txt-input'  onchange='myFunction1()' pattern='[0-9]{9}[vVxX]' required title='Please enter a valid Sri Lankan NIC number (9 digits followed by a 'v', 'V', 'x', or 'X' character)''>";
+							 ;
 							
 
 ?>
@@ -288,7 +286,7 @@ echo "
    {     
    
 
-          	      echo "<label for='exampleFormControlInput1' class='form-label lbl star'>Hospital name</label>";
+          	      echo "<label class='form-label lbl star'>Hospital name</label>";
 				  
 	     echo 
 		   "<select name='hospital' class='form-control txt-input' required>
@@ -340,7 +338,7 @@ echo "
         
         
                               <label for='exampleFormControlInput1' class='form-label lbl star'>SLMC Number</label>
-                             <input type='text' placeholder='Enter the SLMC number' name='SLMC' id='slmc' class='form-control txt-input'   required>
+                             <input type='text' placeholder='Enter the SLMC number' name='SLMC' id='slmc' class='form-control txt-input'   required pattern='SLMC[0-9]{3}'>
                              
 					
                            <label for='exampleFormControlInput1' class='form-label lbl star'>Email</label>

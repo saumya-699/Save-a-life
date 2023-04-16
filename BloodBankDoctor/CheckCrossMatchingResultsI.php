@@ -52,7 +52,8 @@ session_start();
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
  <link rel="stylesheet" href="StyleSearch.css"> 
-
+ <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
+ <link rel="stylesheet" href="StyleIcons.css"> 
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -314,7 +315,7 @@ if($result->num_rows>0)
 	  echo  "<tr>"."<td>".$row["blood_group"]."</td>"."<td>".$row["test_result"]."</td>"."<td>".$row["process_date"]."</td>"."<td>".$row["Status"]."</td>";
 	   echo "<td><form method='POST' action ='CheckCrossMatchingResultsI.php'>
                 <input type=hidden name=Request_ID value=".$row["Request_ID"]." >
-                <button type=submit name=update  class='fp'><img src=eye.png width=43 height=37></button>
+                <button type=submit name=update  id=btn class=z ><i class='fa-regular fa-square-check'></i></button>
                 </form>
 				
                 </td>";

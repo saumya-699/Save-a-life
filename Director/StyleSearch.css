@@ -115,11 +115,11 @@ h1{
 			   
 			   
                   .b1{
-					      height:35px;
+					      height:40px;
                           width:130px;
                           
 						  color:#FFF5F3;
-						  margin-left:20px;
+						  margin-left:46px;
 						   border-radius:20px;
                            
                            background-color:#F3506D;
@@ -131,7 +131,22 @@ h1{
 				  }
 				  
 				  
-				  
+				  .b2{
+					margin-top:-39px;
+						margin-bottom:0px;
+						margin-left:200px;
+						margin-right:0px;
+						
+					  
+						width:130px;
+						height:40px;					   
+						
+						 border-radius:30px;
+						 border: none;
+						 
+						 color:#FFF5F3;
+			  
+			  }
 				      .f2{
 					      //background-color:red;
 						    margin-left:10px;

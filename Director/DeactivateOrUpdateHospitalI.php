@@ -21,6 +21,8 @@ session_start();
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
  <link rel="stylesheet" href="StyleSearch.css"> 
+ <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
+ <link rel="stylesheet" href="StyleIcons.css"> 
 
 
 </head>
@@ -41,7 +43,7 @@ session_start();
               <ul>
                 <li class="menu-header"></li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="Home.php">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -269,12 +271,13 @@ if($result->num_rows>0)
 	  echo  "<tr>"."<td>".$row["Hospital_ID"]."</td>"."<td>".$row["HospitalName"]."</td>"."<td>".$row["Type"]."</td>"."<td>".$row["District"]."</td>"."<td>".$row["Head_Of_Hospital"]."</td>";
 	   echo "<td class='cv'><form method='POST' action ='showAllHospitalI.php'>
                 <input type=hidden name=Hospital_ID value=".$row["Hospital_ID"]." >
-                <button type=submit value=view name=view  class='fp'><img src=eye.png width=43 height=37></button>
+                <button type=submit value=view name=view  id=btn class='x'><i class='fa-sharp fa-solid fa-eye'></i></button>
                 </form>
 				
                 <form method='POST' action ='DeactivateHospitalI.php'>
-                <input type=hidden name=Hospital_ID value=".$row["Hospital_ID"]." >
-                <button type=submit value=Delete name=delete class='f2' ><img src=dx.png width=30 height=33></button>
+                <input type=hidden name=Hospital_ID value=".$row["Hospital_ID"]." >  
+                <button type=submit value=Delete name=delete id=btn class='y'><i class='fa-solid fa-user-xmark'></i></button>
+           
                 </form>
                 </td>";
 				 echo "</tr>";

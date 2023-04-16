@@ -21,6 +21,11 @@ session_start();
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
  <link rel="stylesheet" href="StyleSearch.css"> 
+ <link rel="stylesheet" href="StyleIcons.css"> 
+ <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
+ <link rel="stylesheet" href="StyleIcons.css"> 
+ <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
+
 
 
 </head>
@@ -264,7 +269,7 @@ if($result->num_rows>0)
 	      //echo "<font size=6>";
 	   
 	   //echo  "<div class='tab'>";
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Doctor_ID"."</th>"."<th style='text-align:center;width:120px;'>"."Name_With_Initials"."</th>"."<th>"."Hospital name"."</th>"."<th>"."Specialization"."</th>"."<th>"."SLMC number"."</th>"."<th style='width:120px;'>"."Action"."</th>"."</tr>";
+	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Doctor_ID"."</th>"."<th style='text-align:center;width:120px;'>"."Name_With_Initials"."</th>"."<th>"."Hospital name"."</th>"."<th>"."Specialization"."</th>"."<th>"."SLMC number"."</th>"."<th>"."Action"."</th>"."</tr>";
       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
    while($row = $result->fetch_assoc())
    
@@ -273,11 +278,11 @@ if($result->num_rows>0)
 	  echo  "<tr>"."<td>".$row["WardDoctor_ID"]."</td>"."<td>".$row["Name_With_Initials"]."</td>"."<td>".$row["HospitalName"]."</td>"."<td>".$row["Specialization"]."</td>"."<td>".$row["SLMC_Number"]."</td>";
 	   echo "<td><form method='POST' action ='showAllWardDoctorI.php'>
                 <input type=hidden name=WardDoctor_ID value=".$row["WardDoctor_ID"]." >
-                <button type=submit value=view name=view  class='fp'><img src=eye.png width=43 height=37></button>
+                <button type=submit value=view name=view  id=btn class='x'><i class='fa-sharp fa-solid fa-eye'></i></button>
                 </form>
 			
                
-                <button type=submit value=Delete name=delete class='f2' ><img src=dx.png width=30 height=33></button>
+                <button type=submit value=Delete name=delete id=btn class='y'><i class='fa-solid fa-user-xmark'></i></button>
 				 <input type=hidden  name=WardDoctor_ID value=".$row["WardDoctor_ID"]." >
                 </form>
                 </td>";

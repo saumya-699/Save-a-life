@@ -19,7 +19,7 @@ session_start();
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek2.css">
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./AddHosStyle.css">
 
 
 </head>
@@ -243,7 +243,7 @@ session_start();
 							 
 							   
 							 <label for="exampleFormControlInput1" class="form-label lbl star"> Type </label>
-                             <select name="district" class="form-control txt-input" required>
+                             <select name="Type" class="form-control txt-input" required>
 							   <option value="Not Provided"> None</option>
                              <option value="general">District General</option>
                              
@@ -256,7 +256,7 @@ session_start();
 
 							 
 					     <label for="exampleFormControlInput1" class="form-label lbl star">District </label>
-                          <select name="Type" class="form-control txt-input" required>
+                          <select name="district" class="form-control txt-input" required>
 						    <option value="Not Provided"> None</option>
                         <option value="Matara">Matara</option>
 						 	 <option value="Galle">Galle</option>
@@ -293,7 +293,8 @@ session_start();
 					   <label for="exampleFormControlInput1" class="form-label lbl star"> Contact Number of Hospital Head</label>
                             <input type="text" placeholder="Enter the Contact Number of Hospital Head" name="number2" id="numb2" class="form-control txt-input">
                               
-s
+                            <br><br><br><br>
+               
                   <div class='row btn-buttons'>
                         
                         <div class='col btn-but'> <input type='submit' name='BtnSubmit' value='Add' class='b1'></div>
