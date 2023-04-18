@@ -51,7 +51,9 @@ session_start();
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
- <link rel="stylesheet" href="StyleSearch.css"> 
+ <link rel="stylesheet" href="StyleSearch1.css"> 
+ <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
+ <link rel="stylesheet" href="StyleIcons.css"> 
 
 </head>
 <body>
@@ -303,30 +305,27 @@ $query="select * from bloodbank_doctor where Name_With_Initials='$x'";
      
 	  echo  "<tr>"."<td>".$row["blood_group"]."</td>"."<td>".$row["blood_component"]."</td>"."<td>".$row["required_amount"]."</td>"."<td>".$row["expected_date"]."</td>"."<td>".$row["reason"]."</td>"."<td>".$row["status"]."</td>";
 	   echo "<td>
-				<form method='POST' action ='ViewInternalRequest.php'>
-                <input type=hidden name=RequestID value=".$row["requeste_id"]." >
-                <button type=submit value=update name=update  class='f1'><img src=edit.png width=26 height=26></button>
-                </form>
+				
                 
 				<form method='POST' action ='ViewInternalRequest.php'>
                 <input type=hidden name=Request_ID value=".$row["requeste_id"].">
-                <button type=submit name=Accept  class='f1'><img src=eye.png width=43 height=37></button>
+                <button type=submit name=Accept id=btn class=s1><i class='fa-solid fa-thumbs-up'></i></button>
                 </form>
 				
 				<form method='POST' action ='ViewInternalRequest.php'>
                 <input type=hidden   name=Request_ID value=".$row["requeste_id"]." >
-                <button type=submit  name=Available  class='f1'><img src=edit.png width=26 height=26></button>
+                <button type=submit  name=Available  id=btn class=t1><i class='fa-regular fa-circle-check'></i></button>
                 </form> 
 				
 				<form method='POST' action ='ViewInternalRequest.php'>
                 <input type=hidden name=Request_ID value=".$row["requeste_id"].">
-                <button type=submit name=NotAvailable  class='f1'><img src=eye.png width=43 height=37></button>
+                <button type=submit name=NotAvailable id=btn class=u1><i class='fa-regular fa-circle-xmark'></i></button>
                 </form>  
 
               
                 <form method='POST' action ='ViewAllInternal.php'>
                 <input type=hidden name=Request_ID value=".$row["requeste_id"].">
-                <button type=submit name=view  class='f1'><img src=eye.png width=43 height=67></button>
+                <button type=submit name=view id=btn class=v><i class='fa-sharp fa-solid fa-eye'></i></button>
                 </form>   </td>" ;
 				 echo "</tr>";
 	 

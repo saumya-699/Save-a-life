@@ -271,13 +271,9 @@ echo "
                               
                               
                            <label for='exampleFormControlInput1' class='form-label lbl star'>Name with Initials</label>
-                           <input type='text' placeholder='Enter the name' name='Name' id='name' class='form-control txt-input' required>
+                           <input type='text' placeholder='Enter the name' name='Name' id='name' class='form-control txt-input' required>";
 							 
-							 
-					    <label for='exampleFormControlInput1' class='form-label lbl star'>NIC Number</label>
-                        <input type='text' placeholder='Enter the NIC Number' name='NIC' id='NIC' class='form-control txt-input'  onchange='myFunction1()' required>";
-							
-
+						
 ?>
 	
 <?php

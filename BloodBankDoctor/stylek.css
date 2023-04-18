@@ -16,7 +16,7 @@ a {
 .container-shadow {
   position: absolute;
   width: 525px;
-  height:1388px;
+  height:1088px;
   left: 50%;
   margin-left: -262.5px;
   margin-top: 60px;
@@ -26,7 +26,7 @@ a {
 .container {
   position: absolute;
   width: 590px;
-  height:1380px;
+  height:1080px;
   left: 50%;
   margin-left: -298.5px;
   margin-top: 60px;
@@ -125,7 +125,7 @@ input {
 				  }
 				  
 				  .b2{
-					    margin-top:6px;
+					    margin-top:-33px;
 							margin-bottom:0px;
 							margin-left:200px;
 							margin-right:0px;
