@@ -2,10 +2,42 @@
 
 session_start();
 include "config.php";
+if(isset($_SESSION["ID"])) {
+  include "config.php";
+  $m = $_SESSION["Name"];
+  $query = "SELECT * FROM mlt WHERE UserName ='$m'";
+  $result1 = $conn->query($query);
+
+   if($result1->num_rows > 0) {        
+    while($row = $result1->fetch_assoc()) {
+      $x = $row["MLT_ID"];
+    }
+  }
+
+  
+}
+
+		$vql="select * from mlt where MLT_ID='$x'";	
+		
+		$resultr = $conn->query($vql);
+		 
+		//  echo "Error in ".$vql."<br>".$conn->error;
+if($resultr->num_rows>0)
+
+{        
+    
+   while($rowx = $resultr->fetch_assoc())
+   
+   {
+       $y= $rowx["Hospital_ID"];
+
+	}
+}
+
 
   if (isset($_POST['submit'])) {
 
-    $donar_id=$_POST['donar_id'];
+    $Blood_bagID=$_POST['Blood_bagID'];
 
     $blood_group = $_POST['blood_group'];
 
@@ -14,12 +46,8 @@ include "config.php";
     $process_date=date("Y/m/d");
 
     $expiry_date = $_POST['expiry_date'];
-	
-    $y= $_SESSION['MLT_ID'];
 
-    $x = $_SESSION['Hospital_ID'];
-
-    $sql= "INSERT INTO blood_components (donar_id,blood_group,blood_component,processed_date,expiry_date,MLT_ID,Hospital_ID) VALUES ('$donar_id','$blood_group','$blood_component','$process_date','$expiry_date','$y','$x')";
+    $sql= "INSERT INTO stock (Blood_bagID,blood_group,Component_type,ExpiryDate,MLT_ID,Hospital_ID) VALUES ('$Blood_bagID','$blood_group','$blood_component','$expiry_date','$x','$y')";
   
    $result = $conn->query($sql);
 
@@ -35,6 +63,8 @@ include "config.php";
 
   }
 
-
+  if (isset($_POST['cancel'])){
+      header('location:Add blood components.php');        
+  }
 
 ?>

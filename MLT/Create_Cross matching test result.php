@@ -2,6 +2,37 @@
 
 session_start();
 include "config.php";
+if(isset($_SESSION["ID"])) {
+  include "config.php";
+  $m = $_SESSION["Name"];
+  $query = "SELECT * FROM mlt WHERE UserName ='$m'";
+  $result1 = $conn->query($query);
+
+   if($result1->num_rows > 0) {        
+    while($row = $result1->fetch_assoc()) {
+      $x = $row["MLT_ID"];
+    }
+  }
+
+  
+}
+
+		$vql="select * from mlt where MLT_ID='$x'";	
+		
+		$resultr = $conn->query($vql);
+		 
+		//  echo "Error in ".$vql."<br>".$conn->error;
+if($resultr->num_rows>0)
+
+{        
+    
+   while($rowx = $resultr->fetch_assoc())
+   
+   {
+       $y= $rowx["Hospital_ID"];
+
+	}
+}
 
   if (isset($_POST['submit'])) {
 
@@ -13,11 +44,8 @@ include "config.php";
 
     $process_date=date("Y/m/d");
 	
-    $x = $_SESSION['Hospital_ID'];
 
-    $y= $_SESSION['MLT_ID'];
-
-    $sql= "INSERT INTO cross_matching_testing_result (request_id, blood_group, test_result ,process_date,MLT_ID,Hospital_ID) VALUES ('$request_id','$blood_group','$test_result','$process_date','$y','$x')";
+    $sql= "INSERT INTO cross_matching_testing_result (request_id, blood_group, test_result ,process_date,MLT_ID,Hospital_ID) VALUES ('$request_id','$blood_group','$test_result','$process_date','$x','$y')";
   
    $result = $conn->query($sql);
 
@@ -33,6 +61,8 @@ include "config.php";
 
   }
 
-
+  if (isset($_POST['cancel'])){
+    header('location:Cross matching test result.php');        
+}
 
 ?>

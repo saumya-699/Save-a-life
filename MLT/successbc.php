@@ -1,5 +1,4 @@
 <?php
-
 ?><!DOCTYPE html>
 <html lang="en" >
 <head>
@@ -153,9 +152,10 @@
                     <div class="card frm-form ">
                         <div class="form-body ">
 
+                           
                         <p><b> <font size="2px">Successfully entered</font></b></p>
- <button class="b1" name="back" value="back"><a href="Enter Blood testing result.php"><font size="2px">go back</font></a></button>
-                   
+ <button class="b1" name="back" value="back"><a href="Add blood components.php"><font size="2px">go back</font></a></button>
+                         
                                             
                         </div>
                     </div>
