@@ -1,5 +1,5 @@
 <?php
-
+   session_start();
 include "config.php";
 
 $sql = "SELECT * FROM blood_testing_result";
@@ -7,132 +7,159 @@ $result = $conn->query($sql);
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" >
 <head>
-
-<link rel="stylesheet" href="./css/stylek.css">
-    <link rel="stylesheet" href="./css/nbtssl/nbtssl.min.css">
-    <link rel="stylesheet" href="./css/fontawesome-free-5.15.4/css/all.css">
-    <link rel="stylesheet" href="./css/mediaquery.css">
-
-<meta name="viewport"
-		content="width=device-width, initial-scale=1.0" />
-		
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-		 
-<link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="stylet.css">
+  <meta charset="UTF-8">
+  <title>side-MLT</title>
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
+<link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./style.css">
 
 </head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="layout has-sidebar fixed-sidebar fixed-header">
+      <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
+        <a id="btn-collapse" class="sidebar-collapser"><i class="ri-arrow-left-s-line"></i></a>
 
-<body style="background-color:#FFC3BF;">
-    <div class="logo-massaviu">
-        &nbsp; &nbsp; <img src="icon.png" width="15%">
-    </div>
-    <ul class="top">
-
-    <li>&nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <font size="5px"> National Blood Transfusion Service  </font size></li>
-        </li>
-
-        <li>
-            <div class="top-right">
-                <div class="notification">
-                    <span class="material-icons licon">
-                        notifications
+        <div class="sidebar-layout">
+          <div class="sidebar-header">
+            <div class="pro-sidebar-logo">
+              <div><img src="logo.png" alt="logo"></div>
+              <h5>Save A Life</h5>
+            </div>
+          </div>
+          <div class="sidebar-content">
+            <nav class="menu open-current-submenu">
+              <ul>
+                <li class="menu-header"><span> </span></li>
+                <li class="menu-item">
+                  <a href="seeMLT.php">
+                    <span class="menu-icon">
+                      <i class="ri-home-fill"></i>
                     </span>
-                </div>
-                &nbsp;
-                <div class="person">
-                    <span class="material-icons licon">
-                        person
+                    <span class="menu-title">Home</span>
+                  </a>
+                 </li>
+                <li class="menu-item">
+                  <a href="view donated blood information.php">
+                    <span class="menu-icon">
+                      <i class="ri-folder-open-fill"></i>
                     </span>
-                </div>
-                &nbsp;
-                <div class="name"><?php
-                                    session_start();
-                                    echo " " . $_SESSION['Name_With_Initials'];
-                                    ?>
-                    <br>MLT
-                </div>
+                    <span class="menu-title">View donated blood</span>
+                  </a>
+                  </li>
+                <li class="menu-item sub-menu">
+                  <a href="#">
+                    <span class="menu-icon">
+                      <i class="ri-file-edit-fill"></i>
+                    </span>
+                    <span class="menu-title">Enter test results</span>
+                  </a>
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="Enter Blood testing result.php">
+                            <span class="menu-title">Blood Testing</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="Cross matching test result.php">
+                            <span class="menu-title">Cross Matching</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li class="menu-item">
+                  <a href="Send test results for approval.php">
+                    <span class="menu-icon">
+                        <i class="ri-file-transfer-line"></i>
+                    </span>
+                    <span class="menu-title">Send test results for<br> approval</span>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="View approval of blood test results1.php">
+                    <span class="menu-icon">
+                        <i class="ri-folder-open-line"></i>
+                    </span>
+                    <span class="menu-title">View approval of blood <br> test results</span>
+                  </a>
+                </li>
 
-                <div class="dropdown">
-                    <span class="material-icons licon">
-                        arrow_drop_down
+                <li class="menu-item">
+                    <a href="Add blood components.php">
+                      <span class="menu-icon">
+                        <i class="ri-file-add-line"></i>
+                      </span>
+                      <span class="menu-title">Add blood componets</span>
+                    </a>
+                   </li>
+  
+                  <li class="menu-item">
+                    <a href="Blood stock.php">
+                      <span class="menu-icon">
+                        <i class="ri-hospital-line"></i>
+                      </span>
+                      <span class="menu-title">Blood Stock</span>
+                    </a>
+                  </li>
+                
+                  <li class="menu-item">
+                    <a href="Report.php">
+                      <span class="menu-icon">
+                        <i class="ri-file-chart-line"></i>
+                      </span>
+                      <span class="menu-title">Reports</span>
+                    </a>
+                  </li>
+                  
+
+                <li class="menu-header" style="padding-top: 40px"><span> | </span></li>
+                <li class="menu-item">
+                    <a href="Edit ProfileMlt.php">
+                      <span class="menu-icon">
+                        <i class="ri-user-line"></i>
+                      </span>
+                      <span class="menu-title">Profile</span>
+                      
+                    </a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="#">
+                      <span class="menu-icon">
+                        <i class="ri-notification-line"></i>
+                      </span>
+                      <span class="menu-title">Notification</span>
+                      
+                    </a>
+                  </li>
+                <li class="menu-item">
+                  <a href="logout.php">
+                    <span class="menu-icon">
+                      <i class="ri-logout-box-r-line"></i>
                     </span>
-                    <div class="dropdown-content">
-                        <a href="Edit ProfileMlt.php"> <span class="material-icons licon">
-                                person
-                            </span>Profile</a>
-                        <a href="logout.php">
-                            <span class="material-icons licon">
-                                exit_to_app
-                            </span>
-                            Log out</a>
-                    </div>
-                </div>
-        </li>
+                    <span class="menu-title">Log out</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          
         </div>
-    </ul>
-
-  
-<div class="sidenav">
-    <button class="dropdown-btn" ><a href="seeMLT.php">Home</a>
-    </button>
-  
-  <button class="dropdown-btn">
-  <a href="view donated blood information.php">View donated blood</a>  </button>
-  	
-
-  <button class="dropdown-btn1" >Enter test result 
-    <i class="fa fa-caret-down"></i>
-  </button>
-  <div class="dropdown-container">
-  <a href="Enter Blood testing result.php">Blood test</a>    
-  <a href="Cross matching test result.php">Cross matching</a>
-  </div>
- 
-  <button class="dropdown-btn" style=background-color:#DB2A54;>
-  <a href="Send test results for approval.php" >Send test results for approval</a>
-  </button>
-  
-  <button class="dropdown-btn" >
-  <a href="View approval of blood test results1.php" >View approval of blood test results</a>
-    </button>
-
-    <button class="dropdown-btn" >
-    <a href="Add blood components.php">Add blood components</a>
-        </button>
-        
-        <button class="dropdown-btn"  >
-        <a href="Blood stock.php">Blood stock</a>
-            </button>
+      </aside>
+      <div id="overlay" class="overlay"></div>
+      <div class="layout">
+        <main class="content">
+          <div>
+            <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
+            <h1>Send blood test results for approval</h1>
             
-    
-  <button class="dropdown-btn"  >
-  <a href="Report.php">Reports</a>
-  </button>
-   
-  
-  </div>
- 
-
-
-    
-    </ul>
-
-    </div>
-
-    <div class="title" style="margin-left: 550px;">
-Send blood test results for approval   </div>
-
     <form method="post" action="search blood test result.php">
  
  <div class="midiv">
  
-  
  
   <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
                               <option value="requested_date"><b> Requested Date</b></option>
@@ -152,8 +179,48 @@ Send blood test results for approval   </div>
  
  </form>
  <?php
-   $x = $_SESSION['MLT_ID'];
-require 'config.php';
+if(isset($_SESSION["ID"])) {
+  include "config.php";
+  $m = $_SESSION["Name"];
+  $query = "SELECT * FROM mlt WHERE UserName ='$m'";
+  $result1 = $conn->query($query);
+
+   if($result1->num_rows > 0) {        
+    while($row = $result1->fetch_assoc()) {
+      $x = $row["MLT_ID"];
+    }
+  }
+
+  
+}
+
+
+
+		$vql="select * from mlt where MLT_ID='$x'";	
+		
+		$resultr = $conn->query($vql);
+		 
+		//  echo "Error in ".$vql."<br>".$conn->error;
+
+if($resultr->num_rows>0)
+
+{        
+    
+   while($rowx = $resultr->fetch_assoc())
+   
+   {
+	    
+
+
+	   
+       $y= $rowx["Hospital_ID"];
+
+
+	  
+	}
+	
+
+}
 if(isset($_POST['view']))  
 
 {	
@@ -164,7 +231,7 @@ if(isset($_POST['view']))
    $result = $conn->query($sql);
 
 
-                    echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:200px;'>"."Test result ID"."</th>"."<th style='text-align:center;width:120px;'>"."Donar ID"."</th>"."<th style='text-align:center;width:100px;'>"."Blood group"."</th>"."<th>"."Malaria result"."</th>"."<th>"." HIV result"."</th>"."<th>"."HBV result"."</th>"."<th>"."HCV result"."</th>"."<th>"."VDRL result"."</th>"."<th>"."Date"."</th>"."<th>"."Batch number"."</th>"."<th>"."MLT ID"."</th>"."<th>"."Hospital ID"."</th>"."</tr>";
+                    echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:200px;'>"."Test result ID"."</th>"."<th style='text-align:center;width:120px;'>"."Donar ID"."</th>"."<th style='text-align:center;width:100px;'>"."Blood group"."</th>"."<th>"."Malaria result"."</th>"."<th>"." HIV result"."</th>"."<th>"."HBV result"."</th>"."<th>"."HCV result"."</th>"."<th>"."VDRL result"."</th>"."<th>"."Processed Date"."</th>"."<th>"."Batch number"."</th>"."<th>"."MLT ID"."</th>"."<th>"."Hospital ID"."</th>"."</tr>";
                     echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=12'>"."</td>"."</tr>";
                     while($row = $result->fetch_assoc())
    
@@ -197,107 +264,9 @@ $conn->close();
 ?>
 
 <style>
-  .top {
-  list-style-type: none;
-  margin-top: -100px;
-  margin-left: -10px;
-  padding: 0px;
-  overflow: hidden;
-  background-color:#E56262;
-  position: absolute;
-  width: 1500px;
-  height: 55px;
-}
-.logo-massaviu {
-  position: absolute;
-  background: transparent;
-  overflow: hidden;
-  z-index: 1;
-  width: 198px;
-  margin-top:-90px;
-  margin-left:0px;
-}
-
-
-
-    .sidenav a.active {
-      background-color: red;
-      color: white;
-    }
-    .sidenav {
-      height: 250%;
-      width: 246px;
-      position: absolute;
-      z-index: 1;
-      top: 0;
-      left: 0;
-      background-color: #C14246;
-      overflow-x: hidden;
-      padding-top: 0px;
-      margin-top:55px;
-      font-weight:600;
-    }
-    .sidenav a, .dropdown-btn {
-      padding: 26px 8px 6px 16px;
-      text-decoration: none;
-      font-size: 20px;
-      color: #D9D9D9;
-      display: block;
-      border: none;
-      background: none;
-      width: 100%;
-      text-align: left;
-      cursor: pointer;
-      outline: none;
-      font-family:Open Sans, sans-serif;
-    }
-    .dropdown-btn1 {
-      padding: 26px 8px 6px 16px;
-      text-decoration: none;
-      font-size: 20px;
-      color: #D9D9D9;
-      display: block;
-      border: none;
-      background: none;
-      width: 100%;
-      text-align: left;
-      cursor: pointer;
-      outline: none;
-      font-family:Open Sans, sans-serif;
-    }
-    /* On mouse-over */
-    .sidenav a:hover, .dropdown-btn:hover {
-      color:#574240;
-    }
-    .main {
-      margin-left: 200px; /* Same as the width of the sidenav */
-      font-size: 20px; /* Increased text to enable scrolling */
-      padding: 0px 10px;
-    }
-    .dropdown-btn.active {
-      background-color:#DB2A54;
-      color: white;
-    }
-    .dropdown-btn1.active {
-      background-color:#DB2A54;
-      color: white;
-    }
-    .dropdown-container {
-      display: none;
-      background-color:#007675;
-      
-      
-    }
-    
-    .fa-caret-down {
-      float: right;
-      padding-right: 8px;
-    }
-    @media screen and (max-height: 450px) {
-      .sidenav {padding-top: 15px;}
-      .sidenav a {font-size: 18px;}
-    }
-table{
+  
+  
+  table{
 	
 	
 	
@@ -305,8 +274,8 @@ table{
 	height:15px;
 	border-collapse: collapse;	
     margin-top:40px;
-   border:0px transparent;	
-   margin-left: 300px;	
+    margin-left: 80px;
+   border:0px transparent;		
  	
 }
 
@@ -353,10 +322,7 @@ h1{
 						  
 				  }
 
-
-
-th{
-	
+  th{
 	
 	  white-space: nowrap; overflow: hidden; text-overflow:ellipsis;
 	  text-align: center;
@@ -368,6 +334,8 @@ th{
 	
 }
 
+
+
 td {
   text-align: center;
   padding:1px;
@@ -375,21 +343,23 @@ td {
 
 }
 
-     
+
+.midiv{
    
-   
-    .midiv{
-   
-   background-color: #F5F5F5;
-    margin-left: 300.5px;
-    margin-bottom: -50px;
-    padding: 15px 10px 30px 20px;
-    margin-top: 10px;
-    outline: none;
-    width: 997.5px;
-                  }
+   margin-left: 150px;
+   margin-bottom: -50px;
+   padding: 15px 10px 30px 20px;
+   margin-top: -100px;
+   outline: none;
+   width: 774.5px;
+                 }
                   
-      
+
+
+                 
+				
+            
+				  
 				  
 				  .f2{
 					      
@@ -434,18 +404,7 @@ td {
     flex-direction: row;
 }
 			   
-			   .tab{
-				   
-				   background-color:#F5F5F5;
-				    margin-top:0px;
-					margin-left:350px;
-					margin-right:265px;
-					padding-left:25px;
-                   padding-right:400px;
-					 
-				   
-				   
-			   }
+			   
 			  
 	 
 			   .ta{
@@ -473,29 +432,29 @@ cursor: pointer;
 
 
 }
+.layout{
+    background-color: #d9dbdb;
+}
 	
 			   
 </style>
-<script>
-        var dropdown = document.getElementsByClassName("dropdown-btn1");
-       var i;
+
+            
+          </div>
+        </main>
        
-       for (i = 0; i < dropdown.length; i++) {
-         dropdown[i].addEventListener("click", function() {
-           this.classList.toggle("active");
-           var dropdownContent = this.nextElementSibling;
-           if (dropdownContent.style.display === "block") {
-             dropdownContent.style.display = "none";
-           } else {
-             dropdownContent.style.display = "block";
-           }
-         });
-       }
-       
-       </script>
-       
+      </div>
+    </div>
+<!-- partial -->
+  <script src='https://unpkg.com/@popperjs/core@2'></script><script  src="./script.js"></script>
+
 </body>
 </html>
-	
- 
+
+
+  
+
+
+
+
 

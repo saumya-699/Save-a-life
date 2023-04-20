@@ -1,4 +1,16 @@
 
+<?php
+
+include "config.php";
+   
+  if (isset($_GET['WardDoctor_ID'])) {
+
+    $id = $_GET['WardDoctor_ID']; 
+
+    $sql = "SELECT * FROM `warddoctor` WHERE `WardDoctor_ID`='$id'";
+
+    $result = $conn->query($sql); 
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,7 +57,6 @@
             </div>
 			&nbsp;
       <div class="name"><?php
-       session_start();
      echo " " . $_SESSION['Name_With_Initials'];
     ?>
 	<br>Ward doctor</div>
@@ -56,7 +67,7 @@
 				<div class="dropdown-content">
   <a href="Edit Profile.php"> <span class="material-icons licon">
   person
-                </span> Edit Profile</a>
+                </span> Profile</a>
   <a href="logout.php">
   <span class="material-icons licon">
   exit_to_app
@@ -86,11 +97,19 @@
                         <div class="card-body frm-body ">
 
                                 <h1 class="txt-l "> Profile Update Form</h1>
-                                <form action="create.php " method="POST">
+                                <form action="Editprofilebackend" method="POST">
+
+                                <?php
+                          if ($result->num_rows > 0) {
+                          while ($rows = $result->fetch_assoc()) {
+                                ?>
 
                                 <label for="exampleFormControlInput1 " class="form-label lbl ">Name</label>
                                 <input type="text" class="form-control txt-input " name="Name_With_Initials" value=" <?php
                                                                           echo   $_SESSION['Name_With_Initials']; ?>" >
+                                <label for="exampleFormControlInput1 " class="form-label lbl ">User ID</label>
+                                <input type="hidden" name="id" value="<?php echo $WardDoctor_ID; ?>">
+
 
 
                                <label for="exampleFormControlInput1 " class="form-label lbl ">Email</label>
@@ -107,11 +126,15 @@
                                 <input type="text" class="form-control txt-input " name="Password" value="<?php echo $Password; ?>">
 
                                 <div class="row btn-buttons ">
-                                    <button class="b1" name="submit" value="submit"><font size="2px">Update</font size></button> &nbsp; &nbsp; &nbsp; &nbsp;
-      &nbsp; &nbsp; &nbsp; &nbsp;  <button class="b1" name="cancel" value="cancel"><a href="Make blood request.php"><font size="2px">Cancel</font size></a></button>
+                                    <button class="b1" name="submit" value="update"><font size="2px">Update</font size></button> &nbsp; &nbsp; &nbsp; &nbsp;
+      &nbsp; &nbsp; &nbsp; &nbsp;  <button class="b1" name="cancel" value="cancel"><a href="Edit profile.php"><font size="2px">Cancel</font size></a></button>
                                 </div>
                             </form>
+                            <?php       
+                                }}
 
+                ?>
+                   
                         </div>
                     </div>
                 </div>
@@ -125,3 +148,5 @@
 </body>
 
 </html>
+<?php
+} ?>

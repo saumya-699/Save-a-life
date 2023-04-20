@@ -46,9 +46,8 @@ if (!empty($_POST)) {
    // print_r($result);die();
    $result = $conn->query($sql);
    
-        if ($result) {
-
-            echo "Record updated successfully.";
+   if ($result == TRUE) {
+            header('location:updatesuccess.php');       
            
 
         }else{

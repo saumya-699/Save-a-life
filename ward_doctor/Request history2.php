@@ -1,134 +1,6 @@
 
-
-<?php
-
-include "config.php";
-
-$sql = "SELECT * FROM blood_request";
-
-$result = $conn->query($sql);
-
-?>
-
-<!DOCTYPE html>
-<html lang="en">
-
-
-<head>
-<link rel="stylesheet" href="./css/stylek.css">
-    <link rel="stylesheet" href="./css/nbtssl/nbtssl.min.css">
-    <link rel="stylesheet" href="./css/fontawesome-free-5.15.4/css/all.css">
-    <link rel="stylesheet" href="./css/mediaquery.css">
-
-<meta name="viewport"
-		content="width=device-width, initial-scale=1.0" />
-		
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-		 
-<link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="stylet.css">
-
-</head>
-
-<body style="background-color:#FFC3BF;">
-    <div class="logo-massaviu">
-        &nbsp; &nbsp; <img src="icon.png" width="15%">
-    </div>
-    <ul class="top">
-
-    <li>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <font size="5px"> National Blood Transfusion Service  </font size></li>
-        </li>
-
-        <li>
-            <div class="top-right">
-                <div class="notification">
-                    <span class="material-icons licon">
-                        notifications
-                    </span>
-                </div>
-                &nbsp;
-                <div class="person">
-                    <span class="material-icons licon">
-                        person
-                    </span>
-                </div>
-                &nbsp;
-                <div class="name"><?php
-                                    session_start();
-                                    echo " " . $_SESSION['Name_With_Initials'];
-                                    ?>
-                    <br>Ward doctor
-                </div>
-
-                <div class="dropdown">
-                    <span class="material-icons licon">
-                        arrow_drop_down
-                    </span>
-                    <div class="dropdown-content">
-                        <a href="Edit Profile.php"> <span class="material-icons licon">
-                                person
-                            </span> Edit Profile</a>
-                        <a href="logout.php">
-                            <span class="material-icons licon">
-                                exit_to_app
-                            </span>
-                            Log out</a>
-                    </div>
-                </div>
-        </li>
-        </div>
-    </ul>
-
-
-
-
- 
-
-
-    <div class="sidenav">
-        <button class="dropdown-btn"><a href="see.php">Home</a></button>
-
-        <button class="dropdown-btn"><a href="Make blood request.php">Make Blood request</a> </button>
-
-        <button class="dropdown-btn" style=background-color:#DB2A54;><a href="Request History1.php">Request History </a> </button>
-
-    </div>
-    </ul>
-
-    </div>
-
-    <div class="title">
-        Blood Request History
-    </div>
-
-    <form method="post" action="search.php">
- 
- <div class="midiv">
- 
-  
- 
-  <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
-                              <option value="requested_date"><b> Requested Date</b></option>
-                              <option value="requeste_id"><b> Request ID</b></option>
-                              <option value="patient_name"><b>Patient Name</b></option>
-                              <option value="blood_group" selected><b>Blood Group</b></option>
-                             <option value="status" selected><b> Status</b></option>
-                              </select>
- 
- 
- <input type="text" placeholder="type here" name="data" id="data" class="box">
- 
-  <button type="submit"  name="BtnSubmit" id="search" class="b1" ><b>Search</b></button>
- </div>
- 
- </div>
- 
- </form>
-
  <?php
-require 'config.php';
+include "config.php";
 if(isset($_POST['view']))  
 
 {	
@@ -136,270 +8,221 @@ if(isset($_POST['view']))
    $did=$_POST['RequestID'];
    $sql = "SELECT * FROM blood_request where requeste_id='$did' ";
    $result = $conn->query($sql);
+   }
+   ?>
 
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>side-ward doctor</title>
   
-   
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
+<link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./style.css">
 
-          //echo "<font color=red>";
-	      //echo "<font size=6>";
-	   
-	   echo  "<div style='overflow-x:auto; ' class='tab'> ";
-	    // echo  "<div class='hat'>";
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:100px;'>"."Request_ID"."</th>"."<th style='text-align:center;width:120px;'>"."Patient Name"."</th>"."<th style='text-align:center;width:100px;'>"."Patient Age"."</th>"."<th>"."Patient Gender"."</th>"."<th>"."Blood Group"."</th>"."<th style='text-align:center;width:120px;'>"."Required Blood Component"."</th>"."<th>"."Required Amount (packets)"."</th>"."<th style='text-align:center;width:120px;'>"."Expected date to receive"."</th>"."<th style='text-align:center;width:90px;'>"."Requested_date to receive"."</th>"."<th style='text-align:center;width:120px;'>"."Reason for the request"."</th>"."<th>"."Ward number"."</th>"."<th>"."Remark"."</th>"."<th>"."Status"."</th>"."<th style='text-align:center:width:40px;'>"."Action"."</th>"."</tr>";
-      echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=10'>"."</td>"."</tr>";
-   while($row = $result->fetch_assoc())
-   
-   {     
-     
-	  echo  "<tr>"."<td>".$row["requeste_id"]."</td>"."<td>".$row["patient_name"]."</td>"."<td>".$row["patient_age"]."</td>"."<td>".$row["patient_gender"]."</td>"."<td>".$row["blood_group"]."</td>"."<td>".$row["blood_component"]."</td>"."<td>".$row["required_amount"]."</td>"."<td>".$row["expected_date"]."</td>"."<td>".$row["requested_date"]."</td>"."<td>".$row["reason"]."</td>"."<td>".$row["ward_number"]."</td>"."<td>".$row["remark"]."</td>"."<td>".$row["status"]."</td>";
-	   echo "<td>
-				<form method='POST' action ='Update.php'>
-                <input type=hidden name=RequestID value=".$row["requeste_id"]." >
-                <button type=submit value=update name=update  class='f1'><img src=edit.png width=26 height=26></button>
-                </form>
-                </td>";
-				 echo "</tr>";
-	 
-	   echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=10'>"."</td>"."</tr>";
-	  
-	}
-	
-	 echo "</font>";
-	 echo  "</font>";   
-	 echo "</table>";
-	 echo "</div>";
-	// echo "</div>";
-	
-	
-	
+<link rel="stylesheet" href="./stylek2.css">
 
-
-}
-
-$conn->close();
-?>
- 
-<br>
- <button class=b2 style="	 margin-left: 1050px;"><a href="Request History1.php" >Back</a></button>
-
-
-<style>
-
-table{
-	
-	
-	//margin-left:440px;
-	width:100px;
-	height:20px;
-	border-collapse: collapse;	
-		margin-top:50px;
-   border:0px transparent;		
- 	
-}
-
-
-th{
-	
-	
-	
-	  text-align: center;
-	   padding-top:25px;
-	     padding-bottom:25px;
-	   padding-left:20px;
-	    padding-right:10px;
-	     border:0px transparent;	
-	
-}
-
-td {
-  text-align: center;
-  padding:1px;
-
-
-}
-
-
-
-h1{
-	
-		margin-top:70px;	
-		margin-left:200px;
-		margin-bottom:100px;
-}
-
-.select{
-	
-	 
- height:35px;
- width:138px;
- border-radius:20px;
- background-color:#56CE94;
-  border: none;
- text-align:center;
-                     
-  
-						
-	
-}
-
-
-.midiv{
-   
-   background-color:#F5F5F5;
-   margin-left:285px;
-   margin-bottom:-50px;
-   padding:15px 10px 30px 20px;
-   margin-top:10px;
-   outline:none;
-   width:905px;
-
-}
-            
-
-
-
-			   
-			   
-			   .box{
-                  
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="layout has-sidebar fixed-sidebar fixed-header">
+      <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
+        <a id="btn-collapse" class="sidebar-collapser"><i class="ri-arrow-left-s-line"></i></a>
+        
+        <div class="sidebar-layout">
+          <div class="sidebar-header">
+            <div class="pro-sidebar-logo">
+              <div><img src="logo.png" alt="logo"></div>
+              <h5>Save A Life</h5>
+            </div>
+          </div>
+          <div class="sidebar-content">
+            <nav class="menu open-current-submenu">
+              <ul>
+                <li class="menu-header"><span></span></li>
+                <li class="menu-item">
+                  <a href="see.php">
+                    <span class="menu-icon">
+                      <i class="ri-home-fill"></i>
+                    </span>
+                    <span class="menu-title">Home</span>
                     
-                    height:35px;
-					width:200px;
-					
-					margin-left:20px;
-					margin-top:0px;
-				   border-radius:20px;
-				   border: none;
-				   text-align:center;
-                     
-           
-               }
-			   
-			   
-			   
-                  .b1{
-					      height:35px;
-                width:130px;
-                          
-						  color:#FFF5F3;
-						  margin-left:20px;
-						   border-radius:20px;
-                           
-                background-color:#F3506D;
-						   border: none;
-						   cursor:pointer;
-						   
-				            
-				  
-				  }
-				  
-          .b2{
-					      height:30px;
-                width:100px;
-                          
-						  color:#FFF5F3;
-						   border-radius:20px;
-                           
-                background-color:#F3506D;
-						   border: none;
-						   cursor:pointer;
-				            
-				  
-				  }
-				  
-				  
-				    .f2{
-					      //background-color:red;
-						    margin-left:90px;
-							margin-top:-54px;
-							background-color:transparent;
-							 border: none;
-							  cursor:pointer;
-						  
-						   
-				            
-				  
-				  }
-				  
-				  
-				  .f1{
-					     // background-color:yellow;
-						      background-color:transparent;
-						  margin-left:55px;
-						    margin-right:60px;
-							margin-bottom:5px;
-							margin-top:20px;
-						   border: none;
-						   cursor:pointer;
-						  
-				  }
-				  
-				  
-			   
-			   
-			   .tab{
-				   
-				   background-color:#F5F5F5;
-				    margin-top:0px;
-					margin-left:285px;
-					//padding:10px;
-					margin-right:90px;
-					padding-left:1px;
-                  // padding-right:1000px;
-					 
-				   
-				   
-			   }
-			  
-	 
-			   .ta{
-				   
-				   background-color:#F5F5F5;
-				  
-				   
-				   margin-top:90px;
-				   margin-bottom:0px;
-				  margin-left:284px;
-				  margin-right:90px;
-				  padding-left:30px;
-				   
-				   
-				   
-			   }
-			  
-	tr{
-		
-		background-color:white;
-		
-		
-	}
-		
-		
-                  .bx{
-					      height:25px;
-				          width:100px;
-										   
-						    color:#FFF5F3;
-							margin-left:1340px;
-							 border-radius:30px;
-                             margin-top:30px;
-                           background-color:#F35050;
-						   border: none;
-						   cursor:pointer;
-						   
-				            
-				  
-				  }
-				  
-          a{
-  text-decoration:none;
-  color: white;
-}
-			   
-    
-			   
+                  </a>
+                  <div class="sub-menu-list">
+                    
+                  </div>
+                </li>
+                <li class="menu-item">
+                  <a href="Make blood request.php">
+                    <span class="menu-icon">
+                      <i class="ri-edit-box-fill"></i>
+                    </span>
+                    <span class="menu-title">Make Blood Request</span>
+                  </a>
+                  <div class="sub-menu-list">
+                    
+                  </div>
+                </li>
+                <li class="menu-item">
+                  <a href="Request History1.php">
+                    <span class="menu-icon">
+                      <i class="ri-history-line"></i>
+                    </span>
+                    <span class="menu-title">Request History</span>
+                  </a>
+                  <div class="sub-menu-list">
+                    
+                  </div>
+                </li>
+                
+                
+                <li class="menu-header" style="padding-top: 40px"><span>  </span></li>
+                <li class="menu-item">
+                  <a href="Edit Profile.php">
+                    <span class="menu-icon">
+                      <i class="ri-user-line"></i>
+                    </span>
+                    <span class="menu-title">Profile</span>
+                    
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="#">
+                    <span class="menu-icon">
+                      <i class="ri-notification-line"></i>
+                    </span>
+                    <span class="menu-title">Notification</span>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="logout.php">
+                    <span class="menu-icon">
+                      <i class="ri-logout-box-r-line"></i>
+                    </span>
+                    <span class="menu-title">Logout</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </aside>
+      <div id="overlay" class="overlay"></div>
+      <div class="layout">
+        <main class="content">
+          <!-- add your content from here -->
+          
 
-</style>
+          <div class="container-shadow">
+                 <div class="container">
+                   <div class="wrap">
+                    <div class="headings">
+                    <center> <h1>Blood Request History</h1><center>
+                        </div>
+                        <?php
+
+                     //print_r($row)
+                    if ($result->num_rows > 0) {
+                   while ($rows = $result->fetch_assoc()) {
+                        ?>
+                                <form action="create.php " method="POST">
+
+                                <label for="exampleFormControlInput1 " class="form-label lbl star ">Request ID</label>
+                                <input type="text" class="form-control txt-input " name="patient_name"value="<?php echo $rows['requeste_id']; ?>">
+
+
+                                <label for="exampleFormControlInput1 " class="form-label lbl star ">Patient Name</label>
+                                <input type="text" class="form-control txt-input " name="patient_name"value="<?php echo $rows['patient_name']; ?>">
+
+                                
+                                <label for="exampleFormControlInput1 " class="form-label lbl star ">Patient Age</label>
+                                <input type="text" class="form-control txt-input " name="patient_name"value="<?php echo $rows['patient_age']; ?>">
+
+                                
+                                <label for="exampleFormControlInput1 " class="form-label lbl star ">Patient Gender</label>
+                                <input type="text" class="form-control txt-input " name="patient_name"value="<?php echo $rows['patient_gender']; ?>">
+
+                                
+                                <label for="exampleFormControlInput1 " class="form-label lbl star ">Blood Group</label>
+                                <input type="text" class="form-control txt-input " name="patient_name"value="<?php echo $rows['blood_group']; ?>">
+
+                                
+                                <label for="exampleFormControlInput1 " class="form-label lbl star ">Required Blood Component</label>
+                                <input type="text" class="form-control txt-input " name="patient_name"value="<?php echo $rows['blood_component']; ?>">
+
+                                <label for="exampleFormControlInput1 " class="form-label lbl star ">Required Amount (packets)</label>
+                                <input type="text" class="form-control txt-input " name="patient_name"value="<?php echo $rows['required_amount']; ?>">
+
+                                <label for="exampleFormControlInput1 " class="form-label lbl star ">Expected date to receive</label>
+                                <input type="text" class="form-control txt-input " name="patient_name"value="<?php echo $rows['expected_date']; ?>">
+                               
+                                <label for="exampleFormControlInput1 " class="form-label lbl star ">Requested_date to receive</label>
+                                <input type="text" class="form-control txt-input " name="patient_name"value="<?php echo $rows['requested_date']; ?>">
+
+                                <label for="exampleFormControlInput1 " class="form-label lbl star ">Reason for the request</label>
+                                <input type="text" class="form-control txt-input " name="patient_name"value="<?php echo $rows['reason']; ?>">
+
+                                <label for="exampleFormControlInput1 " class="form-label lbl star ">Ward number</label>
+                                <input type="text" class="form-control txt-input " name="patient_name"value="<?php echo $rows['ward_number']; ?>">
+                               
+                                <label for="exampleFormControlInput1 "  name="remark " class="form-label lbl ">Remark</label>
+                                <input type="text" class="form-control txt-input " name="remark" value="<?php echo $rows['remark']; ?>">
+
+                                <label for="exampleFormControlInput1 " class="form-label lbl star ">Status</label>
+                                <input type="text" class="form-control txt-input " name="patient_name"value="<?php echo $rows['status']; ?>">
+
+                                
+                             
+
+
+                            </form>
+                            <?php       
+                                }}
+
+                              ?>
+                              
+                              <div class="buttons ">
+        <center>  <button class="b1" name="back" value="back"><font size="2px"><a href="Request History1.php">Back</font size></a></button> </center>
+        
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="col " width="10 "></div>
+    </div>
+
+        </main>
+      </div>
+    </div>
+<!-- partial -->
+  <script src='https://unpkg.com/@popperjs/core@2'></script><script  src="./script.js"></script>
 
 </body>
+</html>
+
+<style>
+  
+
+.container {
+  position: absolute;
+  width: 590px;
+  height:1440px;
+  left: 50%;
+  margin-left: -298.5px;
+  margin-top: 60px;
+/*   background: url('https://bit.ly/2kBRtBE'); */
+/*   background: #673AB7; */
+background-color:#0c1e35;
+/*background-image: linear-gradient(315deg, #ffffff 0%, #85C1E9 50%);*/
+
+  box-shadow: 0px 0px 50px -20px #000;
+}
+.buttons{
+  margin-top: 20px;
+}
+</style>
+</body>
+
 </html>
