@@ -69,7 +69,7 @@ $result = $conn->query($sql);
                     <div class="dropdown-content">
                         <a href="Edit Profile.php"> <span class="material-icons licon">
                                 person
-                            </span> Edit Profile</a>
+                            </span>  Profile</a>
                         <a href="logout.php">
                             <span class="material-icons licon">
                                 exit_to_app
@@ -191,7 +191,7 @@ $conn->close();
 ?> 
 </div>
 <br>
-	 <button class="b1" style="margin-left: 1000px;"><a href="Request History1.php">Back</a></button>
+	 <button class="b1" style="margin-left: 1000px; "><a href="Request History1.php">Back</a></button>
 
      
 </html>	 
@@ -223,13 +223,13 @@ h1{
 .select{
 
  
-height:35px;
+height:30px;
 width:138px;
 border-radius:20px;
 background-color:#56CE94;
 border: none;
 text-align:center;
-                 
+margin-left: 30px;           
 
                     
 
@@ -257,24 +257,7 @@ td {
 
 }
 
-.select{
-	
-	 
-    height:40px;
-    width:138px;
-    border-radius:20px;
-    background-color:#56CE94;
-     border: none;
-    text-align:center;
-                        
-     
-                           
-       
-   }
-   
-   
-                         
-   
+
    
    
    .midiv{
@@ -286,14 +269,14 @@ td {
    margin-top:10px;
    outline:none;
    width: 775px;
-
+   
 }
                   
 
 .box{
                   
                     
-                  height:35px;
+                  height:30px;
                   width:150px;
                   margin-left:20px;
                   margin-top:0px;
@@ -306,7 +289,7 @@ td {
                  
 				
              .b1{
-					      height:35px;
+					      height:30px;
                           width:100px;
                           
 						  color:#FFF5F3;

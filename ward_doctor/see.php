@@ -1,100 +1,117 @@
-
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" >
 <head>
-<link rel="stylesheet" href="./css/stylek.css">
-    <link rel="stylesheet" href="./css/nbtssl/nbtssl.min.css">
-    <link rel="stylesheet" href="./css/fontawesome-free-5.15.4/css/all.css">
-    <link rel="stylesheet" href="./css/mediaquery.css">
+  <meta charset="UTF-8">
+  <title>side-ward doctor</title>
+  
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
+<link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./style.css">
 
-<meta name="viewport"
-		content="width=device-width, initial-scale=1.0" />
-		
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-		 
-<link rel="stylesheet" href="https://unpkg.com/purecss@2.0.6/build/pure-min.css">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="style1.css">
-
+<link rel="stylesheet" href="./stylek2.css">
 
 </head>
-<body style="background-color:#FFC3BF;">
- 
-<div id="image"></div>
-<div class="logo-massaviu">
-  &nbsp; &nbsp; <img src="icon.png" width="15%">
-</div>
-<ul class="top">
-
-<li>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <font size="5px"> National Blood Transfusion Service  </font size></li>
-
- <li>
-<div class="top-right">
-            <div class="notification">
-                <span class="material-icons licon">
-                    notifications
-                </span>
+<body>
+<!-- partial:index.partial.html -->
+<div class="layout has-sidebar fixed-sidebar fixed-header">
+      <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
+        <a id="btn-collapse" class="sidebar-collapser"><i class="ri-arrow-left-s-line"></i></a>
+        
+        <div class="sidebar-layout">
+          <div class="sidebar-header">
+            <div class="pro-sidebar-logo">
+              <div><img src="logo.png" alt="logo"></div>
+              <h5>Save A Life</h5>
             </div>
-			&nbsp; 
-			<div class="person">
-                <span class="material-icons licon">
-                    person
-                </span>
-            </div>
-			&nbsp;
-      <div class="name"><?php
-       session_start();
-     echo " " . $_SESSION['Name_With_Initials'];
-    ?>
-	<br>Ward doctor</div>
-		 <div class="dropdown">
-               <span class="material-icons licon">
-                    arrow_drop_down
-                </span> 
-				<div class="dropdown-content">
-  <a href="Edit Profile.php"> <span class="material-icons licon">
-  person
-                </span> Edit Profile</a>
-  <a href="logout.php">
-  <span class="material-icons licon">
-  exit_to_app
-                </span>  
-  Log out</a>
-  </div>
-            </div>
- </li>
- </div>
-</ul>
-
-<div class="sidenav">
- <button class="dropdown-btn" style=background-color:#DB2A54;><a href="see.php">Home</a></button>
- 
-  <button class="dropdown-btn" ><a href="Make blood request.php">Make Blood request</a> </button>
-
-  <button class="dropdown-btn"><a href="Request History1.php">Request History </a>  </button>
-  
-  </div>
-
- </ul>
-</div>
-<br>
+          </div>
+          <div class="sidebar-content">
+            <nav class="menu open-current-submenu">
+              <ul>
+                <li class="menu-header"><span></span></li>
+                <li class="menu-item">
+                  <a href="see.php">
+                    <span class="menu-icon">
+                      <i class="ri-home-fill"></i>
+                    </span>
+                    <span class="menu-title">Home</span>
+                    
+                  </a>
+                  <div class="sub-menu-list">
+                    
+                  </div>
+                </li>
+                <li class="menu-item">
+                  <a href="Make blood request.php">
+                    <span class="menu-icon">
+                      <i class="ri-edit-box-fill"></i>
+                    </span>
+                    <span class="menu-title">Make Blood Request</span>
+                  </a>
+                  <div class="sub-menu-list">
+                    
+                  </div>
+                </li>
+                <li class="menu-item">
+                  <a href="Request History1.php">
+                    <span class="menu-icon">
+                      <i class="ri-history-line"></i>
+                    </span>
+                    <span class="menu-title">Request History</span>
+                  </a>
+                  <div class="sub-menu-list">
+                    
+                  </div>
+                </li>
+                
+                
+                <li class="menu-header" style="padding-top: 40px"><span>  </span></li>
+                <li class="menu-item">
+                  <a href="Edit Profile.php">
+                    <span class="menu-icon">
+                      <i class="ri-user-line"></i>
+                    </span>
+                    <span class="menu-title">Profile</span>
+                    
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="#">
+                    <span class="menu-icon">
+                      <i class="ri-notification-line"></i>
+                    </span>
+                    <span class="menu-title">Notification</span>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="logout.php">
+                    <span class="menu-icon">
+                      <i class="ri-logout-box-r-line"></i>
+                    </span>
+                    <span class="menu-title">Logout</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </aside>
+      <div id="overlay" class="overlay"></div>
+      <div class="layout">
+        <main class="content">
+          <div>
+            <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
 <div class="col-9 ">
-                <div class="frm-login ">
+                <div class="form">
                     <div class="card frm-form ">
-                        <div class="card-body frm-body ">
+                        <div class="form-body ">
 
-                               
-                          
-                                <h1 class="txt-l ">Welcome back to NBTS</h1>
-            <h1 class="txt-l " style=margin-left:120px;> <div class="name">Dear Dr.<?php 
-                       echo " " . $_SESSION['Name_With_Initials'];
-                         ?></h1>
-            <h2 class="txt-l ">You have sucessfully accessed to your Ward Doctor Account</h1>
-                                
-                            
-
+                       
+                        <h1 class="txt-l ">Welcome back</h1>
+                            <h2 class="txt-l ">Dear Mr.<?php
+                              echo " " . $_SESSION['Name_With_Initials'];
+                                   ?></h2>
+                            <h3 class="txt-l ">You have sucessfully accessed to your Ward doctor Account</h3>
+                                            
                         </div>
                     </div>
                 </div>
@@ -103,8 +120,33 @@
         <div class="col " width="10 "></div>
     </div>
 
-
-
+            
+</div>
+        </main>
+       
+      </div>
+    </div>
+<!-- partial -->
+  <script src='https://unpkg.com/@popperjs/core@2'></script><script  src="./script.js"></script>
+       
+       
+<style>
+  .form{ 
+  text-align: center;
+   margin-left: 80px;
+   margin-top: 150px;
+  }
+.form-body{
+  padding: 10px 30px;
+  width: 650px;
+  background-color:white ;
+  border-radius: 20px;
+}
+  .layout{
+    background-color: #d9dbdb;
+}
+	
+</style>
 </body>
 
 </html>
