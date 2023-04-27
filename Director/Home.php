@@ -5,8 +5,199 @@ session_start();
 
 
  <?php
+   require 'conp.php';
    if(isset($_SESSION["ID"]))   {
+
+    $m= $_SESSION["Name"];
+
+
+	$query = "select * from director where UserName ='$m'";
+
+
+   		
+		$resultd = $conn->query($query);
+		
+		//echo "Error in ".$vql."<br>".$conn->error;
+
+if($resultd->num_rows>0)
+
+{        
+  
+ while($row = $resultd->fetch_assoc())
+ 
+ {
+	  
+
+
+   
+	 $x= $row["Name_With_Initials"];
+   
+  
+  
+
 	
+  }
+  
+	
+}	
+
+
+
+    $tql ="select Count(*) AS count
+    from MLT
+    where Remark != 'Removed'";
+
+
+$result = $conn->query($tql);
+
+	
+//$sql= "select * from stock where Hospital_ID='$ty' and No_of_packs <= 2";
+//$result = $conn->query($sql);
+
+if($result->num_rows>0)
+
+{   
+  $row = $result->fetch_assoc();
+  $MLT= $row["count"];
+  
+}
+
+
+
+$nql ="select Count(*) AS countn
+    from Nurse
+    where Remark != 'Removed'";
+
+
+$resultn = $conn->query($nql);
+
+	
+//$sql= "select * from stock where Hospital_ID='$ty' and No_of_packs <= 2";
+//$result = $conn->query($sql);
+
+if($resultn->num_rows>0)
+
+{   
+  $row = $resultn->fetch_assoc();
+  $Nurse= $row["countn"];
+  
+}
+    
+
+$wql ="select Count(*) AS countw
+    from warddoctor
+    where Remark != 'Removed'";
+
+
+$resultw = $conn->query($wql);
+
+	
+//$sql= "select * from stock where Hospital_ID='$ty' and No_of_packs <= 2";
+//$result = $conn->query($sql);
+
+if($resultw->num_rows>0)
+
+{   
+  $row = $resultw->fetch_assoc();
+  $Ward= $row["countw"];
+  
+}
+
+
+
+
+
+
+
+
+
+$bql ="select Count(*) AS countb
+    from bloodbank_doctor
+    where Remark != 'Removed'";
+
+
+$resultb = $conn->query($bql);
+
+	
+//$sql= "select * from stock where Hospital_ID='$ty' and No_of_packs <= 2";
+//$result = $conn->query($sql);
+
+if($resultb->num_rows>0)
+
+{   
+  $row = $resultb->fetch_assoc();
+  $blood= $row["countb"];
+  
+}
+
+
+
+
+$dql ="select Count(*) AS countd
+    from bloodbank_doctor
+    where Remark != 'Removed'";
+
+
+$resultd = $conn->query($dql);
+
+	
+//$sql= "select * from stock where Hospital_ID='$ty' and No_of_packs <= 2";
+//$result = $conn->query($sql);
+
+if($resultd->num_rows>0)
+
+{   
+  $row = $resultd->fetch_assoc();
+  $blood= $row["countd"];
+  
+}
+
+
+
+
+$hql ="select Count(*) AS counth
+    from hospital
+    where Remark != 'Non-functioning'";
+
+
+$resulth = $conn->query($hql);
+
+	
+//$sql= "select * from stock where Hospital_ID='$ty' and No_of_packs <= 2";
+//$result = $conn->query($sql);
+
+if($resulth->num_rows>0)
+
+{   
+  $row = $resulth->fetch_assoc();
+  $Hospital= $row["counth"];
+  
+}
+
+
+
+
+$Dql ="select Count(*) AS countD
+    from donors
+    where Remark != 'Remove'";
+
+
+$resultD = $conn->query($Dql);
+
+	
+//$sql= "select * from stock where Hospital_ID='$ty' and No_of_packs <= 2";
+//$result = $conn->query($sql);
+
+if($resultD->num_rows>0)
+
+{   
+  $row = $resultD->fetch_assoc();
+  $Donor= $row["countD"];
+  
+}
+
+
+    
 	
 ?>
 <html lang="en" >
@@ -238,7 +429,7 @@ session_start();
             <div class="info">
          
             <div class="welcometext"><center>Welcome <div class="usernametext">
-               <!--<?php echo $_SESSION['user']; ?>-->Ms Hiruni</center>
+               <?php echo $x; ?> </center>
             </div></div>
             <br> 
             <span>
@@ -246,19 +437,19 @@ session_start();
                 <tr>
                     <td>
                         <p id="rcorners">
-                            Today appointments
+                           Donors
                             </br>
                             <span style="color:#0D5C75; font-size: 70px; font-weight: 700;">
-                            06
+                            <?php echo $Donor; ?>
                             </span>
                         </p>
                     </td>
                     <td>
                         <p id="rcorners">
-                            Pending Lab Reports
+                            Hospitals
                             </br>
                             <span style="color:#0D5C75; font-size: 70px; font-weight: 700;">
-                            13
+                            <?php echo $Hospital; ?>
                             </span>
                         </p>
                     </td>
@@ -270,19 +461,43 @@ session_start();
                 <tr>
                     <td>
                         <p id="rcorners">
-                            Today appointments
+                            Blood bank doctor
                             </br>
                             <span style="color:#0D5C75; font-size: 70px; font-weight: 700;">
-                            06
+                            <?php echo $blood; ?>
                             </span>
                         </p>
                     </td>
                     <td>
                         <p id="rcorners">
-                            Pending Lab Reports
+                           MLT
                             </br>
                             <span style="color:#0D5C75; font-size: 70px; font-weight: 700;">
-                            13
+                            <?php echo $MLT; ?>
+                            </span>
+                        </p>
+                    </td>
+                </tr>
+         
+            </table>
+
+            <table class="center">
+                <tr>
+                    <td>
+                        <p id="rcorners">
+                            Ward doctor
+                            </br>
+                            <span style="color:#0D5C75; font-size: 70px; font-weight: 700;">
+                            <?php echo $Ward; ?>
+                            </span>
+                        </p>
+                    </td>
+                    <td>
+                        <p id="rcorners">
+                           Nurse
+                            </br>
+                            <span style="color:#0D5C75; font-size: 70px; font-weight: 700;">
+                            <?php echo $Nurse; ?>
                             </span>
                         </p>
                     </td>

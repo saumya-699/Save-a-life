@@ -349,7 +349,7 @@ echo "
                             <input type='tel' placeholder='Enter the contact number' name='contactNumber'  class='form-control txt-input'  id='contact' pattern='[0-9]{10}' required>
 							
 							 <label for='exampleFormControlInput1' class='form-label lbl star'>Date of Appoinment</label>
-                             <input type='text'  name='DOA' id='DOA' class='form-control txt-input' value='$date'>
+                             <input type='date'  name='DOA' id='DOA' class='form-control txt-input' value='$date'>
 				
 							 <label for='exampleFormControlInput1' class='form-label lbl star'>User Name</label>
                              <input type='text' name='Uname' id='Uname' class='form-control txt-input' required>

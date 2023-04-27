@@ -339,7 +339,7 @@ echo "
 							   <div class='input-group mb-4'>
                         <i class='fas fa-calendar-alt input-group-text'></i>
 
-                        <input type='datetime' name='DOB' id='DOB' class='datepicker_input form-control txt-input' placeholder='Select Date' required>
+                        <input type='date' name='DOB' id='DOB' class='datepicker_input form-control txt-input' placeholder='Select Date' required>
                     </div>
 
         
@@ -355,8 +355,8 @@ echo "
                            <label for='exampleFormControlInput1' class='form-label lbl star'>Contact Number</label>
                             <input type='tel' placeholder='Enter the Contact Number' name='contactNumber'  class='form-control txt-input'  id='contact' pattern='[0-9]{10}' required>
 							
-							 <label for='exampleFormControlInput1' class='form-label lbl star'>Date of Appoinment</label>
-                             <input type='text'  name='DOA' id='DOA' class='form-control txt-input' value='$date'>
+							 <label >Date of Appoinment</label>
+                             <input type='date'  name='DOA'   value='$date'>
 				
 							 <label for='exampleFormControlInput1' class='form-label lbl star'>User Name</label>
                              <input type='text' name='Uname' id='Uname' class='form-control txt-input' required>

@@ -14,6 +14,7 @@ if(isset($_POST['BtnSubmit']))
     $HName=$_POST["hospital"];
     $Specialization=$_POST["Specialization"];
 	$SLMC=$_POST["SLMC"];
+  $DOA=$_POST["DOA"];
 	$Email=$_POST["Email"];
 	$contactNumber=$_POST["contactNumber"];
 	$Uname=$_POST["Uname"];
@@ -112,7 +113,7 @@ else
 
 	
 }
-    $sql="insert into warddoctor(WardDoctor_ID,Name_With_Initials,Hospital_ID,HospitalName,Specialization,SLMC_Number,Email,ContactNumber,UserName,Password,Remark,Director_ID)VALUES(' ','$Name','$y','$HName','$Specialization','$SLMC','$Email','$contactNumber','$Uname','$password','Added','$x')";
+    $sql="insert into warddoctor(WardDoctor_ID,Name_With_Initials,Hospital_ID,HospitalName,Specialization,SLMC_Number,Email,ContactNumber,UserName,Password,AppointmentDate,RetiringDate,Remark,Director_ID)VALUES(' ','$Name','$y','$HName','$Specialization','$SLMC','$Email','$contactNumber','$Uname','$password','$DOA','','Added','$x')";
     if($conn->query($sql))
      {
       
