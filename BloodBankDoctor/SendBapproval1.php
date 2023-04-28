@@ -1,59 +1,26 @@
-<?php 
-session_start();
+<?php
+   session_start();
+include "conp.php";
+
+$sql = "SELECT * FROM blood_testing_result";
+$result = $conn->query($sql);
 
 ?>
 
-
- <?php
-   if(isset($_SESSION["ID"]))   {
-	  require "conp.php";
-	  $m= $_SESSION["Name"];
-    $query = "select * from bloodbank_doctor where UserName ='$m'";
-    
-    
-           
-    $resultd = $conn->query($query);
-    
-    //echo "Error in ".$vql."<br>".$conn->error;
-    
-    if($resultd->num_rows>0)
-    
-    {        
-    
-    while($row = $resultd->fetch_assoc())
-    
-    {
-    
-    
-    
-    
-    $x= $row["Name_With_Initials"];
-    
-    
-    
-    
-    
-    }
-    
-    
-    }
-     			
-?>
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
   <title>side bar- blood bank doctor</title>
-  <title>side bar- blood bank doctor</title>
- <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
+  
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
 <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
 <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./styleM.css">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
- <link rel="stylesheet" href="StyleSearch.css"> 
- <link rel="stylesheet" href="StyleIcons.css"> 
-
+<script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="StyleSearch.css"> 
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -228,68 +195,77 @@ session_start();
           <div>
             <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a></div>
              <!--add your content from here-->
+           
+
+             <form method="post" action="search_donor.php">
  
-<?php
-
-
-require 'conp.php';
-    
-$sql= "select * from sent_request where Requested_by='$x'";
-$result = $conn->query($sql);
-
-if($result->num_rows>0)
-
-{     
-
- echo  "<form method='post' action='searchNurse.php'>
+ <div class="ta">
  
-<div class='ta'>
-
  
+  <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
+  <option value="Donor_Id" selected><b> Donor Id</b></option>
+                              <option value="Donor_Name"><b> Donor Name</b></option>
+                              <option value="NIC"><b>NIC</b></option>
+                              <option value="Blood_Group"><b>Blood Group</b></option>
+                              <option value="Gender"><b>Gender</b></option>
+                              <option value="province"><b>Provicel</b></option>
+                             <option value="postal"><b> Postal Code</b></option>
+                              </select>
+ 
+ 
+ <input type="text" placeholder="type here" name="data" id="data" class="box">
+ 
+  <button type="submit"  name="BtnSubmit" id="search" class="b1" ><b>Search</b></button>
+ </div>
+ 
+ 
+ </form>
+ <?php
+if(isset($_SESSION["ID"])) {
+ // include "config.php";
+  $m = $_SESSION["Name"];
+  $query = "SELECT * FROM bloodbank_doctor WHERE UserName ='$m'";
+  $result1 = $conn->query($query);
 
- <font size=3> Search by </font></b>  <br/> <br/><select name= 'search' class='select'>
-                             <option value='Position'><b> position</b></option>
-                             <option value='Nurse_ID'><b> Nurse_ID</b></option>
-                             <option value='Email' selected><b>Email</b></option>
-		                    <option value='ContactNumber' selected><b> Contact number</b></option>
-                             </select>
+   if($result1->num_rows > 0) {        
+    while($row = $result1->fetch_assoc()) {
+     // $x = $row["MLT_ID"];
+      $y= $row["Hospital_ID"];
+
+    }
+  }
+
+  
+}
 
 
-<input type='text' placeholder='type here' name='data' id='data' class='box'>
 
- <button type='submit'  name='BtnSubmit' id='search' class='b1' ><b>Search</b></button>
-</div>
+if(isset($_POST['view']))  
+
+{	
+
+   $did=$_POST['RequestID'];
+   $batchid= $_POST['Requestbatch'];
+   $sql = "SELECT * FROM blood_testing_result where process_date ='$did' AND Hospital_ID='$y' AND batch_number='$batchid'";
+   $result = $conn->query($sql);
 
 
-</form>";
+                    echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:200px;'>"."Test result ID"."</th>"."<th style='text-align:center;width:120px;'>"."Donar ID"."</th>"."<th style='text-align:center;width:100px;'>"."Blood group"."</th>"."<th>"."Malaria result"."</th>"."<th>"." HIV result"."</th>"."<th>"."HBV result"."</th>"."<th>"."HCV result"."</th>"."<th>"."VDRL result"."</th>"."<th>"."Processed Date"."</th>"."<th>"."Batch number"."</th>"."</tr>";
+                    echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=12'>"."</td>"."</tr>";
+                    while($row = $result->fetch_assoc())
    
+                    {         
+                    echo  "<tr>"."<td>".$row["test_result_id"]."</td>"."<td>".$row["Donor_Id"]."</td>"."<td>".$row["blood_group"]."</td>"."<td>".$row["malaria_result"]."</td>"."<td>".$row["hiv_result"]."</td>"."<td>".$row["hbv_result"]."</td>"."<td>".$row["hcv_result"]."</td>"."<td>".$row["vdrl_result"]."</td>"."<td>".$row["process_date"]."</td>"."<td>".$row["batch_number"]."</td>";
+	  
+                    echo "</tr>";
 
-	   
-	   //echo  "<div class='tab'>";
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Request_ID"."</th>"."<th style='text-align:center;width:120px;'>"."Requested_hospital_name"."</th>"."<th>"."Requested_by"."</th>"."<th>"."Requeired_blood_group"."</th>"."<th style='width:120px;'>"."Status"."</th>"."<th style='width:120px;'>"."Action"."</th>"."</tr>";
-      echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
-   while($row = $result->fetch_assoc())
-   
-   {     
-     
-	  echo  "<tr>"."<td>".$row["Request_ID"]."</td>"."<td>".$row["Requested_hospital_name"]."</td>"."<td>".$row["Requested_by"]."</td>"."<td>".$row["Requeired_blood_group"]."</td>"."<td>".$row["status"]."</td>";
-	   echo "<td><form method='POST' action ='ShowAllSentRequest.php'>
-                <input type=hidden name=Request_ID value=".$row["Request_ID"].">
-                <button type=submit value=view name=view  class='fp'><img src=eye.png width=43 height=37></button>
-                </form>
-	
-               
-                </td>";
-				 echo "</tr>";
-	 
-	   echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
+     echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=12'>"."</td>"."</tr>";
 	  
 	}
-	
-	 echo "</font>";
-	 echo  "</font>";   
+	echo  "</font>"; 
+	 echo  "</font>";
 	 echo "</table>";
-	// echo "</div>";
+	
 	
 	
 }	
@@ -297,9 +273,9 @@ if($result->num_rows>0)
 else
 
 {
-  //echo "Error in ".$sql."<br>".$conn->error;
+  echo "Error in ".$sql."<br>".$conn->error;
 
- echo "<br> <br><center> <b>No results</b></center>";
+ echo "no results";
 
 }
 
@@ -307,36 +283,23 @@ $conn->close();
 ?>
 
 
-<script>
-function myConfirm() {
-  var result = confirm("Want to delete?");
-  if (result==true) {
-   return true;
-  } else {
-   return false;
-  }
-}
 
-</script>
-
-          
+            
+          </div>
         </main>
-     
+       
+      </div>
+    </div>
 <!-- partial -->
   <script src='https://unpkg.com/@popperjs/core@2'></script><script  src="./script.js"></script>
 
 </body>
 </html>
-	<?php
-	
-}
- else 
-	 
-	 {echo '<script type="text/javascript">';
-		 echo 'alert("Please log in first");';
-         
-		echo 'window.location.href="userloginFront.php";';
-  echo '</script>';
-	 }
- 
-?>
+
+
+  
+
+
+
+
+
