@@ -20,7 +20,7 @@ $result = $conn->query($sql);
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
 <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="StyleSearch.css"> 
+<link rel="stylesheet" href="StyleSearch1.css"> 
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -244,7 +244,7 @@ if(isset($_POST['view']))
 
 {	
 
-   $did=$_POST['RequestID'];
+   $did=$_POST['process_date'];
    $batchid= $_POST['Requestbatch'];
    $sql = "SELECT * FROM blood_testing_result where process_date ='$did' AND Hospital_ID='$y' AND batch_number='$batchid'";
    $result = $conn->query($sql);

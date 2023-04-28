@@ -12,6 +12,7 @@ if(isset($_SESSION["ID"])) {
    if($result1->num_rows > 0) {        
     while($row = $result1->fetch_assoc()) {
       $x = $row["Hospital_ID"];
+      $ID =$row["BloodBank_doctor_ID"];
     }
   }
 
@@ -33,7 +34,8 @@ if(isset($_SESSION["ID"])) {
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
 <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
-<link rel="stylesheet" href="StyleSearch.css"> 
+ <link rel="stylesheet" href="StyleSearch.css"> 
+ <link rel="stylesheet" href="StyleIcons.css"> 
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -241,27 +243,29 @@ if(isset($_SESSION["ID"])) {
                 if ($result->num_rows > 0) {
 
                  //   echo  "<div class='tab'>";
-                    echo  "<table border=1>"."<tr>"."<th style='text-align:center'>"."Processed Date"."</th>"."<th style='text-align:center;'>"."Batch number"."</th>"."<th style='text-align:center;width:120px;'>"."Click to view more information"."</th>"."<th style='text-align:center;width:120px;'>"."Click button to request for approval"."</th>"."</tr>";
+                    echo  "<table border=1>"."<tr>"."<th style='text-align:center'>"."Processed Date"."</th>"."<th style='text-align:center;'>"."Batch number"."</th>"."<th style='text-align:center;width:120px;'>"."status"."</th>"."<th>"."Action"."</th>"."</tr>";
                     echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
                  while($row = $result->fetch_assoc()) {    
                            
      
-     echo  "<tr>"."<td>".$row["process_date"]."</td>"."<td>".$row["batch_number"]."</td>";   
+     echo  "<tr>"."<td>".$row["process_date"]."</td>"."<td>".$row["batch_number"]."</td>"."<td>".$row["status"]."</td>";   
     
 	 echo "<td><form method='POST' action ='SendBapproval1.php'>
    <input type=hidden name=Requestbatch value=".$row["batch_number"]." >
-   <input type=hidden name=RequestID value=".$row["process_date"]." >
+   <input type=hidden name=process_date value= ".$row["process_date"]." >
    <button type=submit value=view name=view  id=btn class='x'><i class='fa-sharp fa-solid fa-eye'></i></button>
      </form>    	
 
-    </td>"; 
-    echo "<td><form method='POST' action =''>
-    <input type=hidden name=RequestID value=".$row["process_date"]." >
+    
+    <form method='POST' action ='BloodREsultsI.php'>
+    <input type=hidden name=process_date value=".$row["process_date"]." >
     <input type=hidden name=Requestbatch value=".$row["batch_number"]." >
-    <button type=submit value=submit   class='b2'>Send</button>
+    <button type=submit  name=check id=btn class=y><i class='fa-regular fa-circle-check'></i></button>
      </form>    	
 
     </td>"; 
+
+  
     //echo "</div>";	
      echo "</tr>";
 
@@ -289,20 +293,50 @@ $conn->close();
 ?>
 
 <style>
-.b2 {
-  margin-top:5px;
-  background-color: red;
-  color: white;
-  border: 5px solid red;
-  border-radius: 5px;
-  width: 80px;
-  height:35px;
-  
 
-}
  
 </style>
+<?php
+if(isset($_POST['check']))  
 
+{	  include "conp.php";
+
+     $status="checked";
+   $did=$_POST['process_date'];
+ 
+   $RBI=$_POST['Requestbatch'];
+   $sql="update blood_testing_result set status ='$status', BloodBank_doctor_ID ='$ID'  where process_date='$did'and  Hospital_ID ='$x' and batch_number= '$RBI' ";
+   
+   
+   
+     if ($conn->query($sql) === TRUE) 
+				   {
+                          
+                           echo '<script type="text/javascript">';
+		                  //echo 'alert("Details updated successfully");';
+         
+		                     echo 'window.location.href="BloodREsultsI.php";';
+		                  echo '</script>';
+
+                   } 
+					 
+					 else 
+			               {  
+                              echo '<script type="text/javascript">';
+		                     // echo 'alert("Error in updating details.Try again!");';
+                              echo "Error in ".$query."<br>".$conn->error;
+		                      echo 'window.location.href="updateAccount.php";';
+		                      echo '</script>';
+
+                            }
+							
+							
+							
+							
+ 
+}
+
+?>
           
 </div>
         </main>

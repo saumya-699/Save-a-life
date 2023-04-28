@@ -309,16 +309,16 @@ if($result->num_rows>0)
    {     
      
 	  echo  "<tr>"."<td>".$row["Requesting_hospital_name"]."</td>"."</td>"."<td>".$row["Requested_by"]."</td>"."<td>".$row["Requeired_blood_group"]."</td>"."<td>".$row["Requeired_blood_component"]."</td>"."<td>".$row["Requeired_no_of_packs"]."</td>"."<td>".$row["Date"]."</td>"."<td>".$row["status"]."</td>";
-	   echo "<td><form method='POST' action ='checkExternalRequest.php'>
+	   echo "<td><form method='POST' action ='checkExternalRequestI.php'>
                 <input type=hidden name=Request_ID value=".$row["Request_ID"]." >
                 <button type=submit name=Accept id=btn class=s><i class='fa-solid fa-thumbs-up'></i></button>
                 </form>
-				<form method='POST' action ='checkExternalRequest.php'>
+				<form method='POST' action ='checkExternalRequestI.php'>
                 <input type=hidden   name=Request_ID value=".$row["Request_ID"]." >
                 <button type=submit  name=Available id=btn class=t><i class='fa-regular fa-circle-check'></i></button>
                 </form> 
 				
-				<form method='POST' action ='checkExternalRequest.php'>
+				<form method='POST' action ='checkExternalRequestI.php'>
                 <input type=hidden name=Request_ID value=".$row["Request_ID"].">
                 <button type=submit name=NotAvailable  id=btn class=u><i class='fa-regular fa-circle-xmark'></i></button>
                 </form> 
@@ -369,7 +369,7 @@ if(isset($_POST['Accept']))
                            echo '<script type="text/javascript">';
 		                  //echo 'alert("Details updated successfully");';
          
-		                     echo 'window.location.href="checkExternalRequest.php";';
+		                     echo 'window.location.href="checkExternalRequestI.php";';
 		                  echo '</script>';
 
                    } 
@@ -409,7 +409,7 @@ if(isset($_POST['Available']))
                            echo '<script type="text/javascript">';
 		                  //echo 'alert("Details updated successfully");';
          
-		              echo 'window.location.href="checkExternalRequest.php";';
+		              echo 'window.location.href="checkExternalRequestI.php";';
 		                  echo '</script>';
 
                    } 
@@ -448,7 +448,7 @@ if(isset($_POST['NotAvailable']))
                            echo '<script type="text/javascript">';
 		                  //echo 'alert("Details updated successfully");';
          
-		                 echo 'window.location.href="checkExternalRequest.php";';
+		                 echo 'window.location.href="checkExternalRequestI.php";';
 		                  echo '</script>';
 
                    } 
