@@ -204,14 +204,16 @@ session_start();
 		
       <?php
  
- echo "<form action='indexy.php' method='POST'><button name='send'>send </button></form>";
+
  require 'conp.php';
- if(isset($_POST['send']))  
+ $date =date("Y-m-d");
+ if(isset($_POST['go']))  
  
  {	
  
  
      $m= $_SESSION["Name"];
+    
      $queryx = "select * from bloodbank_doctor where UserName ='$m'";
      
      
@@ -241,15 +243,15 @@ session_start();
      
      
      } 
-    $query="select * from blood_testing_result,donors where donors.Donor_Id =blood_testing_result.Donor_Id and (BloodBank_doctor_ID='$x' and (malaria_result='positive' or hiv_result='positive' or hbv_result='positive' or hcv_result='positive' or vdrl_result='positive'))"; //where BloodBank_doctor_ID='$x' and malaria_result='positive' or hiv_result='positive' or hbv_result='positive' or hbv_result='positive' or hbv_result='positive'
+    $query="select * from blood_testing_result,donors where donors.Donor_Id =blood_testing_result.Donor_Id and (BloodBank_doctor_ID='$x' and process_date='$date' and(malaria_result='positive' or hiv_result='positive' or hbv_result='positive' or hcv_result='positive' or vdrl_result='positive'))"; //where BloodBank_doctor_ID='$x' and malaria_result='positive' or hiv_result='positive' or hbv_result='positive' or hbv_result='positive' or hbv_result='positive'
     $result= $conn->query($query);
     
    if($result->num_rows>0)
  
-   {     
+   {     echo "<br> <br><br> <br><br> <br>";
     
     echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Email"."</th>"."<th>"."Full Name"."</th>"."<th>"."Identified desease"."</th>"."<th>"."Action"."</th>"."</tr>";
-    echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=5'>"."</td>"."</tr>";
+    echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=4'>"."</td>"."</tr>";
         
      while($row = $result->fetch_assoc())
     
@@ -260,39 +262,39 @@ session_start();
        
        
        
-       if($row["malaria_result"]=='positive')
+       if($row["malaria_result"]='positive')
        {
    echo  "<td>"."Malaria"."</td>";
            
        }
 
-      else if($row["hiv_result"]=='positive')
+      else if($row["hiv_result"]='positive')
        {
-   echo  "HIV";
+   echo  "<td>"."HIV"."</td>";
        }
     
-       else if($row["hbv_result"]=='positive')
+       else if($row["hbv_result"]='positive')
        {
-   echo  "<td>"."Hbv"."<td>";
+   echo  "<td>"."Hbv"."</td>";
        }
      
-       else if($row["hcv_result"]=='positive')
+       else if($row["hcv_result"]='positive')
        {
-   echo  "<td>"."HCV"."<td>";
+   echo  "<td>"."HCV"."</td>";
        }
-       else if($row["vdrl_result"]=='positive')
+       else if($row["vdrl_result"]='positive')
        {
-   echo  "VDRL";
+   echo  "<td>"."VDRL"."</td>";
        }
        
        
-       echo "</td>"."<td>".
+       echo "<td>".
        
        
        "<form method='POST' action ='index.php'>
                 <input type=hidden name=Request_ID value=".$row["Donor_Id"].">
                 <input type='hidden' name='email' value=".$row["Email"]."><br>
-                  <input type='hidden' name='subject' value='Desease diagnosis'><br>";
+                  <input type='hidden' name='subject' value='Desease diagnosis'>";
 
                   if($row["malaria_result"]='positive')
                   {
@@ -321,10 +323,10 @@ session_start();
 
 
                echo "<button type=submit name=send  id=btn class=u><i class='fa-solid fa-envelope-circle-check'></i></button>
-                </form> "."</td>"."</tr>";
+                "."</td>"."</form>"."</tr>";
         
         
-     echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=5'>"."</td>"."</tr>";
+     echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=4'>"."</td>"."</tr>";
               
      }
      

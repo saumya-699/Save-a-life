@@ -237,7 +237,7 @@ if(isset($_SESSION["ID"])) {
 
     
 
-        <form action="SendBapproval1.php" method="POST">
+        
            
                 <?php
                 if ($result->num_rows > 0) {
@@ -276,7 +276,7 @@ if(isset($_SESSION["ID"])) {
 	 echo  "</font>";
 	 echo "</table>";
 	
-	
+  
 	
 }	
 
@@ -289,13 +289,15 @@ else
 
 }
 
+
 $conn->close();
 ?>
+<form method='POST' action ='indexy.php'>
+    
+  
+    <button type=submit  name=go class=z>send mails</button>
+     </form> "; 
 
-<style>
-
- 
-</style>
 <?php
 if(isset($_POST['check']))  
 
@@ -343,6 +345,16 @@ if(isset($_POST['check']))
        
       </div>
     </div>
+
+    <style>
+.z{
+
+   margin-top:50px;
+   margin-left:800px;
+
+}
+
+</style>
 <!-- partial -->
   <script src='https://unpkg.com/@popperjs/core@2'></script><script  src="./script.js"></script>
 </body>

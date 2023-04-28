@@ -15,8 +15,8 @@ a {
 
 .container-shadow {
   position: absolute;
-  width: 525px;
-  height:1010px;
+
+  height:988px;
   left: 50%;
   margin-left: -262.5px;
   margin-top: 60px;
@@ -25,23 +25,18 @@ a {
 
 .container {
   position: absolute;
-  width: 510px;
-  height:1004px;
+  width: 525px;
+  height:980px;
   left: 50%;
   margin-left: -298.5px;
   margin-top: 60px;
 /*   background: url('https://bit.ly/2kBRtBE'); */
 /*   background: #673AB7; */
-/*background-color:#E0F1FF;*/
 background-color:#B2C0E0;
-
-
 /*background-image: linear-gradient(315deg, #ffffff 0%, #85C1E9 50%);*/
 
   box-shadow: 0px 0px 50px -20px #000;
 }
-
-
 
 .wrap {
   position: relative;

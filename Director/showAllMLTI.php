@@ -292,7 +292,7 @@ echo "
                               <div class='row btn-buttons'>
                           
                            
-                              <div class='col btn-but'> <input type='submit' name='btnCancel' value='Cancel' class='b2'></div>
+                              <div class='col btn-but'> <input type='submit' name='btnCancel' value='Back' class='b2'></div>
                              </div>
 
   

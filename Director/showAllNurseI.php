@@ -294,7 +294,7 @@ session_start();
 
 
          
-          <div class='col btn-but'> <a href='RemoveORUpdateWardDoctor.php'><input type='submit' name='btnCancel' value='Cancel' class='b2'></a></div>
+          <div class='col btn-but'> <a href='RemoveORUpdateWardDoctor.php'><input type='submit' name='btnCancel' value='Back' class='b2'></a></div>
      
 
 
