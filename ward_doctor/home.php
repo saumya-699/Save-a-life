@@ -1,40 +1,39 @@
-
-<?php 
+<?php
 
 session_start();
 
 if (isset($_SESSION['ward_doctor_id']) && isset($_SESSION['user_id'])) {
 
- ?>
+?>
 
-<!DOCTYPE html>
+     <!DOCTYPE html>
 
-<html>
+     <html>
 
-<head>
+     <head>
 
-    <title>HOME</title>
-    <link rel="stylesheet" href="Stylet.css">
+          <title>HOME</title>
+          <link rel="stylesheet" href="Stylet.css">
 
-</head>
-<body>
+     </head>
 
-     <h1>Hello, <?php echo $_SESSION['name']; ?></h1>
+     <body>
 
-     <a href="logout.php">Logout</a>
+          <h1>Hello, <?php echo $_SESSION['name']; ?></h1>
 
-</body>
+          <a href="logout.php">Logout</a>
 
-</html>
+     </body>
 
-<?php 
+     </html>
 
-}else{
+<?php
+
+} else {
 
      header("Location: index.php");
 
      exit();
-
 }
 
- ?>
+?>
