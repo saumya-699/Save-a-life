@@ -1,11 +1,23 @@
 <?php
+
 session_start();
 include "config.php";
+if (isset($_SESSION["ID"])) {
+  include "config.php";
+  $m = $_SESSION["Name"];
+  $query = "SELECT * FROM mlt WHERE UserName ='$m'";
+  $result1 = $conn->query($query);
 
-$sql = "SELECT * FROM blood_testing_result";
-$result = $conn->query($sql);
+  if ($result1->num_rows > 0) {
+    while ($row = $result1->fetch_assoc()) {
+      $x = $row["MLT_ID"];
+    }
+  }
+}
 
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -179,26 +191,22 @@ $result = $conn->query($sql);
       <main class="content">
         <div>
           <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
-          <h1>Send blood test results for approval</h1>
+          <h1> Blood Stock</h1>
 
-          <form method="post" action="Send test results for approval1Search.php">
+
+
+          <form method="post" action="BloodStocksearch.php">
 
             <div class="midiv">
 
 
-              <font size=3> Search by </font></b> <br /> <br /><select name="search" class="select">
-                <option value="test_result_id"><b>Test result ID</b></option>
-                <option value="donar_id"><b> Donar ID</b></option>
-                <option value="blood_group"><b>Blood group</b></option>
-                <option value="malaria_result" selected><b>Malaria result</b></option>
-                <option value="hiv_result"><b> HIV result</b></option>
-                <option value="hbv_result"><b>HBV result</b></option>
-                <option value="hcv_result"><b>HCV result</b></option>
-                <option value="vdrl_result"><b>VDRL result</b></option>
-                <option value="process_date" selected><b>Processed Date</b></option>
-                <option value="batch_number" selected><b>Batch number</b></option>
-              </select>
 
+              <font size=3> Search by </font></b> <br /> <br /><select name="search" class="select">
+                <option value="Blood_bagID" selected><b>Blood bag ID</b></option>
+                <option value="Blood_group"><b>Blood group</b></option>
+                <option value="Component_type"><b> Component type</b></option>
+                <option value="ExpiryDate"><b>Expiry Date</b></option>
+              </select>
 
 
               <input type="text" placeholder="type here" name="data" id="data" class="box">
@@ -209,237 +217,249 @@ $result = $conn->query($sql);
         </div>
 
         </form>
-        <?php
-        if (isset($_SESSION["ID"])) {
-          include "config.php";
-          $m = $_SESSION["Name"];
-          $query = "SELECT * FROM mlt WHERE UserName ='$m'";
-          $result1 = $conn->query($query);
 
-          if ($result1->num_rows > 0) {
-            while ($row = $result1->fetch_assoc()) {
-              $x = $row["MLT_ID"];
-              $y = $row["Hospital_ID"];
+        <div class="box">
+
+          <form action="Blood stock.php" method="POST">
+
+            <?php
+            if (isset($_POST['BtnSubmit'])) {
+
+              $search = $_POST["search"];
+              $data = $_POST["data"];
+              $sql = "select * from stock WHERE $search='$data' AND MLT_ID = '$x'";
+              $result = $conn->query($sql);
+
+              if ($result->num_rows > 0) {
+
+                echo  "<div class='tab'>";
+                echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;'>" . "Blood bag ID" . "</th>" . "<th style='text-align:center;'>" . "Blood group" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Component type" . "</th>" . "<th>" . "Expiry date" . "</th>" . "</tr>";
+                echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
+                while ($row = $result->fetch_assoc()) {
+
+
+                  echo  "<tr>" . "<td>" . $row["Blood_bagID"] . "</td>" . "<td>" . $row["Blood_group"] . "</td>" . "<td>" . $row["Component_type"] . "</td>" . "<td>" . $row["ExpiryDate"] . "</td>" . "</td>";
+
+                  echo "</div>";
+                  echo "</tr>";
+
+                  echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
+                }
+                echo  "</font>";
+                echo  "</font>";
+                echo "</table>";
+              } else {
+                echo "Error in " . $sql . "<br>" . $conn->error;
+
+                echo "no results";
+              }
             }
-          }
-        }
+            $conn->close();
+            ?>
+            <style>
+              table {
 
 
 
-        if (isset($_POST['view'])) {
+                width: 750px;
+                height: 15px;
+                border-collapse: collapse;
+                margin-top: 40px;
+                border: 0px transparent;
 
-          $did = $_POST['RequestID'];
-          $batchid = $_POST['Requestbatch'];
-          $sql = "SELECT * FROM blood_testing_result where process_date ='$did' AND MLT_ID='$x' AND batch_number='$batchid'";
-          $result = $conn->query($sql);
+              }
 
+              h1 {
 
-          echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;width:200px;'>" . "Test result ID" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Donar ID" . "</th>" . "<th style='text-align:center;width:100px;'>" . "Blood group" . "</th>" . "<th>" . "Malaria result" . "</th>" . "<th>" . " HIV result" . "</th>" . "<th>" . "HBV result" . "</th>" . "<th>" . "HCV result" . "</th>" . "<th>" . "VDRL result" . "</th>" . "<th>" . "Processed Date" . "</th>" . "<th>" . "Batch number" . "</th>" . "<th>" . "MLT ID" . "</th>" . "<th>" . "Hospital ID" . "</th>" . "</tr>";
-          echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
-          while ($row = $result->fetch_assoc()) {
-            echo  "<tr>" . "<td>" . $row["test_result_id"] . "</td>" . "<td>" . $row["donar_id"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "<td>" . $row["malaria_result"] . "</td>" . "<td>" . $row["hiv_result"] . "</td>" . "<td>" . $row["hbv_result"] . "</td>" . "<td>" . $row["hcv_result"] . "</td>" . "<td>" . $row["vdrl_result"] . "</td>" . "<td>" . $row["process_date"] . "</td>" . "<td>" . $row["batch_number"] . "</td>" . "<td>" . $row["MLT_ID"] . "</td>" . "<td>" . $row["Hospital_ID"] . "</td>";
+                margin-top: 70px;
+                margin-left: 300px;
+                margin-bottom: 100px;
+              }
 
-            echo "</tr>";
+              .select {
 
-            echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
-          }
-          echo  "</font>";
-          echo  "</font>";
-          echo "</table>";
-        } else {
-          echo "Error in " . $sql . "<br>" . $conn->error;
 
-          echo "no results";
-        }
+                height: 35px;
+                width: 138px;
+                border-radius: 20px;
+                background-color: #56CE94;
+                border: none;
+                text-align: center;
 
-        $conn->close();
-        ?>
 
-        <style>
-          table {
 
 
+              }
 
-            width: 750px;
-            height: 15px;
-            border-collapse: collapse;
-            margin-top: 40px;
-            margin-left: 80px;
-            border: 0px transparent;
 
-          }
 
-          h1 {
+              th {
 
-            margin-top: 70px;
-            margin-left: 200px;
-            margin-bottom: 100px;
-          }
 
-          .select {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                text-align: center;
+                padding-top: 25px;
+                padding-bottom: 25px;
+                padding-left: 20px;
+                padding-right: 10px;
+                border: 0px transparent;
 
-            height: 30px;
-            width: 120px;
-            border-radius: 20px;
-            background-color: #56CE94;
-            border: none;
-            text-align: center;
-            margin-left: 30px;
+              }
 
-          }
+              td {
+                text-align: center;
+                padding: 1px;
 
-          .box {
 
-            height: 30px;
-            width: 130px;
-            margin-left: 20px;
-            margin-top: 0px;
-            border-radius: 20px;
-            border: none;
-            text-align: center;
+              }
 
-          }
+              .select {
 
-          .b1 {
-            height: 30px;
-            width: 100px;
-            color: #FFF5F3;
-            margin-left: 20px;
-            border-radius: 20px;
-            background-color: #F3506D;
-            border: none;
-            cursor: pointer;
+                height: 30px;
+                width: 120px;
+                border-radius: 20px;
+                background-color: #56CE94;
+                border: none;
+                text-align: center;
+                margin-left: 30px;
 
-          }
+              }
 
-          th {
+              .box {
 
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            text-align: center;
-            padding-top: 25px;
-            padding-bottom: 25px;
-            padding-left: 20px;
-            padding-right: 10px;
-            border: 0px transparent;
+                height: 30px;
+                width: 130px;
+                margin-left: 20px;
+                margin-top: 0px;
+                border-radius: 20px;
+                border: none;
+                text-align: center;
 
-          }
+              }
 
+              .b1 {
+                height: 30px;
+                width: 100px;
+                color: #FFF5F3;
+                margin-left: 20px;
+                border-radius: 20px;
+                background-color: #F3506D;
+                border: none;
+                cursor: pointer;
 
+              }
 
-          td {
-            text-align: center;
-            padding: 1px;
 
 
-          }
+              .midiv {
 
+                margin-left: 150px;
+                margin-bottom: -10px;
+                padding: 15px 10px 30px 20px;
+                margin-top: -100px;
+                outline: none;
+                width: 774.5px;
+              }
 
-          .midiv {
 
-            margin-left: 150px;
-            margin-bottom: -50px;
-            padding: 15px 10px 30px 20px;
-            margin-top: -100px;
-            outline: none;
-            width: 774.5px;
-          }
 
+              .f2 {
 
+                margin-left: 50px;
+                margin-top: -100px;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                margin-bottom: 0px;
 
 
+              }
 
 
+              .f1 {
 
+                background-color: transparent;
+                margin-left: 10px;
+                margin-right: 20px;
+                margin-bottom: 10px;
+                margin-top: 10px;
+                border: none;
+                cursor: pointer;
 
-          .f2 {
 
-            margin-left: 50px;
-            margin-top: -100px;
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            margin-bottom: 0px;
+              }
 
+              .fp {
+                margin-top: 0px;
+                margin-left: 30px;
+                margin-bottom: -100px;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+              }
 
-          }
+              .tb {
+                display: inline-flex;
+                justify-content: space-evenly;
+                flex-wrap: nowrap;
+                align-items: baseline;
+                flex-direction: row;
+              }
 
+              .tab {
 
-          .f1 {
+                background-color: #F5F5F5;
+                margin-top: -40px;
+                margin-left: 60px;
+                margin-right: 265px;
 
-            background-color: transparent;
-            margin-left: 10px;
-            margin-right: 20px;
-            margin-bottom: 10px;
-            margin-top: 10px;
-            border: none;
-            cursor: pointer;
 
 
-          }
 
-          .fp {
-            margin-top: 0px;
-            margin-left: 30px;
-            margin-bottom: -100px;
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-          }
+              }
 
-          .tb {
-            display: inline-flex;
-            justify-content: space-evenly;
-            flex-wrap: nowrap;
-            align-items: baseline;
-            flex-direction: row;
-          }
 
+              .ta {
 
+                background-color: #F5F5F5;
+                margin-top: 60px;
+                margin-bottom: 0px;
+                margin-left: 370px;
+                margin-right: 119px;
+                padding-left: 20px;
 
+              }
 
-          .ta {
 
-            background-color: #F5F5F5;
-            margin-top: 60px;
-            margin-bottom: 0px;
-            margin-left: 370px;
-            margin-right: 119px;
-            padding-left: 20px;
 
-          }
+              tr {
 
+                background-color: white;
 
+              }
 
-          tr {
+              .visible {
+                cursor: pointer;
 
-            background-color: white;
 
+              }
 
-          }
+              .layout {
+                background-color: #d9dbdb;
+              }
+            </style>
 
-          .visible {
-            cursor: pointer;
 
-
-          }
-
-          .layout {
-            background-color: #d9dbdb;
-          }
-        </style>
-
+        </div>
+      </main>
 
     </div>
-    </main>
-
-  </div>
   </div>
   <!-- partial -->
   <script src='https://unpkg.com/@popperjs/core@2'></script>
   <script src="./script.js"></script>
-
 </body>
 
 </html>

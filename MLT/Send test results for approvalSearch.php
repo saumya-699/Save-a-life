@@ -1,4 +1,5 @@
 <?php
+include "config.php";
 session_start();
 if (isset($_SESSION["ID"])) {
   include "config.php";
@@ -11,12 +12,9 @@ if (isset($_SESSION["ID"])) {
       $x = $row["MLT_ID"];
     }
   }
-
-  $vql = "SELECT process_date, batch_number,status FROM blood_testing_result Where MLT_ID ='$x' GROUP BY process_date, batch_number order by process_date DESC ";
-  $result = $conn->query($vql);
 }
-?>
 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -193,6 +191,8 @@ if (isset($_SESSION["ID"])) {
           <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
           <h1> Send blood test results for approval</h1>
 
+
+
           <form method="post" action="Send test results for approvalSearch.php">
 
             <div class="midiv">
@@ -217,258 +217,264 @@ if (isset($_SESSION["ID"])) {
 
           <form action="Send test results for approval1.php" method="POST">
 
+
             <?php
-            if ($result->num_rows > 0) {
+            if (isset($_POST['BtnSubmit'])) {
 
-              echo  "<div class='tab'>";
-              echo  "<table border=1>" . "<tr>" . "<th style='text-align:center'>" . "Processed Date" . "</th>" . "<th style='text-align:center;'>" . "Batch number" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Click to view more information" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Click button to request for approval" . "</th>" . "</tr>";
-              echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
-              while ($row = $result->fetch_assoc()) {
+              $search = $_POST["search"];
+              $data = $_POST["data"];
+              $sql = "SELECT * FROM blood_testing_result WHERE $search = '$data' AND MLT_ID = '$x' GROUP BY process_date, batch_number order by process_date DESC";
 
+              $result = $conn->query($sql);
+              if ($result->num_rows > 0) {
 
-                echo  "<tr>" . "<td>" . $row["process_date"] . "</td>" . "<td>" . $row["batch_number"] . "</td>";
-
-                echo "<td class='tb'><form method='POST' action ='Send test results for approval1.php'>
-   <input type=hidden name=Requestbatch value=" . $row["batch_number"] . " >
-   <input type=hidden name=RequestID value=" . $row["process_date"] . " >
-     <button type=submit value=view name=view  class='fp'><img src=eye.png width=40 height=37></button>
-     </form>    	
-
-    </td>";
-                echo "<td class=''><form method='POST' action =''>
-    <input type=hidden name=RequestID value=" . $row["process_date"] . " >
-    <input type=hidden name=Requestbatch value=" . $row["batch_number"] . " >
-    <button type=submit value=submit   class='b2'>Send</button>
-     </form>    	
-
-    </td>";
-                echo "</div>";
-                echo "</tr>";
-
+                echo  "<div class='tab'>";
+                echo  "<table border=1>" . "<tr>" . "<th style='text-align:center'>" . "Processed Date" . "</th>" . "<th style='text-align:center;'>" . "Batch number" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Click to view more information" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Click button to request for approval" . "</th>" . "</tr>";
                 echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
+                while ($row = $result->fetch_assoc()) {
+
+
+                  echo  "<tr>" . "<td>" . $row["process_date"] . "</td>" . "<td>" . $row["batch_number"] . "</td>";
+
+                  echo "<td class='tb'><form method='POST' action ='Send test results for approval1.php'>
+       <input type=hidden name=Requestbatch value=" . $row["batch_number"] . " >
+       <input type=hidden name=RequestID value=" . $row["process_date"] . " >
+         <button type=submit value=view name=view  class='fp'><img src=eye.png width=40 height=37></button>
+         </form>    	
+    
+        </td>";
+                  echo "<td class=''><form method='POST' action =''>
+        <input type=hidden name=RequestID value=" . $row["process_date"] . " >
+        <input type=hidden name=Requestbatch value=" . $row["batch_number"] . " >
+        <button type=submit value=submit   class='b2'>Send</button>
+         </form>    	
+    
+        </td>";
+                  echo "</div>";
+                  echo "</tr>";
+
+                  echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
+                }
+                echo  "</font>";
+                echo  "</font>";
+                echo "</table>";
+              } else {
+                echo "Error in " . $sql . "<br>" . $conn->error;
+
+                echo "no results";
               }
-              echo  "</font>";
-              echo  "</font>";
-              echo "</table>";
-            } else {
-              echo "Error in " . $vql . "<br>" . $conn->error;
-
-              echo "no results";
             }
-
             $conn->close();
             ?>
+            <style>
+              table {
+
+
+
+                width: 750px;
+                height: 15px;
+                border-collapse: collapse;
+                margin-top: 40px;
+                border: 0px transparent;
+
+              }
+
+              h1 {
+
+                margin-top: 70px;
+                margin-left: 300px;
+                margin-bottom: 100px;
+              }
+
+              .select {
+
+
+                height: 35px;
+                width: 138px;
+                border-radius: 20px;
+                background-color: #56CE94;
+                border: none;
+                text-align: center;
+
+
+
+
+              }
+
+              .b2 {
+                background-color: red;
+                color: white;
+                border: 5px solid red;
+                border-radius: 15px;
+                width: 70px;
+
+
+              }
+
+
+              th {
+
+
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                text-align: center;
+                padding-top: 25px;
+                padding-bottom: 25px;
+                padding-left: 20px;
+                padding-right: 10px;
+                border: 0px transparent;
+
+              }
+
+              td {
+                text-align: center;
+                padding: 1px;
+
+
+              }
+
+              .select {
+
+                height: 30px;
+                width: 120px;
+                border-radius: 20px;
+                background-color: #56CE94;
+                border: none;
+                text-align: center;
+                margin-left: 30px;
+
+              }
+
+              .box {
+
+                height: 30px;
+                width: 130px;
+                margin-left: 20px;
+                margin-top: 0px;
+                border-radius: 20px;
+                border: none;
+                text-align: center;
+
+              }
+
+              .b1 {
+                height: 30px;
+                width: 100px;
+                color: #FFF5F3;
+                margin-left: 20px;
+                border-radius: 20px;
+                background-color: #F3506D;
+                border: none;
+                cursor: pointer;
+
+              }
+
+
+
+              .midiv {
+
+                margin-left: 150px;
+                margin-bottom: -10px;
+                padding: 15px 10px 30px 20px;
+                margin-top: -100px;
+                outline: none;
+                width: 774.5px;
+              }
+
+
+
+              .f2 {
+
+                margin-left: 50px;
+                margin-top: -100px;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+                margin-bottom: 0px;
+
+
+              }
+
+
+              .f1 {
+
+                background-color: transparent;
+                margin-left: 10px;
+                margin-right: 20px;
+                margin-bottom: 10px;
+                margin-top: 10px;
+                border: none;
+                cursor: pointer;
+
+
+              }
+
+              .fp {
+                margin-top: 0px;
+                margin-left: 30px;
+                margin-bottom: -100px;
+                background-color: transparent;
+                border: none;
+                cursor: pointer;
+              }
+
+              .tb {
+                display: inline-flex;
+                justify-content: space-evenly;
+                flex-wrap: nowrap;
+                align-items: baseline;
+                flex-direction: row;
+              }
+
+              .tab {
+
+                background-color: #F5F5F5;
+                margin-top: -40px;
+                margin-left: 60px;
+                margin-right: 265px;
+
+
+
+
+              }
+
+
+              .ta {
+
+                background-color: #F5F5F5;
+                margin-top: 60px;
+                margin-bottom: 0px;
+                margin-left: 370px;
+                margin-right: 119px;
+                padding-left: 20px;
+
+              }
+
+
+
+              tr {
+
+                background-color: white;
+
+              }
+
+              .visible {
+                cursor: pointer;
+
+
+              }
+
+              .layout {
+                background-color: #d9dbdb;
+              }
+            </style>
+
+
         </div>
-        <style>
-          .b2 {
-            background-color: red;
-            color: white;
-            border: 5px solid red;
-            border-radius: 15px;
-            width: 70px;
-
-
-          }
-
-          table {
-
-
-
-            width: 750px;
-            height: 15px;
-            border-collapse: collapse;
-            margin-top: 40px;
-            border: 0px transparent;
-
-          }
-
-          h1 {
-
-            margin-top: 70px;
-            margin-left: 200px;
-            margin-bottom: 100px;
-          }
-
-          .select {
-
-
-            height: 35px;
-            width: 138px;
-            border-radius: 20px;
-            background-color: #56CE94;
-            border: none;
-            text-align: center;
-
-
-
-
-          }
-
-
-
-          th {
-
-
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            text-align: center;
-            padding-top: 25px;
-            padding-bottom: 25px;
-            padding-left: 20px;
-            padding-right: 10px;
-            border: 0px transparent;
-
-          }
-
-          td {
-            text-align: center;
-            padding: 1px;
-
-
-          }
-
-          .select {
-
-            height: 30px;
-            width: 120px;
-            border-radius: 20px;
-            background-color: #56CE94;
-            border: none;
-            text-align: center;
-            margin-left: 30px;
-
-          }
-
-          .box {
-
-            height: 30px;
-            width: 130px;
-            margin-left: 20px;
-            margin-top: 0px;
-            border-radius: 20px;
-            border: none;
-            text-align: center;
-
-          }
-
-          .b1 {
-            height: 30px;
-            width: 100px;
-            color: #FFF5F3;
-            margin-left: 20px;
-            border-radius: 20px;
-            background-color: #F3506D;
-            border: none;
-            cursor: pointer;
-
-          }
-
-
-
-          .midiv {
-
-            margin-left: 150px;
-            margin-bottom: -10px;
-            padding: 15px 10px 30px 20px;
-            margin-top: -100px;
-            outline: none;
-            width: 774.5px;
-          }
-
-
-
-          .f2 {
-
-            margin-left: 50px;
-            margin-top: -100px;
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            margin-bottom: 0px;
-
-
-          }
-
-
-          .f1 {
-
-            background-color: transparent;
-            margin-left: 10px;
-            margin-right: 20px;
-            margin-bottom: 10px;
-            margin-top: 10px;
-            border: none;
-            cursor: pointer;
-
-
-          }
-
-          .fp {
-            margin-top: 0px;
-            margin-left: 30px;
-            margin-bottom: -100px;
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-          }
-
-          .tb {
-            display: inline-flex;
-            justify-content: space-evenly;
-            flex-wrap: nowrap;
-            align-items: baseline;
-            flex-direction: row;
-          }
-
-          .tab {
-
-            background-color: #F5F5F5;
-            margin-top: -40px;
-            margin-left: 60px;
-            margin-right: 265px;
-
-
-
-
-          }
-
-
-          .ta {
-
-            background-color: #F5F5F5;
-            margin-top: 60px;
-            margin-bottom: 0px;
-            margin-left: 370px;
-            margin-right: 119px;
-            padding-left: 20px;
-
-          }
-
-
-
-          tr {
-
-            background-color: white;
-
-          }
-
-          .visible {
-            cursor: pointer;
-
-
-          }
-
-          .layout {
-            background-color: #d9dbdb;
-          }
-        </style>
-
+      </main>
 
     </div>
-    </main>
-
-  </div>
   </div>
   <!-- partial -->
   <script src='https://unpkg.com/@popperjs/core@2'></script>
