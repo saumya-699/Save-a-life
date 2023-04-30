@@ -55,10 +55,10 @@ if(isset($_POST["BtnSubmit"]))
 				 
 				 
 				  else if($_SESSION["Type"]   == '2'){
-                 header("Location:MLT/Report.php");
-				  }
+					header("Location:MLT/seeMLT.php");
+				}
 				 else if($_SESSION["Type"]   == '3'){
-                 header("Location:ward_doctor/Make blood request.php");}
+					header("Location:ward_doctor/see.php");}
 			 
 			   else if($_SESSION["Type"]   == '4'){
 			   header("Location:Nurse/add_medical.php");}

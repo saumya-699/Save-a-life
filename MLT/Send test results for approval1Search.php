@@ -4,6 +4,7 @@ include "config.php";
 if (isset($_SESSION["ID"])) {
   include "config.php";
   $m = $_SESSION["Name"];
+  $date =date("Y/m/d");
   $query = "SELECT * FROM mlt WHERE UserName ='$m'";
   $result1 = $conn->query($query);
 
@@ -233,7 +234,7 @@ if (isset($_SESSION["ID"])) {
               if (isset($_POST['BtnSubmit'])) {
                 $search = $_POST["search"];
                 $data = $_POST["data"];
-                $sql = "SELECT * FROM blood_testing_result WHERE $search = '$data' AND process_date ='" . $row["process_date"] . "' AND MLT_ID='$x' AND batch_number='" . $row["batch_number"] . "'";
+                $sql = "SELECT * FROM blood_testing_result WHERE $search = '$data' AND MLT_ID='$x' AND batch_number='" . $row["batch_number"] . "'";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
@@ -241,7 +242,7 @@ if (isset($_SESSION["ID"])) {
                   echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;width:200px;'>" . "Test result ID" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Donar ID" . "</th>" . "<th style='text-align:center;width:100px;'>" . "Blood group" . "</th>" . "<th>" . "Malaria result" . "</th>" . "<th>" . " HIV result" . "</th>" . "<th>" . "HBV result" . "</th>" . "<th>" . "HCV result" . "</th>" . "<th>" . "VDRL result" . "</th>" . "<th>" . "Processed Date" . "</th>" . "<th>" . "Batch number" . "</th>" . "</tr>";
                   echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
                   while ($row = $result->fetch_assoc()) {
-                    echo  "<tr>" . "<td>" . $row["test_result_id"] . "</td>" . "<td>" . $row["donar_id"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "<td>" . $row["malaria_result"] . "</td>" . "<td>" . $row["hiv_result"] . "</td>" . "<td>" . $row["hbv_result"] . "</td>" . "<td>" . $row["hcv_result"] . "</td>" . "<td>" . $row["vdrl_result"] . "</td>" . "<td>" . $row["process_date"] . "</td>" . "<td>" . $row["batch_number"] . "</td>";
+                    echo  "<tr>" . "<td>" . $row["test_result_id"] . "</td>" . "<td>" . $row["Donor_Id"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "<td>" . $row["malaria_result"] . "</td>" . "<td>" . $row["hiv_result"] . "</td>" . "<td>" . $row["hbv_result"] . "</td>" . "<td>" . $row["hcv_result"] . "</td>" . "<td>" . $row["vdrl_result"] . "</td>" . "<td>" . $row["process_date"] . "</td>" . "<td>" . $row["batch_number"] . "</td>";
 
                     echo "</tr>";
 

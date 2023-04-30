@@ -31,6 +31,8 @@ if (isset($_SESSION["ID"])) {
   <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
   <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'>
   <link rel="stylesheet" href="./style.css">
+  <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
+
 
 </head>
 
@@ -238,7 +240,7 @@ if (isset($_SESSION["ID"])) {
                 echo "<td class='tb'><form method='POST' action ='View approval of blood test results2.php'>
      <input type=hidden name=Requestdate value=" . $row["process_date"] . " >
      <input type=hidden name=Requestbatch value=" . $row["batch_number"] . " >
-     <button type=submit value=view name=view  class='fp'><img src=eye.png width=40 height=37></button>
+     <button type=submit value=view name=view  class='fp'><i class='fa-sharp fa-solid fa-eye'></i></button>
      </form>    	
     </td>";
 

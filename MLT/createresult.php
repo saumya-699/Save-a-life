@@ -30,7 +30,7 @@ if ($resultr->num_rows > 0) {
 
 if (isset($_POST['submit'])) {
 
-  $donar_id = $_POST['donar_id'];
+  $Donor_Id = $_POST['Donor_Id'];
 
   $blood_group = $_POST['blood_group'];
 
@@ -51,7 +51,7 @@ if (isset($_POST['submit'])) {
   $status = ("Pending");
 
 
-  $sql = "INSERT INTO blood_testing_result (donar_id, blood_group, malaria_result, hiv_result, hbv_result,hcv_result,vdrl_result,batch_number,process_date,status,MLT_ID,Hospital_ID) VALUES ('$donar_id','$blood_group','$malaria_result', '$hiv_result','$hbv_result','$hcv_result','$vdrl_result','$batch_number','$process_date','$status','$x','$y')";
+  $sql = "INSERT INTO blood_testing_result (Donor_Id, blood_group, malaria_result, hiv_result, hbv_result,hcv_result,vdrl_result,batch_number,process_date,status,MLT_ID,Hospital_ID) VALUES ('$Donor_Id','$blood_group','$malaria_result', '$hiv_result','$hbv_result','$hcv_result','$vdrl_result','$batch_number','$process_date','$status','$x','$y')";
 
   $result = $conn->query($sql);
 

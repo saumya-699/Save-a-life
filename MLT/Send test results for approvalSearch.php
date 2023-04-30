@@ -4,6 +4,7 @@ session_start();
 if (isset($_SESSION["ID"])) {
   include "config.php";
   $m = $_SESSION["Name"];
+  $date =date("Y/m/d");
   $query = "SELECT * FROM mlt WHERE UserName ='$m'";
   $result1 = $conn->query($query);
 
@@ -223,7 +224,7 @@ if (isset($_SESSION["ID"])) {
 
               $search = $_POST["search"];
               $data = $_POST["data"];
-              $sql = "SELECT * FROM blood_testing_result WHERE $search = '$data' AND MLT_ID = '$x' GROUP BY process_date, batch_number order by process_date DESC";
+              $sql = "SELECT * FROM blood_testing_result WHERE $search = '$data' AND MLT_ID = '$x' and process_date ='$date' GROUP BY  batch_number ";
 
               $result = $conn->query($sql);
               if ($result->num_rows > 0) {
@@ -239,7 +240,7 @@ if (isset($_SESSION["ID"])) {
                   echo "<td class='tb'><form method='POST' action ='Send test results for approval1.php'>
        <input type=hidden name=Requestbatch value=" . $row["batch_number"] . " >
        <input type=hidden name=RequestID value=" . $row["process_date"] . " >
-         <button type=submit value=view name=view  class='fp'><img src=eye.png width=40 height=37></button>
+         <button type=submit value=view name=view  class='fp'><i class='fa-sharp fa-solid fa-eye'></i></button>
          </form>    	
     
         </td>";
