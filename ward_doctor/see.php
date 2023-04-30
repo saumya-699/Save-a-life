@@ -10,6 +10,7 @@ if (isset($_SESSION["ID"])) {
   if ($result1->num_rows > 0) {
     while ($row = $result1->fetch_assoc()) {
       $x = $row["Name_With_Initials"];
+      $y = $row["WardDoctor_ID"];
     }
   }
 }
@@ -120,16 +121,33 @@ if (isset($_SESSION["ID"])) {
         <div>
           <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
           <div class="col-9 ">
+            <center style='margin-top:50px;'>
+              <h2 class="txt-l ">Welcome Dear.<?php echo " " . $x;
+                                              ?> </h2>
+              <h3 class="txt-l ">You have sucessfully accessed to your Ward doctor Account</h3>
+            </center>
             <div class="form">
               <div class="card frm-form ">
                 <div class="form-body ">
+                  <h3>Pending Requests</h3>
+                 
+                  <p style="color:#0D5C75; font-size: 70px; font-weight: 700; margin-top:30px;">
+                    <?php
 
+                    $sql = "select Count(*) AS countS from blood_request where status ='Pending'";
 
-                  <h1 class="txt-l ">Welcome back</h1>
-                  <h2 class="txt-l ">Dear Mr.<?php
-                                              echo " " . $x;
-                                              ?></h2>
-                  <h3 class="txt-l ">You have sucessfully accessed to your Ward doctor Account</h3>
+                    $results = $conn->query($sql);
+                    //$sql= "select * from stock where Hospital_ID='$ty' and No_of_packs <= 2";
+                    //$result = $conn->query($sql);
+
+                    if ($results->num_rows > 0) {
+                      $row = $results->fetch_assoc();
+                      $status = $row["countS"];
+                      echo $status;
+                    }
+
+                    ?>
+                  </p>
 
                 </div>
               </div>
@@ -159,9 +177,11 @@ if (isset($_SESSION["ID"])) {
 
     .form-body {
       padding: 10px 30px;
-      width: 650px;
+      width: 300px;
+      height: 200px;
       background-color: white;
       border-radius: 20px;
+      margin-top: -50px;
     }
 
     .layout {
