@@ -223,7 +223,7 @@ if (isset($_SESSION["ID"])) {
             if ($result->num_rows > 0) {
 
               echo  "<div class='tab'>";
-              echo  "<table border=1>" . "<tr>" . "<th style='text-align:center'>" . "Processed Date" . "</th>" . "<th style='text-align:center;'>" . "Batch number" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Click to view more information" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Click button to request for approval" . "</th>" . "</tr>";
+              echo  "<table border=1>" . "<tr>" . "<th style='text-align:center'>" . "Processed Date" . "</th>" . "<th style='text-align:center;'>" . "Batch number" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Action" . "</th>" . "</tr>";
               echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
               while ($row = $result->fetch_assoc()) {
 
@@ -234,13 +234,11 @@ if (isset($_SESSION["ID"])) {
    <input type=hidden name=Requestbatch value=" . $row["batch_number"] . " >
    <input type=hidden name=RequestID value=" . $row["process_date"] . " >
      <button type=submit value=view name=view  class='fp'><i class='fa-sharp fa-solid fa-eye'></i></button>
-     </form>    	
-
-    </td>";
-                echo "<td class=''><form method='POST' action =''>
+     </form>  
+     <form method='POST' action =''>  	
     <input type=hidden name=RequestID value=" . $row["process_date"] . " >
     <input type=hidden name=Requestbatch value=" . $row["batch_number"] . " >
-    <button type=submit value=submit   class='b2'>Send</button>
+    <button type=send value=send name=send class='fp'><i class='fa-regular fa-forward-fast'></i></button>
      </form>    	
 
     </td>";
