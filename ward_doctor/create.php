@@ -95,4 +95,3 @@ echo $blood_group;
 echo $blood_component ;
 echo "sucess:";
 */
-?>

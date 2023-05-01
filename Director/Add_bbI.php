@@ -289,6 +289,8 @@ echo "
 				  
 	     echo 
 		   "<select name='hospital' class='form-control txt-input' required>";
+echo "<option value='Not Provided'> None</option>";
+                      
                       
 	  
 	 
@@ -321,7 +323,7 @@ echo "
 							   <div class='input-group mb-4'>
                         <i class='fas fa-calendar-alt input-group-text'></i>
 
-                        <input type='datetime' name='DOB' id='DOB' class='datepicker_input form-control txt-input' placeholder='Select Date' required>
+                        <input type='date' name='DOB' id='DOB' class='datepicker_input form-control txt-input' placeholder='Select Date' required>
                     </div>
 
         

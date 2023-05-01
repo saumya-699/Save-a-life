@@ -16,6 +16,7 @@ if(isset($_POST['BtnSubmit']))
     $HName=$_POST["hospital"];
 	$SLMC=$_POST["SLMC"];
 	$Email=$_POST["Email"];
+  $DOA=$_POST["DOA"];
 	$contactNumber=$_POST["contactNumber"];
 	$Uname=$_POST["Uname"];
 	$password=$_POST["password"];
@@ -117,7 +118,7 @@ if($conn->query($jql))
 		 
 	 }
 	 
-    $sql="insert into BloodBank_doctor(BloodBank_doctor_ID,Name_With_Initials,Hospital_ID,HospitalName,SLMC_Number,Email,ContactNumber,UserName,Password,Remark,Director_ID)VALUES(' ','$Name','$y','$HName','$SLMC','$Email','$contactNumber','$Uname','$password','Added','$x')";
+    $sql="insert into BloodBank_doctor(BloodBank_doctor_ID,Name_With_Initials,Hospital_ID,HospitalName,SLMC_Number,Email,ContactNumber,UserName,Password,AppointmentDate,RetiringDate,Remark,Director_ID)VALUES(' ','$Name','$y','$HName','$SLMC','$Email','$contactNumber','$Uname','$password','$DOA','','Added','$x')";
     if($conn->query($sql))
      {
       

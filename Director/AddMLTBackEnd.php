@@ -18,6 +18,7 @@ if(isset($_POST['BtnSubmit']))
 	$Uname=$_POST["Uname"];
 	$password=$_POST["password"];
 	$m= $_SESSION["Name"];
+  $DOA=$_POST["DOA"];
 
 
 	$query = "select * from director where UserName ='$m'";
@@ -113,7 +114,7 @@ else
 	
 }
 
-    $sql="insert into MLT(MLT_ID,Name_With_Initials,Hospital_ID,HospitalName,SLMC_Number,Email,ContactNumber,UserName,Password,Remark,Director_ID)VALUES(' ','$Name','$y','$HName','$SLMC','$Email','$contactNumber','$Uname','$password','Added','$x')";
+    $sql="insert into MLT(MLT_ID,Name_With_Initials,Hospital_ID,HospitalName,SLMC_Number,Email,ContactNumber,UserName,Password,AppointmentDate,RetiringDate,Remark,Director_ID)VALUES(' ','$Name','$y','$HName','$SLMC','$Email','$contactNumber','$Uname','$password','$DOA','','Added','$x')";
     if($conn->query($sql))
      {
       

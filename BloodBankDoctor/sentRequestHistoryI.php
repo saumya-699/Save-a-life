@@ -52,6 +52,7 @@ session_start();
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
  <link rel="stylesheet" href="StyleSearch.css"> 
+ <link rel="stylesheet" href="StyleIcons.css"> 
 
 </head>
 <body>

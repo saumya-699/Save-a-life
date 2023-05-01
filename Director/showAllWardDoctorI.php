@@ -297,7 +297,7 @@ echo "
                             <input type='text' value=".$row["ContactNumber"]." name='contactNumber'  class='form-control txt-input' id='contact' >
 				
                      
-                            <div class='col btn-but'> <input type='submit' name='btnCancel' value='Cancel' class='b2'></div>
+                            <div class='col btn-but'> <input type='submit' name='btnCancel' value='Back' class='b2'></div>
                           
   
       </form> 

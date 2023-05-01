@@ -229,9 +229,11 @@ session_start();
     <div class="wrap">
       <div class="headings">
         <center><span><h1>Report Generation</h1></span><center>
-      
+       
+							
+							
       </div>
-         <form method="post" action="ReportGeneration.php">
+         <form method="post" action="download.php">
         
                           
 						   
@@ -241,41 +243,34 @@ session_start();
 
                        <label for="exampleFormControlInput1" class="form-label lbl star">  Report name </label>
                        <select name="report" id="" class="form-control txt-input" required>
-                       <option value="N" selected>Statistic</option>
-
-                        <option value="F">Annual</option >
+                       <option value="bloodbank_doctor" selected>Blood bank doctor details</option>
+                       <option value="mlt">MLT details</option > 
+					   <option value="warddoctor">Ward doctor details</option >
+					   <option value="nurse">Nurse details</option >  
+					  
+					     <option value="AE">All employee details</option >
                        </select>
 							    
 
                        <label for="exampleFormControlInput1" class="form-label lbl star">  Hospital name</label>
-                       <select name="report" id="" class="form-control txt-input" required>
-                       <option value="Karapitiya Teaching Hospital">Karapitiya&nbsp;Teaching&nbsp;Hospital</option>
-                       <option value="Galle_general_hospital" selected>Galle General Hospital</option>
+                       <select name="hospital" id="" class="form-control txt-input" required>
+                       <option value="1">Karapitiya&nbsp;Teaching&nbsp;Hospital</option>
+                       <option value="5" selected>Galle General Hospital</option>
+                       <option value="AH">All hospitals</option >
 						 </select>
 							    
 						     
-							
-					     <label for="exampleFormControlInput1" class="form-label lbl star">   Export method</label>
-                         <select name="report" id="" class="form-control txt-input" required>
-                         <option value="Karapitiya Teaching Hospital">pdf</option>
-						  <option value="Karapitiya Teaching Hospital">doc</option>
-                         <option value="Galle_general_hospital" selected>jpeg</option>
-						  <option value="Galle_general_hospital" selected>png</option>
-							  </select>
-							    
+						
 							 
 							 
 							 
-							    <label for="exampleFormControlInput1" class="form-label lbl star">   Time period</label><br>
+						<br><br<<br>   		<br><br<<br>     <br><br<<br>     <br><br<<br>                         
                             
-                            
-                             From &nbsp;<input type="date" placeholder="From" name="From" id="From" class="yu">&nbsp;&nbsp;
-							      To &nbsp;<input type="date" placeholder="To" name="To" id="To" class="yu"><br><br><br>
-        
-                               
-							   
-							
                               
+                              <div class='col btn-but'> <input type='submit' name='BtnSubmit' value='Generate' class='b1'></div>
+                        <div class='col btn-but'> <input type='submit' name='btnCancel' value='Cancel' class='b2'></div>
+
+                     
 
         
                             

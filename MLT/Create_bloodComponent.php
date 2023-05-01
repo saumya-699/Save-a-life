@@ -66,5 +66,3 @@ if($resultr->num_rows>0)
   if (isset($_POST['cancel'])){
       header('location:Add blood components.php');        
   }
-
-?>
