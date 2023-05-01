@@ -55,7 +55,7 @@ if(isset($_SESSION["ID"])) {
               <ul>
                 <li class="menu-header"><span>  </span></li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="Home.php">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -243,7 +243,7 @@ if(isset($_SESSION["ID"])) {
                 if ($result->num_rows > 0) {
 
                  //   echo  "<div class='tab'>";
-                    echo  "<table border=1>"."<tr>"."<th style='text-align:center'>"."Processed Date"."</th>"."<th style='text-align:center;'>"."Batch number"."</th>"."<th style='text-align:center;width:120px;'>"."status"."</th>"."<th>"."Action"."</th>"."</tr>";
+                    echo  "<table border=1>"."<tr>"."<th style='text-align:center'>"."Processed Date"."</th>"."<th style='text-align:center;'>"."Batch Number"."</th>"."<th style='text-align:center;width:120px;'>"."Status"."</th>"."<th>"."Action"."</th>"."</tr>";
                     echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
                  while($row = $result->fetch_assoc()) {    
                            
@@ -292,10 +292,10 @@ else
 
 $conn->close();
 ?>
-<form method='POST' action ='indexy.php'>
+<form method='POST' action ='EmailDe.php'>
     
   
-    <button type=submit  name=go class=z>send mails</button>
+    <button type=submit  name=send class=z>send mails</button>
      </form> "; 
 
 <?php
@@ -348,10 +348,21 @@ if(isset($_POST['check']))
 
     <style>
 .z{
-
+   font-size:20px;
    margin-top:50px;
-   margin-left:800px;
-
+   margin-left:850px;
+   height:47px;					   
+   border: none;
+                 //background-color:#F35050;
+                 //width: 100%;
+background: #4082f5;
+//text-transform: uppercase;
+// padding: 12px;
+cursor: pointer;
+box-shadow: 0px 10px 40px 0px rgba(17, 97, 237, 0.4);
+font-weight: 700;
+font-size: 20px;	
+border-radius:30px;
 }
 
 </style>

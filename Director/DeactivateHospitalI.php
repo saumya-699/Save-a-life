@@ -75,7 +75,7 @@ if($resultd->num_rows>0)
               <ul>
                 <li class="menu-header"></li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="Home.php">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -361,11 +361,11 @@ echo "
 						   
                               
                                
-                             
+                      <br><br><br>       
  <div class='row btn-buttons'>
                         
                         <div> <input type='submit' name='BtnSubmit' value='Transfer' class='b1'></div>
-                        <div> <input type='submit' name='btnCancel' value='Cancel' class='b2'></div>
+         <button name='btnCancel' value='Cancel' class='b2' onclick='back()'>Cancel </button>
                     </div>
      
           </div>
@@ -443,8 +443,7 @@ $conn->close();
 
 		
 		
-		
-		  
+	 
         </main>
       </div>
     </div>

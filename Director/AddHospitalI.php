@@ -40,7 +40,7 @@ session_start();
               <ul>
                 <li class="menu-header"></li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="Home.php">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -298,7 +298,7 @@ session_start();
                   <div class='row btn-buttons'>
                         
                         <div class='col btn-but'> <input type='submit' name='BtnSubmit' value='Add' class='b1'></div>
-                        <div class='col btn-but'> <input type='submit' name='btnCancel' value='Cancel' class='b2'></div>
+                                             <div class='col btn-but'> <button name='btnCancel' value='Cancel' class='b2' onclick='back()'>Cancel </button></div>
                     </div>							  
 
      
@@ -312,7 +312,20 @@ session_start();
       </form> 
 
 		
+		<script>
+function back(){
+	 
+	 
+	 
+	 
+	 
+	    
+	 
+	 window.location.href="Home.php";
+	 
+ }
 		
+	</script>		
 		
 		
 		

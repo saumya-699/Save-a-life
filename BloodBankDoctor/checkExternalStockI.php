@@ -199,7 +199,7 @@ session_start();
               <ul>
                 <li class="menu-header"><span>  </span></li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="Home.php">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -369,7 +369,7 @@ session_start();
        
     
      <form method="post" action="checkExternalStock.php">
-          <table border=1> <tr> <th style='width:180px;'> Blood_group</th><th style='width:180px;'>Component_type</th><th style='width:180px;'>No_of_packs</th><th></th></tr>
+          <table border=1> <tr> <th style='width:180px;'> Blood Group</th><th style='width:180px;'>Component Type</th><th style='width:180px;'>No of Packs</th><th></th></tr>
 		  <tr> <td style='height:20px;background-color:transparent;'colspan=4'></td> </tr>
 		  
 	    <tr> 

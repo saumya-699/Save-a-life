@@ -43,7 +43,7 @@ session_start();
               <ul>
                 <li class="menu-header"></li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="Home.php">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -226,22 +226,58 @@ session_start();
  
 <div class="ta">
 
-
- <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
-                             <option value="Position"><b> position</b></option>
-                             <option value="Nurse_ID"><b> Nurse_ID</b></option>
-                             <option value="Email" selected><b>Email</b></option>
-		                    <option value="ContactNumber" selected><b> Contact number</b></option>
-                             </select>
-
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
 
 <input type="text" placeholder="type here" name="data" id="data" class="box">
 
- <button type="submit"  name="BtnSubmit" id="search" class="b1" ><b>Search</b></button>
+
 
 </div>
 
 </form>
+
+<script>
+function myFunction() {
+  // Declare variables
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  //var tr = document.getElementsByTagName("tr");
+
+// Loop through all table rows, and hide those who don't match the search query
+
+for (i = 1; i < tr.length; i++) {
+  var displayRow = false;
+  var tdList = tr[i].getElementsByTagName("td");
+  
+  // Check if any of the cells match the search query
+  for (j = 0; j < tdList.length; j++) {
+    var td = tdList[j];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        displayRow = true;
+        break;
+      }
+    }
+  }
+  
+  // Set the display style of the row based on the search query match
+  if (displayRow) {
+    tr[i].style.display = "";
+  } else {
+    tr[i].style.display = "none";
+  }
+}
+
+// Always show table headers
+
+
+}
+</script>
 <?php
 
 
@@ -259,7 +295,7 @@ if($result->num_rows>0)
 	      //echo "<font size=6>";
 	   
 	  // echo  "<div class='tab'>";
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Nurse_ID"."</th>"."<th style='text-align:center;width:120px;'>"."Name_With_Initials"."</th>"."<th>"."Hospital name"."</th>"."<th>"."Position"."</th>"."<th>"."SLMC number"."</th>"."<th style='width:120px;'>"."Action"."</th>"."</tr>";
+	   echo  "<table id='myTable' border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Nurse_ID"."</th>"."<th style='text-align:center;width:120px;'>"."Name_With_Initials"."</th>"."<th>"."Hospital name"."</th>"."<th>"."Position"."</th>"."<th>"."SLMC number"."</th>"."<th style='width:120px;'>"."Action"."</th>"."</tr>";
       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
    while($row = $result->fetch_assoc())
    

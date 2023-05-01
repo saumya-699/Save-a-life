@@ -5,7 +5,24 @@ session_start();
 ?>
 <?php
 
-require 'conp.php';            //make connection here
+require 'conp.php'; 
+
+
+
+if(isset($_POST['btnCancel']))
+{
+	
+	
+	
+	
+	     echo '<script type="text/javascript">';
+		
+         echo 'window.location.href="Home.php";';
+
+		 echo '</script>';
+	
+}
+              //make connection here
 if(isset($_POST['BtnSubmit']))
 {
   //here getting result from the post array after submitting the form.
@@ -59,7 +76,7 @@ if(isset($_POST['BtnSubmit']))
      {
       
 	     echo '<script type="text/javascript">';
-		 echo 'alert("Insrtion is successfully");';
+		 echo 'alert("Sent successfully");';
 	     echo 'window.location.href="sendRequestI.php";';
 		 echo '</script>';
 

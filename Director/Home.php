@@ -18,7 +18,7 @@ session_start();
 		$resultd = $conn->query($query);
 		
 		//echo "Error in ".$vql."<br>".$conn->error;
-
+$x = null;
 if($resultd->num_rows>0)
 
 {        
@@ -37,7 +37,7 @@ if($resultd->num_rows>0)
 
 	
   }
-  
+ 
 	
 }	
 
@@ -461,7 +461,7 @@ if($resultD->num_rows>0)
                 <tr>
                     <td>
                         <p id="rcorners">
-                            Blood bank doctor
+                            Blood Bank Doctor
                             </br>
                             <span style="color:#0D5C75; font-size: 70px; font-weight: 700;">
                             <?php echo $blood; ?>
@@ -485,7 +485,7 @@ if($resultD->num_rows>0)
                 <tr>
                     <td>
                         <p id="rcorners">
-                            Ward doctor
+                            Ward Doctor
                             </br>
                             <span style="color:#0D5C75; font-size: 70px; font-weight: 700;">
                             <?php echo $Ward; ?>

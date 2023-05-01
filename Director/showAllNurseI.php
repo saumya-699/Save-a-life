@@ -41,7 +41,7 @@ session_start();
               <ul>
                 <li class="menu-header"></li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="Home.php">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -252,7 +252,7 @@ session_start();
 
                 echo "
 
-     <form method='post' action='UpdateNursebackEnd.php'>
+  
 
 
 
@@ -294,14 +294,13 @@ session_start();
 
 
          
-          <div class='col btn-but'> <a href='RemoveORUpdateWardDoctor.php'><input type='submit' name='btnCancel' value='Back' class='b2'></a></div>
+          <div class='col btn-but'> <button name='btnCancel' value='Back' class='b2' onclick='back()'>back </button></div>
      
 
 
 
 
 
-      </form>
  ";
 
             }
@@ -319,6 +318,21 @@ session_start();
     ?>
 
 
+<script>
+function back(){
+	 
+	 
+	 
+	 
+	 
+	    
+	 
+	 window.location.href="RemoveOrUpdateNurseI.php";
+	 
+ }
+</script>
+		
+		
 		  
         </main>
       </div>

@@ -204,7 +204,7 @@ session_start();
 		
       <?php
  
- echo "<form action='indexy.php' method='POST'><button name='send'>send </button></form>";
+// echo "<form action='indexy.php' method='POST'><button name='send'>send </button></form>";
  require 'conp.php';
  if(isset($_POST['send']))  
  
@@ -268,60 +268,39 @@ session_start();
 
       else if($row["hiv_result"]=='positive')
        {
-   echo  "HIV";
+   echo  "<td>HIV</td>";
        }
     
        else if($row["hbv_result"]=='positive')
        {
-   echo  "<td>"."Hbv"."<td>";
+   echo  "<td>"."Hbv"."</td>";
        }
      
        else if($row["hcv_result"]=='positive')
        {
-   echo  "<td>"."HCV"."<td>";
+   echo  "<td>"."HCV"."</td>";
        }
        else if($row["vdrl_result"]=='positive')
        {
-   echo  "VDRL";
+   echo  "<td>VDRL</td>";
        }
-       
+        
+		$data_array[] = $row["Email"];
        
        echo "</td>"."<td>".
        
        
-       "<form method='POST' action ='index.php'>
-                <input type=hidden name=Request_ID value=".$row["Donor_Id"].">
-                <input type='hidden' name='email' value=".$row["Email"]."><br>
-                  <input type='hidden' name='subject' value='Desease diagnosis'><br>";
+       "<form method='POST' action ='EmailDeBackEnd.php'>
+               ";
 
-                  if($row["malaria_result"]=='positive')
-                  {
-              echo  "<input type='hidden' name='message' value='Hello you have been recognized with malaria disease.Please take care of ur health. '><br>";
-                      
-                  }
-
-                 else if($row["hiv_result"]=='positive')
-                  {
-              echo  "<input type='hidden' name='message' value='Hello you have been recognized with xdisease.Please take care of ur health. '><br>";
-                  }
-               
-                  else if($row["hbv_result"]=='positive')
-                  {
-              echo  "<input type='hidden' name='message' value='Hello you have been recognized with tdisease.Please take care of ur health. '><br>";
-                  }
                 
-                  else if($row["hcv_result"]=='positive')
-                  {
-              echo  "<input type='hidden' name='message' value='Hello you have been recognized with ydisease.Please take care of ur health. '><br>";
-                  }
-                  else if($row["vdrl_result"]=='positive')
-                  {
-              echo  "<input type='hidden' name='message' value='Hello you have been recognized with idisease.Please take care of ur health. '><br>";
-                  }
+ $email_list = implode(",", $data_array);
+     echo "<input type='hidden' name='emails[]' value='$email_list'>";
 
+          //echo "hello";
+     echo "<button type=submit name=send  class=z>Send</button>";
 
-               echo "<button type=submit name=send  id=btn class=u><i class='fa-solid fa-envelope-circle-check'></i></button>
-                </form> "."</td>"."</tr>";
+              
         
         
      echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=5'>"."</td>"."</tr>";
