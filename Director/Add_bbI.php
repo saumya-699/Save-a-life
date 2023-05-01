@@ -40,7 +40,7 @@ session_start();
               <ul>
                 <li class="menu-header"></li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="Home.php">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -228,7 +228,7 @@ session_start();
   <div class="container">
     <div class="wrap">
       <div class="headings">
-        <center><span><h1>Add blood bank doctor</h1></span><center>
+        <center><span><h1>Add Blood Bank Doctor</h1></span><center>
       
       </div>
      
@@ -237,7 +237,7 @@ session_start();
 
        
 function generate_pw() {
-  $pw;
+  $pw =null;;
   // Set random length for password
   $password_length = rand(8, 16);
   $pw = '';
@@ -334,7 +334,7 @@ echo "<option value='Not Provided'> None</option>";
 					
                            <label for='exampleFormControlInput1' class='form-label lbl star'>Email</label>
                              <input type='email' placeholder='Enter the Email' name='Email' class='form-control txt-input' id='Email' onchange='myFunction()' required>
-        
+                             
                              
                            <label for='exampleFormControlInput1' class='form-label lbl star'>Contact Number</label>
                             <input type='tel' placeholder='Enter the Contact Number' name='contactNumber'  class='form-control txt-input'  id='contact' pattern='[0-9]{10}' required>
@@ -355,24 +355,42 @@ echo "<option value='Not Provided'> None</option>";
 					 document.getElementById('Uname').value = x;  
                      }
                       </script>
-                               
+                                
                       <label for='exampleFormControlInput1' class='form-label lbl star'>Password</label>
+					   <input type='hidden'  name='subject' value='Regarding Appoinment'>
                       <input type='password'  name='password'  class='form-control txt-input'  value='$hel'  required>
                    <br><br><br><br>
-                         
+       
+                   <input type='hidden'  name='subject' value='Regarding Appoinment'>
+                   <input type='password'  name='password'  class='form-control txt-input'  value='$hel'  required>
                         <div class='col btn-but'> <input type='submit' name='BtnSubmit' value='Add' class='b1'></div>
-                        <div class='col btn-but'> <input type='submit' name='btnCancel' value='Cancel' class='b2'></div>
+                        <div class='col btn-but'> <button name='btnCancel' value='Cancel' class='b2' onclick='back()'>Cancel </button></div>
                    
 					
 					</form>
    ";
 ?>
 
+         
 
 
 		
 		
+	<script>
+function back(){
+	 
+	 
+	 
+	 
+	 
+	    
+	 
+	 window.location.href="Home.php";
+	 
+ }
 		
+	</script>	
+			
 		
 		
 		

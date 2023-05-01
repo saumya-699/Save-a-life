@@ -3,6 +3,57 @@
 session_start();
 
 ?>
+<?php
+
+ 
+Use PHPMailer\PHPMailer\PHPmailer;
+Use PHPMailer\PHPMailer\Exception;
+require 'phpmailer/src/Exception.php';
+require 'phpmailer/src/PHPMailer.php';
+
+require 'phpmailer/src/SMTP.php';
+//require 
+if(isset($_POST["BtnSubmit"])){
+   
+$mail = new PHPMailer(true);
+$mail->isSMTP();
+$mail->Host = 'smtp.gmail.com';
+$mail ->SMTPAuth = true;
+$mail->Username = 'wmadushi49@gmail.com';
+$mail->Password = 'zswherapcjuvbtgr';
+$mail->SMTPSecure ='ssl';
+$mail->Port = 465;
+
+
+$mail->setFrom('wmadushi49@gmail.com');
+
+$mail->addAddress($_POST["Email"]);
+$mail->isHTML(true);
+
+$mail->Subject=$_POST["subject"];
+$mail->Body = $_POST["message"];
+
+$mail->send();
+
+echo '<script type="text/javascript">';
+echo 'alert("Successfully added and sent the email");';
+
+ echo 'window.location.href="Home.php";';
+echo '</script>';
+
+
+
+
+
+
+}
+
+
+
+
+
+
+?>
 
 <?php
 
@@ -30,7 +81,7 @@ if(isset($_POST['BtnSubmit']))
 		$resultd = $conn->query($query);
 		
 		//echo "Error in ".$vql."<br>".$conn->error;
-
+$x=null;
 if($resultd->num_rows>0)
 
 {        
@@ -61,7 +112,7 @@ if($resultd->num_rows>0)
 		$result = $conn->query($vql);
 		
 		  //echo "Error in ".$vql."<br>".$conn->error;
-
+$y =null;
 if($result->num_rows>0)
 
 {        
@@ -376,7 +427,7 @@ $date =date("Y/m/d");
 echo "
 
     
-     <form method='post' action='index.php' id='FormName'>
+  
         
                             ";
 						   
@@ -394,32 +445,7 @@ echo "
     
 
 
-          
-  <?php                  
-          
-          echo "      <label for='exampleFormControlInput1' class='form-label lbl star'>Email</label>
-		  <input type='text'  name='email' value='$Email'> 
-		  <label for='exampleFormControlInput1' class='form-label lbl star'>Subject</label>
-                      <input type='text'  name='subject' value='Regarding Appoinment'> 
-					  
-
-                     <label for='exampleFormControlInput1' class='form-label lbl star'>Message</label>
-                             <textarea rows = '10' cols = '60' name='message'>
-            Hello $Name   We are pleased to inform that you have been appointed to the system and your user name is $Uname and your password is $password.Please change the user name and password once you get the e mail 
-
-                          
-         </textarea> 
-                          
-                    <br><br>    
-                        <div class='col btn-but'> <input type='submit' name='BtnSubmit' value='Send' class='b1'></div>
-                        <div class='col btn-but'> <input type='submit' name='btnCancel' value='Cancel' class='b2'></div>
-                   
-					
-  </form> 
-  ";
-
-
-?>
+ 
 
 		                                                                    
 		

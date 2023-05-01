@@ -49,7 +49,7 @@ include 'see.php';
 
 require 'conection.php';
     
-$sql= "select * from donation_records" ;
+$sql= "select * from donation" ;
 $result = $conn->query($sql);
 
 if($result->num_rows>0)

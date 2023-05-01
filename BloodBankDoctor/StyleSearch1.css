@@ -1,28 +1,16 @@
-   .tab{
-				   
-				   background-color:#F5F5F5;
-				    margin-top:0px;
-					margin-left:285px;
-					//padding:10px;
-					margin-right:90px;
-					padding-left:1px;
-                  // padding-right:1000px;
-					 
-				   
-				   
-			   }
+  
 			  
 table{
 	
 	
-	//padding-left:440px;
+	padding-left:440px;
 	width:800px;
 	height:20px;
 	border-collapse: collapse;	
 		margin-top:5px;
    border:0px transparent;
-margin-left:52px;   
- 	
+margin-left:-42px;   
+ 	margin-right:11px;
 }
 
 

@@ -355,12 +355,39 @@ session_start();
 
 
 
-
-
+<button  name=go class=z onclick=back()>Back</button>
+<script>
+function back(){
+	 
+	
+	 window.location.href="BloodREsultsI.php";
+	 
+ }
+		
+	</script>
           
         </main>   </div>
     </div>
-
+<style>
+.z{
+   font-size:20px;
+   margin-top:50px;
+   margin-left:840px;
+   margin-right:45px;
+   height:47px;					   
+   border: none;
+                 //background-color:#F35050;
+                 //width: 100%;
+background: #4082f5;
+//text-transform: uppercase;
+// padding: 12px;
+cursor: pointer;
+box-shadow: 0px 10px 40px 0px rgba(17, 97, 237, 0.4);
+font-weight: 700;
+font-size: 20px;	
+border-radius:30px;
+}
+</style>
      
 <!-- partial -->
   <script src='https://unpkg.com/@popperjs/core@2'></script><script  src="./script.js"></script>

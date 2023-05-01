@@ -72,7 +72,7 @@ session_start();
               <ul>
                 <li class="menu-header"><span>  </span></li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="Home.php">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -284,7 +284,7 @@ if($result->num_rows>0)
 
 	   
 	 //  echo  "<div class='tab'>";
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Blood_bagID"."</th>"."<th style='text-align:center;width:120px;'>"."Blood_group"."</th>"."<th>"."Component_type"."</th>"."<th>"."Expiry date"."</th>"."</tr>";
+	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Blood Bag ID"."</th>"."<th style='text-align:center;width:120px;'>"."Blood Group"."</th>"."<th>"."Component Type"."</th>"."<th>"."Expiry Date"."</th>"."</tr>";
       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
      while($row = $result->fetch_assoc())
    

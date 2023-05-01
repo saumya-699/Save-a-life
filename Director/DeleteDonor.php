@@ -55,7 +55,7 @@ $x= $row["Director_ID"];
                  
 		   echo '<script type="text/javascript">';
 		// echo 'alert("Added successfully");';
-         echo 'window.location.href="View_DonorsDI.php";';
+         echo 'window.location.href="ViewDonorsDI.php";';
 	
 		 echo '</script>';
 		

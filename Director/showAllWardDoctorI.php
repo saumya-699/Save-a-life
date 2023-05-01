@@ -41,7 +41,7 @@ session_start();
               <ul>
                 <li class="menu-header"></li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="Home.php">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -258,8 +258,7 @@ if(isset($_POST['view']))
 	   
 echo "
 
-     <form method='post' action='UpdateWardDoctorBackEnd.php'>
-        
+    
          
 						   
 						  
@@ -297,10 +296,8 @@ echo "
                             <input type='text' value=".$row["ContactNumber"]." name='contactNumber'  class='form-control txt-input' id='contact' >
 				
                      
-                            <div class='col btn-but'> <input type='submit' name='btnCancel' value='Back' class='b2'></div>
+                            <div class='col btn-but'>   <div class='col btn-but'> <button name='btnCancel' value='Back' class='b2' onclick='back()'>back </button></div></div>
                           
-  
-      </form> 
  ";
   
   
@@ -328,10 +325,20 @@ echo "
 $conn->close();
 ?>
 
-
-
+<script>
+function back(){
+	 
+	 
+	 
+	 
+	 
+	    
+	 
+	 window.location.href="RemoveOrUpdateWardDoctorI.php";
+	 
+ }
 		
-		
+	</script>	
 		
 		  
         </main>

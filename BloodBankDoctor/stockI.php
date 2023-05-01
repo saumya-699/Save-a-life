@@ -16,7 +16,7 @@ session_start();
     $resultd = $conn->query($query);
     
     //echo "Error in ".$vql."<br>".$conn->error;
-    
+    $x=null;
     if($resultd->num_rows>0)
     
     {        
@@ -73,7 +73,7 @@ session_start();
               <ul>
                 <li class="menu-header"><span>  </span></li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="Home.php">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -260,7 +260,7 @@ require 'conp.php';
     
 $vql ="select * from bloodbank_doctor where BloodBank_doctor_ID ='$x'";
 $resultx = $conn->query($vql);
-
+ $ty =null;
  while($row = $resultx->fetch_assoc())
    
    {     
@@ -285,7 +285,7 @@ if($result->num_rows>0)
 
 	   
 	  // echo  "<div class='tab'>";
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Blood_bagID"."</th>"."<th style='text-align:center;width:120px;'>"."Blood_group"."</th>"."<th style='text-align:center;width:120px;'>"."Component_type"."</th>"."<th style='width:120px;'>"."Expiry date"."</th>"."</tr>";
+	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Blood Bag ID"."</th>"."<th style='text-align:center;width:120px;'>"."Blood Group"."</th>"."<th style='text-align:center;width:120px;'>"."Component Type"."</th>"."<th style='width:120px;'>"."Expiry Date"."</th>"."</tr>";
       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=7'>"."</td>"."</tr>";
      while($row = $result->fetch_assoc())
    
