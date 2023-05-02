@@ -9,6 +9,9 @@
   <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'>
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="./stylek2.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 
 </head>
 
@@ -247,26 +250,14 @@
   <style>
     .container-shadow {
       position: absolute;
-      width: 525px;
-      height: 700px;
-      left: 50%;
-      margin-left: -262.5px;
-      margin-top: 0px;
+      height: 800px;
       box-shadow: 0px 80px 50px -20px #000;
     }
 
     .container {
       position: absolute;
-      width: 640px;
-      height: 700px;
-      left: 50%;
-      margin-left: -298.5px;
-      margin-top: 60px;
-      /*   background: url('https://bit.ly/2kBRtBE'); */
-      /*   background: #673AB7; */
-      background-color: #0c1e35;
-      /*background-image: linear-gradient(315deg, #ffffff 0%, #85C1E9 50%);*/
-
+      height: 800px;
+      
       box-shadow: 0px 0px 50px -20px #000;
     }
 

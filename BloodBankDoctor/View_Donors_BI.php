@@ -44,7 +44,41 @@ session_start();
               <ul>
                 <li class="menu-header"><span>  </span></li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="Home.php
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  ">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -237,7 +271,7 @@ $m= $_SESSION["Name"];
     $resultd = $conn->query($query);
     
     //echo "Error in ".$vql."<br>".$conn->error;
-    
+    $x=null;
     if($resultd->num_rows>0)
     
     {        
@@ -261,7 +295,7 @@ $m= $_SESSION["Name"];
     }
  $vql ="select * from bloodbank_doctor where BloodBank_doctor_ID ='$x'";
 $resultx = $conn->query($vql);
-
+$tz=null;
  while($row = $resultx->fetch_assoc())
    
    {     
@@ -287,12 +321,12 @@ if($result->num_rows>0)
 	      //echo "<font size=6>";
 	   
 	   //echo  "<div class='tab'>";
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Donor_ID"."</th>"."
+	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Donor ID"."</th>"."
        <th style='text-align:center;width:120px;'>"."Donor Name"."
        <th style='text-align:center;width:120px;'>"."NIC Number"."</th>"."
        <th>"."Gender"."</th>"."
-       <th>"."Cotact Number"."</th>"."
-	   <th>"."province"."</th>"."
+       <th>"."Contact Number"."</th>"."
+	   <th>"."Province"."</th>"."
        <th style='width:100px;'>"."Action"."</th>"."
        </tr>";
       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";

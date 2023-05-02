@@ -1,4 +1,58 @@
+<?php 
+session_start();
 
+?>
+<?php
+
+ 
+Use PHPMailer\PHPMailer\PHPmailer;
+Use PHPMailer\PHPMailer\Exception;
+require 'phpmailer/src/Exception.php';
+require 'phpmailer/src/PHPMailer.php';
+
+require 'phpmailer/src/SMTP.php';
+//require 
+if(isset($_POST["BtnSubmit"])){
+   
+$mail = new PHPMailer(true);
+$mail->isSMTP();
+$mail->Host = 'smtp.gmail.com';
+$mail ->SMTPAuth = true;
+$mail->Username = 'wmadushi49@gmail.com';
+$mail->Password = 'zswherapcjuvbtgr';
+$mail->SMTPSecure ='ssl';
+$mail->Port = 465;
+
+
+$mail->setFrom('wmadushi49@gmail.com');
+
+$mail->addAddress($_POST["Email"]);
+$mail->isHTML(true);
+
+$mail->Subject=$_POST["subject"];
+$mail->Body = $_POST["message"];
+
+$mail->send();
+
+echo '<script type="text/javascript">';
+echo 'alert("Successfully added and sent the email");';
+
+ echo 'window.location.href="Home.php";';
+echo '</script>';
+
+
+
+
+
+
+}
+
+
+
+
+
+
+?>
 <?php 
 session_start();
 
@@ -19,7 +73,7 @@ if(isset($_POST['BtnSubmit']))
 	$password=$_POST["password"];
 	$m= $_SESSION["Name"];
   $DOA=$_POST["DOA"];
-
+$m= $_SESSION["Name"];
 
 	$query = "select * from director where UserName ='$m'";
 
@@ -28,7 +82,7 @@ if(isset($_POST['BtnSubmit']))
 		$resultd = $conn->query($query);
 		
 		//echo "Error in ".$vql."<br>".$conn->error;
-
+$x = null;
 if($resultd->num_rows>0)
 
 {        

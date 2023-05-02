@@ -15,7 +15,7 @@ session_start();
     $resultd = $conn->query($query);
     
     //echo "Error in ".$vql."<br>".$conn->error;
-    
+    $x=null;
     if($resultd->num_rows>0)
     
     {        
@@ -74,7 +74,7 @@ session_start();
               <ul>
                 <li class="menu-header"><span>  </span></li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="Home.php">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>

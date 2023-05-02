@@ -18,7 +18,8 @@ session_start();
 		$resultd = $conn->query($query);
 		
 		//echo "Error in ".$vql."<br>".$conn->error;
-
+$x=null;
+$hid=null;
 if($resultd->num_rows>0)
 
 {        
@@ -57,7 +58,7 @@ $resultD = $conn->query($Dql);
 	
 //$sql= "select * from stock where Hospital_ID='$ty' and No_of_packs <= 2";
 //$result = $conn->query($sql);
-
+$Donor =null;
 if($resultD->num_rows>0)
 
 {   
@@ -81,7 +82,7 @@ $results = $conn->query($sql);
 	
 //$sql= "select * from stock where Hospital_ID='$ty' and No_of_packs <= 2";
 //$result = $conn->query($sql);
-
+$Request =null;
 if($results->num_rows>0)
 
 {   
@@ -317,7 +318,7 @@ if($results->num_rows>0)
                     </td>
                     <td>
                         <p id="rcorners">
-                           Sent request
+                           Sent Requests
                             </br>
                             <span style="color:#0D5C75; font-size: 70px; font-weight: 700;">
                             <?php echo $Request; ?>

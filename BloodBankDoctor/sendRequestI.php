@@ -15,7 +15,7 @@ session_start();
     $resultd = $conn->query($query);
     
     //echo "Error in ".$vql."<br>".$conn->error;
-    
+    $x=null;
     if($resultd->num_rows>0)
     
     {        
@@ -47,7 +47,8 @@ session_start();
 require 'conp.php';
 $vql ="select * from bloodbank_doctor where BloodBank_doctor_ID ='$x'";
 $resultx = $conn->query($vql);
-
+$tz =null;
+$nm=null;
  while($row = $resultx->fetch_assoc())
    
    {     
@@ -93,7 +94,7 @@ $resultx = $conn->query($vql);
               <ul>
                 <li class="menu-header"><span>  </span></li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="Home.php">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -260,7 +261,7 @@ $resultx = $conn->query($vql);
     <div class="wrap">
      
    <div class="headings">
-       <span><h1>External request for <br>components</h1></span>
+       <span><h1><center>&nbsp;&nbsp;External Request for <br>&nbsp;&nbsp;&nbsp;&nbsp;Components</center></h1></span>
       
       </div>
 		
@@ -372,7 +373,7 @@ echo "</select>";
 						<br><br><br><br>
                         
                         <div class='col btn-but'> <input type='submit' name='BtnSubmit' value='Send' class='b1'></div>
-                        <div class='col btn-but'> <input type='submit' name='btnCancel' value='Cancel' class='b2'></div>
+                        <div class='col btn-but'>  <button name='btnCancel' value='Cancel' class='b2' onclick='back()'>Cancel </button></div>
                    
 					
   </form> 

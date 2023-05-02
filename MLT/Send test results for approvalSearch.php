@@ -27,6 +27,7 @@ if (isset($_SESSION["ID"])) {
   <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
   <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'>
   <link rel="stylesheet" href="./style.css">
+  <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
 
 </head>
 
@@ -230,7 +231,7 @@ if (isset($_SESSION["ID"])) {
               if ($result->num_rows > 0) {
 
                 echo  "<div class='tab'>";
-                echo  "<table border=1>" . "<tr>" . "<th style='text-align:center'>" . "Processed Date" . "</th>" . "<th style='text-align:center;'>" . "Batch number" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Click to view more information" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Click button to request for approval" . "</th>" . "</tr>";
+                echo  "<table border=1>" . "<tr>" . "<th style='text-align:center'>" . "Processed Date" . "</th>" . "<th style='text-align:center;'>" . "Batch Number" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Action" . "</th>" . "</tr>";
                 echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
                 while ($row = $result->fetch_assoc()) {
 
@@ -238,17 +239,15 @@ if (isset($_SESSION["ID"])) {
                   echo  "<tr>" . "<td>" . $row["process_date"] . "</td>" . "<td>" . $row["batch_number"] . "</td>";
 
                   echo "<td class='tb'><form method='POST' action ='Send test results for approval1.php'>
-       <input type=hidden name=Requestbatch value=" . $row["batch_number"] . " >
-       <input type=hidden name=RequestID value=" . $row["process_date"] . " >
-         <button type=submit value=view name=view  class='fp'><i class='fa-sharp fa-solid fa-eye'></i></button>
-         </form>    	
-    
-        </td>";
-                  echo "<td class=''><form method='POST' action =''>
-        <input type=hidden name=RequestID value=" . $row["process_date"] . " >
-        <input type=hidden name=Requestbatch value=" . $row["batch_number"] . " >
-        <button type=submit value=submit   class='b2'>Send</button>
-         </form>    	
+                  <input type=hidden name=Requestbatch value=" . $row["batch_number"] . " >
+                  <input type=hidden name=RequestID value=" . $row["process_date"] . " >
+                    <button type=submit value=view name=view  class='fp'><i class='fa-sharp fa-solid fa-eye'></i></button>
+                    </form> 
+                   <form method='POST' action =''>   	
+                   <input type=hidden name=RequestID value=" . $row["process_date"] . " >
+                   <input type=hidden name=Requestbatch value=" . $row["batch_number"] . " >
+                   <button type=send value=send name=send class='fp'><i class='fa-regular fa-forward-fast'></i></button>
+                    </form>    	
     
         </td>";
                   echo "</div>";

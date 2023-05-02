@@ -11,7 +11,7 @@ session_start();
     $query = "select * from bloodbank_doctor where UserName ='$m'";
     
     
-           
+           $x=null;
     $resultd = $conn->query($query);
     
     //echo "Error in ".$vql."<br>".$conn->error;
@@ -73,7 +73,7 @@ session_start();
               <ul>
                 <li class="menu-header"><span>  </span></li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="Home.php">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>

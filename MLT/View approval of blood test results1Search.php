@@ -231,7 +231,7 @@ if (isset($_SESSION["ID"])) {
               if ($result->num_rows > 0) {
 
                 echo  "<div class='tab'>";
-                echo  "<table border=1>" . "<tr>" . "<th style='text-align:center'>" . "Processed Date" . "</th>" . "<th style='text-align:center;'>" . "Batch number" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Status" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Click to view more information" . "</th>" . "</tr>";
+                echo  "<table border=1>" . "<tr>" . "<th style='text-align:center'>" . "Processed Date" . "</th>" . "<th style='text-align:center;'>" . "Batch Number" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Status" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Action" . "</th>" . "</tr>";
                 echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
                 while ($row = $result->fetch_assoc()) {
 

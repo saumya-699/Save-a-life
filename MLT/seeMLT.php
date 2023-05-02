@@ -190,9 +190,8 @@ if (isset($_SESSION["ID"])) {
         </div>
           <div class="col-9 ">
             <center style='margin-top:50px;'>
-              <h2 class="txt-l ">Welcome Dear.<?php echo " " . $x;
+              <h2 class="txt-l ">Welcome MLT.<?php echo " " . $x;
                                               ?> </h2>
-              <h3 class="txt-l ">You have sucessfully accessed to your MLT Account</h3>
             </center>
             <div class="form">
               <div class="card frm-form ">

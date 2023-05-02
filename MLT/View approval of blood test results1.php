@@ -6,6 +6,7 @@ session_start();
 if (isset($_SESSION["ID"])) {
   include "config.php";
   $m = $_SESSION["Name"];
+  $date =date("Y/m/d");
   $query = "SELECT * FROM mlt WHERE UserName ='$m'";
   $result1 = $conn->query($query);
 
@@ -15,7 +16,7 @@ if (isset($_SESSION["ID"])) {
     }
   }
 
-  $sql = "SELECT process_date, batch_number,status FROM blood_testing_result Where MLT_ID='$x' GROUP BY process_date, batch_number  order by process_date DESC ";
+  $sql = "SELECT process_date, batch_number,status FROM blood_testing_result Where MLT_ID='$x' and process_date ='$date' GROUP BY  batch_number ";
   $result = $conn->query($sql);
 }
 ?>
@@ -231,7 +232,7 @@ if (isset($_SESSION["ID"])) {
             if ($result->num_rows > 0) {
 
               echo  "<div class='tab'>";
-              echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;'>" . "Date" . "</th>" . "<th style='text-align:center;'>" . "Batch number" . "</th>" . "<th style='text-align:center;'>" . "Status" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Click button to view more information" . "</th>" . "</tr>";
+              echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;'>" . "Date" . "</th>" . "<th style='text-align:center;'>" . "Batch Number" . "</th>" . "<th style='text-align:center;'>" . "Status" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Action" . "</th>" . "</tr>";
               echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
               while ($row = $result->fetch_assoc()) {
 

@@ -198,7 +198,7 @@ session_start();
               <ul>
                 <li class="menu-header"><span>  </span></li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="Home.php">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -367,7 +367,7 @@ session_start();
        
     
      <form method="post" action="checkInternalStockI.php">
-          <table border=1> <tr> <th style='width:180px;'> Blood_group</th><th style='width:180px;'>Component_type</th><th style='width:180px;'>No_of_packs</th><th></th></tr>
+          <table border=1> <tr> <th style='width:180px;'> Blood Group</th><th style='width:180px;'>Component Type</th><th style='width:180px;'>No of Packs</th><th></th></tr>
 		  <tr> <td style='height:20px;background-color:transparent;'colspan=4'></td> </tr>
 		  
 	    <tr> 
@@ -513,8 +513,8 @@ $conn->close();
           <table class="lk"> 
 	    
 							   <tr> <td style='width:100px;'>Procedure</td> <td><select name= "Procedure" class="elect"> 
-                             <option value="Cross matching">Cross matching</option>    
-                             <option value="Check external stock and send e-msg">Check external stock and send e-msg</option>
+                             <option value="Cross matching">Cross Matching</option>    
+                             <option value="Check external stock and send e-msg">Check External Stock and Send E-Msg</option>
                             
                              </select> </td> </tr>
 							
