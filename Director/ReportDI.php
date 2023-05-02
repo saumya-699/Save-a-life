@@ -241,7 +241,7 @@ session_start();
 							   
 							
 
-                       <label for="exampleFormControlInput1" class="form-label lbl star">  Report name </label>
+                       <label for="exampleFormControlInput1" class="form-label lbl star">  Report Type </label>
                        <select name="report" id="" class="form-control txt-input" required>
                        <option value="bloodbank_doctor" selected>Blood bank doctor details</option>
                        <option value="mlt">MLT details</option > 
@@ -252,14 +252,50 @@ session_start();
                        </select>
 							    
 
-                       <label for="exampleFormControlInput1" class="form-label lbl star">  Hospital name</label>
-                       <select name="hospital" id="" class="form-control txt-input" required>
-                       <option value="1">Karapitiya&nbsp;Teaching&nbsp;Hospital</option>
-                       <option value="5" selected>Galle General Hospital</option>
-                       <option value="AH">All hospitals</option >
-						 </select>
-							    
-						     
+                       <?php
+	
+  require 'conp.php';
+  $sql= 'select *from hospital' ;
+               $result = $conn->query($sql);
+
+if($result->num_rows>0)
+
+{     
+
+
+      echo "<label for='exampleFormControlInput1' class='form-label lbl star'>Hospital Name</label>";
+
+echo 
+"<select name='hid' class='form-control txt-input' required>";
+echo "<option value='Not Provided'> None</option>";
+          
+          
+
+
+while($row=$result->fetch_assoc())
+
+{     
+ 
+echo 
+
+" <option value='$row[Hospital_ID]'name =hid>$row[HospitalName]</option>";
+
+   
+
+//echo '$row[Hospital_ID]';
+}
+}                      
+echo "</select>";                      
+
+?>
+						     	 
+             <label for="exampleFormControlInput1" class="form-label lbl star">   Time period</label><br>
+                            
+                            
+                            From &nbsp;<input type="date" placeholder="From" name="From" id="From" class="yu">&nbsp;&nbsp;
+                   To &nbsp;<input type="date" placeholder="To" name="To" id="To" class="yu"><br><br><br>
+       
+                              
 						
 							 
 							 

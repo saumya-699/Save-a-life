@@ -6,11 +6,12 @@ session_start();
 
  <?php
    if(isset($_SESSION["ID"]))   {
-	
+    $date =date("Y/m/d");
 	
 ?>
 <html lang="en" >
 <head>
+  
   <meta charset="UTF-8">
   <title>side bar-director</title>
 <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
@@ -231,10 +232,43 @@ session_start();
 require 'conp.php';
 if(isset($_POST['BtnSubmit'])){
 $report=$_POST["report"];
-$HID=$_POST["hospital"];
+$HID=$_POST["hid"];
+$From =$_POST["From"];
+$To =$_POST["To"];
+
+$query = "select * from Hospital where Hospital_ID ='$HID'";
+    
+    
+
+$resultd = $conn->query($query);
+
+//echo "Error in ".$vql."<br>".$conn->error;
+
+if($resultd->num_rows>0)
+
+{        
+
+while($row = $resultd->fetch_assoc())
+
+{
+
+
+
+
+$HospitalName= $row["HospitalName"];
+
+
+
+
+
+}
+
+
+}
+
 
 if($report =="nurse"){
- $sql= "select * from nurse where Remark!='Removed' and Hospital_ID= '$HID'";
+ $sql= "select * from nurse where Remark!='Removed' and Hospital_ID= '$HID' and AppointmentDate between '$From' and '$To' ";
 $result = $conn->query($sql);
 
 if($result->num_rows>0)
@@ -246,13 +280,17 @@ if($result->num_rows>0)
 	      //echo "<font size=6>";
 	   
 	  // echo  "<div class='tab'>";
-	   echo  "<table class='container_content' id='container_content' border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Nurse_ID"."</th>"."<th style='text-align:center;width:120px;'>"."Name_With_Initials"."</th>"."<th>"."Hospital name"."</th>"."<th>"."Position"."</th>"."<th>"."SLMC number"."</th>"."</tr>";
+    echo  "<div class='container_content' id='container_content'>";
+   echo "<h2><center>Blood Bank Doctor Details Report of $HospitalName</center> </h2>" ;
+   echo "<h5><center>Save a Life</center> </h5>" ;
+   echo "<h5><center>printed on $date</center> </h5><br><br>" ;
+	   echo  "<table class='container_content' id='container_content' border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Nurse ID"."</th>"."<th style='text-align:center;width:120px;'>"."Name With Initials"."</th>"."<th>"."Position"."</th>"."<th>"."SLMC number"."</th>"."</tr>";
       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
    while($row = $result->fetch_assoc())
    
    {     
      
-	  echo  "<tr>"."<td>".$row["Nurse_ID"]."</td>"."<td>".$row["Name_With_Initials"]."</td>"."<td>".$row["HospitalName"]."</td>"."<td>".$row["Position"]."</td>"."<td>".$row["SLMC_Number"]."</td>";
+	  echo  "<tr>"."<td>".$row["Nurse_ID"]."</td>"."<td>".$row["Name_With_Initials"]."</td>"."<td>".$row["Position"]."</td>"."<td>".$row["SLMC_Number"]."</td>";
 	 
 				 echo "</tr>";
 	 
@@ -263,10 +301,10 @@ if($result->num_rows>0)
 	 echo "</font>";
 	 echo  "</font>";   
 	 echo "</table>";
-	 //echo "</div>";
+	 echo "</div>";
 	
 	
-}	
+} 	
 
 else
 
@@ -282,7 +320,7 @@ else
 
 
 if($report =="mlt"){
-    $sql= "select * from mlt where Remark!='Removed' and Hospital_ID= '$HID'";
+    $sql= "select * from mlt where Remark!='Removed' and Hospital_ID= '$HID'  and AppointmentDate between '$From' and '$To'";
    $result = $conn->query($sql);
    
    if($result->num_rows>0)
@@ -294,13 +332,17 @@ if($report =="mlt"){
              //echo "<font size=6>";
           
          // echo  "<div class='tab'>";
-          echo  "<table class='container_content' id='container_content' border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."MLT_ID"."</th>"."<th style='text-align:center;width:120px;'>"."Name_With_Initials"."</th>"."<th>"."Hospital name"."</th>"."<th>"."Position"."</th>"."<th>"."SLMC number"."</th>"."</tr>";
+         echo  "<div class='container_content' id='container_content'>";
+   echo "<h2><center>Blood Bank Doctor Details Report of $HospitalName</center> </h2>" ;
+   echo "<h5><center>Save a Life</center> </h5>" ;
+   echo "<h5><center>printed on $date</center> </h5><br><br>" ;
+          echo  "<table class='container_content' id='container_content' border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."MLT ID"."</th>"."<th style='text-align:center;width:120px;'>"."Name With Initials"."</th>"."<th>"."SLMC Number"."</th>"."</tr>";
          echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
       while($row = $result->fetch_assoc())
       
       {     
         
-         echo  "<tr>"."<td>".$row["MLT_ID"]."</td>"."<td>".$row["Name_With_Initials"]."</td>"."<td>".$row["HospitalName"]."</td>"."<td>".$row["Position"]."</td>"."<td>".$row["SLMC_Number"]."</td>";
+         echo  "<tr>"."<td>".$row["MLT_ID"]."</td>"."<td>".$row["Name_With_Initials"]."</td>"."<td>".$row["SLMC_Number"]."</td>";
         
                     echo "</tr>";
         
@@ -311,7 +353,7 @@ if($report =="mlt"){
         echo "</font>";
         echo  "</font>";   
         echo "</table>";
-        //echo "</div>";
+        echo "</div>";
        
        
    }	
@@ -330,7 +372,7 @@ if($report =="mlt"){
 
    
 if($report =="warddoctor"){
-    $sql= "select * from warddoctor where Remark!='Removed' and Hospital_ID= '$HID'";
+    $sql= "select * from warddoctor where Remark!='Removed' and Hospital_ID= '$HID'  and AppointmentDate between '$From' and '$To' ";
    $result = $conn->query($sql);
    
    if($result->num_rows>0)
@@ -340,15 +382,19 @@ if($report =="warddoctor"){
    
         //echo "<font color=red>";
              //echo "<font size=6>";
-          
+             echo  "<div class='container_content' id='container_content'>";
+             echo "<h2><center>Donation Details Report of  $HospitalName</center> </h2>" ;
+             echo "<h5><center>Save a Life</center> </h5>" ;
+             echo "<h5><center>printed on $date</center> </h5><br><br>" ;
+             
          // echo  "<div class='tab'>";
-          echo  "<table class='container_content' id='container_content' border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."WardDoctor_ID "."</th>"."<th style='text-align:center;width:120px;'>"."Name_With_Initials"."</th>"."<th>"."Hospital name"."</th>"."<th>"."Position"."</th>"."<th>"."SLMC number"."</th>"."</tr>";
+          echo  "<table class='container_content' id='container_content' border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."WardDoctor ID "."</th>"."<th style='text-align:center;width:120px;'>"."Name With Initials"."</th>"."<th>"."Specialization"."</th>"."<th>"."SLMC number"."</th>"."</tr>";
          echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
       while($row = $result->fetch_assoc())
       
       {     
         
-         echo  "<tr>"."<td>".$row["WardDoctor_ID "]."</td>"."<td>".$row["Name_With_Initials"]."</td>"."<td>".$row["HospitalName"]."</td>"."<td>".$row["Position"]."</td>"."<td>".$row["SLMC_Number"]."</td>";
+         echo  "<tr>"."<td>".$row["WardDoctor_ID"]."</td>"."<td>".$row["Name_With_Initials"]."</td>"."<td>".$row["Specialization"]."</td>"."<td>".$row["SLMC_Number"]."</td>";
         
                     echo "</tr>";
         
@@ -359,7 +405,7 @@ if($report =="warddoctor"){
         echo "</font>";
         echo  "</font>";   
         echo "</table>";
-        //echo "</div>";
+        echo "</div>";
        
        
    }	
@@ -377,25 +423,30 @@ if($report =="warddoctor"){
 
 
    if($report =="bloodbank_doctor"){
-    $sql= "select * from bloodbank_doctor where Remark!='Removed' and Hospital_ID= '$HID'";
+    $sql= "select * from bloodbank_doctor where Remark!='Removed' and Hospital_ID= '$HID'  and AppointmentDate between '$From' and '$To'";
    $result = $conn->query($sql);
    
    if($result->num_rows>0)
    
    {     
-      
+       
+    
+   echo  "<div class='container_content' id='container_content'>";
+   echo "<h2><center>Blood Bank Doctor Details Report of $HospitalName</center> </h2>" ;
+   echo "<h5><center>Save a Life</center> </h5>" ;
+   echo "<h5><center>printed on $date</center> </h5><br><br>" ;
    
         //echo "<font color=red>";
              //echo "<font size=6>";
           
          // echo  "<div class='tab'>";
-          echo  "<table class='container_content' id='container_content' border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."BloodBank_doctor_ID"."</th>"."<th style='text-align:center;width:120px;'>"."Name_With_Initials"."</th>"."<th>"."Hospital name"."</th>"."<th>"."SLMC number"."</th>"."</tr>";
+          echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."BloodBank Doctor ID"."</th>"."<th style='text-align:center;width:120px;'>"."Name With Initials"."</th>"."<th>"."SLMC number"."</th>"."</tr>";
          echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
       while($row = $result->fetch_assoc())
       
       {     
         
-         echo  "<tr>"."<td>".$row["BloodBank_doctor_ID"]."</td>"."<td>".$row["Name_With_Initials"]."</td>"."<td>".$row["HospitalName"]."</td>"."<td>".$row["SLMC_Number"]."</td>";
+         echo  "<tr>"."<td>".$row["BloodBank_doctor_ID"]."</td>"."<td>".$row["Name_With_Initials"]."</td>"."<td>".$row["SLMC_Number"]."</td>";
         
                     echo "</tr>";
         
@@ -406,7 +457,7 @@ if($report =="warddoctor"){
         echo "</font>";
         echo  "</font>";   
         echo "</table>";
-        //echo "</div>";
+        echo "</div>";
        
        
    }	
@@ -423,29 +474,34 @@ if($report =="warddoctor"){
 
 
 
-   echo"<div class=;container_content' id='container_content'>";
+
+
+
+   //all employees
+
+   echo"<div class=container_content' id='container_content'>";
    if($report =="AE"){
-    $sql= "select * from bloodbank_doctor where Remark!='Removed' and Hospital_ID= '$HID'";
-    echo "<h2> <center>Blood Bank Doctor details</center></h2>";
-   echo "<br> <br>";
+    $sql= "select * from bloodbank_doctor where Remark!='Removed' and Hospital_ID= '$HID' and AppointmentDate between '$From' and '$To'";
+    
    $result = $conn->query($sql);
    
    if($result->num_rows>0)
    
-   {     
+   {     echo "<h2> <center>Blood Bank Doctor details</center></h2>";
+    echo "<br> <br>";
       
    
         //echo "<font color=red>";
              //echo "<font size=6>";
           
          // echo  "<div class='tab'>";
-          echo  "<table  border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."BloodBank_doctor_ID"."</th>"."<th style='text-align:center;width:120px;'>"."Name_With_Initials"."</th>"."<th>"."Hospital name"."</th>"."<th>"."SLMC number"."</th>"."</tr>";
+          echo  "<table  border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."BloodBank Doctor ID"."</th>"."<th style='text-align:center;width:120px;'>"."Name With Initials"."</th>"."<th>"."SLMC Number"."</th>"."</tr>";
          echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
       while($row = $result->fetch_assoc())
       
       {     
         
-         echo  "<tr>"."<td>".$row["BloodBank_doctor_ID"]."</td>"."<td>".$row["Name_With_Initials"]."</td>"."<td>".$row["HospitalName"]."</td>"."<td>".$row["SLMC_Number"]."</td>";
+         echo  "<tr>"."<td>".$row["BloodBank_doctor_ID"]."</td>"."<td>".$row["Name_With_Initials"]."</td>"."<td>".$row["SLMC_Number"]."</td>";
         
                     echo "</tr>";
         
@@ -463,26 +519,26 @@ if($report =="warddoctor"){
 
    }	
 
-   $sql= "select * from warddoctor where Remark!='Removed' and Hospital_ID= '$HID'";
+   $sql= "select * from warddoctor where Remark!='Removed' and Hospital_ID= '$HID' and AppointmentDate between '$From' and '$To'";
    $result = $conn->query($sql);
-   echo "<h2><center> Ward Doctor details</center></h2>";
-   echo "<br> <br>";
+  
    if($result->num_rows>0)
    
-   {     
+   {      echo "<h2><center> Ward Doctor details</center></h2>";
+    echo "<br> <br>";
       
    
         //echo "<font color=red>";
              //echo "<font size=6>";
           
          // echo  "<div class='tab'>";
-          echo  "<table  border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."WardDoctor_ID "."</th>"."<th style='text-align:center;width:120px;'>"."Name_With_Initials"."</th>"."<th>"."Hospital name"."</th>"."<th>"."Specialization"."</th>"."<th>"."SLMC number"."</th>"."</tr>";
+          echo  "<table  border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."WardDoctor ID "."</th>"."<th style='text-align:center;width:120px;'>"."Name With Initials"."</th>"."<th>"."Specialization"."</th>"."<th>"."SLMC number"."</th>"."</tr>";
          echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
       while($row = $result->fetch_assoc())
       
       {     
         
-         echo  "<tr>"."<td>".$row["WardDoctor_ID"]."</td>"."<td>".$row["Name_With_Initials"]."</td>"."<td>".$row["HospitalName"]."</td>"."<td>".$row["Specialization"]."</td>"."<td>".$row["SLMC_Number"]."</td>";
+         echo  "<tr>"."<td>".$row["WardDoctor_ID"]."</td>"."<td>".$row["Name_With_Initials"]."</td>"."<td>".$row["Specialization"]."</td>"."<td>".$row["SLMC_Number"]."</td>";
         
                     echo "</tr>";
         
@@ -500,26 +556,26 @@ if($report =="warddoctor"){
 
 
   
-   $sql= "select * from mlt where Remark!='Removed' and Hospital_ID= '$HID'";
+   $sql= "select * from mlt where Remark!='Removed' and Hospital_ID= '$HID' and AppointmentDate between '$From' and '$To'";
    $result = $conn->query($sql);
-   echo "<h2> <center>MLT details</center></h2>";
-   echo "<br> <br>";
+ 
    if($result->num_rows>0)
    
    {     
-      
+    echo "<h2> <center>MLT details</center></h2>";
+    echo "<br> <br>";
    
         //echo "<font color=red>";
              //echo "<font size=6>";
           
          // echo  "<div class='tab'>";
-          echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."MLT_ID"."</th>"."<th style='text-align:center;width:120px;'>"."Name_With_Initials"."</th>"."<th>"."Hospital name"."</th>"."<th>"."SLMC number"."</th>"."</tr>";
+          echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."MLT ID"."</th>"."<th style='text-align:center;width:120px;'>"."Name With Initials"."</th>"."<th>"."SLMC Number"."</th>"."</tr>";
          echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
       while($row = $result->fetch_assoc())
       
       {     
         
-         echo  "<tr>"."<td>".$row["MLT_ID"]."</td>"."<td>".$row["Name_With_Initials"]."</td>"."<td>".$row["HospitalName"]."</td>"."<td>".$row["SLMC_Number"]."</td>";
+         echo  "<tr>"."<td>".$row["MLT_ID"]."</td>"."<td>".$row["Name_With_Initials"]."</td>"."<td>".$row["SLMC_Number"]."</td>";
         
                     echo "</tr>";
         
@@ -537,26 +593,26 @@ if($report =="warddoctor"){
 
 
 
-   $sql= "select * from nurse where Remark!='Removed' and Hospital_ID= '$HID'";
+   $sql= "select * from nurse where Remark!='Removed' and Hospital_ID= '$HID' and AppointmentDate between '$From' and '$To'";
    $result = $conn->query($sql);
-   echo "<h2><center> Nurse details</center></h2>";
-   echo "<br><br>";
+  
    if($result->num_rows>0)
    
-   {     
+   {      echo "<h2><center> Nurse details</center></h2>";
+    echo "<br><br>";
       
    
         //echo "<font color=red>";
              //echo "<font size=6>";
           
          // echo  "<div class='tab'>";
-          echo  "<table  id='container_content' border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Nurse_ID"."</th>"."<th style='text-align:center;width:120px;'>"."Name_With_Initials"."</th>"."<th>"."Hospital name"."</th>"."<th>"."SLMC number"."</th>"."</tr>";
+          echo  "<table  id='container_content' border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Nurse ID"."</th>"."<th style='text-align:center;width:120px;'>"."Name With Initials"."</th>"."<th>"."SLMC Number"."</th>"."</tr>";
          echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
       while($row = $result->fetch_assoc())
       
       {     
         
-         echo  "<tr>"."<td>".$row["Nurse_ID"]."</td>"."<td>".$row["Name_With_Initials"]."</td>"."<td>".$row["HospitalName"]."</td>"."<td>".$row["SLMC_Number"]."</td>";
+         echo  "<tr>"."<td>".$row["Nurse_ID"]."</td>"."<td>".$row["Name_With_Initials"]."</td>"."<td>".$row["SLMC_Number"]."</td>";
         
                     echo "</tr>";
         
@@ -589,15 +645,14 @@ if($report =="warddoctor"){
 $conn->close();
 ?>
 
-
-<button onclick="generatePDF()" class="z">Generate</button>
+<button onclick="generatePDF()" class="z">Download</button>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <script>
-    function generatePDF() {
+   function generatePDF() {
         const element = document.getElementById('container_content');
         var opt = {
             margin: 0,
-            filename: 'html2pdf_example.pdf',
+            filename: 'Report.pdf',
             image: {
                 type: 'jpeg',
                 quality: 0.98
@@ -612,9 +667,16 @@ $conn->close();
             }
         };
         // Choose the element that our invoice is rendered in.
-        html2pdf().set(opt).from(element).output('dataurlnewwindow');
+        html2pdf().set(opt).from(element).save();
     }
 </script>
+
+
+
+
+     
+
+
 
      
              

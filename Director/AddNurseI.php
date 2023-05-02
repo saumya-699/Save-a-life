@@ -236,7 +236,7 @@ session_start();
 
        
 function generate_pw() {
-  $pw;
+  $pw=null;
   // Set random length for password
   $password_length = rand(8, 16);
   $pw = '';
