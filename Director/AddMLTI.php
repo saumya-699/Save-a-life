@@ -360,6 +360,7 @@ echo "
    <br><br><br><br>
    <input type='hidden'  name='subject' value='Regarding Appoinment'>
    <input type='password'  name='password'  class='form-control txt-input'  value='$hel'  required>
+   <input type='hidden'  name='message'   value=' Hello  We are pleased to inform that you have been appointed to the system and your and your password is $hel.Your default user name is your email address. Please change the user name and password once you get the e mail'>   
                   <div class='row btn-buttons'>
                         
                         <div class='col btn-but'> <input type='submit' name='BtnSubmit' value='Add' class='b1'></div>
