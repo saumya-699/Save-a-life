@@ -180,7 +180,7 @@
             <div class="wrap">
               <div class="headings">
                 <center>
-                  <h1>Add blood components</h1>
+                  <h1>Add Blood Components</h1>
                   <center>
               </div>
               <form action="Create_bloodComponent.php " method="POST">
@@ -220,14 +220,13 @@
 
 
 
-
                 <div class="buttons ">
-                  &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp;<button class="b1" name="submit" value="submit">
+                  <button class="b1" name="submit" value="submit" value="submit">
                     <font size="2px">Add</font>
                   </button> &nbsp; &nbsp; &nbsp; &nbsp;
-                  &nbsp; &nbsp; &nbsp; &nbsp; <button class="b1" name="cancel" value="cancel">
-                    <font size="2px">Cancel</font>
-                  </button>
+                  <button class="b1" name="cancel" value="cancel"><a href="Add blood components.php">
+                      <font size="2px">Cancel</font>
+                    </a></button>
                 </div>
               </form>
 
@@ -249,26 +248,14 @@
   <style>
     .container-shadow {
       position: absolute;
-      width: 525px;
       height: 630px;
-      left: 50%;
-      margin-left: -262.5px;
-      margin-top: 0px;
       box-shadow: 0px 80px 50px -20px #000;
     }
 
     .container {
       position: absolute;
-      width: 590px;
-      height: 630px;
-      left: 50%;
-      margin-left: -298.5px;
-      margin-top: 60px;
-      /*   background: url('https://bit.ly/2kBRtBE'); */
-      /*   background: #673AB7; */
-      background-color: #0c1e35;
-      /*background-image: linear-gradient(315deg, #ffffff 0%, #85C1E9 50%);*/
-
+      height: 700px;
+      
       box-shadow: 0px 0px 50px -20px #000;
     }
 

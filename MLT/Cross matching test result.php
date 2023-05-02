@@ -9,6 +9,9 @@
   <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'>
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="./stylek2.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 
 </head>
 
@@ -179,7 +182,7 @@
             <div class="wrap">
               <div class="headings">
                 <center>
-                  <h1> Cross matching test result</h1>
+                  <h1> Cross Matching Test Result</h1>
                   <center>
               </div>
 
@@ -212,10 +215,10 @@
 
 
                 <div class="buttons ">
-                  &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; <button class="b1" name="submit" value="submit">
+                  <button class="b1" name="submit" value="submit" value="submit">
                     <font size="2px">Add</font>
                   </button> &nbsp; &nbsp; &nbsp; &nbsp;
-                  &nbsp; &nbsp; &nbsp; &nbsp; <button class="b1" name="cancel" value="cancel"><a href="Cross matching test result.php">
+                  &nbsp; &nbsp; &nbsp; &nbsp;<button class="b1" name="cancel" value="cancel"><a href="Cross matching test result.php">
                       <font size="2px">Cancel</font>
                     </a></button>
                 </div>
@@ -239,26 +242,14 @@
   <style>
     .container-shadow {
       position: absolute;
-      width: 525px;
       height: 540px;
-      left: 50%;
-      margin-left: -262.5px;
-      margin-top: 0px;
-      box-shadow: 0px 80px 50px -20px #000;
+      
     }
 
     .container {
       position: absolute;
-      width: 590px;
-      height: 540px;
-      left: 50%;
-      margin-left: -298.5px;
-      margin-top: 60px;
-      /*   background: url('https://bit.ly/2kBRtBE'); */
-      /*   background: #673AB7; */
-      background-color: #0c1e35;
-      /*background-image: linear-gradient(315deg, #ffffff 0%, #85C1E9 50%);*/
-
+      height: 600px;
+      
       box-shadow: 0px 0px 50px -20px #000;
     }
 

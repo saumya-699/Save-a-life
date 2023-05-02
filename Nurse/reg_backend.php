@@ -39,9 +39,9 @@ if($conn->query($sql)){
       
 	echo '<script type="text/javascript">';	 
 	echo 'alert("Registration is successfully");';
-         
+	echo 'window.location.href="reg.php";';
+	echo '</script>';    
 	
-		 echo '</script>';
 
 	  
 	  
@@ -52,12 +52,11 @@ if($conn->query($sql)){
 		 
 		   
 		 echo '<script type="text/javascript">';
-		   echo "Error in ".$sql."<br>".$conn->error;
-		
-		// echo 'alert("Error in entering try again!");';
-     
-		 echo '</script>';
-		  
+		echo "Error in ".$sql."<br>".$conn->error;
+		echo 'alert("Error in entering try again!");';
+		echo 'window.location.href="registerUserFront.php";';
+		echo '</script>';
+
  
 		 
 	 }

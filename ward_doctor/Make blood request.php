@@ -9,7 +9,9 @@
   <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
   <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'>
   <link rel="stylesheet" href="./style.css">
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <link rel="stylesheet" href="./stylek2.css">
 
 </head>
@@ -197,13 +199,12 @@
                 <label for="exampleFormControlInput1 " name="remark" class="form-label lbl">Remark</label>
                 <textarea name="remark" id=" " cols="30 " rows="10 " class="input " placeholder="Type remark "></textarea>
 
-
                 <div class="buttons ">
-                  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; <button class="b1" name="submit" value="submit">
-                    <font size="2px">Request</font size>
+                  <button class="b1" name="submit" value="submit" value="submit">
+                    <font size="2px">Request</font>
                   </button> &nbsp; &nbsp; &nbsp; &nbsp;
-                  &nbsp; &nbsp; &nbsp; &nbsp; <button class="b1" name="cancel" value="cancel"><a href="Make blood request.php">
-                      <font size="2px">Cancel</font size>
+                  <button class="b1" name="cancel" value="cancel"><a href="Make blood request.php">
+                      <font size="2px">Cancel</font>
                     </a></button>
                 </div>
               </form>
@@ -227,6 +228,18 @@
 </html>
 
 <style>
+  .container-shadow {
+      position: absolute;
+      height: 1330px;
+      box-shadow: 0px 80px 50px -20px #000;
+    }
+
+    .container {
+      position: absolute;
+      height: 1330px;
+      
+      box-shadow: 0px 0px 50px -20px #000;
+    }
   .buttons {
     margin-top: 20px;
   }

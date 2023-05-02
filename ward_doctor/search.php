@@ -29,6 +29,7 @@ if (isset($_SESSION["ID"])) {
   <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
   <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'>
   <link rel="stylesheet" href="./style.css">
+  <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
 
 </head>
 
@@ -162,16 +163,16 @@ if (isset($_SESSION["ID"])) {
                 echo "<font size=3>";
 
 
-                echo  "<table >" . "<tr>" . "<th>" . "Requested Date" . "</th>" . "<th>" . "Request ID" . "</th>" . "<th>" . "Patient Name" . "</th>" . "<th>" . "Blood Group" . "</th>" . "<th>" . "Status" . "</th>" . "<th>" . "Action" . "</th>" . "</tr>";
+                echo  "<table >" . "<tr>" . "<th>" . "Requested Date" . "</th>" . "<th>" . "Receive date" . "</th>" . "<th>" . "Patient Name" . "</th>" . "<th>" . "Blood Group" . "</th>" . "<th>" . "Status" . "</th>" . "<th>" . "Action" . "</th>" . "</tr>";
                 echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=6'>" . "</td>" . "</tr>";
 
                 while ($row = $result->fetch_assoc()) {
 
-                  echo  "<tr style='height:60px'>" . "<td>" . $row["requested_date"] . "</td>" . "<td>" . $row["requeste_id"] . "</td>" . "<td>" . $row["patient_name"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "<td>" . $row["status"] . "</td>";
+                  echo  "<tr style='height:60px'>" . "<td>" . $row["requested_date"] . "</td>" . "<td>" . $row["expected_date"] . "</td>" . "<td>" . $row["patient_name"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "<td>" . $row["status"] . "</td>";
 
                   echo "<td class='tb'><form method='POST' action ='Request history2.php'>
       <input type=hidden name=RequestID value=" . $row["requeste_id"] . " >
-      <button type=submit value=view name=view  class='fp'><img src=eye.png width=40 height=37></button>
+      <button type=submit value=view name=view  class='fp'><i class='fa-sharp fa-solid fa-eye'></i></button>
       </form>  
     
         </td>";
@@ -271,7 +272,9 @@ if (isset($_SESSION["ID"])) {
       width: 774.5px;
     }
 
-
+    .fa-solid, .fas {
+    margin-top: 22px;
+}
 
     .box {
 

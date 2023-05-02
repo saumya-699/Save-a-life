@@ -9,7 +9,9 @@
   <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'>
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="./stylek2.css">
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 </head>
 
 <body>
@@ -179,14 +181,14 @@
             <div class="wrap">
               <div class="headings">
                 <center>
-                  <h1>Blood testing result of Donor</h1>
+                  <h1>Blood Testing Result Of Donor</h1>
                   <center>
               </div>
 
               <form action="createresult.php " method="POST">
 
 
-                <label for="exampleFormControlInput1 " class="form-label lbl star ">Donar ID</label>
+                <label for="exampleFormControlInput1 " class="form-label lbl star ">Donor ID</label>
                 <input type="text" class="form-control txt-input " name="Donor_Id" placeholder="Type donar id" required="">
 
 
@@ -248,19 +250,21 @@
                   <option value=" " diabled>Select batch_number </option>
                   <option value="1">1</option>
                   <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
 
                 </select>
 
 
 
-
                 <div class="buttons ">
-                  &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; <button class="b1" name="submit" value="submit">
+                  <button class="b1" name="submit" value="submit" value="submit">
                     <font size="2px">Add</font>
                   </button> &nbsp; &nbsp; &nbsp; &nbsp;
-                  &nbsp; &nbsp; &nbsp; &nbsp; <button class="b1" name="cancel" value="cancel">
-                    <font size="2px">Cancel</font>
-                  </button>
+                  &nbsp; &nbsp; &nbsp; &nbsp;<button class="b1" name="cancel" value="cancel"><a href="Enter Blood testing result.php">
+                      <font size="2px">Cancel</font>
+                    </a></button>
                 </div>
               </form>
 
@@ -282,33 +286,24 @@
   <style>
     .container-shadow {
       position: absolute;
-      width: 525px;
-      height: 1020px;
-      left: 50%;
-      margin-left: -262.5px;
-      margin-top: 0px;
-      box-shadow: 0px 80px 50px -20px #000;
+      height: 540px;
+      
     }
 
     .container {
       position: absolute;
-      width: 590px;
-      height: 1020px;
-      left: 50%;
-      margin-left: -298.5px;
-      margin-top: 60px;
-      /*   background: url('https://bit.ly/2kBRtBE'); */
-      /*   background: #673AB7; */
-      background-color: #0c1e35;
-      /*background-image: linear-gradient(315deg, #ffffff 0%, #85C1E9 50%);*/
+      height: 1130px;
+     
+     
 
       box-shadow: 0px 0px 50px -20px #000;
     }
 
-    .buttons {
+    .buttons{
       margin-top: 20px;
     }
-  </style>
+    </style>
+
 </body>
 
 </html>
