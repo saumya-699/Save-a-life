@@ -193,28 +193,14 @@
                 <label for="exampleFormControlInput1 " class="form-label lbl star ">Report name</label>
                 <select name="blood_group" id=" " class="form-control txt-input " required="">
                   <option value=" " diabled> Select </option>
-                  <option value="xxxx">Blood test report</option>
-                  <option value="yyy">xxx</option>
+                  <option value="xxxx">Blood Test Report</option>
+                  <option value="xxxx">Approval Blood Report</option>
 
                 </select>
 
-                <label for="exampleFormControlInput1 " class="form-label lbl star ">Hospital name</label>
-                <select name="Cross_matching_test_result" id=" " class="form-control txt-input " required="">
-                  <option value=" " diabled>Select </option>
-                  <option value="xxx">xxx</option>
-                  <option value="yyy">yyy</option>
+               
 
-                </select>
-
-                <label for="exampleFormControlInput1 " class="form-label lbl star ">Export method</label>
-                <select name="Cross_matching_test_result" id=" " class="form-control txt-input " required="">
-                  <option value=" " diabled>Select </option>
-                  <option value="PDF">PDF</option>
-                  <option value="jpg">jpg</option>
-                  <option value="jpg">jpg</option>
-                  <option value="jpg">jpg</option>
-
-                </select>
+            
 
                 <label for="exampleFormControlInput1 " class="form-label lbl star " name="time_period">Time period (MM/DD/YYYY)</label>
                 <div class="input-group mb-4 ">
@@ -250,13 +236,13 @@
   <style>
     .container-shadow {
       position: absolute;
-      height: 800px;
+      height: 650px;
       box-shadow: 0px 80px 50px -20px #000;
     }
 
     .container {
       position: absolute;
-      height: 800px;
+      height: 650px;
       
       box-shadow: 0px 0px 50px -20px #000;
     }

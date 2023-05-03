@@ -223,25 +223,46 @@ if (isset($_SESSION["ID"])) {
             if ($result->num_rows > 0) {
 
               echo  "<div class='tab'>";
-              echo  "<table border=1>" . "<tr>" . "<th style='text-align:center'>" . "Processed Date" . "</th>" . "<th style='text-align:center;'>" . "Batch number" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Action" . "</th>" . "</tr>";
+              echo  "<table border=1>" . "<tr>" . "<th style='text-align:center'>" . "Processed Date" . "</th>" . "<th style='text-align:center;'>" . "Batch Number" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Action" . "</th>" . "</tr>";
               echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
               while ($row = $result->fetch_assoc()) {
+             
 
 
                 echo  "<tr>" . "<td>" . $row["process_date"] . "</td>" . "<td>" . $row["batch_number"] . "</td>";
+               
 
-                echo "<td class='tb'><form method='POST' action ='Send test results for approval1.php'>
+                echo "<td class='tb'><form method='POST' action ='Send test results for approval1.php'>";
+                
+                echo "
    <input type=hidden name=Requestbatch value=" . $row["batch_number"] . " >
    <input type=hidden name=RequestID value=" . $row["process_date"] . " >
      <button type=submit value=view name=view  class='fp'><i class='fa-sharp fa-solid fa-eye'></i></button>
-     </form>  
+     </form> "; 
+    $bdate=$row['process_date'];
+    $bnum=$row['batch_number'];
+    
+     echo "
      <form method='POST' action =''>  	
-    <input type=hidden name=RequestID value=" . $row["process_date"] . " >
-    <input type=hidden name=Requestbatch value=" . $row["batch_number"] . " >
-    <button type=send value=send name=send class='fp'><i class='fa-regular fa-forward-fast'></i></button>
-     </form>    	
+     <input type=hidden name='bnum' value=" . $row["batch_number"] . " >
+    <input type=hidden name='bdate' value=" . $row["process_date"] . " >
+    <input type='submit' name='$bnum' value='Send'>
+    
+     </form>
+
 
     </td>";
+ 
+    
+    if(isset($_POST[$bnum])){
+    
+      
+      $updateSqlSend= "UPDATE blood_testing_result SET send_status	='1' WHERE batch_number='$bnum' AND process_date='$bdate';";
+      $send=mysqli_query($conn,$updateSqlSend);
+        // var_dump($bdate,$bnum);
+
+
+    }
                 echo "</div>";
                 echo "</tr>";
 

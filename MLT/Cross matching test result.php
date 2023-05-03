@@ -1,3 +1,22 @@
+<?php
+session_start();
+include "config.php";
+if (isset($_SESSION["ID"])) {
+  include "config.php";
+  $m = $_SESSION["Name"];
+  $query = "SELECT * FROM mlt WHERE UserName ='$m'";
+  $result1 = $conn->query($query);
+
+  if ($result1->num_rows > 0) {
+    while ($row = $result1->fetch_assoc()) {
+      $x = $row["MLT_ID"];
+      $y=$row["Hospital_ID"];
+    }
+  }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,10 +27,7 @@
   <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
   <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'>
   <link rel="stylesheet" href="./style.css">
-  <link rel="stylesheet" href="./stylek2.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
 
 </head>
 
@@ -176,87 +192,271 @@
         <div>
           <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
         </div>
-
-        <div class="container-shadow">
-          <div class="container">
-            <div class="wrap">
-              <div class="headings">
-                <center>
-                  <h1> Cross Matching Test Result</h1>
-                  <center>
-              </div>
-
-              <form action="Create_Cross matching test result.php" method="POST">
-
-                <label for="exampleFormControlInput1 " class="form-label lbl star "> Request ID</label>
-                <input type="text" class="form-control txt-input " name="request_id" placeholder="Enter request id" required="">
+        <h1></h1>
 
 
-                <label for="exampleFormControlInput1 " class="form-label lbl star " required="">Blood Group test result</label>
-                <select name="blood_group" id=" " class="form-control txt-input" required="">
-                  <option value=" " diabled> Select group </option>
-                  <option value="O-">O-</option>
-                  <option value="O+">O+</option>
-                  <option value="A-">A-</option>
-                  <option value="A+">A+</option>
-                  <option value="B-">B-</option>
-                  <option value="B+">B+</option>
-                  <option value="AB-">AB-</option>
-                  <option value="AB+">AB+</option>
-                </select>
 
-                <label for="exampleFormControlInput1 " class="form-label lbl star ">Cross matching result</label>
-                <select name="Cross_matching_test_result" id=" " class="form-control txt-input " required="">
-                  <option value=" " diabled>Select test result </option>
-                  <option value="Matched">Matched</option>
-                  <option value="Unmatched">Unmatched</option>
+        <form method="post" action="Cross matching test result.php">
 
-                </select>
+          <div class="midiv">
 
 
-                <div class="buttons ">
-                  <button class="b1" name="submit" value="submit" value="submit">
-                    <font size="2px">Add</font>
-                  </button> &nbsp; &nbsp; &nbsp; &nbsp;
-                  &nbsp; &nbsp; &nbsp; &nbsp;<button class="b1" name="cancel" value="cancel"><a href="Cross matching test result.php">
-                      <font size="2px">Cancel</font>
-                    </a></button>
-                </div>
-              </form>
+            <font size=3> Search by </font></b> <br /> <br /><select name="search" class="select">
+             <option value="requeste_id"><b> Request ID</b></option>
+            </select>
 
 
-            </div>
-          </div>
-        </div>
+            <input type="text" placeholder="type here" name="data" id="data" class="box">
+
+            <button type="submit" name="BtnSubmit" id="search" class="b1"><b>Search</b></button>
+          
+
+    </form>
+
+    <div class="box1">
+
+      <?php
+      if (isset($_POST['BtnSubmit'])) {
+        $search = $_POST["search"];
+        $data = $_POST["data"];
+        $sql = "SELECT * FROM blood_request WHERE $search = '$data' AND Hospital_ID = '$y'";
+        $result = $conn->query($sql);
+        
+
+          if ($result->num_rows > 0) {
+            echo  "<div class='tab'>";
+            echo "<font color=black>";
+            echo "<font size=3>";
+
+
+            echo  "<table >" . "<tr>" . "<th>" . "Requested Date" . "</th>" . "<th>" . "Receive date" . "</th>" . "<th>" . "Request ID" . "</th>" . "<th>" . "Blood Group" . "</th>" . "<th>" . "Status" . "</th>" . "<th>" . "Action" . "</th>" . "</tr>";
+            echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=6'>" . "</td>" . "</tr>";
+
+            while ($row = $result->fetch_assoc()) {
+
+              echo  "<tr style='height:60px'>" . "<td>" . $row["requested_date"] . "</td>" . "<td>" . $row["expected_date"] . "</td>" . "<td>" . $row["requeste_id"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "<td>" . $row["status"] . "</td>";
+
+              echo "<td class='tb'><form method='POST' action ='Cross matching test result1.php'>
+          <input type=hidden name=RequestID value=" . $row["requeste_id"] . " >
+  <button type=submit value=add name=add  class='fp'><i class='fa-solid fa-plus'></i></button>
+  </form>  
+
+    </td>";
+              echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=6'>" . "</td>" . "</tr>";
+            }
+
+            echo "</font>";
+            echo  "</font>";
+
+            echo  "</div>";
+
+            echo "</table>";
+          } else {
+            ///printf("Query failed: %s\n", $conn->error);
+            echo "no results";
+          }
+        }
+
+        $conn->close();
+        ?>
+      <style>
+        table {
+
+
+
+          width: 750px;
+          height: 15px;
+          border-collapse: collapse;
+          margin-top: 40px;
+          border: 0px transparent;
+
+        }
+
+        h1 {
+
+          margin-top: 70px;
+          margin-left: 300px;
+          margin-bottom: 100px;
+        }
+
+        .box1 {
+    height: 30px;
+    width: 150px;
+    margin-left: -170px;
+    margin-top: 100px;
+    border-radius: 20px;
+    border: none;
+    text-align: center;
+}
+
+
+        th {
+
+
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          text-align: center;
+          padding-top: 25px;
+          padding-bottom: 25px;
+          padding-left: 20px;
+          padding-right: 10px;
+          border: 0px transparent;
+
+        }
+
+        td {
+          text-align: center;
+          padding: 1px;
+
+
+        }
+
+        .select {
+
+          height: 30px;
+          width: 120px;
+          border-radius: 20px;
+          background-color: #56CE94;
+          border: none;
+          text-align: center;
+          margin-left: 30px;
+
+        }
+
+        .box {
+
+          height: 30px;
+          width: 130px;
+          margin-left: 20px;
+          margin-top: 0px;
+          border-radius: 20px;
+          border: none;
+          text-align: center;
+
+        }
+
+        .b1 {
+          height: 30px;
+          width: 100px;
+          color: #FFF5F3;
+          margin-left: 20px;
+          border-radius: 20px;
+          background-color: #F3506D;
+          border: none;
+          cursor: pointer;
+
+        }
+
+
+
+        .midiv {
+
+          margin-left: 150px;
+          margin-bottom: -10px;
+          padding: 15px 10px 30px 20px;
+          margin-top: -100px;
+          outline: none;
+          width: 774.5px;
+        }
+
+
+
+        .f2 {
+
+          margin-left: 50px;
+          margin-top: -100px;
+          background-color: transparent;
+          border: none;
+          cursor: pointer;
+          margin-bottom: 0px;
+
+
+        }
+
+
+        .f1 {
+
+          background-color: transparent;
+          margin-left: 10px;
+          margin-right: 20px;
+          margin-bottom: 10px;
+          margin-top: 10px;
+          border: none;
+          cursor: pointer;
+
+
+        }
+
+        .fp {
+          margin-top: 20px;
+          margin-left: 30px;
+          margin-bottom: -100px;
+          background-color: transparent;
+          border: none;
+          cursor: pointer;
+        }
+
+        .tb {
+          display: inline-flex;
+          justify-content: space-evenly;
+          flex-wrap: nowrap;
+          align-items: baseline;
+          flex-direction: row;
+        }
+
+        .tab {
+
+          background-color: #F5F5F5;
+          margin-top: -40px;
+          margin-left: 60px;
+          margin-right: 265px;
+
+
+
+
+        }
+
+
+        .ta {
+
+          background-color: #F5F5F5;
+          margin-top: 60px;
+          margin-bottom: 0px;
+          margin-left: 370px;
+          margin-right: 119px;
+          padding-left: 20px;
+
+        }
+
+
+
+        tr {
+
+          background-color: white;
+
+        }
+
+        .visible {
+          cursor: pointer;
+
+
+        }
+
+        .layout {
+          background-color: #d9dbdb;
+        }
+      </style>
+
+
     </div>
-  </div>
-  <div class="col " width="10 "></div>
-  </div>
+    </main>
 
-  </main>
   </div>
   </div>
   <!-- partial -->
   <script src='https://unpkg.com/@popperjs/core@2'></script>
   <script src="./script.js"></script>
-  <style>
-    .container-shadow {
-      position: absolute;
-      height: 540px;
-      
-    }
-
-    .container {
-      position: absolute;
-      height: 600px;
-      
-      box-shadow: 0px 0px 50px -20px #000;
-    }
-
-    .buttons {
-      margin-top: 20px;
-    }
-  </style>
 </body>
 
 </html>

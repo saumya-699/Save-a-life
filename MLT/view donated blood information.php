@@ -2,7 +2,7 @@
 
 include "config.php";
 
-$sql = "SELECT * FROM blood_testing_result GROUP BY batch_number order by process_date";
+$sql = "SELECT * FROM donation GROUP BY Batch order by Donation_date";
 
 $result = $conn->query($sql);
 
@@ -221,10 +221,10 @@ $result = $conn->query($sql);
               while ($row = $result->fetch_assoc()) {
 
 
-                echo  "<tr>" . "<td>" . $row["process_date"] . "</td>" . "<td>" . $row["batch_number"] . "</td>";
+                echo  "<tr>" . "<td>" . $row["Donation_date"] . "</td>" . "<td>" . $row["Batch"] . "</td>";
 
                 echo "<td class='tb'><form method='POST' action ='view donated blood information1.php'>
-     <input type=hidden name=RequestID value=" . $row["batch_number"] . " >
+     <input type=hidden name=RequestID value=" . $row["Batch"] . " >
      <button type=submit value=view name=view  class='fp'><i class='fa-sharp fa-solid fa-eye'></i></button>
      </form>    	
 

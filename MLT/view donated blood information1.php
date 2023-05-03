@@ -2,7 +2,7 @@
 
 include "config.php";
 
-$sql = "SELECT * FROM blood_request order by requeste_id DESC";
+$sql = "SELECT * FROM donation order by Donation_Id DESC";
 
 $result = $conn->query($sql);
 
@@ -219,7 +219,7 @@ $result = $conn->query($sql);
               while ($row = $result->fetch_assoc()) {
 
 
-                echo  "<tr>" . "<td>xx</td>" . "<td>yy</td>" . "<td>xxx</td>" . "<td>xxx</td>" . "<td>xxx</td>" . "<td>xxx</td>" . "<td>yyy</td>";
+                echo  "<tr>" . "<td>" . $row["Donation_date"] . "</td>" . "<td>" . $row["Batch"] . "</td>". "<td>" . $row["Donor_Id"] . "</td>". "<td>" . $row["Donation_Id"] . "</td>". "<td>" . $row["packet_no"] . "</td>". "<td>" . $row["packet_quantity"] . "</td>". "<td>" . $row["Nurse_ID"] . "</td>";
 
 
                 echo "</div>";

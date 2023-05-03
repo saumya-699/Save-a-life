@@ -10,8 +10,9 @@
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="./stylek2.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
 </head>
 
 <body>
@@ -181,93 +182,55 @@
             <div class="wrap">
               <div class="headings">
                 <center>
-                  <h1>Blood Testing Result Of Donor</h1>
+                  <h1> Cross Matching Test Result</h1>
                   <center>
               </div>
+              <?php
+              include "config.php";
+              if (isset($_POST['add'])) {
 
-              <form action="createresult.php " method="POST">
+                $did = $_POST['RequestID'];
 
+              ?>
+                <form action="Create_Cross matching test result1.php" method="POST">
 
-                <label for="exampleFormControlInput1 " class="form-label lbl star ">Donor ID</label>
-                <input type="text" class="form-control txt-input " name="Donor_Id" placeholder="Type Donor Id" required="">
-
-
-                <label for="exampleFormControlInput1 " class="form-label lbl star ">Blood Group</label>
-                <select name="blood_group" id=" " class="form-control txt-input " required="">
-                  <option value=" " diabled> Select Group </option>
-                  <option value="O-">O-</option>
-                  <option value="O+">O+</option>
-                  <option value="A-">A-</option>
-                  <option value="A+">A+</option>
-                  <option value="B-">B-</option>
-                  <option value="B+">B+</option>
-                  <option value="AB-">AB-</option>
-                  <option value="AB+">AB+</option>
-                </select>
-
-                <label for="exampleFormControlInput1 " class="form-label lbl star ">Malaria Test Result</label>
-                <select name="malaria_result" id=" " class="form-control txt-input " required="">
-                  <option value=" " diabled>Select Result </option>
-                  <option value="Positive">Positive</option>
-                  <option value="Negative">Negative</option>
-
-                </select>
-
-                <label for="exampleFormControlInput1 " class="form-label lbl star ">HIV Test Result</label>
-                <select name="hiv_result" id=" " class="form-control txt-input " required="">
-                  <option value=" " diabled>Select Result </option>
-                  <option value="Positive">Positive</option>
-                  <option value="Negative">Negative</option>
-
-                </select>
-
-                <label for="exampleFormControlInput1 " class="form-label lbl star ">HBV Test Result</label>
-                <select name="hbv_result" id=" " class="form-control txt-input " required="">
-                  <option value=" " diabled>Select Result </option>
-                  <option value="Positive">Positive</option>
-                  <option value="Negative">Negative</option>
-
-                </select>
-
-                <label for="exampleFormControlInput1 " class="form-label lbl star ">HCV Test Result</label>
-                <select name="hcv_result" id=" " class="form-control txt-input " required="">
-                  <option value=" " diabled>Select Result </option>
-                  <option value="Positive">Positive</option>
-                  <option value="Negative">Negative</option>
-
-                </select>
-
-                <label for="exampleFormControlInput1 " class="form-label lbl star ">VDSRL Test Result</label>
-                <select name="vdrl_result" id=" " class="form-control txt-input " required="">
-                  <option value=" " diabled>Select Result </option>
-                  <option value="Positive">Positive</option>
-                  <option value="Negative">Negative</option>
-
-                </select>
-
-                <label for="exampleFormControlInput1 " class="form-label lbl star ">Batch Number</label>
-                <select name="batch_number" id=" " class="form-control txt-input " required="">
-                  <option value=" " diabled>Select Batch Number </option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-
-                </select>
+                  <label for="exampleFormControlInput1 " class="form-label lbl star "> Request ID</label>
+                  <input type="text" class="form-control txt-input " name="request_id" value="<?php echo $did ?>">
 
 
+                  <label for="exampleFormControlInput1 " class="form-label lbl star " required="">Blood Group test result</label>
+                  <select name="blood_group" id=" " class="form-control txt-input" required="">
+                    <option value=" " diabled> Select group </option>
+                    <option value="O-">O-</option>
+                    <option value="O+">O+</option>
+                    <option value="A-">A-</option>
+                    <option value="A+">A+</option>
+                    <option value="B-">B-</option>
+                    <option value="B+">B+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="AB+">AB+</option>
+                  </select>
 
-                <div class="buttons ">
-                  <button class="b1" name="submit" value="submit" value="submit">
-                    <font size="2px">Add</font>
-                  </button> &nbsp; &nbsp; &nbsp; &nbsp;
-                  &nbsp; &nbsp; &nbsp; &nbsp;<button class="b1" name="cancel" value="cancel"><a href="Enter Blood testing result.php">
-                      <font size="2px">Cancel</font>
-                    </a></button>
-                </div>
-              </form>
+                  <label for="exampleFormControlInput1 " class="form-label lbl star ">Cross matching result</label>
+                  <select name="Cross_matching_test_result" id=" " class="form-control txt-input " required="">
+                    <option value=" " diabled>Select test result </option>
+                    <option value="Matched">Matched</option>
+                    <option value="Unmatched">Unmatched</option>
 
+                  </select>
+
+
+                  <div class="buttons ">
+                    <button class="b1" name="submit" value="submit" value="submit">
+                      <font size="2px">Add</font>
+                    </button>                </form> &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp;<button class="b1" name="cancel" value="cancel"><a href="Cross matching test result.php">
+                        <font size="2px">Cancel</font>
+                      </a></button>
+                  </div>
+
+
+              <?php } ?>
 
             </div>
           </div>
@@ -287,23 +250,20 @@
     .container-shadow {
       position: absolute;
       height: 540px;
-      
+
     }
 
     .container {
       position: absolute;
-      height: 1130px;
-     
-     
+      height: 600px;
 
       box-shadow: 0px 0px 50px -20px #000;
     }
 
-    .buttons{
+    .buttons {
       margin-top: 20px;
     }
-    </style>
-
+  </style>
 </body>
 
 </html>

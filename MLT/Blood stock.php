@@ -230,12 +230,12 @@ $result = $conn->query($sql);
             if ($result->num_rows > 0) {
 
               echo  "<div class='tab'>";
-              echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;'>" . "Blood bag ID" . "</th>" . "<th style='text-align:center;'>" . "Blood group" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Component type" . "</th>" . "<th>" . "Expiry date" . "</th>" . "</tr>";
+              echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;'>" . "Blood bag ID" . "</th>" . "<th style='text-align:center;'>" . "Blood group" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Component type" . "</th>" . "<th>" . "Expiry date" . "</th>" ."<th>" . "Process date" . "</th>". "</tr>";
               echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
               while ($row = $result->fetch_assoc()) {
 
 
-                echo  "<tr>" . "<td>" . $row["Blood_bagID"] . "</td>" . "<td>" . $row["Blood_group"] . "</td>" . "<td>" . $row["Component_type"] . "</td>" . "<td>" . $row["ExpiryDate"] . "</td>" . "</td>";
+                echo  "<tr>" . "<td>" . $row["Blood_bagID"] . "</td>" . "<td>" . $row["Blood_group"] . "</td>" . "<td>" . $row["Component_type"] . "</td>" . "<td>" . $row["ExpiryDate"] . "</td>" . "<td>" . $row["ProcessDate"] . "</td>" ;
 
                 echo "</div>";
                 echo "</tr>";
