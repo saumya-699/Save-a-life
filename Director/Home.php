@@ -45,7 +45,7 @@ if($resultd->num_rows>0)
 
     $tql ="select Count(*) AS count
     from MLT
-    where Remark != 'Removed'";
+    where Remark!= 'Removed'";
 
 
 $result = $conn->query($tql);

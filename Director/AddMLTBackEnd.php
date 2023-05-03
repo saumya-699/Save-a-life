@@ -31,7 +31,7 @@ $mail->isHTML(true);
 
 $mail->Subject=$_POST["subject"];
 $mail->Body = $_POST["message"];
-
+$mail->SMTPDebug = true;
 $mail->send();
 
 echo '<script type="text/javascript">';

@@ -375,7 +375,7 @@ echo "
                                
                       <label for='exampleFormControlInput1' class='form-label lbl star'>Password</label>
                       <input type='password'  name='password'  class='form-control txt-input'  value='$hel'  required>
-                      <input type='hidden'  name='message'   value=' Hello  We are pleased to inform that you have been appointed to the system and your and your password is $hel.Your default user name is your email address. Please change the user name and password once you get the e mail'>   
+                      <input type='hidden'  name='message'   value='Hello  We are pleased to inform that you have been appointed to the system and your and your password is $hel.Your default user name is your email address. Please change the user name and password once you get the e mail'>   
                       <br><br><br><br>
                   <div class='row btn-buttons'>
                         

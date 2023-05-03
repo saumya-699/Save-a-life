@@ -241,7 +241,7 @@ session_start();
 							   
 							
 
-                       <label for="exampleFormControlInput1" class="form-label lbl star">  Report Type </label>
+                       <label for="exampleFormControlInput1" class="form-label lbl star">  Filter by Employee Type </label>
                        <select name="report" id="" class="form-control txt-input" required>
                        <option value="bloodbank_doctor" selected>Blood bank doctor details</option>
                        <option value="mlt">MLT details</option > 
@@ -263,7 +263,7 @@ if($result->num_rows>0)
 {     
 
 
-      echo "<label for='exampleFormControlInput1' class='form-label lbl star'>Hospital Name</label>";
+      echo "<label for='exampleFormControlInput1' class='form-label lbl star'>Filter by Hospital</label>";
 
 echo 
 "<select name='hid' class='form-control txt-input' required>";
