@@ -205,14 +205,12 @@ if($result->num_rows>0)
      
 	  echo  "<tr>"."<td>".$row["Donor_Id"]."</td>"."<td>".$row["Weight"]."</td>"."<td>".$row["Height"]."</td>"."<td>".$row["Blood_Pressure"]."</td>"."<td>".$row["Hemoglobine"]."</td>";
 	  echo"<td><form method='POST' action ='Delete_Donor.php'  onsubmit='return myConfirm()'>
-                <input type=hidden  name=Donor_Id value=".$row['Donor_Id']." >
-                <i class='fa-solid fa-trash'></i>
-               
-                </form>
-                </td>";
-	   
-		echo "</tr>";
-		echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=10'>"."</td>"."</tr>";
+    <input type=hidden  name=Donor_Id value=".$row['Donor_Id']." >
+    <button type=submit value=Delete name=delete id=btn><i class='fa-solid fa-trash'></i></i></button>
+    </form>"."
+            </td>";
+				 echo "</tr>";
+		echo "<tr>"."<td style='height:25px;background-color:#F5F5F5;'colspan=10'>"."</td>"."</tr>";
 	  
 	}
 	
@@ -235,6 +233,11 @@ else
 $conn->close();
 ?>
 
+<script>
+    function myConfirm() {
+        return confirm("Are you sure you want to delete this record?");
+    }
+</script>
 
           
         </main>

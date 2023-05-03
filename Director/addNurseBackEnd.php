@@ -200,7 +200,7 @@ else
 	
 }
 
-    $sql="insert into nurse(Nurse_ID,Name_With_Initials,Hospital_ID,HospitalName,Position,DOB,SLMC_Number,Email,ContactNumber,AppointmentDate,RetiringDate,UserName,Password,Remark,Director_ID)VALUES(' ','$Name','$y','$HName','$position','$DOB','$SLMC','$Email','$contactNumber','$DOA','','$Uname','md5($password)','Added','$x')";
+    $sql="insert into nurse(Nurse_ID,Name_With_Initials,Hospital_ID,HospitalName,Position,DOB,SLMC_Number,Email,ContactNumber,AppointmentDate,RetiringDate,UserName,Password,Remark,Director_ID)VALUES(' ','$Name','$y','$HName','$position','$DOB','$SLMC','$Email','$contactNumber','$DOA','','$Uname','$password','Added','$x')";
     if($conn->query($sql))
      {
       
@@ -479,32 +479,7 @@ echo "
 
 
           
-  <?php                  
-          
-          echo "      <label for='exampleFormControlInput1' class='form-label lbl star'>Email</label>
-		  <input type='text'  name='email' value='$Email'> 
-		  <label for='exampleFormControlInput1' class='form-label lbl star'>Subject</label>
-                      <input type='text'  name='subject' value='Regarding Appoinment'> 
-					  
-
-                     <label for='exampleFormControlInput1' class='form-label lbl star'>Message</label>
-                             <textarea rows = '10' cols = '60' name='message'>
-            Hello $Name   We are pleased to inform that you have been appointed to the system and your user name is $Uname and your password is $password.Please change the user name and password once you get the e mail 
-
-                          
-         </textarea> 
-                          
-                    <br><br>    
-                        <div class='col btn-but'> <input type='submit' name='BtnSubmit' value='Send' class='b1'></div>
-                        <div class='col btn-but'> <input type='submit' name='btnCancel' value='Cancel' class='b2'></div>
-                   
-					
-  </form> 
-  ";
-
-
-?>
-
+  
 		                                                                    
 		
 		

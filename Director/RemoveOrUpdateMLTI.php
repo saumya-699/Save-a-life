@@ -222,30 +222,7 @@ session_start();
           
           </div>
           
-        <form method="post" action="SearchWardD.php">
- 
-<div class="ta">   
-
- <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
-                            <option value="MLT_ID"><b> MLT_ID</b></option>
-							   <option value="Name_With_Initials"><b>Name_With_Initials</b></option>
-						        <option value="HospitalName"><b> Hospital Name</b></option>
-							   <option value="SLMC_number"><b> SLMC_number</b></option>
-                             <option value="Email" selected><b>Email</b></option>
-		                    <option value="ContactNumber" selected><b> Contact number</b></option>
-						  <option value="Remark" selected><b>Remark</b></option>
-						  	  <option value="Director_ID" selected><b>Director_ID</b></option>
-							
-                             </select>
-
-
-<input type="text" placeholder="type here" name="data" id="data" class="box">
-
- <button type="submit"  name="BtnSubmit" id="search" class="b1" ><b>Search</b></button>
-</div>
-
-
-</form>
+      
 <?php
 
 
@@ -258,12 +235,21 @@ if($result->num_rows>0)
 
 {     
    
-
+  echo "<div>";
+  echo "<label for='filterDropdown'>Filter:</label>";
+  echo "<select id='filterDropdown'>";
+  echo "<option value='All'>All</option>";
+  echo "<option value='Head nurse'>Head</option>";
+  echo "<option value='nurse'>Nurse</option>";
+  echo "</select>";
+  echo "<label for='searchInput'>Search:</label>";
+  echo "<input type='text' id='searchInput'>";
+  echo "</div>";
           //echo "<font color=red>";
 	      //echo "<font size=6>";
 	   
 	   //echo  "<div class='tab'>";
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."MLT_ID"."</th>"."<th style='text-align:center;width:120px;'>"."Name_With_Initials"."</th>"."<th>"."Hospital name"."</th>"."<th>"."SLMC number"."</th>"."<th style='width:120px;'>"."Action"."</th>"."</tr>";
+	   echo  "<table id='dataTable' border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."MLT ID"."</th>"."<th style='text-align:center;width:120px;'>"."Name With Initials"."</th>"."<th>"."Hospital name"."</th>"."<th>"."SLMC number"."</th>"."<th style='width:120px;'>"."Action"."</th>"."</tr>";
       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
    while($row = $result->fetch_assoc())
    
@@ -312,18 +298,42 @@ $conn->close();
 
 
 
+
+
 <script>
-function myConfirm() {
-  var result = confirm("Want to delete?");
-  if (result==true) {
-   return true;
-  } else {
-   return false;
+  // Filter the table based on the selected color and search query
+  function filterTable() {
+    const input = document.getElementById('searchInput');
+    const filter = input.value.toUpperCase();
+    const select = document.getElementById('filterDropdown');
+    const filterValue = select.options[select.selectedIndex].value;
+
+    const table = document.getElementById('dataTable');
+    const rows = table.getElementsByTagName('tr');
+
+    // Filter the table rows
+    for (let i = 1; i < rows.length; i++) {
+      const row = rows[i];
+      const cells = row.getElementsByTagName('td');
+      const color = cells[3].textContent.toUpperCase();
+      const values = Array.from(cells).map(cell => cell.textContent.toUpperCase());
+
+      if ((filterValue === 'All' || color === filterValue.toUpperCase())
+        && values.some(value => value.includes(filter))) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    }
   }
-}
 
+  // Attach filterTable function to events (e.g. button click, input change)
+  const searchInput = document.getElementById('searchInput');
+  searchInput.addEventListener('input', filterTable);
+
+  const filterDropdown = document.getElementById('filterDropdown');
+  filterDropdown.addEventListener('change', filterTable);
 </script>
-
 		
 		
 		

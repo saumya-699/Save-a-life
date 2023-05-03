@@ -221,147 +221,96 @@ session_start();
           
           </div>
           
-          
-		  <form method="post" action="searchNurse.php">
- 
-<div class="ta">
+     
+		
+		
+		
+		
+		
+          <div>
 
-<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
+<label for="filterDropdown">Filter:</label>
+<select id="filterDropdown">
+  <option value="All">All</option>
+  <option value="Head-nurse">Head nurse</option>
+  <option value="nurse">Nurse</option>
+</select>
 
-<input type="text" placeholder="type here" name="data" id="data" class="box">
+<label for="searchInput">Search:</label>
+<input type="text" id="searchInput">
 
-
+<label for="dateInput">Date:</label>
+<input type="date" id="dateInput">
 
 </div>
 
-</form>
-
-<script>
-function myFunction() {
-  // Declare variables
-  var input, filter, table, tr, td, i, txtValue;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  table = document.getElementById("myTable");
-  tr = table.getElementsByTagName("tr");
-
-  //var tr = document.getElementsByTagName("tr");
-
-// Loop through all table rows, and hide those who don't match the search query
-
-for (i = 1; i < tr.length; i++) {
-  var displayRow = false;
-  var tdList = tr[i].getElementsByTagName("td");
-  
-  // Check if any of the cells match the search query
-  for (j = 0; j < tdList.length; j++) {
-    var td = tdList[j];
-    if (td) {
-      txtValue = td.textContent || td.innerText;
-      if (txtValue.toUpperCase().indexOf(filter) > -1) {
-        displayRow = true;
-        break;
-      }
-    }
-  }
-  
-  // Set the display style of the row based on the search query match
-  if (displayRow) {
-    tr[i].style.display = "";
-  } else {
-    tr[i].style.display = "none";
-  }
-}
-
-// Always show table headers
-
-
-}
-</script>
 <?php
-
-
 require 'conp.php';
-    
-$sql= "select * from nurse where Remark!='Removed'" ;
+$sql = "select * from nurse where Remark!='Removed'";
 $result = $conn->query($sql);
 
-if($result->num_rows>0)
-
-{     
-   
-
-     //echo "<font color=red>";
-	      //echo "<font size=6>";
-	   
-	  // echo  "<div class='tab'>";
-	   echo  "<table id='myTable' border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Nurse_ID"."</th>"."<th style='text-align:center;width:120px;'>"."Name_With_Initials"."</th>"."<th>"."Hospital name"."</th>"."<th>"."Position"."</th>"."<th>"."SLMC number"."</th>"."<th style='width:120px;'>"."Action"."</th>"."</tr>";
-      echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
-   while($row = $result->fetch_assoc())
-   
-   {     
-     
-	  echo  "<tr>"."<td>".$row["Nurse_ID"]."</td>"."<td>".$row["Name_With_Initials"]."</td>"."<td>".$row["HospitalName"]."</td>"."<td>".$row["Position"]."</td>"."<td>".$row["SLMC_Number"]."</td>";
-	   echo "<td><form method='POST' action ='showAllNurseI.php'>
-                <input type=hidden name=Nurse_ID value=".$row["Nurse_ID"]." >
-                <button type=submit value=view name=view  id=btn class='x'><i class='fa-sharp fa-solid fa-eye'></i></button>
-                </form>
-		
-               <form method='POST' action ='DeleteNurse.php' onsubmit='return myConfirm()'>
-                <button type=submit value=Delete name=delete id=btn class='y'><i class='fa-solid fa-user-xmark'></i></button>
-				
-                <input type=hidden  name=Nurse_ID value=".$row["Nurse_ID"]." >
-                
-					</form>
-                  
-                </td>";
-				 echo "</tr>";
-	 
-	   echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
-	  
-	}
-	
-	 echo "</font>";
-	 echo  "</font>";   
-	 echo "</table>";
-	 //echo "</div>";
-	
-	
-}	
-
-else
-
-{
-  //echo "Error in ".$sql."<br>".$conn->error;
-
- echo "no results";
-
+if ($result->num_rows > 0) {
+  echo '<table id="dataTable">';
+  echo '<thead><tr><th>Nurse ID</th><th>Name</th><th>Hospital Name</th><th>Position</th><th>SLMC Number</th><th>Appointment Date</th></tr></thead>';
+  echo '<tbody>';
+  while ($row = $result->fetch_assoc()) {
+      $position_class = strtolower(str_replace(' ', '-', $row['Position']));
+      echo '<tr class="' . $position_class . '">';
+      echo '<td>' . $row['Nurse_ID'] . '</td>';
+      echo '<td>' . $row['Name_With_Initials'] . '</td>';
+      echo '<td>' . $row['HospitalName'] . '</td>';
+      echo '<td>' . $row['Position'] . '</td>';
+      echo '<td>' . $row['SLMC_Number'] . '</td>';
+      echo '<td>' . $row['AppointmentDate'] . '</td>';
+      echo '</tr>';
+  }
+  echo '</tbody></table>';
+} else {
+  echo 'No results';
 }
-
 $conn->close();
 ?>
 
-
 <script>
-function myConfirm() {
-  var result = confirm("Want to delete?");
-  if (result==true) {
-   return true;
-  } else {
-   return false;
+// Filter the table based on the selected position, search query and date
+function filterTable() {
+  const input = document.getElementById('searchInput');
+  const filter = input.value.toUpperCase();
+  const select = document.getElementById('filterDropdown');
+  const filterValue = select.options[select.selectedIndex].value;
+  const dateInput = document.getElementById('dateInput').value;
+
+  const table = document.getElementById('dataTable');
+  const rows = table.getElementsByTagName('tr');
+
+  for (let i = 1; i < rows.length; i++) {
+      const row = rows[i];
+      const cells = row.getElementsByTagName('td');
+      const positionClass = row.className;
+      const appointmentDate = cells[5].textContent;
+
+      if ((filterValue === 'All' || positionClass === filterValue.toLowerCase())
+          && Array.from(cells).some(cell => cell.textContent.toUpperCase().includes(filter))
+          && (dateInput === '' || appointmentDate === dateInput)) {
+          row.style.display = '';
+      } else {
+          row.style.display = 'none';
+      }
   }
 }
 
+// Attach filterTable function to events (e.g. button click, input change)
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', filterTable);
+
+const filterDropdown = document.getElementById('filterDropdown');
+filterDropdown.addEventListener('change', filterTable);
+
+const dateInput = document.getElementById('dateInput');
+dateInput.addEventListener('input', filterTable);
 </script>
-		  
-     
-             
-		
-		
-		
-		
-		
-		
+
+
 		
 		  
         </main>

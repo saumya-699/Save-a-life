@@ -9,6 +9,8 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./add_medical.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 
 </head>
@@ -41,7 +43,7 @@
                   </a>
                  </li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="reg.php">
                     <span class="menu-icon">
                       <i class="ri-user-add-fill"></i>
                     </span>
@@ -49,7 +51,7 @@
                   </a>
                   </li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="add_medical.php">
                     <span class="menu-icon">
                       <i class="ri-heart-add-fill"></i>
                     </span>
@@ -66,12 +68,12 @@
                   <div class="sub-menu-list">
                     <ul>
                       <li class="menu-item">
-                        <a href="#">
+                        <a href="View_Personal.php">
                           <span class="menu-title">Personal</span>
                         </a>
                       </li>
                       <li class="menu-item">
-                        <a href="#">
+                        <a href="View_med.php">
                           <span class="menu-title">Medical</span>
                         </a>
                       </li>
@@ -88,7 +90,7 @@
                 </li>
 
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="start.php">
                     <span class="menu-icon">
                       <i class="ri-drop-fill"></i>
                     </span>
@@ -97,7 +99,7 @@
                   </li>
 
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="donation_history.php">
                     <span class="menu-icon">
                       <i class="ri-history-line"></i>
                     </span>
@@ -141,6 +143,7 @@
       <div class="layout">
         <main class="content">
 
+
             <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
             <!-- add your content from here -->
            
@@ -156,30 +159,29 @@
                
                     
                <form method="post" action="add_medical_backend.php">
-                  
+                    
+                    <label for="exampleFormControlInput1" class="form-label lbl star">NIC Number</label>
+                   <input type="text" class="form-control txt-input" placeholder="NIC Number" name="nic" id="nic" pattern="[0-9]{9}[Vv0-9]{1,3}" required onchange="fillDonorInfo()">
                            
-               <label for="exampleFormControlInput1" class="form-label lbl star">Donor ID</label>
-                    <input type="text" name="donorid" class="form-control txt-input" placeholder="Type Donor ID" required>
+                    <label for="exampleFormControlInput1" class="form-label lbl star">Donor ID</label>
+                    <input type="text" name="donorid" id="donorid" class="form-control txt-input" placeholder="Donor ID" required readonly>
 
                     <label for="exampleFormControlInput1" class="form-label lbl star">Donor Name</label>
-                    <input type="text" class="form-control txt-input" placeholder="Type Donor Name" name="dname" required>
+                    <input type="text" class="form-control txt-input" placeholder="Donor Name" name="dname" id="dname" required>
 
-                   <label for="exampleFormControlInput1" class="form-label lbl star">NIC Number</label>
-                   <input type="text" class="form-control txt-input" placeholder="Type NIC Number" name="nic" pattern="[0-9]{9}[Vv0-9]{1,3}" required>
-
-                   <label for="exampleFormControlInput1" class="form-label lbl star">Weight</label>
+                   <label for="exampleFormControlInput1" class="form-label lbl star">Weight(Kg)</label>
                     <div class="input-group mb-4">
-                    <input type="text" name="weight" class="datepicker_input form-control txt-input" placeholder="Weight" required>
+                    <input type="text" name="weight" class="datepicker_input form-control txt-input" placeholder="Weight(ex: 50.5)" pattern="^[1-9][0-9]{0,2}(\.[0-9]{1,2})?$" required>
                     </div>
 
-                   <label for="exampleFormControlInput1" class="form-label lbl">Height</label>
-                    <input type="text" class="form-control txt-input" placeholder="Height" name="height" required >
+                   <label for="exampleFormControlInput1" class="form-label lbl">Height(cm)</label>
+                    <input type="text" class="form-control txt-input" placeholder="Height(ex: 158)" name="height" pattern="[0-9]{2,3}" required >
 
-                    <label for="exampleFormControlInput1" class="form-label lbl star">Blood Pressure</label>
-                    <input type="text"name="bpressure" class="form-control txt-input" placeholder="Blood Pressure" required>
+                    <label for="exampleFormControlInput1" class="form-label lbl star">Blood Pressure(mmHg)</label>
+                    <input type="text"name="bpressure" class="form-control txt-input" placeholder="Blood Pressure(ex: 120/80)" pattern="\d{2,3}\/\d{2,3}" required>
 
-                    <label for="exampleFormControlInput1" class="form-label lbl star">Hemoglobine Level</label>
-                    <input type="text" class="form-control txt-input" placeholder="Hemoglobine Level" name="hemoglobine" required>
+                    <label for="exampleFormControlInput1" class="form-label lbl star">Hemoglobine Level(g/dl)</label>
+                    <input type="text" class="form-control txt-input" placeholder="Hemoglobine Level(ex: 12.3)" name="hemoglobine" pattern="^\d{1,2}(\.\d{1,2})?$" required>
                                         
                                       <br><br><br><br>
                          
@@ -187,17 +189,34 @@
                                   
                                    <input type='submit' name='BtnSubmit' value='Add' class='b1'>
                                    <input type='submit' name='btnCancel' value='Cancel' class='b2'>
-                              </div>							  
-          
-               
-                    </div>
-              
-          
-             
-            </div>
-           
-              </div>
-                </form> 
+                              </div>
+               </form>
+</div>
+</div>
+
+<script>
+		function fillDonorInfo() {
+			// Get the NIC input value
+			var nicInput = document.getElementById("nic").value;
+
+			// Make an AJAX request to fetch donor info
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", "fetch_donor_info.php?nic=" + nicInput, true);
+			xhr.onload = function() {
+				// Parse the JSON response
+				var response = JSON.parse(xhr.responseText);
+
+				// Fill in the donor ID and name fields
+				document.getElementById("donorid").value = response.donorid;
+				document.getElementById("dname").value = response.dname;
+			};
+			xhr.send();
+            return false; // prevent form submission until donor info is fetched
+		}
+	</script>
+
+
+
           
         </main>
       </div>

@@ -236,7 +236,7 @@ session_start();
 
        
 function generate_pw() {
-  $pw;
+  $pw=null;
   // Set random length for password
   $password_length = rand(8, 16);
   $pw = '';
@@ -349,7 +349,7 @@ echo "
                             <input type='tel' placeholder='Enter the contact number' name='contactNumber'  class='form-control txt-input'  id='contact' pattern='[0-9]{10}' required>
 							
 							 <label for='exampleFormControlInput1' class='form-label lbl star'>Date of Appoinment</label>
-                             <input type='date'  name='DOA' id='DOA' class='form-control txt-input' value='$date'>
+                             <input type='text'  name='DOA' id='DOA' class='form-control txt-input' value='$date'>
 				
 							 <label for='exampleFormControlInput1' class='form-label lbl star'>User Name</label>
                              <input type='text' name='Uname' id='Uname' class='form-control txt-input' required>
@@ -369,7 +369,8 @@ echo "
                       <input type='password'  name='password'  class='form-control txt-input'  value='$hel'  required>
                    <br><br><br><br>
                    <input type='hidden'  name='subject' value='Regarding Appoinment'>
-                   <input type='password'  name='password'  class='form-control txt-input'  value='$hel'  required>
+                 
+                   <input type='hidden'  name='message'   value=' Hello  We are pleased to inform that you have been appointed to the system and your and your password is $hel.Your default user name is your email address. Please change the user name and password once you get the e mail'>   
                   <div class='row btn-buttons'>
                         
                         <div class='col btn-but'> <input type='submit' name='BtnSubmit' value='Add' class='b1'></div>

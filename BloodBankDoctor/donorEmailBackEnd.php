@@ -29,7 +29,7 @@ if(is_array($emails)){
     foreach($to as $email) {
 
         $s="Regarding blood donation";
-        $msg ="If you csn donate blood please come and donate";
+        $msg ="This is an non emerency message.You have completed 4 months of donating blood,If it is possible you may come and donate blood";
         $mail->addAddress($email);
         $mail->isHTML(true);
         $mail->Subject = $s;

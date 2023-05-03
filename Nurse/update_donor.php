@@ -209,7 +209,7 @@ echo "
                                
                              
                               <label for='exampleFormControlInput1' class='form-label lbl star'>NIC Number</label>
-                               <input type='text' value=".$row["NIC_Number"]." name='NIC' id='slmc' class='form-control txt-input' readonly>
+                               <input type='text' value=".$row["NIC_Number"]." name='NIC' id='slmc' class='form-control txt-input'>
 
                                <label for='exampleFormControlInput1' class='form-label lbl star'>DOB</label>
                                <input type='text' value=".$row["DOB"]." name='NIC' id='slmc' class='form-control txt-input' >

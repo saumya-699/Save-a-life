@@ -11,21 +11,26 @@ session_start();
 ?>
 <html lang="en" >
 <head>
+  
   <meta charset="UTF-8">
   <title>side bar-director</title>
-  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
+<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
 <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
 <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./styleM.css">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./AddbbStyle.css">
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
+ <link rel="stylesheet" href="StyleSearch.css"> 
+ <link rel="stylesheet" href="StyleIcons.css"> 
+ <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
+
 
 </head>
 <body>
-<!-- partial:index.partial.html -->
+<!-- partial:index.partial.html --><!-- partial:index.partial.html -->
 <div class="layout has-sidebar fixed-sidebar fixed-header">
-        <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
+      <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
         <a id="btn-collapse" class="sidebar-collapser"><i class="ri-arrow-left-s-line"></i></a>
         
         <div class="sidebar-layout">
@@ -40,7 +45,7 @@ session_start();
               <ul>
                 <li class="menu-header"><span>  </span></li>
                 <li class="menu-item">
-                  <a href="donorEmail.php">
+                  <a href="Home.php">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -193,84 +198,238 @@ session_start();
       <div class="layout">
         <main class="content">
           <div>
-            <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
+            <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a></div>
+             <!--add your content from here-->
+ 
+
           
-          </div>
-          
-          
-		  
-		  
-		  
-		  
-		   <div class="container-shadow">
-  </div>
-  <div class="container">
-    <div class="wrap">
-      <div class="headings">
-        <center><span><h1>Report Generation</h1></span><center>
+    <?php
+   
+	  require "conp.php";
+	  $m= $_SESSION["Name"];
+    $query = "select * from bloodbank_doctor where UserName ='$m'";
+    
+    
+           $HID=null;
+    $resultd = $conn->query($query);
+    
+    //echo "Error in ".$vql."<br>".$conn->error;
+    
+    if($resultd->num_rows>0)
+    
+    {        
+    
+    while($row = $resultd->fetch_assoc())
+    
+    {
+    
+    
+    
+    
+    $HID= $row["Hospital_ID"];
+    
+    $HospitalName= $row["HospitalName"];
+    
+    
+    
+    }
+    
+    
+    }
+ 
+
+
+//require 'conp.php';
+if(isset($_POST['BtnSubmit'])){
+$report=$_POST["report"];
+//$HID=$_POST["hid"];
+$From =$_POST["From"];
+$To =$_POST["To"];
+
+$date =date("Y/m/d");
+if($report =="Donation"){
+    $sql= "select * from donation_records where Hospital_ID= '$HID' and Donation_Date between '$From' and '$To'";
+   $result = $conn->query($sql);
+   
+   if($result->num_rows>0)
+   
+   {     
       
-      </div>
-     
-        
-     <form method="post" action="downloadbb.php">
-        
-                          
-						   
-						  
-							   
-						
-                       <label for="exampleFormControlInput1" class="form-label lbl star">  Report Type</label>
-                       <select name="report" id="" class="form-control txt-input" required>
-                       <option value="Donation" selected>Donation Details</option>
-                        <option value="Request">External Request Details</option >
-                       </select>
-							    
-
-                      
-						     
-							
-					    
-							    
-							 
-							 
-							 
-							    <label for="exampleFormControlInput1" class="form-label lbl star">   Time period</label><br>
-                            
-                            
-                             From &nbsp;<input type="date" placeholder="From" name="From" id="From" class="yu">&nbsp;&nbsp;
-							      To &nbsp;<input type="date" placeholder="To" name="To" id="To" class="yu"><br><br><br>
-        
-                           
-                    <div class='col btn-but'> <input type='submit' name='BtnSubmit' value='Generate' class='b1'></div>
-                        <div class='col btn-but'> <input type='submit' name='btnCancel' value='Cancel' class='b2'></div>
+   
+        //echo "<font color=red>";
+             //echo "<font size=6>";
           
-							   
-							
-                              
+         echo  "<div class='container_content' id='container_content'>";
+         echo "<h2><center>Donation Details Report of $HospitalName</center> </h2>" ;
+         echo "<h5><center>Save a Life</center> </h5>" ;
+         echo "<h5><center>printed on $date</center> </h5><br><br>" ;
+         
 
+           echo  "<table  border=1>"."<tr>"."<th style='text-align:center;width:80px;'>"."Donor ID"."</th>"."<th style='text-align:center;width:80px;'>"."Donoation Date"."</th>"."<th style='text-align:center;width:80px;'>"."Donor Name"."</th>"."</tr>";
+         echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=5'>"."</td>"."</tr>";
+      while($row = $result->fetch_assoc())
+      
+      {     
         
-                            
-          </div>
-		
+         echo  "<tr>"."<td>".$row["Donor_Id"]."</td>"."<td>".$row["Donation_Date"]."</td>"."<td>".$row["Donor_Name"]."</td>";
+        
+                    echo "</tr>";
+        
+          echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=3'>"."</td>"."</tr>";
+         
+       }
+       
+        echo "</font>";
+        echo  "</font>";   
+        echo "</table>";
+    echo "</div>";
+       
+       
+   }	
+   
+   else
+   
+   {
+     //echo "Error in ".$sql."<br>".$conn->error;
+   
+    echo "no results";
+   
+   }
+   }
+   
+
+   if($report =="Request"){
+    $sql= "select * from sent_request where Requesting_hospital_name= '$HospitalName' and Date between '$From' and '$To'";
+   $result = $conn->query($sql);
+   
+   if($result->num_rows>0)
+   
+   {     
+      
+   
+        //echo "<font color=red>";
+             //echo "<font size=6>";
+          
+         echo  "<div class='container_content' id='container_content'>";
+         echo "<h2><center>External Request Details Report of $HospitalName</center> </h2>" ;
+         echo "<h5><center>Save a Life</center> </h5>" ;
+         echo "<h5><center>printed on $date</center> </h5><br><br>" ;
+         
+
+         echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Request ID"."</th>"."<th style='text-align:center;width:120px;'>"."Requested Hospital Name"."</th>"."<th>"."Requested By"."</th>"."<th>"."Requested Blood Group"."</th>"."</tr>";
+         echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=5'>"."</td>"."</tr>";
+      while($row = $result->fetch_assoc())
+      
+      {     
+        
+         echo  "<tr>"."<td>".$row["Request_ID"]."</td>"."<td>".$row["Requested_hospital_name"]."</td>"."<td>".$row["Requested_by"]."</td>"."<td>".$row["Requeired_blood_group"]."</td>";
+        
+                    echo "</tr>";
+        
+          echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=5'>"."</td>"."</tr>";
+         
+       }
+       
+        echo "</font>";
+        echo  "</font>";   
+        echo "</table>";
+    echo "</div>";
+       
+       
+   }	
+   
+   else
+   
+   {
+     //echo "Error in ".$sql."<br>".$conn->error;
+   
+    echo "no results";
+   
+   }
+   }
+   
+
 
    
-  </div>
- 
-  </div>
- 
-  </form> 
- 
 
-  
-  
+
+
+   
+   
+
+
+
+ 
+   
+
+}
+$conn->close();
+?>
+
+<button onclick="generatePDF()" class="z">Download</button>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+   function generatePDF() {
+        const element = document.getElementById('container_content');
+        var opt = {
+            margin: 0,
+            filename: 'Report.pdf',
+            image: {
+                type: 'jpeg',
+                quality: 0.98
+            },
+            html2canvas: {
+                scale: 2
+            },
+            jsPDF: {
+                unit: 'in',
+                format: 'letter',
+                orientation: 'landscape'
+            }
+        };
+        // Choose the element that our invoice is rendered in.
+        html2pdf().set(opt).from(element).save();
+    }
+</script>
+
+
+
+
+     
+             
+		
+		
+		
+		
+		
+		
 		
 		  
         </main>
-      </div>
-    </div>
+      
 <!-- partial -->
   <script src='https://unpkg.com/@popperjs/core@2'></script><script  src="./script.js"></script>
-
+  <style>
+.z{
+   font-size:20px;
+   margin-top:50px;
+   margin-left:840px;
+   margin-right:45px;
+   height:47px;					   
+   border: none;
+                 //background-color:#F35050;
+                 //width: 100%;
+background: #4082f5;
+//text-transform: uppercase;
+// padding: 12px;
+cursor: pointer;
+box-shadow: 0px 10px 40px 0px rgba(17, 97, 237, 0.4);
+font-weight: 700;
+font-size: 20px;	
+border-radius:30px;
+}
+</style>
+     
 </body>
 </html>
 <?php
