@@ -66,17 +66,26 @@ $x= $row["Director_ID"];
 						   $result= $conn->query($ty);
 		  
 							$did=$_POST['WardDoctor_ID'];
+							$UserName=$_POST['UserName'];
 							 $query="update warddoctor set Remark='Removed' where WardDoctor_ID='$did'";
-							$result= $conn->query($query);
-					  
-						
-							 if($conn->query($result))
-      {
-		
-         
-	    
-                       
-	   }	   
+							 $queryx ="delete from system_users where UserName ='$UserName'";
+
+							 $result= $conn->query($query);
+							 $resultx= $conn->query($queryx);
+						  
+						 
+							  if(!$result)
+		   {
+		 
+			 echo "Error deleting record: " . $conn->error;
+		 
+		   }	 
+ 
+ if (!$resultx) {
+	 echo "Error deleting record: " . $conn->error;
+ }
+ 
+ 
 	   }
 
 else

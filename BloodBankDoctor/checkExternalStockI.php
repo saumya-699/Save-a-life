@@ -7,6 +7,7 @@ session_start();
  <?php
    if(isset($_SESSION["ID"]))   {
     require "conp.php";
+    $today =date("Y-m-d");
     $m= $_SESSION["Name"];
     $query = "select * from bloodbank_doctor where UserName ='$m'";
     
@@ -96,7 +97,7 @@ session_start();
 							 margin:-141px 6px -27px 530px;
 							 border-radius:30px;
                              border: none;
-                           background-color:#F35050;
+                             background-color:#F35050;
 				    
 				  
 				  }
@@ -135,17 +136,17 @@ session_start();
 .select{
 	
 	 
- height:30px;
- width:148px;
- border-radius:10px;
- background-color:#56CE94;
-  border: none;
- text-align:center;
-                     
-  
-						
-	
-}
+  height:40px;
+  width:155px;
+  border-radius:10px;
+  background-color:#B2C0E0;;
+   border: none;
+  text-align:center;
+                      
+   
+             
+   
+ }
 
 .elect{
 	
@@ -171,13 +172,18 @@ session_start();
 						  margin-left:10px;
 						   border-radius:20px;
                            
-                           background-color:#F3506D;
+               background-color:#F35050;
 						   border: none;
 						   cursor:pointer;
 						   
 				            
 				  
 				  }
+
+          a{
+                   text-decoration:none;
+
+          }
 		  
 			   </style>
 </head>
@@ -365,10 +371,10 @@ session_start();
 <div class="midiv"> 
    <div class="passwordDiv">
 
-    <center><h1>Check external stock availability</h1></center>
+    <center><h1>Check External Stock Availability</h1></center>
        
     
-     <form method="post" action="checkExternalStock.php">
+     <form method="post" action="checkExternalStockI.php">
           <table border=1> <tr> <th style='width:180px;'> Blood Group</th><th style='width:180px;'>Component Type</th><th style='width:180px;'>No of Packs</th><th></th></tr>
 		  <tr> <td style='height:20px;background-color:transparent;'colspan=4'></td> </tr>
 		  
@@ -394,15 +400,19 @@ session_start();
                              <option value="Plasma">Plasma</option>
                              </select></td>
 							 
-							 
-							 <td> <select name= "No_of_packs" class="select"> 
+                             <?php
+             $value1 =1;
+             $value2 =2;
+             $value3 =3;
+             $value4 =4;
+							 echo "<td> <select name= 'No_of_packs' class='select'> 
 							 	<option value='None'>None</option>
-                             <option value='1'>1</option>
-                             <option value='2'>2</option>
-                             <option value='3'>3</option>
-                             <option value='4'>4</option>
-                             </select></td> 
-							 
+                             <option value=$value1>1</option>
+                             <option value=$value2>2</option>
+                             <option value= $value3>3</option>
+                             <option value= $value4 >4</option>
+                             </select></td>" 
+							 ?>
 							 
 							 
 							<td> <button type="submit"  name="BtnSubmit" id="search" class="b1" ><b>Search</b></button></td></tr> 
@@ -424,7 +434,7 @@ session_start();
   </div>
 
   
-  <button type="submit"  name="BtnSubmit2" id="saveChanges" class="b3" ><b><a href="sendRequest.php">  Proceed</a></b></button>
+  <button type="submit"  name="BtnSubmit2" id="saveChanges" class="b3" ><b><a href="sendRequestI.php">  Proceed</a></b></button>
 	  
 	  <button type="button"  name="btnCancel" id="Cancel" class="b2" ><b><a href="home.php"><font color="white">Cancel</font></a></b></button>
   <?php
@@ -437,12 +447,12 @@ if(isset($_POST['BtnSubmit']))
 $Component_type =$_POST["Component_type"];
 $No_of_packs =$_POST["No_of_packs"];	
 
- 	$vql="select * from bloodbank_doctor where BloodBank_doctor_ID='$x'";	
+ $vql="select * from bloodbank_doctor where BloodBank_doctor_ID='$x'";	
 		
 		$resultr = $conn->query($vql);
 		 
 		//  echo "Error in ".$vql."<br>".$conn->error;
-
+//$y=null;
 if($resultr->num_rows>0)
 
 {        
@@ -462,46 +472,113 @@ if($resultr->num_rows>0)
 	}
 	
       
-	
-  
- 
- 
+	//echo "Blood Group: " . $Blood_group . "<br>";
+//echo "Component Type: " . $Component_type . "<br>";
+//echo "No of packs: " . $No_of_packs . "<br>";
 
+  if($Blood_group !="None" && $Component_type !="None" && $No_of_packs != "None")
  
+ {
+   $sql ="select Hospital_ID,Count(*) AS count
+  from stock
+  where ExpiryDate >'$today'AND Hospital_ID != $y
+  group by Blood_group,Component_type,Hospital_ID
+  HAVING COUNT(*) >= $No_of_packs AND Blood_group='$Blood_group' AND Component_type='$Component_type'";
   
-	 
-$sql= "select * from stock WHERE Hospital_ID != '$y' AND Blood_group='$Blood_group' AND Component_type='$Component_type' AND No_of_packs>='$No_of_packs'";  
+
 $result = $conn->query($sql);
 
-if($result->num_rows>0)
+if ($result->num_rows > 0) {
+$hospitals = array();
+while ($row = $result->fetch_assoc()) {
+  $hospital_id = $row['Hospital_ID'];
+  $hospitals[] = $hospital_id;
+}
 
-{     
-   
-                                echo '<script type="text/javascript">';
-		                        echo 'alert("Available");';
-		                        echo '</script>';
+$hospital_names = array();
+foreach ($hospitals as $hospital_id) {
+  $hos = "SELECT HospitalName FROM hospital WHERE Hospital_ID = $hospital_id";
+  $resulth = $conn->query($hos);
+  if ($resulth->num_rows > 0) {
+      while ($row = $resulth->fetch_assoc()) {
+          $hospital_name = $row['HospitalName'];
+          $hospital_names[] = $hospital_name;
+      }
+  }
+}
 
-   
-	
-}	
+if (!empty($hospital_names)) {
+  $message = "Available in the following hospitals: " . implode(', ', $hospital_names);
+  echo '<script type="text/javascript">';
+  echo "alert('$message');";
+  echo '</script>';
+}
+} else {
+echo '<script type="text/javascript">';
+echo 'alert("Not available");';
+echo '</script>';
+}
 
-else
 
-{
-	
-	
-	
-	
-                                echo '<script type="text/javascript">';
-		                        echo 'alert("Not available");';
-		                        echo '</script>';
-	
-	 //echo " not available";
- // echo "Error in ".$sql."<br>".$conn->error;
-
- //echo "no results";
 
 }
+
+
+
+
+
+
+
+
+else if($Blood_group =="None" && $Component_type !="None" && $No_of_packs!= "None")
+ 
+{
+
+  $sql ="select Hospital_ID,Count(*) AS count
+  from stock
+
+  where ExpiryDate >'$today' AND Hospital_ID != $y 
+  group by Component_type,Hospital_ID
+  HAVING COUNT(*) >= $No_of_packs AND Component_type='$Component_type'";
+  
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+$hospitals = array();
+while ($row = $result->fetch_assoc()) {
+  $hospital_id = $row['Hospital_ID'];
+  $hospitals[] = $hospital_id;
+}
+
+$hospital_names = array();
+foreach ($hospitals as $hospital_id) {
+  $hos = "SELECT HospitalName FROM hospital WHERE Hospital_ID = $hospital_id";
+  $resulth = $conn->query($hos);
+  if ($resulth->num_rows > 0) {
+      while ($row = $resulth->fetch_assoc()) {
+          $hospital_name = $row['HospitalName'];
+          $hospital_names[] = $hospital_name;
+      }
+  }
+}
+
+if (!empty($hospital_names)) {
+  $message = "Available in the following hospitals: " . implode(', ', $hospital_names);
+  echo '<script type="text/javascript">';
+  echo "alert('$message');";
+  echo '</script>';
+}
+} else {
+echo '<script type="text/javascript">';
+echo 'alert("Not available");';
+echo '</script>';
+}
+
+
+}
+
+
+
 }
 
 

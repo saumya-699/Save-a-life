@@ -7,6 +7,7 @@ session_start();
  <?php
    if(isset($_SESSION["ID"]))   {
     require "conp.php";
+    $today =date("Y-m-d");     
     $m= $_SESSION["Name"];
     $query = "select * from bloodbank_doctor where UserName ='$m'";
     
@@ -51,7 +52,7 @@ session_start();
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
- <link rel="stylesheet" href="StyleSearch.css"> 
+ <link rel="stylesheet" href="StyleSearchss.css"> 
 
 </head>
 <body>
@@ -227,6 +228,36 @@ session_start();
           <div>
             <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a></div>
              <!--add your content from here-->
+
+
+             <div>
+             <select id="filterDropdown" class="select">
+  <option value="All">All Groups</option>
+  <option value='A+'>A+</option>
+ <option value='A-'>A-</option>
+ <option value='B+'>B+</option>
+<option value='B-'>B-</option>
+ <option value='O+'>O+</option>
+  <option value='O-'>O-</option>
+ <option value='AB+'>AB+</option>
+<option value='AB-'>AB-</option>
+
+						
+</select>
+
+<select id="ComponentDropdown" class="selectx">
+  <option value="All">All Types</option>
+  
+  <option value="White Blood Cells">White</option>
+  <option value="Red Blood Cells">Red</option>
+  
+</select>
+
+ 
+  <input type="text" id="searchInput" class="box">
+</div>
+
+
   
 <?php
 
@@ -251,54 +282,42 @@ $resultx = $conn->query($vql);
 
 $tql ="select Hospital_ID,Blood_bagID,Blood_group,Component_type,ExpiryDate,Count(*) AS count
 from stock
-group by Blood_group,Component_type
+where ExpiryDate >'$today'
+group by Blood_group,Component_type,Hospital_ID
 HAVING COUNT(*) < 4 AND Hospital_ID='$ty'";
 
 $result = $conn->query($tql);
 
-	
+$result = $conn->query($tql);
+if (!$result) {
+  echo "Error: " . $tql . "<br>" . $conn->error;
+} else {
+  // Your code here
+}
+
 //$sql= "select * from stock where Hospital_ID='$ty' and No_of_packs <= 2";
 //$result = $conn->query($sql);
 
 if($result->num_rows>0)
 
 {     
-  echo  "<form method='post' action='searchNurse.php'>
- 
-  <div class='ta'>
   
-   
-  
-   <font size=3> Search by </font></b>  <br/> <br/><select name= 'search' class='select'>
-                               <option value='Position'><b> position</b></option>
-                               <option value='Nurse_ID'><b> Nurse_ID</b></option>
-                               <option value='Email' selected><b>Email</b></option>
-                          <option value='ContactNumber' selected><b> Contact number</b></option>
-                               </select>
-  
-  
-  <input type='text' placeholder='type here' name='data' id='data' class='box'>
-  
-   <button type='submit'  name='BtnSubmit' id='search' class='b1' ><b>Search</b></button>
-  </div>
-  
-  
-  </form>";
-     
 
 	   
 	   //echo  "<div class='tab'>";
-	   echo  "<table class='container_content' id='container_content' border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Blood Group"."</th>"."<th>"."Component Type"."</th>"."<th>"."No of Packs"."</th>"."</tr>";
-      echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
+	   echo  "<table id='dataTable'  border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Blood Group"."</th>"."<th>"."Component Type"."</th>"."<th>"."No of Packs"."</th>"."</tr>";
+    //  echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
      while($row = $result->fetch_assoc())
    
    {     
      
-	  echo  "<tr>"."<td>".$row["Blood_group"]."</td>"."<td>".$row["Component_type"]."</td>"."<td>".$row["count"]."</td>";
+    $position_class = strtolower(str_replace(' ', '-', $row['Blood_group']));
+    echo '<tr class="' . $position_class . '">';
+	  echo  "<td>".$row["Blood_group"]."</td>"."<td>".$row["Component_type"]."</td>"."<td>".$row["count"]."</td>";
 	
 				 echo "</tr>";
 	 
-	   echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
+	   echo "<tr>"."<td style='height:8px;background-color:#F5F5F5;'colspan=3'>"."</td>"."</tr>";
 	  
 	}
 	
@@ -322,6 +341,52 @@ else
 $conn->close();
 ?>
 
+
+<script>
+  // Filter the table based on the selected position, SLMC number, and search query
+  function filterTable() {
+    const input = document.getElementById('searchInput');
+    const filter = input.value.toUpperCase();
+    const positionSelect = document.getElementById('filterDropdown');
+    const positionFilter = positionSelect.options[positionSelect.selectedIndex].value;
+    const ComponentSelect = document.getElementById('ComponentDropdown');
+    const ComponentValue = ComponentSelect.options[ComponentSelect.selectedIndex].value;
+
+    const table = document.getElementById('dataTable');
+    const rows = table.getElementsByTagName('tr');
+
+    for (let i = 1; i < rows.length; i++) {
+      const row = rows[i];
+      if (row.cells.length === 1) {
+          continue;
+      }
+      const cells = row.getElementsByTagName('td');
+      const positionClass = row.className;
+      console.log(`Row ${i} class: ${positionClass}`);
+      const ComponentName = cells[1].textContent;
+
+        if ((positionFilter === 'All' || positionClass === positionFilter.toLowerCase())
+            && (ComponentValue === 'All' || ComponentName === ComponentValue)
+            && Array.from(cells).some(cell => cell.textContent.toUpperCase().includes(filter))) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    }
+  }
+
+  // Attach filterTable function to events (e.g. button click, input change)
+ // const searchInput = document.getElementById
+// Attach filterTable function to events (e.g. button click, input change)
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', filterTable);
+
+const filterDropdown = document.getElementById('filterDropdown');
+filterDropdown.addEventListener('change', filterTable);
+
+const ComponentDropdown = document.getElementById('ComponentDropdown');
+ComponentDropdown.addEventListener('change', filterTable);
+</script>
 
 
           

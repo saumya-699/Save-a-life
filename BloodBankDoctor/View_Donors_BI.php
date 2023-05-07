@@ -23,7 +23,7 @@ session_start();
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
- <link rel="stylesheet" href="StyleSearch.css"> 
+ <link rel="stylesheet" href="StyleSearchss.css"> 
 
 </head>
 <body>
@@ -234,30 +234,24 @@ session_start();
             <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a></div>
              <!--add your content from here-->
 
+
  
- <form method="post" action="search_donor.php">
+
+     
+<select id="filterDropdown" class="b1">
+    <option value="All">All</option>
+    <option value="Female">Female</option>
+    <option value="Male">Male</option>
+    
+  </select>        
  
-<div class="ta">
+
+<input type="text" id="searchInput" class="box"> 
 
 
- <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
- <option value="Donor_Id" selected><b> Donor Id</b></option>
-                             <option value="Donor_Name"><b> Donor Name</b></option>
-                             <option value="NIC"><b>NIC</b></option>
-                             <option value="Blood_Group"><b>Blood Group</b></option>
-                             <option value="Gender"><b>Gender</b></option>
-                             <option value="province"><b>Provicel</b></option>
-            		            <option value="postal"><b> Postal Code</b></option>
-                             </select>
 
 
-<input type="text" placeholder="type here" name="data" id="data" class="box">
 
- <button type="submit"  name="BtnSubmit" id="search" class="b1" ><b>Search</b></button>
-</div>
-
-
-</form>
 <?php
 
 
@@ -321,7 +315,7 @@ if($result->num_rows>0)
 	      //echo "<font size=6>";
 	   
 	   //echo  "<div class='tab'>";
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Donor ID"."</th>"."
+	   echo  "<table border=1 id='dataTable'>"."<tr>"."<th style='text-align:center;width:120px;'>"."Donor ID"."</th>"."
        <th style='text-align:center;width:120px;'>"."Donor Name"."
        <th style='text-align:center;width:120px;'>"."NIC Number"."</th>"."
        <th>"."Gender"."</th>"."
@@ -329,12 +323,13 @@ if($result->num_rows>0)
 	   <th>"."Province"."</th>"."
        <th style='width:100px;'>"."Action"."</th>"."
        </tr>";
-      echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
+      //echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
    while($row = $result->fetch_assoc())
    
    {     
-     
-	  echo  "<tr>"."<td>".$row["Donor_Id"]."</td>"."<td>".$row["Prefix"].".".$row["Full_Name"]."</td>"."<td>".$row["NIC_Number"]."</td>"."<td>".$row["Gender"]."</td>"."<td>".$row["mobile_number"]."</td>"."<td>".$row["province"]."</td>";
+    $position_class = strtolower(str_replace(' ', '-', $row['Gender']));
+    echo '<tr class="' . $position_class . '">';
+	  echo  "<td>".$row["Donor_Id"]."</td>"."<td>".$row["Prefix"].".".$row["Full_Name"]."</td>"."<td>".$row["NIC_Number"]."</td>"."<td>".$row["Gender"]."</td>"."<td>".$row["mobile_number"]."</td>"."<td>".$row["province"]."</td>";
 	   echo "<td><form method='POST' action ='ViewAll_B.php'>
                 <input type=hidden name=Donor_Id value=".$row["Donor_Id"]." >
                 <button type=submit value=view name=view  class='fp'><img src=eye.png width=43 height=37></button>
@@ -343,7 +338,7 @@ if($result->num_rows>0)
             </td>";
 				 echo "</tr>";
 	 
-	   echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
+	   echo "<tr>"."<td style='height:8px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
 	  
 	}
 	
@@ -381,7 +376,43 @@ function myConfirm() {
 
 </script>
 
+<script>
+  // Filter the table based on the selected color and search query
+  function filterTable() {
+    const input = document.getElementById('searchInput');
+    const filter = input.value.toUpperCase();
+    const select = document.getElementById('filterDropdown');
+    const filterValue = select.options[select.selectedIndex].value;
 
+    const table = document.getElementById('dataTable');
+    const rows = table.getElementsByTagName('tr');
+
+    for (let i = 1; i < rows.length; i++) {
+        const row = rows[i];
+        const cells = row.getElementsByTagName('td');
+        const positionClass = row.className;
+
+        if ((filterValue === 'All' || positionClass === filterValue.toLowerCase())
+            && Array.from(cells).some(cell => cell.textContent.toUpperCase().includes(filter))) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    }
+}
+
+// Attach filterTable function to events (e.g. button click, input change)
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', filterTable);
+
+const filterDropdown = document.getElementById('filterDropdown');
+filterDropdown.addEventListener('change', filterTable);
+
+  
+
+  // Attach filterTable function to events (e.g. button click, input change)
+  
+</script>
           
         </main>
      

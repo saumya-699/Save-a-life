@@ -23,7 +23,7 @@ session_start();
 <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
  <link rel="stylesheet" href="StyleIcons.css"> 
 
- <link rel="stylesheet" href="StyleSearch.css"> 
+ <link rel="stylesheet" href="StyleSearchNew.css"> 
 
 
 </head>
@@ -73,7 +73,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateBBI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -92,7 +92,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateMLTI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -111,7 +111,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateWardDoctorI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -130,7 +130,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateNurseI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -155,7 +155,7 @@ session_start();
                       </li>
                       <li class="menu-item">
                         <a href="DeactivateOrUpdateHospitalI.php">
-                          <span class="menu-title">Update/Deactivte</span>
+                          <span class="menu-title">View/Deactivte</span>
                         </a>
                       </li>
                       <li class="menu-item">
@@ -222,31 +222,17 @@ session_start();
           
           </div>
           
-          
- <form method="post" action="search_donor.php">
+       
+      
+  <select id="filterDropdown" class="b1">
+    <option value="All">Gender</option>
+    <option value="Female">Female</option>
+    <option value="Male">Male</option>
+    
+  </select>        
  
-<div class="ta">
 
- 
-
- <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
- <option value="Donor_Id" selected><b> Donor Id</b></option>
-                             <option value="Donor_Name"><b> Donor Name</b></option>
-                             <option value="NIC"><b>NIC</b></option>
-                             <option value="Blood_Group"><b>Blood Group</b></option>
-                             <option value="Gender"><b>Gender</b></option>
-                             <option value="province"><b>Provicel</b></option>
-            		            <option value="postal"><b> Postal Code</b></option>
-                             </select>
-
-
-<input type="text" placeholder="type here" name="data" id="data" class="box">
-
- <button type="submit"  name="BtnSubmit" id="search" class="b1" ><b>Search</b></button>
-</div>
-
-
-</form>
+<input type="text" id="searchInput" class="box">     
 <?php
 
 
@@ -264,7 +250,7 @@ if($result->num_rows>0)
 	      //echo "<font size=6>";
 	   
 	   //echo  "<div class='tab'>";
-	  echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Donor_ID"."</th>"."
+	  echo  "<table id='dataTable' border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Donor_ID"."</th>"."
        <th style='text-align:center;width:120px;'>"."Donor Name"."
        <th style='text-align:center;width:120px;'>"."NIC Number"."</th>"."
        <th>"."Gender"."</th>"."
@@ -276,14 +262,16 @@ if($result->num_rows>0)
    while($row = $result->fetch_assoc())
    
    {     
-     
-	  echo  "<tr>"."<td>".$row["Donor_Id"]."</td>"."<td>".$row["Prefix"].".".$row["Full_Name"]."</td>"."<td>".$row["NIC_Number"]."</td>"."<td>".$row["Gender"]."</td>"."<td>".$row["mobile_number"]."</td>"."<td>".$row["province"]."</td>";
+    $position_class = strtolower(str_replace(' ', '-', $row['Gender']));
+    echo '<tr class="' . $position_class . '">';
+	  echo  "<td>".$row["Donor_Id"]."</td>"."<td>".$row["Prefix"].".".$row["Full_Name"]."</td>"."<td>".$row["NIC_Number"]."</td>"."<td>".$row["Gender"]."</td>"."<td>".$row["mobile_number"]."</td>"."<td>".$row["province"]."</td>";
 	   echo "<td><form method='POST' action ='ViewAllDI.php'>
                 <input type=hidden name=Donor_Id value=".$row["Donor_Id"]." >
                 <button type=submit value=view name=view  id=btn class='x'><i class='fa-sharp fa-solid fa-eye'></i></button>
                 </form>
 				<form method='POST' action ='DeleteDonor.php' onsubmit='return myConfirm()'>
                 <input type=hidden name=Donor_Id value=".$row["Donor_Id"]." >
+                <input type='hidden' name='UserName' value=".$row['username']." >
                 <button type=submit value=Delete name=delete id=btn class='y'><i class='fa-solid fa-user-xmark'></i></button>
 				              </form>
             </td>";
@@ -312,6 +300,45 @@ else
 
 $conn->close();
 ?>
+
+
+<script>
+  // Filter the table based on the selected color and search query
+  function filterTable() {
+    const input = document.getElementById('searchInput');
+    const filter = input.value.toUpperCase();
+    const select = document.getElementById('filterDropdown');
+    const filterValue = select.options[select.selectedIndex].value;
+
+    const table = document.getElementById('dataTable');
+    const rows = table.getElementsByTagName('tr');
+
+    for (let i = 1; i < rows.length; i++) {
+        const row = rows[i];
+        const cells = row.getElementsByTagName('td');
+        const positionClass = row.className;
+
+        if ((filterValue === 'All' || positionClass === filterValue.toLowerCase())
+            && Array.from(cells).some(cell => cell.textContent.toUpperCase().includes(filter))) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    }
+}
+
+// Attach filterTable function to events (e.g. button click, input change)
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', filterTable);
+
+const filterDropdown = document.getElementById('filterDropdown');
+filterDropdown.addEventListener('change', filterTable);
+
+  
+
+  // Attach filterTable function to events (e.g. button click, input change)
+  
+</script>
 <script>
 function myConfirm() {
   var result = confirm("Want to delete?");

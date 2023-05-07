@@ -36,6 +36,7 @@ if(isset($_POST['BtnSubmit']))
 	$number1=$_POST["number1"];
 	$number2=$_POST["number2"];
 	$m= $_SESSION["Name"];
+	$DOA=$_POST["DOA"];
 
 
 	$query = "select * from director where UserName ='$m'";
@@ -73,7 +74,7 @@ if($resultd->num_rows>0)
 			
 
 //insert the user into the database.
-    $sql="insert into hospital(Hospital_ID,HospitalName,Type,District,Head_Of_Hospital,Address,Landline_Number,ContactNum_Hospital_Head,Remark,Director_ID)VALUES(' ','$HName','$Type','$district','$headName','$address','$number1','$number2','Added','$x')";
+    $sql="insert into hospital(Hospital_ID,HospitalName,Type,District,Head_Of_Hospital,Address,Landline_Number,ContactNum_Hospital_Head,Added_Date,Remark,Director_ID)VALUES(' ','$HName','$Type','$district','$headName','$address','$number1','$number2','$DOA','Added','$x')";
     if($conn->query($sql))
      {
       

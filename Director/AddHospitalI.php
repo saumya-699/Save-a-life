@@ -69,7 +69,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateBBI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -88,7 +88,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateMLTI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -107,7 +107,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateWardDoctorI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -126,7 +126,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateNurseI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -151,7 +151,7 @@ session_start();
                       </li>
                       <li class="menu-item">
                         <a href="DeactivateOrUpdateHospitalI.php">
-                          <span class="menu-title">Update/Deactivte</span>
+                          <span class="menu-title">View/Deactivte</span>
                         </a>
                       </li>
                       <li class="menu-item">
@@ -236,7 +236,9 @@ session_start();
      <form method="post" action="AddHospitalBackEnd.php">
         
                          
-                              
+                    <?php
+                    $date =date("Y-m-d");
+                    ?>
                               
                             <label for="exampleFormControlInput1" class="form-label lbl star">Hospital Name</label>
                              <input type="text" placeholder="Enter the Hospital Name" name="HName" id="H_id" class="form-control txt-input">
@@ -293,8 +295,11 @@ session_start();
 					   <label for="exampleFormControlInput1" class="form-label lbl star"> Contact Number of Hospital Head</label>
                             <input type="text" placeholder="Enter the Contact Number of Hospital Head" name="number2" id="numb2" class="form-control txt-input">
                               
-                            <br><br><br><br>
-               
+
+                            <label for='exampleFormControlInput1' class='form-label lbl star'>Date of Appoinment</label>
+                             <input type='text'  name='DOA' id='DOA' class='form-control txt-input' value="<?php echo $date; ?>">
+				
+                            <br><br>
                   <div class='row btn-buttons'>
                         
                         <div class='col btn-but'> <input type='submit' name='BtnSubmit' value='Add' class='b1'></div>

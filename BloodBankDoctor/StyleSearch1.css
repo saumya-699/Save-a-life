@@ -3,13 +3,13 @@
 table{
 	
 	
-	padding-left:440px;
+	padding-left:400px;
 	width:800px;
 	height:20px;
 	border-collapse: collapse;	
 		margin-top:5px;
    border:0px transparent;
-margin-left:-42px;   
+margin-left:-20px;   
  	margin-right:11px;
 }
 
@@ -45,13 +45,15 @@ h1{
 
 .select{
 	
-	 
+	margin-top:100px;
+margin-bottom:50px;	
  height:35px;
  width:138px;
  border-radius:20px;
- background-color:#56CE94;
+ background-color:#F35050;
   border: none;
  text-align:center;
+ margin-left:190px;
                      
   
 						
@@ -110,7 +112,7 @@ h1{
 						  margin-left:20px;
 						   border-radius:20px;
                            
-                           background-color:#F3506D;
+                           background-color:#F35050;
 						   border: none;
 						   cursor:pointer;
 						   

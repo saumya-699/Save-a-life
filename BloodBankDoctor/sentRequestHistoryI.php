@@ -47,7 +47,7 @@ session_start();
  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
 <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
 <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./styleM.css">
-
+<script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script> 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
@@ -228,6 +228,26 @@ session_start();
           <div>
             <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a></div>
              <!--add your content from here-->
+
+
+             <div>
+
+
+<select id="filterDropdown" class="select">
+  <option value="All">Status</option>
+  <option value="pending">Pending</option>
+  <option value="Available">Available</option>
+  <option value="Not-Available">Not Available</option>
+</select>
+
+
+<input type="date" id="dateInput" class="b1">
+<input type="text" id="searchInput" class="box">
+
+
+
+
+</div>
  
 <?php
 
@@ -241,48 +261,30 @@ if($result->num_rows>0)
 
 {     
 
- echo  "<form method='post' action='searchNurse.php'>
- 
-<div class='ta'>
-
- 
-
- <font size=3> Search by </font></b>  <br/> <br/><select name= 'search' class='select'>
-                             <option value='Position'><b> position</b></option>
-                             <option value='Nurse_ID'><b> Nurse_ID</b></option>
-                             <option value='Email' selected><b>Email</b></option>
-		                    <option value='ContactNumber' selected><b> Contact number</b></option>
-                             </select>
-
-
-<input type='text' placeholder='type here' name='data' id='data' class='box'>
-
- <button type='submit'  name='BtnSubmit' id='search' class='b1' ><b>Search</b></button>
-</div>
-
-
-</form>";
-   
 
 	   
 	   //echo  "<div class='tab'>";
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Request_ID"."</th>"."<th style='text-align:center;width:120px;'>"."Requested_hospital_name"."</th>"."<th>"."Requested_by"."</th>"."<th>"."Requeired_blood_group"."</th>"."<th style='width:120px;'>"."Status"."</th>"."<th style='width:120px;'>"."Action"."</th>"."</tr>";
-      echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
+	   echo  "<table id='dataTable' border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Requested Hospital Name"."</th>"."<th>"."Requested By"."</th>"."<th>"."Requested Blood Group"."</th>"."<th style='width:120px;'>"."Status"."</th>"."<th style='width:120px;'>"."Date"."</th>"."<th style='width:120px;'>"."Action"."</th>"."</tr>";
+     // echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
    while($row = $result->fetch_assoc())
    
    {     
+
+    $position_class = strtolower(str_replace(' ', '-', $row['status']));
+       
+      echo '<tr class="' . $position_class . '">';
      
-	  echo  "<tr>"."<td>".$row["Request_ID"]."</td>"."<td>".$row["Requested_hospital_name"]."</td>"."<td>".$row["Requested_by"]."</td>"."<td>".$row["Requeired_blood_group"]."</td>"."<td>".$row["status"]."</td>";
+	  echo  "<td>".$row["Requested_hospital_name"]."</td>"."<td>".$row["Requested_by"]."</td>"."<td>".$row["Requeired_blood_group"]."</td>"."<td>".$row["status"]."</td>"."<td>".$row["Date"]."</td>";
 	   echo "<td><form method='POST' action ='ShowAllSentRequest.php'>
                 <input type=hidden name=Request_ID value=".$row["Request_ID"].">
-                <button type=submit value=view name=view  class='fp'><img src=eye.png width=43 height=37></button>
+                <button type=submit value=view name=view id=btn class='x'><i class='fa-sharp fa-solid fa-eye'></i></button>
                 </form>
 	
                
                 </td>";
 				 echo "</tr>";
 	 
-	   echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
+	   echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=7'>"."</td>"."</tr>";
 	  
 	}
 	
@@ -305,6 +307,48 @@ else
 
 $conn->close();
 ?>
+<script>
+function filterTable() {
+  const input = document.getElementById('searchInput');
+  const filter = input.value.toUpperCase();
+  const select = document.getElementById('filterDropdown');
+  const filterValue = select.options[select.selectedIndex].value;
+  const dateInput = document.getElementById('dateInput').value;
+
+  const table = document.getElementById('dataTable');
+  const rows = table.getElementsByTagName('tr');
+
+  for (let i = 1; i < rows.length; i++) {
+      const row = rows[i];
+      // Skip the extra row added for styling
+      if (row.cells.length === 1) {
+          continue;
+      }
+      const cells = row.getElementsByTagName('td');
+      const positionClass = row.className;
+      const appointmentDate = cells[4].textContent;
+
+      if ((filterValue === 'All' || positionClass === filterValue.toLowerCase())
+          && Array.from(cells).some(cell => cell.textContent.toUpperCase().includes(filter))
+          && (dateInput === '' || appointmentDate === dateInput)) {
+          row.style.display = '';
+      } else {
+          row.style.display = 'none';
+      }
+  }
+}
+
+
+// Attach filterTable function to events (e.g. button click, input change)
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', filterTable);
+
+const filterDropdown = document.getElementById('filterDropdown');
+filterDropdown.addEventListener('change', filterTable);
+
+const dateInput = document.getElementById('dateInput');
+dateInput.addEventListener('input', filterTable);
+</script>
 
 
 <script>
