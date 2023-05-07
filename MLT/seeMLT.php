@@ -60,25 +60,25 @@ if (isset($_SESSION["ID"])) {
                   </span>
                   <span class="menu-title">View donated blood</span>
                 </a>
-                <li class="menu-item sub-menu">
-                  <a href="#">
-                    <span class="menu-icon">
-                      <i class="ri-article-fill"></i>
-                    </span>
-                    <span class="menu-title">Enter test results</span>
-                  </a>
-                  <div class="sub-menu-list">
-                    <ul>
-                      <li class="menu-item">
-                        <a href="Enter Blood testing result.php">
-                          <span class="menu-title">Blood Testing</span>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a href="Cross matching test result.php">
-                          <span class="menu-title">Cross Matching</span>
-                        </a>
-                      </li>
+              <li class="menu-item sub-menu">
+                <a href="#">
+                  <span class="menu-icon">
+                    <i class="ri-article-fill"></i>
+                  </span>
+                  <span class="menu-title">Enter test results</span>
+                </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Enter Blood testing result.php">
+                        <span class="menu-title">Blood Testing</span>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="Cross matching test result.php">
+                        <span class="menu-title">Cross Matching</span>
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </li>
@@ -109,43 +109,57 @@ if (isset($_SESSION["ID"])) {
               </li>
 
               <li class="menu-item sub-menu">
-                  <a href="#">
-                    <span class="menu-icon">
-                      <i class="ri-hospital-line"></i>
-                    </span>
-                <span class="menu-title">Blood Stock</span>
-                  </a>
-                  <div class="sub-menu-list">
-                    <ul>
-                      <li class="menu-item">
-                        <a href="Blood stock.php">
-                          <span class="menu-title">Stock Info</span>
-                        </a>
-                      </li>
-                     
-					    <li class="menu-item">
-                        <a href="LessStockComponentsI.php">
-                          <span class="menu-title">Low stock blood components</span>
-                        </a>
-                      </li>
-	
-					  
-					     <li class="menu-item">
-                        <a href="ExpiredComponentsI.php">
-                          <span class="menu-title">Blood expiry Information</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-
-              <li class="menu-item">
-                <a href="Report.php">
+                <a href="#">
                   <span class="menu-icon">
-                    <i class="ri-file-chart-line"></i>
+                    <i class="ri-hospital-line"></i>
+                  </span>
+                  <span class="menu-title">Blood Stock</span>
+                </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Blood stock.php">
+                        <span class="menu-title">Stock Info</span>
+                      </a>
+                    </li>
+
+                    <li class="menu-item">
+                      <a href="LessStockComponentsI.php">
+                        <span class="menu-title">Low stock blood components</span>
+                      </a>
+                    </li>
+
+
+                    <li class="menu-item">
+                      <a href="ExpiredComponentsI.php">
+                        <span class="menu-title">Blood expiry Information</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+
+              <li class="menu-item sub-menu">
+                <a href="#">
+                  <span class="menu-icon">
+                    <i class="ri-file-edit-fill"></i>
                   </span>
                   <span class="menu-title">Reports</span>
                 </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Report.php">
+                        <span class="menu-title">Blood Testing Report</span>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="Report1.php">
+                        <span class="menu-title">Cross Matching Report</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
 
 
@@ -160,7 +174,7 @@ if (isset($_SESSION["ID"])) {
                 </a>
               </li>
               <li class="menu-item">
-                <a href="logout.php">
+                <a href="Notification.php">
                   <span class="menu-icon">
                     <i class="ri-notification-line"></i>
                   </span>
@@ -188,36 +202,49 @@ if (isset($_SESSION["ID"])) {
         <div>
           <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
         </div>
-          <div class="col-9 ">
-            <center style='margin-top:50px;'>
-              <h2 class="txt-l ">Welcome MLT.<?php echo " " . $x;
-                                              ?> </h2>
-            </center>
-            <div class="form">
-              <div class="card frm-form ">
-                <div class="form-body ">
-                  <h3> </h3>
+        <div class="col-9 ">
+          <center style='margin-top:50px;'>
+            <h2 class="txt-l ">Welcome MLT.<?php echo " " . $x;
+                                            ?> </h2>
+          </center>
+          <div class="form">
+            <div class="card frm-form ">
+              <div class="form-body ">
+                <h3>Pending Blood Test Results for approval</h3>
+                <p style="color:#0D5C75; font-size: 70px; font-weight: 700; margin-top:-20px;">
+                  <?php
+                  $vql = "SELECT COUNT(countS) AS total_count FROM (
+                    SELECT COUNT(*) AS countS FROM blood_testing_result WHERE status = 'Pending' and MLT_ID='$x' GROUP by process_date,batch_number) AS subquery";
 
+                  $result = $conn->query($vql);
 
+                  if ($result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    $status = $row["total_count"];
+                    echo $status;
+                  }
 
-                </div>
+                  ?>
+                </p>
+
               </div>
             </div>
+          </div>
 
-            <div class="form-right">
+          <div class="form-right">
 
 
 
-
-            </div>
 
           </div>
-        </div>
 
+        </div>
     </div>
 
+  </div>
 
-    </main>
+
+  </main>
 
   </div>
   </div>
@@ -254,7 +281,7 @@ if (isset($_SESSION["ID"])) {
     }
 
     .layout {
-      background-color: #D3FBD8;
+      background-color: #B2C0E0;
     }
   </style>
 </body>

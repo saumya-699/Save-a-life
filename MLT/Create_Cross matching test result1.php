@@ -36,18 +36,21 @@ if (isset($_POST['submit'])) {
   $test_result = $_POST['Cross_matching_test_result'];
 
   $process_date = date("Y/m/d");
+ 
+  $note= $_POST['Note'];
 
 
-  $sql = "INSERT INTO cross_matching_testing_result (request_id, blood_group, test_result ,process_date,MLT_ID,Hospital_ID) VALUES ('$request_id','$blood_group','$test_result','$process_date','$x','$y')";
-
+  $sql = "INSERT INTO cross_matching_testing_result (request_id, blood_group, test_result,Note ,process_date,MLT_ID,Hospital_ID,send_status,Status) VALUES ('$request_id','$blood_group','$test_result',' $note','$process_date','$x','$y','1','Pending')";
   $result = $conn->query($sql);
+
 
   if ($result == TRUE) {
     header('location:successbloodcmresult.php');
   } else {
     echo "Error:" . $sql . "<br>" . $conn->error;
   }
-
+  $updateSql= "UPDATE blood_request SET CrossMatching_Add	='1' WHERE requeste_id=  $request_id";
+  $updateresult = $conn->query($updateSql);
 
   $conn->close();
 }

@@ -124,43 +124,57 @@
                                 </div>
                             </li>
 
-                            <li class="menu-item">
-                                <a href="Report.php">
+                            <li class="menu-item sub-menu">
+                                <a href="#">
                                     <span class="menu-icon">
-                                        <i class="ri-file-chart-line"></i>
+                                        <i class="ri-file-edit-fill"></i>
                                     </span>
                                     <span class="menu-title">Reports</span>
                                 </a>
-                            </li>
+                                <div class="sub-menu-list">
+                                    <ul>
+                                        <li class="menu-item">
+                                            <a href="Report.php">
+                                                <span class="menu-title">Blood Testing Report</span>
+                                            </a>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a href="Report1.php">
+                                                <span class="menu-title">Cross Matching Report</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                </li>
 
 
-                            <li class="menu-header" style="padding-top: 40px"><span> </span></li>
-                            <li class="menu-item">
-                                <a href="Edit ProfileMlt.php">
-                                    <span class="menu-icon">
-                                        <i class="ri-user-line"></i>
-                                    </span>
-                                    <span class="menu-title">Profile</span>
+                                <li class="menu-header" style="padding-top: 40px"><span> </span></li>
+                                <li class="menu-item">
+                                    <a href="Edit ProfileMlt.php">
+                                        <span class="menu-icon">
+                                            <i class="ri-user-line"></i>
+                                        </span>
+                                        <span class="menu-title">Profile</span>
 
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="#">
-                                    <span class="menu-icon">
-                                        <i class="ri-notification-line"></i>
-                                    </span>
-                                    <span class="menu-title">Notification</span>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="#">
+                                        <span class="menu-icon">
+                                            <i class="ri-notification-line"></i>
+                                        </span>
+                                        <span class="menu-title">Notification</span>
 
-                                </a>
-                            </li>
-                            <li class="menu-item">
-                                <a href="logout.php">
-                                    <span class="menu-icon">
-                                        <i class="ri-logout-box-r-line"></i>
-                                    </span>
-                                    <span class="menu-title">Log out</span>
-                                </a>
-                            </li>
+                                    </a>
+                                </li>
+                                <li class="menu-item">
+                                    <a href="logout.php">
+                                        <span class="menu-icon">
+                                            <i class="ri-logout-box-r-line"></i>
+                                        </span>
+                                        <span class="menu-title">Log out</span>
+                                    </a>
+                                </li>
                         </ul>
                     </nav>
                 </div>
@@ -198,7 +212,7 @@
 
                                     <label for="exampleFormControlInput1 " class="form-label lbl star ">Blood Group</label>
                                     <input type="text" class="form-control txt-input " name="blood_group" value="<?php echo $did ?>">
-                                    <input type=hidden name=testid value="<?php echo $res_id ?>" >
+                                    <input type=hidden name=testid value="<?php echo $res_id ?>">
 
 
                                     <!-- <label for="exampleFormControlInput1 " class="form-label lbl star ">Blood Component Type</label>
@@ -207,7 +221,7 @@
                   <option value="Red cell">Red cell</option>
                   <option value="Platelet">Platelet</option>
                   <option value="Plasma">Plasma</option>
-                </select> -->     <label for="exampleFormControlInput1 " class="form-label lbl star ">Blood Component Type</label>
+                </select> --> <label for="exampleFormControlInput1 " class="form-label lbl star ">Blood Component Type</label>
                                     <input type="checkbox" id="Red_cell" name="Red_cell" value="1" style="display: inline-block;">
                                     <label for="Red cell" style="display: inline-block;">Red cell </label><br>
                                     <input type="checkbox" id="Platelet" name="Platelet" value="1" style="display: inline-block;">

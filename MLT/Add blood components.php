@@ -3,7 +3,7 @@ session_start();
 if (isset($_SESSION["ID"])) {
   include "config.php";
   $m = $_SESSION["Name"];
-  $date =date("Y/m/d");
+  $date = date("Y/m/d");
   $query = "SELECT * FROM mlt WHERE UserName ='$m'";
   $result1 = $conn->query($query);
 
@@ -145,13 +145,27 @@ if (isset($_SESSION["ID"])) {
                 </div>
               </li>
 
-              <li class="menu-item">
-                <a href="Report.php">
+              <li class="menu-item sub-menu">
+                <a href="#">
                   <span class="menu-icon">
-                    <i class="ri-file-chart-line"></i>
+                    <i class="ri-file-edit-fill"></i>
                   </span>
                   <span class="menu-title">Reports</span>
                 </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Report.php">
+                        <span class="menu-title">Blood Testing Report</span>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="Report1.php">
+                        <span class="menu-title">Cross Matching Report</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
 
 
@@ -226,16 +240,14 @@ if (isset($_SESSION["ID"])) {
               echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;width:200px;'>" . "Test result ID" . "</th>" .  "<th style='text-align:center;width:100px;'>" . "Blood group" . "</th>" . "<th>" . "Malaria result" . "</th>" . "<th>" . " HIV result" . "</th>" . "<th>" . "HBV result" . "</th>" . "<th>" . "HCV result" . "</th>" . "<th>" . "VDRL result" . "</th>" . "<th>" . "Processed Date" . "</th>" . "<th>" . "Batch number" . "</th>" .  "<th>" . "Action" . "</th>" . "</tr>";
               echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
               while ($row = $result->fetch_assoc()) {
-                echo  "<tr>" . "<td>" . $row["test_result_id"] . "</td>" .  "<td>" . $row["blood_group"] . "</td>" . "<td>" . $row["malaria_result"] . "</td>" . "<td>" . $row["hiv_result"] . "</td>" . "<td>" . $row["hbv_result"] . "</td>" . "<td>" . $row["hcv_result"] . "</td>" . "<td>" . $row["vdrl_result"] . "</td>" . "<td>" . $row["process_date"] . "</td>" . "<td>" . $row["batch_number"] . "</td>" ;
-    
+                echo  "<tr>" . "<td>" . $row["test_result_id"] . "</td>" .  "<td>" . $row["blood_group"] . "</td>" . "<td>" . $row["malaria_result"] . "</td>" . "<td>" . $row["hiv_result"] . "</td>" . "<td>" . $row["hbv_result"] . "</td>" . "<td>" . $row["hcv_result"] . "</td>" . "<td>" . $row["vdrl_result"] . "</td>" . "<td>" . $row["process_date"] . "</td>" . "<td>" . $row["batch_number"] . "</td>";
+
                 echo "<td class='tb'><form method='POST' action ='Add blood components1.php'>
-   <input type=hidden name=RequestID value=" . $row["blood_group"] . " >
-   <input type=hidden name=TestResultID value=" . $row["test_result_id"] . " >
-     <button type=submit value=add name=add  class='fp'><i class='fa-solid fa-plus'></i></i></button>
-     </form>  
-
-
-    </td>";     echo "</tr>";
+                   <input type=hidden name=RequestID value=" . $row["blood_group"] . " >
+                   <input type=hidden name=TestResultID value=" . $row["test_result_id"] . " >
+                   <button type=submit value=add name=add  class='fp'><i class='fa-solid fa-pen-to-square'></i></button>
+                  </form>  </td>";
+                echo "</tr>";
 
                 echo "</div>";
                 echo "</tr>";

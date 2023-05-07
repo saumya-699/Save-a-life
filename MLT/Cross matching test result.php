@@ -10,12 +10,13 @@ if (isset($_SESSION["ID"])) {
   if ($result1->num_rows > 0) {
     while ($row = $result1->fetch_assoc()) {
       $x = $row["MLT_ID"];
-      $y=$row["Hospital_ID"];
+      $y = $row["Hospital_ID"];
     }
   }
 }
 
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -143,13 +144,27 @@ if (isset($_SESSION["ID"])) {
                 </div>
               </li>
 
-              <li class="menu-item">
-                <a href="Report.php">
+              <li class="menu-item sub-menu">
+                <a href="#">
                   <span class="menu-icon">
-                    <i class="ri-file-chart-line"></i>
+                    <i class="ri-file-edit-fill"></i>
                   </span>
                   <span class="menu-title">Reports</span>
                 </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Report.php">
+                        <span class="menu-title">Blood Testing Report</span>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="Report1.php">
+                        <span class="menu-title">Cross Matching Report</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
 
 
@@ -202,257 +217,303 @@ if (isset($_SESSION["ID"])) {
 
 
             <font size=3> Search by </font></b> <br /> <br /><select name="search" class="select">
-             <option value="requeste_id"><b> Request ID</b></option>
+              <option value="requeste_id"><b> Request ID</b></option>
             </select>
 
 
             <input type="text" placeholder="type here" name="data" id="data" class="box">
 
             <button type="submit" name="BtnSubmit" id="search" class="b1"><b>Search</b></button>
-          
-
-    </form>
-
-    <div class="box1">
-
-      <?php
-      if (isset($_POST['BtnSubmit'])) {
-        $search = $_POST["search"];
-        $data = $_POST["data"];
-        $sql = "SELECT * FROM blood_request WHERE $search = '$data' AND Hospital_ID = '$y'";
-        $result = $conn->query($sql);
-        
-
-          if ($result->num_rows > 0) {
-            echo  "<div class='tab'>";
-            echo "<font color=black>";
-            echo "<font size=3>";
 
 
-            echo  "<table >" . "<tr>" . "<th>" . "Requested Date" . "</th>" . "<th>" . "Receive date" . "</th>" . "<th>" . "Request ID" . "</th>" . "<th>" . "Blood Group" . "</th>" . "<th>" . "Status" . "</th>" . "<th>" . "Action" . "</th>" . "</tr>";
-            echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=6'>" . "</td>" . "</tr>";
+        </form>
 
-            while ($row = $result->fetch_assoc()) {
+        <div class="box1">
 
-              echo  "<tr style='height:60px'>" . "<td>" . $row["requested_date"] . "</td>" . "<td>" . $row["expected_date"] . "</td>" . "<td>" . $row["requeste_id"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "<td>" . $row["status"] . "</td>";
+          <?php
+          if (isset($_POST['BtnSubmit'])) {
+            $search = $_POST["search"];
+            $data = $_POST["data"];
+            $sql = "SELECT * FROM blood_request WHERE $search = '$data' AND Hospital_ID = '$y'";
+            $result = $conn->query($sql);
 
-              echo "<td class='tb'><form method='POST' action ='Cross matching test result1.php'>
-          <input type=hidden name=RequestID value=" . $row["requeste_id"] . " >
-  <button type=submit value=add name=add  class='fp'><i class='fa-solid fa-plus'></i></button>
-  </form>  
 
-    </td>";
+            if ($result->num_rows > 0) {
+              echo  "<div class='tab'>";
+              echo "<font color=black>";
+              echo "<font size=3>";
+
+
+              echo  "<table >" . "<tr>" . "<th>" . "Requested Date" . "</th>" . "<th>" . "Receive date" . "</th>" . "<th>" . "Request ID" . "</th>" . "<th>" . "Blood Group" . "</th>" . "<th>" . "Status" . "</th>" . "<th>" . "Action" . "</th>" . "</tr>";
               echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=6'>" . "</td>" . "</tr>";
+
+              // while ($row = $result->fetch_assoc()) {
+
+              //   echo  "<tr style='height:60px'>" . "<td>" . $row["requested_date"] . "</td>" . "<td>" . $row["expected_date"] . "</td>" . "<td>" . $row["requeste_id"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "<td>" . $row["status"] . "</td>";
+
+              //   echo "<td class='tb'><form method='POST' action ='Cross matching test result1.php'>
+              // <input type=hidden name=RequestID value=" . $row["requeste_id"] . " >
+              // <button type=submit value=add name=add  class='fp'><i class='fa-solid fa-plus'></i></button>
+              // </form>  
+
+              //   </td>";
+              //   echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=6'>" . "</td>" . "</tr>";
+              // }
+              while ($row = $result->fetch_assoc()) {
+                // Retrieve the status value from the current row
+                $status = $row["status"];
+                $Add = $row["CrossMatching_Add"];
+                // Set the disabled flag based on the status value
+
+                $disabled = (($status !== ' checked') || ($Add == '1')) ? 'disabled' : '';
+
+
+                // Generate the button HTML with the disabled flag
+                $button_html = "<button type='submit' value='add' name='add' class='fp' $disabled><i class='fa-solid fa-pen-to-square'></i></button>";
+
+                // Generate the table row HTML with the button included
+                echo "<tr style='height:60px'>" .
+                  "<td>" . $row["requested_date"] . "</td>" .
+                  "<td>" . $row["expected_date"] . "</td>" .
+                  "<td>" . $row["requeste_id"] . "</td>" .
+                  "<td>" . $row["blood_group"] . "</td>" .
+                  "<td>" . $row["status"] . "</td>" .
+                  "<td class='tb'>" .
+                  "<form method='POST' action='Cross matching test result1.php'>" .
+                  "<input type='hidden' name='RequestID' value='" . $row["requeste_id"] . "'>" .
+                  $button_html .
+
+                  "</form>" .
+                  "</td>" .
+                  "</tr>" .
+                  "<tr>" .
+                  "<td style='height:20px;background-color:#F5F5F5;' colspan='6'></td>" .
+                  "</tr>";
+              }
+
+
+
+              echo "</font>";
+              echo  "</font>";
+
+              echo  "</div>";
+
+              echo "</table>";
+            } else {
+              ///printf("Query failed: %s\n", $conn->error);
+              echo "no results";
+            }
+          }
+
+          $conn->close();
+          ?>
+          <style>
+            table {
+
+
+
+              width: 750px;
+              height: 15px;
+              border-collapse: collapse;
+              margin-top: 40px;
+              border: 0px transparent;
+
             }
 
-            echo "</font>";
-            echo  "</font>";
+            h1 {
 
-            echo  "</div>";
+              margin-top: 70px;
+              margin-left: 300px;
+              margin-bottom: 100px;
+            }
 
-            echo "</table>";
-          } else {
-            ///printf("Query failed: %s\n", $conn->error);
-            echo "no results";
-          }
-        }
-
-        $conn->close();
-        ?>
-      <style>
-        table {
-
-
-
-          width: 750px;
-          height: 15px;
-          border-collapse: collapse;
-          margin-top: 40px;
-          border: 0px transparent;
-
-        }
-
-        h1 {
-
-          margin-top: 70px;
-          margin-left: 300px;
-          margin-bottom: 100px;
-        }
-
-        .box1 {
-    height: 30px;
-    width: 150px;
-    margin-left: -170px;
-    margin-top: 100px;
-    border-radius: 20px;
-    border: none;
-    text-align: center;
-}
+            .box1 {
+              height: 30px;
+              width: 150px;
+              margin-left: -170px;
+              margin-top: 100px;
+              border-radius: 20px;
+              border: none;
+              text-align: center;
+            }
 
 
-        th {
+            th {
 
 
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          text-align: center;
-          padding-top: 25px;
-          padding-bottom: 25px;
-          padding-left: 20px;
-          padding-right: 10px;
-          border: 0px transparent;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              text-align: center;
+              padding-top: 25px;
+              padding-bottom: 25px;
+              padding-left: 20px;
+              padding-right: 10px;
+              border: 0px transparent;
 
-        }
+            }
 
-        td {
-          text-align: center;
-          padding: 1px;
+            td {
+              text-align: center;
+              padding: 1px;
 
 
-        }
+            }
 
-        .select {
+            .select {
 
-          height: 30px;
-          width: 120px;
-          border-radius: 20px;
-          background-color: #56CE94;
-          border: none;
-          text-align: center;
-          margin-left: 30px;
+              height: 40px;
+              width: 130px;
+              color: #FFF5F3;
+              margin-left: 6px;
+              border-radius: 20px;
+              background-color: #F35050;
+              border: none;
+              cursor: pointer;
+              text-align: center;
+              margin-top: 10px;
+              margin-bottom: 50px;
 
-        }
+            }
 
-        .box {
+            .box {
 
-          height: 30px;
-          width: 130px;
-          margin-left: 20px;
-          margin-top: 0px;
-          border-radius: 20px;
-          border: none;
-          text-align: center;
+              width:130px;
+						  height:40px;
+              margin-left: 20px;
+              margin-top: 10px;
+              border-radius: 30px;
+              border: none;
+              text-align: center;
 
-        }
 
-        .b1 {
-          height: 30px;
-          width: 100px;
-          color: #FFF5F3;
-          margin-left: 20px;
-          border-radius: 20px;
-          background-color: #F3506D;
-          border: none;
-          cursor: pointer;
+            }
 
-        }
+            	  
+				
+
+            .b1 {
+              height: 40px;
+              width: 130px;
+              color: #FFF5F3;
+              margin-left: 6px;
+              border-radius: 20px;
+              background-color: #F35050;
+              border: none;
+              cursor: pointer;
+              margin-top: 10px;
+              margin-bottom: 50px;
 
 
 
-        .midiv {
-
-          margin-left: 150px;
-          margin-bottom: -10px;
-          padding: 15px 10px 30px 20px;
-          margin-top: -100px;
-          outline: none;
-          width: 774.5px;
-        }
-
-
-
-        .f2 {
-
-          margin-left: 50px;
-          margin-top: -100px;
-          background-color: transparent;
-          border: none;
-          cursor: pointer;
-          margin-bottom: 0px;
-
-
-        }
-
-
-        .f1 {
-
-          background-color: transparent;
-          margin-left: 10px;
-          margin-right: 20px;
-          margin-bottom: 10px;
-          margin-top: 10px;
-          border: none;
-          cursor: pointer;
-
-
-        }
-
-        .fp {
-          margin-top: 20px;
-          margin-left: 30px;
-          margin-bottom: -100px;
-          background-color: transparent;
-          border: none;
-          cursor: pointer;
-        }
-
-        .tb {
-          display: inline-flex;
-          justify-content: space-evenly;
-          flex-wrap: nowrap;
-          align-items: baseline;
-          flex-direction: row;
-        }
-
-        .tab {
-
-          background-color: #F5F5F5;
-          margin-top: -40px;
-          margin-left: 60px;
-          margin-right: 265px;
+            }
 
 
 
 
-        }
+            .midiv {
 
-
-        .ta {
-
-          background-color: #F5F5F5;
-          margin-top: 60px;
-          margin-bottom: 0px;
-          margin-left: 370px;
-          margin-right: 119px;
-          padding-left: 20px;
-
-        }
+              margin-left: 150px;
+              margin-bottom: -10px;
+              padding: 15px 10px 30px 20px;
+              margin-top: -100px;
+              outline: none;
+              width: 774.5px;
+            }
 
 
 
-        tr {
+            .f2 {
 
-          background-color: white;
+              margin-left: 50px;
+              margin-top: -100px;
+              background-color: transparent;
+              border: none;
+              cursor: pointer;
+              margin-bottom: 0px;
 
-        }
 
-        .visible {
-          cursor: pointer;
+            }
 
 
-        }
+            .f1 {
 
-        .layout {
-          background-color: #d9dbdb;
-        }
-      </style>
+              background-color: transparent;
+              margin-left: 10px;
+              margin-right: 20px;
+              margin-bottom: 10px;
+              margin-top: 10px;
+              border: none;
+              cursor: pointer;
 
+
+            }
+
+            .fp {
+              margin-top: 20px;
+              margin-left: 30px;
+              margin-bottom: -100px;
+              background-color: transparent;
+              border: none;
+              cursor: pointer;
+            }
+
+            .tb {
+              display: inline-flex;
+              justify-content: space-evenly;
+              flex-wrap: nowrap;
+              align-items: baseline;
+              flex-direction: row;
+            }
+
+            .tab {
+
+              background-color: #F5F5F5;
+              margin-top: -40px;
+              margin-left: 60px;
+              margin-right: 265px;
+
+
+
+
+            }
+
+
+            .ta {
+
+              background-color: #F5F5F5;
+              margin-top: 60px;
+              margin-bottom: 0px;
+              margin-left: 370px;
+              margin-right: 119px;
+              padding-left: 20px;
+
+            }
+
+
+
+            tr {
+
+              background-color: white;
+
+            }
+
+            .visible {
+              cursor: pointer;
+
+
+            }
+
+            .layout {
+              background-color: #d9dbdb;
+            }
+          </style>
+
+
+        </div>
+      </main>
 
     </div>
-    </main>
-
-  </div>
   </div>
   <!-- partial -->
   <script src='https://unpkg.com/@popperjs/core@2'></script>

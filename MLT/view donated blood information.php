@@ -2,7 +2,7 @@
 
 include "config.php";
 
-$sql = "SELECT * FROM donation GROUP BY Batch order by Donation_date";
+$sql = "SELECT * FROM donation GROUP BY Batch, Donation_date order by Donation_date desc";
 
 $result = $conn->query($sql);
 
@@ -134,13 +134,27 @@ $result = $conn->query($sql);
                 </div>
               </li>
 
-              <li class="menu-item">
-                <a href="Report.php">
+              <li class="menu-item sub-menu">
+                <a href="#">
                   <span class="menu-icon">
-                    <i class="ri-file-chart-line"></i>
+                    <i class="ri-file-edit-fill"></i>
                   </span>
                   <span class="menu-title">Reports</span>
                 </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Report.php">
+                        <span class="menu-title">Blood Testing Report</span>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="Report1.php">
+                        <span class="menu-title">Cross Matching Report</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
 
 
@@ -224,9 +238,10 @@ $result = $conn->query($sql);
                 echo  "<tr>" . "<td>" . $row["Donation_date"] . "</td>" . "<td>" . $row["Batch"] . "</td>";
 
                 echo "<td class='tb'><form method='POST' action ='view donated blood information1.php'>
-     <input type=hidden name=RequestID value=" . $row["Batch"] . " >
-     <button type=submit value=view name=view  class='fp'><i class='fa-sharp fa-solid fa-eye'></i></button>
-     </form>    	
+                <input type=hidden name=Requestdate value=" . $row["Donation_date"] . " >
+                <input type=hidden name=RequestBatch value=" . $row["Batch"] . " >
+                <button type=submit value=view name=view  class='fp'><i class='fa-sharp fa-solid fa-eye'></i></button>
+                </form>    	
 
     </td>";
 

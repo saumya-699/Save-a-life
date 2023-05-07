@@ -13,7 +13,7 @@ if (isset($_SESSION["ID"])) {
     }
   }
 
-  $vql = "SELECT process_date, batch_number,status FROM blood_testing_result Where MLT_ID ='$x' and process_date ='$date' GROUP BY  batch_number ";
+  $vql = "SELECT process_date, batch_number,status FROM blood_testing_result Where MLT_ID ='$x' AND send_status	<> '1' GROUP BY process_date, batch_number ";
   $result = $conn->query($vql);
 }
 ?>
@@ -145,13 +145,27 @@ if (isset($_SESSION["ID"])) {
                 </div>
               </li>
 
-              <li class="menu-item">
-                <a href="Report.php">
+              <li class="menu-item sub-menu">
+                <a href="#">
                   <span class="menu-icon">
-                    <i class="ri-file-chart-line"></i>
+                    <i class="ri-file-edit-fill"></i>
                   </span>
                   <span class="menu-title">Reports</span>
                 </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Report.php">
+                        <span class="menu-title">Blood Testing Report</span>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="Report1.php">
+                        <span class="menu-title">Cross Matching Report</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
 
 
@@ -246,8 +260,8 @@ if (isset($_SESSION["ID"])) {
      <form method='POST' action =''>  	
      <input type=hidden name='bnum' value=" . $row["batch_number"] . " >
     <input type=hidden name='bdate' value=" . $row["process_date"] . " >
-    <input type='submit' name='$bnum' value='Send'>
-    
+    <button type=submit value=Send name='$bnum'  class='fp'><i class='fa-regular fa-forward-fast'></i></button>
+
      </form>
 
 
@@ -260,6 +274,7 @@ if (isset($_SESSION["ID"])) {
       $updateSqlSend= "UPDATE blood_testing_result SET send_status	='1' WHERE batch_number='$bnum' AND process_date='$bdate';";
       $send=mysqli_query($conn,$updateSqlSend);
         // var_dump($bdate,$bnum);
+        // <input type='submit' name='$bnum' value='Send'>
 
 
     }

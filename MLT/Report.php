@@ -10,8 +10,8 @@
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="./stylek2.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 
 </head>
 
@@ -127,15 +127,28 @@
                 </div>
               </li>
 
-              <li class="menu-item">
-                <a href="Report.php">
+              <li class="menu-item sub-menu">
+                <a href="#">
                   <span class="menu-icon">
-                    <i class="ri-file-chart-line"></i>
+                    <i class="ri-file-edit-fill"></i>
                   </span>
                   <span class="menu-title">Reports</span>
                 </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Report.php">
+                        <span class="menu-title">Blood Testing Report</span>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="Report1.php">
+                        <span class="menu-title">Cross Matching Report</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
-
 
               <li class="menu-header" style="padding-top: 40px"><span> </span></li>
               <li class="menu-item">
@@ -183,31 +196,34 @@
             <div class="wrap">
               <div class="headings">
                 <center>
-                  <h1>Report Generation</h1>
+                  <h1>Blood Testing Report Generation</h1>
                   <center>
               </div>
-              <form action="create.php " method="POST">
+              <form action="download.php" method="POST">
 
 
 
-                <label for="exampleFormControlInput1 " class="form-label lbl star ">Report name</label>
-                <select name="blood_group" id=" " class="form-control txt-input " required="">
+                <label for="exampleFormControlInput1 " class="form-label lbl star ">Filter By Blood Group</label>
+                <select name="blood_group" id="" class="form-control txt-input " required="">
                   <option value=" " diabled> Select </option>
-                  <option value="xxxx">Blood Test Report</option>
-                  <option value="xxxx">Approval Blood Report</option>
-
+                  <option value="O-">O-</option>
+                  <option value="O+">O+</option>
+                  <option value="A-">A-</option>
+                  <option value="A+">A+</option>
+                  <option value="B-">B-</option>
+                  <option value="B+">B+</option>
+                  <option value="AB-">AB-</option>
+                  <option value="AB+">AB+</option>
                 </select>
 
-               
 
-            
 
-                <label for="exampleFormControlInput1 " class="form-label lbl star " name="time_period">Time period (MM/DD/YYYY)</label>
-                <div class="input-group mb-4 ">
-                  &nbsp; &nbsp;<font size="2px"> From </font> &nbsp; <input type="date" name="expected_date" placeholder="Expected_date" required="" min="<?= date('Y-m-d') ?>">
-                  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <font size="2px">To </font> &nbsp;<input type="date" name="expected_date" placeholder="Expected_date" required="" min="<?= date('Y-m-d') ?>">
 
-                </div>
+                <label for="exampleFormControlInput1" class="form-label lbl star"> Time period</label><br>
+                From &nbsp;<input type="date" placeholder="From" name="From" id="From" class="yu">&nbsp;&nbsp;
+                To &nbsp;<input type="date" placeholder="To" name="To" id="To" class="yu"><br><br><br>
+
+
                 <div class="buttons ">
                   <button class="b1" name="submit" value="submit">
                     <font size="2px">Generate</font>
@@ -242,8 +258,8 @@
 
     .container {
       position: absolute;
-      height: 650px;
-      
+      height: 700px;
+
       box-shadow: 0px 0px 50px -20px #000;
     }
 
