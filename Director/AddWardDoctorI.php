@@ -69,7 +69,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateBBI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -88,7 +88,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateMLTI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -107,7 +107,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateWardDoctorI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -126,7 +126,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateNurseI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -151,7 +151,7 @@ session_start();
                       </li>
                       <li class="menu-item">
                         <a href="DeactivateOrUpdateHospitalI.php">
-                          <span class="menu-title">Update/Deactivte</span>
+                          <span class="menu-title">View/Deactivte</span>
                         </a>
                       </li>
                       <li class="menu-item">
@@ -236,7 +236,7 @@ session_start();
 
        
 function generate_pw() {
-  $pw;
+  $pw=null;
   // Set random length for password
   $password_length = rand(8, 16);
   $pw = '';
@@ -253,7 +253,7 @@ $hel = generate_pw();
 
 <?php
 require 'conp.php';
-$date =date("Y/m/d");
+$date =date("Y-m-d");
 
 
 

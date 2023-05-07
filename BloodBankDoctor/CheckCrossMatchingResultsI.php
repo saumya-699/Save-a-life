@@ -51,7 +51,7 @@ session_start();
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
- <link rel="stylesheet" href="StyleSearch.css"> 
+ <link rel="stylesheet" href="StyleSearchss.css"> 
  <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
  <link rel="stylesheet" href="StyleIcons.css"> 
 </head>
@@ -228,38 +228,28 @@ session_start();
           <div>
             <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a></div>
              <!--add your content from here-->
-
+<div>
  
- <form method="post" action="SearchWardD.php">
- 
-<div class="ta">
-<div class="midiv">
-
-  <div class="passwordDiv">
+             <select id="filterDropdown" class="select">
+  <option value="All">Test Result</option>
+  <option value='Matched'>Matched</option>
+ <option value='Not-Matched'>Not-Matched</option>
  
 
- <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
-                                  <option value="WardDoctor_ID"><b> WardDoctor_ID</b></option>
-							   <option value="Name_With_Initials"><b>Name_With_Initials</b></option>
-						        <option value="HospitalName"><b> Hospital Name</b></option>
-                             <option value="Specialization"><b> Specialization</b></option>
-							   <option value="SLMC_number"><b> SLMC_number</b></option>
-                             <option value="Email" selected><b>Email</b></option>
-		                    <option value="ContactNumber" selected><b> Contact number</b></option>
-						  <option value="Remark" selected><b>Remark</b></option>
-						  	  <option value="Director_ID" selected><b>Director_ID</b></option>
-							
-                             </select>
+						
+</select>
 
+<select id="StatusDropdown" class="selectx">
+  <option value="All">Status</option>
+  <option value="pending"> Pending</option>
+  <option value="checked">Checked</option>
+  
+</select>
 
-<input type="text" placeholder="type here" name="data" id="data" class="box">
+<input type="date" id="dateInput" class="b1">
+<input type="text" id="searchInput" class="box">
 
- <button type="submit"  name="BtnSubmit" id="search" class="b1" ><b>Search</b></button>
-</div>
-</div>
-</div>
-
-</form>
+  </div>
 <?php
 
 
@@ -306,13 +296,16 @@ if($result->num_rows>0)
 	      //echo "<font size=6>";
 	   
 	 //  echo  "<div  class='tab'>";
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Blood Group"."</th>"."<th>"."Test Result"."</th>"."<th>"."Processed Date"."</th>"."<th>"."Status"."</th>"."<th style='width:120px;'>"."Action"."</th>"."</tr>";
+   
+	   echo  "<table id='dataTable' border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Blood Group"."</th>"."<th>"."Test Result"."</th>"."<th>"."Processed Date"."</th>"."<th>"."Status"."</th>"."<th style='width:120px;'>"."Action"."</th>"."</tr>";
       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
    while($row = $result->fetch_assoc())
    
    {     
-     
-	  echo  "<tr>"."<td>".$row["blood_group"]."</td>"."<td>".$row["test_result"]."</td>"."<td>".$row["process_date"]."</td>"."<td>".$row["Status"]."</td>";
+    $position_class = strtolower(str_replace(' ', '-', $row['test_result']));
+       
+    echo '<tr class="' . $position_class . '">';
+	  echo  "<td>".$row["blood_group"]."</td>"."<td>".$row["test_result"]."</td>"."<td>".$row["process_date"]."</td>"."<td>".$row["Status"]."</td>";
 	   echo "<td><form method='POST' action ='CheckCrossMatchingResultsI.php'>
                 <input type=hidden name=Request_ID value=".$row["Request_ID"]." >
                 <button type=submit name=update  id=btn class=z ><i class='fa-regular fa-square-check'></i></button>
@@ -321,7 +314,7 @@ if($result->num_rows>0)
                 </td>";
 				 echo "</tr>";
 	 
-	   echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
+	   echo "<tr>"."<td style='height:8px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
 	  
 	}
 	
@@ -348,52 +341,6 @@ else
 
 
 
-
-if(isset($_POST['update']))  
-
-{	
-
-        $status="checked";
-   $did=$_POST['Request_ID'];
-   $sql="update cross_matching_testing_result set status ='$status' where Request_ID='$did'";
-   
-   
-   
-     if ($conn->query($sql) === TRUE) 
-				   {
-                          
-                           echo '<script type="text/javascript">';
-		                  //echo 'alert("Details updated successfully");';
-         
-		                     echo 'window.location.href="CheckCrossMatchingResultsI.php";';
-		                  echo '</script>';
-
-                   } 
-					 
-					 else 
-			               {  
-                              echo '<script type="text/javascript">';
-		                     // echo 'alert("Error in updating details.Try again!");';
-                              echo "Error in ".$query."<br>".$conn->error;
-		                      echo 'window.location.href="updateAccount.php";';
-		                      echo '</script>';
-
-                            }
-							
-							
-							
-							
- 
-}
-
-
-
-							
-							
-							
-							
- 
-
 $conn->close();
 
 
@@ -402,6 +349,57 @@ $conn->close();
 ?>
 
 
+<script>
+function filterTable() {
+  const input = document.getElementById('searchInput');
+  const filter = input.value.toUpperCase();
+  const select = document.getElementById('filterDropdown');
+  const filterValue = select.options[select.selectedIndex].value;
+  const dateInput = document.getElementById('dateInput').value;
+  const StatusSelect = document.getElementById('StatusDropdown');
+  const StatusValue = StatusSelect.options[StatusSelect.selectedIndex].value;
+
+  const table = document.getElementById('dataTable');
+  const rows = table.getElementsByTagName('tr');
+
+  for (let i = 1; i < rows.length; i++) {
+      const row = rows[i];
+      if (row.cells.length === 1) {
+          continue;
+      }
+      const cells = row.getElementsByTagName('td');
+      const positionClass = row.className;
+      console.log(`Row ${i} class: ${positionClass}`);
+      const ProcessedDate = cells[2].textContent;
+      const StatusName = cells[3].textContent;
+    
+
+      if ((filterValue === 'All' || positionClass === filterValue.toLowerCase())
+          && Array.from(cells).some(cell => cell.textContent.toUpperCase().includes(filter))
+          && (dateInput === '' || ProcessedDate === dateInput)
+          && (StatusValue === 'All' || StatusName === StatusValue)) {
+          row.style.display = '';
+      } else {
+          row.style.display = 'none';
+      }
+  }
+}
+
+
+// Attach filterTable function to events (e.g. button click, input change)
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', filterTable);
+
+const filterDropdown = document.getElementById('filterDropdown');
+filterDropdown.addEventListener('change', filterTable);
+
+const dateInput = document.getElementById('dateInput');
+dateInput.addEventListener('input', filterTable);
+
+const StatusDropdown = document.getElementById('StatusDropdown');
+StatusDropdown.addEventListener('change', filterTable);
+</script>
+          
 
 <script>
 function myConfirm() {

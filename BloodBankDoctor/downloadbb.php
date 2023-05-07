@@ -265,7 +265,7 @@ if($report =="Donation"){
          echo "<h5><center>printed on $date</center> </h5><br><br>" ;
          
 
-           echo  "<table  border=1>"."<tr>"."<th style='text-align:center;width:80px;'>"."Donor ID"."</th>"."<th style='text-align:center;width:80px;'>"."Donoation Date"."</th>"."<th style='text-align:center;width:80px;'>"."Donor Name"."</th>"."</tr>";
+           echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:80px;'>"."Donor ID"."</th>"."<th style='text-align:center;width:80px;'>"."Donoation Date"."</th>"."<th style='text-align:center;width:80px;'>"."Donor Name"."</th>"."</tr>";
          echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=5'>"."</td>"."</tr>";
       while($row = $result->fetch_assoc())
       

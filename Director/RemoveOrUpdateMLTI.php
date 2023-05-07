@@ -23,7 +23,7 @@ session_start();
 <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
  <link rel="stylesheet" href="StyleIcons.css"> 
 
- <link rel="stylesheet" href="StyleSearch.css"> 
+ <link rel="stylesheet" href="StyleSearchNew1.css"> 
 
 
 </head>
@@ -73,7 +73,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateBBI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -92,7 +92,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateMLTI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -111,7 +111,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateWardDoctorI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -130,7 +130,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateNurseI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -155,7 +155,7 @@ session_start();
                       </li>
                       <li class="menu-item">
                         <a href="DeactivateOrUpdateHospitalI.php">
-                          <span class="menu-title">Update/Deactivte</span>
+                          <span class="menu-title">View/Deactivte</span>
                         </a>
                       </li>
                       <li class="menu-item">
@@ -221,119 +221,87 @@ session_start();
             <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
           
           </div>
-          
-      
+<input type="date" id="dateInput" class="b1">
+<input type="text" id="searchInput" class="box">     
+       
 <?php
-
-
 require 'conp.php';
     
-$sql= "select * from MLT where Remark!='Removed'";
+$sql = "SELECT * FROM MLT WHERE Remark!='Removed'";
 $result = $conn->query($sql);
 
-if($result->num_rows>0)
-
-{     
-   
-  echo "<div>";
-  echo "<label for='filterDropdown'>Filter:</label>";
-  echo "<select id='filterDropdown'>";
-  echo "<option value='All'>All</option>";
-  echo "<option value='Head nurse'>Head</option>";
-  echo "<option value='nurse'>Nurse</option>";
-  echo "</select>";
-  echo "<label for='searchInput'>Search:</label>";
-  echo "<input type='text' id='searchInput'>";
-  echo "</div>";
-          //echo "<font color=red>";
-	      //echo "<font size=6>";
-	   
-	   //echo  "<div class='tab'>";
-	   echo  "<table id='dataTable' border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."MLT ID"."</th>"."<th style='text-align:center;width:120px;'>"."Name With Initials"."</th>"."<th>"."Hospital name"."</th>"."<th>"."SLMC number"."</th>"."<th style='width:120px;'>"."Action"."</th>"."</tr>";
-      echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
-   while($row = $result->fetch_assoc())
-   
-   {     
-     
-	  echo  "<tr>"."<td>".$row["MLT_ID"]."</td>"."<td>".$row["Name_With_Initials"]."</td>"."<td>".$row["HospitalName"]."</td>"."<td>".$row["SLMC_Number"]."</td>";
-	   echo "<td><form method='POST' action ='showAllMLTI.php'>
-                <input type=hidden name='MLT_ID' value=".$row["MLT_ID"]." >
-                <button type=submit value=view name=view  id=btn class='x'><i class='fa-sharp fa-solid fa-eye'></i></button>
-                </form>
-				
-                <form method='POST' action ='DeleteMLT.php' onsubmit='return myConfirm()'>
-                <button type=submit value=Delete name=delete id=btn class='y'><i class='fa-solid fa-user-xmark'></i></button>
-                <input type=hidden  name=MLT_ID  value=".$row['MLT_ID']." >
-
+if ($result->num_rows > 0) {
+    echo "<table id='dataTable' border='1'><thead><tr><th style='text-align:center;width:120px;'>MLT_ID</th><th style='text-align:center;width:120px;'>Name_With_Initials</th><th>Hospital name</th><th>SLMC number</th><th style='text-align:center;width:120px;'>Appointment Date</th><th style='width:120px;'>Action</th></tr></thead><tbody>";
+    while ($row = $result->fetch_assoc()) {
+        $position_class = strtolower(str_replace(' ', '-', $row['AppointmentDate']));
+        echo '<tr class="' . $position_class . '">';
+        echo "<td>".$row["MLT_ID"]."</td><td>".$row["Name_With_Initials"]."</td><td>".$row["HospitalName"]."</td><td>".$row["SLMC_Number"]."</td><td>".$row['AppointmentDate']."</td>";
+        echo "<td><form method='POST' action='showAllMLTI.php'>
+                <input type='hidden' name='MLT_ID' value=".$row["MLT_ID"]." >
               
+                <button type='submit' value='view' name='view' id='btn' class='x'><i class='fa-sharp fa-solid fa-eye'></i></button>
+                </form>
+                <form method='POST' action='DeleteMLT.php' onsubmit='return myConfirm()'>
+                <button type='submit' value='Delete' name='delete' id='btn' class='y'><i class='fa-solid fa-user-xmark'></i></button>
+                <input type='hidden' name='MLT_ID' value=".$row['MLT_ID']." >
+                <input type='hidden' name='UserName' value=".$row['UserName']." >
                 </form>
                 </td>";
-				 echo "</tr>";
-	 
-	   echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
-	  
-	}
-	
-	 echo "</font>";
-	 echo  "</font>";   
-	 echo "</table>";
-	 echo "</div>";
-	
-	
-}	
-
-else
-
-{
-  echo "Error in ".$sql."<br>".$conn->error;
-
- echo "no results";
-
+        echo "</tr>";
+		echo "<tr>"."<td style='height:8px;background-color:#F5F5F5;'colspan=7'>"."</td>"."</tr>";
+		
+    }
+    echo "</tbody></table>";
+} else {
+    echo "Error in ".$sql."<br>".$conn->error;
+    echo "no results";
 }
-//echo "Error in ".$sql."<br>".$conn->error;
 $conn->close();
 ?>
 
-
-
-
-
-
-
 <script>
-  // Filter the table based on the selected color and search query
-  function filterTable() {
+function filterTable() {
     const input = document.getElementById('searchInput');
     const filter = input.value.toUpperCase();
-    const select = document.getElementById('filterDropdown');
-    const filterValue = select.options[select.selectedIndex].value;
+    const dateInput = document.getElementById('dateInput').value;
 
     const table = document.getElementById('dataTable');
     const rows = table.getElementsByTagName('tr');
 
-    // Filter the table rows
     for (let i = 1; i < rows.length; i++) {
-      const row = rows[i];
-      const cells = row.getElementsByTagName('td');
-      const color = cells[3].textContent.toUpperCase();
-      const values = Array.from(cells).map(cell => cell.textContent.toUpperCase());
+        const row = rows[i];
+        const cells = row.getElementsByTagName('td');
+        const positionClass = row.className;
 
-      if ((filterValue === 'All' || color === filterValue.toUpperCase())
-        && values.some(value => value.includes(filter))) {
-        row.style.display = '';
-      } else {
-        row.style.display = 'none';
-      }
+        if (positionClass.includes(dateInput) && Array.from(cells).some(cell => cell.textContent.toUpperCase().includes(filter))) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
     }
-  }
+}
 
-  // Attach filterTable function to events (e.g. button click, input change)
-  const searchInput = document.getElementById('searchInput');
-  searchInput.addEventListener('input', filterTable);
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', filterTable);
 
-  const filterDropdown = document.getElementById('filterDropdown');
-  filterDropdown.addEventListener('change', filterTable);
+const dateInput = document.getElementById('dateInput');
+dateInput.addEventListener('input', filterTable);
 </script>
+
+
+
+<script>
+function myConfirm() {
+  var result = confirm("Want to delete?");
+  if (result==true) {
+   return true;
+  } else {
+   return false;
+  }
+}
+
+</script>
+
 		
 		
 		

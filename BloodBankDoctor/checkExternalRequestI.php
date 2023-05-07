@@ -52,8 +52,10 @@ session_start();
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
  <link rel="stylesheet" href="StyleSearch1.css"> 
+ 
  <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
  <link rel="stylesheet" href="StyleIcons.css"> 
+
 
 </head>
 <body>
@@ -229,33 +231,26 @@ session_start();
           <div>
             <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a></div>
              <!--add your content from here-->
- <form method="post" action="SearchWardD.php">
- 
-<div class="ta">
-
- 
-
- <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
-                                  <option value="WardDoctor_ID"><b> WardDoctor_ID</b></option>
-							   <option value="Name_With_Initials"><b>Name_With_Initials</b></option>
-						        <option value="HospitalName"><b> Hospital Name</b></option>
-                             <option value="Specialization"><b> Specialization</b></option>
-							   <option value="SLMC_number"><b> SLMC_number</b></option>
-                             <option value="Email" selected><b>Email</b></option>
-		                    <option value="ContactNumber" selected><b> Contact number</b></option>
-						  <option value="Remark" selected><b>Remark</b></option>
-						  	  <option value="Director_ID" selected><b>Director_ID</b></option>
-							
-                             </select>
+          
+             <div>
 
 
-<input type="text" placeholder="type here" name="data" id="data" class="box">
+<select id="filterDropdown" class="select">
+  <option value="All">Status</option>
+  <option value="pending">Pending</option>
+  <option value="processing">Processing</option>
+  <option value="Available">Available</option>
+  <option value="Not-Available">Not Available</option>
+</select>
 
- <button type="submit"  name="BtnSubmit" id="search" class="b1" ><b>Search</b></button>
+
+<input type="date" id="dateInput" class="b1">
+<input type="text" id="searchInput" class="box">
+
+
+
+
 </div>
-
-
-</form>
 <?php
 
 
@@ -302,13 +297,16 @@ if($result->num_rows>0)
 	      //echo "<font size=6>";
 	   
 	  // echo  "<div style='overflow-x:auto;' class='tab'>";
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:100px;'>"."Requesting <br>hospital name"."</th>"."<th>"."Requested_by"."</th>"."<th>"."Requeired <br> blood_group"."</th>"."<th style='width:120px;'>"."Requeired <br>blood_component"."</th>"."<th>"."Requeired <br> no_of_packs"."</th>"."<th style='width:200px;'>"."Date"."</th>"."<th>"."Status"."</th>"."<th style='width:100px;'>"."Action"."</th>"."</tr>";
-      echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
+    
+	   echo  "<table id='dataTable' border=1>"."<tr>"."<th>"."Request ID"."</th>"."<th style='text-align:center;width:100px;'>"."Requesting <br>Hospital Name"."</th>"."<th>"."Requeired <br> Blood Group"."</th>"."<th style='width:120px;'>"."Requeired <br>Blood Component"."</th>"."<th>"."Requeired <br> No of Packs"."</th>"."<th style='width:200px;'>"."Date"."</th>"."<th>"."Status"."</th>"."<th style='width:100px;'>"."Action"."</th>"."</tr>";
+      //echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
    while($row = $result->fetch_assoc())
    
    {     
-     
-	  echo  "<tr>"."<td>".$row["Requesting_hospital_name"]."</td>"."</td>"."<td>".$row["Requested_by"]."</td>"."<td>".$row["Requeired_blood_group"]."</td>"."<td>".$row["Requeired_blood_component"]."</td>"."<td>".$row["Requeired_no_of_packs"]."</td>"."<td>".$row["Date"]."</td>"."<td>".$row["status"]."</td>";
+    $position_class = strtolower(str_replace(' ', '-', $row['status']));
+       
+    echo '<tr class="' . $position_class . '">';
+	  echo  "<td>".$row["Request_ID"]."</td>"."<td>".$row["Requesting_hospital_name"]."</td>"."<td>".$row["Requeired_blood_group"]."</td>"."<td>".$row["Requeired_blood_component"]."</td>"."<td>".$row["Requeired_no_of_packs"]."</td>"."<td>".$row["Date"]."</td>"."<td>".$row["status"]."</td>";
 	   echo "<td><form method='POST' action ='checkExternalRequestI.php'>
                 <input type=hidden name=Request_ID value=".$row["Request_ID"]." >
                 <button type=submit name=Accept id=btn class=s><i class='fa-solid fa-thumbs-up'></i></button>
@@ -436,7 +434,7 @@ if(isset($_POST['NotAvailable']))
 
 {	
 
-     $status="NotAvailable";
+     $status="Not Available";
    $did=$_POST['Request_ID'];
    $sql="update sent_request set status ='$status' where Request_ID='$did'";
    
@@ -474,7 +472,63 @@ $conn->close();
 
 
 ?>
+<script>
+function filterTable() {
+  const input = document.getElementById('searchInput');
+  const filter = input.value.toUpperCase();
+  const select = document.getElementById('filterDropdown');
+  const filterValue = select.options[select.selectedIndex].value;
+  const dateInput = document.getElementById('dateInput').value;
 
+  const table = document.getElementById('dataTable');
+  const rows = table.getElementsByTagName('tr');
+
+  for (let i = 1; i < rows.length; i++) {
+      const row = rows[i];
+      // Skip the extra row added for styling
+      if (row.cells.length === 1) {
+          continue;
+      }
+      const cells = row.getElementsByTagName('td');
+      const positionClass = row.className;
+      const appointmentDate = cells[5].textContent;
+
+      if ((filterValue === 'All' || positionClass === filterValue.toLowerCase())
+          && Array.from(cells).some(cell => cell.textContent.toUpperCase().includes(filter))
+          && (dateInput === '' || appointmentDate === dateInput)) {
+          row.style.display = '';
+      } else {
+          row.style.display = 'none';
+      }
+  }
+}
+
+
+// Attach filterTable function to events (e.g. button click, input change)
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', filterTable);
+
+const filterDropdown = document.getElementById('filterDropdown');
+filterDropdown.addEventListener('change', filterTable);
+
+const dateInput = document.getElementById('dateInput');
+dateInput.addEventListener('input', filterTable);
+</script>
+
+
+<script>
+function myConfirm() {
+  var result = confirm("Want to delete?");
+  if (result==true) {
+   return true;
+  } else {
+   return false;
+  }
+}
+
+</script>
+
+          
 
 
 <script>

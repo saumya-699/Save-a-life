@@ -69,7 +69,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateBBI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -88,7 +88,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateMLTI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -107,7 +107,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateWardDoctorI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -126,7 +126,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateNurseI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>

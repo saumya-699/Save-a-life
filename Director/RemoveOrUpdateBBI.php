@@ -22,7 +22,7 @@ session_start();
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
 <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
  <link rel="stylesheet" href="StyleIcons.css"> 
- <link rel="stylesheet" href="StyleSearch.css"> 
+ <link rel="stylesheet" href="StyleSearchNew.css"> 
 
     
 </head>
@@ -72,7 +72,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateBBI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -91,7 +91,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateMLTI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -110,7 +110,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateWardDoctorI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -129,7 +129,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateNurseI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -154,7 +154,7 @@ session_start();
                       </li>
                       <li class="menu-item">
                         <a href="DeactivateOrUpdateHospitalI.php">
-                          <span class="menu-title">Update/Deactivte</span>
+                          <span class="menu-title">View/Deactivte</span>
                         </a>
                       </li>
                       <li class="menu-item">
@@ -222,32 +222,9 @@ session_start();
           </div>
           
           
- 
- <form method="post" action="SearchWardD.php">
- 
-<div class="ta">
-
-
-  <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
-                            <option value="BloodBank_doctor_ID"><b> BloodBank_doctor_ID</b></option>
-							   <option value="Name_With_Initials"><b>Name_With_Initials</b></option>
-						        <option value="HospitalName"><b> Hospital Name</b></option>
-							   <option value="SLMC_number"><b> SLMC_number</b></option>
-                             <option value="Email" selected><b>Email</b></option>
-		                    <option value="ContactNumber" selected><b> Contact number</b></option>
-						  <option value="Remark" selected><b>Remark</b></option>
-						  	  <option value="Director_ID" selected><b>Director_ID</b></option>
-							
-                             </select>
-
-
-<input type="text" placeholder="type here" name="data" id="data" class="box">
-
- <button type="submit"  name="BtnSubmit" id="search" class="b1" ><b>Search</b></button>
-
-</div>
-
-</form>
+          <input type="date" id="dateInput" class="b1">
+<input type="text" id="searchInput" class="box">     
+       
 <?php
 
 
@@ -265,13 +242,14 @@ if($result->num_rows>0)
 	      //echo "<font size=6>";
 	   
 	   //echo  "<div class='tab'>";
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."BloodBank doctor_ID"."</th>"."<th style='text-align:center;width:120px;'>"."Name_With_Initials"."</th>"."<th>"."Hospital name"."</th>"."<th>"."SLMC number"."</th>"."<th style='width:120px;'>"."Action"."</th>"."</tr>";
+	   echo  "<table id='dataTable' border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."BloodBank Doctor ID"."</th>"."<th style='text-align:center;width:120px;'>"."Name With Initials"."</th>"."<th>"."Hospital Name"."</th>"."<th>"."SLMC number"."</th>"."<th style='width:120px;'>"."Appointment Date"."</th>"."<th>"."Action"."</th>"."</tr>";
       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
    while($row = $result->fetch_assoc())
    
    {     
-     
-	  echo  "<tr>"."<td>".$row["BloodBank_doctor_ID"]."</td>"."<td>".$row["Name_With_Initials"]."</td>"."<td>".$row["HospitalName"]."</td>"."<td>".$row["SLMC_Number"]."</td>";
+    $position_class = strtolower(str_replace(' ', '-', $row['AppointmentDate']));
+    echo '<tr class="' . $position_class . '">';
+	  echo  "<td>".$row["BloodBank_doctor_ID"]."</td>"."<td>".$row["Name_With_Initials"]."</td>"."<td>".$row["HospitalName"]."</td>"."<td>".$row["SLMC_Number"]."</td>"."<td>".$row["AppointmentDate"]."</td>";
 	   echo "<td><form method='POST' action ='showAllBBI.php'>
                 <input type=hidden name='BloodBank_doctor_ID' value=".$row["BloodBank_doctor_ID"]." >
                 <button type=submit value=view name=view id=btn class=x><i class='fa-sharp fa-solid fa-eye'></i></button>
@@ -279,6 +257,7 @@ if($result->num_rows>0)
 			
                 <form method='POST' action ='Delete_BB.php'  onsubmit='return myConfirm()'>
                 <input type=hidden  name=BloodBank_doctor_ID  value=".$row['BloodBank_doctor_ID']." >
+                <input type=hidden name='UserName' value=".$row['UserName']." >
                 <button type=submit value=Delete name=delete id=btn class=y><i class='fa-solid fa-user-xmark'></i></button>
                
                 </form>
@@ -289,10 +268,10 @@ if($result->num_rows>0)
 	  
 	}
 	
-	 echo "</font>";
+	// echo "</font>";
 	 echo  "</font>";   
 	 echo "</table>";
-	 echo "</div>";
+	 //echo "</div>";
 	
 	
 }	
@@ -308,6 +287,36 @@ else
 //echo "Error in ".$sql."<br>".$conn->error;
 $conn->close();
 ?>
+
+
+<script>
+function filterTable() {
+    const input = document.getElementById('searchInput');
+    const filter = input.value.toUpperCase();
+    const dateInput = document.getElementById('dateInput').value;
+
+    const table = document.getElementById('dataTable');
+    const rows = table.getElementsByTagName('tr');
+
+    for (let i = 1; i < rows.length; i++) {
+        const row = rows[i];
+        const cells = row.getElementsByTagName('td');
+        const positionClass = row.className;
+
+        if (positionClass.includes(dateInput) && Array.from(cells).some(cell => cell.textContent.toUpperCase().includes(filter))) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    }
+}
+
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', filterTable);
+
+const dateInput = document.getElementById('dateInput');
+dateInput.addEventListener('input', filterTable);
+</script>
 
 
 

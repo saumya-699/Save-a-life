@@ -72,7 +72,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateBBI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -91,7 +91,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateMLTI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -110,7 +110,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateWardDoctorI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -129,7 +129,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateNurseI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -154,7 +154,7 @@ session_start();
                       </li>
                       <li class="menu-item">
                         <a href="DeactivateOrUpdateHospitalI.php">
-                          <span class="menu-title">Update/Deactivte</span>
+                          <span class="menu-title">View/Deactivte</span>
                         </a>
                       </li>
                       <li class="menu-item">
@@ -221,28 +221,27 @@ session_start();
           
           </div>
           
-          
-		  <form method="post" action="searchNurse.php">
- 
-<div class="ta">
 
 
 
+          <br><br><br>
+          <div>
 
- <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
-                             <option value="Hospital Name"><b> Hospital Name</b></option>
-                             <option value="Type"><b> Type</b></option>
-                             <option value="District" selected><b>District</b></option>
-		                    <option value="Head_Of_Hospital" selected><b>Head_Of_Hospital</b></option>
-                             </select>
 
-<input type="text" placeholder="type here" name="data" id="data" class="box">
+<select id="filterDropdown" class="select">
+  <option value="All">Type</option>
+  <option value="Teaching">Teaching</option>
+  <option value="General">General</option>
+</select>
 
- <button type="submit"  name="BtnSubmit" id="search" class="b1" ><b>Search</b></button>
+
+<input type="date" id="dateInput" class="b1">
+<input type="text" id="searchInput" class="box">
+
+
+
 
 </div>
-
-</form>
 
 
 <?php
@@ -262,13 +261,17 @@ if($result->num_rows>0)
           
 	   //echo  "<div class='tab'>";
 	    
-	   echo  "<table border=1>"."<tr>"."<th>"."Hospital_ID"."</th>"."<th style='width:165px;'>"."HospitalName"."</th>"."<th style='width:115px;'>"."Type"."</th>"."<th style='width:105px;'>"."District"."</th>"."<th>"."Head_Of_Hospital"."</th>"."<th>"."Action"."</th>"."</tr>";
-       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=6'>"."</td>"."</tr>";
+	   echo  "<table border id='dataTable'>"."<tr>"."<th>"."Hospital ID"."</th>"."<th style='width:165px;'>"."Hospital Name"."</th>"."<th style='width:115px;'>"."Type"."</th>"."<th>"."Head Of Hospital"."</th>"."<th>"."Added Date"."</th>"."<th>"."Action"."</th>"."</tr>";
+   //    echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=6'>"."</td>"."</tr>";
    while($row = $result->fetch_assoc())
    
    {     
+
+    $position_class = strtolower(str_replace(' ', '-', $row['Type']));
+       
+    echo '<tr class="' . $position_class . '">';
      
-	  echo  "<tr>"."<td>".$row["Hospital_ID"]."</td>"."<td>".$row["HospitalName"]."</td>"."<td>".$row["Type"]."</td>"."<td>".$row["District"]."</td>"."<td>".$row["Head_Of_Hospital"]."</td>";
+	  echo  "<td>".$row["Hospital_ID"]."</td>"."<td>".$row["HospitalName"]."</td>"."<td>".$row["Type"]."</td>"."<td>".$row["Head_Of_Hospital"]."</td>"."<td>".$row["Added_Date"]."</td>";
 	   echo "<td class='cv'><form method='POST' action ='showAllHospitalI.php'>
                 <input type=hidden name=Hospital_ID value=".$row["Hospital_ID"]." >
                 <button type=submit value=view name=view  id=btn class='x'><i class='fa-sharp fa-solid fa-eye'></i></button>
@@ -307,6 +310,48 @@ else
 $conn->close();
 ?>
 
+<script>
+function filterTable() {
+  const input = document.getElementById('searchInput');
+  const filter = input.value.toUpperCase();
+  const select = document.getElementById('filterDropdown');
+  const filterValue = select.options[select.selectedIndex].value;
+  const dateInput = document.getElementById('dateInput').value;
+
+  const table = document.getElementById('dataTable');
+  const rows = table.getElementsByTagName('tr');
+
+  for (let i = 1; i < rows.length; i++) {
+      const row = rows[i];
+      // Skip the extra row added for styling
+      if (row.cells.length === 1) {
+          continue;
+      }
+      const cells = row.getElementsByTagName('td');
+      const positionClass = row.className;
+      const appointmentDate = cells[4].textContent;
+
+      if ((filterValue === 'All' || positionClass === filterValue.toLowerCase())
+          && Array.from(cells).some(cell => cell.textContent.toUpperCase().includes(filter))
+          && (dateInput === '' || appointmentDate === dateInput)) {
+          row.style.display = '';
+      } else {
+          row.style.display = 'none';
+      }
+  }
+}
+
+
+// Attach filterTable function to events (e.g. button click, input change)
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', filterTable);
+
+const filterDropdown = document.getElementById('filterDropdown');
+filterDropdown.addEventListener('change', filterTable);
+
+const dateInput = document.getElementById('dateInput');
+dateInput.addEventListener('input', filterTable);
+</script>
 
 
 <script>

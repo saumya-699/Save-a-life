@@ -4,11 +4,11 @@
 session_start();
 if(isset($_SESSION["ID"])) {
   include "conp.php";
-  $date =date("Y/m/d");
+  $date =date("Y-m-d");
   $m = $_SESSION["Name"];
   $query = "SELECT * FROM bloodbank_doctor WHERE UserName ='$m'";
   $result1 = $conn->query($query);
-
+  $ID =null;
    if($result1->num_rows > 0) {        
     while($row = $result1->fetch_assoc()) {
       $x = $row["Hospital_ID"];
@@ -16,8 +16,7 @@ if(isset($_SESSION["ID"])) {
     }
   }
 
-    $vql = "SELECT process_date, batch_number,status FROM blood_testing_result Where Hospital_ID ='$x' and process_date ='$date' GROUP BY  batch_number ";
-    $result = $conn->query($vql);
+   
 }
 ?>
 
@@ -34,7 +33,7 @@ if(isset($_SESSION["ID"])) {
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
 <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
- <link rel="stylesheet" href="StyleSearch.css"> 
+<link rel="stylesheet" href="StyleSearchNew.css"> 
  <link rel="stylesheet" href="StyleIcons.css"> 
 </head>
 <body>
@@ -211,44 +210,42 @@ if(isset($_SESSION["ID"])) {
             <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a></div>
              <!--add your content from here-->
            
-            <form method="post" action="search_donor.php">
+         
+  
+    <select id="filterDropdown" class="b1">
+    <option value="All">Status</option>
+    <option value="pending">pending</option>
+    <option value="checked">checked</option>
+    
+  </select>        
  
- <div class="ta">
- 
- 
-  <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
-  <option value="Donor_Id" selected><b> Donor Id</b></option>
-                              <option value="Donor_Name"><b> Donor Name</b></option>
-                              <option value="NIC"><b>NIC</b></option>
-                              <option value="Blood_Group"><b>Blood Group</b></option>
-                              <option value="Gender"><b>Gender</b></option>
-                              <option value="province"><b>Provicel</b></option>
-                             <option value="postal"><b> Postal Code</b></option>
-                              </select>
- 
- 
- <input type="text" placeholder="type here" name="data" id="data" class="box">
- 
-  <button type="submit"  name="BtnSubmit" id="search" class="b1" ><b>Search</b></button>
- </div>
- 
- 
- </form>
+
+<input type="text" id="searchInput" class="box">    
 
     
 
         
            
                 <?php
-                if ($result->num_rows > 0) {
+
+
+$vql = "SELECT process_date,batch_number,status 
+FROM blood_testing_result Where Hospital_ID ='$x' and process_date ='$date' GROUP BY  batch_number ";
+$result = $conn->query($vql);
+            
+
+if ($result->num_rows > 0) {
 
                  //   echo  "<div class='tab'>";
-                    echo  "<table border=1>"."<tr>"."<th style='text-align:center'>"."Processed Date"."</th>"."<th style='text-align:center;'>"."Batch Number"."</th>"."<th style='text-align:center;width:120px;'>"."Status"."</th>"."<th>"."Action"."</th>"."</tr>";
-                    echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
+                    echo  "<table border=1 id='dataTable'>"."<tr>"."<th style='text-align:center'>"."Processed Date"."</th>"."<th style='text-align:center;'>"."Batch Number"."</th>"."<th style='text-align:center;width:120px;'>"."Status"."</th>"."<th>"."Action"."</th>"."</tr>";
+                  //  echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
                  while($row = $result->fetch_assoc()) {    
                            
-     
-     echo  "<tr>"."<td>".$row["process_date"]."</td>"."<td>".$row["batch_number"]."</td>"."<td>".$row["status"]."</td>";   
+                  $position_class = strtolower(str_replace(' ', '-', $row['status']));
+       
+                  echo '<tr class="' . $position_class . '">';
+                 
+     echo  "<td>".$row["process_date"]."</td>"."<td>".$row["batch_number"]."</td>"."<td>".$row["status"]."</td>";   
     
 	 echo "<td><form method='POST' action ='SendBapproval1.php'>
    <input type=hidden name=Requestbatch value=".$row["batch_number"]." >
@@ -269,7 +266,7 @@ if(isset($_SESSION["ID"])) {
     //echo "</div>";	
      echo "</tr>";
 
-     echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
+     echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=4'>"."</td>"."</tr>";
 	  
 	}
 	echo  "</font>"; 
@@ -283,7 +280,7 @@ if(isset($_SESSION["ID"])) {
 else
 
 {
-  echo "Error in ".$vql."<br>".$conn->error;
+  //echo "Error in ".$vql."<br>".$conn->error;
 
  echo "no results";
 
@@ -303,11 +300,11 @@ if(isset($_POST['check']))
 
 {	  include "conp.php";
 
-     $status="checked";
+     $status="Checked";
    $did=$_POST['process_date'];
  
    $RBI=$_POST['Requestbatch'];
-   $sql="update blood_testing_result set status ='$status', BloodBank_doctor_ID ='$ID'  where process_date='$did'and  Hospital_ID ='$x' and batch_number= '$RBI' ";
+   $sql="update blood_testing_result set status ='$status', BloodBank_doctor_ID ='$ID'  where process_date='$did' and  Hospital_ID ='$x' and batch_number= '$RBI' ";
    
    
    
@@ -339,6 +336,44 @@ if(isset($_POST['check']))
 }
 
 ?>
+
+<script>
+  // Filter the table based on the selected color and search query
+  function filterTable() {
+    const input = document.getElementById('searchInput');
+    const filter = input.value.toUpperCase();
+    const select = document.getElementById('filterDropdown');
+    const filterValue = select.options[select.selectedIndex].value;
+
+    const table = document.getElementById('dataTable');
+    const rows = table.getElementsByTagName('tr');
+
+    for (let i = 1; i < rows.length; i++) {
+        const row = rows[i];
+        const cells = row.getElementsByTagName('td');
+        const positionClass = row.className;
+
+        if ((filterValue === 'All' || positionClass === filterValue.toLowerCase())
+            && Array.from(cells).some(cell => cell.textContent.toUpperCase().includes(filter))) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    }
+}
+
+// Attach filterTable function to events (e.g. button click, input change)
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', filterTable);
+
+const filterDropdown = document.getElementById('filterDropdown');
+filterDropdown.addEventListener('change', filterTable);
+
+  
+
+  // Attach filterTable function to events (e.g. button click, input change)
+  
+</script>
           
 </div>
         </main>

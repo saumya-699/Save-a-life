@@ -21,7 +21,6 @@ session_start();
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./AddbbStyle.css">
 
-
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -69,7 +68,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateBBI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -88,7 +87,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateMLTI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -107,7 +106,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateWardDoctorI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -126,7 +125,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateNurseI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -151,7 +150,7 @@ session_start();
                       </li>
                       <li class="menu-item">
                         <a href="DeactivateOrUpdateHospitalI.php">
-                          <span class="menu-title">Update/Deactivte</span>
+                          <span class="menu-title">View/Deactivte</span>
                         </a>
                       </li>
                       <li class="menu-item">
@@ -253,7 +252,7 @@ $hel = generate_pw();
 ?>
 <?php
 require 'conp.php';
-$date =date("Y/m/d");
+$date =date("Y-m-d");
 echo "
    
        
@@ -365,7 +364,7 @@ echo "<option value='Not Provided'> None</option>";
                  
                    <input type='hidden'  name='message'   value=' Hello  We are pleased to inform that you have been appointed to the system and your and your password is $hel.Your default user name is your email address. Please change the user name and password once you get the e mail'>   
                         <div class='col btn-but'> <input type='submit' name='BtnSubmit' value='Add' class='b1'></div>
-                        <div class='col btn-but'> <button name='btnCancel' value='Cancel' class='b2' onclick='back()'>Cancel </button></div>
+                        <div class='col btn-but'> <button name='btnCancel' value='Cancel' class=b2 onclick='back()'>Cancel </button></div>
                    
 					
 					</form>

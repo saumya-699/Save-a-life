@@ -6,6 +6,7 @@ session_start();
 
  <?php
    if(isset($_SESSION["ID"]))   {
+    $today =date("Y-m-d"); 
     require "conp.php";
     $m= $_SESSION["Name"];
     $query = "select * from bloodbank_doctor where UserName ='$m'";
@@ -117,6 +118,12 @@ session_start();
 				    
 				  
 				  }
+
+          body{
+
+
+            background-color:rgba(0, 0, 0, 0.3);
+          }
  		  
 		      .lk{
 	
@@ -134,10 +141,10 @@ session_start();
 .select{
 	
 	 
- height:30px;
- width:148px;
+ height:40px;
+ width:155px;
  border-radius:10px;
- background-color:#56CE94;
+ background-color:#B2C0E0;;
   border: none;
  text-align:center;
                      
@@ -170,7 +177,7 @@ session_start();
 						  margin-left:10px;
 						   border-radius:20px;
                            
-                           background-color:#F3506D;
+                           background-color:#F35050;
 						   border: none;
 						   cursor:pointer;
 						   
@@ -362,10 +369,10 @@ session_start();
 
 <div class="midiv"> 
    <div class="passwordDiv">
-
-    <center><h1>Check internal stock availability</h1></center>
+   <br><br><br><br>
+    <center><h1>Check Internal Stock Availability</h1></center>
        
-    
+    <br><br>
      <form method="post" action="checkInternalStockI.php">
           <table border=1> <tr> <th style='width:180px;'> Blood Group</th><th style='width:180px;'>Component Type</th><th style='width:180px;'>No of Packs</th><th></th></tr>
 		  <tr> <td style='height:20px;background-color:transparent;'colspan=4'></td> </tr>
@@ -374,7 +381,7 @@ session_start();
 							 
 							 <td>  <select name= "Blood_group" class="select"> 
 							 <option value='None'>None</option> 
-                             <option value="A+">A+</option>    
+                            
                              <option value='A+'>A+</option>
                              <option value='A-'>A-</option>
                              <option value='B+'>B+</option>
@@ -387,20 +394,24 @@ session_start();
 							 
 							 <td> <select name= "Component_type" class="select">
                              <option value='None'>None</option>							 
-                             <option value="Red">Red Blood Cells</option>    
+                             <option value="Red Blood Cells">Red Blood Cells</option>    
                              <option value="White Blood Cells">White Blood Cells</option>
                              <option value="Plasma">Plasma</option>
                              </select></td>
 							 
-							 
-							 <td> <select name= "No_of_packs" class="select"> 
+						<?php
+             $value1 =1;
+             $value2 =2;
+             $value3 =3;
+             $value4 =4;
+							 echo "<td> <select name= 'No_of_packs' class='select'> 
 							 <option value='None'>None</option>
-                             <option value='1'>1</option>
-                             <option value='2'>2</option>
-                             <option value='3'>3</option>
-                             <option value='4'>4</option>
-                             </select></td> 
-							 
+                             <option value= $value1>1</option>
+                             <option value=$value2 >2</option>
+                             <option value=$value3>3</option>
+                             <option value= $value4 >4</option>
+                             </select></td> "
+							 ?>
 							 
 							 
 							<td> <button type="submit"  name="BtnSubmit" id="search" class="b1" ><b>Search</b></button></td></tr> 
@@ -456,15 +467,25 @@ if($resultr->num_rows>0)
 	}
 	
       
-	
+	//2022<2023
+  //2024>2023
+  	
+  if($Blood_group !="None" && $Component_type !="None" && $No_of_packs!= "None")
+ {
+ 
+  $sql ="select Hospital_ID,Count(*) AS count
+  from stock
+
+  where ExpiryDate >'$today'AND Hospital_ID= $y 
+  group by Blood_group,Component_type,Hospital_ID
+  HAVING COUNT(*) >= $No_of_packs AND Blood_group='$Blood_group' AND Component_type='$Component_type'";
   
- 
- 
+  $result = $conn->query($sql);
 
  
   
 	 
-$sql= "select * from stock WHERE Hospital_ID = '$y' AND Blood_group='$Blood_group' AND Component_type='$Component_type' AND No_of_packs>='$No_of_packs'";  
+//$sql= "select * from stock WHERE Hospital_ID = '$y' AND Blood_group='$Blood_group' AND Component_type='$Component_type' AND No_of_packs>=$No_of_packs";  
 $result = $conn->query($sql);
 
 if($result->num_rows>0)
@@ -499,17 +520,81 @@ else
 }
 
 
+
+
+
+
+  	
+if($Blood_group =="None" && $Component_type !="None" && $No_of_packs!= "None")
+{
+
+ $sql ="select Hospital_ID,Count(*) AS count
+ from stock
+ where ExpiryDate > '$today' AND Hospital_ID= $y 
+ group by Component_type,Hospital_ID
+ HAVING COUNT(*) >= $No_of_packs AND Component_type='$Component_type'";
+ 
+ $result = $conn->query($sql);
+
+
+ 
+  
+//$sql= "select * from stock WHERE Hospital_ID = '$y' AND Blood_group='$Blood_group' AND Component_type='$Component_type' AND No_of_packs>=$No_of_packs";  
+$result = $conn->query($sql);
+
+if($result->num_rows>0)
+
+{     
+  
+                               echo '<script type="text/javascript">';
+                           echo 'alert("Available");';
+                           echo '</script>';
+
+  
+ 
+}	
+
+else
+
+{
+ 
+ 
+ 
+ 
+                               echo '<script type="text/javascript">';
+                           echo 'alert("Not available");';
+                           echo '</script>';
+ 
+  //echo " not available";
+// echo "Error in ".$sql."<br>".$conn->error;
+
+//echo "no results";
+
+}
+}
+
+
+
+}
+
+///////////////
+
+
+
+
+
+
 }
 //echo "Error in ".$sql."<br>".$conn->error;
 $conn->close(); 
 ?>
-
+  <!--
      <form method="post" action="checkInternalStockBackEnd.php">
 
 <div class="midiv"> 
    <div class="passwordDiv">
 
-  
+
           <table class="lk"> 
 	    
 							   <tr> <td style='width:100px;'>Procedure</td> <td><select name= "Procedure" class="elect"> 
@@ -538,7 +623,7 @@ $conn->close();
 	   <button type="button"  name="btnCancel" id="Cancel" class="b2" ><b><a href="home.php"><font color="white">Cancel</font></a></b></button>
 </form> 	   
           
-        </main>
+        </main>  -->
      
 <!-- partial -->
   <script src='https://unpkg.com/@popperjs/core@2'></script><script  src="./script.js"></script>

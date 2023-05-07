@@ -51,7 +51,7 @@ session_start();
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
- <link rel="stylesheet" href="StyleSearch.css"> 
+ <link rel="stylesheet" href="StyleSearchss.css"> 
 
 </head>
 <body>
@@ -227,31 +227,38 @@ session_start();
           <div>
             <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a></div>
              <!--add your content from here-->
-  <form method="post" action="searchNurse.php">
- 
-<div class="ta">
+  
+
+<div>
+<select id="filterDropdown" class="select">
+  <option value="All">Group</option>
+  <option value='A+'>A+</option>
+ <option value='A-'>A-</option>
+ <option value='B+'>B+</option>
+<option value='B-'>B-</option>
+ <option value='O+'>O+</option>
+  <option value='O-'>O-</option>
+ <option value='AB+'>AB+</option>
+<option value='AB-'>AB-</option>
+
+						
+</select>
+
+<select id="ComponentDropdown" class="selectx">
+  <option value="All">Component</option>
+  <option value="Red"> Red</option>
+  <option value="White">White</option>
+  
+</select>
+
+<input type="date" id="dateInput" class="b1">
+<input type="text" id="searchInput" class="box">
 
 
- <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
-                            <option value="MLT_ID"><b> MLT_ID</b></option>
-							   <option value="Name_With_Initials"><b>Name_With_Initials</b></option>
-						        <option value="HospitalName"><b> Hospital Name</b></option>
-							   <option value="SLMC_number"><b> SLMC_number</b></option>
-                             <option value="Email" selected><b>Email</b></option>
-		                    <option value="ContactNumber" selected><b> Contact number</b></option>
-						  <option value="Remark" selected><b>Remark</b></option>
-						  	  <option value="Director_ID" selected><b>Director_ID</b></option>
-							
-                             </select>
 
-
-<input type="text" placeholder="type here" name="data" id="data" class="box">
-
- <button type="submit"  name="BtnSubmit" id="search" class="b1" ><b>Search</b></button>
 </div>
 
 
-</form>
 <?php
 
 
@@ -274,7 +281,7 @@ $resultx = $conn->query($vql);
  //echo $row["Hospital_ID"];
 
 	
-$sql= "select * from stock where Hospital_ID='$ty' and ExpiryDate <'$today'";
+$sql= "select * from stock where Hospital_ID='$ty' and ExpiryDate <='$today'";
 $result = $conn->query($sql);
 
 if($result->num_rows>0)
@@ -284,17 +291,19 @@ if($result->num_rows>0)
 
 	   
 	 //  echo  "<div class='tab'>";
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Blood Bag ID"."</th>"."<th style='text-align:center;width:120px;'>"."Blood Group"."</th>"."<th>"."Component Type"."</th>"."<th>"."Expiry Date"."</th>"."</tr>";
+	   echo  "<table id='dataTable' border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Blood Bag ID"."</th>"."<th style='text-align:center;width:120px;'>"."Blood Group"."</th>"."<th>"."Component Type"."</th>"."<th>"."Expiry Date"."</th>"."</tr>";
       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
      while($row = $result->fetch_assoc())
    
    {     
-     
-	  echo  "<tr>"."<td>".$row["Blood_bagID"]."</td>"."<td>".$row["Blood_group"]."</td>"."<td>".$row["Component_type"]."</td>"."<td>".$row["ExpiryDate"]."</td>";
+    $position_class = strtolower(str_replace(' ', '-', $row['Blood_group']));
+       
+    echo '<tr class="' . $position_class . '">';
+	  echo  "<td>".$row["Blood_bagID"]."</td>"."<td>".$row["Blood_group"]."</td>"."<td>".$row["Component_type"]."</td>"."<td>".$row["ExpiryDate"]."</td>";
 	 
 				 echo "</tr>";
 	 
-	   echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
+	   echo "<tr>"."<td style='height:8px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
 	  
 	}
 	
@@ -319,6 +328,55 @@ $conn->close();
 ?>
 
 
+<script>
+function filterTable() {
+  const input = document.getElementById('searchInput');
+  const filter = input.value.toUpperCase();
+  const select = document.getElementById('filterDropdown');
+  const filterValue = select.options[select.selectedIndex].value;
+  const dateInput = document.getElementById('dateInput').value;
+  const ComponentSelect = document.getElementById('ComponentDropdown');
+  const ComponentValue = ComponentSelect.options[ComponentSelect.selectedIndex].value;
+
+  const table = document.getElementById('dataTable');
+  const rows = table.getElementsByTagName('tr');
+
+  for (let i = 1; i < rows.length; i++) {
+      const row = rows[i];
+      if (row.cells.length === 1) {
+          continue;
+      }
+      const cells = row.getElementsByTagName('td');
+      const positionClass = row.className;
+      console.log(`Row ${i} class: ${positionClass}`);
+      const ComponentName = cells[2].textContent;
+      const ExpiryDate = cells[3].textContent;
+
+      if ((filterValue === 'All' || positionClass === filterValue.toLowerCase())
+          && Array.from(cells).some(cell => cell.textContent.toUpperCase().includes(filter))
+          && (dateInput === '' || ExpiryDate === dateInput)
+          && (ComponentValue === 'All' || ComponentName === ComponentValue)) {
+          row.style.display = '';
+      } else {
+          row.style.display = 'none';
+      }
+  }
+}
+
+
+// Attach filterTable function to events (e.g. button click, input change)
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', filterTable);
+
+const filterDropdown = document.getElementById('filterDropdown');
+filterDropdown.addEventListener('change', filterTable);
+
+const dateInput = document.getElementById('dateInput');
+dateInput.addEventListener('input', filterTable);
+
+const ComponentDropdown = document.getElementById('ComponentDropdown');
+ComponentDropdown.addEventListener('change', filterTable);
+</script>
 
 
           

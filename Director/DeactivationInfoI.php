@@ -20,10 +20,11 @@ session_start();
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
- <link rel="stylesheet" href="StyleSearch.css"> 
+ <link rel="stylesheet" href="StyleSearchNew3.css"> 
 
 
 </head>
+
 <body>
 <!-- partial:index.partial.html -->
 <div class="layout has-sidebar fixed-sidebar fixed-header">
@@ -70,7 +71,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateBBI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -89,7 +90,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateMLTI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -108,7 +109,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateWardDoctorI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -127,7 +128,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateNurseI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -152,7 +153,7 @@ session_start();
                       </li>
                       <li class="menu-item">
                         <a href="DeactivateOrUpdateHospitalI.php">
-                          <span class="menu-title">Update/Deactivte</span>
+                          <span class="menu-title">View/Deactivte</span>
                         </a>
                       </li>
                       <li class="menu-item">
@@ -221,25 +222,11 @@ session_start();
           
           
 	
- <form method="post" action="searchHospital.php">
- <div class="ta">
+
+  <input type="date" id="dateInput" class="b1">
+<input type="text" id="searchInput" class="box">  
 
 
- <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
-                             <option value="Transfer_ID"><b> Transfer_ID</b></option>
-                             <option value="Transfered_by"><b> Transfered_by</b></option>
-                             <option value="Transfered_to" selected><b>Transfered_to</b></option>
-		                    <option value="HospitalName" selected><b>Hospital_Name</b></option>
-                             </select>
-
-
-<input type="text" placeholder="type here" name="data" id="data" class="box">
-
- <button type="submit"  name="BtnSubmit" id="search" class="b1" ><b>Search</b></button>
-
-</div>
-
-</form>
 <?php
 
 
@@ -256,20 +243,21 @@ if($result->num_rows>0)
           
 	   //echo  "<div class='tab'>";
 	    
-	   echo  "<table border=1>"."<tr>"."<th>"."Transfer ID"."</th>"."<th style='width:165px;'>"."Hospital ID"."</th>"."<th style='width:95px;'>"."Hospital<br>
+	   echo  "<table border=1 id='dataTable'>"."<tr>"."<th>"."Transfer ID"."</th>"."<th style='width:95px;'>"."Hospital<br>
      Name"."</th>"."<th style='width:105px;'>"."Transfered to"."</th>"."<th>"."Transfered by"."</th>"."<th style='width:115px;'>"."Date"."</th>"."</tr>";
-       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=6'>"."</td>"."</tr>";
+      // echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=6'>"."</td>"."</tr>";
    while($row = $result->fetch_assoc())
    
    {     
-     
-	  echo  "<tr>"."<td>".$row["Transfer_ID"]."</td>"."<td>".$row["Hospital_ID"]."</td>"."<td>".$row["HospitalName"]."</td>"."<td>".$row["Transfered_to"]."</td>"."<td>".$row["Transfered_by"]."</td>"."<td>".$row["Date"]."</td>";
+    $position_class = strtolower(str_replace(' ', '-', $row['Date']));
+    echo '<tr class="' . $position_class . '">';
+	  echo  "<td>".$row["Transfer_ID"]."</td>"."<td>".$row["HospitalName"]."</td>"."<td>".$row["Transfered_to"]."</td>"."<td>".$row["Transfered_by"]."</td>"."<td>".$row["Date"]."</td>";
 	   echo "<td class='cv'>
                 
                 </td>";
 				 echo "</tr>";
 				 
-				   echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=6'>"."</td>"."</tr>";
+				   echo "<tr>"."<td style='height:8px;background-color:#F5F5F5;'colspan=6'>"."</td>"."</tr>";
 	 
 	   
 	  
@@ -296,6 +284,34 @@ $conn->close();
 
 
 
+<script>
+function filterTable() {
+    const input = document.getElementById('searchInput');
+    const filter = input.value.toUpperCase();
+    const dateInput = document.getElementById('dateInput').value;
+
+    const table = document.getElementById('dataTable');
+    const rows = table.getElementsByTagName('tr');
+
+    for (let i = 1; i < rows.length; i++) {
+        const row = rows[i];
+        const cells = row.getElementsByTagName('td');
+        const positionClass = row.className;
+
+        if (positionClass.includes(dateInput) && Array.from(cells).some(cell => cell.textContent.toUpperCase().includes(filter))) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    }
+}
+
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', filterTable);
+
+const dateInput = document.getElementById('dateInput');
+dateInput.addEventListener('input', filterTable);
+</script>
 
 <script>
 function myConfirm() {
