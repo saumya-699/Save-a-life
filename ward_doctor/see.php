@@ -122,9 +122,8 @@ if (isset($_SESSION["ID"])) {
           <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
           <div class="col-9 ">
             <center style='margin-top:50px;'>
-              <h2 class="txt-l ">Welcome Dear.<?php echo " " . $x;
+              <h2 class="txt-l ">Welcome Dr.<?php echo " " . $x;
                                               ?> </h2>
-              <h3 class="txt-l ">You have sucessfully accessed to your Ward doctor Account</h3>
             </center>
             <div class="form">
               <div class="card frm-form ">
@@ -185,7 +184,7 @@ if (isset($_SESSION["ID"])) {
     }
 
     .layout {
-      background-color: #D3FBD8;
+      background-color: #B2C0E0;
     }
   </style>
 </body>

@@ -70,19 +70,18 @@ if($resultr->num_rows>0)
     
     $status= ("Pending");
 
-    $sql= "INSERT INTO blood_request (patient_name, date_Of_birth, patient_age, patient_gender, blood_group, blood_component,required_amount,expected_date,requested_date,reason,ward_number,remark,status,Hospital_ID,WardDoctor_ID) VALUES ('$patient_name',' $date_Of_birth','$Age','$patient_gender', '$blood_group','$blood_component','$required_amount','$expected_date','$requested_date','$reason','$ward_number','$remark','$status','$y','$x')";
+    $sql= "INSERT INTO blood_request (patient_name, date_Of_birth, patient_age, patient_gender, blood_group, blood_component,required_amount,expected_date,requested_date,reason,ward_number,remark,status,Hospital_ID,WardDoctor_ID,send_status) VALUES ('$patient_name',' $date_Of_birth','$Age','$patient_gender', '$blood_group','$blood_component','$required_amount','$expected_date','$requested_date','$reason','$ward_number','$remark','$status','$y','$x','1')";
   
    $result = $conn->query($sql);
 
+   $conn->close(); 
    if ($result == TRUE) {
     header('location:success.php');       
   } 
   else{
       echo "Error:". $sql . "<br>". $conn->error;
     }
-
-
-    $conn->close(); 
+    
 
   }
 

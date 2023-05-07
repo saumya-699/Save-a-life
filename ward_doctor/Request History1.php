@@ -215,11 +215,13 @@ if (isset($_SESSION["ID"])) {
       height: 30px;
       width: 138px;
       border-radius: 20px;
-      background-color: #56CE94;
+      background-color: #F35050;
       border: none;
       text-align: center;
       margin-left: 30px;
+      color: #FFF5F3;
 
+     
 
 
     }
@@ -285,7 +287,7 @@ if (isset($_SESSION["ID"])) {
       margin-left: 20px;
       border-radius: 20px;
 
-      background-color: #F3506D;
+      background-color: #F35050;
       border: none;
       cursor: pointer;
 
