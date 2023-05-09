@@ -127,13 +127,27 @@
                 </div>
               </li>
 
-              <li class="menu-item">
-                <a href="Report.php">
+              <li class="menu-item sub-menu">
+                <a href="#">
                   <span class="menu-icon">
-                    <i class="ri-file-chart-line"></i>
+                    <i class="ri-file-edit-fill"></i>
                   </span>
                   <span class="menu-title">Reports</span>
                 </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Report.php">
+                        <span class="menu-title">Blood Testing Report</span>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="Report1.php">
+                        <span class="menu-title">Cross Matching Report</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
 
 
@@ -218,6 +232,9 @@
                     <option value="Unmatched">Unmatched</option>
 
                   </select>
+ 
+                  <label for="exampleFormControlInput1 " class="form-label lbl star ">Special Note</label>
+                  <textarea name="Note" id=" " cols="30 " rows="10 " class="input " placeholder="Type note "></textarea>
 
 
                   <div class="buttons ">
@@ -255,7 +272,7 @@
 
     .container {
       position: absolute;
-      height: 600px;
+      height: 700px;
 
       box-shadow: 0px 0px 50px -20px #000;
     }

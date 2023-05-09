@@ -60,7 +60,8 @@ if (isset($_POST['submit'])) {
   } else {
     echo "Error:" . $sql . "<br>" . $conn->error;
   }
-
+  $updateSql= "UPDATE donation SET AddStatus	='1',MLT_ID='$x' WHERE Donor_Id=  $Donor_Id";
+  $updateresult = $conn->query($updateSql);
 
   $conn->close();
 }

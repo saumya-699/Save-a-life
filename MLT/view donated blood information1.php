@@ -1,10 +1,12 @@
 <?php
+  include "config.php";
+  
+if (isset($_POST['view'])) {
+  $did = $_POST['Requestdate'];
+  $batchid = $_POST['RequestBatch'];
+  $sql = "SELECT * FROM donation where Donation_date ='$did' AND Batch='$batchid'";
+  $result = $conn->query($sql);
 
-include "config.php";
-
-$sql = "SELECT * FROM donation order by Donation_Id DESC";
-
-$result = $conn->query($sql);
 
 ?>
 <!DOCTYPE html>
@@ -132,15 +134,28 @@ $result = $conn->query($sql);
                 </div>
               </li>
 
-              <li class="menu-item">
-                <a href="Report.php">
+              <li class="menu-item sub-menu">
+                <a href="#">
                   <span class="menu-icon">
-                    <i class="ri-file-chart-line"></i>
+                    <i class="ri-file-edit-fill"></i>
                   </span>
                   <span class="menu-title">Reports</span>
                 </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Report.php">
+                        <span class="menu-title">Blood Testing Report</span>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="Report1.php">
+                        <span class="menu-title">Cross Matching Report</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
-
 
               <li class="menu-header" style="padding-top: 40px"><span> | </span></li>
               <li class="menu-item">
@@ -211,10 +226,9 @@ $result = $conn->query($sql);
 
             <?php
 
-            if ($result->num_rows > 0) {
 
               echo  "<div class='tab'>";
-              echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;'>" . "Date" . "</th>" . "<th style='text-align:center;'>" . "Batch Number" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Donar ID" . "</th>" . "<th>" . "Donation ID" . "</th>" . "<th>" . "Blood Packet ID" . "</th>" . "<th>" . "Number Of Blood Packets" . "</th>" . "<th style='text-align:center;width:40px;'>" . "Nurse ID" . "</th>" . "</tr>";
+              echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;'>" . "Donation Date" . "</th>" . "<th style='text-align:center;'>" . "Batch Number" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Donar ID" . "</th>" . "<th>" . "Donation ID" . "</th>" . "<th>" . "Blood Packet ID" . "</th>" . "<th>" . "Number Of Blood Packets" . "</th>" . "<th style='text-align:center;width:40px;'>" . "Nurse ID" . "</th>" . "</tr>";
               echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
               while ($row = $result->fetch_assoc()) {
 
