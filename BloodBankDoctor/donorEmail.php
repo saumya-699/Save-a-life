@@ -14,16 +14,17 @@ session_start();
   <meta charset="UTF-8">
   <title>side bar- blood bank doctor</title>
     <title>side bar- blood bank doctor</title>
- <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
 <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
-<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="styleM.css">
+<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./styleM.css">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="stylek.css">
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
 <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
- <link rel="stylesheet" href="StyleSearch.css"> 
-
+<link rel="stylesheet" href="StyleSearchNew.css"> 
+ <link rel="stylesheet" href="StyleIcons.css"> 
+ 
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -144,22 +145,69 @@ session_start();
                     </ul>
                   </div>
                 </li>
-                <li class="menu-item">
-                  <a href="View_Donors_BI.php">
+                <li class="menu-item sub-menu">
+                  <a href="#">
                     <span class="menu-icon">
-                      <i class="ri-user-heart-fill"></i>
+                      <i class="ri-article-fill"></i>
                     </span>
                     <span class="menu-title">Donors</span>
                   </a>
-                 </li>
-                <li class="menu-item">
-                  <a href="ReportGeneration_BI.php">
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="View_Donors_BI.php">
+                          <span class="menu-title">View</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="donorEmail.php">
+                          <span class="menu-title">Send Non -Emergency Email</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                
+                 <li class="menu-item sub-menu">
+                  <a href="#">
                     <span class="menu-icon">
-                      <i class="ri-file-chart-line"></i>
+                      <i class="ri-message-2-fill"></i>
                     </span>
                     <span class="menu-title">Reports</span>
                   </a>
-                 </li>
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="ReportGenerationStock.php">
+                          <span class="menu-title">Stock Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGenerationCrossMatching.php">
+                          <span class="menu-title">Cross Matching Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGenerationBlood.php">
+                          <span class="menu-title">Blood Request Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGeneration_BI.php">
+                          <span class="menu-title">Donation Details Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGeneration_Request.php">
+                          <span class="menu-title">External Requests Reports</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+
+
+
                 <li class="menu-header" style="padding-top: 40px"><span>  </span></li>
                 <li class="menu-item">
                   <a href="profileBI.php">
@@ -197,9 +245,8 @@ session_start();
         <main class="content">
           <div>
             <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a></div>
-             <!--add your content from here-->
           
-		  
+		<h1>Three Months Completed Donors</h1>
 		 
 		
       <?php
@@ -244,15 +291,20 @@ session_start();
      } 
   
     echo "<form method='POST' action ='donorEmailBackEnd.php'>";
-    
-    $query="select * from donation_records,donors where donors.Donor_Id =donation_records.Donor_Id and (donors.Hospital_ID='$x' and Donation_Date <= DATE_SUB(NOW(), INTERVAL 4 MONTH))
-    group by donors.username"; //where BloodBank_doctor_ID='$x' and malaria_result='positive' or hiv_result='positive' or hbv_result='positive' or hbv_result='positive' or hbv_result='positive'
+    $query =" SELECT * 
+FROM donation_records 
+JOIN donors ON donors.Donor_Id = donation_records.Donor_Id 
+WHERE donors.Hospital_ID = '$x' 
+AND DATE_ADD(donation_records.Donation_Date, INTERVAL 3 MONTH) = DATE(NOW())";
+//$query="select * from donation_records,donors where donors.Donor_Id =donation_records.Donor_Id and (donors.Hospital_ID='$x' AND DATE_ADD(donation_records.Donation_Date, INTERVAL 3 MONTH) = DATE(NOW()))";
+
+   // $query="select * from donation_records,donors where donors.Donor_Id =donation_records.Donor_Id and (donors.Hospital_ID='$x' AND DATE_ADD(donation_records.Donation_Date, INTERVAL 3 MONTH) = DATE(NOW())"; //where BloodBank_doctor_ID='$x' and malaria_result='positive' or hiv_result='positive' or hbv_result='positive' or hbv_result='positive' or hbv_result='positive'
     $result= $conn->query($query);
     
    if($result->num_rows>0)
  
    {     
-
+// group by donors.username
     echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Donor ID"."</th>"."<th>"."Full Name"."</th>"."<th>"."Email"."</th>"."</tr>";
     echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=3'>"."</td>"."</tr>";
     while($row = $result->fetch_assoc())
@@ -276,14 +328,14 @@ session_start();
   else
  
   {
-   echo "Error in ".$query."<br>".$conn->error;
+  // echo "Error in ".$query."<br>".$conn->error;
  
-  //echo "no results";
+  echo "<center><b>no results</b></center>";
  
   }
  
-  echo "<button type=submit name=send  id=btn class=z >send</button>
-  ";
+  echo "<button type='submit'  name=send class=z><span style='color: white';>Send Emails </span></button>";
+  
 
 
  
@@ -295,25 +347,24 @@ session_start();
 
 <style>
 .z{
-   font-size:40px;
+   font-size:15px;
    margin-top:50px;
-   margin-left:850px;
-   margin-right:10px;
-   width:100px;
-   height:55px;					   
+   margin-left:765px;
+   height:47px;					   
    border: none;
                  //background-color:#F35050;
                  //width: 100%;
 background: #4082f5;
 //text-transform: uppercase;
-// padding: 12px;
-cursor: pointer;
-box-shadow: 0px 10px 40px 0px rgba(17, 97, 237, 0.4);
-font-weight: 700;
-font-size: 20px;	
-border-radius:30px;
-}
+ padding: 10px;
 
+cursor: pointer;
+
+font-weight: 700;
+
+border-radius:30px;
+
+}
 </style>
 
 

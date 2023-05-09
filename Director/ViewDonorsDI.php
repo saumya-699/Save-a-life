@@ -352,7 +352,14 @@ function myConfirm() {
 </script>
 		  
      
-             
+      <style>
+      
+      table{
+
+        margin-left:100px;
+
+      }
+      </style>
 		
 		
 		

@@ -45,7 +45,7 @@ session_start();
               <ul>
                 <li class="menu-header"><span>  </span></li>
                 <li class="menu-item">
-                  <a href="Home.php">
+                  <a href="#">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -146,22 +146,69 @@ session_start();
                     </ul>
                   </div>
                 </li>
-                <li class="menu-item">
-                  <a href="View_Donors_BI.php">
+                <li class="menu-item sub-menu">
+                  <a href="#">
                     <span class="menu-icon">
-                      <i class="ri-user-heart-fill"></i>
+                      <i class="ri-article-fill"></i>
                     </span>
                     <span class="menu-title">Donors</span>
                   </a>
-                 </li>
-                <li class="menu-item">
-                  <a href="ReportGeneration_BI.php">
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="View_Donors_BI.php">
+                          <span class="menu-title">View</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="donorEmail.php">
+                          <span class="menu-title">Send Non -Emergency Email</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                
+                 <li class="menu-item sub-menu">
+                  <a href="#">
                     <span class="menu-icon">
-                      <i class="ri-file-chart-line"></i>
+                      <i class="ri-message-2-fill"></i>
                     </span>
                     <span class="menu-title">Reports</span>
                   </a>
-                 </li>
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="ReportGenerationStock.php">
+                          <span class="menu-title">Stock Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGenerationCrossMatching.php">
+                          <span class="menu-title">Cross Matching Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGenerationBlood.php">
+                          <span class="menu-title">Blood Request Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGeneration_BI.php">
+                          <span class="menu-title">Donation Details Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGeneration_Request.php">
+                          <span class="menu-title">External Requests Reports</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+
+
+
                 <li class="menu-header" style="padding-top: 40px"><span>  </span></li>
                 <li class="menu-item">
                   <a href="profileBI.php">
@@ -199,8 +246,6 @@ session_start();
         <main class="content">
           <div>
             <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a></div>
-             <!--add your content from here-->
- 
 
           
     <?php
@@ -247,8 +292,8 @@ $From =$_POST["From"];
 $To =$_POST["To"];
 
 $date =date("Y/m/d");
-if($report =="Donation"){
-    $sql= "select * from donation_records where Hospital_ID= '$HID' and Donation_Date between '$From' and '$To'";
+if($report =="Female"){
+    $sql= "select * from donation_records ,donors where donation_records.Donor_Id = donors.Donor_Id and donors.Hospital_ID= '$HID' and donors.Gender ='Female' and donation_records.Donation_Date between '$From' and '$To'";
    $result = $conn->query($sql);
    
    if($result->num_rows>0)
@@ -265,7 +310,7 @@ if($report =="Donation"){
          echo "<h5><center>printed on $date</center> </h5><br><br>" ;
          
 
-           echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:80px;'>"."Donor ID"."</th>"."<th style='text-align:center;width:80px;'>"."Donoation Date"."</th>"."<th style='text-align:center;width:80px;'>"."Donor Name"."</th>"."</tr>";
+           echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:80px;'>"."Donor ID"."</th>"."<th style='text-align:center;width:80px;'>"."Donation Date"."</th>"."<th style='text-align:center;width:80px;'>"."Donor Name"."</th>"."</tr>";
          echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=5'>"."</td>"."</tr>";
       while($row = $result->fetch_assoc())
       
@@ -298,8 +343,10 @@ if($report =="Donation"){
    }
    
 
-   if($report =="Request"){
-    $sql= "select * from sent_request where Requesting_hospital_name= '$HospitalName' and Date between '$From' and '$To'";
+
+
+  else if($report =="Male"){
+    $sql= "select * from donation_records ,donors where donation_records.Donor_Id = donors.Donor_Id and donors.Hospital_ID= '$HID' and donors.Gender ='Male' and donation_records.Donation_Date between '$From' and '$To'";
    $result = $conn->query($sql);
    
    if($result->num_rows>0)
@@ -311,22 +358,22 @@ if($report =="Donation"){
              //echo "<font size=6>";
           
          echo  "<div class='container_content' id='container_content'>";
-         echo "<h2><center>External Request Details Report of $HospitalName</center> </h2>" ;
+         echo "<h2><center>Donation Details Report of $HospitalName</center> </h2>" ;
          echo "<h5><center>Save a Life</center> </h5>" ;
          echo "<h5><center>printed on $date</center> </h5><br><br>" ;
          
 
-         echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Request ID"."</th>"."<th style='text-align:center;width:120px;'>"."Requested Hospital Name"."</th>"."<th>"."Requested By"."</th>"."<th>"."Requested Blood Group"."</th>"."</tr>";
+           echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:80px;'>"."Donor ID"."</th>"."<th style='text-align:center;width:80px;'>"."Donoation Date"."</th>"."<th style='text-align:center;width:80px;'>"."Donor Name"."</th>"."</tr>";
          echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=5'>"."</td>"."</tr>";
       while($row = $result->fetch_assoc())
       
       {     
         
-         echo  "<tr>"."<td>".$row["Request_ID"]."</td>"."<td>".$row["Requested_hospital_name"]."</td>"."<td>".$row["Requested_by"]."</td>"."<td>".$row["Requeired_blood_group"]."</td>";
+         echo  "<tr>"."<td>".$row["Donor_Id"]."</td>"."<td>".$row["Donation_Date"]."</td>"."<td>".$row["Donor_Name"]."</td>";
         
                     echo "</tr>";
         
-          echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=5'>"."</td>"."</tr>";
+          echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=3'>"."</td>"."</tr>";
          
        }
        

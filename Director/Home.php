@@ -273,7 +273,7 @@ if($resultD->num_rows>0)
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateBBI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -292,7 +292,7 @@ if($resultD->num_rows>0)
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateMLTI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -311,7 +311,7 @@ if($resultD->num_rows>0)
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateWardDoctorI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -330,7 +330,7 @@ if($resultD->num_rows>0)
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateNurseI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -355,7 +355,7 @@ if($resultD->num_rows>0)
                       </li>
                       <li class="menu-item">
                         <a href="DeactivateOrUpdateHospitalI.php">
-                          <span class="menu-title">Update/Deactivte</span>
+                          <span class="menu-title">View/Deactivte</span>
                         </a>
                       </li>
                       <li class="menu-item">
@@ -374,14 +374,7 @@ if($resultD->num_rows>0)
                     <span class="menu-title">Donors</span>
                   </a>
                 </li>
-                <li class="menu-item">
-                  <a href="ReportDI.php">
-                    <span class="menu-icon">
-                      <i class="ri-file-chart-line"></i>
-                    </span>
-                    <span class="menu-title">Reports</span>
-                  </a>
-                 </li>
+                
                 
                 <li class="menu-header" style="padding-top: 40px"><span> </span></li>
                 <li class="menu-item">

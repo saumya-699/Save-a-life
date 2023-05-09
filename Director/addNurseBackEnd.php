@@ -134,7 +134,7 @@ if($conn->query($jql))
 	echo '</script>';
 
  
-  $sql="insert into nurse(Nurse_ID,Name_With_Initials,Hospital_ID,HospitalName,Position,DOB,SLMC_Number,Email,ContactNumber,AppointmentDate,RetiringDate,UserName,Password,Remark,Director_ID)VALUES(' ','$Name','$y','$HName','$position','$DOB','$SLMC','$Email','$contactNumber','$DOA','','$Uname','$password','Added','$x')";
+  $sql="insert into nurse(Nurse_ID,Name_With_Initials,Hospital_ID,HospitalName,Position,DOB,SLMC_Number,Email,ContactNumber,AppointmentDate,UserName,Password,Remark,Director_ID)VALUES(' ','$Name','$y','$HName','$position','$DOB','$SLMC','$Email','$contactNumber','$DOA','$Uname','$password','Added','$x')";
     if($conn->query($sql))
      {
       

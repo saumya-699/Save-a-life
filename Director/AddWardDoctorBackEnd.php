@@ -13,17 +13,7 @@ require 'phpmailer/src/PHPMailer.php';
 require 'phpmailer/src/SMTP.php';
 //require 
 
-
-
-
-
-
 ?>
-<?php 
-session_start();
-
-?>
-
 <?php
 
 require 'conp.php';            //make connection here
@@ -410,14 +400,7 @@ textarea {
 <?php
 //Srequire 'conp.php';
 $date =date("Y/m/d");
-echo "
 
-    
-     <form method='post' action='index.php' id='FormName'>
-        
-                            ";
-						   
-                              
                               
                              
 
@@ -471,7 +454,8 @@ echo "
  
 		 
 	 }
-	 
+  }
+
  //  echo "Error in ".$sql."<br>".$conn->error;
  
  

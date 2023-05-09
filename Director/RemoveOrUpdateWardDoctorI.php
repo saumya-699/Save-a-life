@@ -226,8 +226,23 @@ session_start();
  
 <select id="filterDropdown" class="select">
   <option value="All">Specialization</option>
-  <option value="Dermatology">Dermatology</option>
-  <option value="General-Surgery">General Surgery</option>
+  <option value='Anesthesiologist'>Anesthesiologist</option>
+               <option value='Cardiologist'>Cardiologist</option>
+               <option value='Dermatologist'>Dermatologist</option>
+               <option value='Gastroenterologist'>Gastroenterologist</option>
+               <option value='Hematologist'>Hematologist</option>
+               <option value='Immunologist'>Immunologist</option>
+               <option value='Nephrologist'>Nephrologist</option>
+               <option value='Neurologist'>Neurologist </option>
+               <option value='Gynecologist'>Gynecologist </option>
+               <option value='Oncologist'>Oncologist </option>
+               <option value='Ophthalmologist'>Ophthalmologist</option>
+               <option value='Orthopedist'>Orthopedist</option>
+               <option value='Pediatrician'>Pediatrician</option>
+               <option value='Psychiatrist'>Psychiatrist </option>
+               <option value='Radiologic-Technologist'>Radiologic Technologist </option>
+               <option value='Rheumatologist'>Rheumatologist</option>
+               <option value='Surgeon'>Surgeon</option>
 </select>
 
 

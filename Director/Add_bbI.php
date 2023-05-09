@@ -276,7 +276,7 @@ echo "
 <?php
 	
 
-						  $sql= 'select *from hospital' ;
+  $sql= "select *from hospital where Remark != 'Non-functioning'" ;
                            $result = $conn->query($sql);
 
       if($result->num_rows>0)
