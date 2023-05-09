@@ -265,7 +265,7 @@ session_start();
 						
                        <label for="exampleFormControlInput1" class="form-label lbl star"> Filter by Blood Group</label>
                        <select name="report" id="" class="form-control txt-input" required>
-                       
+                       <option value="All">All Groups</option>                   
   <option value='A+'>A+</option>
  <option value='A-'>A-</option>
  <option value='B+'>B+</option>
@@ -274,19 +274,19 @@ session_start();
   <option value='O-'>O-</option>
  <option value='AB+'>AB+</option>
 <option value='AB-'>AB-</option>
-<option value="All">All Groups</option>
+
 
                        </select>
 							    
                        
                        <label for="exampleFormControlInput1" class="form-label lbl star"> Filter by Component Type </label>
                        <select name="report" id="" class="form-control txt-input" required>
-                     
+                       <option value="All">All Components</option>  
                   <option value="Red Cells"> Red</option>
                  <option value="White Cells">White</option>
                   <option value="Platelets">Platelets</option>
                    <option value="Plasma">Plasma</option>
-                   <option value="AllC">All Components</option>
+                  
                        </select>
 							    
 
