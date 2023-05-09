@@ -11,24 +11,19 @@ session_start();
 ?>
 <html lang="en" >
 <head>
-  
   <meta charset="UTF-8">
   <title>side bar-director</title>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
 <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
 <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./styleM.css">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
- <link rel="stylesheet" href="StyleSearch.css"> 
- <link rel="stylesheet" href="StyleIcons.css"> 
- <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
-
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./AddbbStyle.css">
 
 </head>
 <body>
-<!-- partial:index.partial.html --><!-- partial:index.partial.html -->
+<!-- partial:index.partial.html -->
 <div class="layout has-sidebar fixed-sidebar fixed-header">
       <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
         <a id="btn-collapse" class="sidebar-collapser"><i class="ri-arrow-left-s-line"></i></a>
@@ -246,271 +241,81 @@ session_start();
         <main class="content">
           <div>
             <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a></div>
- 
-
-          
-    <?php
-   
-	  require "conp.php";
-	  $m= $_SESSION["Name"];
-    $query = "select * from bloodbank_doctor where UserName ='$m'";
-    
-    
-           $HID=null;
-    $resultd = $conn->query($query);
-    
-    //echo "Error in ".$vql."<br>".$conn->error;
-    
-    if($resultd->num_rows>0)
-    
-    {        
-    
-    while($row = $resultd->fetch_assoc())
-    
-    {
-    
-    
-    
-    
-    $HID= $row["Hospital_ID"];
-    
-    $HospitalName= $row["HospitalName"];
-    
-    
-    
-    }
-    
-    
-    }
- 
-
-
-            if (isset($_POST['BtnSubmit'])) {
-                $result = $_POST["result"];
-                //$HID=$_POST["hid"];
-                $From = $_POST["From"];
-                $To = $_POST["To"];
-
-                $date = date("Y/m/d");
-                //    var_dump($blood_group,$From,);
-                if($result == "Matched"){
-                $sql = "SELECT * FROM Cross_matching_testing_result where Hospital_ID ='$HID' and test_result='Matched' and process_date between '$From' and '$To'";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-
-                    //echo "<font color=red>";
-                    //echo "<font size=6>";
-
-                    echo  "<div class='container_content' id='container_content'>";
-                    echo "<h2><center>Cross Matching Testing Details Report of $HospitalName</center> </h2>";
-                    echo "<h5><center>Save a Life</center> </h5>";
-                    echo "<h5><center>printed on $date</center> </h5><br><br>";
-
-
-
-
-                    echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;width:200px;'>" . " Blood Request ID" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Blood Group" . "</th>" . "<th style='text-align:center;width:100px;'>" . "Test Result" . "</th>" . "<th>" . "Processed Date" . "</th>" .  "</tr>";
-                    echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
-                    while ($row = $result->fetch_assoc()) {
-                        echo  "<tr>" . "<td>" . $row["Request_ID"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "</td>" . "<td>" . $row["test_result"] . "</td>" . "<td>" . $row["process_date"] . "</td>" ;
-
-                        echo "</tr>";
-
-                        echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
-                    }
-
-                    echo "</font>";
-                    echo  "</font>";
-                    echo "</table>";
-                    echo "</div>";
-                } else {
-                    //echo "Error in ".$sql."<br>".$conn->error;
-
-                    echo "no results";
-                }
-            }
-
-
-            else if($result == "Unmatched"){
-                $sql = "SELECT * FROM Cross_matching_testing_result where Hospital_ID ='$HID' and test_result='Unmatched' and process_date between '$From' and '$To'";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-
-                    //echo "<font color=red>";
-                    //echo "<font size=6>";
-
-                    echo  "<div class='container_content' id='container_content'>";
-                    echo "<h2><center>Cross Matching Testing Details Report of $HospitalName</center> </h2>";
-                    echo "<h5><center>Save a Life</center> </h5>";
-                    echo "<h5><center>printed on $date</center> </h5><br><br>";
-
-
-
-
-                    echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;width:200px;'>" . " Blood Request ID" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Blood Group" . "</th>" . "<th style='text-align:center;width:100px;'>" . "Test Result" . "</th>" . "<th>" . "Processed Date" . "</th>" .  "</tr>";
-                    echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
-                    while ($row = $result->fetch_assoc()) {
-                        echo  "<tr>" . "<td>" . $row["Request_ID"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "</td>" . "<td>" . $row["test_result"] . "</td>" . "<td>" . $row["process_date"] . "</td>" ;
-
-                        echo "</tr>";
-
-                        echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
-                    }
-
-                    echo "</font>";
-                    echo  "</font>";
-                    echo "</table>";
-                    echo "</div>";
-                } else {
-                    //echo "Error in ".$sql."<br>".$conn->error;
-
-                    echo "no results";
-                }
-            }
-
-
-
-   
-            else if($result == "All"){
-                $sql = "SELECT * FROM Cross_matching_testing_result where Hospital_ID ='$HID'  and process_date between '$From' and '$To'";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-
-                    //echo "<font color=red>";
-                    //echo "<font size=6>";
-
-                    echo  "<div class='container_content' id='container_content'>";
-                    echo "<h2><center>Cross Matching Testing Details Report of $HospitalName</center> </h2>";
-                    echo "<h5><center>Save a Life</center> </h5>";
-                    echo "<h5><center>printed on $date</center> </h5><br><br>";
-
-
-
-
-                    echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;width:200px;'>" . " Blood Request ID" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Blood Group" . "</th>" . "<th style='text-align:center;width:100px;'>" . "Test Result" . "</th>" . "<th>" . "Processed Date" . "</th>" .  "</tr>";
-                    echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
-                    while ($row = $result->fetch_assoc()) {
-                        echo  "<tr>" . "<td>" . $row["Request_ID"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "</td>" . "<td>" . $row["test_result"] . "</td>" . "<td>" . $row["process_date"] . "</td>" ;
-
-                        echo "</tr>";
-
-                        echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
-                    }
-
-                    echo "</font>";
-                    echo  "</font>";
-                    echo "</table>";
-                    echo "</div>";
-                } else {
-                    //echo "Error in ".$sql."<br>".$conn->error;
-
-                    echo "no results";
-                }
-            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        }
-            $conn->close();
-            ?>
-
-
-<button onclick="generatePDF()" class="z">Download</button>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script>
-   function generatePDF() {
-        const element = document.getElementById('container_content');
-        var opt = {
-            margin: 0,
-            filename: 'Report.pdf',
-            image: {
-                type: 'jpeg',
-                quality: 0.98
-            },
-            html2canvas: {
-                scale: 2
-            },
-            jsPDF: {
-                unit: 'in',
-                format: 'letter',
-                orientation: 'landscape'
-            }
-        };
-        // Choose the element that our invoice is rendered in.
-        html2pdf().set(opt).from(element).save();
-    }
-</script>
-
-
-
-
+		  
+		  
+		  
+		  
+		   <div class="container-shadow">
+  </div>
+  <div class="container">
+    <div class="wrap">
+      <div class="headings">
+        <center><span><h1>Report Generation</h1></span><center>
+      
+      </div>
      
-             
+        
+     <form method="post" action="downloadBlood.php">
+        
+                          
+						 
+							
+                <label for="exampleFormControlInput1 " class="form-label lbl star ">Filter By Blood Group</label>
+                <select name="blood_group" id="" class="form-control txt-input " required="">
+                <option value="All">All</option>
+                  <option value="O-">O-</option>
+                  <option value="O+">O+</option>
+                  <option value="A-">A-</option>
+                  <option value="A+">A+</option>
+                  <option value="B-">B-</option>
+                  <option value="B+">B+</option>
+                  <option value="AB-">AB-</option>
+                  <option value="AB+">AB+</option>
+                </select>
+
+
+					    
+							    
+							 
+							 
+							 
+							    <label for="exampleFormControlInput1" class="form-label lbl star">   Time period</label><br>
+                            
+                            
+                             From &nbsp;<input type="date" placeholder="From" name="From" id="From" class="yu">&nbsp;&nbsp;
+							      To &nbsp;<input type="date" placeholder="To" name="To" id="To" class="yu"><br><br><br>
+        
+                           
+                    <div class='col btn-but'> <input type='submit' name='BtnSubmit' value='Generate' class='b1'></div>
+                        <div class='col btn-but'> <input type='submit' name='btnCancel' value='Cancel' class='b2'></div>
+          
+							   
+							
+                              
+
+        
+                            
+          </div>
 		
-		
-		
-		
-		
-		
+
+   
+  </div>
+ 
+  </div>
+ 
+  </form> 
+ 
+
+  
+  
 		
 		  
         </main>
-      
+      </div>
+    </div>
 <!-- partial -->
   <script src='https://unpkg.com/@popperjs/core@2'></script><script  src="./script.js"></script>
-  <style>
-.z{
-   font-size:20px;
-   margin-top:50px;
-   margin-left:840px;
-   margin-right:45px;
-   height:47px;					   
-   border: none;
-                 //background-color:#F35050;
-                 //width: 100%;
-background: #4082f5;
-//text-transform: uppercase;
-// padding: 12px;
-cursor: pointer;
-box-shadow: 0px 10px 40px 0px rgba(17, 97, 237, 0.4);
-font-weight: 700;
-font-size: 20px;	
-border-radius:30px;
-}
-</style>
-     
+
 </body>
 </html>
 <?php

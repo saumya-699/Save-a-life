@@ -274,7 +274,7 @@ session_start();
   <option value='O-'>O-</option>
  <option value='AB+'>AB+</option>
 <option value='AB-'>AB-</option>
-<option value="AllG">All Groups</option>
+<option value="All">All Groups</option>
 
                        </select>
 							    

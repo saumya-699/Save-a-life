@@ -284,36 +284,37 @@ session_start();
     }
  
 
-
+  include "conp.php";
             if (isset($_POST['BtnSubmit'])) {
-                $result = $_POST["result"];
+                $blood_group = $_POST["blood_group"];
                 //$HID=$_POST["hid"];
                 $From = $_POST["From"];
                 $To = $_POST["To"];
 
                 $date = date("Y/m/d");
-                //    var_dump($blood_group,$From,);
-                if($result == "Matched"){
-                $sql = "SELECT * FROM Cross_matching_testing_result where Hospital_ID ='$HID' and test_result='Matched' and process_date between '$From' and '$To'";
+                //    var_dump($blood_group,$From,); 
+                if($blood_group == "A-" || $blood_group == "A+" || $blood_group == "B-" || $blood_group == "B+" || $blood_group == "O-" || $blood_group == "O+" || $blood_group == "AB-" || $blood_group == "AB+"){
+                $sql = "SELECT * FROM blood_testing_result where Hospital_ID ='$HID' and blood_group='$blood_group' and process_date between '$From' and '$To'";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
+
 
                     //echo "<font color=red>";
                     //echo "<font size=6>";
 
                     echo  "<div class='container_content' id='container_content'>";
-                    echo "<h2><center>Cross Matching Testing Details Report of $HospitalName</center> </h2>";
+                    echo "<h2><center>Blood Testing Details Report of $HospitalName</center> </h2>";
                     echo "<h5><center>Save a Life</center> </h5>";
                     echo "<h5><center>printed on $date</center> </h5><br><br>";
 
 
 
 
-                    echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;width:200px;'>" . " Blood Request ID" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Blood Group" . "</th>" . "<th style='text-align:center;width:100px;'>" . "Test Result" . "</th>" . "<th>" . "Processed Date" . "</th>" .  "</tr>";
+                    echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;width:200px;'>" . "Test result ID" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Donar ID" . "</th>" . "<th style='text-align:center;width:100px;'>" . "Blood group" . "</th>" . "<th>" . "Malaria result" . "</th>" . "<th>" . " HIV result" . "</th>" . "<th>" . "HBV result" . "</th>" . "<th>" . "HCV result" . "</th>" . "<th>" . "VDRL result" . "</th>" . "<th>" . "Processed Date" . "</th>" . "<th>" . "Batch number" . "</th>" . "</tr>";
                     echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
                     while ($row = $result->fetch_assoc()) {
-                        echo  "<tr>" . "<td>" . $row["Request_ID"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "</td>" . "<td>" . $row["test_result"] . "</td>" . "<td>" . $row["process_date"] . "</td>" ;
+                        echo  "<tr>" . "<td>" . $row["test_result_id"] . "</td>" . "<td>" . $row["Donor_Id"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "<td>" . $row["malaria_result"] . "</td>" . "<td>" . $row["hiv_result"] . "</td>" . "<td>" . $row["hbv_result"] . "</td>" . "<td>" . $row["hcv_result"] . "</td>" . "<td>" . $row["vdrl_result"] . "</td>" . "<td>" . $row["process_date"] . "</td>" . "<td>" . $row["batch_number"] . "</td>";
 
                         echo "</tr>";
 
@@ -329,87 +330,54 @@ session_start();
 
                     echo "no results";
                 }
+           
+           
+           
             }
-
-
-            else if($result == "Unmatched"){
-                $sql = "SELECT * FROM Cross_matching_testing_result where Hospital_ID ='$HID' and test_result='Unmatched' and process_date between '$From' and '$To'";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-
-                    //echo "<font color=red>";
-                    //echo "<font size=6>";
-
-                    echo  "<div class='container_content' id='container_content'>";
-                    echo "<h2><center>Cross Matching Testing Details Report of $HospitalName</center> </h2>";
-                    echo "<h5><center>Save a Life</center> </h5>";
-                    echo "<h5><center>printed on $date</center> </h5><br><br>";
+           
+           
+           else{
 
 
 
 
-                    echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;width:200px;'>" . " Blood Request ID" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Blood Group" . "</th>" . "<th style='text-align:center;width:100px;'>" . "Test Result" . "</th>" . "<th>" . "Processed Date" . "</th>" .  "</tr>";
+            $sql = "SELECT * FROM blood_testing_result where Hospital_ID ='$HID' and process_date between '$From' and '$To'";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+
+
+                //echo "<font color=red>";
+                //echo "<font size=6>";
+
+                echo  "<div class='container_content' id='container_content'>";
+                echo "<h2><center>Blood Testing Details Report of $HospitalName</center> </h2>";
+                echo "<h5><center>Save a Life</center> </h5>";
+                echo "<h5><center>printed on $date</center> </h5><br><br>";
+
+
+
+
+                echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;width:200px;'>" . "Test result ID" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Donar ID" . "</th>" . "<th style='text-align:center;width:100px;'>" . "Blood group" . "</th>" . "<th>" . "Malaria result" . "</th>" . "<th>" . " HIV result" . "</th>" . "<th>" . "HBV result" . "</th>" . "<th>" . "HCV result" . "</th>" . "<th>" . "VDRL result" . "</th>" . "<th>" . "Processed Date" . "</th>" . "<th>" . "Batch number" . "</th>" . "</tr>";
+                echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
+                while ($row = $result->fetch_assoc()) {
+                    echo  "<tr>" . "<td>" . $row["test_result_id"] . "</td>" . "<td>" . $row["Donor_Id"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "<td>" . $row["malaria_result"] . "</td>" . "<td>" . $row["hiv_result"] . "</td>" . "<td>" . $row["hbv_result"] . "</td>" . "<td>" . $row["hcv_result"] . "</td>" . "<td>" . $row["vdrl_result"] . "</td>" . "<td>" . $row["process_date"] . "</td>" . "<td>" . $row["batch_number"] . "</td>";
+
+                    echo "</tr>";
+
                     echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
-                    while ($row = $result->fetch_assoc()) {
-                        echo  "<tr>" . "<td>" . $row["Request_ID"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "</td>" . "<td>" . $row["test_result"] . "</td>" . "<td>" . $row["process_date"] . "</td>" ;
-
-                        echo "</tr>";
-
-                        echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
-                    }
-
-                    echo "</font>";
-                    echo  "</font>";
-                    echo "</table>";
-                    echo "</div>";
-                } else {
-                    //echo "Error in ".$sql."<br>".$conn->error;
-
-                    echo "no results";
                 }
+
+                echo "</font>";
+                echo  "</font>";
+                echo "</table>";
+                echo "</div>";
+            } else {
+                //echo "Error in ".$sql."<br>".$conn->error;
+
+                echo "no results";
             }
-
-
-
-   
-            else if($result == "All"){
-                $sql = "SELECT * FROM Cross_matching_testing_result where Hospital_ID ='$HID'  and process_date between '$From' and '$To'";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-
-                    //echo "<font color=red>";
-                    //echo "<font size=6>";
-
-                    echo  "<div class='container_content' id='container_content'>";
-                    echo "<h2><center>Cross Matching Testing Details Report of $HospitalName</center> </h2>";
-                    echo "<h5><center>Save a Life</center> </h5>";
-                    echo "<h5><center>printed on $date</center> </h5><br><br>";
-
-
-
-
-                    echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;width:200px;'>" . " Blood Request ID" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Blood Group" . "</th>" . "<th style='text-align:center;width:100px;'>" . "Test Result" . "</th>" . "<th>" . "Processed Date" . "</th>" .  "</tr>";
-                    echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
-                    while ($row = $result->fetch_assoc()) {
-                        echo  "<tr>" . "<td>" . $row["Request_ID"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "</td>" . "<td>" . $row["test_result"] . "</td>" . "<td>" . $row["process_date"] . "</td>" ;
-
-                        echo "</tr>";
-
-                        echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
-                    }
-
-                    echo "</font>";
-                    echo  "</font>";
-                    echo "</table>";
-                    echo "</div>";
-                } else {
-                    //echo "Error in ".$sql."<br>".$conn->error;
-
-                    echo "no results";
-                }
-            }
+       
 
 
 
@@ -430,22 +398,13 @@ session_start();
 
 
 
+           }
+    
+      }
 
 
-
-
-
-
-
-
-
-
-
-
-        }
             $conn->close();
             ?>
-
 
 <button onclick="generatePDF()" class="z">Download</button>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -464,7 +423,7 @@ session_start();
             },
             jsPDF: {
                 unit: 'in',
-                format: 'letter',
+                format: [15, 8.5],
                 orientation: 'landscape'
             }
         };
