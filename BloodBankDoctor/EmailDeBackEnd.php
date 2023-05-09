@@ -31,6 +31,8 @@ if(is_array($emails)){
         $s="Regarding deseas identification";
         $msg ="You have been been identified to have deseases in the blood testing phase.";
         $mail->addAddress($email);
+        $Email_sent=1;
+    
         $mail->isHTML(true);
         $mail->Subject = $s;
         $mail->Body = $msg;
@@ -47,17 +49,25 @@ if(is_array($emails)){
 
 
 
-echo "<script>  alert('sent');
-document.location.href='EmailDe.php';
 
-</script>";
+$Email_sent=1;
+$sql="update blood_testing_result set Email_sent ='$Email_sent'";
 
+if ($conn->query($sql) === TRUE) 
+				   {
+                          
+                           echo '<script type="text/javascript">';
+		                  echo 'alert("E mail sent");';
+         
+		                     echo 'window.location.href="BloodREsultsI.php";';
+		                  echo '</script>';
 
-
-
+                   } 
+					 
 
 
 }
+
 
 
 

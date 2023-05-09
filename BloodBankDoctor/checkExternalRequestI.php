@@ -59,7 +59,6 @@ session_start();
 
 </head>
 <body>
-<!-- partial:index.partial.html -->
 <div class="layout has-sidebar fixed-sidebar fixed-header">
       <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
         <a id="btn-collapse" class="sidebar-collapser"><i class="ri-arrow-left-s-line"></i></a>
@@ -76,7 +75,7 @@ session_start();
               <ul>
                 <li class="menu-header"><span>  </span></li>
                 <li class="menu-item">
-                  <a href="Home.php">
+                  <a href="#">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -177,22 +176,69 @@ session_start();
                     </ul>
                   </div>
                 </li>
-                <li class="menu-item">
-                  <a href="View_Donors_BI.php">
+                <li class="menu-item sub-menu">
+                  <a href="#">
                     <span class="menu-icon">
-                      <i class="ri-user-heart-fill"></i>
+                      <i class="ri-article-fill"></i>
                     </span>
                     <span class="menu-title">Donors</span>
                   </a>
-                 </li>
-                <li class="menu-item">
-                  <a href="ReportGeneration_BI.php">
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="View_Donors_BI.php">
+                          <span class="menu-title">View</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="donorEmail.php">
+                          <span class="menu-title">Send Non -Emergency Email</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                
+                 <li class="menu-item sub-menu">
+                  <a href="#">
                     <span class="menu-icon">
-                      <i class="ri-file-chart-line"></i>
+                      <i class="ri-message-2-fill"></i>
                     </span>
                     <span class="menu-title">Reports</span>
                   </a>
-                 </li>
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="ReportGenerationStock.php">
+                          <span class="menu-title">Stock Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGenerationCrossMatching.php">
+                          <span class="menu-title">Cross Matching Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGenerationBlood.php">
+                          <span class="menu-title">Blood Request Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGeneration_BI.php">
+                          <span class="menu-title">Donation Details Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGeneration_Request.php">
+                          <span class="menu-title">External Requests Reports</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+
+
+
                 <li class="menu-header" style="padding-top: 40px"><span>  </span></li>
                 <li class="menu-item">
                   <a href="profileBI.php">
@@ -543,7 +589,23 @@ function myConfirm() {
 
 </script>
 
-          
+      <style>
+      
+      table{
+	
+	
+	padding-left:400px;
+	width:800px;
+	height:20px;
+	border-collapse: collapse;	
+		margin-top:5px;
+   border:0px transparent;
+margin-left:-15px;   
+ 	margin-right:11px;
+}
+
+
+      </style>
         </main>
      
 <!-- partial -->

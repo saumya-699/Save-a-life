@@ -229,8 +229,13 @@ session_start();
 
 <select id="filterDropdown" class="select">
   <option value="All">Position</option>
-  <option value="Head-nurse">Head nurse</option>
-  <option value="nurse">Nurse</option>
+  <option value="Staff-Nurse">Staff Nurse</option>
+<option value="Senior-Staff-Nurse">Senior Staff Nurse</option>
+<option value='Head-Nurse'>Head Nurse</option>
+<option value='Nursing-Supervisor'>Nursing Supervisor</option>
+<option value='Nurse-Educator'>Nurse Educator</option>
+<option value='Nurse-Researcher'>Nurse Researcher</option>
+<option value='Nurse-Practitioner'>Nurse Practitioner</option>
 </select>
 
 
@@ -343,7 +348,15 @@ function myConfirm() {
 
 </script>
 		
-		  
+		 <style>
+     table{
+
+     margin-left:30px;
+
+
+     }
+     
+     </style>
         </main>
       
 <!-- partial -->
