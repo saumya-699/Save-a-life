@@ -195,19 +195,11 @@ if (isset($_POST['view'])) {
       <main class="content">
         <div>
           <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
-          <h1> View donated blood information</h1>
 
           <div>
           <input type="date" id="dateInput" class="b1">
 
-              <select id="filterDropdown" class="select">
-                <option value="All">Status</option>
-                <option value='Pending'>Pending</option>
-                <option value='Checked'>Checked</option>
-                
-              </select>
 
-             
               <input type="text" id="searchInput" class="box">
 
             </div>
@@ -246,6 +238,42 @@ if (isset($_POST['view'])) {
 
             $conn->close();
             ?>
+               <script>
+            function filterTable() {
+              const input = document.getElementById('searchInput');
+              const filter = input.value.toUpperCase();
+              const dateInput = document.getElementById('dateInput').value;
+
+              const table = document.getElementById('dataTable');
+              const rows = table.getElementsByTagName('tr');
+
+              for (let i = 1; i < rows.length; i++) {
+                const row = rows[i];
+                if (row.cells.length === 1) {
+                  continue;
+                }
+                const cells = row.getElementsByTagName('td');
+                const positionClass = row.className;
+                
+                const date = cells[0].textContent;
+
+                if (
+                  Array.from(cells).some(cell => cell.textContent.toUpperCase().includes(filter)) &&
+                  (dateInput === '' || date === dateInput)){
+                  row.style.display = '';
+                } else {
+                  row.style.display = 'none';
+                }
+              }
+            }
+
+            // Attach filterTable function to events (e.g. button click, input change)
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', filterTable);
+
+            const dateInput = document.getElementById('dateInput');
+            dateInput.addEventListener('input', filterTable);
+          </script>
         </div>
         <style>
           table {
@@ -288,7 +316,32 @@ if (isset($_POST['view'])) {
 
 
           }
+          .box {
+              height: 35px;
+              width: 200px;
+              margin-left: 20px;
+              border-radius: 20px;
+              border: none;
+              text-align: center;
+              margin-top: 100px;
+            }
 
+           
+
+            .b1 {
+              height: 40px;
+              width: 130px;
+              color: #FFF5F3;
+              margin-left: 6px;
+              border-radius: 20px;
+              background-color: #F35050;
+              border: none;
+              text-align: center;
+              cursor: pointer;
+              margin-top: 100px;
+              margin-bottom: 50px;
+              margin-left: 200px
+            }
 
 
 

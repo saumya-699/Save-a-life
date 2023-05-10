@@ -374,7 +374,7 @@ if (isset($_SESSION["ID"])) {
               background-color: #F35050;
               border: none;
               text-align: center;
-              margin-left: 70px;
+              margin-left: 10px;
               margin-top: 100px;
               margin-bottom: 50px;
               color: white;
@@ -392,7 +392,7 @@ if (isset($_SESSION["ID"])) {
               cursor: pointer;
               margin-top: 100px;
               margin-bottom: 50px;
-              margin-left: 170px
+              margin-left: 200px
             }
 
             .f2 {

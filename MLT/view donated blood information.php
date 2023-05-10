@@ -196,30 +196,12 @@ $result = $conn->query($sql);
       <main class="content">
         <div>
           <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
-          <h1> View donated blood information</h1>
+          <div>
+            <input type="date" id="dateInput" class="b1">
 
-          <form method="post" action="search blood test result.php">
+            <input type="text" id="searchInput" class="box">
 
-            <div class="midiv">
-
-
-              <font size=3> Search by </font></b> <br /> <br /><select name="search" class="select">
-                <option value="requested_date"><b> Requested Date</b></option>
-                <option value="requeste_id"><b> Request ID</b></option>
-                <option value="patient_name"><b>Patient Name</b></option>
-                <option value="blood_group" selected><b>Blood Group</b></option>
-                <option value="status" selected><b> Status</b></option>
-              </select>
-
-
-              <input type="text" placeholder="type here" name="data" id="data" class="box">
-
-              <button type="submit" name="BtnSubmit" id="search" class="b1"><b>Search</b></button>
-            </div>
-
-        </div>
-
-        </form>
+          </div>
 
         <div class="box">
 
@@ -229,7 +211,7 @@ $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
 
-              echo  "<div class='tab'>";
+              echo  "<div id='dataTable' class='tab'>";
               echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;'>" . "Date" . "</th>" . "<th style='text-align:center;'>" . "Batch Number" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Action" . "</th>" . "</tr>";
               echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
               while ($row = $result->fetch_assoc()) {
@@ -261,6 +243,42 @@ $result = $conn->query($sql);
 
             $conn->close();
             ?>
+                     <script>
+            function filterTable() {
+              const input = document.getElementById('searchInput');
+              const filter = input.value.toUpperCase();
+              const dateInput = document.getElementById('dateInput').value;
+
+              const table = document.getElementById('dataTable');
+              const rows = table.getElementsByTagName('tr');
+
+              for (let i = 1; i < rows.length; i++) {
+                const row = rows[i];
+                if (row.cells.length === 1) {
+                  continue;
+                }
+                const cells = row.getElementsByTagName('td');
+                const positionClass = row.className;
+                
+                const date = cells[0].textContent;
+
+                if (
+                  Array.from(cells).some(cell => cell.textContent.toUpperCase().includes(filter)) &&
+                  (dateInput === '' || date === dateInput)){
+                  row.style.display = '';
+                } else {
+                  row.style.display = 'none';
+                }
+              }
+            }
+
+            // Attach filterTable function to events (e.g. button click, input change)
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', filterTable);
+
+            const dateInput = document.getElementById('dateInput');
+            dateInput.addEventListener('input', filterTable);
+          </script>
         </div>
         <style>
           table {
@@ -281,42 +299,32 @@ $result = $conn->query($sql);
             margin-left: 200px;
             margin-bottom: 100px;
           }
-
-          .select {
-
-            height: 30px;
-            width: 120px;
-            border-radius: 20px;
-            background-color: #56CE94;
-            border: none;
-            text-align: center;
-            margin-left: 30px;
-
-          }
-
           .box {
+              height: 35px;
+              width: 200px;
+              margin-left: 20px;
+              border-radius: 20px;
+              border: none;
+              text-align: center;
+              margin-top: 100px;
+            }
 
-            height: 30px;
-            width: 130px;
-            margin-left: 20px;
-            margin-top: 0px;
-            border-radius: 20px;
-            border: none;
-            text-align: center;
+           
 
-          }
-
-          .b1 {
-            height: 30px;
-            width: 100px;
-            color: #FFF5F3;
-            margin-left: 20px;
-            border-radius: 20px;
-            background-color: #F3506D;
-            border: none;
-            cursor: pointer;
-
-          }
+            .b1 {
+              height: 40px;
+              width: 130px;
+              color: #FFF5F3;
+              margin-left: 6px;
+              border-radius: 20px;
+              background-color: #F35050;
+              border: none;
+              text-align: center;
+              cursor: pointer;
+              margin-top: 100px;
+              margin-bottom: 50px;
+              margin-left: 200px
+            }
 
           th {
 
@@ -352,13 +360,6 @@ $result = $conn->query($sql);
             outline: none;
             width: 774.5px;
           }
-
-
-
-
-
-
-
 
 
           .f2 {
@@ -407,7 +408,7 @@ $result = $conn->query($sql);
           .tab {
 
             background-color: #F5F5F5;
-            margin-top: -50px;
+            margin-top: -100px;
             margin-left: 60px;
             padding-left: 0px;
             padding-right: 0px;
