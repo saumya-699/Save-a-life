@@ -233,7 +233,7 @@ $result = $conn->query($sql);
               while ($row = $result->fetch_assoc()) {
 
 
-                echo  "<tr>" . "<td>" . $row["Donation_date"] . "</td>" . "<td>" . $row["Batch"] . "</td>". "<td>" . $row["Donor_Id"] . "</td>". "<td>" . $row["Donation_Id"] . "</td>". "<td>" . $row["packet_no"] .  "</td>";
+                echo  "<tr>" . "<td>" . $row["Donation_date"] . "</td>" . "<td>" . $row["Batch"] . "</td>". "<td>" . $row["Donor_Id"] . "</td>". "<td>" . $row["Donation_ID"] . "</td>". "<td>" . $row["packet_no"] .  "</td>";
                 echo "<td class='tb'><form method='POST' action ='Enter Blood testing result1.php'>
                    <input type=hidden name=DID value=" . $row["Donor_Id"] . " >
                    <input type=hidden name=PID value=" . $row["packet_no"] . " >
