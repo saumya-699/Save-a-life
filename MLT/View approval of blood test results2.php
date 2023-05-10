@@ -17,6 +17,10 @@ $result = $conn->query($sql);
   <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
   <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'>
   <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="StyleSearchss.css">
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+
 
 </head>
 
@@ -194,35 +198,30 @@ $result = $conn->query($sql);
       <main class="content">
         <div>
           <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
-          <h1> View approval of the blood test results </h1>
-
-          <form method="post" action="View approval of blood test results2Search.php">
-            <div class="midiv">
-
-
-
-              <font size=3> Search by </font></b> <br /> <br /><select name="search" class="select">
-                <option value="test_result_id"><b>Test result ID</b></option>
-                <option value="donar_id"><b> Donar ID</b></option>
-                <option value="blood_group"><b>Blood group</b></option>
-                <option value="malaria_result" selected><b>Malaria result</b></option>
-                <option value="hiv_result"><b> HIV result</b></option>
-                <option value="hbv_result"><b>HBV result</b></option>
-                <option value="hcv_result"><b>HCV result</b></option>
-                <option value="vdrl_result"><b>VDRL result</b></option>
-                <option value="process_date" selected><b>Processed Date</b></option>
-                <option value="batch_number" selected><b>Batch number</b></option>
+          <div>
+              <select id="filterDropdown" class="select">
+                <option value="All">Group</option>
+                <option value='A+'>A+</option>
+                <option value='A-'>A-</option>
+                <option value='B+'>B+</option>
+                <option value='B-'>B-</option>
+                <option value='O+'>O+</option>
+                <option value='O-'>O-</option>
+                <option value='AB+'>AB+</option>
+                <option value='AB-'>AB-</option>
               </select>
 
+              <select id="ResultDropdown" class="selectx">
+                <option value="All">Result</option>
+                <option value="Positive">Positive</option>
+                <option value="Negative">Negative</option>
 
-              <input type="text" placeholder="type here" name="data" id="data" class="box">
+              </select>
+              <input type="text" id="searchInput" class="box">
 
-              <button type="submit" name="BtnSubmit" id="search" class="b1"><b>Search</b></button>
             </div>
 
-        </div>
 
-        </form>
 
         <?php
         if (isset($_SESSION["ID"])) {
@@ -247,14 +246,14 @@ $result = $conn->query($sql);
           $result = $conn->query($sql);
 
 
-          echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;width:200px;'>" . "Test Result ID" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Donar ID" . "</th>" . "<th style='text-align:center;width:100px;'>" . "Blood Group" . "</th>" . "<th>" . "Malaria Result" . "</th>" . "<th>" . " HIV Result" . "</th>" . "<th>" . "HBV Result" . "</th>" . "<th>" . "HCV Result" . "</th>" . "<th>" . "VDRL Result" . "</th>" . "<th>" . "Processed Date" . "</th>" . "<th>" . "Batch Number" . "</th>" . "</tr>";
-          echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
+          echo  "<table id='dataTable' border=1>" . "<tr>" . "<th style='text-align:center;width:200px;'>" . "Test Result ID" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Donar ID" . "</th>" . "<th style='text-align:center;width:100px;'>" . "Blood Group" . "</th>" . "<th>" . "Malaria Result" . "</th>" . "<th>" . " HIV Result" . "</th>" . "<th>" . "HBV Result" . "</th>" . "<th>" . "HCV Result" . "</th>" . "<th>" . "VDRL Result" . "</th>" .  "</tr>";
+          echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=10'>" . "</td>" . "</tr>";
           while ($row = $result->fetch_assoc()) {
-            echo  "<tr>" . "<td>" . $row["test_result_id"] . "</td>" . "<td>" . $row["Donor_Id"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "<td>" . $row["malaria_result"] . "</td>" . "<td>" . $row["hiv_result"] . "</td>" . "<td>" . $row["hbv_result"] . "</td>" . "<td>" . $row["hcv_result"] . "</td>" . "<td>" . $row["vdrl_result"] . "</td>" . "<td>" . $row["process_date"] . "</td>" . "<td>" . $row["batch_number"] . "</td>" ;
+            echo  "<tr>" . "<td>" . $row["test_result_id"] . "</td>" . "<td>" . $row["Donor_Id"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "<td>" . $row["malaria_result"] . "</td>" . "<td>" . $row["hiv_result"] . "</td>" . "<td>" . $row["hbv_result"] . "</td>" . "<td>" . $row["hcv_result"] . "</td>" . "<td>" . $row["vdrl_result"] . "</td>" ;
 
             echo "</tr>";
 
-            echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
+            echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=10'>" . "</td>" . "</tr>";
           }
           echo  "</font>";
           echo  "</font>";
@@ -266,6 +265,52 @@ $result = $conn->query($sql);
         }
         $conn->close();
         ?>
+<script>
+            function filterTable() {
+              const input = document.getElementById('searchInput');
+              const filter = input.value.toUpperCase();
+              const select = document.getElementById('filterDropdown');
+              const filterValue = select.options[select.selectedIndex].value;
+              const Result = document.getElementById('ResultDropdown');
+              const ResultValue = Result.options[Result.selectedIndex].value;
+
+
+              const table = document.getElementById('dataTable');
+              const rows = table.getElementsByTagName('tr');
+
+              for (let i = 1; i < rows.length; i++) {
+                const row = rows[i];
+                if (row.cells.length === 1) {
+                  continue;
+                }
+                const cells = row.getElementsByTagName('td');
+                const positionClass = row.className;
+                
+                const result = cells[3,4,5,6,7].textContent;
+                const group = cells[2].textContent;
+
+                if ((filterValue === 'All' || group.toLowerCase() === filterValue.toLowerCase()) &&
+                  Array.from(cells).some(cell => cell.textContent.toUpperCase().includes(filter)) &&
+                  (ResultValue === 'All' || result.toLowerCase() === ResultValue.toLowerCase())){
+                  row.style.display = '';
+                } else {
+                  row.style.display = 'none';
+                }
+              }
+            
+              }
+            
+
+            // Attach filterTable function to events (e.g. button click, input change)
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', filterTable);
+
+            const filterDropdown = document.getElementById('filterDropdown');
+            filterDropdown.addEventListener('change', filterTable);
+
+            const ResultDropdown = document.getElementById('ResultDropdown');
+            ResultDropdown.addEventListener('change', filterTable);
+          </script>
 
         <style>
           table {
@@ -288,41 +333,21 @@ $result = $conn->query($sql);
             margin-bottom: 100px;
           }
 
-          .select {
-
-            height: 30px;
-            width: 120px;
-            border-radius: 20px;
-            background-color: #56CE94;
-            border: none;
-            text-align: center;
-            margin-left: 30px;
-
-          }
-
-          .box {
-
-            height: 30px;
-            width: 130px;
-            margin-left: 20px;
-            margin-top: 0px;
-            border-radius: 20px;
-            border: none;
-            text-align: center;
-
-          }
-
           .b1 {
-            height: 30px;
-            width: 100px;
-            color: #FFF5F3;
-            margin-left: 20px;
-            border-radius: 20px;
-            background-color: #F3506D;
-            border: none;
-            cursor: pointer;
-
-          }
+    height: 40px;
+    width: 130px;
+    color: #FFF5F3;
+    margin-left: 6px;
+    border-radius: 20px;
+    background-color: #F35050;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 100px;
+    margin-bottom: 50px;
+    margin-left: 1px;
+}
+         
 
           th {
 
@@ -348,16 +373,7 @@ $result = $conn->query($sql);
           }
 
 
-          .midiv {
-
-            margin-left: 150px;
-            margin-bottom: -50px;
-            padding: 15px 10px 30px 20px;
-            margin-top: -100px;
-            outline: none;
-            width: 774.5px;
-          }
-
+         
 
 
 

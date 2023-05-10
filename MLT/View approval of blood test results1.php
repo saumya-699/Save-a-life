@@ -6,7 +6,7 @@ session_start();
 if (isset($_SESSION["ID"])) {
   include "config.php";
   $m = $_SESSION["Name"];
-  $date =date("Y/m/d");
+  $date = date("Y/m/d");
   $query = "SELECT * FROM mlt WHERE UserName ='$m'";
   $result1 = $conn->query($query);
 
@@ -33,6 +33,8 @@ if (isset($_SESSION["ID"])) {
   <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'>
   <link rel="stylesheet" href="./style.css">
   <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
 
 
 </head>
@@ -211,53 +213,41 @@ if (isset($_SESSION["ID"])) {
       <main class="content">
         <div>
           <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
-          <h1> View approval of the blood test results </h1>
+
+          <div>
+            <input type="date" id="dateInput" class="b1">
+
+            <select id="filterDropdown" class="select">
+              <option value="All">Status</option>
+              <option value='Pending'>Pending</option>
+              <option value='Checked'>Checked</option>
+
+            </select>
 
 
-          <form method="post" action="View approval of blood test results1Search.php">
+            <input type="text" id="searchInput" class="box">
 
-            <div class="midiv">
+          </div>
 
-
-
-              <font size=3> Search by </font></b> <br /> <br /><select name="search" class="select">
-                <option value="process_date" selected><b>Date</b></option>
-                <option value="batch_number"><b>Batch number</b></option>
-                <option value="status"><b> Status</b></option>
-              </select>
-
-
-
-              <input type="text" placeholder="type here" name="data" id="data" class="box">
-
-              <button type="submit" name="BtnSubmit" id="search" class="b1"><b>Search</b></button>
-            </div>
-
-        </div>
-
-        </form>
-
-        <div class="box">
-
-          <form action="View approval of blood test results2.php" method="POST">
+          <div class="box">
 
             <?php
 
             if ($result->num_rows > 0) {
 
               echo  "<div class='tab'>";
-              echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;'>" . "Date" . "</th>" . "<th style='text-align:center;'>" . "Batch Number" . "</th>" . "<th style='text-align:center;'>" . "Status" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Action" . "</th>" . "</tr>";
+              echo  "<table  id='dataTable' border=1>" . "<tr>" . "<th style='text-align:center;'>" . "Date" . "</th>" . "<th style='text-align:center;'>" . "Batch Number" . "</th>" . "<th style='text-align:center;'>" . "Status" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Action" . "</th>" . "</tr>";
               echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
               while ($row = $result->fetch_assoc()) {
 
                 echo  "<tr>" . "<td>" . $row["process_date"] . "</td>" . "<td>" . $row["batch_number"] . "</td>" . "<td>" . $row["status"] . "</td>";
 
                 echo "<td class='tb'><form method='POST' action ='View approval of blood test results2.php'>
-     <input type=hidden name=Requestdate value=" . $row["process_date"] . " >
-     <input type=hidden name=Requestbatch value=" . $row["batch_number"] . " >
-     <button type=submit value=view name=view  class='fp'><i class='fa-sharp fa-solid fa-eye'></i></button>
-     </form>    	
-    </td>";
+                    <input type=hidden name=Requestdate value=" . $row["process_date"] . " >
+                  <input type=hidden name=Requestbatch value=" . $row["batch_number"] . " >
+                 <button type=submit value=view name=view  class='fp'><i class='fa-sharp fa-solid fa-eye'></i></button>
+                 </form>    	
+                  </td>";
 
                 echo "</div>";
                 echo "</tr>";
@@ -275,207 +265,228 @@ if (isset($_SESSION["ID"])) {
 
             $conn->close();
             ?>
+
+          </div>
+
+          <script>
+            function filterTable() {
+              const input = document.getElementById('searchInput');
+              const filter = input.value.toUpperCase();
+              const select = document.getElementById('filterDropdown');
+              const filterValue = select.options[select.selectedIndex].value;
+              const dateInput = document.getElementById('dateInput').value;
+
+              const table = document.getElementById('dataTable');
+              const rows = table.getElementsByTagName('tr');
+
+              for (let i = 1; i < rows.length; i++) {
+                const row = rows[i];
+                if (row.cells.length === 1) {
+                  continue;
+                }
+                const cells = row.getElementsByTagName('td');
+                const positionClass = row.className;
+                
+                const statusName = cells[2].textContent;
+                const processDate = cells[0].textContent;
+
+                if ((filterValue === 'All' || statusName.toLowerCase() === filterValue.toLowerCase()) &&
+                  Array.from(cells).some(cell => cell.textContent.toUpperCase().includes(filter)) &&
+                  (dateInput === '' || processDate === dateInput)){
+                  row.style.display = '';
+                } else {
+                  row.style.display = 'none';
+                }
+              }
+            }
+
+            // Attach filterTable function to events (e.g. button click, input change)
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', filterTable);
+
+            const filterDropdown = document.getElementById('filterDropdown');
+            filterDropdown.addEventListener('change', filterTable);
+
+            const dateInput = document.getElementById('dateInput');
+            dateInput.addEventListener('input', filterTable);
+          </script>
+
+          <style>
+            table {
+
+
+
+              width: 750px;
+              height: 15px;
+              border-collapse: collapse;
+              margin-top: 40px;
+              border: 0px transparent;
+
+            }
+
+            h1 {
+
+              margin-top: 70px;
+              margin-left: 200px;
+              margin-bottom: 100px;
+            }
+
+
+
+
+
+            th {
+
+
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              text-align: center;
+              padding-top: 25px;
+              padding-bottom: 25px;
+              padding-left: 20px;
+              padding-right: 10px;
+              border: 0px transparent;
+
+            }
+
+            td {
+              text-align: center;
+              padding: 1px;
+
+
+            }
+
+            .box {
+              height: 35px;
+              width: 200px;
+              margin-left: 20px;
+              border-radius: 20px;
+              border: none;
+              text-align: center;
+              margin-top: 100px;
+            }
+
+            .select {
+              height: 35px;
+              width: 145px;
+              border-radius: 20px;
+              background-color: #F35050;
+              border: none;
+              text-align: center;
+              margin-left: 70px;
+              margin-top: 100px;
+              margin-bottom: 50px;
+              color: white;
+            }
+
+            .b1 {
+              height: 40px;
+              width: 130px;
+              color: #FFF5F3;
+              margin-left: 6px;
+              border-radius: 20px;
+              background-color: #F35050;
+              border: none;
+              text-align: center;
+              cursor: pointer;
+              margin-top: 100px;
+              margin-bottom: 50px;
+              margin-left: 170px
+            }
+
+            .f2 {
+
+              margin-left: 50px;
+              margin-top: -100px;
+              background-color: transparent;
+              border: none;
+              cursor: pointer;
+              margin-bottom: 0px;
+
+
+            }
+
+
+            .f1 {
+
+              background-color: transparent;
+              margin-left: 10px;
+              margin-right: 20px;
+              margin-bottom: 10px;
+              margin-top: 10px;
+              border: none;
+              cursor: pointer;
+
+
+            }
+
+            .fp {
+              margin-top: 0px;
+              margin-left: 30px;
+              margin-bottom: -100px;
+              background-color: transparent;
+              border: none;
+              cursor: pointer;
+            }
+
+            .tb {
+              display: inline-flex;
+              justify-content: space-evenly;
+              flex-wrap: nowrap;
+              align-items: baseline;
+              flex-direction: row;
+            }
+
+            .tab {
+
+              background-color: #F5F5F5;
+              margin-top: -100px;
+              margin-left: 60px;
+              margin-right: 265px;
+
+
+
+
+            }
+
+
+            .ta {
+
+              background-color: #F5F5F5;
+              margin-top: 60px;
+              margin-bottom: 0px;
+              margin-left: 370px;
+              margin-right: 119px;
+              padding-left: 20px;
+
+            }
+
+
+
+            tr {
+
+              background-color: white;
+
+            }
+
+            .visible {
+              cursor: pointer;
+
+
+            }
+
+            .layout {
+              background-color: #d9dbdb;
+            }
+          </style>
+
+
+
         </div>
-        <style>
-          table {
-
-
-
-            width: 750px;
-            height: 15px;
-            border-collapse: collapse;
-            margin-top: 40px;
-            border: 0px transparent;
-
-          }
-
-          h1 {
-
-            margin-top: 70px;
-            margin-left: 200px;
-            margin-bottom: 100px;
-          }
-
-          .select {
-
-
-            height: 35px;
-            width: 138px;
-            border-radius: 20px;
-            background-color: #56CE94;
-            border: none;
-            text-align: center;
-
-
-
-
-          }
-
-
-
-          th {
-
-
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            text-align: center;
-            padding-top: 25px;
-            padding-bottom: 25px;
-            padding-left: 20px;
-            padding-right: 10px;
-            border: 0px transparent;
-
-          }
-
-          td {
-            text-align: center;
-            padding: 1px;
-
-
-          }
-
-          .select {
-
-            height: 30px;
-            width: 120px;
-            border-radius: 20px;
-            background-color: #56CE94;
-            border: none;
-            text-align: center;
-            margin-left: 30px;
-
-          }
-
-          .box {
-
-            height: 30px;
-            width: 130px;
-            margin-left: 20px;
-            margin-top: 0px;
-            border-radius: 20px;
-            border: none;
-            text-align: center;
-
-          }
-
-          .b1 {
-            height: 30px;
-            width: 100px;
-            color: #FFF5F3;
-            margin-left: 20px;
-            border-radius: 20px;
-            background-color: #F3506D;
-            border: none;
-            cursor: pointer;
-
-          }
-
-
-
-          .midiv {
-
-            margin-left: 150px;
-            margin-bottom: -10px;
-            padding: 15px 10px 30px 20px;
-            margin-top: -100px;
-            outline: none;
-            width: 774.5px;
-          }
-
-
-
-          .f2 {
-
-            margin-left: 50px;
-            margin-top: -100px;
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            margin-bottom: 0px;
-
-
-          }
-
-
-          .f1 {
-
-            background-color: transparent;
-            margin-left: 10px;
-            margin-right: 20px;
-            margin-bottom: 10px;
-            margin-top: 10px;
-            border: none;
-            cursor: pointer;
-
-
-          }
-
-          .fp {
-            margin-top: 0px;
-            margin-left: 30px;
-            margin-bottom: -100px;
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-          }
-
-          .tb {
-            display: inline-flex;
-            justify-content: space-evenly;
-            flex-wrap: nowrap;
-            align-items: baseline;
-            flex-direction: row;
-          }
-
-          .tab {
-
-            background-color: #F5F5F5;
-            margin-top: -40px;
-            margin-left: 60px;
-            margin-right: 265px;
-
-
-
-
-          }
-
-
-          .ta {
-
-            background-color: #F5F5F5;
-            margin-top: 60px;
-            margin-bottom: 0px;
-            margin-left: 370px;
-            margin-right: 119px;
-            padding-left: 20px;
-
-          }
-
-
-
-          tr {
-
-            background-color: white;
-
-          }
-
-          .visible {
-            cursor: pointer;
-
-
-          }
-
-          .layout {
-            background-color: #d9dbdb;
-          }
-        </style>
-
+      </main>
 
     </div>
-    </main>
-
-  </div>
   </div>
   <!-- partial -->
   <script src='https://unpkg.com/@popperjs/core@2'></script>

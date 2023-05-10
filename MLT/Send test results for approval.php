@@ -258,8 +258,7 @@ if (isset($_SESSION["ID"])) {
     
      echo "
      <form method='POST' action =''>  	
-     <input type=hidden name='bnum' value=" . $row["batch_number"] . " >
-    <input type=hidden name='bdate' value=" . $row["process_date"] . " >
+    
     <button type=submit value=Send name='$bnum'  class='fp'><i class='fa-regular fa-forward-fast'></i></button>
 
      </form>
@@ -267,7 +266,8 @@ if (isset($_SESSION["ID"])) {
 
     </td>";
  
-    
+    // <input type=hidden name='bnum' value=" . $row["batch_number"] . " >
+    // <input type=hidden name='bdate' value=" . $row["process_date"] . " >
     if(isset($_POST[$bnum])){
     
       
@@ -287,7 +287,7 @@ if (isset($_SESSION["ID"])) {
               echo  "</font>";
               echo "</table>";
             } else {
-              echo "Error in " . $vql . "<br>" . $conn->error;
+              // echo "Error in " . $vql . "<br>" . $conn->error;
 
               echo "no results";
             }

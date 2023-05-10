@@ -258,7 +258,7 @@ if (isset($_SESSION["ID"])) {
               echo  "</font>";
               echo "</table>";
             } else {
-              echo "Error in " . $vql . "<br>" . $conn->error;
+              // echo "Error in " . $vql . "<br>" . $conn->error;
 
               echo "no results";
             }

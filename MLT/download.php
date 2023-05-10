@@ -212,7 +212,8 @@ if (isset($_SESSION["ID"])) {
 
                 $date = date("Y/m/d");
                 //    var_dump($blood_group,$From,);
-                $sql = "SELECT * FROM blood_testing_result where MLT_ID ='$x' and blood_group='$blood_group' and process_date between '$From' and '$To'";
+                if($blood_group == "A-" || $blood_group == "A+" || $blood_group == "B-" || $blood_group == "B+" || $blood_group == "O-" || $blood_group == "O+" || $blood_group == "AB-" || $blood_group == "AB+"){
+                $sql = "SELECT * FROM blood_testing_result where Hospital_ID ='$y' and blood_group='$blood_group' and process_date between '$From' and '$To'";
                 $result = $conn->query($sql);
 
                 if ($result->num_rows > 0) {
@@ -243,15 +244,50 @@ if (isset($_SESSION["ID"])) {
                     echo  "</font>";
                     echo "</table>";
                     echo "</div>";
-                } else {
-                    //echo "Error in ".$sql."<br>".$conn->error;
-
-                    echo "no results";
-                }
-            }
+                }} else {
+                    $sql = "SELECT * FROM blood_testing_result where Hospital_ID ='$y' and process_date between '$From' and '$To'";
+                    $result = $conn->query($sql);
+        
+                    if ($result->num_rows > 0) {
+        
+        
+                        //echo "<font color=red>";
+                        //echo "<font size=6>";
+        
+                        echo  "<div class='container_content' id='container_content'>";
+                        echo "<h2><center>Blood Testing Details Report of $HospitalName</center> </h2>";
+                        echo "<h5><center>Save a Life</center> </h5>";
+                        echo "<h5><center>printed on $date</center> </h5><br><br>";
+        
+        
+        
+        
+                        echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;width:200px;'>" . "Test result ID" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Donar ID" . "</th>" . "<th style='text-align:center;width:100px;'>" . "Blood group" . "</th>" . "<th>" . "Malaria result" . "</th>" . "<th>" . " HIV result" . "</th>" . "<th>" . "HBV result" . "</th>" . "<th>" . "HCV result" . "</th>" . "<th>" . "VDRL result" . "</th>" . "<th>" . "Processed Date" . "</th>" . "<th>" . "Batch number" . "</th>" . "</tr>";
+                        echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
+                        while ($row = $result->fetch_assoc()) {
+                            echo  "<tr>" . "<td>" . $row["test_result_id"] . "</td>" . "<td>" . $row["Donor_Id"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "<td>" . $row["malaria_result"] . "</td>" . "<td>" . $row["hiv_result"] . "</td>" . "<td>" . $row["hbv_result"] . "</td>" . "<td>" . $row["hcv_result"] . "</td>" . "<td>" . $row["vdrl_result"] . "</td>" . "<td>" . $row["process_date"] . "</td>" . "<td>" . $row["batch_number"] . "</td>";
+        
+                            echo "</tr>";
+        
+                            echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
+                        }
+        
+                        echo "</font>";
+                        echo  "</font>";
+                        echo "</table>";
+                        echo "</div>";
+                    } else {
+                        //echo "Error in ".$sql."<br>".$conn->error;
+        
+                        echo "no results";
+                    }
+               
+                    
+                }}
+        }
             $conn->close();
             ?>
-
+<br>    
             <button onclick="generatePDF()" class="z">Download</button>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.2/pdfmake.min.js"></script>
 
@@ -271,7 +307,7 @@ if (isset($_SESSION["ID"])) {
                         },
                         jsPDF: {
                             unit: 'in',
-                            format: 'letter',
+                            format: [15, 8.5],
                             orientation: 'landscape'
                         },
                         width: 1524,
@@ -336,14 +372,12 @@ if (isset($_SESSION["ID"])) {
 
                 .z {
                     font-size: 20px;
-                    margin-top: 500px;
-                    margin-left: -100px;
-                    margin-right: 45px;
+                    margin-top: auto;
+                    margin-left: auto;
+                    margin-right: auto;
                     height: 47px;
                     border: none;
-
                     background: #4082f5;
-
                     cursor: pointer;
                     box-shadow: 0px 10px 40px 0px rgba(17, 97, 237, 0.4);
                     font-weight: 700;
@@ -355,8 +389,3 @@ if (isset($_SESSION["ID"])) {
     </body>
 
     </html>
-<?php
-
-}
-
-?>

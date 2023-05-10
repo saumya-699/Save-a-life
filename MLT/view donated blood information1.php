@@ -197,29 +197,23 @@ if (isset($_POST['view'])) {
           <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
           <h1> View donated blood information</h1>
 
-          <form method="post" action="search blood test result.php">
+          <div>
+          <input type="date" id="dateInput" class="b1">
 
-            <div class="midiv">
-
-
-              <font size=3> Search by </font></b> <br /> <br /><select name="search" class="select">
-                <option value="requested_date"><b> Requested Date</b></option>
-                <option value="requeste_id"><b> Request ID</b></option>
-                <option value="patient_name"><b>Patient Name</b></option>
-                <option value="blood_group" selected><b>Blood Group</b></option>
-                <option value="status" selected><b> Status</b></option>
+              <select id="filterDropdown" class="select">
+                <option value="All">Status</option>
+                <option value='Pending'>Pending</option>
+                <option value='Checked'>Checked</option>
+                
               </select>
 
+             
+              <input type="text" id="searchInput" class="box">
 
-              <input type="text" placeholder="type here" name="data" id="data" class="box">
-
-              <button type="submit" name="BtnSubmit" id="search" class="b1"><b>Search</b></button>
             </div>
 
-        </div>
 
-        </form>
-
+              
         <div class="box">
 
           <form action="Request history2.php" method="POST">
@@ -228,24 +222,24 @@ if (isset($_POST['view'])) {
 
 
               echo  "<div class='tab'>";
-              echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;'>" . "Donation Date" . "</th>" . "<th style='text-align:center;'>" . "Batch Number" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Donar ID" . "</th>" . "<th>" . "Donation ID" . "</th>" . "<th>" . "Blood Packet ID" . "</th>" . "<th>" . "Number Of Blood Packets" . "</th>" . "<th style='text-align:center;width:40px;'>" . "Nurse ID" . "</th>" . "</tr>";
-              echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
+              echo  "<table  id='dataTable' border=1>" . "<tr>" . "<th style='text-align:center;'>" . "Donation Date" . "</th>" . "<th style='text-align:center;'>" . "Batch Number" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Donar ID" . "</th>" . "<th>" . "Donation ID" . "</th>" . "<th>" . "Blood Packet ID" . "</th>" .  "<th style='text-align:center;width:40px;'>" . "Nurse ID" . "</th>" . "</tr>";
+              echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=6'>" . "</td>" . "</tr>";
               while ($row = $result->fetch_assoc()) {
 
 
-                echo  "<tr>" . "<td>" . $row["Donation_date"] . "</td>" . "<td>" . $row["Batch"] . "</td>". "<td>" . $row["Donor_Id"] . "</td>". "<td>" . $row["Donation_Id"] . "</td>". "<td>" . $row["packet_no"] . "</td>". "<td>" . $row["packet_quantity"] . "</td>". "<td>" . $row["Nurse_ID"] . "</td>";
+                echo  "<tr>" . "<td>" . $row["Donation_date"] . "</td>" . "<td>" . $row["Batch"] . "</td>". "<td>" . $row["Donor_Id"] . "</td>". "<td>" . $row["Donation_ID"] . "</td>". "<td>" . $row["packet_no"] . "</td>". "<td>" . $row["Nurse_ID"] . "</td>";
 
 
                 echo "</div>";
                 echo "</tr>";
 
-                echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
+                echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=6'>" . "</td>" . "</tr>";
               }
               echo  "</font>";
               echo  "</font>";
               echo "</table>";
             } else {
-              echo "Error in " . $sql . "<br>" . $conn->error;
+              // echo "Error in " . $sql . "<br>" . $conn->error;
 
               echo "no results";
             }
@@ -270,41 +264,7 @@ if (isset($_POST['view'])) {
             margin-bottom: 100px;
           }
 
-          .select {
-
-            height: 30px;
-            width: 120px;
-            border-radius: 20px;
-            background-color: #56CE94;
-            border: none;
-            text-align: center;
-            margin-left: 30px;
-
-          }
-
-          .box {
-
-            height: 30px;
-            width: 130px;
-            margin-left: 20px;
-            margin-top: 0px;
-            border-radius: 20px;
-            border: none;
-            text-align: center;
-
-          }
-
-          .b1 {
-            height: 30px;
-            width: 100px;
-            color: #FFF5F3;
-            margin-left: 20px;
-            border-radius: 20px;
-            background-color: #F3506D;
-            border: none;
-            cursor: pointer;
-
-          }
+          
 
           th {
 
@@ -314,7 +274,7 @@ if (isset($_POST['view'])) {
             text-align: center;
             padding-top: 25px;
             padding-bottom: 25px;
-            padding-left: 20px;
+            padding-left: 10px;
             padding-right: 10px;
             border: 0px transparent;
 
@@ -330,16 +290,6 @@ if (isset($_POST['view'])) {
           }
 
 
-
-          .midiv {
-
-            margin-left: 150px;
-            margin-bottom: 0px;
-            padding: 15px 10px 30px 20px;
-            margin-top: -100px;
-            outline: none;
-            width: 774.5px;
-          }
 
 
 
@@ -396,7 +346,8 @@ if (isset($_POST['view'])) {
 
             background-color: #F5F5F5;
             margin-top: -50px;
-            margin-left: 60px;
+            margin-left: 120px;
+            margin-right: 100px;
             padding-left: 0px;
             padding-right: 0px;
 
