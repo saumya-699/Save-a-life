@@ -11,7 +11,7 @@ require 'conection.php';
 
 if(isset($_POST['BtnSubmit']))
 {
-  
+    $date=date("Y/m/d");
     $Prefix=$_POST["prefix"];
     $Fullname=$_POST["fullname"];
 	$Initial=$_POST["Initials"];
@@ -32,45 +32,41 @@ if(isset($_POST['BtnSubmit']))
     
     //database connection
 
-        $sql = "INSERT INTO donors (Prefix,Full_Name,Initials,NIC_Number,DOB,Email,Gender,Address,province,postal,mobile_number,land_number,username,password)
-VALUES ('$Prefix','$Fullname','$Initial','$NIC','$DOB','$Email','$Gender','$Address','$province','$postal','$mobile_number','$land_number','$username','$password')";
+        $sql = "INSERT INTO donors (Prefix,Full_Name,Initials,NIC_Number,DOB,Email,Gender,Address,province,postal,mobile_number,land_number,username,password,date)
+VALUES ('$Prefix','$Fullname','$Initial','$NIC','$DOB','$Email','$Gender','$Address','$province','$postal','$mobile_number','$land_number','$username','$password','$date')";
 
-if($conn->query($sql)){
-      
-	echo '<script type="text/javascript">';	 
-	echo 'alert("Registration is successfully");';
+if($conn->query($sql)) {
+	//echo '<script type="text/javascript">';
+	//echo 'alert("Registration is successfully");';
+	//echo 'window.location.href="reg.php";';
+	//echo '</script>';
+
+	// Send email to donor with login credentials
+	
+	$to = $Email;
+	$subject = "Donor Login Credentials";
+	$message = "Hello $Fullname,\n\nYour login credentials are:\nEmail: $Email\nPassword: $password\n\nPlease login using this information to complete your registration.\n\nThank you!";
+	$headers = "From: sahhansini@gmail.com";
+
+	if (mail($to, $subject, $message, $headers)) {
+		echo "Email sent successfully!";
+		header("Location:reg.php");
+		exit();
+	} else {
+		echo "Email sending failed.";
+	}
+  
+} else {
+	echo '<script type="text/javascript">';
+	echo "Error in ".$sql."<br>".$conn->error;
+	echo 'alert("Error in entering try again!");';
 	echo 'window.location.href="reg.php";';
-	echo '</script>';    
-	
-
-	  
-	  
-	  
-     }
-     else
-	 {
-		 
-		   
-		 echo '<script type="text/javascript">';
-		echo "Error in ".$sql."<br>".$conn->error;
-		echo 'alert("Error in entering try again!");';
-		echo 'window.location.href="registerUserFront.php";';
-		echo '</script>';
-
- 
-		 
-	 }
-	 
- 
- //  echo "Error in ".$sql."<br>".$conn->error;
- 
- 
-	
+	echo '</script>';
 }
- 
-$conn->close();
 
+$conn->close();
+}
 ?>
 
 
- 
+
