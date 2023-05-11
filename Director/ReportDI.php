@@ -263,7 +263,7 @@ if($result->num_rows>0)
 {     
 
 
-      echo "<label for='exampleFormControlInput1' class='form-label lbl star'>Filter by Hospital</label>";
+echo "<label for='exampleFormControlInput1' class='form-label lbl star'>Filter by Hospital</label>";
 
 echo 
 "<select name='hid' class='form-control txt-input' required>";

@@ -238,7 +238,7 @@
     }
 
     .b1 {
-      background-color: #F35050;
+      background-color:#4082f5;
       color: white;
       border-radius: 30px;
       width: 110px;

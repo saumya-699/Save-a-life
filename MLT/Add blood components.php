@@ -13,7 +13,7 @@ if (isset($_SESSION["ID"])) {
     }
   }
 
-  $vql = "SELECT *FROM blood_testing_result Where MLT_ID ='$x' AND hbv_result <> 'Positive' AND hcv_result <> 'Positive' AND malaria_result <> 'Positive' AND hiv_result <> 'Positive' AND vdrl_result <> 'Positive' AND AddStatus	<> '1'";
+  $vql = "SELECT *FROM blood_testing_result Where MLT_ID ='$x' AND hbv_result <> 'Positive' AND hcv_result <> 'Positive' AND malaria_result <> 'Positive' AND hiv_result <> 'Positive' AND vdrl_result <> 'Positive' AND AddStatus	<> '1'AND status <> 'Pending'";
   $result = $conn->query($vql);
 }
 ?>
@@ -209,26 +209,6 @@ if (isset($_SESSION["ID"])) {
           <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
           <h1> Add blood component</h1>
 
-          <form method="post" action="Send test results for approvalSearch.php">
-
-            <div class="midiv">
-
-
-              <font size=3> Search by </font></b> <br /> <br /><select name="search" class="select">
-                <option value="process_date" selected><b>Process Date</b></option>
-                <option value="batch_number"><b>Batch number</b></option>
-              </select>
-
-
-              <input type="text" placeholder="type here" name="data" id="data" class="box">
-
-              <button type="submit" name="BtnSubmit" id="search" class="b1"><b>Search</b></button>
-            </div>
-
-        </div>
-
-        </form>
-
         <div class="box">
 
           <form action="Add blood components1.php" method="POST">
@@ -258,7 +238,7 @@ if (isset($_SESSION["ID"])) {
               echo  "</font>";
               echo "</table>";
             } else {
-              echo "Error in " . $vql . "<br>" . $conn->error;
+              // echo "Error in " . $vql . "<br>" . $conn->error;
 
               echo "no results";
             }

@@ -108,7 +108,7 @@ if($conn->query($jql))
      {
       
 	  
-	  $sql="insert into BloodBank_doctor(BloodBank_doctor_ID,Name_With_Initials,Hospital_ID,HospitalName,SLMC_Number,Email,ContactNumber,UserName,Password,AppointmentDate,RetiringDate,Remark,Director_ID)VALUES(' ','$Name','$y','$HName','$SLMC','$Email','$contactNumber','$Uname','$password','$DOA','','Added','$x')";
+	  $sql="insert into BloodBank_doctor(BloodBank_doctor_ID,Name_With_Initials,Hospital_ID,HospitalName,SLMC_Number,Email,ContactNumber,UserName,Password,AppointmentDate,Remark,Director_ID)VALUES(' ','$Name','$y','$HName','$SLMC','$Email','$contactNumber','$Uname','$password','$DOA','Added','$x')";
     if($conn->query($sql))
      {
       
@@ -376,16 +376,7 @@ if($conn->query($jql))
 		  
 		  
 		  
-	 <div class="container-shadow">
-  </div>
-  <div class="container">
-    <div class="wrap">
-     
-   <div class="headings">
-       <span><h1>Email</h1></span>
-      
-      </div>
-		
+	 
 		<style>
 textarea {
   width: 100%;

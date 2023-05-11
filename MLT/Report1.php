@@ -203,20 +203,19 @@
 
 
 
-              <label for="exampleFormControlInput1 " class="form-label lbl star ">Cross matching result</label>
-                  <select name="result" id=" " class="form-control txt-input " required="">
-                    <option value=" " diabled>Select test result </option>
-                    <option value="Matched">Matched</option>
-                    <option value="Unmatched">Unmatched</option>
+                <label for="exampleFormControlInput1 " class="form-label lbl star ">Cross matching result</label>
+                <select name="result" id=" " class="form-control txt-input " required="">
+                  <option value=" " diabled>Select test result </option>
+                  <option value="All">All</option>
+                  <option value="Matched">Matched</option>
+                  <option value="Unmatched">Unmatched</option>
+                </select>
+
+                <label for="exampleFormControlInput1" class="form-label lbl star"> Time period</label>
+                &nbsp; &nbsp; &nbsp; &nbsp; From &nbsp;<input type="date" placeholder="From" name="From" id="From" class="yu">&nbsp;&nbsp;
+                &nbsp; &nbsp; To &nbsp;<input type="date" placeholder="To" name="To" id="To" class="yu"><br><br><br>
 
 
-                <label for="exampleFormControlInput1" class="form-label lbl star">   Time period</label><br>
-                            
-                            
-                    From &nbsp;<input type="date" placeholder="From" name="From" id="From" class="yu">&nbsp;&nbsp;
-							      To &nbsp;<input type="date" placeholder="To" name="To" id="To" class="yu"><br><br><br>
-        
-                    
                 <div class="buttons ">
                   <button class="b1" name="submit" value="submit">
                     <font size="2px">Generate</font>

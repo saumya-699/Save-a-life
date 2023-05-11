@@ -212,41 +212,111 @@ if (isset($_SESSION["ID"])) {
 
                 $date = date("Y/m/d");
                 //    var_dump($blood_group,$From,);
-                $sql = "SELECT * FROM Cross_matching_testing_result where MLT_ID ='$x' and test_result='$result' and process_date between '$From' and '$To'";
-                $result = $conn->query($sql);
+                if ($result == "Matched") {
+                    $sql = "SELECT * FROM Cross_matching_testing_result where Hospital_ID ='$y' and test_result='Matched' and process_date between '$From' and '$To'";
+                    $result = $conn->query($sql);
 
-                if ($result->num_rows > 0) {
+                    if ($result->num_rows > 0) {
 
+                        //echo "<font color=red>";
+                        //echo "<font size=6>";
 
-                    //echo "<font color=red>";
-                    //echo "<font size=6>";
-
-                    echo  "<div class='container_content' id='container_content'>";
-                    echo "<h2><center>Cross Matching Testing Details Report of $HospitalName</center> </h2>";
-                    echo "<h5><center>Save a Life</center> </h5>";
-                    echo "<h5><center>printed on $date</center> </h5><br><br>";
-
-
+                        echo  "<div class='container_content' id='container_content'>";
+                        echo "<h2><center>Cross Matching Testing Details Report of $HospitalName</center> </h2>";
+                        echo "<h5><center>Save a Life</center> </h5>";
+                        echo "<h5><center>printed on $date</center> </h5><br><br>";
 
 
-                    echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;width:200px;'>" . " Blood Request ID" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Blood Group" . "</th>" . "<th style='text-align:center;width:100px;'>" . "Test Result" . "</th>" . "<th>" . "Processed Date" . "</th>" .  "</tr>";
-                    echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
-                    while ($row = $result->fetch_assoc()) {
-                        echo  "<tr>" . "<td>" . $row["Request_ID"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "</td>" . "<td>" . $row["test_result"] . "</td>" . "<td>" . $row["process_date"] . "</td>" ;
 
-                        echo "</tr>";
 
+                        echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;width:200px;'>" . " Blood Request ID" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Blood Group" . "</th>" . "<th style='text-align:center;width:100px;'>" . "Test Result" . "</th>" . "<th>" . "Processed Date" . "</th>" .  "</tr>";
                         echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
+                        while ($row = $result->fetch_assoc()) {
+                            echo  "<tr>" . "<td>" . $row["Request_ID"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "</td>" . "<td>" . $row["test_result"] . "</td>" . "<td>" . $row["process_date"] . "</td>";
+
+                            echo "</tr>";
+
+                            echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
+                        }
+
+                        echo "</font>";
+                        echo  "</font>";
+                        echo "</table>";
+                        echo "</div>";
+                    } else {
+                        //echo "Error in ".$sql."<br>".$conn->error;
+
+                        echo "no results";
                     }
+                } else if ($result == "Unmatched") {
+                    $sql = "SELECT * FROM Cross_matching_testing_result where Hospital_ID ='$y' and test_result='Unmatched' and process_date between '$From' and '$To'";
+                    $result = $conn->query($sql);
 
-                    echo "</font>";
-                    echo  "</font>";
-                    echo "</table>";
-                    echo "</div>";
-                } else {
-                    //echo "Error in ".$sql."<br>".$conn->error;
+                    if ($result->num_rows > 0) {
 
-                    echo "no results";
+                        //echo "<font color=red>";
+                        //echo "<font size=6>";
+
+                        echo  "<div class='container_content' id='container_content'>";
+                        echo "<h2><center>Cross Matching Testing Details Report of $HospitalName</center> </h2>";
+                        echo "<h5><center>Save a Life</center> </h5>";
+                        echo "<h5><center>printed on $date</center> </h5><br><br>";
+
+
+
+
+                        echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;width:200px;'>" . " Blood Request ID" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Blood Group" . "</th>" . "<th style='text-align:center;width:100px;'>" . "Test Result" . "</th>" . "<th>" . "Processed Date" . "</th>" .  "</tr>";
+                        echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
+                        while ($row = $result->fetch_assoc()) {
+                            echo  "<tr>" . "<td>" . $row["Request_ID"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "</td>" . "<td>" . $row["test_result"] . "</td>" . "<td>" . $row["process_date"] . "</td>";
+
+                            echo "</tr>";
+
+                            echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
+                        }
+
+                        echo "</font>";
+                        echo  "</font>";
+                        echo "</table>";
+                        echo "</div>";
+                    } else {
+                        //echo "Error in ".$sql."<br>".$conn->error;
+
+                        echo "no results";
+                    }
+                } else if ($result == "All") {
+                    $sql = "SELECT * FROM Cross_matching_testing_result where Hospital_ID ='$y'  and process_date between '$From' and '$To'";
+                    $result = $conn->query($sql);
+
+                    if ($result->num_rows > 0) {
+
+                        //echo "<font color=red>";
+                        //echo "<font size=6>";
+
+                        echo  "<div class='container_content' id='container_content'>";
+                        echo "<h2><center>Cross Matching Testing Details Report of $HospitalName</center> </h2>";
+                        echo "<h5><center>Save a Life</center> </h5>";
+                        echo "<h5><center>printed on $date</center> </h5><br><br>";
+
+          echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;width:200px;'>" . " Blood Request ID" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Blood Group" . "</th>" . "<th style='text-align:center;width:100px;'>" . "Test Result" . "</th>" . "<th>" . "Processed Date" . "</th>" .  "</tr>";
+                        echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
+                        while ($row = $result->fetch_assoc()) {
+                            echo  "<tr>" . "<td>" . $row["Request_ID"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "</td>" . "<td>" . $row["test_result"] . "</td>" . "<td>" . $row["process_date"] . "</td>";
+
+                            echo "</tr>";
+
+                            echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
+                        }
+
+                        echo "</font>";
+                        echo  "</font>";
+                        echo "</table>";
+                        echo "</div>";
+                    } else {
+                        //echo "Error in ".$sql."<br>".$conn->error;
+
+                        echo "no results";
+                    }
                 }
             }
             $conn->close();
@@ -259,7 +329,7 @@ if (isset($_SESSION["ID"])) {
                     const element = document.getElementById('container_content');
                     var opt = {
                         margin: 0,
-                        filename: 'Blood testing Report.pdf',
+                        filename: 'Cross Matching testing Report.pdf',
                         image: {
                             type: 'jpeg',
                             quality: 0.98
@@ -279,72 +349,74 @@ if (isset($_SESSION["ID"])) {
             </script>
 
             </main>
-            </div>
+        </div>
 
-            <!-- partial -->
-            <script src='https://unpkg.com/@popperjs/core@2'></script>
-            <script src="./script.js"></script>
-
-
-            <style>
-                .container_content{
-                    margin-left: 150px;
-                }
-                table {
-                    width: 700px;
-                    height: 15px;
-                    border-collapse: collapse;
-                    margin-top: 40px;
-                    border: 0px transparent;
-
-                }
-
-                th {
+        <!-- partial -->
+        <script src='https://unpkg.com/@popperjs/core@2'></script>
+        <script src="./script.js"></script>
 
 
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    text-align: center;
-                    padding-top: 25px;
-                    padding-bottom: 25px;
-                    padding-left: 20px;
-                    padding-right: 10px;
-                    border: 0px transparent;
+        <style>
+            .container_content {
+                margin-left: 150px;
+            }
 
-                }
+            table {
+                width: 700px;
+                height: 15px;
+                border-collapse: collapse;
+                margin-top: 40px;
+                border: 0px transparent;
+                margin-left: 10px;
 
-                td {
-                    text-align: center;
-                    padding: 1px;
+            }
 
-
-                }
-
-                tr {
-
-                    background-color: white;
+            th {
 
 
-                }
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                text-align: center;
+                padding-top: 25px;
+                padding-bottom: 25px;
+                padding-left: 20px;
+                padding-right: 10px;
+                border: 0px transparent;
 
-                .z {
-                    font-size: 20px;
-                    margin-top: 500px;
-                    margin-left: 0px;
-                    margin-right: 45px;
-                    height: 47px;
-                    border: none;
+            }
 
-                    background: #4082f5;
+            td {
+                text-align: center;
+                padding: 1px;
 
-                    cursor: pointer;
-                    box-shadow: 0px 10px 40px 0px rgba(17, 97, 237, 0.4);
-                    font-weight: 700;
-                    font-size: 20px;
-                    border-radius: 30px;
-                }
-            </style>
+
+            }
+
+            tr {
+
+                background-color: white;
+
+
+            }
+
+            .z {
+                font-size: 20px;
+                margin-top: auto;
+                margin-left: auto;
+                margin-right: auto;
+                height: 47px;
+                border: none;
+
+                background: #4082f5;
+
+                cursor: pointer;
+                box-shadow: 0px 10px 40px 0px rgba(17, 97, 237, 0.4);
+                font-weight: 700;
+                font-size: 20px;
+                border-radius: 30px;
+            }
+        </style>
 
     </body>
 

@@ -31,7 +31,7 @@ if (isset($_SESSION["ID"])) {
   <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'>
   <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="./style.css">
-
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 </head>
 
 <body>
@@ -122,28 +122,35 @@ if (isset($_SESSION["ID"])) {
     <div class="layout">
       <main class="content">
         <!-- add your content from here -->
-        <h1> Blood Request History</h1>
-        <form method="post" action="search.php">
 
-          <div class="midiv">
-            <p>
-              <font size=3> Search by </font>
-            </p><select name="search" class="select">
-              <option value="requested_date"><b> Requested Date</b></option>
-              <option value="requeste_id"><b> Request ID</b></option>
-              <option value="patient_name"><b>Patient Name</b></option>
-              <option value="blood_group" selected><b>Blood Group</b></option>
-              <option value="status" selected><b> Status</b></option>
-            </select>
+        <div>
+          <input type="date" id="dateInput" class="b1">
+
+          <select id="filterDropdown" class="select">
+            <option value="All">Group</option>
+            <option value='A+'>A+</option>
+            <option value='A-'>A-</option>
+            <option value='B+'>B+</option>
+            <option value='B-'>B-</option>
+            <option value='O+'>O+</option>
+            <option value='O-'>O-</option>
+            <option value='AB+'>AB+</option>
+            <option value='AB-'>AB-</option>
+          </select>
+
+          <select id="ResultDropdown" class="selectx">
+            <option value="All">Status</option>
+            <option value='Pending'>Pending</option>
+            <option value='Checked'>Checked</option>
+
+          </select>
 
 
-            <input type="text" placeholder="type here" name="data" id="data" class="box">
+          <input type="text" id="searchInput" class="box">
 
-            <button type="submit" name="BtnSubmit" id="search" class="b1"><b>Search</b></button>
-          </div>
+        </div>
 
 
-        </form>
 
         <div class="box">
 
@@ -153,7 +160,7 @@ if (isset($_SESSION["ID"])) {
 
             if ($result->num_rows > 0) {
 
-              echo  "<div class='tab'>";
+              echo  "<div id='dataTable' class='tab'>";
               echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;'>" . "Requested date" . "</th>" . "<th style='text-align:center;'>" . "Receive date" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Patient Name" . "</th>" . "<th>" . "Blood Group" . "</th>" . "<th>" . "Status" . "</th>" . "<th style='text-align:center;width:40px;'>" . "Action" . "</th>" . "</tr>";
               echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
               while ($row = $result->fetch_assoc()) {
@@ -185,6 +192,59 @@ if (isset($_SESSION["ID"])) {
             $conn->close();
 
             ?>
+            <script>
+            function filterTable() {
+              const input = document.getElementById('searchInput');
+              const filter = input.value.toUpperCase();
+              const select = document.getElementById('filterDropdown');
+              const filterValue = select.options[select.selectedIndex].value;
+              const Result = document.getElementById('ResultDropdown');
+              const ResultValue = Result.options[Result.selectedIndex].value;
+              const dateInput = document.getElementById('dateInput').value;
+
+
+
+              const table = document.getElementById('dataTable');
+              const rows = table.getElementsByTagName('tr');
+
+              for (let i = 1; i < rows.length; i++) {
+                const row = rows[i];
+                if (row.cells.length === 1) {
+                  continue;
+                }
+                const cells = row.getElementsByTagName('td');
+                const positionClass = row.className;
+                
+                const result = cells[4].textContent;
+                const group = cells[3].textContent;
+                const date = cells[0,1].textContent;
+                
+
+                if ((filterValue === 'All' || group.toLowerCase() === filterValue.toLowerCase()) &&
+                  Array.from(cells).some(cell => cell.textContent.toUpperCase().includes(filter)) &&
+                  (ResultValue === 'All' || result.toLowerCase() === ResultValue.toLowerCase())&&
+                  (dateInput === '' || date === dateInput)){
+                  row.style.display = '';
+                } else {
+                  row.style.display = 'none';
+                }
+              }
+            
+              }
+            
+            // Attach filterTable function to events (e.g. button click, input change)
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', filterTable);
+
+            const filterDropdown = document.getElementById('filterDropdown');
+            filterDropdown.addEventListener('change', filterTable);
+
+            const ResultDropdown = document.getElementById('ResultDropdown');
+            ResultDropdown.addEventListener('change', filterTable);
+
+            const dateInput = document.getElementById('dateInput');
+            dateInput.addEventListener('input', filterTable);
+          </script>
         </div>
     </div>
   </div>
@@ -210,21 +270,6 @@ if (isset($_SESSION["ID"])) {
       margin-bottom: 70px;
     }
 
-    .select {
-
-      height: 30px;
-      width: 138px;
-      border-radius: 20px;
-      background-color: #F35050;
-      border: none;
-      text-align: center;
-      margin-left: 30px;
-      color: #FFF5F3;
-
-     
-
-
-    }
 
 
 
@@ -252,47 +297,55 @@ if (isset($_SESSION["ID"])) {
 
 
 
-
-    .midiv {
-
-      margin-left: 200px;
-      padding: 15px 10px 30px 20px;
-      margin-top: -70px;
-      outline: none;
-      width: 774.5px;
+    .select {
+      height: 35px;
+      width: 145px;
+      border-radius: 20px;
+      background-color: #F35050;
+      border: none;
+      text-align: center;
+      margin-left: 10px;
+      margin-top: 100px;
+      margin-bottom: 50px;
+      color: white;
     }
 
+    .selectx {
+      height: 35px;
+      width: 145px;
+      border-radius: 20px;
+      background-color: #F35050;
+      border: none;
+      text-align: center;
+      margin-left: 10px;
+      margin-top: 100px;
+      margin-bottom: 50px;
+      color: white;
+    }
 
+    .b1 {
+      height: 40px;
+      width: 130px;
+      color: #FFF5F3;
+      margin-left: 6px;
+      border-radius: 20px;
+      background-color: #F35050;
+      border: none;
+      text-align: center;
+      cursor: pointer;
+      margin-top: 100px;
+      margin-bottom: 50px;
+      margin-left: 170px
+    }
 
     .box {
-
-
-      height: 30px;
-      width: 150px;
+      height: 35px;
+      width: 200px;
       margin-left: 20px;
-      margin-top: 0px;
       border-radius: 20px;
       border: none;
       text-align: center;
-
-
-    }
-
-
-    .b1 {
-      height: 30px;
-      width: 100px;
-
-      color: #FFF5F3;
-      margin-left: 20px;
-      border-radius: 20px;
-
-      background-color: #F35050;
-      border: none;
-      cursor: pointer;
-
-
-
+      margin-top: 100px;
     }
 
 
@@ -341,7 +394,7 @@ if (isset($_SESSION["ID"])) {
 
     .tab {
       background-color: #F5F5F5;
-      margin-top: -60px;
+      margin-top: -120px;
       margin-left: 60px;
     }
 

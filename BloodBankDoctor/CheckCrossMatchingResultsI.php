@@ -73,7 +73,7 @@ session_start();
               <ul>
                 <li class="menu-header"><span>  </span></li>
                 <li class="menu-item">
-                  <a href="Home.php">
+                  <a href="#">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -174,22 +174,69 @@ session_start();
                     </ul>
                   </div>
                 </li>
-                <li class="menu-item">
-                  <a href="View_Donors_BI.php">
+                <li class="menu-item sub-menu">
+                  <a href="#">
                     <span class="menu-icon">
-                      <i class="ri-user-heart-fill"></i>
+                      <i class="ri-article-fill"></i>
                     </span>
                     <span class="menu-title">Donors</span>
                   </a>
-                 </li>
-                <li class="menu-item">
-                  <a href="ReportGeneration_BI.php">
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="View_Donors_BI.php">
+                          <span class="menu-title">View</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="donorEmail.php">
+                          <span class="menu-title">Send Non -Emergency Email</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                
+                 <li class="menu-item sub-menu">
+                  <a href="#">
                     <span class="menu-icon">
-                      <i class="ri-file-chart-line"></i>
+                      <i class="ri-message-2-fill"></i>
                     </span>
                     <span class="menu-title">Reports</span>
                   </a>
-                 </li>
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="ReportGenerationStock.php">
+                          <span class="menu-title">Stock Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGenerationCrossMatching.php">
+                          <span class="menu-title">Cross Matching Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGenerationBlood.php">
+                          <span class="menu-title">Blood Request Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGeneration_BI.php">
+                          <span class="menu-title">Donation Details Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGeneration_Request.php">
+                          <span class="menu-title">External Requests Reports</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+
+
+
                 <li class="menu-header" style="padding-top: 40px"><span>  </span></li>
                 <li class="menu-item">
                   <a href="profileBI.php">
@@ -227,7 +274,6 @@ session_start();
         <main class="content">
           <div>
             <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a></div>
-             <!--add your content from here-->
 <div>
  
              <select id="filterDropdown" class="select">
@@ -284,7 +330,9 @@ if($resultr->num_rows>0)
   
 
 
-$sql= "select * from cross_matching_testing_result where Hospital_ID='$y' ORDER BY status DESC" ;
+$sql= "select * 
+from cross_matching_testing_result where Hospital_ID=$y 
+ORDER BY Status DESC" ;
 $result = $conn->query($sql);
 
 if($result->num_rows>0)
@@ -309,11 +357,11 @@ if($result->num_rows>0)
 	   echo "<td><form method='POST' action ='CheckCrossMatchingResultsI.php'>
                 <input type=hidden name=Request_ID value=".$row["Request_ID"]." >
                 <button type=submit name=update  id=btn class=z ><i class='fa-regular fa-square-check'></i></button>
-                </form>
+               
 				
                 </td>";
 				 echo "</tr>";
-	 
+      echo "  </form>";
 	   echo "<tr>"."<td style='height:8px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
 	  
 	}
@@ -338,6 +386,44 @@ else
 }
 
 
+
+if(isset($_POST['update']))  
+
+{	
+
+     $status="Checked";
+   $did=$_POST['Request_ID'];
+   $sql="update cross_matching_testing_result
+   set Status ='$status',BloodBank_doctor_ID ='$x'  where Request_ID=$did";
+   
+   
+   
+     if ($conn->query($sql) === TRUE) 
+				   {
+                          
+                           echo '<script type="text/javascript">';
+		                  //echo 'alert("Details updated successfully");';
+         
+		                     echo 'window.location.href="checkCrossMatchingResultsI.php";';
+		                  echo '</script>';
+
+                   } 
+					 
+					 else 
+			               {  
+                              echo '<script type="text/javascript">';
+		                     // echo 'alert("Error in updating details.Try again!");';
+                              echo "Error in ".$sql."<br>".$conn->error;
+		                      echo 'window.location.href="updateAccount.php";';
+		                      echo '</script>';
+
+                            }
+							
+							
+							
+							
+ 
+}
 
 
 
@@ -413,7 +499,17 @@ function myConfirm() {
 
 </script>
 
-          
+   <style>
+   
+   .z{
+
+          // margin-left:50px;
+           margin-top:12px;
+           font-size: 25px;
+
+    }
+
+   </style>
         </main>
      
 <!-- partial -->

@@ -54,7 +54,7 @@ if(isset($_SESSION["ID"])) {
               <ul>
                 <li class="menu-header"><span>  </span></li>
                 <li class="menu-item">
-                  <a href="Home.php">
+                  <a href="#">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -155,22 +155,69 @@ if(isset($_SESSION["ID"])) {
                     </ul>
                   </div>
                 </li>
-                <li class="menu-item">
-                  <a href="View_Donors_BI.php">
+                <li class="menu-item sub-menu">
+                  <a href="#">
                     <span class="menu-icon">
-                      <i class="ri-user-heart-fill"></i>
+                      <i class="ri-article-fill"></i>
                     </span>
                     <span class="menu-title">Donors</span>
                   </a>
-                 </li>
-                <li class="menu-item">
-                  <a href="ReportGeneration_BI.php">
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="View_Donors_BI.php">
+                          <span class="menu-title">View</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="donorEmail.php">
+                          <span class="menu-title">Send Non -Emergency Email</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                
+                 <li class="menu-item sub-menu">
+                  <a href="#">
                     <span class="menu-icon">
-                      <i class="ri-file-chart-line"></i>
+                      <i class="ri-message-2-fill"></i>
                     </span>
                     <span class="menu-title">Reports</span>
                   </a>
-                 </li>
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="ReportGenerationStock.php">
+                          <span class="menu-title">Stock Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGenerationCrossMatching.php">
+                          <span class="menu-title">Cross Matching Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGenerationBlood.php">
+                          <span class="menu-title">Blood Request Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGeneration_BI.php">
+                          <span class="menu-title">Donation Details Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGeneration_Request.php">
+                          <span class="menu-title">External Requests Reports</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+
+
+
                 <li class="menu-header" style="padding-top: 40px"><span>  </span></li>
                 <li class="menu-item">
                   <a href="profileBI.php">
@@ -208,7 +255,6 @@ if(isset($_SESSION["ID"])) {
         <main class="content">
           <div>
             <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a></div>
-             <!--add your content from here-->
            
          
   
@@ -228,16 +274,21 @@ if(isset($_SESSION["ID"])) {
            
                 <?php
 
-
+$send_status =1;
 $vql = "SELECT process_date,batch_number,status 
-FROM blood_testing_result Where Hospital_ID ='$x' and process_date ='$date' GROUP BY  batch_number ";
+FROM blood_testing_result 
+Where Hospital_ID ='$x' and process_date ='$date' and send_status=$send_status
+ GROUP BY  batch_number
+ ORDER BY status
+ ";
+
 $result = $conn->query($vql);
             
 
 if ($result->num_rows > 0) {
 
                  //   echo  "<div class='tab'>";
-                    echo  "<table border=1 id='dataTable'>"."<tr>"."<th style='text-align:center'>"."Processed Date"."</th>"."<th style='text-align:center;'>"."Batch Number"."</th>"."<th style='text-align:center;width:120px;'>"."Status"."</th>"."<th>"."Action"."</th>"."</tr>";
+                    echo  "<table border=1 id='dataTable'>"."<tr>"."<th style='text-align:center'>"."Process Date"."</th>"."<th style='text-align:center;'>"."Batch Number"."</th>"."<th style='text-align:center;width:120px;'>"."Status"."</th>"."<th>"."Action"."</th>"."</tr>";
                   //  echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
                  while($row = $result->fetch_assoc()) {    
                            
@@ -292,8 +343,8 @@ $conn->close();
 <form method='POST' action ='EmailDe.php'>
     
   
-    <button type=submit  name=send class=z>send mails</button>
-     </form> "; 
+    <button type=submit  name=send class=z><span style="color: white;">Send Emails</span></button>
+     </form> 
 
 <?php
 if(isset($_POST['check']))  
@@ -383,21 +434,23 @@ filterDropdown.addEventListener('change', filterTable);
 
     <style>
 .z{
-   font-size:20px;
+   font-size:15px;
    margin-top:50px;
-   margin-left:850px;
+   margin-left:730px;
    height:47px;					   
    border: none;
                  //background-color:#F35050;
                  //width: 100%;
 background: #4082f5;
 //text-transform: uppercase;
-// padding: 12px;
+ padding: 10px;
+
 cursor: pointer;
-box-shadow: 0px 10px 40px 0px rgba(17, 97, 237, 0.4);
+
 font-weight: 700;
-font-size: 20px;	
+
 border-radius:30px;
+
 }
 
 </style>

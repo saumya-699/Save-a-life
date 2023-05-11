@@ -209,25 +209,7 @@ if (isset($_SESSION["ID"])) {
           <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
           <h1> Send blood test results for approval</h1>
 
-          <form method="post" action="Send test results for approvalSearch.php">
-
-            <div class="midiv">
-
-
-              <font size=3> Search by </font></b> <br /> <br /><select name="search" class="select">
-                <option value="process_date" selected><b>Process Date</b></option>
-                <option value="batch_number"><b>Batch number</b></option>
-              </select>
-
-
-              <input type="text" placeholder="type here" name="data" id="data" class="box">
-
-              <button type="submit" name="BtnSubmit" id="search" class="b1"><b>Search</b></button>
-            </div>
-
-        </div>
-
-        </form>
+        
 
         <div class="box">
 
@@ -258,8 +240,7 @@ if (isset($_SESSION["ID"])) {
     
      echo "
      <form method='POST' action =''>  	
-     <input type=hidden name='bnum' value=" . $row["batch_number"] . " >
-    <input type=hidden name='bdate' value=" . $row["process_date"] . " >
+    
     <button type=submit value=Send name='$bnum'  class='fp'><i class='fa-regular fa-forward-fast'></i></button>
 
      </form>
@@ -267,7 +248,8 @@ if (isset($_SESSION["ID"])) {
 
     </td>";
  
-    
+    // <input type=hidden name='bnum' value=" . $row["batch_number"] . " >
+    // <input type=hidden name='bdate' value=" . $row["process_date"] . " >
     if(isset($_POST[$bnum])){
     
       
@@ -287,8 +269,8 @@ if (isset($_SESSION["ID"])) {
               echo  "</font>";
               echo "</table>";
             } else {
-              echo "Error in " . $vql . "<br>" . $conn->error;
-
+              // echo "Error in " . $vql . "<br>" . $conn->error;
+        
               echo "no results";
             }
 

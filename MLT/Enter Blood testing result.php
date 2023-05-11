@@ -194,30 +194,9 @@ $result = $conn->query($sql);
       <main class="content">
         <div>
           <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
-          <h1> </h1>
+         <h1>Enter testing Result </h1> 
 
-          <form method="post" action="search blood test result.php">
-
-            <div class="midiv">
-
-
-              <font size=3> Search by </font></b> <br /> <br /><select name="search" class="select">
-                <option value="requested_date"><b> Requested Date</b></option>
-                <option value="requeste_id"><b> Request ID</b></option>
-                <option value="patient_name"><b>Patient Name</b></option>
-                <option value="blood_group" selected><b>Blood Group</b></option>
-                <option value="status" selected><b> Status</b></option>
-              </select>
-
-
-              <input type="text" placeholder="type here" name="data" id="data" class="box">
-
-              <button type="submit" name="BtnSubmit" id="search" class="b1"><b>Search</b></button>
-            </div>
-
-        </div>
-
-        </form>
+        
 
         <div class="box">
 
@@ -233,7 +212,7 @@ $result = $conn->query($sql);
               while ($row = $result->fetch_assoc()) {
 
 
-                echo  "<tr>" . "<td>" . $row["Donation_date"] . "</td>" . "<td>" . $row["Batch"] . "</td>". "<td>" . $row["Donor_Id"] . "</td>". "<td>" . $row["Donation_Id"] . "</td>". "<td>" . $row["packet_no"] .  "</td>";
+                echo  "<tr>" . "<td>" . $row["Donation_date"] . "</td>" . "<td>" . $row["Batch"] . "</td>". "<td>" . $row["Donor_Id"] . "</td>". "<td>" . $row["Donation_ID"] . "</td>". "<td>" . $row["packet_no"] .  "</td>";
                 echo "<td class='tb'><form method='POST' action ='Enter Blood testing result1.php'>
                    <input type=hidden name=DID value=" . $row["Donor_Id"] . " >
                    <input type=hidden name=PID value=" . $row["packet_no"] . " >
@@ -270,45 +249,11 @@ $result = $conn->query($sql);
           h1 {
 
             margin-top: 70px;
-            margin-left: 200px;
+            margin-left: 320px;
             margin-bottom: 100px;
           }
 
-          .select {
-
-            height: 30px;
-            width: 120px;
-            border-radius: 20px;
-            background-color: #56CE94;
-            border: none;
-            text-align: center;
-            margin-left: 30px;
-
-          }
-
-          .box {
-
-            height: 30px;
-            width: 130px;
-            margin-left: 20px;
-            margin-top: 0px;
-            border-radius: 20px;
-            border: none;
-            text-align: center;
-
-          }
-
-          .b1 {
-            height: 30px;
-            width: 100px;
-            color: #FFF5F3;
-            margin-left: 20px;
-            border-radius: 20px;
-            background-color: #F3506D;
-            border: none;
-            cursor: pointer;
-
-          }
+        
 
           th {
 

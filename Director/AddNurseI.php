@@ -277,8 +277,7 @@ echo "
 	
 <?php
 	
-
-						  $sql= 'select *from hospital' ;
+  $sql= "select *from hospital where Remark != 'Non-functioning'" ;
                            $result = $conn->query($sql);
 
       if($result->num_rows>0)
@@ -316,9 +315,13 @@ echo "
 	        echo   "<label for='exampleFormControlInput1'>Position</label>
                          <select id='position' name='position'  class='x' required>
 						   <option value=Not Provided' class='items'> None</option>
-                         <option value='Head nurse' class='items'> Head&nbsp;nurse
-						 </option>
-                         <option value='Nurse' class='items'> Nurse</option>
+               <option value='Staff Nurse'>Staff Nurse</option>
+               <option value='Senior Staff Nurse'>Senior Staff Nurse</option>
+               <option value='Head Nurse'>Head Nurse</option>
+               <option value='Nursing Supervisor'>Nursing Supervisor</option>
+               <option value='Nurse Educator'>Nurse Educator</option>
+               <option value='Nurse Researcher'>Nurse Researcher</option>
+               <option value='Nurse Practitioner'>Nurse Practitioner</option>
                         
                         
                          </select>

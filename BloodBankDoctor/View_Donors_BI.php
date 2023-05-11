@@ -15,15 +15,16 @@ session_start();
 <head>
   <meta charset="UTF-8">
   <title>side bar- blood bank doctor</title>
-    <title>side bar- blood bank doctor</title>
  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
 <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
 <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./styleM.css">
-
+<script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script> 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
- <link rel="stylesheet" href="StyleSearchss.css"> 
+ <link rel="stylesheet" href="StyleSearchNew.css"> 
+ <link rel="stylesheet" href="StyleIcons.css"> 
+
 
 </head>
 <body>
@@ -44,41 +45,7 @@ session_start();
               <ul>
                 <li class="menu-header"><span>  </span></li>
                 <li class="menu-item">
-                  <a href="Home.php
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  
-                  ">
+                  <a href="#">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -179,22 +146,69 @@ session_start();
                     </ul>
                   </div>
                 </li>
-                <li class="menu-item">
-                  <a href="View_Donors_BI.php">
+                <li class="menu-item sub-menu">
+                  <a href="#">
                     <span class="menu-icon">
-                      <i class="ri-user-heart-fill"></i>
+                      <i class="ri-article-fill"></i>
                     </span>
                     <span class="menu-title">Donors</span>
                   </a>
-                 </li>
-                <li class="menu-item">
-                  <a href="ReportGeneration_BI.php">
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="View_Donors_BI.php">
+                          <span class="menu-title">View</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="donorEmail.php">
+                          <span class="menu-title">Send Non -Emergency Email</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                
+                 <li class="menu-item sub-menu">
+                  <a href="#">
                     <span class="menu-icon">
-                      <i class="ri-file-chart-line"></i>
+                      <i class="ri-message-2-fill"></i>
                     </span>
                     <span class="menu-title">Reports</span>
                   </a>
-                 </li>
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="ReportGenerationStock.php">
+                          <span class="menu-title">Stock Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGenerationCrossMatching.php">
+                          <span class="menu-title">Cross Matching Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGenerationBlood.php">
+                          <span class="menu-title">Blood Request Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGeneration_BI.php">
+                          <span class="menu-title">Donation Details Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGeneration_Request.php">
+                          <span class="menu-title">External Requests Reports</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+
+
+
                 <li class="menu-header" style="padding-top: 40px"><span>  </span></li>
                 <li class="menu-item">
                   <a href="profileBI.php">
@@ -232,14 +246,12 @@ session_start();
         <main class="content">
           <div>
             <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a></div>
-             <!--add your content from here-->
-
 
  
 
      
 <select id="filterDropdown" class="b1">
-    <option value="All">All</option>
+    <option value="All">Gender</option>
     <option value="Female">Female</option>
     <option value="Male">Male</option>
     
@@ -332,7 +344,7 @@ if($result->num_rows>0)
 	  echo  "<td>".$row["Donor_Id"]."</td>"."<td>".$row["Prefix"].".".$row["Full_Name"]."</td>"."<td>".$row["NIC_Number"]."</td>"."<td>".$row["Gender"]."</td>"."<td>".$row["mobile_number"]."</td>"."<td>".$row["province"]."</td>";
 	   echo "<td><form method='POST' action ='ViewAll_B.php'>
                 <input type=hidden name=Donor_Id value=".$row["Donor_Id"]." >
-                <button type=submit value=view name=view  class='fp'><img src=eye.png width=43 height=37></button>
+                <button type=submit value=view name=view  id ='btn' class='x'><i class='fa-sharp fa-solid fa-eye'></i></button>
                 </form>
 				
             </td>";
