@@ -1,42 +1,51 @@
-<?php 
+
+
+<?php
+  include "conp.php";
 session_start();
-require "conp.php";
-?>
+if(isset($_SESSION["ID"])) {
 
+  if(isset($_POST['view'])){
 
- <?php
-   if(isset($_SESSION["ID"]))   {
-    $m = $_SESSION["Name"];
-    $query = "SELECT * FROM bloodbank_doctor WHERE UserName ='$m'";
-    $result1 = $conn->query($query);
-    $ID =null;
-     if($result1->num_rows > 0) {        
-      while($row = $result1->fetch_assoc()) {
-        $x = $row["Hospital_ID"];
-       $hid= $x;
-        $ID =$row["BloodBank_doctor_ID"];
-      }
+  $date =date("Y/m/d");
+  $m = $_SESSION["Name"];
+  $query = "SELECT * FROM bloodbank_doctor WHERE UserName ='$m'";
+  $result1 = $conn->query($query);
+
+   if($result1->num_rows > 0) {        
+    while($row = $result1->fetch_assoc()) {
+      $x = $row["Hospital_ID"];
+      $ID =$row["BloodBank_doctor_ID"];
+      $hid =$row["Hospital_ID"];
     }
-	
-	
+  }
+  $request_date=$_POST['RequestDate'];
+  $batch_no=$_POST['RequestBatch'];
+
+  $vql = "SELECT * FROM blood_testing_result Where Hospital_ID ='$x' and send_status='1' AND process_date='$request_date' AND batch_number='$batch_no' Group by process_date,batch_number ";
+  $result = $conn->query($vql);
+
 ?>
+
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>side bar-director</title>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
+  <title>side bar- blood bank doctor</title>
+  
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
 <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
 <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./styleM.css">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
-<link rel="stylesheet" href="./StyleSheetNotification.css">
-
-
+<script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
+ <link rel="stylesheet" href="StyleSearch.css"> 
+ <link rel="stylesheet" href="StyleIcons.css"> 
+ <link rel="stylesheet" href="./StyleSheetNotification.css">
+ 
 </head>
 <body>
-<!-- partial:index.partial.html -->
 <!-- partial:index.partial.html -->
 <div class="layout has-sidebar fixed-sidebar fixed-header">
       <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
@@ -359,132 +368,153 @@ require "conp.php";
         <main class="content">
           <div>
             <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a></div>
-		   <div class="container-shadow">
-  </div>
-  <div class="container">
-    <div class="wrap">
-      <div class="headings">
-        <center><span><h1>Donor </h1></span><center>
-      
-      </div>
-  <?php
-
-
-require 'conp.php';
-if(isset($_POST['view']))  {
-
-  $did=$_POST['Donor_Id'];
-  $query="select * from donors where Donor_Id='$did'";
-  $result= $conn->query($query);
-  
-  
- if($result->num_rows>0)
-
- {     
-  
-
-      
-   while($row = $result->fetch_assoc())
-  
-  {     
-    
-   //echo  "<tr>"."<td>".$row["Donor_Id"]."</td>"."<td>".$row["Prefix"].".".$row["Full_Name"]."</td>"."<td>".$row["Initials"]."</td>"."<td>".$row["NIC_Number"]."</td>"."<td>".$row["DOB"]."</td>"."<td>".$row["Address"]."</td>"."<td>".$row["province"]."</td>"."<td>".$row["postal"]."</td>"."<td>".$row["Gender"]."</td>"."<td>".$row["Email"]."</td>"."<td>".$row["mobile_number"]."<br/>".$row["land_number"]."</td>";
- 
-    
-echo "
-
-                              <label for='exampleFormControlInput1' class='form-label lbl star'>Donor Id</label> 
-                              <input type='text' value=".$row["Donor_Id"]." name='id'  class='form-control txt-input' readonly>
-                     
-                              <label for='exampleFormControlInput1' class='form-label lbl star'>Name with Initials</label> 
-                              <input type='text' value=".$row["Initials"]." name='Name' id='name' class='form-control txt-input' readonly>
-                       
-                              
-                            
-                             <label for='exampleFormControlInput1' class='form-label lbl star'>NIC Number</label>
-                              <input type='text' value=".$row["NIC_Number"]." name='NIC' id='slmc' class='form-control txt-input'readonly>
-
-                              <label for='exampleFormControlInput1' class='form-label lbl star'>DOB</label>
-                              <input type='text' value=".$row["DOB"]." name='NIC' id='slmc' class='form-control txt-input' redonly>
-         
-                               
-                              <label for='exampleFormControlInput1' class='form-label lbl star'>Address</label>
-                              <input type='text' value=".$row["Address"]." name='Address' class='form-control txt-input'  readonly>
-
-                              <label for='exampleFormControlInput1' class='form-label lbl star'>Province</label>
-                              <input type='text' value=".$row["province"]." name='Address' class='form-control txt-input'  readonly >
-
-                              <label for='exampleFormControlInput1' class='form-label lbl star'>Postal</label>
-                              <input type='text' value=".$row["postal"]." name='Address' class='form-control txt-input' readonly >
-
-                              <label for='exampleFormControlInput1' class='form-label lbl star'>Gender </label>
-                              <select name= 'Gender' class='form-control txt-input' readonly>
-                             
-                              <option value=" . $row["Gender"] . " selected> " . $row["Gender"] . " </option>
- 
-                              </select> 
-
-                              <label for='exampleFormControlInput1' class='form-label lbl star'>E-mail</label>
-                              <input type='text' value=".$row["Email"]." name='Address' class='form-control txt-input' readonly >
-
-                              <label for='exampleFormControlInput1' class='form-label lbl star'>Mobile Number</label>
-                              <input type='text' value=".$row["mobile_number"]." name='Address' class='form-control txt-input' readonly >
-         
- 
-                              <label for='exampleFormControlInput1' class='form-label lbl star'>Land Number</label>
-                             <input type='text' value=".$row["land_number"]." name='contactNumber'  class='form-control txt-input' readonly >
-             
-                  
- 
-                             <div class='row btn-buttons'>
-                         
-                             
-                             <div class='col btn-but'> <input type='submit' name='btnCancel' value='Cancel' class='b2' onclick='history.back()'></div>
-                            </div>
-                            
-     </form> 
-  ";
- 
-    
-    
-      
- }
- 
- 
- 
- 
-}	
-
-else
-
-{
- echo "Error in ".$query."<br>".$conn->error;
-
-echo "no results";
-
-}
-
-   }
-$conn->close();
-?>
-
-
-
+   
+       
+       
 		
 		
 		
 		  
         </main>
-      </div>
-    </div>
-<!-- partial -->
-  <script src='https://unpkg.com/@popperjs/core@2'></script><script  src="./script.js"></script>
+          <Center><h1>Blood Testing result</h1></Center>   
 
-</body>
-</html>
+
+    
+
+        
+           
+                <?php
+                if ($result->num_rows > 0) {
+
+                 //   echo  "<div class='tab'>";
+                    echo  "<table border=1>"."<tr>"."<th style='text-align:center'>"."Processed Date"."</th>"."<th style='text-align:center;'>"."Batch Number"."</th>"."<th style='text-align:center;width:120px;'>"."Status"."</th>"."<th>"."Action"."</th>"."</tr>";
+                    echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
+                 while($row = $result->fetch_assoc()) {    
+                           
+     
+     echo  "<tr>"."<td>".$row["process_date"]."</td>"."<td>".$row["batch_number"]."</td>"."<td>".$row["status"]."</td>";   
+    
+	 echo "<td><form method='POST' action ='SendBapproval1.php'>
+   <input type=hidden name=Requestbatch value=".$row["batch_number"]." >
+   <input type=hidden name=process_date value= ".$row["process_date"]." >
+   <button type=submit value=view name=view  id=btn class='x'><i class='fa-sharp fa-solid fa-eye'></i></button>
+     </form>    	
+
+    
+    <form method='POST' action ='BloodREsultsI.php'>
+    <input type=hidden name=process_date value=".$row["process_date"]." >
+    <input type=hidden name=Requestbatch value=".$row["batch_number"]." >
+    <button type=submit  name=check id=btn class=y><i class='fa-regular fa-circle-check'></i></button>
+     </form>    	
+
+    </td>"; 
+
+  
+    //echo "</div>";	
+     echo "</tr>";
+
+     echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
+	  
+	}
+	echo  "</font>"; 
+	 echo  "</font>";
+	 echo "</table>";
+	
+  
+	
+}	
+
+else
+
+{
+  echo "Error in ".$vql."<br>".$conn->error;
+
+ echo "no results";
+
+}
+
+
+$conn->close();
+?>
+<form method='POST' action ='EmailDe.php'>
+    
+  
+    <button type=submit  name=send class=z>send mails</button>
+     </form> "; 
 
 <?php
-	
-}
+if(isset($_POST['check']))  
+
+{	  include "conp.php";
+
+     $status="checked";
+   $did=$_POST['process_date'];
  
+   $RBI=$_POST['Requestbatch'];
+   $sql="update blood_testing_result set status ='$status', BloodBank_doctor_ID ='$ID'  where process_date='$did'and  Hospital_ID ='$x' and batch_number= '$RBI' ";
+   
+   
+   
+     if ($conn->query($sql) === TRUE) 
+				   {
+                          
+                           echo '<script type="text/javascript">';
+		                  //echo 'alert("Details updated successfully");';
+         
+		                     echo 'window.location.href="#.php";';
+		                  echo '</script>';
+
+                   } 
+					 
+					 else 
+			               {  
+                              echo '<script type="text/javascript">';
+		                     // echo 'alert("Error in updating details.Try again!");';
+                              echo "Error in ".$query."<br>".$conn->error;
+		                      echo 'window.location.href="updateAccount.php";';
+		                      echo '</script>';
+
+                            }
+							
+							
+							
+							
+ 
+}
+}
+}
 ?>
+          
+</div>
+        </main>
+       
+      </div>
+    </div>
+
+    <style>
+.z{
+   font-size:20px;
+   margin-top:50px;
+   margin-left:850px;
+   height:47px;					   
+   border: none;
+                 //background-color:#F35050;
+                 //width: 100%;
+background: #4082f5;
+//text-transform: uppercase;
+// padding: 12px;
+cursor: pointer;
+box-shadow: 0px 10px 40px 0px rgba(17, 97, 237, 0.4);
+font-weight: 700;
+font-size: 20px;	
+border-radius:30px;
+}
+
+</style>
+<!-- partial -->
+  <script src='https://unpkg.com/@popperjs/core@2'></script><script  src="./script.js"></script>
+</body>
+</html>
+	
+ 
+

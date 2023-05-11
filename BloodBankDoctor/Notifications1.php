@@ -1,132 +1,56 @@
-<?php 
+<?php
 session_start();
 
 ?>
 
 
- <?php
-   require 'conp.php';
-   if(isset($_SESSION["ID"]))   {
-
-    $m= $_SESSION["Name"];
-
-
-	$query = "select * from bloodbank_doctor where UserName ='$m'";
+<?php
+if (isset($_SESSION["ID"])) {
+  require "conp.php";
+  $m = $_SESSION["Name"];
+  $date = date("Y/m/d");
+  $query = "select * from bloodbank_doctor where UserName ='$m'";
 
 
-   		
-		$resultd = $conn->query($query);
-		
-		//echo "Error in ".$vql."<br>".$conn->error;
-$x=null;
-$hid=null;
-if($resultd->num_rows>0)
 
-{        
-  
- while($row = $resultd->fetch_assoc())
- 
- {
-	  
+  $resultd = $conn->query($query);
 
+  //echo "Error in ".$vql."<br>".$conn->error;
 
-   
-	 $x= $row["Name_With_Initials"];
-   $hid=$row["Hospital_ID"];
-   
-  
-  
+  if ($resultd->num_rows > 0) {
 
-	
+    while ($row = $resultd->fetch_assoc()) {
+
+      $x = $row["BloodBank_doctor_ID"];
+      $y = $row["Hospital_ID"];
+    }
   }
-  
-	
-}	
 
-
-
-
-
-
-$Dql ="select Count(*) AS countD
-    from donors
-    where Remark != 'Remove' && Hospital_ID =$hid";
-
-
-$resultD = $conn->query($Dql);
-
-	
-//$sql= "select * from stock where Hospital_ID='$ty' and No_of_packs <= 2";
-//$result = $conn->query($sql);
-$Donor =null;
-if($resultD->num_rows>0)
-
-{   
-  $row = $resultD->fetch_assoc();
-  $Donor= $row["countD"];
-  
-}
-
-
-
-
-
-
-$sql ="select Count(*) AS countS
-    from sent_request
-    where Requested_by = '$x'";
-
-
-$results = $conn->query($sql);
-
-	
-//$sql= "select * from stock where Hospital_ID='$ty' and No_of_packs <= 2";
-//$result = $conn->query($sql);
-$Request =null;
-if($results->num_rows>0)
-
-{   
-  $row = $results->fetch_assoc();
-  $Request= $row["countS"];
-  
-}
-
-    
-	
 ?>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>side bar-director</title>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
-<link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
-<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./styleM.css">
+  <html lang="en">
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <head>
+    <meta charset="UTF-8">
+    <title>side bar-director</title>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
+    <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'>
+    <link rel="stylesheet" href="./styleM.css">
 
-<script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
- <link rel="stylesheet" href="StyleIcons.css"> 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <link rel="stylesheet" href="./AddbbStyle.css">
+    <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
 
+  </head>
 
- 
-   
-   
-
-
- <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   
-    <link rel="stylesheet" href="lab.css"> 
-
-
-</head>
-<body>
-<!-- partial:index.partial.html -->
-<div class="layout has-sidebar fixed-sidebar fixed-header">
+  <body>
+    <!-- partial:index.partial.html -->
+    <div class="layout has-sidebar fixed-sidebar fixed-header">
       <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
         <a id="btn-collapse" class="sidebar-collapser"><i class="ri-arrow-left-s-line"></i></a>
-        
+
         <div class="sidebar-layout">
           <div class="sidebar-header">
             <div class="pro-sidebar-logo">
@@ -137,7 +61,7 @@ if($results->num_rows>0)
           <div class="sidebar-content">
             <nav class="menu open-current-submenu">
               <ul>
-                <li class="menu-header"><span>  </span></li>
+                <li class="menu-header"><span> </span></li>
                 <li class="menu-item">
                   <a href="Home.php">
                     <span class="menu-icon">
@@ -145,7 +69,7 @@ if($results->num_rows>0)
                     </span>
                     <span class="menu-title">Home</span>
                   </a>
-                  </li>
+                </li>
                 <li class="menu-item sub-menu">
                   <a href="#">
                     <span class="menu-icon">
@@ -170,15 +94,15 @@ if($results->num_rows>0)
                           <span class="menu-title">External Stock Availability</span>
                         </a>
                       </li>
-					  
-					    <li class="menu-item">
+
+                      <li class="menu-item">
                         <a href="LessStockComponentsI.php">
                           <span class="menu-title">Low stock blood components</span>
                         </a>
                       </li>
-	
-					  
-					     <li class="menu-item">
+
+
+                      <li class="menu-item">
                         <a href="ExpiredComponentsI.php">
                           <span class="menu-title">Blood expiry Information</span>
                         </a>
@@ -240,70 +164,23 @@ if($results->num_rows>0)
                     </ul>
                   </div>
                 </li>
-                <li class="menu-item sub-menu">
-                  <a href="#">
+                <li class="menu-item">
+                  <a href="View_Donors_BI.php">
                     <span class="menu-icon">
-                      <i class="ri-article-fill"></i>
+                      <i class="ri-user-heart-fill"></i>
                     </span>
                     <span class="menu-title">Donors</span>
                   </a>
-                  <div class="sub-menu-list">
-                    <ul>
-                      <li class="menu-item">
-                        <a href="View_Donors_BI.php">
-                          <span class="menu-title">View</span>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a href="donorEmail.php">
-                          <span class="menu-title">Send Non -Emergency Email</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
                 </li>
-                
-                 <li class="menu-item sub-menu">
-                  <a href="#">
+                <li class="menu-item">
+                  <a href="ReportGeneration_BI.php">
                     <span class="menu-icon">
-                      <i class="ri-message-2-fill"></i>
+                      <i class="ri-file-chart-line"></i>
                     </span>
                     <span class="menu-title">Reports</span>
                   </a>
-                  <div class="sub-menu-list">
-                    <ul>
-                      <li class="menu-item">
-                        <a href="ReportGenerationStock.php">
-                          <span class="menu-title">Stock Reports</span>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a href="ReportGenerationCrossMatching.php">
-                          <span class="menu-title">Cross Matching Reports</span>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a href="ReportGenerationBlood.php">
-                          <span class="menu-title">Blood Request Reports</span>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a href="ReportGeneration_BI.php">
-                          <span class="menu-title">Donation Details Reports</span>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a href="ReportGeneration_Request.php">
-                          <span class="menu-title">External Requests Reports</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
                 </li>
-
-
-
-                <li class="menu-header" style="padding-top: 40px"><span>  </span></li>
+                <li class="menu-header" style="padding-top: 40px"><span> </span></li>
                 <li class="menu-item">
                   <a href="profileBI.php">
                     <span class="menu-icon">
@@ -312,14 +189,14 @@ if($results->num_rows>0)
                     <span class="menu-title">Profile</span>
                   </a>
                 </li>
-                 <li class="menu-item sub-menu">
+                <li class="menu-item sub-menu">
                   <a href="#">
                     <span class="menu-icon">
                       <i class="ri-notification-line"></i>
                     </span>
                     <?php
 
-                    $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$hid' and status ='Pending' and send_status='1'";
+                    $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$y' and status ='Pending' and send_status='1'";
 
                     $results = $conn->query($sql);
 
@@ -335,7 +212,7 @@ if($results->num_rows>0)
                     <?php
 
                     $vql = "SELECT COUNT(countS) AS total_count FROM (
-                                    SELECT COUNT(*) AS countS FROM blood_testing_result WHERE send_status='1' and status = 'Pending' and Hospital_ID='$hid' GROUP by process_date,batch_number) AS subquery";
+                                    SELECT COUNT(*) AS countS FROM blood_testing_result WHERE send_status='1' and status = 'Pending' and Hospital_ID='$y' GROUP by process_date,batch_number) AS subquery";
 
                     $result = $conn->query($vql);
 
@@ -352,7 +229,7 @@ if($results->num_rows>0)
 
 
                     <?php
-                    $rql = "SELECT COUNT(*) AS countS FROM cross_matching_testing_result WHERE Hospital_ID = '$hid' AND Status = 'Pending' and send_status='1'";
+                    $rql = "SELECT COUNT(*) AS countS FROM cross_matching_testing_result WHERE Hospital_ID = '$y' AND Status = 'Pending' and send_status='1'";
                     $result1 = $conn->query($rql);
                     if ($result1->num_rows > 0) {
                       $row = $result1->fetch_assoc();
@@ -362,8 +239,7 @@ if($results->num_rows>0)
                       }
                     }
                     ?>
-
-                    <span class="menu-title">Notifications</span>
+  <span class="menu-title">Notifications</span>
                   </a>
                   <div class="sub-menu-list">
                     <ul>
@@ -371,7 +247,7 @@ if($results->num_rows>0)
                         <a href="Notifications.php">
                           <span class="menu-title"> <?php
 
-                                                    $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$hid' and status ='Pending' and send_status='1'";
+                                                    $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$y' and status ='Pending' and send_status='1'";
 
                                                     $results = $conn->query($sql);
 
@@ -391,7 +267,7 @@ if($results->num_rows>0)
                             <?php
 
                             $vql = "SELECT COUNT(countS) AS total_count FROM (
-                            SELECT COUNT(*) AS countS FROM blood_testing_result WHERE send_status='1' and status = 'Pending' and Hospital_ID='$hid' GROUP by process_date,batch_number) AS subquery";
+                            SELECT COUNT(*) AS countS FROM blood_testing_result WHERE send_status='1' and status = 'Pending' and Hospital_ID='$y' GROUP by process_date,batch_number) AS subquery";
 
                             $result = $conn->query($vql);
 
@@ -410,7 +286,7 @@ if($results->num_rows>0)
                         <a href="Notifications2.php">
                           <span class="menu-title">
                             <?php
-                            $rql = "SELECT COUNT(*) AS countS FROM cross_matching_testing_result WHERE Hospital_ID = '$hid' AND Status = 'Pending' and send_status='1'";
+                            $rql = "SELECT COUNT(*) AS countS FROM cross_matching_testing_result WHERE Hospital_ID = '$y' AND Status = 'Pending' and send_status='1'";
                             $result1 = $conn->query($rql);
                             if ($result1->num_rows > 0) {
                               $row = $result1->fetch_assoc();
@@ -425,6 +301,8 @@ if($results->num_rows>0)
                     </ul>
                   </div>
                 </li>
+               
+
                 <li class="menu-item">
                   <a href="logoutI.php">
                     <span class="menu-icon">
@@ -443,67 +321,183 @@ if($results->num_rows>0)
       <div class="layout">
         <main class="content">
           <div>
-            <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a></div>
-          
-    
-		
-		
-          <div class="main_content"> 
-            <div class="info">
-           <br>
-            <div class="welcometext"><center>Welcome <div class="usernametext">
-               <?php echo $x; ?> </center>
-            </div></div>
-           
-            <span>
-            <table class="center">
-                <tr>
-                    <td>
-                        <p id="rcorners">
-                           Donors
-                            </br>
-                            <span style="color:#0D5C75; font-size: 70px; font-weight: 700;">
-                            <?php echo $Donor; ?>
-                            </span>
-                        </p>
-                    </td>
-                    <td>
-                        <p id="rcorners">
-                           Sent Requests
-                            </br>
-                            <span style="color:#0D5C75; font-size: 70px; font-weight: 700;">
-                            <?php echo $Request; ?>
-                            </span>
-                        </p>
-                    </td>
-                </tr>
-         
-            </table>
+            <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
+
+          </div>
+
+
+
+
+
+
+          <div class="container-shadow">
+          </div>
+          <div class="container">
+            <div class="wrap">
+              <div class="headings">
+                <center><span>
+                    <h1>Notifications</h1>
+                  </span>
+                  <center>
+
+              </div>
+              <h4><b>Notification Received</b></h4>
+              &nbsp; &nbsp;  From <input type="date" name="From" id="From" class="yu">
+              &nbsp; &nbsp; &nbsp;To <input type="date" name="To" id="To" class="yu"><br><br>
+              &nbsp; &nbsp; Search: <input type="text" id="searchInput" class="box">
+
+
+              <h2>Blood Testing result</h2>
+              <?php
+               $vql = "SELECT MLT.Name_With_Initials
+               FROM MLT
+               INNER JOIN blood_testing_result ON MLT.MLT_ID =blood_testing_result.MLT_ID";
+            $result = $conn->query($vql);
+            if ($result->num_rows > 0) {
+              while ($row = $result->fetch_assoc()) {
+                $z = $row['Name_With_Initials'];
+              }
+            }
+
+              $vql = "SELECT * FROM blood_testing_result Where Hospital_ID ='$y' AND send_status='1' GROUP BY batch_number,process_date ORDER BY process_date DESC";
+              $result = $conn->query($vql);
+              if ($result->num_rows > 0) {
+
+                echo "<table id='dataTable'><thead><tr><th style='text-align:center;width:120px;'> Date</th><th style='text-align:center;width:120px;'>Batch Number</th><th style='text-align:center;width:120px;'>Testing done by MLT</th><th style='width:120px;'>Action</th></tr></thead><tbody>";
+  
+                while ($row = $result->fetch_assoc()) {
+                  $status = $row['status'];
+                  $status_class = ($status === 'Pending') ? 'pending-row' : '';
+  
+                  // echo "<tr class='$status_class'><td>" . $row["process_date"] . "</td><td>" . $row["batch_number"] . "</td><td>" . $z . "</td><td><form method='POST' action ='bloodtestNotify.php'>
+                  // <button type=submit value=view name=view  class='fp'><i class='fa-solid fa-arrow-right'></i></button>
+                  // <input type=hidden name=RequestDate value=" . $row["process_date"] . " >
+                  // <input type=hidden name=RequestBatch value=" . $row["batch_number"] . " >
+                  
+                  echo "<tr class='$status_class'><td>" . $row["process_date"] . "</td><td>" . $row["batch_number"] . "</td><td>" . $z . "</td><td><form method='POST' action ='bloodtestNotify.php'>
+                  <button type=submit value=view name=view  class='fp'><i class='fa-solid fa-arrow-right'></i></button>
+                  <input type=hidden name=RequestDate value=" . $row["process_date"] . " >
+                  <input type=hidden name=RequestBatch value=" . $row["batch_number"] . " >
+
+                 </form></td></tr>";
+                 
+                }
+  
+                echo "</tbody></table>";
+                echo "<br>";
+                echo "<br>";
+                echo "<br>";
+              }
+            }
+            $conn->close();
+              ?>
+
              
-            
-
-            </span>
             </div>
-       
-       
-		
-		
-		
-		  
-        </main>
-      
-<!-- partial -->
-  <script src='https://unpkg.com/@popperjs/core@2'></script><script  src="./script.js"></script>
 
-</body>
-</html>
-<?php
-	
-}
- 
-?>
-<style>
-.icon-button__badge {
+
+
+          </div>
+
+      </div>
+
+
+
+
+
+      </main>
+    </div>
+    </div>
+    <!-- partial -->
+    <script src='https://unpkg.com/@popperjs/core@2'></script>
+    <script src="./script.js"></script>
+
+  </body>
+  <script>
+    function filterTable() {
+      // Get the table, rows, and search/filter values
+      const table = document.getElementById('dataTable');
+      const rows = table.getElementsByTagName('tr');
+      const fromDate = document.getElementById('From').value;
+      const toDate = document.getElementById('To').value;
+      const searchInput = document.getElementById('searchInput').value.toUpperCase();
+
+      // Loop through all rows in the table, hide rows that don't match the filter criteria
+      for (let i = 1; i < rows.length; i++) { // start at i=1 to skip header row
+        const row = rows[i];
+        const date = row.cells[0].textContent.trim(); // assumes date is in second cell of each row
+
+        if ((fromDate && date < fromDate) || (toDate && date > toDate)) { // hide rows outside date range
+          row.style.display = 'none';
+        } else if (searchInput) { // hide rows that don't match search text
+          let matchFound = false;
+          const cells = row.getElementsByTagName('td');
+          for (let j = 0; j < cells.length; j++) {
+            const cell = cells[j];
+            const text = cell.textContent.toUpperCase().trim();
+            if (text.includes(searchInput)) {
+              matchFound = true;
+              break;
+            }
+          }
+          if (matchFound) {
+            row.style.display = '';
+          } else {
+            row.style.display = 'none';
+          }
+        } else { // show rows that match date range but have no search text
+          row.style.display = '';
+        }
+      }
+    }
+
+    // Add event listeners to date range and search inputs
+    document.getElementById('From').addEventListener('input', filterTable);
+    document.getElementById('To').addEventListener('input', filterTable);
+    document.getElementById('searchInput').addEventListener('input', filterTable);
+  </script>
+  <style>
+    table {
+      border: 10px;
+      width: 440px;
+    }
+
+    tr {
+
+      background-color: #ffffff;
+
+    }
+
+    td {
+      text-align: center;
+
+    }
+    
+    input {
+      width: 35%;
+      color: black;
+      font-weight: 700;
+      font-size: 14px;
+      letter-spacing: 1px;
+      background-color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      outline: none;
+      box-sizing: border-box;
+      border-color: #0c1e35;
+      margin-bottom: 10px;
+    }
+    .wrap {
+      width: 440px;
+    }
+
+    .container {
+      /* width: 550px; */
+      height: fit-content;
+    }
+
+    .icon-button__badge {
       position: absolute;
       top: 6;
       right: 220px;
@@ -588,4 +582,15 @@ if($results->num_rows>0)
     justify-content: center;
     align-items: center;
     border-radius: 50%;
-}</style>
+}
+
+    .container {
+      background-color: #B2C0E0;
+
+    }
+     .fp{
+    margin-top: 15px;
+  }
+  </style>
+
+  </html>

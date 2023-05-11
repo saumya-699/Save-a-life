@@ -29,7 +29,7 @@ if(is_array($emails)){
     foreach($to as $email) {
 
         $s="Regarding blood donation";
-        $msg ="This is an non emerency message.You have completed 4 months of donating blood,If it is possible you may come and donate blood";
+        $msg ="This is an non emerency message.You have completed 3 months of donating blood,If it is possible you may come and donate blood";
         $mail->addAddress($email);
         $mail->isHTML(true);
         $mail->Subject = $s;
@@ -38,6 +38,15 @@ if(is_array($emails)){
         $mail->ClearAddresses();
     }
 
+
+    $mail->isSMTP();
+$mail->SMTPDebug = 4; // Enable verbose debugging output
+
+// Send the email
+
+if (!$mail->send()) {
+    echo "Error: " . $mail->ErrorInfo;
+}
 }// get the comma-separated string from the hidden input field
   //$email_array = explode(",",$email_list);
 

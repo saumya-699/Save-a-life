@@ -1,39 +1,61 @@
 <?php 
 session_start();
-require "conp.php";
+
 ?>
 
 
  <?php
    if(isset($_SESSION["ID"]))   {
-    $m = $_SESSION["Name"];
-    $query = "SELECT * FROM bloodbank_doctor WHERE UserName ='$m'";
-    $result1 = $conn->query($query);
-    $ID =null;
-     if($result1->num_rows > 0) {        
-      while($row = $result1->fetch_assoc()) {
-        $x = $row["Hospital_ID"];
-       $hid= $x;
-        $ID =$row["BloodBank_doctor_ID"];
-      }
+    require "conp.php";
+    $m= $_SESSION["Name"];
+    $query = "select * from bloodbank_doctor where UserName ='$m'";
+    
+    
+           
+    $resultd = $conn->query($query);
+    
+    //echo "Error in ".$vql."<br>".$conn->error;
+    
+    if($resultd->num_rows>0)
+    
+    {        
+    
+    while($row = $resultd->fetch_assoc())
+    
+    {
+    
+    
+    
+    
+    $x= $row["BloodBank_doctor_ID"];
+    $hid =$row["Hospital_ID"];
+    
+    
+    
+    
     }
-	
-	
+    
+    
+    }
+     			
 ?>
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>side bar-director</title>
-<link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
+  <title>side bar- blood bank doctor</title>
+    <title>side bar- blood bank doctor</title>
+ <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
 <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
 <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./styleM.css">
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
-<link rel="stylesheet" href="./StyleSheetNotification.css">
-
-
+ <link rel="stylesheet" href="StyleSearch.css"> 
+ <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
+ <link rel="stylesheet" href="StyleIcons.css"> 
+ <link rel="stylesheet" href="./StyleSheetNotification.css">
+ 
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -359,132 +381,145 @@ require "conp.php";
         <main class="content">
           <div>
             <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a></div>
-		   <div class="container-shadow">
-  </div>
-  <div class="container">
-    <div class="wrap">
-      <div class="headings">
-        <center><span><h1>Donor </h1></span><center>
-      
-      </div>
-  <?php
-
-
-require 'conp.php';
-if(isset($_POST['view']))  {
-
-  $did=$_POST['Donor_Id'];
-  $query="select * from donors where Donor_Id='$did'";
-  $result= $conn->query($query);
-  
-  
- if($result->num_rows>0)
-
- {     
-  
-
-      
-   while($row = $result->fetch_assoc())
-  
-  {     
+          
     
-   //echo  "<tr>"."<td>".$row["Donor_Id"]."</td>"."<td>".$row["Prefix"].".".$row["Full_Name"]."</td>"."<td>".$row["Initials"]."</td>"."<td>".$row["NIC_Number"]."</td>"."<td>".$row["DOB"]."</td>"."<td>".$row["Address"]."</td>"."<td>".$row["province"]."</td>"."<td>".$row["postal"]."</td>"."<td>".$row["Gender"]."</td>"."<td>".$row["Email"]."</td>"."<td>".$row["mobile_number"]."<br/>".$row["land_number"]."</td>";
- 
-    
-echo "
-
-                              <label for='exampleFormControlInput1' class='form-label lbl star'>Donor Id</label> 
-                              <input type='text' value=".$row["Donor_Id"]." name='id'  class='form-control txt-input' readonly>
-                     
-                              <label for='exampleFormControlInput1' class='form-label lbl star'>Name with Initials</label> 
-                              <input type='text' value=".$row["Initials"]." name='Name' id='name' class='form-control txt-input' readonly>
-                       
-                              
-                            
-                             <label for='exampleFormControlInput1' class='form-label lbl star'>NIC Number</label>
-                              <input type='text' value=".$row["NIC_Number"]." name='NIC' id='slmc' class='form-control txt-input'readonly>
-
-                              <label for='exampleFormControlInput1' class='form-label lbl star'>DOB</label>
-                              <input type='text' value=".$row["DOB"]." name='NIC' id='slmc' class='form-control txt-input' redonly>
-         
-                               
-                              <label for='exampleFormControlInput1' class='form-label lbl star'>Address</label>
-                              <input type='text' value=".$row["Address"]." name='Address' class='form-control txt-input'  readonly>
-
-                              <label for='exampleFormControlInput1' class='form-label lbl star'>Province</label>
-                              <input type='text' value=".$row["province"]." name='Address' class='form-control txt-input'  readonly >
-
-                              <label for='exampleFormControlInput1' class='form-label lbl star'>Postal</label>
-                              <input type='text' value=".$row["postal"]." name='Address' class='form-control txt-input' readonly >
-
-                              <label for='exampleFormControlInput1' class='form-label lbl star'>Gender </label>
-                              <select name= 'Gender' class='form-control txt-input' readonly>
-                             
-                              <option value=" . $row["Gender"] . " selected> " . $row["Gender"] . " </option>
- 
-                              </select> 
-
-                              <label for='exampleFormControlInput1' class='form-label lbl star'>E-mail</label>
-                              <input type='text' value=".$row["Email"]." name='Address' class='form-control txt-input' readonly >
-
-                              <label for='exampleFormControlInput1' class='form-label lbl star'>Mobile Number</label>
-                              <input type='text' value=".$row["mobile_number"]." name='Address' class='form-control txt-input' readonly >
-         
- 
-                              <label for='exampleFormControlInput1' class='form-label lbl star'>Land Number</label>
-                             <input type='text' value=".$row["land_number"]." name='contactNumber'  class='form-control txt-input' readonly >
-             
-                  
- 
-                             <div class='row btn-buttons'>
-                         
-                             
-                             <div class='col btn-but'> <input type='submit' name='btnCancel' value='Cancel' class='b2' onclick='history.back()'></div>
-                            </div>
-                            
-     </form> 
-  ";
- 
-    
-    
-      
- }
- 
- 
- 
- 
-}	
-
-else
-
-{
- echo "Error in ".$query."<br>".$conn->error;
-
-echo "no results";
-
-}
-
-   }
-$conn->close();
-?>
-
-
-
+		
+		
+        
+       
+       
 		
 		
 		
 		  
         </main>
-      </div>
-    </div>
+      <center><h1>Cross Matching Testing Result</h1></center>
+<?php
+
+
+require 'conp.php';
+     $test_id=$_POST['TestID'];
+
+		$vql="SELECT * from bloodbank_doctor where BloodBank_doctor_ID='$x'";	
+		
+		$resultr = $conn->query($vql);
+		 
+		//  echo "Error in ".$vql."<br>".$conn->error;
+
+if($resultr->num_rows>0)
+
+{        
+    
+   while($rowx = $resultr->fetch_assoc())
+   
+   {
+	    
+
+
+	   
+       $y= $rowx["Hospital_ID"];
+
+	
+
+	  
+	}
+	
+      
+	
+  
+
+
+$sql= "SELECT * from cross_matching_testing_result where Hospital_ID='$y' AND test_result_id='$test_id'" ;
+$result = $conn->query($sql);
+
+if($result->num_rows>0)
+
+{     
+   
+
+          //echo "<font color=red>";
+	      //echo "<font size=6>";
+	   
+	 //  echo  "<div  class='tab'>";
+   
+	   echo  "<table id='dataTable' border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Blood Group"."</th>"."<th>"."Test Result"."</th>"."<th>"."Processed Date"."</th>"."<th>"."Status"."</th>"."<th style='width:120px;'>"."Action"."</th>"."</tr>";
+      echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
+   while($row = $result->fetch_assoc())
+   
+   {     
+    $position_class = strtolower(str_replace(' ', '-', $row['test_result']));
+       
+    echo '<tr class="' . $position_class . '">';
+	  echo  "<td>".$row["blood_group"]."</td>"."<td>".$row["test_result"]."</td>"."<td>".$row["process_date"]."</td>"."<td>".$row["Status"]."</td>";
+	   echo "<td><form method='POST' action ='CheckCrossMatchingResultsI.php'>
+                <input type=hidden name=Request_ID value=".$row["Request_ID"]." >
+                <button type=submit name=update  id=btn class=z ><i class='fa-regular fa-square-check'></i></button>
+                </form>
+				
+                </td>";
+				 echo "</tr>";
+	 
+	   echo "<tr>"."<td style='height:8px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
+	  
+	}
+	
+	 echo "</font>";
+	 echo  "</font>";   
+	 echo "</table>";
+	 //echo "</div>";
+	
+	
+}	
+
+
+else
+
+{
+  //echo "Error in ".$sql."<br>".$conn->error;
+
+ echo "no requests";
+
+}
+}
+
+
+
+
+
+$conn->close();
+
+
+
+
+?>
+
+
+
+
+          
+        </main>
+     
 <!-- partial -->
   <script src='https://unpkg.com/@popperjs/core@2'></script><script  src="./script.js"></script>
 
 </body>
 </html>
-
-<?php
+	<?php
 	
 }
+ else 
+	 
+	 {echo '<script type="text/javascript">';
+		 echo 'alert("Please log in first");';
+         
+		echo 'window.location.href="userloginFront.php";';
+  echo '</script>';
+	 }
  
 ?>
+<style>
+  .box1 {
+    margin-left: 200px;
+    margin-top: 150px;
+}
+</style>
