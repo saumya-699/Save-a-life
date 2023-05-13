@@ -8,5 +8,5 @@ unset($_SESSION["ID"]);
          
 		 //echo 'window.location.href="FAQ.html";';
  //echo '</script>';
-header("Location:Home.php");
+header("Location:../loginT.php");
 ?>

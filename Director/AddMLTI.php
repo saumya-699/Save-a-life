@@ -329,15 +329,15 @@ echo "
         
         
                               <label for='exampleFormControlInput1' class='form-label lbl star'>SLMC Number</label>
-                             <input type='text' placeholder='Enter the SLMC Number' name='SLMC' id='slmc' class='form-control txt-input'  required>
+                             <input type='text' placeholder='Enter the SLMC Number' name='SLMC' id='slmc' class='form-control txt-input'  required  pattern='SLMC[0-9]{3}'>
                              
 					
                            <label for='exampleFormControlInput1' class='form-label lbl star'>Email</label>
-                             <input type='email' placeholder='Enter the Email' name='Email' class='form-control txt-input' id='Email'  onchange='myFunction()' required>
+                             <input type='email' placeholder='Enter the Email' name='Email' class='form-control txt-input' id='Email'  onchange='myFunction()' required required title='Please enter a valid email address in the format of example@gmail.com'>
         
                              
                            <label for='exampleFormControlInput1' class='form-label lbl star'>Contact Number</label>
-                            <input type='tel' placeholder='Enter the Contact number' name='contactNumber'  class='form-control txt-input'  id='contact' required>
+                            <input type='tel' placeholder='Enter the Contact number' name='contactNumber'  class='form-control txt-input'  id='contact' required pattern='[0-9]{10}'>
 							
 							 <label for='exampleFormControlInput1' class='form-label lbl star'>Date of Appoinment</label>
                              <input type='text'  name='DOA' id='DOA' class='form-control txt-input' value='$date'>

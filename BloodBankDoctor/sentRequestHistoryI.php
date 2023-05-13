@@ -1,68 +1,61 @@
-<?php 
+<?php
 session_start();
 
 ?>
 
 
- <?php
-   if(isset($_SESSION["ID"]))   {
-	  require "conp.php";
-	  $m= $_SESSION["Name"];
-    $query = "select * from bloodbank_doctor where UserName ='$m'";
-    
-    
-           $x=null;
-    $resultd = $conn->query($query);
-    
-    //echo "Error in ".$vql."<br>".$conn->error;
-    
-    if($resultd->num_rows>0)
-    
-    {        
-    
-    while($row = $resultd->fetch_assoc())
-    
-    {
-    
-    
-    
-    
-    $x= $row["Name_With_Initials"];
-    $hid=$row["Hospital_ID"];
-    
-    
-    
-    
-    
-    }
-    
-    
-    }
-     			
-?>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>side bar- blood bank doctor</title>
-  <title>side bar- blood bank doctor</title>
- <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
-<link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
-<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./styleM.css">
-<script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script> 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
- <link rel="stylesheet" href="StyleSearch.css"> 
- <link rel="stylesheet" href="StyleIcons.css"> 
- <link rel="stylesheet" href="./StyleSheetNotification.css">
+<?php
+if (isset($_SESSION["ID"])) {
+  require "conp.php";
+  $m = $_SESSION["Name"];
+  $query = "select * from bloodbank_doctor where UserName ='$m'";
 
-</head>
-<body>
-<!-- partial:index.partial.html -->
-<div class="layout has-sidebar fixed-sidebar fixed-header">
+
+  $x = null;
+  $resultd = $conn->query($query);
+
+  //echo "Error in ".$vql."<br>".$conn->error;
+
+  if ($resultd->num_rows > 0) {
+
+    while ($row = $resultd->fetch_assoc()) {
+
+
+
+
+      $x = $row["Name_With_Initials"];
+      $hid = $row["Hospital_ID"];
+    }
+  }
+
+?>
+  <html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>side bar- blood bank doctor</title>
+    <title>side bar- blood bank doctor</title>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
+    <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'>
+    <link rel="stylesheet" href="./styleM.css">
+    <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <link rel="stylesheet" href="./stylek.css">
+    <link rel="stylesheet" href="StyleSearch.css">
+    <link rel="stylesheet" href="StyleIcons.css">
+    <link rel="stylesheet" href="./StyleSheetNotification.css">
+
+  </head>
+
+  <body>
+    <!-- partial:index.partial.html -->
+    <div class="layout has-sidebar fixed-sidebar fixed-header">
       <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
         <a id="btn-collapse" class="sidebar-collapser"><i class="ri-arrow-left-s-line"></i></a>
-        
+
         <div class="sidebar-layout">
           <div class="sidebar-header">
             <div class="pro-sidebar-logo">
@@ -73,7 +66,7 @@ session_start();
           <div class="sidebar-content">
             <nav class="menu open-current-submenu">
               <ul>
-                <li class="menu-header"><span>  </span></li>
+                <li class="menu-header"><span> </span></li>
                 <li class="menu-item">
                   <a href="Home.php">
                     <span class="menu-icon">
@@ -81,7 +74,7 @@ session_start();
                     </span>
                     <span class="menu-title">Home</span>
                   </a>
-                  </li>
+                </li>
                 <li class="menu-item sub-menu">
                   <a href="#">
                     <span class="menu-icon">
@@ -106,15 +99,15 @@ session_start();
                           <span class="menu-title">External Stock Availability</span>
                         </a>
                       </li>
-					  
-					    <li class="menu-item">
+
+                      <li class="menu-item">
                         <a href="LessStockComponentsI.php">
                           <span class="menu-title">Low stock blood components</span>
                         </a>
                       </li>
-	
-					  
-					     <li class="menu-item">
+
+
+                      <li class="menu-item">
                         <a href="ExpiredComponentsI.php">
                           <span class="menu-title">Blood expiry Information</span>
                         </a>
@@ -198,8 +191,8 @@ session_start();
                     </ul>
                   </div>
                 </li>
-                
-                 <li class="menu-item sub-menu">
+
+                <li class="menu-item sub-menu">
                   <a href="#">
                     <span class="menu-icon">
                       <i class="ri-message-2-fill"></i>
@@ -239,7 +232,7 @@ session_start();
 
 
 
-                <li class="menu-header" style="padding-top: 40px"><span>  </span></li>
+                <li class="menu-header" style="padding-top: 40px"><span> </span></li>
                 <li class="menu-item">
                   <a href="profileBI.php">
                     <span class="menu-icon">
@@ -248,7 +241,7 @@ session_start();
                     <span class="menu-title">Profile</span>
                   </a>
                 </li>
-                 <li class="menu-item sub-menu">
+                <li class="menu-item sub-menu">
                   <a href="#">
                     <span class="menu-icon">
                       <i class="ri-notification-line"></i>
@@ -379,159 +372,149 @@ session_start();
       <div class="layout">
         <main class="content">
           <div>
-            <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a></div>
+            <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
+          </div>
 
-             <div>
-
-
-<select id="filterDropdown" class="select">
-  <option value="All">Status</option>
-  <option value="pending">Pending</option>
-  <option value="Available">Available</option>
-  <option value="Not-Available">Not Available</option>
-</select>
+          <div>
 
 
-<input type="date" id="dateInput" class="b1">
-<input type="text" id="searchInput" class="box">
+            <select id="filterDropdown" class="select">
+              <option value="All">Status</option>
+              <option value="pending">Pending</option>
+              <option value="Available">Available</option>
+              <option value="Not-Available">Not Available</option>
+            </select>
+
+
+            <input type="date" id="dateInput" class="b1">
+            <input type="text" id="searchInput" class="box">
 
 
 
 
-</div>
- 
-<?php
+          </div>
+
+          <?php
 
 
-require 'conp.php';
-    
-$sql= "select * from sent_request where Requested_by='$x'";
-$result = $conn->query($sql);
+          require 'conp.php';
 
-if($result->num_rows>0)
+          $sql = "select * from sent_request where Requested_by='$x'";
+          $result = $conn->query($sql);
 
-{     
+          if ($result->num_rows > 0) {
 
 
-	   
-	   //echo  "<div class='tab'>";
-	   echo  "<table id='dataTable' border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Requested Hospital Name"."</th>"."<th>"."Requested By"."</th>"."<th>"."Requested Blood Group"."</th>"."<th style='width:120px;'>"."Status"."</th>"."<th style='width:120px;'>"."Date"."</th>"."<th style='width:120px;'>"."Action"."</th>"."</tr>";
-     // echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
-   while($row = $result->fetch_assoc())
-   
-   {     
 
-    $position_class = strtolower(str_replace(' ', '-', $row['status']));
-       
-      echo '<tr class="' . $position_class . '">';
-     
-	  echo  "<td>".$row["Requested_hospital_name"]."</td>"."<td>".$row["Requested_by"]."</td>"."<td>".$row["Requeired_blood_group"]."</td>"."<td>".$row["status"]."</td>"."<td>".$row["Date"]."</td>";
-	   echo "<td><form method='POST' action ='ShowAllSentRequest.php'>
-                <input type=hidden name=Request_ID value=".$row["Request_ID"].">
+            //echo  "<div class='tab'>";
+            echo  "<table id='dataTable' border=1>" . "<tr>" . "<th style='text-align:center;width:120px;'>" . "Requested Hospital Name" . "</th>" . "<th>" . "Requested By" . "</th>" . "<th>" . "Requested Blood Group" . "</th>" . "<th style='width:120px;'>" . "Status" . "</th>" . "<th style='width:120px;'>" . "Date" . "</th>" . "<th style='width:120px;'>" . "Action" . "</th>" . "</tr>";
+            // echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
+            while ($row = $result->fetch_assoc()) {
+
+              $position_class = strtolower(str_replace(' ', '-', $row['status']));
+
+              echo '<tr class="' . $position_class . '">';
+
+              echo  "<td>" . $row["Requested_hospital_name"] . "</td>" . "<td>" . $row["Requested_by"] . "</td>" . "<td>" . $row["Requeired_blood_group"] . "</td>" . "<td>" . $row["status"] . "</td>" . "<td>" . $row["Date"] . "</td>";
+              echo "<td><form method='POST' action ='ShowAllSentRequest.php'>
+                <input type=hidden name=Request_ID value=" . $row["Request_ID"] . ">
                 <button type=submit value=view name=view id=btn class='x'><i class='fa-sharp fa-solid fa-eye'></i></button>
                 </form>
 	
                
                 </td>";
-				 echo "</tr>";
-	 
-	   echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=7'>"."</td>"."</tr>";
-	  
-	}
-	
-	 echo "</font>";
-	 echo  "</font>";   
-	 echo "</table>";
-	// echo "</div>";
-	
-	
-}	
+              echo "</tr>";
 
-else
+              echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=7'>" . "</td>" . "</tr>";
+            }
 
-{
-  //echo "Error in ".$sql."<br>".$conn->error;
-
- echo "<br> <br><center> <b>No results</b></center>";
-
-}
-
-$conn->close();
-?>
-<script>
-function filterTable() {
-  const input = document.getElementById('searchInput');
-  const filter = input.value.toUpperCase();
-  const select = document.getElementById('filterDropdown');
-  const filterValue = select.options[select.selectedIndex].value;
-  const dateInput = document.getElementById('dateInput').value;
-
-  const table = document.getElementById('dataTable');
-  const rows = table.getElementsByTagName('tr');
-
-  for (let i = 1; i < rows.length; i++) {
-      const row = rows[i];
-      // Skip the extra row added for styling
-      if (row.cells.length === 1) {
-          continue;
-      }
-      const cells = row.getElementsByTagName('td');
-      const positionClass = row.className;
-      const appointmentDate = cells[4].textContent;
-
-      if ((filterValue === 'All' || positionClass === filterValue.toLowerCase())
-          && Array.from(cells).some(cell => cell.textContent.toUpperCase().includes(filter))
-          && (dateInput === '' || appointmentDate === dateInput)) {
-          row.style.display = '';
-      } else {
-          row.style.display = 'none';
-      }
-  }
-}
+            echo "</font>";
+            echo  "</font>";
+            echo "</table>";
+            // echo "</div>";
 
 
-// Attach filterTable function to events (e.g. button click, input change)
-const searchInput = document.getElementById('searchInput');
-searchInput.addEventListener('input', filterTable);
+          } else {
+            //echo "Error in ".$sql."<br>".$conn->error;
 
-const filterDropdown = document.getElementById('filterDropdown');
-filterDropdown.addEventListener('change', filterTable);
+            echo "<br> <br><center> <b>No results</b></center>";
+          }
 
-const dateInput = document.getElementById('dateInput');
-dateInput.addEventListener('input', filterTable);
-</script>
+          $conn->close();
+          ?>
+          <script>
+            function filterTable() {
+              const input = document.getElementById('searchInput');
+              const filter = input.value.toUpperCase();
+              const select = document.getElementById('filterDropdown');
+              const filterValue = select.options[select.selectedIndex].value;
+              const dateInput = document.getElementById('dateInput').value;
+
+              const table = document.getElementById('dataTable');
+              const rows = table.getElementsByTagName('tr');
+
+              for (let i = 1; i < rows.length; i++) {
+                const row = rows[i];
+                // Skip the extra row added for styling
+                if (row.cells.length === 1) {
+                  continue;
+                }
+                const cells = row.getElementsByTagName('td');
+                const positionClass = row.className;
+                const appointmentDate = cells[4].textContent;
+
+                if ((filterValue === 'All' || positionClass === filterValue.toLowerCase()) &&
+                  Array.from(cells).some(cell => cell.textContent.toUpperCase().includes(filter)) &&
+                  (dateInput === '' || appointmentDate === dateInput)) {
+                  row.style.display = '';
+                } else {
+                  row.style.display = 'none';
+                }
+              }
+            }
 
 
-<script>
-function myConfirm() {
-  var result = confirm("Want to delete?");
-  if (result==true) {
-   return true;
-  } else {
-   return false;
-  }
-}
+            // Attach filterTable function to events (e.g. button click, input change)
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', filterTable);
 
-</script>
+            const filterDropdown = document.getElementById('filterDropdown');
+            filterDropdown.addEventListener('change', filterTable);
 
-          
+            const dateInput = document.getElementById('dateInput');
+            dateInput.addEventListener('input', filterTable);
+          </script>
+
+
+          <script>
+            function myConfirm() {
+              var result = confirm("Want to delete?");
+              if (result == true) {
+                return true;
+              } else {
+                return false;
+              }
+            }
+          </script>
+
+
         </main>
-     
-<!-- partial -->
-  <script src='https://unpkg.com/@popperjs/core@2'></script><script  src="./script.js"></script>
 
-</body>
-</html>
-	<?php
-	
-}
- else 
-	 
-	 {echo '<script type="text/javascript">';
-		 echo 'alert("Please log in first");';
-         
-		echo 'window.location.href="userloginFront.php";';
+        <!-- partial -->
+        <script src='https://unpkg.com/@popperjs/core@2'></script>
+        <script src="./script.js"></script>
+
+  </body>
+
+  </html>
+<?php
+
+} else {
+  echo '<script type="text/javascript">';
+  echo 'alert("Please log in first");';
+
+  echo 'window.location.href="userloginFront.php";';
   echo '</script>';
-	 }
- 
+}
+
 ?>
