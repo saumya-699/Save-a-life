@@ -102,7 +102,7 @@ session_start();
 					  
 					     <li class="menu-item">
                         <a href="ExpiredComponentsI.php">
-                          <span class="menu-title">Blood Expiry Information</span>
+                          <span class="menu-title">Blood E+xpiry Information</span>
                         </a>
                       </li>
                     </ul>
