@@ -289,7 +289,7 @@ if (isset($_SESSION["ID"])) {
             <div class="wrap">
               <div class="headings">
                 <center>
-                  <h1>Blood Testing Result Of Donor</h1>
+                  <h1>Blood Testing Result of Donor</h1>
                   <center>
               </div>
               <?php
