@@ -162,6 +162,11 @@ if (isset($_SESSION["ID"])) {
                         <span class="menu-title">Cross Matching Report</span>
                       </a>
                     </li>
+                    <li class="menu-item">
+                      <a href="ReportGenerationStock.php">
+                        <span class="menu-title">Blood Stock Report</span>
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </li>

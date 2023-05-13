@@ -10,8 +10,8 @@
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="./stylek2.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 </head>
 
 <body>
@@ -145,6 +145,11 @@
                         <span class="menu-title">Cross Matching Report</span>
                       </a>
                     </li>
+                    <li class="menu-item">
+                      <a href="ReportGenerationStock.php">
+                        <span class="menu-title">Blood Stock Report</span>
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </li>
@@ -160,14 +165,86 @@
 
                 </a>
               </li>
-              <li class="menu-item">
+              <li class="menu-item sub-menu">
                 <a href="#">
                   <span class="menu-icon">
                     <i class="ri-notification-line"></i>
                   </span>
-                  <span class="menu-title">Notification</span>
+                  <?php
 
+                  $sql = "SELECT COUNT(countS) AS total_count FROM (
+                    SELECT COUNT(*) AS countS FROM donation_records WHERE Hospital_ID='$y' and End_donation ='1' and AddStatus='0' GROUP by Batch,Donation_date) AS subquery";
+
+                  $results = $conn->query($sql);
+
+                  if ($results->num_rows > 0) {
+                    $row = $results->fetch_assoc();
+                    $status = $row["total_count"];
+                    if ($status > 0) {
+                      echo '<span class="icon-button__badge">' . $status . '</span>';
+                    }
+                  }
+
+                  ?>
+
+
+
+
+                  <?php
+                  $rql = "SELECT COUNT(*) AS countS FROM blood_request WHERE Hospital_ID = '$y' AND status='Available' and CrossMatching_Add='0'";
+                  $result1 = $conn->query($rql);
+                  if ($result1->num_rows > 0) {
+                    $row = $result1->fetch_assoc();
+                    $status = $row["countS"];
+                    if ($status > 0) {
+                      echo '<span class="icon-button__badge2">' . $status . '</span>';
+                    }
+                  }
+                  ?>
+                  <span class="menu-title">Notifications</span>
                 </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Notifications.php">
+                        <span class="menu-title"> <?php
+
+                                                  $sql = "SELECT COUNT(countS) AS total_count FROM (
+                                                 SELECT COUNT(*) AS countS FROM donation_records WHERE Hospital_ID='$y' and End_donation ='1' and AddStatus='0' GROUP by Batch,Donation_date) AS subquery";
+
+                                                  $results = $conn->query($sql);
+
+                                                  if ($results->num_rows > 0) {
+                                                    $row = $results->fetch_assoc();
+                                                    $status = $row["total_count"];
+                                                    if ($status > 0) {
+                                                      echo '<span class="icon-button__badge3">' . $status . '</span>';
+                                                    }
+                                                  }
+
+                                                  ?>
+
+                          <span>Donation</span>
+                      </a>
+
+                    <li class="menu-item">
+                      <a href="Notifications1.php">
+                        <span class="menu-title">
+                          <?php
+                          $rql = "SELECT COUNT(*) AS countS FROM blood_request WHERE Hospital_ID = '$y' AND status='Available' and CrossMatching_Add='0'";
+                          $result1 = $conn->query($rql);
+                          if ($result1->num_rows > 0) {
+                            $row = $result1->fetch_assoc();
+                            $status = $row["countS"];
+                            if ($status > 0) {
+                              echo '<span class="icon-button__badge5">' . $status . '</span>';
+                            }
+                          }
+                          ?>Cross Matching Testing</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
               <li class="menu-item">
                 <a href="logout.php">
@@ -199,87 +276,88 @@
                   <center>
               </div>
               <?php
-                            include "config.php";
-                            if (isset($_POST['add'])) {
+              include "config.php";
+              if (isset($_POST['add'])) {
 
-                                $did = $_POST['DID'];
-                                $bid = $_POST['BID'];
-                                $pid = $_POST['PID'];
+                $did = $_POST['DID'];
+                $bid = $_POST['BID'];
+                $pid = $_POST['PID'];
 
-                            ?>
-              <form action="createresult.php " method="POST">
+              ?>
 
-                <label for="exampleFormControlInput1 " class="form-label lbl star ">Donor ID</label>
-                <input type="text" class="form-control txt-input " name="Donor_Id" value="<?php echo $did ?>">
+                <form action="createresult.php " method="POST" id="myForm" onsubmit="return validateForm()">
 
+                  <label for="exampleFormControlInput1" class="form-label lbl star ">Donor ID</label>
+                  <input type="text" class="form-control txt-input " name="Donor_Id" value="<?php echo $did ?>">
 
-                <label for="exampleFormControlInput1 " class="form-label lbl star ">Blood Group</label>
-                <select name="blood_group" id=" " class="form-control txt-input " required="">
-                  <option value=" " diabled> Select Group </option>
-                  <option value="O-">O-</option>
-                  <option value="O+">O+</option>
-                  <option value="A-">A-</option>
-                  <option value="A+">A+</option>
-                  <option value="B-">B-</option>
-                  <option value="B+">B+</option>
-                  <option value="AB-">AB-</option>
-                  <option value="AB+">AB+</option>
-                </select>
+                  <label for="exampleFormControlInput1" class="form-label lbl star">Blood Group</label>
+                  <select name="blood_group" id="blood_group" class="form-control txt-input" required>
+                    <option value="" disabled selected> Select Group </option>
+                    <option value="O-">O-</option>
+                    <option value="O+">O+</option>
+                    <option value="A-">A-</option>
+                    <option value="A+">A+</option>
+                    <option value="B-">B-</option>
+                    <option value="B+">B+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="AB+">AB+</option>
+                  </select>
 
-                <label for="exampleFormControlInput1 " class="form-label lbl star ">Malaria Test Result</label>
-                <select name="malaria_result" id=" " class="form-control txt-input " required="">
-                  <option value=" " diabled>Select Result </option>
-                  <option value="Positive">Positive</option>
-                  <option value="Negative">Negative</option>
+                  <label for="exampleFormControlInput1" class="form-label lbl star">Malaria Test Result</label>
+                  <select name="malaria_result" id="malaria_result" class="form-control txt-input " required>
+                    <option value="" disabled selected>Select Result </option>
+                    <option value="Positive">Positive</option>
+                    <option value="Negative">Negative</option>
 
-                </select>
+                  </select>
 
-                <label for="exampleFormControlInput1 " class="form-label lbl star ">HIV Test Result</label>
-                <select name="hiv_result" id=" " class="form-control txt-input " required="">
-                  <option value=" " diabled>Select Result </option>
-                  <option value="Positive">Positive</option>
-                  <option value="Negative">Negative</option>
+                  <label for="exampleFormControlInput1" class="form-label lbl star">HIV Test Result</label>
+                  <select name="hiv_result" id="hiv_result" class="form-control txt-input " required>
+                    <option value="" disabled selected>Select Result </option>
+                    <option value="Positive">Positive</option>
+                    <option value="Negative">Negative</option>
 
-                </select>
+                  </select>
 
-                <label for="exampleFormControlInput1 " class="form-label lbl star ">HBV Test Result</label>
-                <select name="hbv_result" id=" " class="form-control txt-input " required="">
-                  <option value=" " diabled>Select Result </option>
-                  <option value="Positive">Positive</option>
-                  <option value="Negative">Negative</option>
+                  <label for="exampleFormControlInput1" class="form-label lbl star">HBV Test Result</label>
+                  <select name="hbv_result" id="hbv_result" class="form-control txt-input" required="">
+                    <option value="" disabled selected>Select Result </option>
+                    <option value="Positive">Positive</option>
+                    <option value="Negative">Negative</option>
 
-                </select>
+                  </select>
 
-                <label for="exampleFormControlInput1 " class="form-label lbl star ">HCV Test Result</label>
-                <select name="hcv_result" id=" " class="form-control txt-input " required="">
-                  <option value=" " diabled>Select Result </option>
-                  <option value="Positive">Positive</option>
-                  <option value="Negative">Negative</option>
+                  <label for="exampleFormControlInput1 " class="form-label lbl star ">HCV Test Result</label>
+                  <select name="hcv_result" id="hcv_result" class="form-control txt-input" required="">
+                    <option value="" disabled selected>Select Result </option>
+                    <option value="Positive">Positive</option>
+                    <option value="Negative">Negative</option>
 
-                </select>
+                  </select>
 
-                <label for="exampleFormControlInput1 " class="form-label lbl star ">VDSRL Test Result</label>
-                <select name="vdrl_result" id=" " class="form-control txt-input " required="">
-                  <option value=" " diabled>Select Result </option>
-                  <option value="Positive">Positive</option>
-                  <option value="Negative">Negative</option>
-
-                </select>
-
-                <label for="exampleFormControlInput1 " class="form-label lbl star ">Batch Number</label>
-                <input type="text" class="form-control txt-input " name="batch_number" value="<?php echo $bid ?>">
+                    <label for="exampleFormControlInput1" class="form-label lbl star">VDSRL Test Result</label>
+                    <select name="vdrl_result" id="vdrl_result" class="form-control txt-input" required>
+                      <option value="" disabled selected>Select Result</option>
+                      <option value="Positive">Positive</option>
+                      <option value="Negative">Negative</option>
+                    </select>
 
 
 
-                <div class="buttons ">
-                  <button class="b1" name="submit" value="submit" value="submit">
-                    <font size="2px">Add</font>
-                  </button> &nbsp; &nbsp; &nbsp; &nbsp;
-                  &nbsp; &nbsp; &nbsp; &nbsp;<button class="b1" name="cancel" value="cancel"><a href="Enter Blood testing result.php">
-                      <font size="2px">Cancel</font>
-                    </a></button>
-                </div>
-              </form>
+                  <label for="exampleFormControlInput1 " class="form-label lbl star ">Batch Number</label>
+                  <input type="text" class="form-control txt-input " name="batch_number" value="<?php echo $bid ?>">
+
+
+
+                  <div class="buttons ">
+                    <button class="b1" name="submit" value="submit" value="submit">
+                      <font size="2px">Add</font>
+                    </button> &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp;<button class="b1" name="cancel" value="cancel"><a href="Enter Blood testing result.php">
+                        <font size="2px">Cancel</font>
+                      </a></button>
+                  </div>
+                </form>
 
 
             </div>
@@ -289,33 +367,51 @@
   </div>
   <div class="col " width="10 "></div>
   </div>
-<?php }?>
-  </main>
-  </div>
-  </div>
-  <!-- partial -->
-  <script src='https://unpkg.com/@popperjs/core@2'></script>
-  <script src="./script.js"></script>
-  <style>
-    .container-shadow {
-      position: absolute;
-      height: 540px;
-      
-    }
+<?php } ?>
+</main>
+<script>
+function validateForm() {
+  var result = document.getElementById("vdrl_result").value;
+  var result1 = document.getElementById("blood_group").value;
+  var result2 = document.getElementById("hcv_result").value;
+  var result3 = document.getElementById("hbv_result").value;
+  var result4 = document.getElementById("hiv_result").value;
+  var result5 = document.getElementById("malaria_result").value;
 
-    .container {
-      position: absolute;
-      height: 1130px;
-     
-     
 
-      box-shadow: 0px 0px 50px -20px #000;
-    }
+  if (result === ""||result1 === ""||result2===""||result3===""||result4===""||result5==="") {
+    alert("Please select a result");
+    return false;
+  }
+  return true;
+}
+</script>
 
-    .buttons{
-      margin-top: 20px;
-    }
-    </style>
+</div>
+</div>
+<!-- partial -->
+<script src='https://unpkg.com/@popperjs/core@2'></script>
+<script src="./script.js"></script>
+<style>
+  .container-shadow {
+    position: absolute;
+    height: 540px;
+
+  }
+
+  .container {
+    position: absolute;
+    height: 1130px;
+
+
+
+    box-shadow: 0px 0px 50px -20px #000;
+  }
+
+  .buttons {
+    margin-top: 20px;
+  }
+</style>
 
 </body>
 

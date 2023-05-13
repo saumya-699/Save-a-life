@@ -1,26 +1,3 @@
-<?php
-session_start();
-
-if (isset($_SESSION["ID"])) {
-  include "config.php";
-  $m = $_SESSION["Name"];
-  $date = date("Y/m/d");
-  $query = "SELECT * FROM mlt WHERE UserName ='$m'";
-  $result1 = $conn->query($query);
-
-  if ($result1->num_rows > 0) {
-    while ($row = $result1->fetch_assoc()) {
-      $y=$row["Hospital_ID"];
-
-    }
-  }}
-
-
-$sql = "SELECT * FROM donation_records where AddStatus <> '1' order by Donation_Id DESC";
-
-$result = $conn->query($sql);
-
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,7 +8,10 @@ $result = $conn->query($sql);
   <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
   <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'>
   <link rel="stylesheet" href="./style.css">
-  <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./stylek2.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 
 </head>
 
@@ -175,6 +155,7 @@ $result = $conn->query($sql);
                 </div>
               </li>
 
+
               <li class="menu-header" style="padding-top: 40px"><span> | </span></li>
               <li class="menu-item">
                 <a href="Edit ProfileMlt.php">
@@ -285,209 +266,103 @@ $result = $conn->query($sql);
       <main class="content">
         <div>
           <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
-          <h1>Enter testing Result </h1>
-
-
-
-          <div class="box">
-
-            <!-- <form action="Enter Blood testing result1.php" method="POST"> -->
-
-            <?php
-
-            if ($result->num_rows > 0) {
-
-              echo  "<div class='tab'>";
-              echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;'>" . "Donation Date" . "</th>" . "<th style='text-align:center;'>" . "Batch Number" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Donar ID" . "</th>" . "<th>" . "Donation ID" . "</th>" . "<th>" . "Blood Packet ID" . "</th>" . "<th>" . "Action" . "</th>" . "</tr>";
-              echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
-              while ($row = $result->fetch_assoc()) {
-
-
-                echo  "<tr>" . "<td>" . $row["Donation_date"] . "</td>" . "<td>" . $row["Batch"] . "</td>" . "<td>" . $row["Donor_Id"] . "</td>" . "<td>" . $row["Donation_ID"] . "</td>" . "<td>" . $row["packet_no"] .  "</td>";
-                echo "<td class='tb'><form method='POST' action ='Enter Blood testing result1.php'>
-                   <input type=hidden name=DID value=" . $row["Donor_Id"] . " >
-                   <input type=hidden name=PID value=" . $row["packet_no"] . " >
-                   <input type=hidden name=BID value=" . $row["Batch"] . " >
-                   <button type=submit value=add name=add  class='fp'><i class='fa-solid fa-pen-to-square'></i></button>
-                  </form>  </td>";
-
-                echo "</div>";
-                echo "</tr>";
-
-                echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
-              }
-              echo  "</font>";
-              echo  "</font>";
-              echo "</table>";
-            } else {
-
-              echo "no results";
-            }
-
-            $conn->close();
-            ?>
-          </div>
-          <style>
-            table {
-              width: 750px;
-              height: 15px;
-              border-collapse: collapse;
-              margin-top: 40px;
-              margin-left: 20px;
-              border: 0px transparent;
-            }
-
-            h1 {
-
-              margin-top: 70px;
-              margin-left: 320px;
-              margin-bottom: 100px;
-            }
-
-
-
-            th {
-
-              white-space: nowrap;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              text-align: center;
-              padding-top: 25px;
-              padding-bottom: 25px;
-              padding-left: 20px;
-              padding-right: 10px;
-              border: 0px transparent;
-
-            }
-
-
-
-            td {
-              text-align: center;
-              padding: 1px;
-
-
-            }
-
-
-
-            .midiv {
-
-              margin-left: 150px;
-              margin-bottom: 120px;
-              padding: 15px 10px 30px 20px;
-              margin-top: -100px;
-              outline: none;
-              width: 774.5px;
-            }
-
-
-
-
-
-
-
-
-
-            .f2 {
-
-              margin-left: 50px;
-              margin-top: -100px;
-              background-color: transparent;
-              border: none;
-              cursor: pointer;
-              margin-bottom: 0px;
-
-
-            }
-
-
-            .f1 {
-
-              background-color: transparent;
-              margin-left: 10px;
-              margin-right: 20px;
-              margin-bottom: 10px;
-              margin-top: 10px;
-              border: none;
-              cursor: pointer;
-
-
-            }
-
-            .fp {
-              margin-top: 0px;
-              margin-left: 30px;
-              margin-bottom: -100px;
-              background-color: transparent;
-              border: none;
-              cursor: pointer;
-              font-size: 20px;
-              padding: 10px 20px;
-            }
-
-            .tb {
-              display: inline-flex;
-              justify-content: space-evenly;
-              flex-wrap: nowrap;
-              align-items: baseline;
-              flex-direction: row;
-            }
-
-            .tab {
-
-              background-color: #F5F5F5;
-              margin-top: -50px;
-              margin-left: 60px;
-              padding-left: 0px;
-              padding-right: 0px;
-
-
-
-            }
-
-
-            .ta {
-
-              background-color: #F5F5F5;
-              margin-top: 60px;
-              margin-bottom: 0px;
-              margin-left: 370px;
-              margin-right: 119px;
-              padding-left: 20px;
-
-            }
-
-
-
-            tr {
-
-              background-color: white;
-
-
-            }
-
-            .visible {
-              cursor: pointer;
-
-
-            }
-
-            .layout {
-              background-color: #d9dbdb;
-            }
-          </style>
-
-
         </div>
-      </main>
 
+        <div class="container-shadow">
+          <div class="container">
+            <div class="wrap">
+              <div class="headings">
+                <center>
+                  <h1> Cross Matching Test Result</h1>
+                  <center>
+              </div>
+              <?php
+              include "config.php";
+              if (isset($_POST['view'])) {
+
+                $did = $_POST['RID'];
+                $id = $_POST['ID'];
+
+
+              ?>
+                <form action="Create_Cross matching test result1.php" method="POST">
+
+                  <label for="exampleFormControlInput1" class="form-label lbl star"> Request ID</label>
+                  <input type="text" class="form-control txt-input" name="request_id" value="<?php echo $did ?>">
+
+                  <label for="exampleFormControlInput1" class="form-label lbl star">Blood Group</label>
+                  <input type="text" class="form-control txt-input" name="blood_group" value="<?php echo $id ?>">
+
+                  <label for="exampleFormControlInput1" class="form-label lbl star" >Blood Group test result</label>
+                  <select name="blood_group" id="blood_group" class="form-control txt-input" required>
+                    <option value="" disabled selected > Select group </option>
+                    <option value="O-">O-</option>
+                    <option value="O+">O+</option>
+                    <option value="A-">A-</option>
+                    <option value="A+">A+</option>
+                    <option value="B-">B-</option>
+                    <option value="B+">B+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="AB+">AB+</option>
+                  </select>
+
+                  <label for="exampleFormControlInput1" class="form-label lbl star" >Cross matching result</label>
+                  <select name="Cross_matching_test_result" id="Cross_matching_test_result" class="form-control txt-input " required>
+                    <option value="" disabled selected>Select test result </option>
+                    <option value="Matched">Matched</option>
+                    <option value="Unmatched">Unmatched</option>
+
+                  </select>
+
+                  <label for="exampleFormControlInput1 " class="form-label lbl star ">Special Note</label>
+                  <textarea name="Note" id=" " cols="30 " rows="10 " class="input " placeholder="Type note "></textarea>
+
+
+                  <div class="buttons ">
+                    <button class="b1" name="submit" value="submit" value="submit">
+                      <font size="2px">Add</font>
+                    </button>
+                </form> &nbsp; &nbsp; &nbsp; &nbsp;
+                &nbsp; &nbsp; &nbsp; &nbsp;<button class="b1" name="cancel" value="cancel"><a href="Cross matching test result.php">
+                    <font size="2px">Cancel</font>
+                  </a></button>
+            </div>
+
+
+          <?php } ?>
+
+          </div>
+        </div>
     </div>
+  </div>
+  </div>
+  <div class="col " width="10 "></div>
+  </div>
+  
+  </main>
+  </div>
   </div>
   <!-- partial -->
   <script src='https://unpkg.com/@popperjs/core@2'></script>
   <script src="./script.js"></script>
+  <style>
+    .container-shadow {
+      position: absolute;
+      height: 540px;
 
+    }
+
+    .container {
+      position: absolute;
+      height: 700px;
+
+      box-shadow: 0px 0px 50px -20px #000;
+    }
+
+    .buttons {
+      margin-top: 20px;
+    }
+  </style>
 </body>
 
 </html>

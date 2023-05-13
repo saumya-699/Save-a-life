@@ -1,26 +1,23 @@
 <?php
 session_start();
-
+include "config.php";
 if (isset($_SESSION["ID"])) {
   include "config.php";
   $m = $_SESSION["Name"];
-  $date = date("Y/m/d");
   $query = "SELECT * FROM mlt WHERE UserName ='$m'";
   $result1 = $conn->query($query);
 
   if ($result1->num_rows > 0) {
     while ($row = $result1->fetch_assoc()) {
-      $y=$row["Hospital_ID"];
-
+      $x = $row["MLT_ID"];
+      $y = $row["Hospital_ID"];
     }
-  }}
-
-
-$sql = "SELECT * FROM donation_records where AddStatus <> '1' order by Donation_Id DESC";
-
-$result = $conn->query($sql);
+  }
+}
 
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,6 +29,11 @@ $result = $conn->query($sql);
   <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'>
   <link rel="stylesheet" href="./style.css">
   <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <link rel="stylesheet" href="./AddbbStyle.css">
+
 
 </head>
 
@@ -175,6 +177,7 @@ $result = $conn->query($sql);
                 </div>
               </li>
 
+
               <li class="menu-header" style="padding-top: 40px"><span> | </span></li>
               <li class="menu-item">
                 <a href="Edit ProfileMlt.php">
@@ -192,8 +195,10 @@ $result = $conn->query($sql);
                   </span>
                   <?php
 
+
+
                   $sql = "SELECT COUNT(countS) AS total_count FROM (
-                    SELECT COUNT(*) AS countS FROM donation_records WHERE Hospital_ID='$y' and End_donation ='1' and AddStatus='0' GROUP by Batch,Donation_date) AS subquery";
+                SELECT COUNT(*) AS countS FROM donation_records WHERE Hospital_ID='$y' and End_donation ='1' and AddStatus='0' GROUP by Batch,Donation_date) AS subquery";
 
                   $results = $conn->query($sql);
 
@@ -230,7 +235,7 @@ $result = $conn->query($sql);
                         <span class="menu-title"> <?php
 
                                                   $sql = "SELECT COUNT(countS) AS total_count FROM (
-                                                 SELECT COUNT(*) AS countS FROM donation_records WHERE Hospital_ID='$y' and End_donation ='1' and AddStatus='0' GROUP by Batch,Donation_date) AS subquery";
+                                        SELECT COUNT(*) AS countS FROM donation_records WHERE Hospital_ID='$y' and End_donation ='1' and AddStatus='0' GROUP by Batch,Donation_date) AS subquery";
 
                                                   $results = $conn->query($sql);
 
@@ -242,9 +247,7 @@ $result = $conn->query($sql);
                                                     }
                                                   }
 
-                                                  ?>
-
-                          <span>Donation</span>
+                                                  ?>Donation</span>
                       </a>
 
                     <li class="menu-item">
@@ -266,18 +269,20 @@ $result = $conn->query($sql);
                   </ul>
                 </div>
               </li>
+
+
               <li class="menu-item">
-                <a href="logout.php">
+                <a href="logoutI.php">
                   <span class="menu-icon">
                     <i class="ri-logout-box-r-line"></i>
                   </span>
-                  <span class="menu-title">Log out</span>
+                  <span class="menu-title">Log Out</span>
                 </a>
               </li>
+
             </ul>
           </nav>
         </div>
-
       </div>
     </aside>
     <div id="overlay" class="overlay"></div>
@@ -285,209 +290,268 @@ $result = $conn->query($sql);
       <main class="content">
         <div>
           <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
-          <h1>Enter testing Result </h1>
+
+        </div>
 
 
 
-          <div class="box">
 
-            <!-- <form action="Enter Blood testing result1.php" method="POST"> -->
 
+
+        <div class="container-shadow">
+        </div>
+        <div class="container">
+          <div class="wrap">
+            <div class="headings">
+              <center><span>
+                  <h1>Notification</h1>
+                </span>
+                <center>
+
+            </div>
+            <h4><b>Notification Received</b></h4>
+            &nbsp; &nbsp; From <input type="date" name="From" id="From" class="yu">
+            &nbsp; &nbsp; &nbsp;To <input type="date" name="To" id="To" class="yu"><br><br>
+            &nbsp; &nbsp; Search: <input type="text" id="searchInput" class="box">
+
+            <h3>Request to do Cross Matching Testing</h3>
             <?php
+            $vql = "SELECT bloodbank_doctor.Name_With_Initials
+            FROM bloodbank_doctor
+            INNER JOIN blood_request ON bloodbank_doctor.BloodBank_doctor_ID =blood_request.BloodBankDoctor_ID";
+            $result = $conn->query($vql);
+            if ($result->num_rows > 0) {
+              while ($row = $result->fetch_assoc()) {
+                $z = $row['Name_With_Initials'];
+              }
+            }
 
+            $vql = "SELECT * FROM blood_request Where Hospital_ID ='$y'  AND status='Available' ORDER BY requeste_id DESC";
+            $result = $conn->query($vql);
             if ($result->num_rows > 0) {
 
-              echo  "<div class='tab'>";
-              echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;'>" . "Donation Date" . "</th>" . "<th style='text-align:center;'>" . "Batch Number" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Donar ID" . "</th>" . "<th>" . "Donation ID" . "</th>" . "<th>" . "Blood Packet ID" . "</th>" . "<th>" . "Action" . "</th>" . "</tr>";
-              echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
+              echo "<table id='dataTable'><thead><tr><th style='text-align:center;width:120px;'> Donation Date</th><th style='text-align:center;width:120px;'>Batch Number</th><th style='text-align:center;width:120px;'>Testing done by MLT</th><th style='width:120px;'>Action</th></tr></thead><tbody>";
+
               while ($row = $result->fetch_assoc()) {
+                $status = $row["status"];
+                $Add = $row["CrossMatching_Add"];
+                // Set the disabled flag based on the status value
+
+                $disabled = (($status !== 'Available') || ($Add == '1')) ? 'disabled' : '';
 
 
-                echo  "<tr>" . "<td>" . $row["Donation_date"] . "</td>" . "<td>" . $row["Batch"] . "</td>" . "<td>" . $row["Donor_Id"] . "</td>" . "<td>" . $row["Donation_ID"] . "</td>" . "<td>" . $row["packet_no"] .  "</td>";
-                echo "<td class='tb'><form method='POST' action ='Enter Blood testing result1.php'>
-                   <input type=hidden name=DID value=" . $row["Donor_Id"] . " >
-                   <input type=hidden name=PID value=" . $row["packet_no"] . " >
-                   <input type=hidden name=BID value=" . $row["Batch"] . " >
-                   <button type=submit value=add name=add  class='fp'><i class='fa-solid fa-pen-to-square'></i></button>
-                  </form>  </td>";
+                // Generate the button HTML with the disabled flag
+                $button_html = "<button type='submit' value='view' name='view' class='fp' $disabled><i class='fa-solid fa-pen-to-square'></i></button>";
 
-                echo "</div>";
-                echo "</tr>";
+                $status = $row['CrossMatching_Add'];
+                $status_class = ($status === '0') ? 'pending-row' : '';
 
-                echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
+
+                echo "<tr class='$status_class'><td>" . $row["expected_date"] . "</td><td>" . $row["status"] . "</td><td>" . $z . "</td><td><form method='POST' action ='CrossMatchingNotify.php'>
+                  <input type=hidden name=RID value=" . $row["requeste_id"] . " >
+                  <input type=hidden name=ID value=" . $row["blood_group"] . " >
+                  $button_html 
+                 </form></td></tr>";
               }
-              echo  "</font>";
-              echo  "</font>";
-              echo "</table>";
-            } else {
 
-              echo "no results";
+              echo "</tbody></table>";
+              echo "<br>";
+              echo "<br>";
+              echo "<br>";
+
+              $conn->close();
             }
-
-            $conn->close();
             ?>
+
+
           </div>
-          <style>
-            table {
-              width: 750px;
-              height: 15px;
-              border-collapse: collapse;
-              margin-top: 40px;
-              margin-left: 20px;
-              border: 0px transparent;
-            }
 
-            h1 {
-
-              margin-top: 70px;
-              margin-left: 320px;
-              margin-bottom: 100px;
-            }
-
-
-
-            th {
-
-              white-space: nowrap;
-              overflow: hidden;
-              text-overflow: ellipsis;
-              text-align: center;
-              padding-top: 25px;
-              padding-bottom: 25px;
-              padding-left: 20px;
-              padding-right: 10px;
-              border: 0px transparent;
-
-            }
-
-
-
-            td {
-              text-align: center;
-              padding: 1px;
-
-
-            }
-
-
-
-            .midiv {
-
-              margin-left: 150px;
-              margin-bottom: 120px;
-              padding: 15px 10px 30px 20px;
-              margin-top: -100px;
-              outline: none;
-              width: 774.5px;
-            }
-
-
-
-
-
-
-
-
-
-            .f2 {
-
-              margin-left: 50px;
-              margin-top: -100px;
-              background-color: transparent;
-              border: none;
-              cursor: pointer;
-              margin-bottom: 0px;
-
-
-            }
-
-
-            .f1 {
-
-              background-color: transparent;
-              margin-left: 10px;
-              margin-right: 20px;
-              margin-bottom: 10px;
-              margin-top: 10px;
-              border: none;
-              cursor: pointer;
-
-
-            }
-
-            .fp {
-              margin-top: 0px;
-              margin-left: 30px;
-              margin-bottom: -100px;
-              background-color: transparent;
-              border: none;
-              cursor: pointer;
-              font-size: 20px;
-              padding: 10px 20px;
-            }
-
-            .tb {
-              display: inline-flex;
-              justify-content: space-evenly;
-              flex-wrap: nowrap;
-              align-items: baseline;
-              flex-direction: row;
-            }
-
-            .tab {
-
-              background-color: #F5F5F5;
-              margin-top: -50px;
-              margin-left: 60px;
-              padding-left: 0px;
-              padding-right: 0px;
-
-
-
-            }
-
-
-            .ta {
-
-              background-color: #F5F5F5;
-              margin-top: 60px;
-              margin-bottom: 0px;
-              margin-left: 370px;
-              margin-right: 119px;
-              padding-left: 20px;
-
-            }
-
-
-
-            tr {
-
-              background-color: white;
-
-
-            }
-
-            .visible {
-              cursor: pointer;
-
-
-            }
-
-            .layout {
-              background-color: #d9dbdb;
-            }
-          </style>
 
 
         </div>
-      </main>
 
     </div>
+
+    </form>
+
+
+    </main>
+  </div>
   </div>
   <!-- partial -->
   <script src='https://unpkg.com/@popperjs/core@2'></script>
   <script src="./script.js"></script>
 
 </body>
+<script>
+  function filterTable() {
+    // Get the table, rows, and search/filter values
+    const table = document.getElementById('dataTable');
+    const rows = table.getElementsByTagName('tr');
+    const fromDate = document.getElementById('From').value;
+    const toDate = document.getElementById('To').value;
+    const searchInput = document.getElementById('searchInput').value.toUpperCase();
+
+    // Loop through all rows in the table, hide rows that don't match the filter criteria
+    for (let i = 1; i < rows.length; i++) { // start at i=1 to skip header row
+      const row = rows[i];
+      const date = row.cells[0].textContent.trim(); // assumes date is in second cell of each row
+
+      if ((fromDate && date < fromDate) || (toDate && date > toDate)) { // hide rows outside date range
+        row.style.display = 'none';
+      } else if (searchInput) { // hide rows that don't match search text
+        let matchFound = false;
+        const cells = row.getElementsByTagName('td');
+        for (let j = 0; j < cells.length; j++) {
+          const cell = cells[j];
+          const text = cell.textContent.toUpperCase().trim();
+          if (text.includes(searchInput)) {
+            matchFound = true;
+            break;
+          }
+        }
+        if (matchFound) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      } else { // show rows that match date range but have no search text
+        row.style.display = '';
+      }
+    }
+  }
+
+  // Add event listeners to date range and search inputs
+  document.getElementById('From').addEventListener('input', filterTable);
+  document.getElementById('To').addEventListener('input', filterTable);
+  document.getElementById('searchInput').addEventListener('input', filterTable);
+</script>
+<style>
+  table {
+    border: 10px;
+    width: 440px;
+  }
+
+  tr {
+
+    background-color: #ffffff;
+
+  }
+
+  td {
+    text-align: center;
+
+  }
+
+  input {
+    width: 35%;
+    color: black;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 1px;
+    background-color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    outline: none;
+    box-sizing: border-box;
+    border-color: #0c1e35;
+    margin-bottom: 10px;
+  }
+
+  .wrap {
+    width: 440px;
+  }
+
+  .container {
+    /* width: 550px; */
+    height: fit-content;
+  }
+
+  .icon-button__badge {
+    position: absolute;
+    top: 7px;
+    right: 220px;
+    width: 15px;
+    height: 18px;
+    background: red;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+
+  .pending-row {
+    background-color: #fad2c3;
+  }
+
+
+  .icon-button__badge1 {
+    position: absolute;
+    top: 0;
+    right: 228;
+    width: 15px;
+    height: 18px;
+    background: green;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+
+  .icon-button__badge2 {
+    position: absolute;
+    top: 4px;
+    right: 239;
+    width: 15px;
+    height: 18px;
+    background: purple;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+
+  .icon-button__badge3 {
+    position: absolute;
+    top: 15;
+    right: 235px;
+    width: 15px;
+    height: 18px;
+    background: red;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+
+
+  .icon-button__badge5 {
+    position: absolute;
+    top: 115;
+    right: 235px;
+    width: 15px;
+    height: 18px;
+    background: purple;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+
+  .container {
+    background-color: #B2C0E0;
+
+  }
+
+  .fp {
+    margin-top: 15px;
+  }
+</style>
 
 </html>

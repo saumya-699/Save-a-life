@@ -1,3 +1,21 @@
+<?php
+session_start();
+?>
+
+<?php
+if (isset($_SESSION["ID"])) {
+  include "config.php";
+  $m = $_SESSION["Name"];
+  $date = date("Y/m/d");
+  $query = "SELECT * FROM mlt WHERE UserName ='$m'";
+  $result1 = $conn->query($query);
+
+  if ($result1->num_rows > 0) {
+    while ($row = $result1->fetch_assoc()) {
+      $y=$row["Hospital_ID"];
+
+    }
+  }}?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -146,6 +164,11 @@
                         <span class="menu-title">Cross Matching Report</span>
                       </a>
                     </li>
+                    <li class="menu-item">
+                      <a href="ReportGenerationStock.php">
+                        <span class="menu-title">Blood Stock Report</span>
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </li>
@@ -160,14 +183,86 @@
 
                 </a>
               </li>
-              <li class="menu-item">
+              <li class="menu-item sub-menu">
                 <a href="#">
                   <span class="menu-icon">
                     <i class="ri-notification-line"></i>
                   </span>
-                  <span class="menu-title">Notification</span>
+                  <?php
 
+                  $sql = "SELECT COUNT(countS) AS total_count FROM (
+                    SELECT COUNT(*) AS countS FROM donation_records WHERE Hospital_ID='$y' and End_donation ='1' and AddStatus='0' GROUP by Batch,Donation_date) AS subquery";
+
+                  $results = $conn->query($sql);
+
+                  if ($results->num_rows > 0) {
+                    $row = $results->fetch_assoc();
+                    $status = $row["total_count"];
+                    if ($status > 0) {
+                      echo '<span class="icon-button__badge">' . $status . '</span>';
+                    }
+                  }
+
+                  ?>
+
+
+
+
+                  <?php
+                  $rql = "SELECT COUNT(*) AS countS FROM blood_request WHERE Hospital_ID = '$y' AND status='Available' and CrossMatching_Add='0'";
+                  $result1 = $conn->query($rql);
+                  if ($result1->num_rows > 0) {
+                    $row = $result1->fetch_assoc();
+                    $status = $row["countS"];
+                    if ($status > 0) {
+                      echo '<span class="icon-button__badge2">' . $status . '</span>';
+                    }
+                  }
+                  ?>
+                  <span class="menu-title">Notifications</span>
                 </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Notifications.php">
+                        <span class="menu-title"> <?php
+
+                                                  $sql = "SELECT COUNT(countS) AS total_count FROM (
+                                                 SELECT COUNT(*) AS countS FROM donation_records WHERE Hospital_ID='$y' and End_donation ='1' and AddStatus='0' GROUP by Batch,Donation_date) AS subquery";
+
+                                                  $results = $conn->query($sql);
+
+                                                  if ($results->num_rows > 0) {
+                                                    $row = $results->fetch_assoc();
+                                                    $status = $row["total_count"];
+                                                    if ($status > 0) {
+                                                      echo '<span class="icon-button__badge3">' . $status . '</span>';
+                                                    }
+                                                  }
+
+                                                  ?>
+
+                          <span>Donation</span>
+                      </a>
+
+                    <li class="menu-item">
+                      <a href="Notifications1.php">
+                        <span class="menu-title">
+                          <?php
+                          $rql = "SELECT COUNT(*) AS countS FROM blood_request WHERE Hospital_ID = '$y' AND status='Available' and CrossMatching_Add='0'";
+                          $result1 = $conn->query($rql);
+                          if ($result1->num_rows > 0) {
+                            $row = $result1->fetch_assoc();
+                            $status = $row["countS"];
+                            if ($status > 0) {
+                              echo '<span class="icon-button__badge5">' . $status . '</span>';
+                            }
+                          }
+                          ?>Cross Matching Testing</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
               <li class="menu-item">
                 <a href="logout.php">
