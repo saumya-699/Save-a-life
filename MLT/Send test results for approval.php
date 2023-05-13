@@ -10,7 +10,7 @@ if (isset($_SESSION["ID"])) {
   if ($result1->num_rows > 0) {
     while ($row = $result1->fetch_assoc()) {
       $x = $row["MLT_ID"];
-      $y=$row["Hospital_ID"];
+      $y = $row["Hospital_ID"];
     }
   }
 
@@ -285,7 +285,7 @@ if (isset($_SESSION["ID"])) {
       <main class="content">
         <div>
           <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
-          <h1> Send blood test results for approval</h1>
+          <h1> Send Blood Test Results for Approval</h1>
 
 
 
@@ -502,7 +502,7 @@ if (isset($_SESSION["ID"])) {
 
             .fp {
               margin-top: 0px;
-              margin-left: 30px;
+              margin-left: -3px;
               margin-bottom: -100px;
               background-color: transparent;
               border: none;
@@ -560,6 +560,7 @@ if (isset($_SESSION["ID"])) {
             .layout {
               background-color: #d9dbdb;
             }
+
             .icon-button__badge {
               position: absolute;
               top: 7px;
@@ -632,7 +633,6 @@ if (isset($_SESSION["ID"])) {
               align-items: center;
               border-radius: 50%;
             }
-
           </style>
 
 

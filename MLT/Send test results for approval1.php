@@ -12,8 +12,7 @@ if (isset($_SESSION["ID"])) {
   if ($result1->num_rows > 0) {
     while ($row = $result1->fetch_assoc()) {
       $x = $row["MLT_ID"];
-      $y=$row["Hospital_ID"];
-
+      $y = $row["Hospital_ID"];
     }
   }
 }
@@ -280,131 +279,156 @@ $result = $conn->query($sql);
       <main class="content">
         <div>
           <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
-          <h1>Send blood test results for approval</h1>
+          <h1> Send Blood Test Results for Approval</h1>
 
 
-            
 
 
-        </form>
-        <?php
-        if (isset($_SESSION["ID"])) {
-          include "config.php";
-          $m = $_SESSION["Name"];
-          $query = "SELECT * FROM mlt WHERE UserName ='$m'";
-          $result1 = $conn->query($query);
 
-          if ($result1->num_rows > 0) {
-            while ($row = $result1->fetch_assoc()) {
-              $x = $row["MLT_ID"];
-              $y = $row["Hospital_ID"];
+          </form>
+          <?php
+          if (isset($_SESSION["ID"])) {
+            include "config.php";
+            $m = $_SESSION["Name"];
+            $query = "SELECT * FROM mlt WHERE UserName ='$m'";
+            $result1 = $conn->query($query);
+
+            if ($result1->num_rows > 0) {
+              while ($row = $result1->fetch_assoc()) {
+                $x = $row["MLT_ID"];
+                $y = $row["Hospital_ID"];
+              }
             }
           }
-        }
 
 
 
-        if (isset($_POST['view'])) {
+          if (isset($_POST['view'])) {
 
-          $did = $_POST['RequestID'];
-          $batchid = $_POST['Requestbatch'];
-          $sql = "SELECT * FROM blood_testing_result where process_date ='$did' AND MLT_ID='$x' AND batch_number='$batchid'";
-          $result = $conn->query($sql);
+            $did = $_POST['RequestID'];
+            $batchid = $_POST['Requestbatch'];
+            $sql = "SELECT * FROM blood_testing_result where process_date ='$did' AND MLT_ID='$x' AND batch_number='$batchid'";
+            $result = $conn->query($sql);
 
 
-          echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;width:200px;'>" . "Test result ID" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Donar ID" . "</th>" . "<th style='text-align:center;width:100px;'>" . "Blood group" . "</th>" . "<th>" . "Malaria result" . "</th>" . "<th>" . " HIV result" . "</th>" . "<th>" . "HBV result" . "</th>" . "<th>" . "HCV result" . "</th>" . "<th>" . "VDRL result" . "</th>"  . "</tr>";
-          echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=10'>" . "</td>" . "</tr>";
-          while ($row = $result->fetch_assoc()) {
-            echo  "<tr>" . "<td>" . $row["test_result_id"] . "</td>" . "<td>" . $row["Donor_Id"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "<td>" . $row["malaria_result"] . "</td>" . "<td>" . $row["hiv_result"] . "</td>" . "<td>" . $row["hbv_result"] . "</td>" . "<td>" . $row["hcv_result"] . "</td>" . "<td>" . $row["vdrl_result"] . "</td>" . "<td>"  ;
-
-            echo "</tr>";
-
+            echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;width:200px;'>" . "Test result ID" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Donar ID" . "</th>" . "<th style='text-align:center;width:100px;'>" . "Blood group" . "</th>" . "<th>" . "Malaria result" . "</th>" . "<th>" . " HIV result" . "</th>" . "<th>" . "HBV result" . "</th>" . "<th>" . "HCV result" . "</th>" . "<th>" . "VDRL result" . "</th>"  . "</tr>";
             echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=10'>" . "</td>" . "</tr>";
-          }
-          echo  "</font>";
-          echo  "</font>";
-          echo "</table>";
-        } else {
-          echo "Error in " . $sql . "<br>" . $conn->error;
+            while ($row = $result->fetch_assoc()) {
+              echo  "<tr>" . "<td>" . $row["test_result_id"] . "</td>" . "<td>" . $row["Donor_Id"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "<td>" . $row["malaria_result"] . "</td>" . "<td>" . $row["hiv_result"] . "</td>" . "<td>" . $row["hbv_result"] . "</td>" . "<td>" . $row["hcv_result"] . "</td>" . "<td>" . $row["vdrl_result"] . "</td>" . "<td>";
 
-          echo "no results";
-        }
+              echo "</tr>";
 
-        $conn->close();
-        ?>
+              echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=10'>" . "</td>" . "</tr>";
+            }
+            echo  "</font>";
+            echo  "</font>";
+            echo "</table>";
+          } else {
+            echo "Error in " . $sql . "<br>" . $conn->error;
 
-        <style>
-          table {
-
-
-
-            width: 750px;
-            height: 15px;
-            border-collapse: collapse;
-            margin-top: -60px;
-            margin-left: 20px;
-            border: 0px transparent;
-
+            echo "no results";
           }
 
-          h1 {
+          $conn->close();
+          ?>
+          <button class="b2" name="back" value="back">
+            <font size="2px"><a href="Send test results for approval.php">Back</font size></a>
+          </button>
+          <style>
+            table {
 
-            margin-top: 70px;
-            margin-left: 200px;
-            margin-bottom: 100px;
-          }
+              width: 750px;
+              height: 15px;
+              border-collapse: collapse;
+              margin-top: -60px;
+              margin-left: 20px;
+              border: 0px transparent;
 
-          .select {
+            }
 
-            height: 30px;
-            width: 120px;
-            border-radius: 20px;
-            background-color: #56CE94;
-            border: none;
-            text-align: center;
-            margin-left: 30px;
+            .b2 {
 
-          }
 
-          .box {
+              border: none;
+              cursor: pointer;
+              margin-top: 20px;
+              margin-bottom: 30px;
+              margin-left: 770px;
+              margin-right: 10px;
+              width: 130px;
+              height: 40px;
+              border-radius: 30px;
+              background: #4082f5;
+              text-transform: uppercase;
+              box-shadow: 0px 10px 40px 0px rgba(17, 97, 237, 0.4);
+              font-weight: 700;
+              font-size: 14px;
+            }
+            a {
+                text-decoration: none;
+                color: white;
+                cursor: pointer;
+              }
 
-            height: 30px;
-            width: 130px;
-            margin-left: 20px;
-            margin-top: 0px;
-            border-radius: 20px;
-            border: none;
-            text-align: center;
 
-          }
+            h1 {
 
-          .b1 {
-            height: 30px;
-            width: 100px;
-            color: #FFF5F3;
-            margin-left: 20px;
-            border-radius: 20px;
-            background-color: #F3506D;
-            border: none;
-            cursor: pointer;
+              margin-top: 70px;
+              margin-left: 200px;
+              margin-bottom: 100px;
+            }
 
-          }
+            .select {
 
-          th {
+              height: 30px;
+              width: 120px;
+              border-radius: 20px;
+              background-color: #56CE94;
+              border: none;
+              text-align: center;
+              margin-left: 30px;
 
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            text-align: center;
-            padding-top: 25px;
-            padding-bottom: 25px;
-            padding-left: 20px;
-            padding-right: 10px;
-            border: 0px transparent;
+            }
 
-          }
+            .box {
 
-          .icon-button__badge {
+              height: 30px;
+              width: 130px;
+              margin-left: 20px;
+              margin-top: 0px;
+              border-radius: 20px;
+              border: none;
+              text-align: center;
+
+            }
+
+            .b1 {
+              height: 30px;
+              width: 100px;
+              color: #FFF5F3;
+              margin-left: 20px;
+              border-radius: 20px;
+              background-color: #F3506D;
+              border: none;
+              cursor: pointer;
+
+            }
+
+            th {
+
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              text-align: center;
+              padding-top: 25px;
+              padding-bottom: 25px;
+              padding-left: 20px;
+              padding-right: 10px;
+              border: 0px transparent;
+
+            }
+
+            .icon-button__badge {
               position: absolute;
               top: 7px;
               right: 220px;
@@ -478,15 +502,12 @@ $result = $conn->query($sql);
             }
 
 
-          td {
-            text-align: center;
-            padding: 1px;
+            td {
+              text-align: center;
+              padding: 1px;
 
 
-          }
-
-
-         
+            }
 
 
 
@@ -494,88 +515,91 @@ $result = $conn->query($sql);
 
 
 
-          .f2 {
-
-            margin-left: 50px;
-            margin-top: -100px;
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            margin-bottom: 0px;
-
-
-          }
-
-
-          .f1 {
-
-            background-color: transparent;
-            margin-left: 10px;
-            margin-right: 20px;
-            margin-bottom: 10px;
-            margin-top: 10px;
-            border: none;
-            cursor: pointer;
-
-
-          }
-
-          .fp {
-            margin-top: 0px;
-            margin-left: 30px;
-            margin-bottom: -100px;
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-          }
-
-          .tb {
-            display: inline-flex;
-            justify-content: space-evenly;
-            flex-wrap: nowrap;
-            align-items: baseline;
-            flex-direction: row;
-          }
 
 
 
+            .f2 {
 
-          .ta {
-
-            background-color: #F5F5F5;
-            margin-top: 60px;
-            margin-bottom: 0px;
-            margin-left: 370px;
-            margin-right: 119px;
-            padding-left: 20px;
-
-          }
+              margin-left: 50px;
+              margin-top: -100px;
+              background-color: transparent;
+              border: none;
+              cursor: pointer;
+              margin-bottom: 0px;
 
 
-
-          tr {
-
-            background-color: white;
+            }
 
 
-          }
+            .f1 {
 
-          .visible {
-            cursor: pointer;
+              background-color: transparent;
+              margin-left: 10px;
+              margin-right: 20px;
+              margin-bottom: 10px;
+              margin-top: 10px;
+              border: none;
+              cursor: pointer;
 
 
-          }
+            }
 
-          .layout {
-            background-color: #d9dbdb;
-          }
-        </style>
+            .fp {
+              margin-top: 0px;
+              margin-left: 30px;
+              margin-bottom: -100px;
+              background-color: transparent;
+              border: none;
+              cursor: pointer;
+            }
 
+            .tb {
+              display: inline-flex;
+              justify-content: space-evenly;
+              flex-wrap: nowrap;
+              align-items: baseline;
+              flex-direction: row;
+            }
+
+
+
+
+            .ta {
+
+              background-color: #F5F5F5;
+              margin-top: 60px;
+              margin-bottom: 0px;
+              margin-left: 370px;
+              margin-right: 119px;
+              padding-left: 20px;
+
+            }
+
+
+
+            tr {
+
+              background-color: white;
+
+
+            }
+
+            .visible {
+              cursor: pointer;
+
+
+            }
+
+            .layout {
+              background-color: #d9dbdb;
+            }
+          </style>
+
+
+        </div>
+      </main>
 
     </div>
-    </main>
-
-  </div>
   </div>
   <!-- partial -->
   <script src='https://unpkg.com/@popperjs/core@2'></script>
