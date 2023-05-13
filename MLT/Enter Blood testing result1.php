@@ -302,7 +302,7 @@ if (isset($_SESSION["ID"])) {
 
               ?>
 
-                <form action="createresult.php " method="POST" id="myForm" onsubmit="return validateForm()">
+                <form action="createresult.php" method="POST" id="myForm" onsubmit="return validateForm()">
 
                   <label for="exampleFormControlInput1" class="form-label lbl star ">Donor ID</label>
                   <input type="text" class="form-control txt-input " name="Donor_Id" value="<?php echo $did ?>">
