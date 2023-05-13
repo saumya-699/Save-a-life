@@ -207,7 +207,7 @@ session_start();
                             </div>
                     
                             <label for="exampleFormControlInput1" class="form-label lbl">Email Address</label>
-                            <input type="email" class="form-control txt-input" placeholder="Type your Email Address" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"onchange='myFunction()' required >
+                            <input type="email" class="form-control txt-input" placeholder="Type your Email Address" name="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required >
                     
                             <label for="exampleFormControlInput1" class="form-label lbl star">Gender</label>
                             <select name="gender" id="" class="form-control txt-input" required>Gender
@@ -273,12 +273,7 @@ session_start();
               </div>
                 </form> 
 
-                <script>
-function myFunction() {
-  var email = document.getElementById("email").value;
-  document.getElementById("username").value = email;
-}
-</script>
+
           
         </main>
       </div>
