@@ -91,14 +91,14 @@ if(isset($_SESSION["ID"])) {
 					  
 					    <li class="menu-item">
                         <a href="LessStockComponentsI.php">
-                          <span class="menu-title">Low stock blood components</span>
+                          <span class="menu-title">Low Stock Blood Components</span>
                         </a>
                       </li>
 	
 					  
 					     <li class="menu-item">
                         <a href="ExpiredComponentsI.php">
-                          <span class="menu-title">Blood expiry Information</span>
+                          <span class="menu-title">Blood Expiry Information</span>
                         </a>
                       </li>
                     </ul>
@@ -125,7 +125,7 @@ if(isset($_SESSION["ID"])) {
                       </li>
                       <li class="menu-item">
                         <a href="sendRequestI.php">
-                          <span class="menu-title">Send requests</span>
+                          <span class="menu-title">Send Requests</span>
                         </a>
                       </li>
                       <li class="menu-item">
@@ -384,7 +384,7 @@ $send_status =1;
 $vql = "SELECT process_date,batch_number,status 
 FROM blood_testing_result 
 Where Hospital_ID ='$x' and process_date ='$date' and send_status=$send_status
- GROUP BY  batch_number
+GROUP BY  batch_number
  ORDER BY status
  ";
 
@@ -481,7 +481,7 @@ if(isset($_POST['check']))
                               echo '<script type="text/javascript">';
 		                     // echo 'alert("Error in updating details.Try again!");';
                               echo "Error in ".$query."<br>".$conn->error;
-		                      echo 'window.location.href="updateAccount.php";';
+		                      echo 'window.location.href="Home.php";';
 		                      echo '</script>';
 
                             }

@@ -241,14 +241,14 @@ session_start();
 					  
 					    <li class="menu-item">
                         <a href="LessStockComponentsI.php">
-                          <span class="menu-title">Low stock blood components</span>
+                          <span class="menu-title">Low Stock Blood Components</span>
                         </a>
                       </li>
 	
 					  
 					     <li class="menu-item">
                         <a href="ExpiredComponentsI.php">
-                          <span class="menu-title">Blood expiry Information</span>
+                          <span class="menu-title">Blood Expiry Information</span>
                         </a>
                       </li>
                     </ul>
@@ -275,7 +275,7 @@ session_start();
                       </li>
                       <li class="menu-item">
                         <a href="sendRequestI.php">
-                          <span class="menu-title">Send requests</span>
+                          <span class="menu-title">Send Requests</span>
                         </a>
                       </li>
                       <li class="menu-item">
@@ -627,6 +627,10 @@ if($resultr->num_rows>0)
 //echo "Component Type: " . $Component_type . "<br>";
 //echo "No of packs: " . $No_of_packs . "<br>";
 
+
+//------------------check the blood group ,component type,no of packs if those three are not none then the query inside this will 
+//be executed
+
   if($Blood_group !="None" && $Component_type !="None" && $No_of_packs != "None")
  
  {
@@ -681,15 +685,18 @@ echo '</script>';
 
 
 
+//------------------check the blood group is none and component type,no of packs if those two are not none then the query inside this will 
+//be executed
 else if($Blood_group =="None" && $Component_type !="None" && $No_of_packs!= "None")
  
 {
-
+ 
+  //-----------first remove records which has the hospital id $y and which has long expiry dates and group the stock by hospital id and the component type red id1 -->one grp red id4-->second grp white id5 -->third grp
+  //when grouping the groups should have the given component type and count should be more than given count
   $sql ="select Hospital_ID,Count(*) AS count
   from stock
-
   where ExpiryDate >'$today' AND Hospital_ID != $y 
-  group by Component_type,Hospital_ID
+  group by Component_type,Hospital_ID 
   HAVING COUNT(*) >= $No_of_packs AND Component_type='$Component_type'";
   
 $result = $conn->query($sql);

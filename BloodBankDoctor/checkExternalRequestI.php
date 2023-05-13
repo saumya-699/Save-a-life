@@ -112,14 +112,14 @@ session_start();
 					  
 					    <li class="menu-item">
                         <a href="LessStockComponentsI.php">
-                          <span class="menu-title">Low stock blood components</span>
+                          <span class="menu-title">Low Stock Blood Components</span>
                         </a>
                       </li>
 	
 					  
 					     <li class="menu-item">
                         <a href="ExpiredComponentsI.php">
-                          <span class="menu-title">Blood expiry Information</span>
+                          <span class="menu-title">Blood Expiry Information</span>
                         </a>
                       </li>
                     </ul>
@@ -146,7 +146,7 @@ session_start();
                       </li>
                       <li class="menu-item">
                         <a href="sendRequestI.php">
-                          <span class="menu-title">Send requests</span>
+                          <span class="menu-title">Send Requests</span>
                         </a>
                       </li>
                       <li class="menu-item">
@@ -435,7 +435,8 @@ if($resultr->num_rows>0)
 	
   
 
-
+///------------------requested hospital means the hospital which we sent the request to 
+//so here we get the hospital id of our hospital and check whether we have requests in sent_request table when displaiyn we arrange it in descending order
 $sql= "select * from sent_request where Requested_hospital_name ='$y' ORDER BY status DESC" ;
 $result = $conn->query($sql);
 

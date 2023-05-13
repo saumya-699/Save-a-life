@@ -267,7 +267,7 @@ echo "
 	  
                                <input type='hidden' value=".$row["BloodBank_doctor_ID"]." name='BloodBank_doctor_ID' id='BloodBank_doctor_ID' class='box'>
                                <label for='exampleFormControlInput1' class='form-label lbl star'>Name with Initials</label> 
-                               <input type='text' value=".$row["Name_With_Initials"]." name='Name' id='name' class='form-control txt-input'>
+                               <input type='text' value='$row[Name_With_Initials]' name='Name' id='name' class='form-control txt-input'>
                         
                                <label for='exampleFormControlInput1' class='form-label lbl star'>Hospital name </label>
                                <select name= 'hospital' class='form-control txt-input' required>

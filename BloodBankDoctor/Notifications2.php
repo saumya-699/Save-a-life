@@ -97,14 +97,14 @@ if (isset($_SESSION["ID"])) {
 
                       <li class="menu-item">
                         <a href="LessStockComponentsI.php">
-                          <span class="menu-title">Low stock blood components</span>
+                          <span class="menu-title">Low Stock Blood Components</span>
                         </a>
                       </li>
 
 
                       <li class="menu-item">
                         <a href="ExpiredComponentsI.php">
-                          <span class="menu-title">Blood expiry Information</span>
+                          <span class="menu-title">Blood Expiry Information</span>
                         </a>
                       </li>
                     </ul>
@@ -131,7 +131,7 @@ if (isset($_SESSION["ID"])) {
                       </li>
                       <li class="menu-item">
                         <a href="sendRequestI.php">
-                          <span class="menu-title">Send requests</span>
+                          <span class="menu-title">Send Requests</span>
                         </a>
                       </li>
                       <li class="menu-item">
@@ -165,20 +165,65 @@ if (isset($_SESSION["ID"])) {
                   </div>
                 </li>
                 <li class="menu-item">
-                  <a href="View_Donors_BI.php">
+                <li class="menu-item sub-menu">
+                  <a href="#">
                     <span class="menu-icon">
-                      <i class="ri-user-heart-fill"></i>
+                      <i class="ri-article-fill"></i>
                     </span>
                     <span class="menu-title">Donors</span>
                   </a>
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="View_Donors_BI.php">
+                          <span class="menu-title">View</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="donorEmail.php">
+                          <span class="menu-title">Send Non -Emergency Email</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
                 </li>
-                <li class="menu-item">
-                  <a href="ReportGeneration_BI.php">
+                
+                 <li class="menu-item sub-menu">
+                  <a href="#">
                     <span class="menu-icon">
-                      <i class="ri-file-chart-line"></i>
+                      <i class="ri-message-2-fill"></i>
                     </span>
                     <span class="menu-title">Reports</span>
                   </a>
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="ReportGenerationStock.php">
+                          <span class="menu-title">Stock Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGenerationCrossMatching.php">
+                          <span class="menu-title">Cross Matching Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGenerationBlood.php">
+                          <span class="menu-title">Blood Request Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGeneration_BI.php">
+                          <span class="menu-title">Donation Details Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGeneration_Request.php">
+                          <span class="menu-title">External Requests Reports</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
                 </li>
                 <li class="menu-header" style="padding-top: 40px"><span> </span></li>
                 <li class="menu-item">
@@ -240,7 +285,7 @@ if (isset($_SESSION["ID"])) {
                     }
                     ?>
 
-<span class="menu-title">Notifications</span>
+                    <span class="menu-title">Notifications</span>
                   </a>
                   <div class="sub-menu-list">
                     <ul>
@@ -302,7 +347,7 @@ if (isset($_SESSION["ID"])) {
                     </ul>
                   </div>
                 </li>
-               
+
 
                 <li class="menu-item">
                   <a href="logoutI.php">
@@ -343,14 +388,14 @@ if (isset($_SESSION["ID"])) {
 
               </div>
               <h4><b>Notification Received</b></h4>
-              &nbsp; &nbsp;  From <input type="date" name="From" id="From" class="yu">
+              &nbsp; &nbsp; From <input type="date" name="From" id="From" class="yu">
               &nbsp; &nbsp; &nbsp;To <input type="date" name="To" id="To" class="yu"><br><br>
               &nbsp; &nbsp; Search: <input type="text" id="searchInput" class="box">
 
               <h2>Cross Matching Testing result</h2>
 
-              <?php
-               $vql = "SELECT MLT.Name_With_Initials
+            <?php
+            $vql = "SELECT MLT.Name_With_Initials
                FROM MLT
                INNER JOIN blood_testing_result ON MLT.MLT_ID =blood_testing_result.MLT_ID";
             $result = $conn->query($vql);
@@ -360,33 +405,32 @@ if (isset($_SESSION["ID"])) {
               }
             }
 
-              $sql = "SELECT * from cross_matching_testing_result where Hospital_ID='$y' AND send_status='1' ORDER BY process_date DESC";
-              $result = $conn->query($sql);
+            $sql = "SELECT * from cross_matching_testing_result where Hospital_ID='$y' AND send_status='1' ORDER BY process_date DESC";
+            $result = $conn->query($sql);
 
-              if ($result->num_rows > 0) {
-                echo "<table id='dataTable'><thead><tr><th style='text-align:center;width:120px;'>Request Id</th><th style='text-align:center;width:120px;'>Requested Date</th><th style='text-align:center;width:120px;'>Testing done by MLT</th><th style='width:120px;'>Action</th></tr></thead><tbody>";
+            if ($result->num_rows > 0) {
+              echo "<table id='dataTable'><thead><tr><th style='text-align:center;width:120px;'>Request Id</th><th style='text-align:center;width:120px;'>Requested Date</th><th style='text-align:center;width:120px;'>Testing done by MLT</th><th style='width:120px;'>Action</th></tr></thead><tbody>";
 
-                while ($row = $result->fetch_assoc()) {
-                  $status = $row['Status'];
-                  $status_class = ($status === 'Pending') ? 'pending-row' : '';
-  
-                  echo "<tr class='$status_class'><td>" . $row["Request_ID"] . "</td><td>" . $row["process_date"] . "</td><td>" . $z . "</td><td><form method='POST' action ='crossmatchingNotify.php'>
+              while ($row = $result->fetch_assoc()) {
+                $status = $row['Status'];
+                $status_class = ($status === 'Pending') ? 'pending-row' : '';
+
+                echo "<tr class='$status_class'><td>" . $row["Request_ID"] . "</td><td>" . $row["process_date"] . "</td><td>" . $z . "</td><td><form method='POST' action ='crossmatchingNotify.php'>
                   <button type=submit value=view name=view  class='fp'><i class='fa-solid fa-arrow-right'></i></button>
                   <input type=hidden name=TestID value=" . $row["test_result_id"] . " >
                   </form></td></tr>";
-
-                }
-  
-                echo "</tbody></table>";
-                echo "<br>";
-                echo "<br>";
-                echo "<br>";
               }
-            }
-            $conn->close();
-              ?>
 
-                <!-- //   echo  "<div class='tab'>";
+              echo "</tbody></table>";
+              echo "<br>";
+              echo "<br>";
+              echo "<br>";
+            }
+          }
+          $conn->close();
+            ?>
+
+            <!-- //   echo  "<div class='tab'>";
                 while ($row = $result->fetch_assoc()) {
                   $status = $row['Status'];
                   $status_class = ($status === 'Pending') ? 'pending-row' : '';
@@ -487,6 +531,7 @@ if (isset($_SESSION["ID"])) {
       background-color: #ffffff;
 
     }
+
     input {
       width: 35%;
       color: black;
@@ -502,6 +547,7 @@ if (isset($_SESSION["ID"])) {
       border-color: #0c1e35;
       margin-bottom: 10px;
     }
+
     .wrap {
       width: 440px;
     }
@@ -510,6 +556,7 @@ if (isset($_SESSION["ID"])) {
       /* width: 550px; */
       height: fit-content;
     }
+
     td {
       text-align: center;
 
@@ -566,10 +613,12 @@ if (isset($_SESSION["ID"])) {
       background-color: #B2C0E0;
 
     }
-    .fp{
-    margin-top: 15px;
-  }
-  .icon-button__badge3 {
+
+    .fp {
+      margin-top: 15px;
+    }
+
+    .icon-button__badge3 {
       position: absolute;
       top: 15;
       right: 235px;
@@ -596,19 +645,20 @@ if (isset($_SESSION["ID"])) {
       align-items: center;
       border-radius: 50%;
     }
+
     .icon-button__badge5 {
-    position: absolute;
-    top: 115;
-    right: 236;
-    width: 15px;
-    height: 18px;
-    background: purple;
-    color: #ffffff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-}
+      position: absolute;
+      top: 115;
+      right: 236;
+      width: 15px;
+      height: 18px;
+      background: purple;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
   </style>
 
   </html>

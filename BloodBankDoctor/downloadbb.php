@@ -94,14 +94,14 @@ session_start();
 					  
 					    <li class="menu-item">
                         <a href="LessStockComponentsI.php">
-                          <span class="menu-title">Low stock blood components</span>
+                          <span class="menu-title">Low Stock Blood Components</span>
                         </a>
                       </li>
 	
 					  
 					     <li class="menu-item">
                         <a href="ExpiredComponentsI.php">
-                          <span class="menu-title">Blood expiry Information</span>
+                          <span class="menu-title">Blood Expiry Information</span>
                         </a>
                       </li>
                     </ul>
@@ -128,7 +128,7 @@ session_start();
                       </li>
                       <li class="menu-item">
                         <a href="sendRequestI.php">
-                          <span class="menu-title">Send requests</span>
+                          <span class="menu-title">Send Requests</span>
                         </a>
                       </li>
                       <li class="menu-item">
@@ -486,7 +486,7 @@ if($report =="Female"){
       
       {     
         
-         echo  "<tr>"."<td>".$row["Donor_Id"]."</td>"."<td>".$row["Donation_Date"]."</td>"."<td>".$row["Donor_Name"]."</td>";
+         echo  "<tr>"."<td>".$row["Donor_Id"]."</td>"."<td>".$row["Donation_Date"]."</td>"."<td>".$row["Full_Name"]."</td>";
         
                     echo "</tr>";
         

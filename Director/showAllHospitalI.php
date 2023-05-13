@@ -265,7 +265,7 @@ echo "
 			
                         
                              <label for='exampleFormControlInput1' class='form-label lbl star'>Hospital Name </label> 
-                             <input type='text' value=".$row["HospitalName"]." name='HName' id='H_id' class='form-control txt-input'>
+                             <input type='text' value='$row[HospitalName]' name='HName' id='H_id' class='form-control txt-input'>
 							 
 							                <label for='exampleFormControlInput1' class='form-label lbl star'> Type </label>
                              <select name='Type' class='form-control txt-input' required>
@@ -282,11 +282,11 @@ echo "
                           </select>
         
                              <label for='exampleFormControlInput1' class='form-label lbl star'>Head of Hospital  </label> 
-                             <input type='text' value=".$row["Head_Of_Hospital"]." name='headName' id='headID' class='form-control txt-input'>
+                             <input type='text' value='$row[Head_Of_Hospital].' name='headName' id='headID' class='form-control txt-input'>
         
                                
                               <label for='exampleFormControlInput1' class='form-label lbl star'>Address </label> 
-                             <input type='text' value=".$row["Address"]." name='address' class='form-control txt-input' id='adddress'>
+                             <input type='text' value='$row[Address].' name='address' class='form-control txt-input' id='adddress'>
         
 
                            <label for='exampleFormControlInput1' class='form-label lbl star'>Land Line Number </label> 

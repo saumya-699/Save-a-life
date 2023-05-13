@@ -231,7 +231,7 @@ $sql = "SELECT * FROM MLT WHERE Remark!='Removed'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
-    echo "<table id='dataTable' border='1'><thead><tr><th style='text-align:center;width:120px;'>MLT_ID</th><th style='text-align:center;width:120px;'>Name_With_Initials</th><th>Hospital name</th><th>SLMC number</th><th style='text-align:center;width:120px;'>Appointment Date</th><th style='width:120px;'>Action</th></tr></thead><tbody>";
+    echo "<table id='dataTable' border='1'><thead><tr><th style='text-align:center;width:120px;'>MLT ID</th><th style='text-align:center;width:120px;'>Name With Initials</th><th>Hospital Name</th><th>SLMC Number</th><th style='text-align:center;width:120px;'>Appointment Date</th><th style='width:120px;'>Action</th></tr></thead><tbody>";
     while ($row = $result->fetch_assoc()) {
         $position_class = strtolower(str_replace(' ', '-', $row['AppointmentDate']));
         echo '<tr class="' . $position_class . '">';

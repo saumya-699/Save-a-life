@@ -9,19 +9,7 @@ require 'conp.php';
 
 
 
-if(isset($_POST['btnCancel']))
-{
-	
-	
-	
-	
-	     echo '<script type="text/javascript">';
-		
-         echo 'window.location.href="Home.php";';
 
-		 echo '</script>';
-	
-}
               //make connection here
 if(isset($_POST['BtnSubmit']))
 {

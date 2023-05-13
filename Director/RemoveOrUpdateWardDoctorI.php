@@ -268,7 +268,7 @@ if($result->num_rows>0)
 	      //echo "<font size=6>";
 	   
 	   //echo  "<div class='tab'>";
-	   echo  "<table id='dataTable' border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Doctor_ID"."</th>"."<th style='text-align:center;width:120px;'>"."Name_With_Initials"."</th>"."<th>"."Hospital name"."</th>"."<th>"."Specialization"."</th>"."<th>"."SLMC number"."</th>"."<th>Appointment Date</th>"."<th>"."Action"."</th>"."</tr>";
+	   echo  "<table id='dataTable' border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Doctor ID"."</th>"."<th style='text-align:center;width:120px;'>"."Name With Initials"."</th>"."<th>"."Hospital Name"."</th>"."<th>"."Specialization"."</th>"."<th>"."SLMC Number"."</th>"."<th>Appointment Date</th>"."<th>"."Action"."</th>"."</tr>";
       //echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
    while($row = $result->fetch_assoc())
    

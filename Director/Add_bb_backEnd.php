@@ -36,7 +36,28 @@ if(isset($_POST['BtnSubmit']))
 	$password=$_POST["password"];
     $m= $_SESSION["Name"];
 
-
+    $check1= "select * from system_users where UserName ='$Email'";
+    $resultc1 = $conn->query($check1);
+    if(!empty($resultc1) && $resultc1->num_rows>0)
+ 
+    {
+ 
+ 
+     echo '<script type="text/javascript">';
+     echo 'alert("Email already exists");';
+     
+      echo 'window.location.href="Add_bbI.php";';
+     echo '</script>';
+ 
+ 
+ 
+    }
+ 
+     
+       
+          else
+          {
+ 
 	$query = "select * from director where UserName ='$m'";
 
 
@@ -460,7 +481,7 @@ echo "
  
 	
 }
- 
+}
 $conn->close();
 
 ?>

@@ -18,6 +18,7 @@ session_start();
     //echo "Error in ".$vql."<br>".$conn->error;
     $x=null;
     $ID=null;
+    $hid =null;
     if($resultd->num_rows>0)
     
     {        
@@ -118,14 +119,14 @@ session_start();
 					  
 					    <li class="menu-item">
                         <a href="LessStockComponentsI.php">
-                          <span class="menu-title">Low stock blood components</span>
+                          <span class="menu-title">Low Stock Blood Components</span>
                         </a>
                       </li>
 	
 					  
 					     <li class="menu-item">
                         <a href="ExpiredComponentsI.php">
-                          <span class="menu-title">Blood expiry Information</span>
+                          <span class="menu-title">Blood Expiry Information</span>
                         </a>
                       </li>
                     </ul>
@@ -152,7 +153,7 @@ session_start();
                       </li>
                       <li class="menu-item">
                         <a href="sendRequestI.php">
-                          <span class="menu-title">Send requests</span>
+                          <span class="menu-title">Send Requests</span>
                         </a>
                       </li>
                       <li class="menu-item">
@@ -413,23 +414,13 @@ session_start();
 
 require 'conp.php';
 $date =date("Y/m/d");
+//-----------------------------------------------------get the user name from session 
 
-$query="select * from bloodbank_doctor where Name_With_Initials='$x'";
-   $result= $conn->query($query);
-     
-  if($result->num_rows>0)
-
-   {     
-
-      while($row = $result->fetch_assoc())
- 
-       {   
-     	  $s= $row["Hospital_ID"];
-		 
-       }
+//---------------------------------------------------select the hospital id using user name of the blood bak doctor from blood bank doctor table
+//----------------------------------------------------after getting the hospital id select all from blood request table order it in descending order
 	   
 	   
-	  $rql ="select * from blood_request where Hospital_ID ='$s'  ORDER BY status DESC";
+	  $rql ="select * from blood_request where Hospital_ID ='$hid'  ORDER BY status DESC";
 	   $resultx= $conn->query($rql);
 	  
 	 
@@ -449,7 +440,7 @@ $query="select * from bloodbank_doctor where Name_With_Initials='$x'";
 	   
 	   //echo  "<div style='overflow-x:auto; ' class='tab'> ";
 	    // echo  "<div class='hat'>";
-	   echo  "<table id='dataTable' border=1>"."<tr>"."<th style='text-align:center;width:50px;'>"."Request <br>ID"."</th>"."<th>"."Blood Group"."</th>"."<th style='text-align:center;width:120px;'>"."Required<br> Component"."</th>"."<th>"."Required <br>Amount (packets)"."</th>"."<th style='text-align:center;width:120px;'>"."Expected date <br> to receive"."</th>"."<th style='text-align:center:width:40px;'>"."Status"."</th>"."<th style='text-align:center;width:100px;'>"."Action"."</th>"."</tr>";
+	   echo  "<table id='dataTable' border=1>"."<tr>"."<th style='text-align:center;width:50px;'>"."Request <br>ID"."</th>"."<th>"."Blood Group"."</th>"."<th style='text-align:center;width:120px;'>"."Required<br> Component"."</th>"."<th>"."Required <br>Amount (packets)"."</th>"."<th style='text-align:center;width:120px;'>"."Expected Date <br> to Receive"."</th>"."<th style='text-align:center:width:40px;'>"."Status"."</th>"."<th style='text-align:center;width:100px;'>"."Action"."</th>"."</tr>";
       echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=10'>"."</td>"."</tr>";
    while($row = $resultx->fetch_assoc())
    
@@ -495,18 +486,7 @@ $query="select * from bloodbank_doctor where Name_With_Initials='$x'";
 	// echo "</div>";
 	
 		  }
-   
-   }
-
-
-else
-
-{
-  //echo "Error in ".$query."<br>".$conn->error;
-
- //echo "no results";
-
-}
+ 
 
 
 
@@ -549,7 +529,10 @@ else
  
 }*/
 
-
+//wwhen processing available or not available is clicked they will be directed to the same page.
+//When view more is clicked it will be directed to view more page
+//Request_ID will be passed through each form 
+//when clicking that button it will update the status and the blood bank doctor coloumns of the bloood request table which have that request id and 
 
 
 if(isset($_POST['Accept']))  
@@ -712,20 +695,6 @@ dateInput.addEventListener('input', filterTable);
 </script>
 
                 <!--<button type="submit" name="data" id="data" class="bx"><a href="RemoveOrUpdateBB.php"><font color="white"><font size="3">Back</font></font></a></button>-->
-                <script>
-                function myConfirm() {
-                    var result = confirm("Want to delete?");
-                    if (result == true) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                }
-                </script>
-
-
-
-
 
             </main>
 
