@@ -295,11 +295,10 @@ if (isset($_SESSION["ID"])) {
               <?php
               include "config.php";
               if (isset($_POST['add'])) {
-                
+
                 $did = $_POST['DID'];
                 $bid = $_POST['BID'];
                 $pid = $_POST['PID'];
-               // echo $did;
 
               ?>
 
