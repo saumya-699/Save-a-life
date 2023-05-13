@@ -112,7 +112,7 @@ if (isset($_POST['view'])) {
                   </span>
                   <?php
 
-                  $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$y' AND notifyView='0' AND (status='Available' OR status='NotAvailable')";
+                  $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$y' AND notifyView='0' AND (status='Available' OR status='Not Available')";
 
                   $results = $conn->query($sql);
 
@@ -136,7 +136,7 @@ if (isset($_POST['view'])) {
                       <a href="Notifications.php">
                         <span class="menu-title"> <?php
 
-                                                  $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$y' AND notifyView='0' AND (status='Available' OR status='NotAvailable')";
+                                                  $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$y' AND notifyView='0' AND (status='Available' OR status='Not Available')";
 
                                                   $results = $conn->query($sql);
 

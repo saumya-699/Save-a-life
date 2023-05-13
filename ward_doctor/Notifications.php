@@ -104,7 +104,7 @@ if (isset($_SESSION["ID"])) {
                   </span>
                   <?php
 
-                  $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$y' AND notifyView='0' AND (status='Available' OR status='NotAvailable')";
+                  $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$y' AND notifyView='0' AND (status='Available' OR status='Not Available')";
 
                   $results = $conn->query($sql);
 
@@ -128,7 +128,7 @@ if (isset($_SESSION["ID"])) {
                       <a href="Notifications.php">
                         <span class="menu-title"> <?php
 
-                                                  $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$y' AND notifyView='0' AND (status='Available' OR status='NotAvailable')";
+                                                  $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$y' AND notifyView='0' AND (status='Available' OR status='Not Available')";
 
                                                   $results = $conn->query($sql);
 
@@ -204,7 +204,7 @@ if (isset($_SESSION["ID"])) {
               }
             }
 
-            $sql = "SELECT * FROM blood_request WHERE Hospital_ID ='$y' AND (status='Available' OR status='NotAvailable') ORDER BY requeste_id DESC";
+            $sql = "SELECT * FROM blood_request WHERE Hospital_ID ='$y' AND (status='Available' OR status='Not Available') ORDER BY requeste_id DESC";
             $result = $conn->query($sql);
             if ($result->num_rows > 0) {
 
