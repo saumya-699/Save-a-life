@@ -583,13 +583,13 @@ if (isset($_SESSION["ID"])) {
             }
 
             .fp {
-              margin-top: 10px;
+              margin-top: 6px;
               margin-left: 30px;
               margin-bottom: -100px;
               background-color: transparent;
               border: none;
               cursor: pointer;
-              font-size: 20px;
+              font-size: 25px;
               padding: 10px 20px;
             }
 
