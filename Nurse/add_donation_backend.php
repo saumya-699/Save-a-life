@@ -1,7 +1,7 @@
 <?php 
 session_start();
 
-require 'conection.php'; // make database connection here
+require 'conp.php'; // make database connection here
 $m = $_SESSION["Name"];
 $query = "SELECT * FROM nurse WHERE UserName ='$m'";
 $result1 = $conn->query($query);
@@ -27,7 +27,7 @@ if(isset($_POST['BtnSubmit']))
     $Donation_Date = date("Y-m-d");
     
     // get the last donation ID and the batch number
-    $last_donation_sql = "SELECT Donation_ID, Batch FROM donation ORDER BY Donation_ID DESC LIMIT 1";
+    $last_donation_sql = "SELECT Donation_ID, Batch FROM donation_records ORDER BY Donation_ID DESC LIMIT 1";
     $last_donation_result = $conn->query($last_donation_sql);
     if ($last_donation_result->num_rows > 0) {
         $last_donation_row = $last_donation_result->fetch_assoc();

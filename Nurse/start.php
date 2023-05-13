@@ -1,4 +1,16 @@
-<!DOCTYPE html>
+<?php 
+session_start();
+
+?>
+
+
+ <?php
+   if(isset($_SESSION["ID"]))   {
+	
+    require "conp.php";
+    
+     			
+?>
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
@@ -147,16 +159,21 @@
 <?php
 
 
-require 'conection.php';
-?>
-           
-			<?php
+require 'conp.php';
+
+$sql = "SELECT Batch FROM donation_records ORDER BY Batch DESC LIMIT 1";
+$result = $conn->query($sql);
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $current_batch = $row['Batch'];
+
 			echo  "<div class='tab'>";
      echo " <h1>Daily Blood Collection </h1>";
      echo " <h4>Everyday blood collecting process Start at 8.00am and end at 4.00pm .<br>
-     There has two batches For a day. B01 and B02. Batches Time Periods;<br>
-     B01- From 8.00am to 12.00pm<br>
-     B02- From 12.00pm to 4.00pm
+     There has a batch in every 15 doations.<br>
+     <br>
+     <br>
+     Current Batch Number: $current_batch
      </h4>";
 		echo '<form method="POST" action="end.php">';
     echo"<div class='center'>";
@@ -166,6 +183,7 @@ require 'conection.php';
 		echo "<form/>";
 	   
 	 echo "</div>";
+}
 	 
 $conn->close();
 ?>
@@ -178,3 +196,6 @@ $conn->close();
 
 </body>
 </html>
+<?php
+}
+?>

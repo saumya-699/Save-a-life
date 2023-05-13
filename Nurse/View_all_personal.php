@@ -1,4 +1,16 @@
-<!DOCTYPE html>
+<?php 
+session_start();
+
+?>
+
+
+ <?php
+   if(isset($_SESSION["ID"]))   {
+	
+    require "conp.php";
+    
+     			
+?>
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
@@ -272,3 +284,6 @@ $conn->close();
 
 </body>
 </html>
+<?php
+}
+?>

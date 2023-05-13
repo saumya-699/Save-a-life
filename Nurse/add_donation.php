@@ -27,7 +27,7 @@ session_start();
 <body>
 <!-- partial:index.partial.html -->
 <?php
-require 'conection.php';
+require 'conp.php';
 
 // Check if the form is submitted
 if (isset($_POST['BtnSubmit'])) {

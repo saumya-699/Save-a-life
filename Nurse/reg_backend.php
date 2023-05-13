@@ -7,7 +7,18 @@ session_start();
 <?php
 
 //make connection here
-require 'conection.php'; 
+require 'conp.php'; 
+$m = $_SESSION["Name"];
+$query = "SELECT * FROM nurse WHERE UserName ='$m'";
+$result1 = $conn->query($query);
+
+if ($result1->num_rows > 0) {
+    while ($row = $result1->fetch_assoc()) {
+      $y = $row["Hospital_ID"];
+    }
+  
+  }
+
 
 if(isset($_POST['BtnSubmit']))
 {
@@ -26,14 +37,15 @@ if(isset($_POST['BtnSubmit']))
 	$land_number=$_POST["land"];
 	$username = $_POST["username"];
 	$password = $_POST["password"];
+	$Hospital_ID=$y;
     
    
     
     
     //database connection
 
-        $sql = "INSERT INTO donors (Prefix,Full_Name,Initials,NIC_Number,DOB,Email,Gender,Address,province,postal,mobile_number,land_number,username,password,date)
-VALUES ('$Prefix','$Fullname','$Initial','$NIC','$DOB','$Email','$Gender','$Address','$province','$postal','$mobile_number','$land_number','$username','$password','$date')";
+        $sql = "INSERT INTO donors (Prefix,Full_Name,Initials,NIC_Number,DOB,Email,Gender,Address,province,postal,mobile_number,land_number,username,password,date,Hospital_ID)
+VALUES ('$Prefix','$Fullname','$Initial','$NIC','$DOB','$Email','$Gender','$Address','$province','$postal','$mobile_number','$land_number','$username','$password','$date','$Hospital_ID')";
 
 if($conn->query($sql)) {
 	//echo '<script type="text/javascript">';

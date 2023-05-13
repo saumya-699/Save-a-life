@@ -1,0 +1,249 @@
+body{
+    background-color: #FAFAFA;
+}
+.container-profile {
+    margin-top: 60px;
+    background: #FAFAFA;
+
+}
+
+.flex-container-profile {
+    display: flex;
+    flex-direction: row;
+    font-size: 14px;
+    background-color: #FAFAFA;
+}
+
+.about {
+    flex: 0.5;
+    margin:1.3rem;
+    box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.2);
+    width: 200px;
+    border-radius: .5rem;
+}
+
+.other {
+    
+    flex-direction: column;
+
+
+}
+
+.info {
+    flex: 100%;
+    box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.2);
+    margin: 1.3rem;
+    border-radius: .5rem;
+    height:450px;
+}
+
+.p-s-info {
+    flex: 30%;
+    box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.2);
+    margin: 1.3rem;
+    margin-left: 0.4rem;
+    margin-top: 0.4rem;
+    border-radius: .5rem;
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+
+
+.social-media {
+    margin: 20px;
+    margin-left: 10%;
+}
+
+.profile-bio {
+    margin: auto;
+    width: 80%;
+    margin-top: 10px;
+}
+
+.profile-name {
+    text-align: center;
+    font-weight: bolder;
+    font-size: 15px;
+}
+
+.profile-role {
+    text-align: center;
+    color: rgb(134, 134, 134);
+}
+
+.sm-all {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px rgb(224, 224, 224) solid;
+    margin: 13px;
+}
+
+.sm-logo {
+    flex: 10%;
+}
+
+.sm-logo img {
+    width: 20px;
+}
+
+.sm-name {
+    flex: 30%;
+}
+
+.sm-link {
+    flex: 50%;
+    text-align: left;
+}
+
+.personal-info {
+    margin: 15px;
+}
+
+.prof-all {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px rgb(238, 238, 238) solid;
+    margin: 13px;
+}
+
+.prof-name {
+    flex: 20%;
+}
+
+.prof-data {
+    flex: 60%;
+    text-align: justify;
+}
+
+.personal-info-heading {
+    font-weight: bold;
+    font-size: 15px;
+    color: white;
+    background-color: #490258;
+    border-radius: 0.5rem;
+    margin: 10px;
+    width: 30%;
+    padding: 4px;
+    padding-left: 6px;
+    text-align: center;
+}
+
+@media (max-width: 1200px) {
+    .sm-name {
+        display: none;
+    }
+}
+
+@media (max-width: 100%) {
+    .container-profile {
+        
+        overflow-x: hidden;
+    }
+
+    .flex-container-profile {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .image {
+        height: 30%;
+    }
+
+    .about {
+        flex: 1;
+    }
+
+    .sm-name {
+        display: none;
+    }
+
+    .info {
+        width: 90%;
+        margin: auto;
+        margin-top: 6%;
+    }
+
+    .profile-bio {
+        width: 100%;
+    }
+
+    .personal-info-heading {
+        width: 90%;
+    }
+}
+
+
+.tag {
+    display: inline-block;
+    border-radius: 3px;
+    padding: .2em .5em .3em;
+    border-radius: 2px;
+    background: var(--tag-bg);
+    color: var(--text-color);
+    font-weight: 600;
+    margin: .25em .1em
+}
+
+.tag-sm {
+    font-size: .7em;
+    display: inline-block;
+    letter-spacing: .15ch;
+}
+
+.tag-lg {
+    border-radius: 4px;
+    font-weight: bold;
+    background: rgb(226, 226, 226);
+    color: #490258;
+}
+
+
+
+
+.grid-container-payments {
+    display: grid;
+    grid-template-areas:
+        'search'
+        'main';
+    gap: 10px;
+    padding: 10px 0 10px 20px;
+    padding-left: 20px;
+}
+
+.grid-container-profile {
+    display: grid;
+    grid-template-areas:
+        'menu header header header header header'
+        'menu main main main main main'
+        'menu main main main main main';
+    gap: 10px;
+    padding: 10px;
+    padding-left: 20px;
+}
+
+
+
+
+/********* Profile *********/
+.paddingLeft-1 {
+    padding-left: 1vw;
+}
+
+.paddingLeft-2 {
+    padding-left: 2vw;
+}
+
+.profilePic {
+    width: 8vw;
+    height: 8vw;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 0 1px 10px 0 rgba(0, 0, 0, 0.2);
+}
+
+p{
+    color: rgb(134, 134, 134);
+}
