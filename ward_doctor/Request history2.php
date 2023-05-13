@@ -9,7 +9,7 @@ if (isset($_SESSION["ID"])) {
 
   if ($result1->num_rows > 0) {
     while ($row = $result1->fetch_assoc()) {
-      $y= $row["Hospital_ID"];
+      $y = $row["Hospital_ID"];
     }
   }
 }
@@ -36,8 +36,8 @@ if (isset($_POST['view'])) {
   <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'>
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <link rel="stylesheet" href="./stylek2.css">
 
 </head>
@@ -272,7 +272,7 @@ if (isset($_POST['view'])) {
 </html>
 
 <style>
-   .icon-button__badge {
+  .icon-button__badge {
     position: absolute;
     top: 9px;
     right: 226px;
@@ -285,6 +285,7 @@ if (isset($_POST['view'])) {
     align-items: center;
     border-radius: 50%;
   }
+
   .icon-button__badge3 {
     position: absolute;
     top: 15px;
@@ -300,17 +301,22 @@ if (isset($_POST['view'])) {
   }
 
   .container-shadow {
-      position: absolute;
-      height: 1530px;
-      box-shadow: 0px 80px 50px -20px #000;
-    }
+    position: absolute;
+    height: 1530px;
+    box-shadow: 0px 80px 50px -20px #000;
+  }
 
-    .container {
-      position: absolute;
-      height: 1530px;
-      
-      box-shadow: 0px 0px 50px -20px #000;
-    }
+  .b1 {
+    margin-left: 244px;
+  }
+
+  .container {
+    position: absolute;
+    height: 1530px;
+
+    box-shadow: 0px 0px 50px -20px #000;
+  }
+
   .buttons {
     margin-top: 20px;
   }
