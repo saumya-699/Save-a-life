@@ -384,7 +384,7 @@ if (isset($_SESSION["ID"])) {
     height: 15px;
     border-collapse: collapse;
     margin-top: 90px;
-    margin-left: -150px;
+    margin-left: -200px;
     border: 0px transparent;
   }
 
