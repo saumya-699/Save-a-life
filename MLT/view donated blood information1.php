@@ -467,8 +467,6 @@ if (isset($_POST['view'])) {
                 text-decoration: none;
                 color: white;
                 cursor: pointer;
-
-
               }
 
 

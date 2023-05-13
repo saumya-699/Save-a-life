@@ -10,8 +10,7 @@ if (isset($_SESSION["ID"])) {
   if ($result1->num_rows > 0) {
     while ($row = $result1->fetch_assoc()) {
       $x = $row["Name_With_Initials"];
-      $y=$row["Hospital_ID"];
-
+      $y = $row["Hospital_ID"];
     }
   }
 }
@@ -333,78 +332,79 @@ if (isset($_SESSION["ID"])) {
 
 
   <style>
-     .icon-button__badge {
-              position: absolute;
-              top: 7px;
-              right: 220px;
-              width: 15px;
-              height: 18px;
-              background: red;
-              color: #ffffff;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              border-radius: 50%;
-            }
+    .icon-button__badge {
+      position: absolute;
+      top: 7px;
+      right: 220px;
+      width: 15px;
+      height: 18px;
+      background: red;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
 
 
 
-            .icon-button__badge1 {
-              position: absolute;
-              top: 0;
-              right: 228;
-              width: 15px;
-              height: 18px;
-              background: green;
-              color: #ffffff;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              border-radius: 50%;
-            }
+    .icon-button__badge1 {
+      position: absolute;
+      top: 0;
+      right: 228;
+      width: 15px;
+      height: 18px;
+      background: green;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
 
-            .icon-button__badge2 {
-              position: absolute;
-              top: 4px;
-              right: 239;
-              width: 15px;
-              height: 18px;
-              background: purple;
-              color: #ffffff;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              border-radius: 50%;
-            }
+    .icon-button__badge2 {
+      position: absolute;
+      top: 4px;
+      right: 239;
+      width: 15px;
+      height: 18px;
+      background: purple;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
 
-            .icon-button__badge3 {
-              position: absolute;
-              top: 15;
-              right: 235px;
-              width: 15px;
-              height: 18px;
-              background: red;
-              color: #ffffff;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              border-radius: 50%;
-            }
+    .icon-button__badge3 {
+      position: absolute;
+      top: 15;
+      right: 235px;
+      width: 15px;
+      height: 18px;
+      background: red;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
 
 
-            .icon-button__badge5 {
-              position: absolute;
-              top: 115;
-              right: 235px;
-              width: 15px;
-              height: 18px;
-              background: purple;
-              color: #ffffff;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              border-radius: 50%;
-            }
+    .icon-button__badge5 {
+      position: absolute;
+      top: 115;
+      right: 235px;
+      width: 15px;
+      height: 18px;
+      background: purple;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
+
     .form {
       text-align: center;
       margin-left: 80px;
@@ -426,9 +426,8 @@ if (isset($_SESSION["ID"])) {
       height: 200px;
       background-color: white;
       border-radius: 20px;
-      margin-top: -200px;
-      margin-left: 500px;
-
+      margin-top: -199px;
+      margin-left: 533px;
     }
 
     .layout {
