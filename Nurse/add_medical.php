@@ -1,4 +1,16 @@
-<!DOCTYPE html>
+<?php 
+session_start();
+
+?>
+
+
+ <?php
+   if(isset($_SESSION["ID"]))   {
+	
+    require "conp.php";
+    
+     			
+?>
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
@@ -34,7 +46,7 @@
               <ul>
                 <li class="menu-header"></li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="Home.php">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -226,3 +238,6 @@
 
 </body>
 </html>
+<?php
+   }
+   ?>

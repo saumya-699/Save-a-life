@@ -1,8 +1,20 @@
-<!DOCTYPE html>
+<?php 
+session_start();
+
+?>
+
+
+ <?php
+   if(isset($_SESSION["ID"]))   {
+	
+    require "conp.php";
+    
+     			
+?>
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Side bar</title>
+  <title>Registration Form</title>
   <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
 <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
 <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./style.css">
@@ -32,7 +44,7 @@
               <ul>
                 <li class="menu-header"></li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="Home.php">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -173,7 +185,7 @@
                            
               <label for="exampleFormControlInput1" class="form-label lbl star"> Prefix </label>
                 <select name="prefix" class="form-control txt-input" required>
-                           <option selected disabled value="">Prefix</option>
+                           <option selected disabled value="">None</option>
                            <option value="Mr">Mr</option>
                            <option value="Ms">Ms</option>
                           <option value="Mrs">Mrs</option>
@@ -199,7 +211,7 @@
                     
                             <label for="exampleFormControlInput1" class="form-label lbl star">Gender</label>
                             <select name="gender" id="" class="form-control txt-input" required>Gender
-                            <option selected disabled value="">Gender</option>
+                            <option selected disabled value="">None</option>
                             <option value="Male">Male</option>
                             <option value="Female">Female</option>
                             </select>
@@ -276,3 +288,6 @@ function myFunction() {
 
 </body>
 </html>
+<?php
+}
+?>
