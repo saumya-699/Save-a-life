@@ -302,7 +302,7 @@ if (isset($_SESSION["ID"])) {
 
               ?>
 
-                <form action="createresult.php " method="POST" id="myForm" onsubmit="return validateForm()">
+                <form action="createresult.php " method="POST">
 
                   <label for="exampleFormControlInput1" class="form-label lbl star ">Donor ID</label>
                   <input type="text" class="form-control txt-input " name="Donor_Id" value="<?php echo $did ?>">
@@ -428,6 +428,79 @@ function validateForm() {
   .buttons {
     margin-top: 20px;
   }
+  .icon-button__badge {
+              position: absolute;
+              top: 7px;
+              right: 220px;
+              width: 15px;
+              height: 18px;
+              background: red;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
+
+
+
+            .icon-button__badge1 {
+              position: absolute;
+              top: 0;
+              right: 228;
+              width: 15px;
+              height: 18px;
+              background: green;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
+
+            .icon-button__badge2 {
+              position: absolute;
+              top: 4px;
+              right: 239;
+              width: 15px;
+              height: 18px;
+              background: purple;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
+
+            .icon-button__badge3 {
+              position: absolute;
+              top: 15;
+              right: 235px;
+              width: 15px;
+              height: 18px;
+              background: red;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
+
+
+            .icon-button__badge5 {
+              position: absolute;
+              top: 115;
+              right: 235px;
+              width: 15px;
+              height: 18px;
+              background: purple;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
+
 </style>
 
 </body>

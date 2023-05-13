@@ -1,3 +1,19 @@
+<?php
+session_start();
+include "config.php";
+if (isset($_SESSION["ID"])) {
+  include "config.php";
+  $m = $_SESSION["Name"];
+  $query = "SELECT * FROM warddoctor WHERE UserName ='$m'";
+  $result1 = $conn->query($query);
+
+  if ($result1->num_rows > 0) {
+    while ($row = $result1->fetch_assoc()) {
+      $y= $row["Hospital_ID"];
+    }
+  }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -79,13 +95,56 @@
 
                 </a>
               </li>
-              <li class="menu-item">
+              <li class="menu-item sub-menu">
                 <a href="#">
                   <span class="menu-icon">
                     <i class="ri-notification-line"></i>
                   </span>
-                  <span class="menu-title">Notification</span>
+                  <?php
+
+                  $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$y' AND notifyView='0' AND (status='Available' OR status='NotAvailable')";
+
+                  $results = $conn->query($sql);
+
+                  if ($results->num_rows > 0) {
+                    $row = $results->fetch_assoc();
+                    $status = $row["countS"];
+                    if ($status > 0) {
+                      echo '<span class="icon-button__badge">' . $status . '</span>';
+                    }
+                  }
+
+                  ?>
+
+
+
+                  <span class="menu-title">Notifications</span>
                 </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Notifications.php">
+                        <span class="menu-title"> <?php
+
+                                                  $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$y' AND notifyView='0' AND (status='Available' OR status='NotAvailable')";
+
+                                                  $results = $conn->query($sql);
+
+                                                  if ($results->num_rows > 0) {
+                                                    $row = $results->fetch_assoc();
+                                                    $status = $row["countS"];
+                                                    if ($status > 0) {
+                                                      echo '<span class="icon-button__badge3">' . $status . '</span>';
+                                                    }
+                                                  }
+
+                                                  ?>Request Results</span>
+                      </a>
+
+                    </li>
+                  </ul>
+                </div>
+              </li>
               </li>
               <li class="menu-item">
                 <a href="logout.php">
@@ -104,6 +163,7 @@
     <div class="layout">
       <main class="content">
         <!-- add your content from here -->
+        <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
 
 
         <div class="container-shadow">

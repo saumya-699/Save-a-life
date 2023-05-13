@@ -311,6 +311,9 @@ if (isset($_SESSION["ID"])) {
             $vql = "SELECT * FROM donation_records where Donation_date='$donation_date' AND Batch='$batch_no'";
             $result = $conn->query($vql);
             if ($result->num_rows > 0) {
+              echo  "<div class='tab'>";
+              echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;'>" . "Donation Date" . "</th>" . "<th style='text-align:center;'>" . "Batch Number" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Donar ID" . "</th>" . "<th>" . "Donation ID" . "</th>" . "<th>" . "Blood Packet ID" . "</th>" . "<th>" . "Action" . "</th>" . "</tr>";
+
               while ($row = $result->fetch_assoc()) {
 
               $s = $row['AddStatus'];
@@ -320,12 +323,10 @@ if (isset($_SESSION["ID"])) {
 
 
               // Generate the button HTML with the disabled flag
-              $button_html = "<button type='submit' value='view' name='view' class='fp' $disabled><i class='fa-solid fa-pen-to-square'></i></button>";
+              $button_html = "<button type='submit' value='view' name='add' class='fp' $disabled><i class='fa-solid fa-pen-to-square'></i></button>";
 
 
-              echo  "<div class='tab'>";
-              echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;'>" . "Donation Date" . "</th>" . "<th style='text-align:center;'>" . "Batch Number" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Donar ID" . "</th>" . "<th>" . "Donation ID" . "</th>" . "<th>" . "Blood Packet ID" . "</th>" . "<th>" . "Action" . "</th>" . "</tr>";
-
+             
 
                 echo  "<tr>" . "<td>" . $row["Donation_date"] . "</td>" . "<td>" . $row["Batch"] . "</td>" . "<td>" . $row["Donor_Id"] . "</td>" . "<td>" . $row["Donation_ID"] . "</td>" . "<td>" . $row["packet_no"] .  "</td>";
                 echo "<td class='tb'><form method='POST' action ='Enter Blood testing result1.php'>
