@@ -297,7 +297,6 @@ $result = $conn->query($sql);
 
             if ($result->num_rows > 0) {
 
-              echo  "<div class='tab'>";
               echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;'>" . "Donation Date" . "</th>" . "<th style='text-align:center;'>" . "Batch Number" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Donar ID" . "</th>" . "<th>" . "Donation ID" . "</th>" . "<th>" . "Blood Packet ID" . "</th>" . "<th>" . "Action" . "</th>" . "</tr>";
               echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=6'>" . "</td>" . "</tr>";
               while ($row = $result->fetch_assoc()) {
@@ -311,7 +310,6 @@ $result = $conn->query($sql);
                    <button type=submit value=add name=add  class='fp'><i class='fa-solid fa-pen-to-square'></i></button>
                   </form>  </td>";
 
-                echo "</div>";
                 echo "</tr>";
 
                 echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=6'>" . "</td>" . "</tr>";
@@ -417,17 +415,7 @@ $result = $conn->query($sql);
               flex-direction: row;
             }
 
-            .tab {
-
-              background-color: #F5F5F5;
-              margin-top: -50px;
-              margin-left: 60px;
-              padding-left: 0px;
-              padding-right: 0px;
-
-
-
-            }
+            
 
 
             .ta {
