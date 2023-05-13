@@ -311,7 +311,6 @@ if (isset($_SESSION["ID"])) {
             $vql = "SELECT * FROM donation_records where Donation_date='$donation_date' AND Batch='$batch_no'";
             $result = $conn->query($vql);
             if ($result->num_rows > 0) {
-              echo  "<div class='tab'>";
               echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;'>" . "Donation Date" . "</th>" . "<th style='text-align:center;'>" . "Batch Number" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Donar ID" . "</th>" . "<th>" . "Donation ID" . "</th>" . "<th>" . "Blood Packet ID" . "</th>" . "<th>" . "Action" . "</th>" . "</tr>";
               echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
 
@@ -337,7 +336,6 @@ if (isset($_SESSION["ID"])) {
                                             $button_html 
                                             </form>  </td>";
 
-                echo "</div>";
                 echo "</tr>";
                 echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
 
@@ -458,7 +456,7 @@ if (isset($_SESSION["ID"])) {
     background-color: transparent;
     border: none;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 25px;
     padding: 10px 20px;
   }
 
