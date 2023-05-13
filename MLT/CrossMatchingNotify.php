@@ -1,3 +1,20 @@
+<?php
+session_start();
+if (isset($_SESSION["ID"])) {
+  include "config.php";
+  $m = $_SESSION["Name"];
+  $date = date("Y/m/d");
+  $query = "SELECT * FROM mlt WHERE UserName ='$m'";
+  $result1 = $conn->query($query);
+
+  if ($result1->num_rows > 0) {
+    while ($row = $result1->fetch_assoc()) {
+      $x = $row["MLT_ID"];
+      $y=$row["Hospital_ID"];
+
+    }
+  }
+}?>
 <!DOCTYPE html>
 <html lang="en">
 
