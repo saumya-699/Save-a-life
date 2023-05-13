@@ -319,7 +319,7 @@ if (isset($_SESSION["ID"])) {
                   echo "
      <form method='POST' action =''>  	
     
-    <button type=submit value=Send name='$bnum'  class='fp'><i class='fa-regular fa-forward-fast'></i></button>
+    <button type=submit value=Send name='$bnum'  class='fp'><i class='fa-regular fa-envelope'></i></button>
 
      </form>
 
