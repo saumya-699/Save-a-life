@@ -290,99 +290,82 @@ if (isset($_SESSION["ID"])) {
 
 
         <h1>Enter Cross Matching Test Result</h1>
-        <form method="post" action="Cross matching test result.php">
 
-          <div class="midiv">
-
-
-            <font size=3> </font></b> <br /> <br /><select name="search" class="select">
-              <option value="requeste_id"><b> Request ID</b></option>
-            </select>
-
-
-            <input type="text" placeholder="type here" name="data" id="data" class="box">
-
-            <button type="submit" name="BtnSubmit" id="search" class="b1"><b>Search</b></button>
-
-
-        </form>
 
         <div class="box1">
 
           <?php
-          if (isset($_POST['BtnSubmit'])) {
-            $search = $_POST["search"];
-            $data = $_POST["data"];
-            $sql = "SELECT * FROM blood_request WHERE $search = '$data' AND Hospital_ID = '$y'";
-            $result = $conn->query($sql);
+
+          $sql = "SELECT * FROM blood_request WHERE status='Available' and CrossMatching_Add='0' AND Hospital_ID = '$y'";
+          $result = $conn->query($sql);
 
 
-            if ($result->num_rows > 0) {
-              echo  "<div class='tab'>";
-              echo "<font color=black>";
-              echo "<font size=3>";
+          if ($result->num_rows > 0) {
+            echo  "<div class='tab'>";
+            echo "<font color=black>";
+            echo "<font size=3>";
 
 
-              echo  "<table >" . "<tr>" . "<th>" . "Requested Date" . "</th>" . "<th>" . "Receive date" . "</th>" . "<th>" . "Request ID" . "</th>" . "<th>" . "Blood Group" . "</th>" . "<th>" . "Status" . "</th>" . "<th>" . "Action" . "</th>" . "</tr>";
-              echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=6'>" . "</td>" . "</tr>";
+            echo  "<table >" . "<tr>" . "<th>" . "Requested Date" . "</th>" . "<th>" . "Receive date" . "</th>" . "<th>" . "Request ID" . "</th>" . "<th>" . "Blood Group" . "</th>" . "<th>" . "Status" . "</th>" . "<th>" . "Action" . "</th>" . "</tr>";
+            echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=6'>" . "</td>" . "</tr>";
 
-              // while ($row = $result->fetch_assoc()) {
+            // while ($row = $result->fetch_assoc()) {
 
-              //   echo  "<tr style='height:60px'>" . "<td>" . $row["requested_date"] . "</td>" . "<td>" . $row["expected_date"] . "</td>" . "<td>" . $row["requeste_id"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "<td>" . $row["status"] . "</td>";
+            //   echo  "<tr style='height:60px'>" . "<td>" . $row["requested_date"] . "</td>" . "<td>" . $row["expected_date"] . "</td>" . "<td>" . $row["requeste_id"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "<td>" . $row["status"] . "</td>";
 
-              //   echo "<td class='tb'><form method='POST' action ='Cross matching test result1.php'>
-              // <input type=hidden name=RequestID value=" . $row["requeste_id"] . " >
-              // <button type=submit value=add name=add  class='fp'><i class='fa-solid fa-plus'></i></button>
-              // </form>  
+            //   echo "<td class='tb'><form method='POST' action ='Cross matching test result1.php'>
+            // <input type=hidden name=RequestID value=" . $row["requeste_id"] . " >
+            // <button type=submit value=add name=add  class='fp'><i class='fa-solid fa-plus'></i></button>
+            // </form>  
 
-              //   </td>";
-              //   echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=6'>" . "</td>" . "</tr>";
-              // }
-              while ($row = $result->fetch_assoc()) {
-                // Retrieve the status value from the current row
-                $status = $row["status"];
-                $Add = $row["CrossMatching_Add"];
-                // Set the disabled flag based on the status value
+            //   </td>";
+            //   echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=6'>" . "</td>" . "</tr>";
+            // }
+            while ($row = $result->fetch_assoc()) {
+              // Retrieve the status value from the current row
+              $status = $row["status"];
+              $Add = $row["CrossMatching_Add"];
+              // Set the disabled flag based on the status value
 
-                $disabled = (($status !== 'Available') || ($Add == '1')) ? 'disabled' : '';
-
-
-                // Generate the button HTML with the disabled flag
-                $button_html = "<button type='submit' value='add' name='add' class='fp' $disabled><i class='fa-solid fa-pen-to-square'></i></button>";
-
-                // Generate the table row HTML with the button included
-                echo "<tr style='height:60px'>" .
-                  "<td>" . $row["requested_date"] . "</td>" .
-                  "<td>" . $row["expected_date"] . "</td>" .
-                  "<td>" . $row["requeste_id"] . "</td>" .
-                  "<td>" . $row["blood_group"] . "</td>" .
-                  "<td>" . $row["status"] . "</td>" .
-                  "<td class='tb'>" .
-                  "<form method='POST' action='Cross matching test result1.php'>" .
-                  "<input type='hidden' name='RequestID' value='" . $row["requeste_id"] . "'>" .
-                  $button_html .
-
-                  "</form>" .
-                  "</td>" .
-                  "</tr>" .
-                  "<tr>" .
-                  "<td style='height:20px;background-color:#F5F5F5;' colspan='6'></td>" .
-                  "</tr>";
-              }
+              $disabled = (($status !== 'Available') || ($Add == '1')) ? 'disabled' : '';
 
 
+              // Generate the button HTML with the disabled flag
+              $button_html = "<button type='submit' value='add' name='add' class='fp' $disabled><i class='fa-solid fa-pen-to-square'></i></button>";
 
-              echo "</font>";
-              echo  "</font>";
+              // Generate the table row HTML with the button included
+              echo "<tr style='height:60px'>" .
+                "<td>" . $row["requested_date"] . "</td>" .
+                "<td>" . $row["expected_date"] . "</td>" .
+                "<td>" . $row["requeste_id"] . "</td>" .
+                "<td>" . $row["blood_group"] . "</td>" .
+                "<td>" . $row["status"] . "</td>" .
+                "<td class='tb'>" .
+                "<form method='POST' action='Cross matching test result1.php'>" .
+                "<input type='hidden' name='RequestID' value='" . $row["requeste_id"] . "'>" .
+                $button_html .
 
-              echo  "</div>";
-
-              echo "</table>";
-            } else {
-              ///printf("Query failed: %s\n", $conn->error);
-              echo "no results";
+                "</form>" .
+                "</td>" .
+                "</tr>" .
+                "<tr>" .
+                "<td style='height:20px;background-color:#F5F5F5;' colspan='6'></td>" .
+                "</tr>";
             }
+
+
+
+            echo "</font>";
+            echo  "</font>";
+
+            echo  "</div>";
+
+            echo "</table>";
+          } else {
+            ///printf("Query failed: %s\n", $conn->error);
+            echo "no results";
           }
+
 
           $conn->close();
           ?>
@@ -619,15 +602,10 @@ if (isset($_SESSION["ID"])) {
             }
 
             .tab {
-
               background-color: #F5F5F5;
-              margin-top: -55px;
-              margin-left: 65px;
+              margin-top: -160px;
+              margin-left: 250px;
               margin-right: 265px;
-
-
-
-
             }
 
 

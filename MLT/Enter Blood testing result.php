@@ -299,7 +299,7 @@ $result = $conn->query($sql);
 
               echo  "<div class='tab'>";
               echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;'>" . "Donation Date" . "</th>" . "<th style='text-align:center;'>" . "Batch Number" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Donar ID" . "</th>" . "<th>" . "Donation ID" . "</th>" . "<th>" . "Blood Packet ID" . "</th>" . "<th>" . "Action" . "</th>" . "</tr>";
-              echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
+              echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=6'>" . "</td>" . "</tr>";
               while ($row = $result->fetch_assoc()) {
 
 
@@ -314,7 +314,7 @@ $result = $conn->query($sql);
                 echo "</div>";
                 echo "</tr>";
 
-                echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
+                echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=6'>" . "</td>" . "</tr>";
               }
               echo  "</font>";
               echo  "</font>";
@@ -368,23 +368,6 @@ $result = $conn->query($sql);
 
 
             }
-
-
-
-            .midiv {
-
-              margin-left: 150px;
-              margin-bottom: 120px;
-              padding: 15px 10px 30px 20px;
-              margin-top: -100px;
-              outline: none;
-              width: 774.5px;
-            }
-
-
-
-
-
 
 
 

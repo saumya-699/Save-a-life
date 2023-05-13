@@ -50,8 +50,10 @@ if (isset($_POST['submit'])) {
     $result = $conn->query($sql);
 
     if ($result == TRUE) {
-      header('location:successbc.php');
-    } else {
+      echo '<script type="text/javascript">';
+      echo 'alert("Added Successfully");';
+      echo 'window.location.href="Add blood components.php";';
+      echo'</script>';     } else {
       echo "Error:" . $sql . "<br>" . $conn->error;
     }
   }
@@ -65,8 +67,10 @@ if (isset($_POST['submit'])) {
     $result = $conn->query($sql);
 
     if ($result == TRUE) {
-      header('location:successbc.php');
-    } else {
+      echo '<script type="text/javascript">';
+      echo 'alert("Added Successfully");';
+      echo 'window.location.href="Add blood components.php";';
+      echo'</script>';    } else {
       echo "Error:" . $sql . "<br>" . $conn->error;
     }
   }
@@ -81,8 +85,10 @@ if (isset($_POST['submit'])) {
     $result = $conn->query($sql);
 
     if ($result == TRUE) {
-      header('location:successbc.php');
-    } else {
+      echo '<script type="text/javascript">';
+      echo 'alert("Added Successfully");';
+      echo 'window.location.href="Add blood components.php";';
+      echo'</script>';    } else {
       echo "Error:" . $sql . "<br>" . $conn->error;
     }
   }
@@ -96,8 +102,10 @@ if (isset($_POST['submit'])) {
     $result = $conn->query($sql);
 
     if ($result == TRUE) {
-      header('location:successbc.php');
-    } else {
+      echo '<script type="text/javascript">';
+      echo 'alert("Added Successfully");';
+      echo 'window.location.href="Add blood components.php";';
+      echo'</script>';    } else {
       echo "Error:" . $sql . "<br>" . $conn->error;
     }
   }

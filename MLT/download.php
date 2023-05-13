@@ -276,6 +276,13 @@ if (isset($_SESSION["ID"])) {
 
                 </div>
             </aside>
+            <div id="overlay" class="overlay"></div>
+    <div class="layout">
+      <main class="content">
+        <!-- add your content from here -->
+        <div>
+          <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
+        </div>
 
         <?php
 

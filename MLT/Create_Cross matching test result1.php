@@ -45,8 +45,11 @@ if (isset($_POST['submit'])) {
 
 
   if ($result == TRUE) {
-    header('location:successbloodcmresult.php');
-  } else {
+    echo '<script type="text/javascript">';
+    echo 'alert("Added Successfully");';
+    echo 'window.location.href="Cross matching test result.php";';
+    echo'</script>'; 
+    } else {
     echo "Error:" . $sql . "<br>" . $conn->error;
   }
   $updateSql= "UPDATE blood_request SET CrossMatching_Add	='1' WHERE requeste_id=  $request_id";

@@ -365,11 +365,10 @@ if (isset($_SESSION["ID"])) {
     }
 
     .container {
-      position: absolute;
-      height: 700px;
-
-      box-shadow: 0px 0px 50px -20px #000;
-    }
+    position: absolute;
+    height: 800px;
+    box-shadow: 0px 0px 50px -20px #000;
+}
     .icon-button__badge {
               position: absolute;
               top: 7px;

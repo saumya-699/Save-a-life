@@ -56,8 +56,11 @@ if (isset($_POST['submit'])) {
   $result = $conn->query($sql);
 
   if ($result == TRUE) {
-    header('location:successbloodresult.php');
-  } else {
+    echo '<script type="text/javascript">';
+    echo 'alert("Added Successfully");';
+    echo 'window.location.href="Enter Blood testing result.php";';
+    echo'</script>'; 
+    } else {
     echo "Error:" . $sql . "<br>" . $conn->error;
   }
   $updateSql= "UPDATE donation_records SET AddStatus	='1',MLT_ID='$x' WHERE Donor_ID=  $Donor_Id";
