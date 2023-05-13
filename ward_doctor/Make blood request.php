@@ -10,8 +10,8 @@
   <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'>
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <link rel="stylesheet" href="./stylek2.css">
 
 </head>
@@ -115,30 +115,29 @@
                   <center>
               </div>
 
-              <form action="create.php " method="POST">
+              <form action="create.php " method="POST" name="myForm">
 
-                <label for="exampleFormControlInput1 " class="form-label lbl star ">Patient Name</label>
+                <label for="exampleFormControlInput1" class="form-label lbl star">Patient Name</label>
                 <input type="text" class="form-control txt-input " name="patient_name" placeholder="Type patient name " required="">
 
 
-                <label for="exampleFormControlInput1 " class="form-label lbl star " name="date_Of_birth">Patient's Date of birth (MM/DD/YYYY)</label>
+                <label for="exampleFormControlInput1" class="form-label lbl star" name="date_Of_birth">Patient's Date of birth (MM/DD/YYYY)</label>
                 <div class="input-group mb-4 ">
                   <i class="fas fa-calendar-alt input-group-text"></i>
                   <input type="date" name="date_Of_birth" class="datepicker_input form-control txt-input" placeholder="Select Date" required="" max="<?= date('Y-m-d') ?>">
                 </div>
 
-
-                <label for="exampleFormControlInput1" class="form-label lbl star ">Patient Gender</label>
-                <select name="patient_gender" id=" " class="form-control txt-input " required="">
-                  <option value=" " diabled> Select gender </option>
+                <label for="exampleFormControlInput1" class="form-label lbl star">Patient Gender</label>
+                <select name="patient_gender" id="patient_gender" class="form-control txt-input" required>
+                  <option value=""> Select gender </option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                 </select>
 
 
-                <label for="exampleFormControlInput1 " class="form-label lbl star ">Blood Group</label>
-                <select name="blood_group" id=" " class="form-control txt-input " required="">
-                  <option value=" " diabled> Select group </option>
+                <label for="exampleFormControlInput1" class="form-label lbl star">Blood Group</label>
+                <select name="blood_group" id="blood_group" class="form-control txt-input" required>
+                  <option value="">Select group</option>
                   <option value="O-">O-</option>
                   <option value="O+">O+</option>
                   <option value="A-">A-</option>
@@ -147,21 +146,22 @@
                   <option value="B+">B+</option>
                   <option value="AB-">AB-</option>
                   <option value="AB+">AB+</option>
-
                 </select>
 
-                <label for="exampleFormControlInput1 " class="form-label lbl star ">Required Blood Component</label>
-                <select name="blood_component" id=" " class="form-control txt-input " required="">
-                  <option value=" " diabled>Select component </option>
-                  <option value="Whole blood">Whole blood</option>
-                  <option value="Red cell">Red cell</option>
-                  <option value="Platelet">Platelet</option>
+
+                <label for="exampleFormControlInput1" class="form-label lbl star">Required Blood Component</label>
+                <select name="blood_component" id="blood_component" class="form-control txt-input" required>
+                  <option value="">Select component </option>
+                  <option value="Whole Blood">Whole Blood</option>
+                  <option value="Red cells">Red Cells</option>
+                  <option value="White Cells">Red Cells</option>
+                  <option value="Platelets">Platelets</option>
                   <option value="Plasma">Plasma</option>
                 </select>
 
-                <label for="exampleFormControlInput1 " class="form-label lbl star ">Required Amount (packets)</label>
-                <select name="required_amount" id=" " class="form-control txt-input " required="">
-                  <option value=" " diabled>Select no.of.packets </option>
+                <label for="exampleFormControlInput1" class="form-label lbl star">Required Amount (packets)</label>
+                <select name="required_amount" id="required_amount" class="form-control txt-input " required>
+                  <option value="">Select no.of.packets </option>
                   <option value="01">01</option>
                   <option value="02">02</option>
                   <option value="03">03</option>
@@ -170,18 +170,18 @@
                 </select>
 
 
-                <label for="exampleFormControlInput1 " class="form-label lbl star " name="expected_date">Expected date to receive (MM/DD/YYYY)</label>
-                <div class="input-group mb-4 ">
+                <label for="exampleFormControlInput1" class="form-label lbl star" name="expected_date">Expected date to receive (MM/DD/YYYY)</label>
+                <div class="input-group mb-4">
                   <i class="fas fa-calendar-alt input-group-text"></i>
                   <input type="date" class="datepicker_input form-control txt-input" name="expected_date" placeholder="Select Date" required="" min="<?= date('Y-m-d') ?>">
                 </div>
 
-                <label for="exampleFormControlInput1 " class="form-label lbl star " name="reason">Reason for the request</label>
-                <textarea name="reason" id=" " cols="30 " rows="10 " class="form-control txt-input " placeholder="Type reason " required=""></textarea>
+                <label for="exampleFormControlInput1" class="form-label lbl star" name="reason">Reason for the request</label>
+                <textarea name="reason" id="" cols="30 " rows="10 " class="form-control txt-input " placeholder="Type reason " required></textarea>
 
-                <label for="exampleFormControlInput1 " class="form-label lbl star ">Ward number</label>
-                <select name="ward_number" id=" " class="form-control txt-input " required="">
-                  <option value=" " diabled> Select Ward number </option>
+                <label for="exampleFormControlInput1" class="form-label lbl star">Ward number</label>
+                <select name="ward_number" id="ward_number" class="form-control txt-input " required>
+                  <option value=""> Select Ward number </option>
                   <option value="01">01</option>
                   <option value="02">02</option>
                   <option value="03">03</option>
@@ -195,9 +195,8 @@
                   <option value="11">11</option>
                   <option value="12">12</option>
                 </select>
-
-                <label for="exampleFormControlInput1 " name="remark" class="form-label lbl">Remark</label>
-                <textarea name="remark" id=" " cols="30 " rows="10 " class="input " placeholder="Type remark "></textarea>
+                <label for="exampleFormControlInput1" name="remark" class="form-label lbl">Remark</label>
+                <textarea name="remark" id="" cols="30 " rows="10 " class="input " placeholder="Type remark "></textarea>
 
                 <div class="buttons ">
                   <button class="b1" name="submit" value="submit" value="submit">
@@ -224,22 +223,35 @@
   <script src="./script.js"></script>
 
 </body>
+<script>
+  const form = document.querySelector('form');
+  const bloodGroupSelect = form.querySelector('#blood_group');
+  const validBloodGroups = ['O-', 'O+', 'A-', 'A+', 'B-', 'B+', 'AB-', 'AB+'];
+
+  form.addEventListener('submit', (event) => {
+    if (!validBloodGroups.includes(bloodGroupSelect.value)) {
+      event.preventDefault();
+      alert('Please select a valid blood group');
+    }
+  });
+</script>
 
 </html>
 
 <style>
   .container-shadow {
-      position: absolute;
-      height: 1330px;
-      box-shadow: 0px 80px 50px -20px #000;
-    }
+    position: absolute;
+    height: 1330px;
+    box-shadow: 0px 80px 50px -20px #000;
+  }
 
-    .container {
-      position: absolute;
-      height: 1330px;
-      
-      box-shadow: 0px 0px 50px -20px #000;
-    }
+  .container {
+    position: absolute;
+    height: 1330px;
+
+    box-shadow: 0px 0px 50px -20px #000;
+  }
+
   .buttons {
     margin-top: 20px;
   }

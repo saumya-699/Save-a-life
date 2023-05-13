@@ -141,7 +141,9 @@ if (isset($_SESSION["ID"])) {
           <select id="ResultDropdown" class="selectx">
             <option value="All">Status</option>
             <option value='Pending'>Pending</option>
-            <option value='Checked'>Checked</option>
+            <option value='Available'>Available</option>
+            <option value='NotAvailable'>NotAvailable</option>
+
 
           </select>
 
@@ -161,12 +163,12 @@ if (isset($_SESSION["ID"])) {
             if ($result->num_rows > 0) {
 
               echo  "<div id='dataTable' class='tab'>";
-              echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;'>" . "Requested date" . "</th>" . "<th style='text-align:center;'>" . "Receive date" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Patient Name" . "</th>" . "<th>" . "Blood Group" . "</th>" . "<th>" . "Status" . "</th>" . "<th style='text-align:center;width:40px;'>" . "Action" . "</th>" . "</tr>";
+              echo  "<table border=1>" . "<tr>" .  "<th style='text-align:center;'>" . "Receive date" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Patient Name" . "</th>" . "<th>" . "Blood Group" . "</th>" . "<th>" . "Status" . "</th>" . "<th style='text-align:center;width:40px;'>" . "Action" . "</th>" . "</tr>";
               echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
               while ($row = $result->fetch_assoc()) {
 
 
-                echo  "<tr>" . "<td>" . $row["requested_date"] . "</td>" . "<td>" . $row["expected_date"] . "</td>" . "<td>" . $row["patient_name"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "<td>" . $row["status"] . "</td>";
+                echo  "<tr>" . "<td>" . $row["expected_date"] . "</td>" . "<td>" . $row["patient_name"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "<td>" . $row["status"] . "</td>";
 
                 echo "<td class='tb'><form method='POST' action ='Request history2.php'>
      <input type=hidden name=RequestID value=" . $row["requeste_id"] . " >
@@ -193,58 +195,58 @@ if (isset($_SESSION["ID"])) {
 
             ?>
             <script>
-            function filterTable() {
-              const input = document.getElementById('searchInput');
-              const filter = input.value.toUpperCase();
-              const select = document.getElementById('filterDropdown');
-              const filterValue = select.options[select.selectedIndex].value;
-              const Result = document.getElementById('ResultDropdown');
-              const ResultValue = Result.options[Result.selectedIndex].value;
-              const dateInput = document.getElementById('dateInput').value;
+              function filterTable() {
+                const input = document.getElementById('searchInput');
+                const filter = input.value.toUpperCase();
+                const select = document.getElementById('filterDropdown');
+                const filterValue = select.options[select.selectedIndex].value;
+                const Result = document.getElementById('ResultDropdown');
+                const ResultValue = Result.options[Result.selectedIndex].value;
+                const dateInput = document.getElementById('dateInput').value;
 
 
 
-              const table = document.getElementById('dataTable');
-              const rows = table.getElementsByTagName('tr');
+                const table = document.getElementById('dataTable');
+                const rows = table.getElementsByTagName('tr');
 
-              for (let i = 1; i < rows.length; i++) {
-                const row = rows[i];
-                if (row.cells.length === 1) {
-                  continue;
+                for (let i = 1; i < rows.length; i++) {
+                  const row = rows[i];
+                  if (row.cells.length === 1) {
+                    continue;
+                  }
+                  const cells = row.getElementsByTagName('td');
+                  const positionClass = row.className;
+
+                  const result = cells[3].textContent;
+                  const group = cells[2].textContent;
+                  const date = cells[0].textContent;
+
+
+                  if ((filterValue === 'All' || group.toLowerCase() === filterValue.toLowerCase()) &&
+                    Array.from(cells).some(cell => cell.textContent.toUpperCase().includes(filter)) &&
+                    (ResultValue === 'All' || result.toLowerCase() === ResultValue.toLowerCase()) &&
+                    (dateInput === '' || date === dateInput)) {
+                    row.style.display = '';
+                  } else {
+                    row.style.display = 'none';
+                  }
                 }
-                const cells = row.getElementsByTagName('td');
-                const positionClass = row.className;
-                
-                const result = cells[4].textContent;
-                const group = cells[3].textContent;
-                const date = cells[0,1].textContent;
-                
 
-                if ((filterValue === 'All' || group.toLowerCase() === filterValue.toLowerCase()) &&
-                  Array.from(cells).some(cell => cell.textContent.toUpperCase().includes(filter)) &&
-                  (ResultValue === 'All' || result.toLowerCase() === ResultValue.toLowerCase())&&
-                  (dateInput === '' || date === dateInput)){
-                  row.style.display = '';
-                } else {
-                  row.style.display = 'none';
-                }
               }
-            
-              }
-            
-            // Attach filterTable function to events (e.g. button click, input change)
-            const searchInput = document.getElementById('searchInput');
-            searchInput.addEventListener('input', filterTable);
 
-            const filterDropdown = document.getElementById('filterDropdown');
-            filterDropdown.addEventListener('change', filterTable);
+              // Attach filterTable function to events (e.g. button click, input change)
+              const searchInput = document.getElementById('searchInput');
+              searchInput.addEventListener('input', filterTable);
 
-            const ResultDropdown = document.getElementById('ResultDropdown');
-            ResultDropdown.addEventListener('change', filterTable);
+              const filterDropdown = document.getElementById('filterDropdown');
+              filterDropdown.addEventListener('change', filterTable);
 
-            const dateInput = document.getElementById('dateInput');
-            dateInput.addEventListener('input', filterTable);
-          </script>
+              const ResultDropdown = document.getElementById('ResultDropdown');
+              ResultDropdown.addEventListener('change', filterTable);
+
+              const dateInput = document.getElementById('dateInput');
+              dateInput.addEventListener('input', filterTable);
+            </script>
         </div>
     </div>
   </div>
@@ -382,6 +384,8 @@ if (isset($_SESSION["ID"])) {
       background-color: transparent;
       border: none;
       cursor: pointer;
+      font-size: 20px;
+      padding: 10px 10px;
     }
 
     .tb {

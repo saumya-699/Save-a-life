@@ -7,7 +7,7 @@ session_start();
 <?php
 
 //make connection here
-require 'conection.php'; 
+require 'conp.php'; 
 $m = $_SESSION["Name"];
 $query = "SELECT * FROM nurse WHERE UserName ='$m'";
 $result1 = $conn->query($query);

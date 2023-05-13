@@ -1,82 +1,17 @@
 <?php 
 session_start();
-
 ?>
-
-
- 
-<?php
-
-include 'see.php';
-?>
-<html>
-
+<html lang="en" >
 <head>
-	
-<link rel="stylesheet" href="https://kit.fontawesome.com/87928bc990.css" crossorigin="anonymous">
-
-
-</head>
-<body>
-    <h1>Daily Blood Collection</h1>
-<br><br>
- 
- <form method="post" action="search_donor.php">
- 
-<div class="ta">
-<div class="midiv">
-
-</div>
-</div>
-
-</form>
-<?php
-
-
-require 'conection.php';
-if (isset($_POST['BtnSubmit'])) {
-
-
-
-
-
-
-    echo "<div class='tab'>";
-    echo "<button class='button'>Add donor <br> Details";
-    echo "</button>";
-    echo "<table border=1>" . "<tr>" . "<th style='text-align:center;width:120px;'>" . "Donor_ID" . "</th>" . "
-       <th style='text-align:center;width:120px;'>" . "Donation ID" . "
-       <th style='text-align:center;width:120px;'>" . "Batch No" . "</th>" . "
-       <th>" . "Blood Packet ID" . "</th>" . "
-       <th>" . "Number of<br/> blood packets" . "</th>" . "
-       <th>" . "Nurse ID" . "</th>" . "
-       <th style='width:150px;'>" . "Action" . "</th>" . "
-       </tr>";
-
-    echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
-
-    echo "<tr>" . "<td>" . '1' . "</td>" . "<td>" . 'D10' . "</td>" . "<td>" . 'B20' . "</td>" . "<td>" . '100' . "</td>" . "<td>" . '1' . "</td>" . "<td>" . '10' . "</td>" . "<td><button class='b1'>Save</button></td>";
-
-    echo "</tr>";
-
-    echo "</table>";
-    echo "<button class='button2'>End blood <br> collection";
-    echo "</button>";
-    echo "</div>";
-}
-
-     
-
-
-$conn->close();
-?>
-
-
-
-
-
+  <meta charset="UTF-8">
+  <title>Side bar</title>
+  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
+<link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./add_medical.css">
 <style>
-
 table{
 	
 	
@@ -114,9 +49,9 @@ td {
 
 h1{
 	
-    margin-top:100px;	
-		margin-left:650px;
-		margin-bottom:10px;
+    margin-top: 50px;
+	text-align: center;
+	position: relative;
 }
 
 .select{
@@ -146,20 +81,7 @@ h1{
 
 
 
-           .midiv{
-
-                    background-color:transparent;
-                    
-                    //margin-left:396px;
-                   // margin-right:325px;
-                    margin-bottom:-52px;
-                    padding:2px 90px 30px 10px;
-					margin-top:-10px;
-					outline:none;
-					border-radius: 25px;
-
-               }
-			   
+           
 			   
 			   .box{
                   
@@ -203,33 +125,23 @@ h1{
 			   .tab{
 				   
 				   background-color:#F5F5F5;
+				   align:center ;
 				    margin-top:30px;
-					margin-left:370px;
+					margin-left:150px;
 					//padding:10px;
-					margin-right:265px;
+					margin-right:150px;
 					padding-left:37px;
                    padding-right:60px;
-				   padding-bottom:20px;
+				   padding-bottom:50px;
+                   width:1000px;
+         
 					 
 				   
 				   
 			   }
 			  
 	 
-			   .ta{
-				   
-				   background-color:#F5F5F5;
-				  
-				   
-				   margin-top:50px;
-				   margin-bottom:0px;
-				  margin-left:370px;
-				  margin-right:265px;
-				  padding-left:30px;
-				   
-				   
-				   
-			   }
+			  
 			  
 	tr{
 		
@@ -276,6 +188,194 @@ h1{
 			   
 </style>
 
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="layout has-sidebar fixed-sidebar fixed-header">
+      <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
+        <a id="btn-collapse" class="sidebar-collapser"><i class="ri-arrow-left-s-line"></i></a>
+        <div class="image-wrapper">
+          <img src="assets/images/sidebar-bg.jpg" alt="sidebar background" />
+        </div>
+        <div class="sidebar-layout">
+          <div class="sidebar-header">
+            <div class="pro-sidebar-logo">
+              <div><img src="logo.png" alt="logo"></div>
+              <h5>Save A Life</h5>
+            </div>
+          </div>
+          <div class="sidebar-content">
+            <nav class="menu open-current-submenu">
+              <ul>
+                <li class="menu-header"></li>
+                <li class="menu-item">
+                  <a href="#">
+                    <span class="menu-icon">
+                      <i class="ri-home-fill"></i>
+                    </span>
+                    <span class="menu-title">Home</span>
+                    
+                  </a>
+                 </li>
+                <li class="menu-item">
+                  <a href="reg.php">
+                    <span class="menu-icon">
+                      <i class="ri-user-add-fill"></i>
+                    </span>
+                    <span class="menu-title">Register the Donors</span>
+                  </a>
+                  </li>
+                <li class="menu-item">
+                  <a href="add_medical.php">
+                    <span class="menu-icon">
+                      <i class="ri-heart-add-fill"></i>
+                    </span>
+                    <span class="menu-title">Add medical Details</span>
+                  </a>
+                  </li>
+                <li class="menu-item sub-menu">
+                  <a href="#">
+                    <span class="menu-icon">
+                      <i class="ri-folder-user-fill"></i>
+                    </span>
+                    <span class="menu-title">Donor Information</span>
+                  </a>
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="View_Personal.php">
+                          <span class="menu-title">Personal</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="View_med.php">
+                          <span class="menu-title">Medical</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                <li class="menu-item">
+                  <a href="#">
+                    <span class="menu-icon">
+                      <i class="ri-file-text-fill"></i>
+                    </span>
+                    <span class="menu-title">Declaration Form</span>
+                  </a>
+                </li>
+
+                <li class="menu-item">
+                  <a href="start.php">
+                    <span class="menu-icon">
+                      <i class="ri-drop-fill"></i>
+                    </span>
+                    <span class="menu-title">Daily Blood Collection</span>
+                  </a>
+                  </li>
+
+                <li class="menu-item">
+                  <a href="donation_history.php">
+                    <span class="menu-icon">
+                      <i class="ri-history-line"></i>
+                    </span>
+                    <span class="menu-title">Donation History</span>
+                  </a>
+                  </li>
+                
+
+                <li class="menu-header" style="padding-top: 40px"><span>| </span></li>
+                <li class="menu-item">
+                  <a href="#">
+                    <span class="menu-icon">
+                      <i class="ri-user-line"></i>
+                    </span>
+                    <span class="menu-title">Profile</span> 
+                  </a>
+                <li class="menu-item">
+                  <a href="#">
+                    <span class="menu-icon">
+                      <i class="ri-notification-line"></i>
+                    </span>
+                    <span class="menu-title">Notifications</span>
+                  </a>
+                </li>
+                </li>
+                <li class="menu-item">
+                  <a href="#">
+                    <span class="menu-icon">
+                      <i class="ri-logout-box-r-line"></i>
+                    </span>
+                    <span class="menu-title">Log out</span>
+                  </a>
+                </li>
+                
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </aside>
+      <div id="overlay" class="overlay"></div>
+      <div class="layout">
+        <main class="content">
+
+            <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
+            <!-- add your content from here -->
+           <h1>Daily Blood Collection</h1>
+<br><br>
+
+
+<div class='tab'>
+  <form method="POST" action="add_donation.php">
+    <button class='button'>Add donor <br> Details</button>
+  </form>
+  <?php
+  require 'conection.php';
+  $sql= "SELECT Donation_date, Donation_Id, Batch, Donor_Id, packet_no, packet_quantity, Nurse_ID FROM donation" ;
+
+  $result = $conn->query($sql);
+  if ($result->num_rows > 0) {
+    ?>
+    <table border="1">
+      <tr>
+        <th style="text-align:center;width:120px;">Donation Date</th>
+        <th style="text-align:center;width:120px;">Donation ID</th>
+        <th style="text-align:center;width:120px;">Batch No</th>
+        <th style="text-align:center;width:120px;">Donor Id</th>
+        <th style="text-align:center;width:120px;">Blood Packet No</th>
+        <th>Number of<br/>blood packets</th>
+        <th>Nurse ID</th>
+      </tr>
+      <tr>
+        <td style="height:20px;background-color:#F5F5F5;" colspan="8"></td>
+      </tr>
+      <!-- Donation_date,Donation_Id,Batch,Donor_Id,packet_no,packet_quantity,Nurse_ID -->
+      <?php while ($row = $result->fetch_assoc()) { ?>
+        <tr>
+          <td><?php echo $row["Donation_date"]; ?></td>
+          <td><?php echo $row["Donation_Id"]; ?></td>
+          <td><?php echo $row["Batch"]; ?></td>
+          <td><?php echo $row["Donor_Id"]; ?></td>
+          <td><?php echo $row["packet_no"]; ?></td>
+          <td><?php echo $row["packet_quantity"]; ?></td>
+          <td><?php echo $row["Nurse_ID"]; ?></td>
+        </tr>
+      <?php } ?>
+    </table>
+  <?php } else { ?>
+    <p>No donations yet.</p>
+  <?php } ?>
+  <form method="POST" action="end.php">
+    <button class="button2">End blood <br> collection</button>
+  </form>
+</div>
+
+
+       </main>
+      </div>
+    </div>
+<!-- partial -->
+<script src='https://unpkg.com/@popperjs/core@2'></script><script  src="./script.js"></script>
+
 </body>
 </html>
-	

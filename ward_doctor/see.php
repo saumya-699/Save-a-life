@@ -86,7 +86,7 @@ if (isset($_SESSION["ID"])) {
 
               <li class="menu-header" style="padding-top: 40px"><span> </span></li>
               <li class="menu-item">
-                <a href="Edit Profile.php">
+                <a href="profile.php">
                   <span class="menu-icon">
                     <i class="ri-user-line"></i>
                   </span>
@@ -95,7 +95,7 @@ if (isset($_SESSION["ID"])) {
                 </a>
               </li>
               <li class="menu-item">
-                <a href="#">
+                <a href="Notifications.php">
                   <span class="menu-icon">
                     <i class="ri-notification-line"></i>
                   </span>

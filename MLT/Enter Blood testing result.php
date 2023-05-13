@@ -1,8 +1,22 @@
 <?php
+session_start();
 
-include "config.php";
+if (isset($_SESSION["ID"])) {
+  include "config.php";
+  $m = $_SESSION["Name"];
+  $date = date("Y/m/d");
+  $query = "SELECT * FROM mlt WHERE UserName ='$m'";
+  $result1 = $conn->query($query);
 
-$sql = "SELECT * FROM donation where AddStatus <> '1' order by Donation_Id DESC";
+  if ($result1->num_rows > 0) {
+    while ($row = $result1->fetch_assoc()) {
+      $y=$row["Hospital_ID"];
+
+    }
+  }}
+
+
+$sql = "SELECT * FROM donation_records where AddStatus <> '1' order by Donation_Id DESC";
 
 $result = $conn->query($sql);
 
@@ -152,6 +166,11 @@ $result = $conn->query($sql);
                         <span class="menu-title">Cross Matching Report</span>
                       </a>
                     </li>
+                    <li class="menu-item">
+                      <a href="ReportGenerationStock.php">
+                        <span class="menu-title">Blood Stock Report</span>
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </li>
@@ -166,14 +185,86 @@ $result = $conn->query($sql);
 
                 </a>
               </li>
-              <li class="menu-item">
+              <li class="menu-item sub-menu">
                 <a href="#">
                   <span class="menu-icon">
                     <i class="ri-notification-line"></i>
                   </span>
-                  <span class="menu-title">Notification</span>
+                  <?php
 
+                  $sql = "SELECT COUNT(countS) AS total_count FROM (
+                    SELECT COUNT(*) AS countS FROM donation_records WHERE Hospital_ID='$y' and End_donation ='1' and AddStatus='0' GROUP by Batch,Donation_date) AS subquery";
+
+                  $results = $conn->query($sql);
+
+                  if ($results->num_rows > 0) {
+                    $row = $results->fetch_assoc();
+                    $status = $row["total_count"];
+                    if ($status > 0) {
+                      echo '<span class="icon-button__badge">' . $status . '</span>';
+                    }
+                  }
+
+                  ?>
+
+
+
+
+                  <?php
+                  $rql = "SELECT COUNT(*) AS countS FROM blood_request WHERE Hospital_ID = '$y' AND status='Available' and CrossMatching_Add='0'";
+                  $result1 = $conn->query($rql);
+                  if ($result1->num_rows > 0) {
+                    $row = $result1->fetch_assoc();
+                    $status = $row["countS"];
+                    if ($status > 0) {
+                      echo '<span class="icon-button__badge2">' . $status . '</span>';
+                    }
+                  }
+                  ?>
+                  <span class="menu-title">Notifications</span>
                 </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Notifications.php">
+                        <span class="menu-title"> <?php
+
+                                                  $sql = "SELECT COUNT(countS) AS total_count FROM (
+                                                 SELECT COUNT(*) AS countS FROM donation_records WHERE Hospital_ID='$y' and End_donation ='1' and AddStatus='0' GROUP by Batch,Donation_date) AS subquery";
+
+                                                  $results = $conn->query($sql);
+
+                                                  if ($results->num_rows > 0) {
+                                                    $row = $results->fetch_assoc();
+                                                    $status = $row["total_count"];
+                                                    if ($status > 0) {
+                                                      echo '<span class="icon-button__badge3">' . $status . '</span>';
+                                                    }
+                                                  }
+
+                                                  ?>
+
+                          <span>Donation</span>
+                      </a>
+
+                    <li class="menu-item">
+                      <a href="Notifications1.php">
+                        <span class="menu-title">
+                          <?php
+                          $rql = "SELECT COUNT(*) AS countS FROM blood_request WHERE Hospital_ID = '$y' AND status='Available' and CrossMatching_Add='0'";
+                          $result1 = $conn->query($rql);
+                          if ($result1->num_rows > 0) {
+                            $row = $result1->fetch_assoc();
+                            $status = $row["countS"];
+                            if ($status > 0) {
+                              echo '<span class="icon-button__badge5">' . $status . '</span>';
+                            }
+                          }
+                          ?>Cross Matching Testing</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
               <li class="menu-item">
                 <a href="logout.php">
@@ -194,25 +285,25 @@ $result = $conn->query($sql);
       <main class="content">
         <div>
           <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
-         <h1>Enter testing Result </h1> 
+          <h1>Enter testing Result </h1>
 
-        
 
-        <div class="box">
 
-          <!-- <form action="Enter Blood testing result1.php" method="POST"> -->
+          <div class="box">
+
+            <!-- <form action="Enter Blood testing result1.php" method="POST"> -->
 
             <?php
 
             if ($result->num_rows > 0) {
 
               echo  "<div class='tab'>";
-              echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;'>" . "Donation Date" . "</th>" . "<th style='text-align:center;'>" . "Batch Number" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Donar ID" . "</th>" . "<th>" . "Donation ID" . "</th>" . "<th>" . "Blood Packet ID" . "</th>" . "<th>"."Action"."</th>". "</tr>";
+              echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;'>" . "Donation Date" . "</th>" . "<th style='text-align:center;'>" . "Batch Number" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Donar ID" . "</th>" . "<th>" . "Donation ID" . "</th>" . "<th>" . "Blood Packet ID" . "</th>" . "<th>" . "Action" . "</th>" . "</tr>";
               echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
               while ($row = $result->fetch_assoc()) {
 
 
-                echo  "<tr>" . "<td>" . $row["Donation_date"] . "</td>" . "<td>" . $row["Batch"] . "</td>". "<td>" . $row["Donor_Id"] . "</td>". "<td>" . $row["Donation_ID"] . "</td>". "<td>" . $row["packet_no"] .  "</td>";
+                echo  "<tr>" . "<td>" . $row["Donation_date"] . "</td>" . "<td>" . $row["Batch"] . "</td>" . "<td>" . $row["Donor_Id"] . "</td>" . "<td>" . $row["Donation_ID"] . "</td>" . "<td>" . $row["packet_no"] .  "</td>";
                 echo "<td class='tb'><form method='POST' action ='Enter Blood testing result1.php'>
                    <input type=hidden name=DID value=" . $row["Donor_Id"] . " >
                    <input type=hidden name=PID value=" . $row["packet_no"] . " >
@@ -235,161 +326,163 @@ $result = $conn->query($sql);
 
             $conn->close();
             ?>
+          </div>
+          <style>
+            table {
+              width: 750px;
+              height: 15px;
+              border-collapse: collapse;
+              margin-top: 40px;
+              margin-left: 20px;
+              border: 0px transparent;
+            }
+
+            h1 {
+
+              margin-top: 70px;
+              margin-left: 320px;
+              margin-bottom: 100px;
+            }
+
+
+
+            th {
+
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              text-align: center;
+              padding-top: 25px;
+              padding-bottom: 25px;
+              padding-left: 20px;
+              padding-right: 10px;
+              border: 0px transparent;
+
+            }
+
+
+
+            td {
+              text-align: center;
+              padding: 1px;
+
+
+            }
+
+
+
+            .midiv {
+
+              margin-left: 150px;
+              margin-bottom: 120px;
+              padding: 15px 10px 30px 20px;
+              margin-top: -100px;
+              outline: none;
+              width: 774.5px;
+            }
+
+
+
+
+
+
+
+
+
+            .f2 {
+
+              margin-left: 50px;
+              margin-top: -100px;
+              background-color: transparent;
+              border: none;
+              cursor: pointer;
+              margin-bottom: 0px;
+
+
+            }
+
+
+            .f1 {
+
+              background-color: transparent;
+              margin-left: 10px;
+              margin-right: 20px;
+              margin-bottom: 10px;
+              margin-top: 10px;
+              border: none;
+              cursor: pointer;
+
+
+            }
+
+            .fp {
+              margin-top: 0px;
+              margin-left: 30px;
+              margin-bottom: -100px;
+              background-color: transparent;
+              border: none;
+              cursor: pointer;
+              font-size: 20px;
+              padding: 10px 20px;
+            }
+
+            .tb {
+              display: inline-flex;
+              justify-content: space-evenly;
+              flex-wrap: nowrap;
+              align-items: baseline;
+              flex-direction: row;
+            }
+
+            .tab {
+
+              background-color: #F5F5F5;
+              margin-top: -50px;
+              margin-left: 60px;
+              padding-left: 0px;
+              padding-right: 0px;
+
+
+
+            }
+
+
+            .ta {
+
+              background-color: #F5F5F5;
+              margin-top: 60px;
+              margin-bottom: 0px;
+              margin-left: 370px;
+              margin-right: 119px;
+              padding-left: 20px;
+
+            }
+
+
+
+            tr {
+
+              background-color: white;
+
+
+            }
+
+            .visible {
+              cursor: pointer;
+
+
+            }
+
+            .layout {
+              background-color: #d9dbdb;
+            }
+          </style>
+
+
         </div>
-        <style>
-          table {
-            width: 750px;
-            height: 15px;
-            border-collapse: collapse;
-            margin-top: 40px;
-            margin-left: 20px;
-            border: 0px transparent;
-          }
-
-          h1 {
-
-            margin-top: 70px;
-            margin-left: 320px;
-            margin-bottom: 100px;
-          }
-
-        
-
-          th {
-
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            text-align: center;
-            padding-top: 25px;
-            padding-bottom: 25px;
-            padding-left: 20px;
-            padding-right: 10px;
-            border: 0px transparent;
-
-          }
-
-
-
-          td {
-            text-align: center;
-            padding: 1px;
-
-
-          }
-
-
-
-          .midiv {
-
-            margin-left: 150px;
-            margin-bottom: 120px;
-            padding: 15px 10px 30px 20px;
-            margin-top: -100px;
-            outline: none;
-            width: 774.5px;
-          }
-
-
-
-
-
-
-
-
-
-          .f2 {
-
-            margin-left: 50px;
-            margin-top: -100px;
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            margin-bottom: 0px;
-
-
-          }
-
-
-          .f1 {
-
-            background-color: transparent;
-            margin-left: 10px;
-            margin-right: 20px;
-            margin-bottom: 10px;
-            margin-top: 10px;
-            border: none;
-            cursor: pointer;
-
-
-          }
-
-          .fp {
-            margin-top: 0px;
-            margin-left: 30px;
-            margin-bottom: -100px;
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-          }
-
-          .tb {
-            display: inline-flex;
-            justify-content: space-evenly;
-            flex-wrap: nowrap;
-            align-items: baseline;
-            flex-direction: row;
-          }
-
-          .tab {
-
-            background-color: #F5F5F5;
-            margin-top: -50px;
-            margin-left: 60px;
-            padding-left: 0px;
-            padding-right: 0px;
-
-
-
-          }
-
-
-          .ta {
-
-            background-color: #F5F5F5;
-            margin-top: 60px;
-            margin-bottom: 0px;
-            margin-left: 370px;
-            margin-right: 119px;
-            padding-left: 20px;
-
-          }
-
-
-
-          tr {
-
-            background-color: white;
-
-
-          }
-
-          .visible {
-            cursor: pointer;
-
-
-          }
-
-          .layout {
-            background-color: #d9dbdb;
-          }
-        </style>
-
+      </main>
 
     </div>
-    </main>
-
-  </div>
   </div>
   <!-- partial -->
   <script src='https://unpkg.com/@popperjs/core@2'></script>

@@ -2,6 +2,21 @@
 session_start();
 include "config.php";
 
+if (isset($_SESSION["ID"])) {
+  include "config.php";
+  $m = $_SESSION["Name"];
+  $date = date("Y/m/d");
+  $query = "SELECT * FROM mlt WHERE UserName ='$m'";
+  $result1 = $conn->query($query);
+
+  if ($result1->num_rows > 0) {
+    while ($row = $result1->fetch_assoc()) {
+      $x = $row["MLT_ID"];
+      $y=$row["Hospital_ID"];
+
+    }
+  }
+}
 $sql = "SELECT * FROM blood_testing_result";
 $result = $conn->query($sql);
 
@@ -165,14 +180,86 @@ $result = $conn->query($sql);
 
                 </a>
               </li>
-              <li class="menu-item">
+              <li class="menu-item sub-menu">
                 <a href="#">
                   <span class="menu-icon">
                     <i class="ri-notification-line"></i>
                   </span>
-                  <span class="menu-title">Notification</span>
+                  <?php
 
+                  $sql = "SELECT COUNT(countS) AS total_count FROM (
+                    SELECT COUNT(*) AS countS FROM donation_records WHERE Hospital_ID='$y' and End_donation ='1' and AddStatus='0' GROUP by Batch,Donation_date) AS subquery";
+
+                  $results = $conn->query($sql);
+
+                  if ($results->num_rows > 0) {
+                    $row = $results->fetch_assoc();
+                    $status = $row["total_count"];
+                    if ($status > 0) {
+                      echo '<span class="icon-button__badge">' . $status . '</span>';
+                    }
+                  }
+
+                  ?>
+
+
+
+
+                  <?php
+                  $rql = "SELECT COUNT(*) AS countS FROM blood_request WHERE Hospital_ID = '$y' AND status='Available' and CrossMatching_Add='0'";
+                  $result1 = $conn->query($rql);
+                  if ($result1->num_rows > 0) {
+                    $row = $result1->fetch_assoc();
+                    $status = $row["countS"];
+                    if ($status > 0) {
+                      echo '<span class="icon-button__badge2">' . $status . '</span>';
+                    }
+                  }
+                  ?>
+                  <span class="menu-title">Notifications</span>
                 </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Notifications.php">
+                        <span class="menu-title"> <?php
+
+                                                  $sql = "SELECT COUNT(countS) AS total_count FROM (
+                                                 SELECT COUNT(*) AS countS FROM donation_records WHERE Hospital_ID='$y' and End_donation ='1' and AddStatus='0' GROUP by Batch,Donation_date) AS subquery";
+
+                                                  $results = $conn->query($sql);
+
+                                                  if ($results->num_rows > 0) {
+                                                    $row = $results->fetch_assoc();
+                                                    $status = $row["total_count"];
+                                                    if ($status > 0) {
+                                                      echo '<span class="icon-button__badge3">' . $status . '</span>';
+                                                    }
+                                                  }
+
+                                                  ?>
+
+                          <span>Donation</span>
+                      </a>
+
+                    <li class="menu-item">
+                      <a href="Notifications1.php">
+                        <span class="menu-title">
+                          <?php
+                          $rql = "SELECT COUNT(*) AS countS FROM blood_request WHERE Hospital_ID = '$y' AND status='Available' and CrossMatching_Add='0'";
+                          $result1 = $conn->query($rql);
+                          if ($result1->num_rows > 0) {
+                            $row = $result1->fetch_assoc();
+                            $status = $row["countS"];
+                            if ($status > 0) {
+                              echo '<span class="icon-button__badge5">' . $status . '</span>';
+                            }
+                          }
+                          ?>Cross Matching Testing</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
               <li class="menu-item">
                 <a href="logout.php">
@@ -196,30 +283,8 @@ $result = $conn->query($sql);
           <h1>Send blood test results for approval</h1>
 
 
-            <div class="midiv">
+            
 
-
-              <font size=3> Search by </font></b> <br /> <br /><select name="search" class="select">
-                <option value="test_result_id"><b>Test result ID</b></option>
-                <option value="donar_id"><b> Donar ID</b></option>
-                <option value="blood_group"><b>Blood group</b></option>
-                <option value="malaria_result" selected><b>Malaria result</b></option>
-                <option value="hiv_result"><b> HIV result</b></option>
-                <option value="hbv_result"><b>HBV result</b></option>
-                <option value="hcv_result"><b>HCV result</b></option>
-                <option value="vdrl_result"><b>VDRL result</b></option>
-                <option value="process_date" selected><b>Processed Date</b></option>
-                <option value="batch_number" selected><b>Batch number</b></option>
-              </select>
-
-
-
-              <input type="text" placeholder="type here" name="data" id="data" class="box">
-
-              <button type="submit" name="BtnSubmit" id="search" class="b1"><b>Search</b></button>
-            </div>
-
-        </div>
 
         </form>
         <?php
@@ -276,8 +341,8 @@ $result = $conn->query($sql);
             width: 750px;
             height: 15px;
             border-collapse: collapse;
-            margin-top: 40px;
-            margin-left: 80px;
+            margin-top: -60px;
+            margin-left: 20px;
             border: 0px transparent;
 
           }
@@ -349,16 +414,7 @@ $result = $conn->query($sql);
           }
 
 
-          .midiv {
-
-            margin-left: 150px;
-            margin-bottom: -50px;
-            padding: 15px 10px 30px 20px;
-            margin-top: -100px;
-            outline: none;
-            width: 774.5px;
-          }
-
+         
 
 
 
