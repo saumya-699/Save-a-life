@@ -331,7 +331,7 @@ $result = $conn->query($sql);
               height: 15px;
               border-collapse: collapse;
               margin-top: 40px;
-              margin-left: 20px;
+              margin-left: 60px;
               border: 0px transparent;
             }
 
