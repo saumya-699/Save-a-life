@@ -431,7 +431,7 @@ if (isset($_SESSION["ID"])) {
       background-color: transparent;
       border: none;
       cursor: pointer;
-      font-size: 20px;
+      font-size: 25px;
       padding: 10px 10px;
     }
 
