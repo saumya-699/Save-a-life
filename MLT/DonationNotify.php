@@ -313,6 +313,7 @@ if (isset($_SESSION["ID"])) {
             if ($result->num_rows > 0) {
               echo  "<div class='tab'>";
               echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;'>" . "Donation Date" . "</th>" . "<th style='text-align:center;'>" . "Batch Number" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Donar ID" . "</th>" . "<th>" . "Donation ID" . "</th>" . "<th>" . "Blood Packet ID" . "</th>" . "<th>" . "Action" . "</th>" . "</tr>";
+              echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
 
               while ($row = $result->fetch_assoc()) {
 
@@ -338,6 +339,8 @@ if (isset($_SESSION["ID"])) {
 
                 echo "</div>";
                 echo "</tr>";
+                echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
+
               }
               echo  "</font>";
               echo  "</font>";
