@@ -212,7 +212,7 @@ if (isset($_SESSION["ID"])) {
 
 
   <style>
-    .icon-button__badge {
+  .icon-button__badge {
     position: absolute;
     top: 9px;
     right: 226px;
