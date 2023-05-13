@@ -54,6 +54,8 @@ session_start();
  <link rel="stylesheet" href="StyleSearchss.css"> 
  <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
  <link rel="stylesheet" href="StyleIcons.css"> 
+ <link rel="stylesheet" href="./StyleSheetNotification.css">
+ 
 </head>
 <body>
 <!-- partial:index.partial.html -->
