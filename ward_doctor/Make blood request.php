@@ -102,7 +102,7 @@ if (isset($_SESSION["ID"])) {
                   </span>
                   <?php
 
-                  $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$y' AND notifyView='0' AND (status='Available' OR status='NotAvailable')";
+                  $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$y' AND notifyView='0' AND (status='Available' OR status='Not Available')";
 
                   $results = $conn->query($sql);
 
@@ -126,7 +126,7 @@ if (isset($_SESSION["ID"])) {
                       <a href="Notifications.php">
                         <span class="menu-title"> <?php
 
-                                                  $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$y' AND notifyView='0' AND (status='Available' OR status='NotAvailable')";
+                                                  $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$y' AND notifyView='0' AND (status='Available' OR status='Not Available')";
 
                                                   $results = $conn->query($sql);
 
@@ -145,7 +145,7 @@ if (isset($_SESSION["ID"])) {
                   </ul>
                 </div>
               </li>
-              </li>
+
               <li class="menu-item">
                 <a href="logout.php">
                   <span class="menu-icon">
@@ -315,6 +315,33 @@ if (isset($_SESSION["ID"])) {
   .buttons {
     margin-top: 20px;
   }
+  .icon-button__badge {
+    position: absolute;
+    top: 9px;
+    right: 226px;
+    width: 15px;
+    height: 18px;
+    background: red;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+  .icon-button__badge3 {
+    position: absolute;
+    top: 15px;
+    right: 245px;
+    width: 15px;
+    height: 18px;
+    background: red;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+
 </style>
 </body>
 

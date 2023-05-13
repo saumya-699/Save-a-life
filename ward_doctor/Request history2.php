@@ -155,6 +155,7 @@ if (isset($_POST['view'])) {
                   </ul>
                 </div>
               </li>
+
               <li class="menu-item">
                 <a href="logout.php">
                   <span class="menu-icon">
@@ -271,7 +272,33 @@ if (isset($_POST['view'])) {
 </html>
 
 <style>
-  
+   .icon-button__badge {
+    position: absolute;
+    top: 9px;
+    right: 226px;
+    width: 15px;
+    height: 18px;
+    background: red;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+  .icon-button__badge3 {
+    position: absolute;
+    top: 15px;
+    right: 245px;
+    width: 15px;
+    height: 18px;
+    background: red;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+
   .container-shadow {
       position: absolute;
       height: 1530px;
