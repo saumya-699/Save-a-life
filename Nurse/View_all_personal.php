@@ -1,8 +1,20 @@
-<!DOCTYPE html>
+<?php 
+session_start();
+
+?>
+
+
+ <?php
+   if(isset($_SESSION["ID"]))   {
+	
+    require "conp.php";
+    
+     			
+?>
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Side bar</title>
+  <title>View Personal details</title>
   <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
 <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
 <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./style.css">
@@ -272,3 +284,6 @@ $conn->close();
 
 </body>
 </html>
+<?php
+}
+?>

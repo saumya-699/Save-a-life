@@ -1,12 +1,16 @@
-<?php
+<?php 
 session_start();
 
 ?>
 
- <?php
-if (isset($_SESSION["ID"])) {
 
- ?>
+ <?php
+   if(isset($_SESSION["ID"]))   {
+	
+    require "conp.php";
+    
+     			
+?>
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
@@ -154,8 +158,6 @@ if (isset($_SESSION["ID"])) {
 
             <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
             <!-- add your content from here -->
-           
-
             <div class="container-shadow">
   </div>
   <div class="container">

@@ -12,6 +12,7 @@ if(isset($_SESSION["ID"])) {
    if($result1->num_rows > 0) {        
     while($row = $result1->fetch_assoc()) {
       $x = $row["Hospital_ID"];
+      $hid=$x;
     }
   }
 
@@ -34,8 +35,10 @@ if(isset($_SESSION["ID"])) {
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
 <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="StyleSearch.css"> 
+<link rel="stylesheet" href="./StyleSheetNotification.css">
 </head>
 <body>
+<!-- partial:index.partial.html -->
 <!-- partial:index.partial.html -->
 <div class="layout has-sidebar fixed-sidebar fixed-header">
       <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
@@ -53,7 +56,7 @@ if(isset($_SESSION["ID"])) {
               <ul>
                 <li class="menu-header"><span>  </span></li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="Home.php">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -226,15 +229,119 @@ if(isset($_SESSION["ID"])) {
                     <span class="menu-title">Profile</span>
                   </a>
                 </li>
-                <li class="menu-item">
-                  <a href="Notifications.php">
+                 <li class="menu-item sub-menu">
+                  <a href="#">
                     <span class="menu-icon">
                       <i class="ri-notification-line"></i>
                     </span>
+                    <?php
+
+                    $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$hid' and status ='Pending' and send_status='1'";
+
+                    $results = $conn->query($sql);
+
+                    if ($results->num_rows > 0) {
+                      $row = $results->fetch_assoc();
+                      $status = $row["countS"];
+                      if ($status > 0) {
+                        echo '<span class="icon-button__badge">' . $status . '</span>';
+                      }
+                    }
+
+                    ?>
+                    <?php
+
+                    $vql = "SELECT COUNT(countS) AS total_count FROM (
+                                    SELECT COUNT(*) AS countS FROM blood_testing_result WHERE send_status='1' and status = 'Pending' and Hospital_ID='$hid' GROUP by process_date,batch_number) AS subquery";
+
+                    $result = $conn->query($vql);
+
+                    if ($result->num_rows > 0) {
+                      $row = $result->fetch_assoc();
+                      $status = $row["total_count"];
+                      if ($status > 0) {
+                        echo '<span class="icon-button__badge1">' . $status . '</span>';
+                      }
+                    }
+
+                    ?>
+
+
+
+                    <?php
+                    $rql = "SELECT COUNT(*) AS countS FROM cross_matching_testing_result WHERE Hospital_ID = '$hid' AND Status = 'Pending' and send_status='1'";
+                    $result1 = $conn->query($rql);
+                    if ($result1->num_rows > 0) {
+                      $row = $result1->fetch_assoc();
+                      $status = $row["countS"];
+                      if ($status > 0) {
+                        echo '<span class="icon-button__badge2">' . $status . '</span>';
+                      }
+                    }
+                    ?>
+
                     <span class="menu-title">Notifications</span>
                   </a>
-                </li>
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="Notifications.php">
+                          <span class="menu-title"> <?php
 
+                                                    $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$hid' and status ='Pending' and send_status='1'";
+
+                                                    $results = $conn->query($sql);
+
+                                                    if ($results->num_rows > 0) {
+                                                      $row = $results->fetch_assoc();
+                                                      $status = $row["countS"];
+                                                      if ($status > 0) {
+                                                        echo '<span class="icon-button__badge3">' . $status . '</span>';
+                                                      }
+                                                    }
+
+                                                    ?>Blood Request</span>
+                        </a>
+                      <li class="menu-item">
+                        <a href="Notifications1.php">
+                          <span class="menu-title">
+                            <?php
+
+                            $vql = "SELECT COUNT(countS) AS total_count FROM (
+                            SELECT COUNT(*) AS countS FROM blood_testing_result WHERE send_status='1' and status = 'Pending' and Hospital_ID='$hid' GROUP by process_date,batch_number) AS subquery";
+
+                            $result = $conn->query($vql);
+
+                            if ($result->num_rows > 0) {
+                              $row = $result->fetch_assoc();
+                              $status = $row["total_count"];
+                              if ($status > 0) {
+                                echo '<span class="icon-button__badge4">' . $status . '</span>';
+                              }
+                            }
+
+                            ?>Blood Testing</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="Notifications2.php">
+                          <span class="menu-title">
+                            <?php
+                            $rql = "SELECT COUNT(*) AS countS FROM cross_matching_testing_result WHERE Hospital_ID = '$hid' AND Status = 'Pending' and send_status='1'";
+                            $result1 = $conn->query($rql);
+                            if ($result1->num_rows > 0) {
+                              $row = $result1->fetch_assoc();
+                              $status = $row["countS"];
+                              if ($status > 0) {
+                                echo '<span class="icon-button__badge5">' . $status . '</span>';
+                              }
+                            }
+                            ?>Cross Matching</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
                 <li class="menu-item">
                   <a href="logoutI.php">
                     <span class="menu-icon">
@@ -254,7 +361,6 @@ if(isset($_SESSION["ID"])) {
         <main class="content">
           <div>
             <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a></div>
-           
             <form method="post" action="search_donor.php">
  
  <div class="ta">

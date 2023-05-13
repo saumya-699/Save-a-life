@@ -139,7 +139,7 @@ if($results->num_rows>0)
               <ul>
                 <li class="menu-header"><span>  </span></li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="Home.php">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -312,15 +312,119 @@ if($results->num_rows>0)
                     <span class="menu-title">Profile</span>
                   </a>
                 </li>
-                <li class="menu-item">
-                  <a href="Notifications.php">
+                 <li class="menu-item sub-menu">
+                  <a href="#">
                     <span class="menu-icon">
                       <i class="ri-notification-line"></i>
                     </span>
+                    <?php
+
+                    $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$hid' and status ='Pending' and send_status='1'";
+
+                    $results = $conn->query($sql);
+
+                    if ($results->num_rows > 0) {
+                      $row = $results->fetch_assoc();
+                      $status = $row["countS"];
+                      if ($status > 0) {
+                        echo '<span class="icon-button__badge">' . $status . '</span>';
+                      }
+                    }
+
+                    ?>
+                    <?php
+
+                    $vql = "SELECT COUNT(countS) AS total_count FROM (
+                                    SELECT COUNT(*) AS countS FROM blood_testing_result WHERE send_status='1' and status = 'Pending' and Hospital_ID='$hid' GROUP by process_date,batch_number) AS subquery";
+
+                    $result = $conn->query($vql);
+
+                    if ($result->num_rows > 0) {
+                      $row = $result->fetch_assoc();
+                      $status = $row["total_count"];
+                      if ($status > 0) {
+                        echo '<span class="icon-button__badge1">' . $status . '</span>';
+                      }
+                    }
+
+                    ?>
+
+
+
+                    <?php
+                    $rql = "SELECT COUNT(*) AS countS FROM cross_matching_testing_result WHERE Hospital_ID = '$hid' AND Status = 'Pending' and send_status='1'";
+                    $result1 = $conn->query($rql);
+                    if ($result1->num_rows > 0) {
+                      $row = $result1->fetch_assoc();
+                      $status = $row["countS"];
+                      if ($status > 0) {
+                        echo '<span class="icon-button__badge2">' . $status . '</span>';
+                      }
+                    }
+                    ?>
+
                     <span class="menu-title">Notifications</span>
                   </a>
-                </li>
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="Notifications.php">
+                          <span class="menu-title"> <?php
 
+                                                    $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$hid' and status ='Pending' and send_status='1'";
+
+                                                    $results = $conn->query($sql);
+
+                                                    if ($results->num_rows > 0) {
+                                                      $row = $results->fetch_assoc();
+                                                      $status = $row["countS"];
+                                                      if ($status > 0) {
+                                                        echo '<span class="icon-button__badge3">' . $status . '</span>';
+                                                      }
+                                                    }
+
+                                                    ?>Blood Request</span>
+                        </a>
+                      <li class="menu-item">
+                        <a href="Notifications1.php">
+                          <span class="menu-title">
+                            <?php
+
+                            $vql = "SELECT COUNT(countS) AS total_count FROM (
+                            SELECT COUNT(*) AS countS FROM blood_testing_result WHERE send_status='1' and status = 'Pending' and Hospital_ID='$hid' GROUP by process_date,batch_number) AS subquery";
+
+                            $result = $conn->query($vql);
+
+                            if ($result->num_rows > 0) {
+                              $row = $result->fetch_assoc();
+                              $status = $row["total_count"];
+                              if ($status > 0) {
+                                echo '<span class="icon-button__badge4">' . $status . '</span>';
+                              }
+                            }
+
+                            ?>Blood Testing</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="Notifications2.php">
+                          <span class="menu-title">
+                            <?php
+                            $rql = "SELECT COUNT(*) AS countS FROM cross_matching_testing_result WHERE Hospital_ID = '$hid' AND Status = 'Pending' and send_status='1'";
+                            $result1 = $conn->query($rql);
+                            if ($result1->num_rows > 0) {
+                              $row = $result1->fetch_assoc();
+                              $status = $row["countS"];
+                              if ($status > 0) {
+                                echo '<span class="icon-button__badge5">' . $status . '</span>';
+                              }
+                            }
+                            ?>Cross Matching</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
                 <li class="menu-item">
                   <a href="logoutI.php">
                     <span class="menu-icon">
@@ -398,3 +502,90 @@ if($results->num_rows>0)
 }
  
 ?>
+<style>
+.icon-button__badge {
+      position: absolute;
+      top: 6;
+      right: 220px;
+      width: 15px;
+      height: 18px;
+      background: red;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
+
+    .pending-row {
+      background-color: #fad2c3;
+    }
+
+
+    .icon-button__badge1 {
+      position: absolute;
+      top: 0;
+      right: 228;
+      width: 15px;
+      height: 18px;
+      background: green;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
+
+    .icon-button__badge2 {
+      position: absolute;
+      top: 4px;
+      right: 239;
+      width: 15px;
+      height: 18px;
+      background: purple;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
+    .icon-button__badge3 {
+      position: absolute;
+      top: 15;
+      right: 235px;
+      width: 15px;
+      height: 18px;
+      background: red;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
+
+    .icon-button__badge4 {
+      position: absolute;
+      top: 65;
+      right: 235;
+      width: 15px;
+      height: 18px;
+      background: green;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
+    .icon-button__badge5 {
+    position: absolute;
+    top: 115;
+    right: 236;
+    width: 15px;
+    height: 18px;
+    background: purple;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}</style>

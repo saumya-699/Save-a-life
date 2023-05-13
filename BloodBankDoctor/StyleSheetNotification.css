@@ -1,0 +1,94 @@
+.icon-button__badge {
+    position: absolute;
+    top: 6;
+    right: 220px;
+    width: 15px;
+    height: 18px;
+    background: red;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+
+  .pending-row {
+    background-color: #fad2c3;
+  }
+
+
+  .icon-button__badge1 {
+    position: absolute;
+    top: 0;
+    right: 228;
+    width: 15px;
+    height: 18px;
+    background: green;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+
+  .icon-button__badge2 {
+    position: absolute;
+    top: 4px;
+    right: 239;
+    width: 15px;
+    height: 18px;
+    background: purple;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+
+  .container {
+    background-color: #B2C0E0;
+
+  }
+  .fp{
+  margin-top: 15px;
+}
+.icon-button__badge3 {
+    position: absolute;
+    top: 15;
+    right: 235px;
+    width: 15px;
+    height: 18px;
+    background: red;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+
+  .icon-button__badge4 {
+    position: absolute;
+    top: 65;
+    right: 235;
+    width: 15px;
+    height: 18px;
+    background: green;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+  .icon-button__badge5 {
+  position: absolute;
+  top: 115;
+  right: 236;
+  width: 15px;
+  height: 18px;
+  background: purple;
+  color: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}

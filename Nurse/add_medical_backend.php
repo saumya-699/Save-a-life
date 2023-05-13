@@ -7,7 +7,17 @@ session_start();
 <?php
 
 //make connection here
-require 'conection.php'; 
+require 'conp.php'; 
+$m = $_SESSION["Name"];
+$query = "SELECT * FROM nurse WHERE UserName ='$m'";
+$result1 = $conn->query($query);
+
+if ($result1->num_rows > 0) {
+    while ($row = $result1->fetch_assoc()) {
+      $y = $row["Hospital_ID"];
+    }
+  
+  }
 
 if(isset($_POST['BtnSubmit']))
 {
@@ -18,11 +28,14 @@ if(isset($_POST['BtnSubmit']))
     $Height=$_POST["height"];
 	$Blood_Pressure=$_POST["bpressure"];
 	$Hemoglobine=$_POST["hemoglobine"];
+	$Hospital_ID=$y;
+	$date=date("Y/m/d");
+
     
     //database connection
 
-        $sql = "INSERT INTO pre_medical (Donor_Id,Donor_Name,Weight,Height,Blood_Pressure,Hemoglobine)
-VALUES ('$Donor_Id','$Donor_Name','$Weight','$Height','$Blood_Pressure','$Hemoglobine')";
+        $sql = "INSERT INTO pre_medical (Donor_Id,Donor_Name,Weight,Height,Blood_Pressure,Hemoglobine,Hospital_ID,date)
+VALUES ('$Donor_Id','$Donor_Name','$Weight','$Height','$Blood_Pressure','$Hemoglobine','$Hospital_ID','$date')";
 
 if($conn->query($sql)){
       
