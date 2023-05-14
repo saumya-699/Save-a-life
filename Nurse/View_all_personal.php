@@ -173,7 +173,7 @@ session_start();
 <?php
 
 
-require 'conection.php';
+require 'conp.php';
 if(isset($_POST['view']))  
 
 {	
@@ -208,8 +208,11 @@ echo "
                               <label for='exampleFormControlInput1' class='form-label lbl star'>NIC Number</label>
                                <input type='text' value=".$row["NIC_Number"]." name='NIC' id='slmc' class='form-control txt-input'readonly>
 
-                               <label for='exampleFormControlInput1' class='form-label lbl star'>DOB</label>
+                               <label for='exampleFormControlInput1' class='form-label lbl star'>Date of Birth</label>
                                <input type='text' value=".$row["DOB"]." name='NIC' id='slmc' class='form-control txt-input' redonly>
+
+                               <label for='exampleFormControlInput1' class='form-label lbl star'>Blood Group</label>
+                               <input type='text' value=".$row["blood_group"]." name='NIC' id='slmc' class='form-control txt-input' redonly>
           
                                 
                                <label for='exampleFormControlInput1' class='form-label lbl star'>Address</label>

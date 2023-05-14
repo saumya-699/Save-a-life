@@ -40,7 +40,7 @@ if (isset($_POST['submit'])) {
                 // Password updated in the system_users table
 
                 // Prepare the UPDATE statement to change the password in the nurse table
-                $stmt = $conn->prepare("UPDATE warddoctor SET Password = ? WHERE UserName = ?");
+                $stmt = $conn->prepare("UPDATE mlt SET Password = ? WHERE UserName = ?");
                 $stmt->bind_param("ss", $newpwd, $_SESSION['Name']);
                 $stmt->execute();
 

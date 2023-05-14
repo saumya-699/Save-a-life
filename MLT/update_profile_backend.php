@@ -32,7 +32,7 @@
     $username = $_SESSION['Name'];
 
     // Update the nurse's contact number, email, and address in the database
-    $sql = "UPDATE warddoctor SET Name_With_Initials = '$name', ContactNumber = '$contact', Email = '$email' WHERE UserName = '$username'";
+    $sql = "UPDATE mlt SET Name_With_Initials = '$name', ContactNumber = '$contact', Email = '$email' WHERE UserName = '$username'";
 
     if ($conn->query($sql) === TRUE) {
         // Generate JavaScript popup message for success

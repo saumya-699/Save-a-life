@@ -180,7 +180,7 @@ h1{
 					      height:50px;
                           width:100px;
 						  color:#FFF;
-						  margin-left:700px;
+						  margin-left:800px;
 						   border-radius:5px;
                            margin-top:20px;
                            margin-bottom: 10PX;
@@ -420,7 +420,7 @@ $y=null;
 echo "
      <form method='POST' action =''>  	
     
-    <button type=submit value=Send name='send'  class='button2'>End blood <br> collection</button>
+    <button type=submit value=Send name='send'  class='button2' onclick='return confirmEndCollection()' >End blood <br> collection</button>
 
      </form>
 
@@ -438,6 +438,17 @@ echo "
 
 
     }?>
+<script>
+function confirmEndCollection() {
+    var confirmResult = confirm("Are you sure you want to start the blood collection?");
+    if (confirmResult) {
+        window.location.href = "Home.php";
+    }
+    return false;
+}
+</script>
+
+
     </div>
 
        </main>

@@ -161,7 +161,7 @@ session_start();
             <!-- add your content from here -->
            
 
-            <select id="filterDropdown" class="b1">
+    <select id="filterDropdown" class="b1">
     <option value="All">Gender</option>
     <option value="Female">Female</option>
     <option value="Male">Male</option>
@@ -233,11 +233,11 @@ if($result->num_rows>0)
 	      //echo "<font size=6>";
 	   
 	   //echo  "<div class='tab'>";
-     echo  "<table id='dataTable' border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Donor_ID"."</th>"."
+     echo  "<table id='dataTable' border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Donor ID"."</th>"."
      <th style='text-align:center;width:200px;'>"."Donor Name"."
      <th style='text-align:center;width:120px;'>"."NIC Number"."</th>"."
      <th>"."Gender"."</th>"."
-     <th>"."Cotact Number"."</th>"."
+     <th>"."Blood Group"."</th>"."
    <th>"."province"."</th>"."
      <th>"."Action"."</th>"."
    <th >"." "."</th>"."
@@ -248,7 +248,7 @@ if($result->num_rows>0)
    {     
     $position_class = strtolower(str_replace(' ', '-', $row['Gender']));
     echo '<tr class="' . $position_class . '">'; 
-	  echo  "<td>".$row["Donor_Id"]."</td>"."<td>".$row["Prefix"].".".$row["Full_Name"]."</td>"."<td>".$row["NIC_Number"]."</td>"."<td>".$row["Gender"]."</td>"."<td>".$row["mobile_number"]."</td>"."<td>".$row["province"]."</td>";
+	  echo  "<td>".$row["Donor_Id"]."</td>"."<td>".$row["Prefix"].".".$row["Full_Name"]."</td>"."<td>".$row["NIC_Number"]."</td>"."<td>".$row["Gender"]."</td>"."<td>".$row["blood_group"]."</td>"."<td>".$row["province"]."</td>";
 	   echo "<td><form method='POST' action ='View_all_personal.php'>
                 <input type=hidden name=Donor_Id value=".$row["Donor_Id"]." >
                 <button type=submit value=view name=view id=btn style=display: inline-block class='rt'><i class='fa-sharp fa-solid fa-eye'></i></button>

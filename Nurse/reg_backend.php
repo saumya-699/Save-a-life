@@ -3,17 +3,34 @@ session_start();
 
 // make connection here
 require 'conp.php';
-
 if (isset($_POST['BtnSubmit'])) {
-    $m = $_SESSION["Name"];
-    $query = "SELECT * FROM nurse WHERE UserName ='$m'";
-    $result1 = $conn->query($query);
 
-    if ($result1->num_rows > 0) {
-        while ($row = $result1->fetch_assoc()) {
-            $y = $row["Hospital_ID"];
-        }
+    $m= $_SESSION["Name"];
+    $query = "select * from nurse where UserName ='$m'";
+    $resultd = $conn->query($query);
+    
+    //echo "Error in ".$vql."<br>".$conn->error;
+    $x=null;
+    if($resultd->num_rows>0)
+    
+    {        
+    
+    while($row = $resultd->fetch_assoc())
+    
+    {
+    $x= $row["Nurse_ID"];
     }
+}
+ $vql ="select * from nurse where Nurse_ID ='$x'";
+$resultx = $conn->query($vql);
+$y=null;
+ while($row = $resultx->fetch_assoc())
+   
+   {     
+     
+	  $y=$row["Hospital_ID"];
+    }
+    
 
     $date = date("Y/m/d");
     $Prefix = $_POST["prefix"];
@@ -32,12 +49,13 @@ if (isset($_POST['BtnSubmit'])) {
     $password = $_POST["password"];
     $Hospital_ID = $y;
     $Type = 6;
+    $Nurse_ID= $x;
 
     // insert the user into the database.
     $jql = "INSERT INTO system_users(User_ID, UserName, Password, Type) VALUES('', '$username', '$password', 6)";
     if ($conn->query($jql)) {
-        $sql = "INSERT INTO donors (Prefix, Full_Name, Initials, NIC_Number, DOB, Email, Gender, Address, province, postal, mobile_number, land_number, username, password, date, Hospital_ID, Remark) 
-                VALUES ('$Prefix', '$Fullname', '$Initial', '$NIC', '$DOB', '$Email', '$Gender', '$Address', '$province', '$postal', '$mobile_number', '$land_number', '$username', '$password', '$date', '$Hospital_ID', 'Added')";
+        $sql = "INSERT INTO donors (Prefix, Full_Name, Initials, NIC_Number, DOB, Email, Gender, Address, province, postal, mobile_number, land_number, username, password, date, Hospital_ID, Remark,Nurse_ID) 
+                VALUES ('$Prefix', '$Fullname', '$Initial', '$NIC', '$DOB', '$Email', '$Gender', '$Address', '$province', '$postal', '$mobile_number', '$land_number', '$username', '$password', '$date', '$Hospital_ID', 'Added','$Nurse_ID')";
         if ($conn->query($sql)) {
             echo '<script type="text/javascript">';
             echo 'alert("Registration is successful");';

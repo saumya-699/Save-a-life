@@ -21,7 +21,7 @@
 
     // Retrieve user information
     $username = $_SESSION['Name'];
-    $sql = "SELECT * FROM warddoctor WHERE UserName = '$username'";
+    $sql = "SELECT * FROM mlt WHERE UserName = '$username'";
     $result = $conn->query($sql);
 
     if ($result->num_rows == 1) {

@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 include "config.php";
@@ -12,17 +11,16 @@ if (isset($_SESSION["ID"])) {
     while ($row = $result1->fetch_assoc()) {
       $x = $row["Name_With_Initials"];
       $y = $row["WardDoctor_ID"];
+      $z= $row["Hospital_ID"];
     }
   }
 }
 ?>
-<!DOCTYPE html>
-<html lang="en">
 
+<html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>side-ward doctor</title>
-
+  <title>Side bar</title>
   <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
 <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
 <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./style.css">
@@ -32,16 +30,16 @@ if (isset($_SESSION["ID"])) {
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
-
 </head>
-
 <body>
-  <!-- partial:index.partial.html -->
-  <div class="layout has-sidebar fixed-sidebar fixed-header">
-    <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
-      <a id="btn-collapse" class="sidebar-collapser"><i class="ri-arrow-left-s-line"></i></a>
-
-      <div class="sidebar-layout">
+<!-- partial:index.partial.html -->
+<div class="layout has-sidebar fixed-sidebar fixed-header">
+      <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
+        <a id="btn-collapse" class="sidebar-collapser"><i class="ri-arrow-left-s-line"></i></a>
+        <div class="image-wrapper">
+          <img src="assets/images/sidebar-bg.jpg" alt="sidebar background" />
+        </div>
+        <div class="sidebar-layout">
         <div class="sidebar-header">
           <div class="pro-sidebar-logo">
             <div><img src="logo.png" alt="logo"></div>
@@ -98,14 +96,57 @@ if (isset($_SESSION["ID"])) {
 
                 </a>
               </li>
-              <li class="menu-item">
-                <a href="Notifications.php">
+              <li class="menu-item sub-menu">
+                <a href="#">
                   <span class="menu-icon">
                     <i class="ri-notification-line"></i>
                   </span>
-                  <span class="menu-title">Notification</span>
+                  <?php
+
+                  $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$z' AND notifyView='0' AND (status='Available' OR status='Not Available')";
+
+                  $results = $conn->query($sql);
+
+                  if ($results->num_rows > 0) {
+                    $row = $results->fetch_assoc();
+                    $status = $row["countS"];
+                    if ($status > 0) {
+                      echo '<span class="icon-button__badge">' . $status . '</span>';
+                    }
+                  }
+
+                  ?>
+
+
+
+                  <span class="menu-title">Notifications</span>
                 </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Notifications.php">
+                        <span class="menu-title"> <?php
+
+                                                  $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$z' AND notifyView='0' AND (status='Available' OR status='Not Available')";
+
+                                                  $results = $conn->query($sql);
+
+                                                  if ($results->num_rows > 0) {
+                                                    $row = $results->fetch_assoc();
+                                                    $status = $row["countS"];
+                                                    if ($status > 0) {
+                                                      echo '<span class="icon-button__badge3">' . $status . '</span>';
+                                                    }
+                                                  }
+
+                                                  ?>Request Results</span>
+                      </a>
+
+                    </li>
+                  </ul>
+                </div>
               </li>
+
               <li class="menu-item">
                 <a href="logout.php">
                   <span class="menu-icon">
@@ -188,6 +229,33 @@ if (isset($_SESSION["ID"])) {
     </div>
 <!-- partial -->
 <script src='https://unpkg.com/@popperjs/core@2'></script><script  src="./script.js"></script>
-
+<style>
+  .icon-button__badge {
+    position: absolute;
+    top: 9px;
+    right: 226px;
+    width: 15px;
+    height: 18px;
+    background: red;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+  .icon-button__badge3 {
+    position: absolute;
+    top: 15px;
+    right: 245px;
+    width: 15px;
+    height: 18px;
+    background: red;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+</style>
 </body>
 </html>

@@ -6,7 +6,51 @@ session_start();
 <?php
 
 //make connection here
-require 'conection.php'; 
+require 'conp.php'; 
+$m= $_SESSION["Name"];
+    $query = "select * from nurse where UserName ='$m'";
+    
+    
+           
+    $resultd = $conn->query($query);
+    
+    //echo "Error in ".$vql."<br>".$conn->error;
+    $x=null;
+    if($resultd->num_rows>0)
+    
+    {        
+    
+    while($row = $resultd->fetch_assoc())
+    
+    {
+    
+    
+    
+    
+    $x= $row["Nurse_ID"];
+    
+    
+    
+    
+    
+    }
+    
+    
+    }
+ $vql ="select * from nurse where Nurse_ID ='$x'";
+$resultx = $conn->query($vql);
+$y=null;
+ while($row = $resultx->fetch_assoc())
+   
+   {     
+     
+	  $y=$row["Hospital_ID"];
+   
+	 
+	  
+	  
+	}
+
 
 // Check connection
 if ($conn->connect_error) {
@@ -17,7 +61,7 @@ if ($conn->connect_error) {
 $nic = $_GET["nic"];
 
 // Fetch the donor info from the database
-$sql = "SELECT Donor_Id, Full_Name FROM donors WHERE NIC_Number='$nic'";
+$sql = "SELECT Donor_Id, Full_Name FROM donors WHERE NIC_Number='$nic' and Hospital_ID='$y'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
