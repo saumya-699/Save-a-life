@@ -1,7 +1,20 @@
 <?php
-
-// Start session
 session_start();
+include "config.php";
+if (isset($_SESSION["ID"])) {
+  include "config.php";
+  $m = $_SESSION["Name"];
+  $query = "SELECT * FROM warddoctor WHERE UserName ='$m'";
+  $result1 = $conn->query($query);
+
+  if ($result1->num_rows > 0) {
+    while ($row = $result1->fetch_assoc()) {
+      $x = $row["Name_With_Initials"];
+      $y = $row["WardDoctor_ID"];
+      $z= $row["Hospital_ID"];
+    }
+  }
+}
 ?>
 
 <html lang="en" >
@@ -28,122 +41,126 @@ session_start();
           <img src="assets/images/sidebar-bg.jpg" alt="sidebar background" />
         </div>
         <div class="sidebar-layout">
-          <div class="sidebar-header">
-            <div class="pro-sidebar-logo">
-              <div><img src="logo.png" alt="logo"></div>
-              <h5>Save A Life</h5>
-            </div>
-          </div>
-          <div class="sidebar-content">
-            <nav class="menu open-current-submenu">
-              <ul>
-                <li class="menu-header"></li>
-                <li class="menu-item">
-                  <a href="#">
-                    <span class="menu-icon">
-                      <i class="ri-home-fill"></i>
-                    </span>
-                    <span class="menu-title">Home</span>
-                    
-                  </a>
-                 </li>
-                <li class="menu-item">
-                  <a href="reg.php">
-                    <span class="menu-icon">
-                      <i class="ri-user-add-fill"></i>
-                    </span>
-                    <span class="menu-title">Register the Donors</span>
-                  </a>
-                  </li>
-                <li class="menu-item">
-                  <a href="add_medical.php">
-                    <span class="menu-icon">
-                      <i class="ri-heart-add-fill"></i>
-                    </span>
-                    <span class="menu-title">Add medical Details</span>
-                  </a>
-                  </li>
-                <li class="menu-item sub-menu">
-                  <a href="#">
-                    <span class="menu-icon">
-                      <i class="ri-folder-user-fill"></i>
-                    </span>
-                    <span class="menu-title">Donor Information</span>
-                  </a>
-                  <div class="sub-menu-list">
-                    <ul>
-                      <li class="menu-item">
-                        <a href="View_Personal.php">
-                          <span class="menu-title">Personal</span>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a href="View_med.php">
-                          <span class="menu-title">Medical</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-                <li class="menu-item">
-                  <a href="#">
-                    <span class="menu-icon">
-                      <i class="ri-file-text-fill"></i>
-                    </span>
-                    <span class="menu-title">Declaration Form</span>
-                  </a>
-                </li>
-
-                <li class="menu-item">
-                  <a href="start.php">
-                    <span class="menu-icon">
-                      <i class="ri-drop-fill"></i>
-                    </span>
-                    <span class="menu-title">Daily Blood Collection</span>
-                  </a>
-                  </li>
-
-                <li class="menu-item">
-                  <a href="donation_history.php">
-                    <span class="menu-icon">
-                      <i class="ri-history-line"></i>
-                    </span>
-                    <span class="menu-title">Donation History</span>
-                  </a>
-                  </li>
-                
-
-                <li class="menu-header" style="padding-top: 40px"><span>| </span></li>
-                <li class="menu-item">
-                  <a href="#">
-                    <span class="menu-icon">
-                      <i class="ri-user-line"></i>
-                    </span>
-                    <span class="menu-title">Profile</span> 
-                  </a>
-                <li class="menu-item">
-                  <a href="#">
-                    <span class="menu-icon">
-                      <i class="ri-notification-line"></i>
-                    </span>
-                    <span class="menu-title">Notifications</span>
-                  </a>
-                </li>
-                </li>
-                <li class="menu-item">
-                  <a href="#">
-                    <span class="menu-icon">
-                      <i class="ri-logout-box-r-line"></i>
-                    </span>
-                    <span class="menu-title">Log out</span>
-                  </a>
-                </li>
-                
-              </ul>
-            </nav>
+        <div class="sidebar-header">
+          <div class="pro-sidebar-logo">
+            <div><img src="logo.png" alt="logo"></div>
+            <h5>Save A Life</h5>
           </div>
         </div>
-      </aside>
+        <div class="sidebar-content">
+          <nav class="menu open-current-submenu">
+            <ul>
+              <li class="menu-header"><span></span></li>
+              <li class="menu-item">
+                <a href="see.php">
+                  <span class="menu-icon">
+                    <i class="ri-home-fill"></i>
+                  </span>
+                  <span class="menu-title">Home</span>
+
+                </a>
+                <div class="sub-menu-list">
+
+                </div>
+              </li>
+              <li class="menu-item">
+                <a href="Make blood request.php">
+                  <span class="menu-icon">
+                    <i class="ri-edit-box-fill"></i>
+                  </span>
+                  <span class="menu-title">Make Blood Request</span>
+                </a>
+                <div class="sub-menu-list">
+
+                </div>
+              </li>
+              <li class="menu-item">
+                <a href="Request History1.php">
+                  <span class="menu-icon">
+                    <i class="ri-history-line"></i>
+                  </span>
+                  <span class="menu-title">Request History</span>
+                </a>
+                <div class="sub-menu-list">
+
+                </div>
+              </li>
+
+
+              <li class="menu-header" style="padding-top: 40px"><span> </span></li>
+              <li class="menu-item">
+                <a href="profile.php">
+                  <span class="menu-icon">
+                    <i class="ri-user-line"></i>
+                  </span>
+                  <span class="menu-title">Profile</span>
+
+                </a>
+              </li>
+              <li class="menu-item sub-menu">
+                <a href="#">
+                  <span class="menu-icon">
+                    <i class="ri-notification-line"></i>
+                  </span>
+                  <?php
+
+                  $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$z' AND notifyView='0' AND (status='Available' OR status='Not Available')";
+
+                  $results = $conn->query($sql);
+
+                  if ($results->num_rows > 0) {
+                    $row = $results->fetch_assoc();
+                    $status = $row["countS"];
+                    if ($status > 0) {
+                      echo '<span class="icon-button__badge">' . $status . '</span>';
+                    }
+                  }
+
+                  ?>
+
+
+
+                  <span class="menu-title">Notifications</span>
+                </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Notifications.php">
+                        <span class="menu-title"> <?php
+
+                                                  $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$z' AND notifyView='0' AND (status='Available' OR status='Not Available')";
+
+                                                  $results = $conn->query($sql);
+
+                                                  if ($results->num_rows > 0) {
+                                                    $row = $results->fetch_assoc();
+                                                    $status = $row["countS"];
+                                                    if ($status > 0) {
+                                                      echo '<span class="icon-button__badge3">' . $status . '</span>';
+                                                    }
+                                                  }
+
+                                                  ?>Request Results</span>
+                      </a>
+
+                    </li>
+                  </ul>
+                </div>
+              </li>
+
+              <li class="menu-item">
+                <a href="logout.php">
+                  <span class="menu-icon">
+                    <i class="ri-logout-box-r-line"></i>
+                  </span>
+                  <span class="menu-title">Logout</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </aside>
       <div id="overlay" class="overlay"></div>
       <div class="layout">
         <main class="content">
@@ -214,6 +231,34 @@ session_start();
 <script src='https://unpkg.com/@popperjs/core@2'></script><script  src="./script.js"></script>
 
 </body>
+<style>
+  .icon-button__badge {
+    position: absolute;
+    top: 9px;
+    right: 226px;
+    width: 15px;
+    height: 18px;
+    background: red;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+  .icon-button__badge3 {
+    position: absolute;
+    top: 15px;
+    right: 245px;
+    width: 15px;
+    height: 18px;
+    background: red;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+  </style>
 </html>
 
 

@@ -13,7 +13,7 @@
 	}
 
     //connect with db
-    require 'conp.php';
+    require 'config.php';
 
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
@@ -21,7 +21,7 @@
 
     // Retrieve user information
     $username = $_SESSION['Name'];
-    $sql = "SELECT * FROM nurse WHERE UserName = '$username'";
+    $sql = "SELECT * FROM warddoctor WHERE UserName = '$username'";
     $result = $conn->query($sql);
 
     if ($result->num_rows == 1) {

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require 'conp.php';
+require 'config.php';
 
 if (isset($_POST['submit'])) {
     $oldpwd = $_POST['oldpwd'];
@@ -15,7 +15,7 @@ if (isset($_POST['submit'])) {
     }
 
     // Open the database connection
-    require 'conp.php';
+    require 'config.php';
     if (mysqli_connect_errno()) {
         die("Connection failed: " . mysqli_connect_error());
     }
@@ -40,14 +40,14 @@ if (isset($_POST['submit'])) {
                 // Password updated in the system_users table
 
                 // Prepare the UPDATE statement to change the password in the nurse table
-                $stmt = $conn->prepare("UPDATE nurse SET Password = ? WHERE UserName = ?");
+                $stmt = $conn->prepare("UPDATE warddoctor SET Password = ? WHERE UserName = ?");
                 $stmt->bind_param("ss", $newpwd, $_SESSION['Name']);
                 $stmt->execute();
 
                 if ($stmt->affected_rows == 1) {
                     // Password updated in both tables
                     $_SESSION['change-pwd'] = true;
-                    echo "<script>alert('Password updated successfully.'); window.location.href = 'update.php';</script>";
+                    echo "<script>alert('Password updated successfully.'); window.location.href = 'profile.php';</script>";
                     exit();
                 } else {
                     // Password update failed in the nurse table
