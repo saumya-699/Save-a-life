@@ -180,7 +180,7 @@ h1{
 					      height:50px;
                           width:100px;
 						  color:#FFF;
-						  margin-left:700px;
+						  margin-left:800px;
 						   border-radius:5px;
                            margin-top:20px;
                            margin-bottom: 10PX;
@@ -414,7 +414,7 @@ $y=null;
       <?php } ?>
     </table>
   <?php } else { ?>
-    <p><center>Donation details are sent.<center></p>
+    <p>Donation details are sent.</p>
   <?php } ?>
   <?php
 echo "
@@ -433,7 +433,8 @@ echo "
       
       $updateSqlSend= "UPDATE donation_records SET End_donation	='1'";
       $send=mysqli_query($conn,$updateSqlSend);
-       
+        // var_dump($bdate,$bnum);
+        // <input type='submit' name='$bnum' value='Send'>
 
 
     }?>
