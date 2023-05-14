@@ -36,11 +36,11 @@
 
     if ($conn->query($sql) === TRUE) {
         // Generate JavaScript popup message for success
-        echo '<script>alert("Profile updated successfully."); window.location.href = "update.php";</script>';
+        echo '<script>alert("Profile updated successfully."); window.location.href = "profile.php";</script>';
         exit();
     } else {
         // Generate JavaScript popup message for error
-        echo '<script>alert("Error updating profile: ' . $conn->error . '"); window.location.href = "update.php";</script>';
+        echo '<script>alert("Error updating profile: ' . $conn->error . '"); window.location.href = "profile.php";</script>';
         exit();
     }
 

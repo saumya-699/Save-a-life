@@ -30,10 +30,7 @@ if (isset($_SESSION["ID"])) {
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./update_profile.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
-  input[type="text"]:read-only, input[type="date"]:read-only{
-    background-color:rgba(255, 255, 255, 0.5);
-    color:rgba(0, 0, 0, 0.7);
-  }
+  
   .icon-button__badge {
       position: absolute;
       top: 7px;
