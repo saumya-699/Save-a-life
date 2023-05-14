@@ -397,9 +397,10 @@ session_start();
 
 <select id="ComponentDropdown" class="selectx">
   <option value="All">All Types</option>
-  
-  <option value="White Blood Cells">White</option>
-  <option value="Red Blood Cells">Red</option>
+  <option value="Red Cells">Red Cells</option>    
+                             <option value="White Cells">White Cells</option>
+                             <option value="Plasma">Plasma</option>
+                             <option value="Platelets">Platelets</option>
   
 </select>
 

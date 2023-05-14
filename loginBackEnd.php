@@ -67,7 +67,7 @@ if(isset($_POST["BtnSubmit"]))
 			 header("Location:Director/Home.php");}
 			 
 			 else {
-			 header("Location:Guestx/donar/doner_Information.php");}
+			 header("Location:Guest/donar/doner_Information.php");}
 			 
 			 
     }	 

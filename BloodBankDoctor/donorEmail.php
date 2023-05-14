@@ -415,7 +415,7 @@ session_start();
     $query =" SELECT * 
 FROM donation_records 
 JOIN donors ON donors.Donor_Id = donation_records.Donor_Id 
-WHERE donors.Hospital_ID = '$x' 
+WHERE donation_records.Hospital_ID = '$x' 
 AND DATE_ADD(donation_records.Donation_Date, INTERVAL 3 MONTH) = DATE(NOW())";
 //$query="select * from donation_records,donors where donors.Donor_Id =donation_records.Donor_Id and (donors.Hospital_ID='$x' AND DATE_ADD(donation_records.Donation_Date, INTERVAL 3 MONTH) = DATE(NOW()))";
 

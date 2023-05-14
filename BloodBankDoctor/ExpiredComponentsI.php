@@ -396,10 +396,10 @@ session_start();
 </select>
 
 <select id="ComponentDropdown" class="selectx">
-  <option value="All">Component</option>
-  <option value="Red"> Red</option>
-  <option value="White">White</option>
-  
+<option value="Red Cells">Red Cells</option>    
+      <option value="White Cells">White Cells</option>
+       <option value="Plasma">Plasma</option>
+    <option value="Platelets">Platelets</option>
 </select>
 
 <input type="date" id="dateInput" class="b1">

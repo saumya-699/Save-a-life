@@ -51,11 +51,10 @@ session_start();
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
- <link rel="stylesheet" href="StyleSearch.css"> 
+ <link rel="stylesheet" href="StyleSearchss.css"> 
  <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
  <link rel="stylesheet" href="StyleIcons.css"> 
  <link rel="stylesheet" href="./StyleSheetNotification.css">
- 
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -392,8 +391,8 @@ session_start();
 		
 		
 		  
-        </main>
-      <center><h1>Cross Matching Testing Result</h1></center>
+      
+      <h1>Cross Matching Testing Result</h1>
 <?php
 
 
@@ -518,6 +517,13 @@ $conn->close();
  
 ?>
 <style>
+   .z{
+
+// margin-left:50px;
+ margin-top:12px;
+ font-size: 25px;
+
+}
   .box1 {
     margin-left: 200px;
     margin-top: 150px;
