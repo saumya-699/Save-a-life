@@ -1,11 +1,23 @@
 <?php 
 session_start();
-
+require "conp.php";
 ?>
 
 
  <?php
    if(isset($_SESSION["ID"]))   {
+    $m = $_SESSION["Name"];
+    $query = "SELECT * FROM bloodbank_doctor WHERE UserName ='$m'";
+    $result1 = $conn->query($query);
+    $ID =null;
+     if($result1->num_rows > 0) {        
+      while($row = $result1->fetch_assoc()) {
+        $x = $row["Hospital_ID"];
+       $hid= $x;
+        $ID =$row["BloodBank_doctor_ID"];
+      }
+    }
+  
 	
 	
 ?>
@@ -23,7 +35,7 @@ session_start();
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="stylek.css">
 <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
  <link rel="stylesheet" href="StyleSearch.css"> 
-
+ <link rel="stylesheet" href="./StyleSheetNotification.css">
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -43,7 +55,7 @@ session_start();
               <ul>
                 <li class="menu-header"><span>  </span></li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="Home.php">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -144,22 +156,69 @@ session_start();
                     </ul>
                   </div>
                 </li>
-                <li class="menu-item">
-                  <a href="View_Donors_BI.php">
+                <li class="menu-item sub-menu">
+                  <a href="#">
                     <span class="menu-icon">
-                      <i class="ri-user-heart-fill"></i>
+                      <i class="ri-article-fill"></i>
                     </span>
                     <span class="menu-title">Donors</span>
                   </a>
-                 </li>
-                <li class="menu-item">
-                  <a href="ReportGeneration_BI.php">
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="View_Donors_BI.php">
+                          <span class="menu-title">View</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="donorEmail.php">
+                          <span class="menu-title">Send Non -Emergency Email</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+                
+                 <li class="menu-item sub-menu">
+                  <a href="#">
                     <span class="menu-icon">
-                      <i class="ri-file-chart-line"></i>
+                      <i class="ri-message-2-fill"></i>
                     </span>
                     <span class="menu-title">Reports</span>
                   </a>
-                 </li>
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="ReportGenerationStock.php">
+                          <span class="menu-title">Stock Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGenerationCrossMatching.php">
+                          <span class="menu-title">Cross Matching Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGenerationBlood.php">
+                          <span class="menu-title">Blood Request Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGeneration_BI.php">
+                          <span class="menu-title">Donation Details Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGeneration_Request.php">
+                          <span class="menu-title">External Requests Reports</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+
+
+
                 <li class="menu-header" style="padding-top: 40px"><span>  </span></li>
                 <li class="menu-item">
                   <a href="profileBI.php">
@@ -169,15 +228,119 @@ session_start();
                     <span class="menu-title">Profile</span>
                   </a>
                 </li>
-                <li class="menu-item">
-                  <a href="Notifications.php">
+                 <li class="menu-item sub-menu">
+                  <a href="#">
                     <span class="menu-icon">
                       <i class="ri-notification-line"></i>
                     </span>
+                    <?php
+
+                    $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$hid' and status ='Pending' and send_status='1'";
+
+                    $results = $conn->query($sql);
+
+                    if ($results->num_rows > 0) {
+                      $row = $results->fetch_assoc();
+                      $status = $row["countS"];
+                      if ($status > 0) {
+                        echo '<span class="icon-button__badge">' . $status . '</span>';
+                      }
+                    }
+
+                    ?>
+                    <?php
+
+                    $vql = "SELECT COUNT(countS) AS total_count FROM (
+                                    SELECT COUNT(*) AS countS FROM blood_testing_result WHERE send_status='1' and status = 'Pending' and Hospital_ID='$hid' GROUP by process_date,batch_number) AS subquery";
+
+                    $result = $conn->query($vql);
+
+                    if ($result->num_rows > 0) {
+                      $row = $result->fetch_assoc();
+                      $status = $row["total_count"];
+                      if ($status > 0) {
+                        echo '<span class="icon-button__badge1">' . $status . '</span>';
+                      }
+                    }
+
+                    ?>
+
+
+
+                    <?php
+                    $rql = "SELECT COUNT(*) AS countS FROM cross_matching_testing_result WHERE Hospital_ID = '$hid' AND Status = 'Pending' and send_status='1'";
+                    $result1 = $conn->query($rql);
+                    if ($result1->num_rows > 0) {
+                      $row = $result1->fetch_assoc();
+                      $status = $row["countS"];
+                      if ($status > 0) {
+                        echo '<span class="icon-button__badge2">' . $status . '</span>';
+                      }
+                    }
+                    ?>
+
                     <span class="menu-title">Notifications</span>
                   </a>
-                </li>
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="Notifications.php">
+                          <span class="menu-title"> <?php
 
+                                                    $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$hid' and status ='Pending' and send_status='1'";
+
+                                                    $results = $conn->query($sql);
+
+                                                    if ($results->num_rows > 0) {
+                                                      $row = $results->fetch_assoc();
+                                                      $status = $row["countS"];
+                                                      if ($status > 0) {
+                                                        echo '<span class="icon-button__badge3">' . $status . '</span>';
+                                                      }
+                                                    }
+
+                                                    ?>Blood Request</span>
+                        </a>
+                      <li class="menu-item">
+                        <a href="Notifications1.php">
+                          <span class="menu-title">
+                            <?php
+
+                            $vql = "SELECT COUNT(countS) AS total_count FROM (
+                            SELECT COUNT(*) AS countS FROM blood_testing_result WHERE send_status='1' and status = 'Pending' and Hospital_ID='$hid' GROUP by process_date,batch_number) AS subquery";
+
+                            $result = $conn->query($vql);
+
+                            if ($result->num_rows > 0) {
+                              $row = $result->fetch_assoc();
+                              $status = $row["total_count"];
+                              if ($status > 0) {
+                                echo '<span class="icon-button__badge4">' . $status . '</span>';
+                              }
+                            }
+
+                            ?>Blood Testing</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="Notifications2.php">
+                          <span class="menu-title">
+                            <?php
+                            $rql = "SELECT COUNT(*) AS countS FROM cross_matching_testing_result WHERE Hospital_ID = '$hid' AND Status = 'Pending' and send_status='1'";
+                            $result1 = $conn->query($rql);
+                            if ($result1->num_rows > 0) {
+                              $row = $result1->fetch_assoc();
+                              $status = $row["countS"];
+                              if ($status > 0) {
+                                echo '<span class="icon-button__badge5">' . $status . '</span>';
+                              }
+                            }
+                            ?>Cross Matching</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
                 <li class="menu-item">
                   <a href="logoutI.php">
                     <span class="menu-icon">
@@ -196,11 +359,9 @@ session_start();
       <div class="layout">
         <main class="content">
           <div>
-            <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a></div>
-             <!--add your content from here-->
-          
+            <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a></div> 
 		  
-		 
+           <h1>&nbsp; &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;  &nbsp; &nbsp; &nbsp;Identified Donors</h1>
 		
       <?php
  
@@ -218,7 +379,7 @@ session_start();
      $resultd = $conn->query($queryx);
      
      //echo "Error in ".$vql."<br>".$conn->error;
-     
+     $hid=null;
      if($resultd->num_rows>0)
      
      {        
@@ -232,6 +393,8 @@ session_start();
      
      $x= $row["BloodBank_doctor_ID"];
      
+     $hid= $row["Hospital_ID"];
+     
      
      
      
@@ -240,25 +403,27 @@ session_start();
      
      
      } 
-    $query="select * from blood_testing_result,donors where donors.Donor_Id =blood_testing_result.Donor_Id and (BloodBank_doctor_ID='$x' and (malaria_result='positive' or hiv_result='positive' or hbv_result='positive' or hcv_result='positive' or vdrl_result='positive'))"; //where BloodBank_doctor_ID='$x' and malaria_result='positive' or hiv_result='positive' or hbv_result='positive' or hbv_result='positive' or hbv_result='positive'
+
+     $date =date("Y-m-d");
+    $query="select * from blood_testing_result,donors where donors.Donor_Id =blood_testing_result.Donor_Id and blood_testing_result.status='Checked'  and  blood_testing_result.Email_sent =0 and(blood_testing_result.BloodBank_doctor_ID='$x' and (blood_testing_result.Hospital_ID = '$hid' and (blood_testing_result.process_date ='$date' and(malaria_result='Positive' or hiv_result='Positive' or hbv_result='Positive' or hcv_result='Positive' or vdrl_result='Positive'))))"; //where BloodBank_doctor_ID='$x' and malaria_result='positive' or hiv_result='positive' or hbv_result='positive' or hbv_result='positive' or hbv_result='positive'
     $result= $conn->query($query);
     
    if($result->num_rows>0)
  
    {     
     
-    echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Email"."</th>"."<th>"."Full Name"."</th>"."<th>"."Identified desease"."</th>"."</tr>";
+    echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Donor ID"."</th>"."<th>"."Test Result ID"."</th>"."<th>"."Full Name"."</th>"."</tr>";
     echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=3'>"."</td>"."</tr>";
         
      while($row = $result->fetch_assoc())
     
     {     
       
-       echo   "<tr>"."<td>".$row["Email"]."</td>"."<td>".$row["Full_Name"]."</td>"
+       echo   "<tr>"."<td>".$row["Donor_Id"]."</td>"."<td>".$row["test_result_id"]."</td>"."<td>".$row["Full_Name"]."</td>"
   ;
        
 
-  echo "<td>";
+ /* echo "<td>";
   if($row["malaria_result"]=='Positive')
   {
       echo "Malaria";
@@ -279,7 +444,7 @@ session_start();
   {
       echo "VDRL";
   }
-  echo "</td>";
+  echo "</td>";*/
   echo "</tr>";
        
        
@@ -294,7 +459,7 @@ session_start();
      echo "<form method='POST' action ='EmailDeBackEnd.php'>";
      $email_list = implode(",", $data_array);
      echo "<input type='hidden' name='emails[]' value='$email_list'>";
-     echo "<button type='submit' name='send' id='btn' class='z'>Send</button>";
+     echo "<button type='submit' name='send'  value = 'btn' class='z'> <span style='color: white;'>Send</span></button>";
      echo "</form>";
     
  
@@ -309,7 +474,8 @@ session_start();
   else
  
   {
-   echo "Error in ".$query."<br>".$conn->error;
+    echo "<center>No results<center>";
+   //echo "Error in ".$query."<br>".$conn->error;
  
   //echo "no results";
  
@@ -325,23 +491,33 @@ session_start();
 
 <style>
 .z{
-   font-size:20px;
-   margin-top:50px;
-   margin-left:850px;
+   font-size:600px;
+   margin-top:100px;
+   margin-right:120px;
+   margin-left:780px;
    height:47px;					   
    border: none;
                  //background-color:#F35050;
                  //width: 100%;
 background: #4082f5;
 //text-transform: uppercase;
-// padding: 12px;
+ padding: 1px;
 cursor: pointer;
 box-shadow: 0px 10px 40px 0px rgba(17, 97, 237, 0.4);
-font-weight: 700;
+font-weight: 500;
 font-size: 20px;	
+width:110px;
+height:40px;
 border-radius:30px;
+
 }
 
+table{
+
+margin-top:-200px;
+margin-bottom:30px;
+
+}
 </style>
           
         </main>   </div>

@@ -1,8 +1,20 @@
+<?php 
+session_start();
 
+?>
+
+
+ <?php
+   if(isset($_SESSION["ID"]))   {
+	
+    require "conp.php";
+    
+     			
+?>
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Side bar</title>
+  <title>View medical details</title>
   <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
 <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
 <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./style.css">
@@ -148,36 +160,57 @@
             <!-- add your content from here -->
            
 
-            <form method="post" action="SearchWardD.php">
- 
-<div class="ta">
-
-
-<font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
- <option value="Donor_Id" selected><b> Donor Id</b></option>
-                             <option value="Donor_Name"><b> Donor Name</b></option>
-                             <option value="NIC"><b>NIC</b></option>
-                             <option value="Blood_Group"><b>Blood Group</b></option>
-                             <option value="Gender"><b>Gender</b></option>
-                             <option value="province"><b>Provicel</b></option>
-            		            <option value="postal"><b> Postal Code</b></option>
-                             </select>
-
-
-
-<input type="text" placeholder="type here" name="data" id="data" class="box">
-
- <button type="submit"  name="BtnSubmit" id="search" class="b1" ><b>Search</b></button>
-
-</div>
-
 </form>
 <?php
 
 
-require 'conection.php';
+require 'conp.php';
+
+$m= $_SESSION["Name"];
+    $query = "select * from nurse where UserName ='$m'";
     
-$sql= "select * from pre_medical" ;
+    
+           
+    $resultd = $conn->query($query);
+    
+    //echo "Error in ".$vql."<br>".$conn->error;
+    $x=null;
+    if($resultd->num_rows>0)
+    
+    {        
+    
+    while($row = $resultd->fetch_assoc())
+    
+    {
+    
+    
+    
+    
+    $x= $row["Nurse_ID"];
+    
+    
+    
+    
+    
+    }
+    
+    
+    }
+ $vql ="select * from nurse where Nurse_ID ='$x'";
+$resultx = $conn->query($vql);
+$y=null;
+ while($row = $resultx->fetch_assoc())
+   
+   {     
+     
+	  $y=$row["Hospital_ID"];
+   
+	 
+	  
+	  
+	}
+    
+$sql= "select * from pre_medical where Hospital_ID=$y" ;
 $result = $conn->query($sql);
 
 if($result->num_rows>0)
@@ -248,3 +281,6 @@ $conn->close();
 
 </body>
 </html>
+<?php
+}
+?>

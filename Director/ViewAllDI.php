@@ -69,7 +69,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateBBI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -88,7 +88,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateMLTI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -107,7 +107,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateWardDoctorI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -126,7 +126,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateNurseI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -228,114 +228,107 @@ session_start();
   <div class="container">
     <div class="wrap">
       <div class="headings">
-        <center><span><h1>Add Ward Doctor</h1></span><center>
+        <center><span><h1>Donor</h1></span><center>
       
       </div>
   <?php
 
 
 require 'conp.php';
-if(isset($_POST['view']))  
+if(isset($_POST['view']))  {
 
-{	
-   $did=$_POST['WardDoctor_ID'];
-   $query="select * from warddoctor where WardDoctor_ID='$did'";
-   $result= $conn->query($query);
-   
-  if($result->num_rows>0)
+  $did=$_POST['Donor_Id'];
+  $query="select * from donors where Donor_Id='$did'";
+  $result= $conn->query($query);
+  
+  
+ if($result->num_rows>0)
 
+ {     
+  
+
+      
+   while($row = $result->fetch_assoc())
+  
   {     
-   
-
-       
-    while($row = $result->fetch_assoc())
-   
-   {     
-     
-	 // echo   $row["WardDoctor_ID"]."</td>"."<td>".$row["Name_With_Initials"]."</td>"."<td>".$row["HospitalName"]."</td>"."<td>".$row["Specialization"]."</td>"."<td>".$row["SLMC_Number"]."</td>"."<td>".$row["Email"]."</td>"."<td>".$row["ContactNumber"]."</td>";
-	   
-	   
-echo "<div class='container frm-login'>
-<div class='card frm-form'>
-    <div class='card-body frm-body'>
-
-     <form method='post' action='UpdateWardDoctorBackEnd.php'>
-        
-               <center> <b>  <h1 class='txt-l'>Update Ward doctor</h1></b></center>
-						   
-						  
-						               
-                              
-                               <input type='hidden' value=".$row["WardDoctor_ID"]." name='WardDoctor_ID' id='WardDoctor_ID' class='box'>
-                              <label for='exampleFormControlInput1' class='form-label lbl star'>Name with Initials</label> 
-                             <input type='text' value=".$row["Name_With_Initials"]." name='Name' id='name' class='form-control txt-input'>
-							 
-                             <label for='exampleFormControlInput1' class='form-label lbl star'>Hospital name </label>
-                             <select name= 'hospital' class='form-control txt-input' required>
-                            
-                             <option value=" . $row["HospitalName"] . " selected> " . $row["HospitalName"] . " </option>
-
-                             </select> 
-							
-							        <br>
-                             <label for='exampleFormControlInput1' class='form-label lbl star'>Specialization </label><select id='Specialization' name='Specialization' class='form-control txt-input'>
-                             <option value=".$row["Specialization"]."> ".$row["Specialization"]." </option>
-                             
-                         
     
-                             </select>
-						
-                           
-                            <label for='exampleFormControlInput1' class='form-label lbl star'>SLMC Number</label>
-                             <input type='text' value=".$row["SLMC_Number"]." name='SLMC' id='slmc' class='form-control txt-input'>
-        
+   //echo  "<tr>"."<td>".$row["Donor_Id"]."</td>"."<td>".$row["Prefix"].".".$row["Full_Name"]."</td>"."<td>".$row["Initials"]."</td>"."<td>".$row["NIC_Number"]."</td>"."<td>".$row["DOB"]."</td>"."<td>".$row["Address"]."</td>"."<td>".$row["province"]."</td>"."<td>".$row["postal"]."</td>"."<td>".$row["Gender"]."</td>"."<td>".$row["Email"]."</td>"."<td>".$row["mobile_number"]."<br/>".$row["land_number"]."</td>";
+ 
+    
+echo "
+
+                              <label for='exampleFormControlInput1' class='form-label lbl star'>Donor Id</label> 
+                              <input type='text' value=".$row["Donor_Id"]." name='id'  class='form-control txt-input' readonly>
+                     
+                              <label for='exampleFormControlInput1' class='form-label lbl star'>Name with Initials</label> 
+                              <input type='text' value=".$row["Initials"]." name='Name' id='name' class='form-control txt-input' readonly>
+                       
                               
-                             <label for='exampleFormControlInput1' class='form-label lbl star'>Email</label>
-                             <input type='text' value=".$row["Email"]." name='Email' class='form-control txt-input' id='Email' >
-        
+                            
+                             <label for='exampleFormControlInput1' class='form-label lbl star'>NIC Number</label>
+                              <input type='text' value=".$row["NIC_Number"]." name='NIC' id='slmc' class='form-control txt-input'readonly>
 
-                             <label for='exampleFormControlInput1' class='form-label lbl star'>Contact Number</label>
-                            <input type='text' value=".$row["ContactNumber"]." name='contactNumber'  class='form-control txt-input' id='contact' >
-				
-                            <label for='exampleFormControlInput1' class='form-label lbl star'>User Name</label>
-                             <input type='text' value=".$row["UserName"]." name='Uname' id='Uname' class='form-control txt-input'>
+                              <label for='exampleFormControlInput1' class='form-label lbl star'>DOB</label>
+                              <input type='text' value=".$row["DOB"]." name='NIC' id='slmc' class='form-control txt-input' redonly>
+         
+                               
+                              <label for='exampleFormControlInput1' class='form-label lbl star'>Address</label>
+                              <input type='text' value=".$row["Address"]." name='Address' class='form-control txt-input'  readonly>
 
-                            <label for='exampleFormControlInput1' class='form-label lbl star'>Password</label>
-                            <input type='password' value=".$row["Password"]." name='password'  class='form-control txt-input'  id='pw' required> 
+                              <label for='exampleFormControlInput1' class='form-label lbl star'>Province</label>
+                              <input type='text' value=".$row["province"]." name='Address' class='form-control txt-input'  readonly >
 
-                            <div class='row btn-buttons'>
-                        
-                            <div class='col btn-but'> <input type='submit' name='BtnSubmit' value='Update' class='btn btn-danger btn-reg'></div>
-                            <div class='col btn-but'> <input type='submit' name='btnCancel' value='Cancel' class='btn btn-secondary btn-can'></div>
-                           </div>
-  
-      </form> 
-  </div>
-  </div>
-  </div>";
-  
-  
-	   
-		 
-			 
-	}
-	
-	
-	
-	
+                              <label for='exampleFormControlInput1' class='form-label lbl star'>Postal</label>
+                              <input type='text' value=".$row["postal"]." name='Address' class='form-control txt-input' readonly >
+
+                              <label for='exampleFormControlInput1' class='form-label lbl star'>Gender </label>
+                              <select name= 'Gender' class='form-control txt-input' readonly>
+                             
+                              <option value=" . $row["Gender"] . " selected> " . $row["Gender"] . " </option>
+ 
+                              </select> 
+
+                              <label for='exampleFormControlInput1' class='form-label lbl star'>E-mail</label>
+                              <input type='text' value=".$row["Email"]." name='Address' class='form-control txt-input' readonly >
+
+                              <label for='exampleFormControlInput1' class='form-label lbl star'>Mobile Number</label>
+                              <input type='text' value=".$row["mobile_number"]." name='Address' class='form-control txt-input' readonly >
+         
+ 
+                              <label for='exampleFormControlInput1' class='form-label lbl star'>Land Number</label>
+                             <input type='text' value=".$row["land_number"]." name='contactNumber'  class='form-control txt-input' readonly >
+             
+                  
+ 
+                             <div class='row btn-buttons'>
+                         
+                             
+                             <div class='col btn-but'> <input type='submit' name='btnCancel' value='Cancel' class='b2' onclick='history.back()'></div>
+                            </div>
+                            
+     </form> 
+  ";
+ 
+    
+    
+      
+ }
+ 
+ 
+ 
+ 
 }	
 
- else
+else
 
- {
-  //echo "Error in ".$query."<br>".$conn->error;
+{
+ echo "Error in ".$query."<br>".$conn->error;
 
- echo "no results";
-
- }
+echo "no results";
 
 }
 
+   }
 $conn->close();
 ?>
 

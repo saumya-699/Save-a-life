@@ -13,43 +13,6 @@ require 'phpmailer/src/PHPMailer.php';
 
 require 'phpmailer/src/SMTP.php';
 //require 
-if(isset($_POST["BtnSubmit"])){
-   
-$mail = new PHPMailer(true);
-$mail->isSMTP();
-$mail->Host = 'smtp.gmail.com';
-$mail ->SMTPAuth = true;
-$mail->Username = 'wmadushi49@gmail.com';
-$mail->Password = 'zswherapcjuvbtgr';
-$mail->SMTPSecure ='ssl';
-$mail->Port = 465;
-
-
-$mail->setFrom('wmadushi49@gmail.com');
-
-$mail->addAddress($_POST["Email"]);
-$mail->isHTML(true);
-
-$mail->Subject=$_POST["subject"];
-$mail->Body = $_POST["message"];
-
-$mail->send();
-
-echo '<script type="text/javascript">';
-echo 'alert("Successfully added and sent the email");';
-
- echo 'window.location.href="Home.php";';
-echo '</script>';
-
-
-
-
-
-
-}
-
-
-
 
 
 
@@ -73,7 +36,28 @@ if(isset($_POST['BtnSubmit']))
 	$password=$_POST["password"];
     $m= $_SESSION["Name"];
 
-
+    $check1= "select * from system_users where UserName ='$Email'";
+    $resultc1 = $conn->query($check1);
+    if(!empty($resultc1) && $resultc1->num_rows>0)
+ 
+    {
+ 
+ 
+     echo '<script type="text/javascript">';
+     echo 'alert("Email already exists");';
+     
+      echo 'window.location.href="Add_bbI.php";';
+     echo '</script>';
+ 
+ 
+ 
+    }
+ 
+     
+       
+          else
+          {
+ 
 	$query = "select * from director where UserName ='$m'";
 
 
@@ -144,15 +128,41 @@ $jql="insert into system_users(User_ID,UserName,Password,Type)VALUES(' ','$Uname
 if($conn->query($jql))
      {
       
-	     echo '<script type="text/javascript">';
-		 //echo 'alert("Ad successfully");';
-         
-	//echo 'window.location.href="Add_bbI.php";';
-		 echo '</script>';
+	  
+	  $sql="insert into BloodBank_doctor(BloodBank_doctor_ID,Name_With_Initials,Hospital_ID,HospitalName,SLMC_Number,Email,ContactNumber,UserName,Password,AppointmentDate,Remark,Director_ID)VALUES(' ','$Name','$y','$HName','$SLMC','$Email','$contactNumber','$Uname','$password','$DOA','Added','$x')";
+    if($conn->query($sql))
+     {
+      
+	      
+   $mail = new PHPMailer(true);
+   $mail->isSMTP();
+   $mail->Host = 'smtp.gmail.com';
+   $mail ->SMTPAuth = true;
+   $mail->Username = 'wmadushi49@gmail.com';
+   $mail->Password = 'zswherapcjuvbtgr';
+   $mail->SMTPSecure ='ssl';
+   $mail->Port = 465;
+   
+   
+   $mail->setFrom('wmadushi49@gmail.com');
+   
+   $mail->addAddress($_POST["Email"]);
+   $mail->isHTML(true);
+   
+   $mail->Subject=$_POST["subject"];
+   $mail->Body = $_POST["message"];
+   
+   $mail->send();
+   
+   echo '<script type="text/javascript">';
+   echo 'alert("Successfully added and sent the email");';
+   
+    echo 'window.location.href="Home.php";';
+   echo '</script>';
 
-	  
-	  
-	  
+
+
+
      }
      else
 	 {
@@ -169,17 +179,7 @@ if($conn->query($jql))
 		 
 	 }
 	 
-    $sql="insert into BloodBank_doctor(BloodBank_doctor_ID,Name_With_Initials,Hospital_ID,HospitalName,SLMC_Number,Email,ContactNumber,UserName,Password,AppointmentDate,RetiringDate,Remark,Director_ID)VALUES(' ','$Name','$y','$HName','$SLMC','$Email','$contactNumber','$Uname','$password','$DOA','','Added','$x')";
-    if($conn->query($sql))
-     {
-      
-	     echo '<script type="text/javascript">';
-		 //echo 'alert("Added successfully");';
-         
-	//echo 'window.location.href="Add_bbI.php";';
-		 echo '</script>';
-
-	  
+   
 	  ?>
 	  
 	  	 
@@ -397,16 +397,7 @@ if($conn->query($jql))
 		  
 		  
 		  
-	 <div class="container-shadow">
-  </div>
-  <div class="container">
-    <div class="wrap">
-     
-   <div class="headings">
-       <span><h1>Email</h1></span>
-      
-      </div>
-		
+	 
 		<style>
 textarea {
   width: 100%;
@@ -490,7 +481,7 @@ echo "
  
 	
 }
- 
+}
 $conn->close();
 
 ?>

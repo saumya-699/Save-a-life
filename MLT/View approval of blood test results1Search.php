@@ -143,13 +143,32 @@ if (isset($_SESSION["ID"])) {
                 </div>
               </li>
 
-              <li class="menu-item">
-                <a href="Report.php">
+              <li class="menu-item sub-menu">
+                <a href="#">
                   <span class="menu-icon">
-                    <i class="ri-file-chart-line"></i>
+                    <i class="ri-file-edit-fill"></i>
                   </span>
                   <span class="menu-title">Reports</span>
                 </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Report.php">
+                        <span class="menu-title">Blood Testing Report</span>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="Report1.php">
+                        <span class="menu-title">Cross Matching Report</span>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="ReportGenerationStock.php">
+                        <span class="menu-title">Blood Stock Report</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
 
 
@@ -425,6 +444,78 @@ if (isset($_SESSION["ID"])) {
 
 
               }
+              .icon-button__badge {
+              position: absolute;
+              top: 7px;
+              right: 220px;
+              width: 15px;
+              height: 18px;
+              background: red;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
+
+
+
+            .icon-button__badge1 {
+              position: absolute;
+              top: 0;
+              right: 228;
+              width: 15px;
+              height: 18px;
+              background: green;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
+
+            .icon-button__badge2 {
+              position: absolute;
+              top: 4px;
+              right: 239;
+              width: 15px;
+              height: 18px;
+              background: purple;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
+
+            .icon-button__badge3 {
+              position: absolute;
+              top: 15;
+              right: 235px;
+              width: 15px;
+              height: 18px;
+              background: red;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
+
+
+            .icon-button__badge5 {
+              position: absolute;
+              top: 115;
+              right: 235px;
+              width: 15px;
+              height: 18px;
+              background: purple;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
 
 
               .ta {

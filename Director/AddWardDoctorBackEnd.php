@@ -12,52 +12,8 @@ require 'phpmailer/src/PHPMailer.php';
 
 require 'phpmailer/src/SMTP.php';
 //require 
-if(isset($_POST["BtnSubmit"])){
-   
-$mail = new PHPMailer(true);
-$mail->isSMTP();
-$mail->Host = 'smtp.gmail.com';
-$mail ->SMTPAuth = true;
-$mail->Username = 'wmadushi49@gmail.com';
-$mail->Password = 'zswherapcjuvbtgr';
-$mail->SMTPSecure ='ssl';
-$mail->Port = 465;
-
-
-$mail->setFrom('wmadushi49@gmail.com');
-
-$mail->addAddress($_POST["Email"]);
-$mail->isHTML(true);
-
-$mail->Subject=$_POST["subject"];
-$mail->Body = $_POST["message"];
-
-$mail->send();
-
-echo '<script type="text/javascript">';
-echo 'alert("Successfully added and sent the email");';
-
- echo 'window.location.href="Home.php";';
-echo '</script>';
-
-
-
-
-
-
-}
-
-
-
-
-
 
 ?>
-<?php 
-session_start();
-
-?>
-
 <?php
 
 require 'conp.php';            //make connection here
@@ -75,6 +31,27 @@ if(isset($_POST['BtnSubmit']))
 	$password=$_POST["password"];
 	$m= $_SESSION["Name"];
 
+  $check1= "select * from system_users where UserName ='$Email'";
+  $resultc1 = $conn->query($check1);
+  if(!empty($resultc1) && $resultc1->num_rows>0)
+
+  {
+
+
+   echo '<script type="text/javascript">';
+   echo 'alert("Email already exists");';
+   
+    echo 'window.location.href="AddWardDoctorI.php";';
+   echo '</script>';
+
+
+
+  }
+
+   
+     
+        else
+        {
 
 	$query = "select * from director where UserName ='$m'";
 
@@ -143,16 +120,46 @@ $jql="insert into system_users(User_ID,UserName,Password,Type)VALUES('','$Uname'
 if($conn->query($jql))
 {
  
-	echo '<script type="text/javascript">';
-	//echo 'alert("user successfully");';
 	
-	// echo 'window.location.href="AddWardDoctorI.php";';
-	echo '</script>';
+ 
+ 
+ 
+  $sql="insert into warddoctor(WardDoctor_ID,Name_With_Initials,Hospital_ID,HospitalName,Specialization,SLMC_Number,Email,ContactNumber,UserName,Password,AppointmentDate,Remark,Director_ID)VALUES(' ','$Name','$y','$HName','$Specialization','$SLMC','$Email','$contactNumber','$Uname','$password','$DOA','Added','$x')";
+  if($conn->query($sql))
+   {
+         
+$mail = new PHPMailer(true);
+$mail->isSMTP();
+$mail->Host = 'smtp.gmail.com';
+$mail ->SMTPAuth = true;
+$mail->Username = 'wmadushi49@gmail.com';
+$mail->Password = 'zswherapcjuvbtgr';
+$mail->SMTPSecure ='ssl';
+$mail->Port = 465;
+
+
+$mail->setFrom('wmadushi49@gmail.com');
+
+$mail->addAddress($_POST["Email"]);
+$mail->isHTML(true);
+
+$mail->Subject=$_POST["subject"];
+$mail->Body = $_POST["message"];
+
+$mail->send();
+
+echo '<script type="text/javascript">';
+echo 'alert("Successfully added and sent the email");';
+
+ echo 'window.location.href="Home.php";';
+echo '</script>';
 
  
- 
- 
-}
+
+  
+  
+  
+   }
 else
 {
 	
@@ -167,20 +174,7 @@ else
 
 	
 }
-    $sql="insert into warddoctor(WardDoctor_ID,Name_With_Initials,Hospital_ID,HospitalName,Specialization,SLMC_Number,Email,ContactNumber,UserName,Password,AppointmentDate,RetiringDate,Remark,Director_ID)VALUES(' ','$Name','$y','$HName','$Specialization','$SLMC','$Email','$contactNumber','$Uname','$password','$DOA','','Added','$x')";
-    if($conn->query($sql))
-     {
-      
-	     echo '<script type="text/javascript">';
-		// echo 'alert("Added successfully");';
-       //  echo 'window.location.href="AddWardDoctorI.php";';
-	
-		 echo '</script>';
-
-	  
-	  
-	  
-     }
+   
 	 
 	 ?>
 	 
@@ -427,14 +421,7 @@ textarea {
 <?php
 //Srequire 'conp.php';
 $date =date("Y/m/d");
-echo "
 
-    
-     <form method='post' action='index.php' id='FormName'>
-        
-                            ";
-						   
-                              
                               
                              
 
@@ -488,7 +475,8 @@ echo "
  
 		 
 	 }
-	 
+  }
+}
  //  echo "Error in ".$sql."<br>".$conn->error;
  
  

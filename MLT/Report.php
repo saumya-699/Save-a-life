@@ -1,3 +1,21 @@
+<?php
+session_start();
+?>
+
+<?php
+if (isset($_SESSION["ID"])) {
+  include "config.php";
+  $m = $_SESSION["Name"];
+  $date = date("Y/m/d");
+  $query = "SELECT * FROM mlt WHERE UserName ='$m'";
+  $result1 = $conn->query($query);
+
+  if ($result1->num_rows > 0) {
+    while ($row = $result1->fetch_assoc()) {
+      $y=$row["Hospital_ID"];
+
+    }
+  }}?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,8 +28,8 @@
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="./stylek2.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 
 </head>
 
@@ -127,15 +145,33 @@
                 </div>
               </li>
 
-              <li class="menu-item">
-                <a href="Report.php">
+              <li class="menu-item sub-menu">
+                <a href="#">
                   <span class="menu-icon">
-                    <i class="ri-file-chart-line"></i>
+                    <i class="ri-file-edit-fill"></i>
                   </span>
                   <span class="menu-title">Reports</span>
                 </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Report.php">
+                        <span class="menu-title">Blood Testing Report</span>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="Report1.php">
+                        <span class="menu-title">Cross Matching Report</span>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="ReportGenerationStock.php">
+                        <span class="menu-title">Blood Stock Report</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
-
 
               <li class="menu-header" style="padding-top: 40px"><span> </span></li>
               <li class="menu-item">
@@ -147,14 +183,86 @@
 
                 </a>
               </li>
-              <li class="menu-item">
+              <li class="menu-item sub-menu">
                 <a href="#">
                   <span class="menu-icon">
                     <i class="ri-notification-line"></i>
                   </span>
-                  <span class="menu-title">Notification</span>
+                  <?php
 
+                  $sql = "SELECT COUNT(countS) AS total_count FROM (
+                    SELECT COUNT(*) AS countS FROM donation_records WHERE Hospital_ID='$y' and End_donation ='1' and AddStatus='0' GROUP by Batch,Donation_date) AS subquery";
+
+                  $results = $conn->query($sql);
+
+                  if ($results->num_rows > 0) {
+                    $row = $results->fetch_assoc();
+                    $status = $row["total_count"];
+                    if ($status > 0) {
+                      echo '<span class="icon-button__badge">' . $status . '</span>';
+                    }
+                  }
+
+                  ?>
+
+
+
+
+                  <?php
+                  $rql = "SELECT COUNT(*) AS countS FROM blood_request WHERE Hospital_ID = '$y' AND status='Available' and CrossMatching_Add='0'";
+                  $result1 = $conn->query($rql);
+                  if ($result1->num_rows > 0) {
+                    $row = $result1->fetch_assoc();
+                    $status = $row["countS"];
+                    if ($status > 0) {
+                      echo '<span class="icon-button__badge2">' . $status . '</span>';
+                    }
+                  }
+                  ?>
+                  <span class="menu-title">Notifications</span>
                 </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Notifications.php">
+                        <span class="menu-title"> <?php
+
+                                                  $sql = "SELECT COUNT(countS) AS total_count FROM (
+                                                 SELECT COUNT(*) AS countS FROM donation_records WHERE Hospital_ID='$y' and End_donation ='1' and AddStatus='0' GROUP by Batch,Donation_date) AS subquery";
+
+                                                  $results = $conn->query($sql);
+
+                                                  if ($results->num_rows > 0) {
+                                                    $row = $results->fetch_assoc();
+                                                    $status = $row["total_count"];
+                                                    if ($status > 0) {
+                                                      echo '<span class="icon-button__badge3">' . $status . '</span>';
+                                                    }
+                                                  }
+
+                                                  ?>
+
+                          <span>Donation</span>
+                      </a>
+
+                    <li class="menu-item">
+                      <a href="Notifications1.php">
+                        <span class="menu-title">
+                          <?php
+                          $rql = "SELECT COUNT(*) AS countS FROM blood_request WHERE Hospital_ID = '$y' AND status='Available' and CrossMatching_Add='0'";
+                          $result1 = $conn->query($rql);
+                          if ($result1->num_rows > 0) {
+                            $row = $result1->fetch_assoc();
+                            $status = $row["countS"];
+                            if ($status > 0) {
+                              echo '<span class="icon-button__badge5">' . $status . '</span>';
+                            }
+                          }
+                          ?>Cross Matching Testing</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
               <li class="menu-item">
                 <a href="logout.php">
@@ -183,31 +291,34 @@
             <div class="wrap">
               <div class="headings">
                 <center>
-                  <h1>Report Generation</h1>
+                  <h1>Blood Testing Report Generation</h1>
                   <center>
               </div>
-              <form action="create.php " method="POST">
+              <form action="download.php" method="POST">
 
 
 
-                <label for="exampleFormControlInput1 " class="form-label lbl star ">Report name</label>
-                <select name="blood_group" id=" " class="form-control txt-input " required="">
+                <label for="exampleFormControlInput1 " class="form-label lbl star ">Filter By Blood Group</label>
+                <select name="blood_group" id="" class="form-control txt-input " required="">
                   <option value=" " diabled> Select </option>
-                  <option value="xxxx">Blood Test Report</option>
-                  <option value="xxxx">Approval Blood Report</option>
-
+                  <option value="All">All</option>
+                  <option value="O-">O-</option>
+                  <option value="O+">O+</option>
+                  <option value="A-">A-</option>
+                  <option value="A+">A+</option>
+                  <option value="B-">B-</option>
+                  <option value="B+">B+</option>
+                  <option value="AB-">AB-</option>
+                  <option value="AB+">AB+</option>
                 </select>
 
-               
 
-            
 
-                <label for="exampleFormControlInput1 " class="form-label lbl star " name="time_period">Time period (MM/DD/YYYY)</label>
-                <div class="input-group mb-4 ">
-                  &nbsp; &nbsp;<font size="2px"> From </font> &nbsp; <input type="date" name="expected_date" placeholder="Expected_date" required="" min="<?= date('Y-m-d') ?>">
-                  &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; <font size="2px">To </font> &nbsp;<input type="date" name="expected_date" placeholder="Expected_date" required="" min="<?= date('Y-m-d') ?>">
+                <label for="exampleFormControlInput1" class="form-label lbl star"> Time period</label>
+                &nbsp; &nbsp;&nbsp; &nbsp;From &nbsp;<input type="date" placeholder="From" name="From" id="From" class="yu">&nbsp;&nbsp;
+                &nbsp; &nbsp;To &nbsp;<input type="date" placeholder="To" name="To" id="To" class="yu"><br><br><br>
 
-                </div>
+
                 <div class="buttons ">
                   <button class="b1" name="submit" value="submit">
                     <font size="2px">Generate</font>
@@ -242,14 +353,87 @@
 
     .container {
       position: absolute;
-      height: 650px;
-      
+      height: 700px;
+
       box-shadow: 0px 0px 50px -20px #000;
     }
 
     .buttons {
       margin-top: 20px;
     }
+    .icon-button__badge {
+              position: absolute;
+              top: 7px;
+              right: 220px;
+              width: 15px;
+              height: 18px;
+              background: red;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
+
+
+
+            .icon-button__badge1 {
+              position: absolute;
+              top: 0;
+              right: 228;
+              width: 15px;
+              height: 18px;
+              background: green;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
+
+            .icon-button__badge2 {
+              position: absolute;
+              top: 4px;
+              right: 239;
+              width: 15px;
+              height: 18px;
+              background: purple;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
+
+            .icon-button__badge3 {
+              position: absolute;
+              top: 15;
+              right: 235px;
+              width: 15px;
+              height: 18px;
+              background: red;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
+
+
+            .icon-button__badge5 {
+              position: absolute;
+              top: 115;
+              right: 235px;
+              width: 15px;
+              height: 18px;
+              background: purple;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
+
   </style>
 </body>
 

@@ -1,0 +1,17 @@
+[11-May-2023 13:19:04 Europe/Berlin] PHP Fatal error:  Uncaught PHPMailer\PHPMailer\Exception: SMTP Error: data not accepted. in C:\xampp\htdocs\Save-a-life\BloodBankDoctor\phpmailer\src\PHPMailer.php:2051
+Stack trace:
+#0 C:\xampp\htdocs\Save-a-life\BloodBankDoctor\phpmailer\src\PHPMailer.php(1678): PHPMailer\PHPMailer\PHPMailer->smtpSend('Date: Thu, 11 M...', 'You have been b...')
+#1 C:\xampp\htdocs\Save-a-life\BloodBankDoctor\phpmailer\src\PHPMailer.php(1516): PHPMailer\PHPMailer\PHPMailer->postSend()
+#2 C:\xampp\htdocs\Save-a-life\BloodBankDoctor\EmailDeBackEnd.php(41): PHPMailer\PHPMailer\PHPMailer->send()
+#3 {main}
+  thrown in C:\xampp\htdocs\Save-a-life\BloodBankDoctor\phpmailer\src\PHPMailer.php on line 2051
+[13-May-2023 12:56:03 Europe/Berlin] PHP Notice:  Undefined variable: conn in C:\xampp\htdocs\Save-a-life\BloodBankDoctor\EmailDeBackEnd.php on line 50
+[13-May-2023 12:56:03 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in C:\xampp\htdocs\Save-a-life\BloodBankDoctor\EmailDeBackEnd.php:50
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\Save-a-life\BloodBankDoctor\EmailDeBackEnd.php on line 50
+[13-May-2023 12:56:03 Europe/Berlin] PHP Notice:  Undefined variable: conn in C:\xampp\htdocs\Save-a-life\BloodBankDoctor\EmailDeBackEnd.php on line 50
+[13-May-2023 12:56:03 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in C:\xampp\htdocs\Save-a-life\BloodBankDoctor\EmailDeBackEnd.php:50
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\Save-a-life\BloodBankDoctor\EmailDeBackEnd.php on line 50

@@ -1,66 +1,61 @@
-<?php 
+<?php
 session_start();
 
 ?>
 
 
- <?php
-   if(isset($_SESSION["ID"]))   {
-	  require "conp.php";
-	  $m= $_SESSION["Name"];
-    $query = "select * from bloodbank_doctor where UserName ='$m'";
-    
-    
-           $x=null;
-    $resultd = $conn->query($query);
-    
-    //echo "Error in ".$vql."<br>".$conn->error;
-    
-    if($resultd->num_rows>0)
-    
-    {        
-    
-    while($row = $resultd->fetch_assoc())
-    
-    {
-    
-    
-    
-    
-    $x= $row["Name_With_Initials"];
-    
-    
-    
-    
-    
+<?php
+if (isset($_SESSION["ID"])) {
+  require "conp.php";
+  $m = $_SESSION["Name"];
+  $query = "select * from bloodbank_doctor where UserName ='$m'";
+
+
+  $x = null;
+  $resultd = $conn->query($query);
+
+  //echo "Error in ".$vql."<br>".$conn->error;
+
+  if ($resultd->num_rows > 0) {
+
+    while ($row = $resultd->fetch_assoc()) {
+
+
+
+
+      $x = $row["Name_With_Initials"];
+      $hid = $row["Hospital_ID"];
     }
-    
-    
-    }
-     			
+  }
+
 ?>
-<html lang="en" >
-<head>
-  <meta charset="UTF-8">
-  <title>side bar- blood bank doctor</title>
-  <title>side bar- blood bank doctor</title>
- <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
-<link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
-<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./styleM.css">
+  <html lang="en">
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./stylek.css">
- <link rel="stylesheet" href="StyleSearch.css"> 
- <link rel="stylesheet" href="StyleIcons.css"> 
+  <head>
+    <meta charset="UTF-8">
+    <title>side bar- blood bank doctor</title>
+    <title>side bar- blood bank doctor</title>
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
+    <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'>
+    <link rel="stylesheet" href="./styleM.css">
+    <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <link rel="stylesheet" href="./stylek.css">
+    <link rel="stylesheet" href="StyleSearch.css">
+    <link rel="stylesheet" href="StyleIcons.css">
+    <link rel="stylesheet" href="./StyleSheetNotification.css">
 
-</head>
-<body>
-<!-- partial:index.partial.html -->
-<div class="layout has-sidebar fixed-sidebar fixed-header">
+  </head>
+
+  <body>
+    <!-- partial:index.partial.html -->
+    <div class="layout has-sidebar fixed-sidebar fixed-header">
       <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
         <a id="btn-collapse" class="sidebar-collapser"><i class="ri-arrow-left-s-line"></i></a>
-        
+
         <div class="sidebar-layout">
           <div class="sidebar-header">
             <div class="pro-sidebar-logo">
@@ -71,7 +66,7 @@ session_start();
           <div class="sidebar-content">
             <nav class="menu open-current-submenu">
               <ul>
-                <li class="menu-header"><span>  </span></li>
+                <li class="menu-header"><span> </span></li>
                 <li class="menu-item">
                   <a href="Home.php">
                     <span class="menu-icon">
@@ -79,7 +74,7 @@ session_start();
                     </span>
                     <span class="menu-title">Home</span>
                   </a>
-                  </li>
+                </li>
                 <li class="menu-item sub-menu">
                   <a href="#">
                     <span class="menu-icon">
@@ -104,15 +99,15 @@ session_start();
                           <span class="menu-title">External Stock Availability</span>
                         </a>
                       </li>
-					  
-					    <li class="menu-item">
+
+                      <li class="menu-item">
                         <a href="LessStockComponentsI.php">
                           <span class="menu-title">Low stock blood components</span>
                         </a>
                       </li>
-	
-					  
-					     <li class="menu-item">
+
+
+                      <li class="menu-item">
                         <a href="ExpiredComponentsI.php">
                           <span class="menu-title">Blood expiry Information</span>
                         </a>
@@ -174,23 +169,70 @@ session_start();
                     </ul>
                   </div>
                 </li>
-                <li class="menu-item">
-                  <a href="View_Donors_BI.php">
+                <li class="menu-item sub-menu">
+                  <a href="#">
                     <span class="menu-icon">
-                      <i class="ri-user-heart-fill"></i>
+                      <i class="ri-article-fill"></i>
                     </span>
                     <span class="menu-title">Donors</span>
                   </a>
-                 </li>
-                <li class="menu-item">
-                  <a href="ReportGeneration_BI.php">
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="View_Donors_BI.php">
+                          <span class="menu-title">View</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="donorEmail.php">
+                          <span class="menu-title">Send Non -Emergency Email</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+
+                <li class="menu-item sub-menu">
+                  <a href="#">
                     <span class="menu-icon">
-                      <i class="ri-file-chart-line"></i>
+                      <i class="ri-message-2-fill"></i>
                     </span>
                     <span class="menu-title">Reports</span>
                   </a>
-                 </li>
-                <li class="menu-header" style="padding-top: 40px"><span>  </span></li>
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="ReportGenerationStock.php">
+                          <span class="menu-title">Stock Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGenerationCrossMatching.php">
+                          <span class="menu-title">Cross Matching Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGenerationBlood.php">
+                          <span class="menu-title">Blood Request Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGeneration_BI.php">
+                          <span class="menu-title">Donation Details Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGeneration_Request.php">
+                          <span class="menu-title">External Requests Reports</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
+
+
+
+                <li class="menu-header" style="padding-top: 40px"><span> </span></li>
                 <li class="menu-item">
                   <a href="profileBI.php">
                     <span class="menu-icon">
@@ -199,15 +241,119 @@ session_start();
                     <span class="menu-title">Profile</span>
                   </a>
                 </li>
-                <li class="menu-item">
-                  <a href="Notifications.php">
+                <li class="menu-item sub-menu">
+                  <a href="#">
                     <span class="menu-icon">
                       <i class="ri-notification-line"></i>
                     </span>
+                    <?php
+
+                    $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$hid' and status ='Pending' and send_status='1'";
+
+                    $results = $conn->query($sql);
+
+                    if ($results->num_rows > 0) {
+                      $row = $results->fetch_assoc();
+                      $status = $row["countS"];
+                      if ($status > 0) {
+                        echo '<span class="icon-button__badge">' . $status . '</span>';
+                      }
+                    }
+
+                    ?>
+                    <?php
+
+                    $vql = "SELECT COUNT(countS) AS total_count FROM (
+                                    SELECT COUNT(*) AS countS FROM blood_testing_result WHERE send_status='1' and status = 'Pending' and Hospital_ID='$hid' GROUP by process_date,batch_number) AS subquery";
+
+                    $result = $conn->query($vql);
+
+                    if ($result->num_rows > 0) {
+                      $row = $result->fetch_assoc();
+                      $status = $row["total_count"];
+                      if ($status > 0) {
+                        echo '<span class="icon-button__badge1">' . $status . '</span>';
+                      }
+                    }
+
+                    ?>
+
+
+
+                    <?php
+                    $rql = "SELECT COUNT(*) AS countS FROM cross_matching_testing_result WHERE Hospital_ID = '$hid' AND Status = 'Pending' and send_status='1'";
+                    $result1 = $conn->query($rql);
+                    if ($result1->num_rows > 0) {
+                      $row = $result1->fetch_assoc();
+                      $status = $row["countS"];
+                      if ($status > 0) {
+                        echo '<span class="icon-button__badge2">' . $status . '</span>';
+                      }
+                    }
+                    ?>
+
                     <span class="menu-title">Notifications</span>
                   </a>
-                </li>
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="Notifications.php">
+                          <span class="menu-title"> <?php
 
+                                                    $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$hid' and status ='Pending' and send_status='1'";
+
+                                                    $results = $conn->query($sql);
+
+                                                    if ($results->num_rows > 0) {
+                                                      $row = $results->fetch_assoc();
+                                                      $status = $row["countS"];
+                                                      if ($status > 0) {
+                                                        echo '<span class="icon-button__badge3">' . $status . '</span>';
+                                                      }
+                                                    }
+
+                                                    ?>Blood Request</span>
+                        </a>
+                      <li class="menu-item">
+                        <a href="Notifications1.php">
+                          <span class="menu-title">
+                            <?php
+
+                            $vql = "SELECT COUNT(countS) AS total_count FROM (
+                            SELECT COUNT(*) AS countS FROM blood_testing_result WHERE send_status='1' and status = 'Pending' and Hospital_ID='$hid' GROUP by process_date,batch_number) AS subquery";
+
+                            $result = $conn->query($vql);
+
+                            if ($result->num_rows > 0) {
+                              $row = $result->fetch_assoc();
+                              $status = $row["total_count"];
+                              if ($status > 0) {
+                                echo '<span class="icon-button__badge4">' . $status . '</span>';
+                              }
+                            }
+
+                            ?>Blood Testing</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="Notifications2.php">
+                          <span class="menu-title">
+                            <?php
+                            $rql = "SELECT COUNT(*) AS countS FROM cross_matching_testing_result WHERE Hospital_ID = '$hid' AND Status = 'Pending' and send_status='1'";
+                            $result1 = $conn->query($rql);
+                            if ($result1->num_rows > 0) {
+                              $row = $result1->fetch_assoc();
+                              $status = $row["countS"];
+                              if ($status > 0) {
+                                echo '<span class="icon-button__badge5">' . $status . '</span>';
+                              }
+                            }
+                            ?>Cross Matching</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </li>
                 <li class="menu-item">
                   <a href="logoutI.php">
                     <span class="menu-icon">
@@ -226,117 +372,149 @@ session_start();
       <div class="layout">
         <main class="content">
           <div>
-            <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a></div>
-             <!--add your content from here-->
- 
-<?php
+            <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
+          </div>
+
+          <div>
 
 
-require 'conp.php';
-    
-$sql= "select * from sent_request where Requested_by='$x'";
-$result = $conn->query($sql);
-
-if($result->num_rows>0)
-
-{     
-
- echo  "<form method='post' action='searchNurse.php'>
- 
-<div class='ta'>
-
- 
-
- <font size=3> Search by </font></b>  <br/> <br/><select name= 'search' class='select'>
-                             <option value='Position'><b> position</b></option>
-                             <option value='Nurse_ID'><b> Nurse_ID</b></option>
-                             <option value='Email' selected><b>Email</b></option>
-		                    <option value='ContactNumber' selected><b> Contact number</b></option>
-                             </select>
+            <select id="filterDropdown" class="select">
+              <option value="All">Status</option>
+              <option value="pending">Pending</option>
+              <option value="Available">Available</option>
+              <option value="Not-Available">Not Available</option>
+            </select>
 
 
-<input type='text' placeholder='type here' name='data' id='data' class='box'>
-
- <button type='submit'  name='BtnSubmit' id='search' class='b1' ><b>Search</b></button>
-</div>
+            <input type="date" id="dateInput" class="b1">
+            <input type="text" id="searchInput" class="box">
 
 
-</form>";
-   
 
-	   
-	   //echo  "<div class='tab'>";
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Request_ID"."</th>"."<th style='text-align:center;width:120px;'>"."Requested_hospital_name"."</th>"."<th>"."Requested_by"."</th>"."<th>"."Requeired_blood_group"."</th>"."<th style='width:120px;'>"."Status"."</th>"."<th style='width:120px;'>"."Action"."</th>"."</tr>";
-      echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
-   while($row = $result->fetch_assoc())
-   
-   {     
-     
-	  echo  "<tr>"."<td>".$row["Request_ID"]."</td>"."<td>".$row["Requested_hospital_name"]."</td>"."<td>".$row["Requested_by"]."</td>"."<td>".$row["Requeired_blood_group"]."</td>"."<td>".$row["status"]."</td>";
-	   echo "<td><form method='POST' action ='ShowAllSentRequest.php'>
-                <input type=hidden name=Request_ID value=".$row["Request_ID"].">
-                <button type=submit value=view name=view  class='fp'><img src=eye.png width=43 height=37></button>
+
+          </div>
+
+          <?php
+
+
+          require 'conp.php';
+
+          $sql = "select * from sent_request where Requested_by='$x'";
+          $result = $conn->query($sql);
+
+          if ($result->num_rows > 0) {
+
+
+
+            //echo  "<div class='tab'>";
+            echo  "<table id='dataTable' border=1>" . "<tr>" . "<th style='text-align:center;width:120px;'>" . "Requested Hospital Name" . "</th>" . "<th>" . "Requested By" . "</th>" . "<th>" . "Requested Blood Group" . "</th>" . "<th style='width:120px;'>" . "Status" . "</th>" . "<th style='width:120px;'>" . "Date" . "</th>" . "<th style='width:120px;'>" . "Action" . "</th>" . "</tr>";
+            // echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
+            while ($row = $result->fetch_assoc()) {
+
+              $position_class = strtolower(str_replace(' ', '-', $row['status']));
+
+              echo '<tr class="' . $position_class . '">';
+
+              echo  "<td>" . $row["Requested_hospital_name"] . "</td>" . "<td>" . $row["Requested_by"] . "</td>" . "<td>" . $row["Requeired_blood_group"] . "</td>" . "<td>" . $row["status"] . "</td>" . "<td>" . $row["Date"] . "</td>";
+              echo "<td><form method='POST' action ='ShowAllSentRequest.php'>
+                <input type=hidden name=Request_ID value=" . $row["Request_ID"] . ">
+                <button type=submit value=view name=view id=btn class='x'><i class='fa-sharp fa-solid fa-eye'></i></button>
                 </form>
 	
                
                 </td>";
-				 echo "</tr>";
-	 
-	   echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
-	  
-	}
-	
-	 echo "</font>";
-	 echo  "</font>";   
-	 echo "</table>";
-	// echo "</div>";
-	
-	
-}	
+              echo "</tr>";
 
-else
+              echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=7'>" . "</td>" . "</tr>";
+            }
 
-{
-  //echo "Error in ".$sql."<br>".$conn->error;
-
- echo "<br> <br><center> <b>No results</b></center>";
-
-}
-
-$conn->close();
-?>
+            echo "</font>";
+            echo  "</font>";
+            echo "</table>";
+            // echo "</div>";
 
 
-<script>
-function myConfirm() {
-  var result = confirm("Want to delete?");
-  if (result==true) {
-   return true;
-  } else {
-   return false;
-  }
-}
+          } else {
+            //echo "Error in ".$sql."<br>".$conn->error;
 
-</script>
+            echo "<br> <br><center> <b>No results</b></center>";
+          }
 
-          
+          $conn->close();
+          ?>
+          <script>
+            function filterTable() {
+              const input = document.getElementById('searchInput');
+              const filter = input.value.toUpperCase();
+              const select = document.getElementById('filterDropdown');
+              const filterValue = select.options[select.selectedIndex].value;
+              const dateInput = document.getElementById('dateInput').value;
+
+              const table = document.getElementById('dataTable');
+              const rows = table.getElementsByTagName('tr');
+
+              for (let i = 1; i < rows.length; i++) {
+                const row = rows[i];
+                // Skip the extra row added for styling
+                if (row.cells.length === 1) {
+                  continue;
+                }
+                const cells = row.getElementsByTagName('td');
+                const positionClass = row.className;
+                const appointmentDate = cells[4].textContent;
+
+                if ((filterValue === 'All' || positionClass === filterValue.toLowerCase()) &&
+                  Array.from(cells).some(cell => cell.textContent.toUpperCase().includes(filter)) &&
+                  (dateInput === '' || appointmentDate === dateInput)) {
+                  row.style.display = '';
+                } else {
+                  row.style.display = 'none';
+                }
+              }
+            }
+
+
+            // Attach filterTable function to events (e.g. button click, input change)
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', filterTable);
+
+            const filterDropdown = document.getElementById('filterDropdown');
+            filterDropdown.addEventListener('change', filterTable);
+
+            const dateInput = document.getElementById('dateInput');
+            dateInput.addEventListener('input', filterTable);
+          </script>
+
+
+          <script>
+            function myConfirm() {
+              var result = confirm("Want to delete?");
+              if (result == true) {
+                return true;
+              } else {
+                return false;
+              }
+            }
+          </script>
+
+
         </main>
-     
-<!-- partial -->
-  <script src='https://unpkg.com/@popperjs/core@2'></script><script  src="./script.js"></script>
 
-</body>
-</html>
-	<?php
-	
-}
- else 
-	 
-	 {echo '<script type="text/javascript">';
-		 echo 'alert("Please log in first");';
-         
-		echo 'window.location.href="userloginFront.php";';
+        <!-- partial -->
+        <script src='https://unpkg.com/@popperjs/core@2'></script>
+        <script src="./script.js"></script>
+
+  </body>
+
+  </html>
+<?php
+
+} else {
+  echo '<script type="text/javascript">';
+  echo 'alert("Please log in first");';
+
+  echo 'window.location.href="userloginFront.php";';
   echo '</script>';
-	 }
- 
+}
+
 ?>

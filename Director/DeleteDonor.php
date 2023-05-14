@@ -65,19 +65,27 @@ $x= $row["Director_ID"];
 		                   $ty ="update donors set Director_ID ='$x'";
 
 						   $result= $conn->query($ty);
-		  
+		                   $UserName=$_POST['UserName'];
 							$did=$_POST['Donor_Id'];
 							$query="update donors set username='Removed' where Donor_Id='$did'";
+							$queryx ="delete from system_users where UserName ='$UserName'";
+
 							$result= $conn->query($query);
-					  
+							$resultx= $conn->query($queryx);
+						 
 						
-							 if($conn->query($result))
-      {
+							 if(!$result)
+		  {
 		
-         
-	    
-                       
-	   }	   
+			echo "Error deleting record: " . $conn->error;
+		
+		  }	 
+
+if (!$resultx) {
+	echo "Error deleting record: " . $conn->error;
+}
+
+						
 	   }
 
 else

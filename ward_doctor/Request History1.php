@@ -10,6 +10,9 @@ if (isset($_SESSION["ID"])) {
   if ($result1->num_rows > 0) {
     while ($row = $result1->fetch_assoc()) {
       $x = $row["WardDoctor_ID"];
+      $y= $row["Hospital_ID"];
+
+
     }
   }
 
@@ -31,7 +34,7 @@ if (isset($_SESSION["ID"])) {
   <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'>
   <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="./style.css">
-
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 </head>
 
 <body>
@@ -97,14 +100,57 @@ if (isset($_SESSION["ID"])) {
 
                 </a>
               </li>
-              <li class="menu-item">
+              <li class="menu-item sub-menu">
                 <a href="#">
                   <span class="menu-icon">
                     <i class="ri-notification-line"></i>
                   </span>
-                  <span class="menu-title">Notification</span>
+                  <?php
+
+                  $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$y' AND notifyView='0' AND (status='Available' OR status='Not Available')";
+
+                  $results = $conn->query($sql);
+
+                  if ($results->num_rows > 0) {
+                    $row = $results->fetch_assoc();
+                    $status = $row["countS"];
+                    if ($status > 0) {
+                      echo '<span class="icon-button__badge">' . $status . '</span>';
+                    }
+                  }
+
+                  ?>
+
+
+
+                  <span class="menu-title">Notifications</span>
                 </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Notifications.php">
+                        <span class="menu-title"> <?php
+
+                                                  $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$y' AND notifyView='0' AND (status='Available' OR status='Not Available')";
+
+                                                  $results = $conn->query($sql);
+
+                                                  if ($results->num_rows > 0) {
+                                                    $row = $results->fetch_assoc();
+                                                    $status = $row["countS"];
+                                                    if ($status > 0) {
+                                                      echo '<span class="icon-button__badge3">' . $status . '</span>';
+                                                    }
+                                                  }
+
+                                                  ?>Request Results</span>
+                      </a>
+
+                    </li>
+                  </ul>
+                </div>
               </li>
+
               <li class="menu-item">
                 <a href="logout.php">
                   <span class="menu-icon">
@@ -122,28 +168,38 @@ if (isset($_SESSION["ID"])) {
     <div class="layout">
       <main class="content">
         <!-- add your content from here -->
-        <h1> Blood Request History</h1>
-        <form method="post" action="search.php">
+        <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
 
-          <div class="midiv">
-            <p>
-              <font size=3> Search by </font>
-            </p><select name="search" class="select">
-              <option value="requested_date"><b> Requested Date</b></option>
-              <option value="requeste_id"><b> Request ID</b></option>
-              <option value="patient_name"><b>Patient Name</b></option>
-              <option value="blood_group" selected><b>Blood Group</b></option>
-              <option value="status" selected><b> Status</b></option>
-            </select>
+        <div>
+          <input type="date" id="dateInput" class="b1">
+
+          <select id="filterDropdown" class="select">
+            <option value="All">Group</option>
+            <option value='A+'>A+</option>
+            <option value='A-'>A-</option>
+            <option value='B+'>B+</option>
+            <option value='B-'>B-</option>
+            <option value='O+'>O+</option>
+            <option value='O-'>O-</option>
+            <option value='AB+'>AB+</option>
+            <option value='AB-'>AB-</option>
+          </select>
+
+          <select id="ResultDropdown" class="selectx">
+            <option value="All">Status</option>
+            <option value='Pending'>Pending</option>
+            <option value='Available'>Available</option>
+            <option value='Not Available'>Not Available</option>
 
 
-            <input type="text" placeholder="type here" name="data" id="data" class="box">
-
-            <button type="submit" name="BtnSubmit" id="search" class="b1"><b>Search</b></button>
-          </div>
+          </select>
 
 
-        </form>
+          <input type="text" id="searchInput" class="box">
+
+        </div>
+
+
 
         <div class="box">
 
@@ -153,13 +209,13 @@ if (isset($_SESSION["ID"])) {
 
             if ($result->num_rows > 0) {
 
-              echo  "<div class='tab'>";
-              echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;'>" . "Requested date" . "</th>" . "<th style='text-align:center;'>" . "Receive date" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Patient Name" . "</th>" . "<th>" . "Blood Group" . "</th>" . "<th>" . "Status" . "</th>" . "<th style='text-align:center;width:40px;'>" . "Action" . "</th>" . "</tr>";
+              echo  "<div id='dataTable' class='tab'>";
+              echo  "<table border=1>" . "<tr>" .  "<th style='text-align:center;'>" . "Receive date" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Patient Name" . "</th>" . "<th>" . "Blood Group" . "</th>" . "<th>" . "Status" . "</th>" . "<th style='text-align:center;width:40px;'>" . "Action" . "</th>" . "</tr>";
               echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=8'>" . "</td>" . "</tr>";
               while ($row = $result->fetch_assoc()) {
 
 
-                echo  "<tr>" . "<td>" . $row["requested_date"] . "</td>" . "<td>" . $row["expected_date"] . "</td>" . "<td>" . $row["patient_name"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "<td>" . $row["status"] . "</td>";
+                echo  "<tr>" . "<td>" . $row["expected_date"] . "</td>" . "<td>" . $row["patient_name"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "<td>" . $row["status"] . "</td>";
 
                 echo "<td class='tb'><form method='POST' action ='Request history2.php'>
      <input type=hidden name=RequestID value=" . $row["requeste_id"] . " >
@@ -185,6 +241,59 @@ if (isset($_SESSION["ID"])) {
             $conn->close();
 
             ?>
+            <script>
+              function filterTable() {
+                const input = document.getElementById('searchInput');
+                const filter = input.value.toUpperCase();
+                const select = document.getElementById('filterDropdown');
+                const filterValue = select.options[select.selectedIndex].value;
+                const Result = document.getElementById('ResultDropdown');
+                const ResultValue = Result.options[Result.selectedIndex].value;
+                const dateInput = document.getElementById('dateInput').value;
+
+
+
+                const table = document.getElementById('dataTable');
+                const rows = table.getElementsByTagName('tr');
+
+                for (let i = 1; i < rows.length; i++) {
+                  const row = rows[i];
+                  if (row.cells.length === 1) {
+                    continue;
+                  }
+                  const cells = row.getElementsByTagName('td');
+                  const positionClass = row.className;
+
+                  const result = cells[3].textContent;
+                  const group = cells[2].textContent;
+                  const date = cells[0].textContent;
+
+
+                  if ((filterValue === 'All' || group.toLowerCase() === filterValue.toLowerCase()) &&
+                    Array.from(cells).some(cell => cell.textContent.toUpperCase().includes(filter)) &&
+                    (ResultValue === 'All' || result.toLowerCase() === ResultValue.toLowerCase()) &&
+                    (dateInput === '' || date === dateInput)) {
+                    row.style.display = '';
+                  } else {
+                    row.style.display = 'none';
+                  }
+                }
+
+              }
+
+              // Attach filterTable function to events (e.g. button click, input change)
+              const searchInput = document.getElementById('searchInput');
+              searchInput.addEventListener('input', filterTable);
+
+              const filterDropdown = document.getElementById('filterDropdown');
+              filterDropdown.addEventListener('change', filterTable);
+
+              const ResultDropdown = document.getElementById('ResultDropdown');
+              ResultDropdown.addEventListener('change', filterTable);
+
+              const dateInput = document.getElementById('dateInput');
+              dateInput.addEventListener('input', filterTable);
+            </script>
         </div>
     </div>
   </div>
@@ -210,19 +319,6 @@ if (isset($_SESSION["ID"])) {
       margin-bottom: 70px;
     }
 
-    .select {
-
-      height: 30px;
-      width: 138px;
-      border-radius: 20px;
-      background-color: #56CE94;
-      border: none;
-      text-align: center;
-      margin-left: 30px;
-
-
-
-    }
 
 
 
@@ -250,47 +346,55 @@ if (isset($_SESSION["ID"])) {
 
 
 
-
-    .midiv {
-
-      margin-left: 200px;
-      padding: 15px 10px 30px 20px;
-      margin-top: -70px;
-      outline: none;
-      width: 774.5px;
+    .select {
+      height: 35px;
+      width: 145px;
+      border-radius: 20px;
+      background-color: #F35050;
+      border: none;
+      text-align: center;
+      margin-left: 10px;
+      margin-top: 100px;
+      margin-bottom: 50px;
+      color: white;
     }
 
+    .selectx {
+      height: 35px;
+      width: 145px;
+      border-radius: 20px;
+      background-color: #F35050;
+      border: none;
+      text-align: center;
+      margin-left: 10px;
+      margin-top: 100px;
+      margin-bottom: 50px;
+      color: white;
+    }
 
+    .b1 {
+      height: 40px;
+      width: 130px;
+      color: #FFF5F3;
+      margin-left: 6px;
+      border-radius: 20px;
+      background-color: #F35050;
+      border: none;
+      text-align: center;
+      cursor: pointer;
+      margin-top: 100px;
+      margin-bottom: 50px;
+      margin-left: 170px
+    }
 
     .box {
-
-
-      height: 30px;
-      width: 150px;
+      height: 35px;
+      width: 200px;
       margin-left: 20px;
-      margin-top: 0px;
       border-radius: 20px;
       border: none;
       text-align: center;
-
-
-    }
-
-
-    .b1 {
-      height: 30px;
-      width: 100px;
-
-      color: #FFF5F3;
-      margin-left: 20px;
-      border-radius: 20px;
-
-      background-color: #F3506D;
-      border: none;
-      cursor: pointer;
-
-
-
+      margin-top: 100px;
     }
 
 
@@ -327,6 +431,8 @@ if (isset($_SESSION["ID"])) {
       background-color: transparent;
       border: none;
       cursor: pointer;
+      font-size: 25px;
+      padding: 10px 10px;
     }
 
     .tb {
@@ -339,7 +445,7 @@ if (isset($_SESSION["ID"])) {
 
     .tab {
       background-color: #F5F5F5;
-      margin-top: -60px;
+      margin-top: -120px;
       margin-left: 60px;
     }
 
@@ -369,6 +475,33 @@ if (isset($_SESSION["ID"])) {
 
 
     }
+    .icon-button__badge {
+    position: absolute;
+    top: 9px;
+    right: 226px;
+    width: 15px;
+    height: 18px;
+    background: red;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+  .icon-button__badge3 {
+    position: absolute;
+    top: 15px;
+    right: 245px;
+    width: 15px;
+    height: 18px;
+    background: red;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+
 
     .layout {
       background-color: #d8d8d8;

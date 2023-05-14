@@ -69,7 +69,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateBBI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -88,7 +88,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateMLTI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -107,7 +107,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateWardDoctorI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -126,7 +126,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateNurseI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -151,7 +151,7 @@ session_start();
                       </li>
                       <li class="menu-item">
                         <a href="DeactivateOrUpdateHospitalI.php">
-                          <span class="menu-title">Update/Deactivte</span>
+                          <span class="menu-title">View/Deactivte</span>
                         </a>
                       </li>
                       <li class="menu-item">
@@ -236,7 +236,7 @@ session_start();
 
        
 function generate_pw() {
-  $pw;
+  $pw=null;
   // Set random length for password
   $password_length = rand(8, 16);
   $pw = '';
@@ -253,7 +253,7 @@ $hel = generate_pw();
 
 <?php
 require 'conp.php';
-$date =date("Y/m/d");
+$date =date("Y-m-d");
 
 
 
@@ -279,7 +279,7 @@ echo "
 <?php
 	
 
-						  $sql= 'select *from hospital' ;
+						  $sql= "select *from hospital where Remark != 'Non-functioning'" ;
                            $result = $conn->query($sql);
 
       if($result->num_rows>0)
@@ -318,15 +318,24 @@ echo "
 	        echo   "<label for='exampleFormControlInput1' class='form-label lbl star'>Specialization</label>
                          <select id='Specialization' name='Specialization'  class='form-control txt-input' required>
 						   <option value='Not Provided'> None</option>
-                         <option value='General Medicine'> General Medicine
-						 </option>
-                         <option value='General Surgery'> General Surgery</option>
-						 <option value='Pediatrics'> Pediatrics</option>
-						 <option value='Obstetrics & Gynecology'>Obstetrics & Gynecology</option>
-						  <option value='Dermatology'>Dermatology</option>
-						  <option value='ENT'>ENT</option>
-                          <option value='Psychiatry'>Psychiatry</option>
-                        
+               <option value='Anesthesiologist'>Anesthesiologist</option>
+               <option value='Cardiologist'>Cardiologist</option>
+               <option value='Dermatologist'>Dermatologist</option>
+               <option value='Gastroenterologist'>Gastroenterologist</option>
+               <option value='Hematologist'>Hematologist</option>
+               <option value='Immunologist'>Immunologist</option>
+               <option value='Nephrologist'>Nephrologist</option>
+               <option value='Neurologist'>Neurologist </option>
+               <option value='Gynecologist'>Gynecologist </option>
+               <option value='Oncologist'>Oncologist </option>
+               <option value='Ophthalmologist'>Ophthalmologist</option>
+               <option value='Orthopedist'>Orthopedist</option>
+               <option value='Pediatrician'>Pediatrician</option>
+               <option value='Psychiatrist'>Psychiatrist </option>
+               <option value='Radiologic Technologist'>Radiologic Technologist </option>
+               <option value='Rheumatologist'>Rheumatologist</option>
+               <option value='Surgeon'>Surgeon</option>
+               
                         
                          </select>
                           
@@ -346,18 +355,18 @@ echo "
                     <input type='hidden'  name='subject' value='Regarding Appoinment'> 
                              
                               <label for='exampleFormControlInput1' class='form-label lbl star'>SLMC Number</label>
-                             <input type='text' placeholder='Enter the SLMC Number' name='SLMC' id='slmc' class='form-control txt-input'   required>
+                             <input type='text' placeholder='Enter the SLMC Number' name='SLMC' id='slmc' class='form-control txt-input'   required  pattern='SLMC[0-9]{3}'>
                              
 					
                            <label for='exampleFormControlInput1' class='form-label lbl star'>Email</label>
-                             <input type='email' placeholder='Enter the Email' name='Email' class='form-control txt-input' id='Email' onchange='myFunction()' required>
+                             <input type='email' placeholder='Enter the Email' name='Email' class='form-control txt-input' id='Email' onchange='myFunction()'  required title='Please enter a valid email address in the format of example@gmail.com'>
         
                              
                            <label for='exampleFormControlInput1' class='form-label lbl star'>Contact Number</label>
                             <input type='tel' placeholder='Enter the Contact Number' name='contactNumber'  class='form-control txt-input'  id='contact' pattern='[0-9]{10}' required>
 							
 							 <label >Date of Appoinment</label>
-                             <input type='date'  name='DOA'   value='$date'>
+                             <input type='text'  name='DOA'   value='$date'>
 				
 							 <label for='exampleFormControlInput1' class='form-label lbl star'>User Name</label>
                              <input type='text' name='Uname' id='Uname' class='form-control txt-input' required>

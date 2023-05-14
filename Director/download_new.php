@@ -284,8 +284,8 @@ if($result->num_rows>0)
    echo "<h2><center>Blood Bank Doctor Details Report of $HospitalName</center> </h2>" ;
    echo "<h5><center>Save a Life</center> </h5>" ;
    echo "<h5><center>printed on $date</center> </h5><br><br>" ;
-	   echo  "<table class='container_content' id='container_content' border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Nurse ID"."</th>"."<th style='text-align:center;width:120px;'>"."Name With Initials"."</th>"."<th>"."Position"."</th>"."<th>"."SLMC number"."</th>"."</tr>";
-      echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
+	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Nurse ID"."</th>"."<th style='text-align:center;width:120px;'>"."Name With Initials"."</th>"."<th>"."Position"."</th>"."<th>"."SLMC number"."</th>"."</tr>";
+      echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=4'>"."</td>"."</tr>";
    while($row = $result->fetch_assoc())
    
    {     
@@ -294,7 +294,7 @@ if($result->num_rows>0)
 	 
 				 echo "</tr>";
 	 
-	   echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
+	   echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=4'>"."</td>"."</tr>";
 	  
 	}
 	
@@ -336,8 +336,8 @@ if($report =="mlt"){
    echo "<h2><center>Blood Bank Doctor Details Report of $HospitalName</center> </h2>" ;
    echo "<h5><center>Save a Life</center> </h5>" ;
    echo "<h5><center>printed on $date</center> </h5><br><br>" ;
-          echo  "<table class='container_content' id='container_content' border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."MLT ID"."</th>"."<th style='text-align:center;width:120px;'>"."Name With Initials"."</th>"."<th>"."SLMC Number"."</th>"."</tr>";
-         echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
+          echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."MLT ID"."</th>"."<th style='text-align:center;width:120px;'>"."Name With Initials"."</th>"."<th>"."SLMC Number"."</th>"."</tr>";
+         echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=3'>"."</td>"."</tr>";
       while($row = $result->fetch_assoc())
       
       {     
@@ -346,7 +346,7 @@ if($report =="mlt"){
         
                     echo "</tr>";
         
-          echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
+          echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=3'>"."</td>"."</tr>";
          
        }
        
@@ -389,7 +389,7 @@ if($report =="warddoctor"){
              
          // echo  "<div class='tab'>";
           echo  "<table class='container_content' id='container_content' border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."WardDoctor ID "."</th>"."<th style='text-align:center;width:120px;'>"."Name With Initials"."</th>"."<th>"."Specialization"."</th>"."<th>"."SLMC number"."</th>"."</tr>";
-         echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
+         echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=4'>"."</td>"."</tr>";
       while($row = $result->fetch_assoc())
       
       {     
@@ -398,7 +398,7 @@ if($report =="warddoctor"){
         
                     echo "</tr>";
         
-          echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
+          echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=4'>"."</td>"."</tr>";
          
        }
        
@@ -441,7 +441,7 @@ if($report =="warddoctor"){
           
          // echo  "<div class='tab'>";
           echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."BloodBank Doctor ID"."</th>"."<th style='text-align:center;width:120px;'>"."Name With Initials"."</th>"."<th>"."SLMC number"."</th>"."</tr>";
-         echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
+         echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=3'>"."</td>"."</tr>";
       while($row = $result->fetch_assoc())
       
       {     
@@ -450,7 +450,7 @@ if($report =="warddoctor"){
         
                     echo "</tr>";
         
-          echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=8'>"."</td>"."</tr>";
+          echo "<tr>"."<td style='height:20px;background-color:#F5F5F5;'colspan=3'>"."</td>"."</tr>";
          
        }
        
@@ -479,7 +479,7 @@ if($report =="warddoctor"){
 
    //all employees
 
-   echo"<div class=container_content' id='container_content'>";
+   echo"<div class='container_content' id='container_content'>";
    if($report =="AE"){
     $sql= "select * from bloodbank_doctor where Remark!='Removed' and Hospital_ID= '$HID' and AppointmentDate between '$From' and '$To'";
     

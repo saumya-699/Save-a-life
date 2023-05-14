@@ -10,6 +10,7 @@ if (isset($_SESSION["ID"])) {
   if ($result1->num_rows > 0) {
     while ($row = $result1->fetch_assoc()) {
       $x = $row["Name_With_Initials"];
+      $y = $row["Hospital_ID"];
     }
   }
 }
@@ -60,25 +61,25 @@ if (isset($_SESSION["ID"])) {
                   </span>
                   <span class="menu-title">View donated blood</span>
                 </a>
-                <li class="menu-item sub-menu">
-                  <a href="#">
-                    <span class="menu-icon">
-                      <i class="ri-article-fill"></i>
-                    </span>
-                    <span class="menu-title">Enter test results</span>
-                  </a>
-                  <div class="sub-menu-list">
-                    <ul>
-                      <li class="menu-item">
-                        <a href="Enter Blood testing result.php">
-                          <span class="menu-title">Blood Testing</span>
-                        </a>
-                      </li>
-                      <li class="menu-item">
-                        <a href="Cross matching test result.php">
-                          <span class="menu-title">Cross Matching</span>
-                        </a>
-                      </li>
+              <li class="menu-item sub-menu">
+                <a href="#">
+                  <span class="menu-icon">
+                    <i class="ri-article-fill"></i>
+                  </span>
+                  <span class="menu-title">Enter test results</span>
+                </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Enter Blood testing result.php">
+                        <span class="menu-title">Blood Testing</span>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="Cross matching test result.php">
+                        <span class="menu-title">Cross Matching</span>
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </li>
@@ -109,49 +110,68 @@ if (isset($_SESSION["ID"])) {
               </li>
 
               <li class="menu-item sub-menu">
-                  <a href="#">
-                    <span class="menu-icon">
-                      <i class="ri-hospital-line"></i>
-                    </span>
-                <span class="menu-title">Blood Stock</span>
-                  </a>
-                  <div class="sub-menu-list">
-                    <ul>
-                      <li class="menu-item">
-                        <a href="Blood stock.php">
-                          <span class="menu-title">Stock Info</span>
-                        </a>
-                      </li>
-                     
-					    <li class="menu-item">
-                        <a href="LessStockComponentsI.php">
-                          <span class="menu-title">Low stock blood components</span>
-                        </a>
-                      </li>
-	
-					  
-					     <li class="menu-item">
-                        <a href="ExpiredComponentsI.php">
-                          <span class="menu-title">Blood expiry Information</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </li>
-
-              <li class="menu-item">
-                <a href="Report.php">
+                <a href="#">
                   <span class="menu-icon">
-                    <i class="ri-file-chart-line"></i>
+                    <i class="ri-hospital-line"></i>
+                  </span>
+                  <span class="menu-title">Blood Stock</span>
+                </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Blood stock.php">
+                        <span class="menu-title">Stock Info</span>
+                      </a>
+                    </li>
+
+                    <li class="menu-item">
+                      <a href="LessStockComponentsI.php">
+                        <span class="menu-title">Low stock blood components</span>
+                      </a>
+                    </li>
+
+
+                    <li class="menu-item">
+                      <a href="ExpiredComponentsI.php">
+                        <span class="menu-title">Blood expiry Information</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+
+              <li class="menu-item sub-menu">
+                <a href="#">
+                  <span class="menu-icon">
+                    <i class="ri-file-edit-fill"></i>
                   </span>
                   <span class="menu-title">Reports</span>
                 </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Report.php">
+                        <span class="menu-title">Blood Testing Report</span>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="Report1.php">
+                        <span class="menu-title">Cross Matching Report</span>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="ReportGenerationStock.php">
+                        <span class="menu-title">Blood Stock Report</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
 
 
               <li class="menu-header" style="padding-top: 40px"><span> </span></li>
               <li class="menu-item">
-                <a href="Edit ProfileMlt.php">
+                <a href="Profile.php">
                   <span class="menu-icon">
                     <i class="ri-user-line"></i>
                   </span>
@@ -159,14 +179,86 @@ if (isset($_SESSION["ID"])) {
 
                 </a>
               </li>
-              <li class="menu-item">
-                <a href="logout.php">
+              <li class="menu-item sub-menu">
+                <a href="#">
                   <span class="menu-icon">
                     <i class="ri-notification-line"></i>
                   </span>
-                  <span class="menu-title">Notification</span>
+                  <?php
 
+                  $sql = "SELECT COUNT(countS) AS total_count FROM (
+                    SELECT COUNT(*) AS countS FROM donation_records WHERE Hospital_ID='$y' and End_donation ='1' and AddStatus='0' GROUP by Batch,Donation_date) AS subquery";
+
+                  $results = $conn->query($sql);
+
+                  if ($results->num_rows > 0) {
+                    $row = $results->fetch_assoc();
+                    $status = $row["total_count"];
+                    if ($status > 0) {
+                      echo '<span class="icon-button__badge">' . $status . '</span>';
+                    }
+                  }
+
+                  ?>
+
+
+
+
+                  <?php
+                  $rql = "SELECT COUNT(*) AS countS FROM blood_request WHERE Hospital_ID = '$y' AND status='Available' and CrossMatching_Add='0'";
+                  $result1 = $conn->query($rql);
+                  if ($result1->num_rows > 0) {
+                    $row = $result1->fetch_assoc();
+                    $status = $row["countS"];
+                    if ($status > 0) {
+                      echo '<span class="icon-button__badge2">' . $status . '</span>';
+                    }
+                  }
+                  ?>
+                  <span class="menu-title">Notifications</span>
                 </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Notifications.php">
+                        <span class="menu-title"> <?php
+
+                                                  $sql = "SELECT COUNT(countS) AS total_count FROM (
+                                                 SELECT COUNT(*) AS countS FROM donation_records WHERE Hospital_ID='$y' and End_donation ='1' and AddStatus='0' GROUP by Batch,Donation_date) AS subquery";
+
+                                                  $results = $conn->query($sql);
+
+                                                  if ($results->num_rows > 0) {
+                                                    $row = $results->fetch_assoc();
+                                                    $status = $row["total_count"];
+                                                    if ($status > 0) {
+                                                      echo '<span class="icon-button__badge3">' . $status . '</span>';
+                                                    }
+                                                  }
+
+                                                  ?>
+
+                          <span>Donation</span>
+                      </a>
+
+                    <li class="menu-item">
+                      <a href="Notifications1.php">
+                        <span class="menu-title">
+                          <?php
+                          $rql = "SELECT COUNT(*) AS countS FROM blood_request WHERE Hospital_ID = '$y' AND status='Available' and CrossMatching_Add='0'";
+                          $result1 = $conn->query($rql);
+                          if ($result1->num_rows > 0) {
+                            $row = $result1->fetch_assoc();
+                            $status = $row["countS"];
+                            if ($status > 0) {
+                              echo '<span class="icon-button__badge5">' . $status . '</span>';
+                            }
+                          }
+                          ?>Cross Matching Testing</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
               <li class="menu-item">
                 <a href="logout.php">
@@ -188,36 +280,49 @@ if (isset($_SESSION["ID"])) {
         <div>
           <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
         </div>
-          <div class="col-9 ">
-            <center style='margin-top:50px;'>
-              <h2 class="txt-l ">Welcome MLT.<?php echo " " . $x;
-                                              ?> </h2>
-            </center>
-            <div class="form">
-              <div class="card frm-form ">
-                <div class="form-body ">
-                  <h3> </h3>
+        <div class="col-9 ">
+          <center style='margin-top:50px;'>
+            <h2 class="txt-l ">Welcome MLT.<?php echo " " . $x;
+                                            ?> </h2>
+          </center>
+          <div class="form">
+            <div class="card frm-form ">
+              <div class="form-body ">
+                <h3>Pending Blood Test Results of approval</h3>
+                <p style="color:#0D5C75; font-size: 70px; font-weight: 700; margin-top:-20px;">
+                  <?php
+                  $vql = "SELECT COUNT(countS) AS total_count FROM (
+                    SELECT COUNT(*) AS countS FROM blood_testing_result WHERE status = 'Pending' and MLT_ID='$x' GROUP by process_date,batch_number) AS subquery";
 
+                  $result = $conn->query($vql);
 
+                  if ($result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    $status = $row["total_count"];
+                    echo $status;
+                  }
 
-                </div>
+                  ?>
+                </p>
+
               </div>
             </div>
+          </div>
 
-            <div class="form-right">
+          <div class="form-right">
 
 
 
-
-            </div>
 
           </div>
-        </div>
 
+        </div>
     </div>
 
+  </div>
 
-    </main>
+
+  </main>
 
   </div>
   </div>
@@ -227,6 +332,79 @@ if (isset($_SESSION["ID"])) {
 
 
   <style>
+    .icon-button__badge {
+      position: absolute;
+      top: 7px;
+      right: 220px;
+      width: 15px;
+      height: 18px;
+      background: red;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
+
+
+
+    .icon-button__badge1 {
+      position: absolute;
+      top: 0;
+      right: 228;
+      width: 15px;
+      height: 18px;
+      background: green;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
+
+    .icon-button__badge2 {
+      position: absolute;
+      top: 4px;
+      right: 239;
+      width: 15px;
+      height: 18px;
+      background: purple;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
+
+    .icon-button__badge3 {
+      position: absolute;
+      top: 15;
+      right: 235px;
+      width: 15px;
+      height: 18px;
+      background: red;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
+
+
+    .icon-button__badge5 {
+      position: absolute;
+      top: 115;
+      right: 235px;
+      width: 15px;
+      height: 18px;
+      background: purple;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
+
     .form {
       text-align: center;
       margin-left: 80px;
@@ -248,13 +426,12 @@ if (isset($_SESSION["ID"])) {
       height: 200px;
       background-color: white;
       border-radius: 20px;
-      margin-top: -200px;
-      margin-left: 500px;
-
+      margin-top: -199px;
+      margin-left: 533px;
     }
 
     .layout {
-      background-color: #D3FBD8;
+      background-color: #B2C0E0;
     }
   </style>
 </body>

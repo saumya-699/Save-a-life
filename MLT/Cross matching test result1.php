@@ -1,3 +1,20 @@
+<?php
+session_start();
+if (isset($_SESSION["ID"])) {
+  include "config.php";
+  $m = $_SESSION["Name"];
+  $date = date("Y/m/d");
+  $query = "SELECT * FROM mlt WHERE UserName ='$m'";
+  $result1 = $conn->query($query);
+
+  if ($result1->num_rows > 0) {
+    while ($row = $result1->fetch_assoc()) {
+      $x = $row["MLT_ID"];
+      $y=$row["Hospital_ID"];
+
+    }
+  }
+}?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -127,13 +144,32 @@
                 </div>
               </li>
 
-              <li class="menu-item">
-                <a href="Report.php">
+              <li class="menu-item sub-menu">
+                <a href="#">
                   <span class="menu-icon">
-                    <i class="ri-file-chart-line"></i>
+                    <i class="ri-file-edit-fill"></i>
                   </span>
                   <span class="menu-title">Reports</span>
                 </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Report.php">
+                        <span class="menu-title">Blood Testing Report</span>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="Report1.php">
+                        <span class="menu-title">Cross Matching Report</span>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="ReportGenerationStock.php">
+                        <span class="menu-title">Blood Stock Report</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
 
 
@@ -147,14 +183,86 @@
 
                 </a>
               </li>
-              <li class="menu-item">
+              <li class="menu-item sub-menu">
                 <a href="#">
                   <span class="menu-icon">
                     <i class="ri-notification-line"></i>
                   </span>
-                  <span class="menu-title">Notification</span>
+                  <?php
 
+                  $sql = "SELECT COUNT(countS) AS total_count FROM (
+                    SELECT COUNT(*) AS countS FROM donation_records WHERE Hospital_ID='$y' and End_donation ='1' and AddStatus='0' GROUP by Batch,Donation_date) AS subquery";
+
+                  $results = $conn->query($sql);
+
+                  if ($results->num_rows > 0) {
+                    $row = $results->fetch_assoc();
+                    $status = $row["total_count"];
+                    if ($status > 0) {
+                      echo '<span class="icon-button__badge">' . $status . '</span>';
+                    }
+                  }
+
+                  ?>
+
+
+
+
+                  <?php
+                  $rql = "SELECT COUNT(*) AS countS FROM blood_request WHERE Hospital_ID = '$y' AND status='Available' and CrossMatching_Add='0'";
+                  $result1 = $conn->query($rql);
+                  if ($result1->num_rows > 0) {
+                    $row = $result1->fetch_assoc();
+                    $status = $row["countS"];
+                    if ($status > 0) {
+                      echo '<span class="icon-button__badge2">' . $status . '</span>';
+                    }
+                  }
+                  ?>
+                  <span class="menu-title">Notifications</span>
                 </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Notifications.php">
+                        <span class="menu-title"> <?php
+
+                                                  $sql = "SELECT COUNT(countS) AS total_count FROM (
+                                                 SELECT COUNT(*) AS countS FROM donation_records WHERE Hospital_ID='$y' and End_donation ='1' and AddStatus='0' GROUP by Batch,Donation_date) AS subquery";
+
+                                                  $results = $conn->query($sql);
+
+                                                  if ($results->num_rows > 0) {
+                                                    $row = $results->fetch_assoc();
+                                                    $status = $row["total_count"];
+                                                    if ($status > 0) {
+                                                      echo '<span class="icon-button__badge3">' . $status . '</span>';
+                                                    }
+                                                  }
+
+                                                  ?>
+
+                          <span>Donation</span>
+                      </a>
+
+                    <li class="menu-item">
+                      <a href="Notifications1.php">
+                        <span class="menu-title">
+                          <?php
+                          $rql = "SELECT COUNT(*) AS countS FROM blood_request WHERE Hospital_ID = '$y' AND status='Available' and CrossMatching_Add='0'";
+                          $result1 = $conn->query($rql);
+                          if ($result1->num_rows > 0) {
+                            $row = $result1->fetch_assoc();
+                            $status = $row["countS"];
+                            if ($status > 0) {
+                              echo '<span class="icon-button__badge5">' . $status . '</span>';
+                            }
+                          }
+                          ?>Cross Matching Testing</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
               <li class="menu-item">
                 <a href="logout.php">
@@ -194,13 +302,13 @@
               ?>
                 <form action="Create_Cross matching test result1.php" method="POST">
 
-                  <label for="exampleFormControlInput1 " class="form-label lbl star "> Request ID</label>
-                  <input type="text" class="form-control txt-input " name="request_id" value="<?php echo $did ?>">
+                  <label for="exampleFormControlInput1" class="form-label lbl star"> Request ID</label>
+                  <input type="text" class="form-control txt-input" name="request_id" value="<?php echo $did ?>">
 
 
-                  <label for="exampleFormControlInput1 " class="form-label lbl star " required="">Blood Group test result</label>
-                  <select name="blood_group" id=" " class="form-control txt-input" required="">
-                    <option value=" " diabled> Select group </option>
+                  <label for="exampleFormControlInput1" class="form-label lbl star" >Blood Group test result</label>
+                  <select name="blood_group" id="blood_group" class="form-control txt-input" required>
+                    <option value="" disabled selected > Select group </option>
                     <option value="O-">O-</option>
                     <option value="O+">O+</option>
                     <option value="A-">A-</option>
@@ -211,35 +319,39 @@
                     <option value="AB+">AB+</option>
                   </select>
 
-                  <label for="exampleFormControlInput1 " class="form-label lbl star ">Cross matching result</label>
-                  <select name="Cross_matching_test_result" id=" " class="form-control txt-input " required="">
-                    <option value=" " diabled>Select test result </option>
+                  <label for="exampleFormControlInput1" class="form-label lbl star" >Cross matching result</label>
+                  <select name="Cross_matching_test_result" id="Cross_matching_test_result" class="form-control txt-input " required>
+                    <option value="" disabled selected>Select test result </option>
                     <option value="Matched">Matched</option>
                     <option value="Unmatched">Unmatched</option>
 
                   </select>
 
+                  <label for="exampleFormControlInput1 " class="form-label lbl star ">Special Note</label>
+                  <textarea name="Note" id=" " cols="30 " rows="10 " class="input " placeholder="Type note "></textarea>
+
 
                   <div class="buttons ">
                     <button class="b1" name="submit" value="submit" value="submit">
                       <font size="2px">Add</font>
-                    </button>                </form> &nbsp; &nbsp; &nbsp; &nbsp;
-                    &nbsp; &nbsp; &nbsp; &nbsp;<button class="b1" name="cancel" value="cancel"><a href="Cross matching test result.php">
-                        <font size="2px">Cancel</font>
-                      </a></button>
-                  </div>
-
-
-              <?php } ?>
-
+                    </button>
+                </form> &nbsp; &nbsp; &nbsp; &nbsp;
+                &nbsp; &nbsp; &nbsp; &nbsp;<button class="b1" name="cancel" value="cancel"><a href="Cross matching test result.php">
+                    <font size="2px">Cancel</font>
+                  </a></button>
             </div>
+
+
+          <?php } ?>
+
           </div>
         </div>
     </div>
   </div>
+  </div>
   <div class="col " width="10 "></div>
   </div>
-
+  
   </main>
   </div>
   </div>
@@ -255,7 +367,7 @@
 
     .container {
       position: absolute;
-      height: 600px;
+      height: 700px;
 
       box-shadow: 0px 0px 50px -20px #000;
     }
@@ -263,6 +375,79 @@
     .buttons {
       margin-top: 20px;
     }
+    .icon-button__badge {
+              position: absolute;
+              top: 7px;
+              right: 220px;
+              width: 15px;
+              height: 18px;
+              background: red;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
+
+
+
+            .icon-button__badge1 {
+              position: absolute;
+              top: 0;
+              right: 228;
+              width: 15px;
+              height: 18px;
+              background: green;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
+
+            .icon-button__badge2 {
+              position: absolute;
+              top: 4px;
+              right: 239;
+              width: 15px;
+              height: 18px;
+              background: purple;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
+
+            .icon-button__badge3 {
+              position: absolute;
+              top: 15;
+              right: 235px;
+              width: 15px;
+              height: 18px;
+              background: red;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
+
+
+            .icon-button__badge5 {
+              position: absolute;
+              top: 115;
+              right: 235px;
+              width: 15px;
+              height: 18px;
+              background: purple;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
+
   </style>
 </body>
 

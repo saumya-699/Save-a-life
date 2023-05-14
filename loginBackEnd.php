@@ -49,7 +49,7 @@ if(isset($_POST["BtnSubmit"]))
 
                   if( $_SESSION["Type"]   == '1')
 				  {
-                 header("Location:BloodBankDoctor/stockI.php");
+                 header("Location:BloodBankDoctor/Home.php");
 				 //printf("Query failed: %s\n", $conn->error);
 				  }
 				 
@@ -67,7 +67,7 @@ if(isset($_POST["BtnSubmit"]))
 			 header("Location:Director/Home.php");}
 			 
 			 else {
-			 header("Location:donorhome.php");}
+			 header("Location:Guestx/donar/doner_Information.php");}
 			 
 			 
     }	 

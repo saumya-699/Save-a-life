@@ -69,7 +69,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateBBI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -88,7 +88,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateMLTI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -107,7 +107,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateWardDoctorI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -126,7 +126,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateNurseI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -151,7 +151,7 @@ session_start();
                       </li>
                       <li class="menu-item">
                         <a href="DeactivateOrUpdateHospitalI.php">
-                          <span class="menu-title">Update/Deactivte</span>
+                          <span class="menu-title">View/Deactivte</span>
                         </a>
                       </li>
                       <li class="menu-item">
@@ -277,8 +277,7 @@ echo "
 	
 <?php
 	
-
-						  $sql= 'select *from hospital' ;
+  $sql= "select *from hospital where Remark != 'Non-functioning'" ;
                            $result = $conn->query($sql);
 
       if($result->num_rows>0)
@@ -316,9 +315,13 @@ echo "
 	        echo   "<label for='exampleFormControlInput1'>Position</label>
                          <select id='position' name='position'  class='x' required>
 						   <option value=Not Provided' class='items'> None</option>
-                         <option value='Head nurse' class='items'> Head&nbsp;nurse
-						 </option>
-                         <option value='Nurse' class='items'> Nurse</option>
+               <option value='Staff Nurse'>Staff Nurse</option>
+               <option value='Senior Staff Nurse'>Senior Staff Nurse</option>
+               <option value='Head Nurse'>Head Nurse</option>
+               <option value='Nursing Supervisor'>Nursing Supervisor</option>
+               <option value='Nurse Educator'>Nurse Educator</option>
+               <option value='Nurse Researcher'>Nurse Researcher</option>
+               <option value='Nurse Practitioner'>Nurse Practitioner</option>
                         
                         
                          </select>
@@ -342,7 +345,7 @@ echo "
                              
 					
                            <label for='exampleFormControlInput1' class='form-label lbl star'>Email</label>
-                             <input type='email' placeholder='Enter the Email' name='Email' class='form-control txt-input' id='Email' onchange='myFunction()' required title='Please enter a valid email address in the format of example@domain.com'>
+                             <input type='email' placeholder='Enter the Email' name='Email' class='form-control txt-input' id='Email' onchange='myFunction()' required title='Please enter a valid email address in the format of example@gmail.com'>
         
                              
                            <label for='exampleFormControlInput1' class='form-label lbl star'>Contact Number</label>

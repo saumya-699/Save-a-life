@@ -13,28 +13,7 @@ a {
   text-decoration: none;
 }
 
-  .b1{
-					  
-					        width:130px;
-                            height:40px;						   
-						    //color:#FFF5F3;
-							
-							//margin:: 0px 21px 27px 215px;
-							margin-top:0px;
-							margin-bottom:0px;
-							margin-left:50px;
-							margin-right:0px;
-							
-							
-							 border-radius:30px;
-                            
-                           background-color:#F35050;
-						    border: none;
-						   cursor:pointer;
-				            
-				  
-				  }	  
-				
+  
 
 .container-shadow {
   position: absolute;
@@ -128,7 +107,7 @@ input {
 
 
 .b2{
-  margin-top:34px;
+  margin-top:-3px;
   margin-bottom:0px;
   margin-left:244px;
   margin-right:0px;
@@ -151,6 +130,30 @@ font-weight: 700;
 font-size: 14px;		    
 
 }
+
+
+.b1{
+					  
+  width:130px;
+            height:40px;						   
+//color:#FFF5F3;
+
+//margin:: 0px 21px 27px 215px;
+margin-top:0px;
+margin-bottom:0px;
+margin-left:50px;
+margin-right:0px;
+
+
+border-radius:30px;
+            
+           background-color:#F35050;
+border: none;
+cursor:pointer;
+    
+
+}
+
 
 select {
   width: 100%;

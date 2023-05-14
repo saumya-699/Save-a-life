@@ -70,7 +70,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateBBI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -89,7 +89,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateMLTI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -108,7 +108,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateWardDoctorI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -127,7 +127,7 @@ session_start();
                             </li>
                             <li class="menu-item">
                               <a href="RemoveOrUpdateNurseI.php">
-                                <span class="menu-title">Remove/Update</span>
+                                <span class="menu-title">View/Remove</span>
                               </a>
                             </li>
                           </ul>
@@ -152,7 +152,7 @@ session_start();
                       </li>
                       <li class="menu-item">
                         <a href="DeactivateOrUpdateHospitalI.php">
-                          <span class="menu-title">Update/Deactivte</span>
+                          <span class="menu-title">View/Deactivte</span>
                         </a>
                       </li>
                       <li class="menu-item">
@@ -266,7 +266,7 @@ echo "
                               
                                <input type='hidden' value=".$row["WardDoctor_ID"]." name='WardDoctor_ID' id='WardDoctor_ID' class='box'>
                               <label for='exampleFormControlInput1' class='form-label lbl star'>Name with Initials</label> 
-                             <input type='text' value=".$row["Name_With_Initials"]." name='Name' id='name' class='form-control txt-input'>
+                             <input type='text' value='$row[Name_With_Initials]' name='Name' id='name' class='form-control txt-input'>
 							 
                              <label for='exampleFormControlInput1' class='form-label lbl star'>Hospital name </label>
                              <select name= 'hospital' class='form-control txt-input' required>

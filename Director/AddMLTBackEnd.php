@@ -11,41 +11,6 @@ require 'phpmailer/src/Exception.php';
 require 'phpmailer/src/PHPMailer.php';
 
 require 'phpmailer/src/SMTP.php';
-//require 
-if(isset($_POST["BtnSubmit"])){
-   
-$mail = new PHPMailer(true);
-$mail->isSMTP();
-$mail->Host = 'smtp.gmail.com';
-$mail ->SMTPAuth = true;
-$mail->Username = 'wmadushi49@gmail.com';
-$mail->Password = 'zswherapcjuvbtgr';
-$mail->SMTPSecure ='ssl';
-$mail->Port = 465;
-
-
-$mail->setFrom('wmadushi49@gmail.com');
-
-$mail->addAddress($_POST["Email"]);
-$mail->isHTML(true);
-
-$mail->Subject=$_POST["subject"];
-$mail->Body = $_POST["message"];
-$mail->SMTPDebug = true;
-$mail->send();
-
-echo '<script type="text/javascript">';
-echo 'alert("Successfully added and sent the email");';
-
- echo 'window.location.href="Home.php";';
-echo '</script>';
-
-
-
-
-
-
-}
 
 
 
@@ -53,10 +18,7 @@ echo '</script>';
 
 
 ?>
-<?php 
-session_start();
 
-?>
 
 <?php
 
@@ -74,6 +36,30 @@ if(isset($_POST['BtnSubmit']))
 	$m= $_SESSION["Name"];
   $DOA=$_POST["DOA"];
 $m= $_SESSION["Name"];
+
+
+$check1= "select * from system_users where UserName ='$Email'";
+$resultc1 = $conn->query($check1);
+if(!empty($resultc1) && $resultc1->num_rows>0)
+
+{
+
+
+ echo '<script type="text/javascript">';
+ echo 'alert("Email already exists");';
+ 
+  echo 'window.location.href="AddMLTI.php";';
+ echo '</script>';
+
+
+
+}
+
+ 
+   
+      else
+      {
+
 
 	$query = "select * from director where UserName ='$m'";
 
@@ -105,7 +91,7 @@ if($resultd->num_rows>0)
 	
 }	
 
-
+$y = null;
      			
 		$vql="select *from hospital where HospitalName='$HName'";	
 		
@@ -143,40 +129,58 @@ $jql="insert into system_users(User_ID,UserName,Password,Type)VALUES('','$Uname'
 if($conn->query($jql))
 {
  
-	echo '<script type="text/javascript">';
-	//echo 'alert("user successfully");';
-	
-	// echo 'window.location.href="AddMLTI.php";';
-	echo '</script>';
 
  
  
- 
-}
-else
-{
+  $sql="insert into mlt(MLT_ID,Name_With_Initials,Hospital_ID,HospitalName,SLMC_Number,Email,ContactNumber,UserName,Password,AppointmentDate,Remark,Director_ID)VALUES('','$Name','$y','$HName','$SLMC','$Email','$contactNumber','$Uname','$password','$DOA','Added','$x')";
+  if($conn->query($sql))
+   { 
+
+
+    $mail = new PHPMailer(true);
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com';
+    $mail ->SMTPAuth = true;
+    $mail->Username = 'wmadushi49@gmail.com';
+    $mail->Password = 'zswherapcjuvbtgr';
+    $mail->SMTPSecure ='ssl';
+    $mail->Port = 465;
+    
+    
+    $mail->setFrom('wmadushi49@gmail.com');
+    
+    $mail->addAddress($_POST["Email"]);
+    $mail->isHTML(true);
+    
+    $mail->Subject=$_POST["subject"];
+    $mail->Body = $_POST["message"];
+    
+    $mail->send();
+    
+    echo '<script type="text/javascript">';
+    echo 'alert("Successfully added and sent the email");';
+    
+     echo 'window.location.href="Home.php";';
+    echo '</script>';
+    
+    
+   }
+
+  else
+   {
 	
 	  
-	echo '<script type="text/javascript">';
+	  echo '<script type="text/javascript">';
 	  echo "Error in ".$jql."<br>".$conn->error;
    
-	echo 'alert("Error in entering try again!");';
-
-	echo '</script>';
+	  echo 'alert("Error in entering try again!");';
+  
+   	echo '</script>';
 	 
 
 	
-}
+ }
 
-    $sql="insert into MLT(MLT_ID,Name_With_Initials,Hospital_ID,HospitalName,SLMC_Number,Email,ContactNumber,UserName,Password,AppointmentDate,RetiringDate,Remark,Director_ID)VALUES(' ','$Name','$y','$HName','$SLMC','$Email','$contactNumber','$Uname','$password','$DOA','','Added','$x')";
-    if($conn->query($sql))
-     {
-      
-	     echo '<script type="text/javascript">';
-		// echo 'alert("Added successfully");';
-         
-	      //echo 'window.location.href="AddMLTI.php";';
-		 echo '</script>';
 
 	?>  
 	
@@ -395,17 +399,7 @@ else
           </div>
           
           
-		  
-	 <div class="container-shadow">
-  </div>
-  <div class="container">
-    <div class="wrap">
-     
-   <div class="headings">
-       <span><h1>Email</h1></span>
-      
-      </div>
-		
+
 		<style>
 textarea {
   width: 100%;
@@ -463,7 +457,7 @@ textarea {
  
 	
 }
- 
+}
 $conn->close();
 
 ?>

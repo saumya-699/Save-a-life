@@ -21,7 +21,7 @@ table{
 	border-collapse: collapse;	
 		margin-top:5px;
    border:0px transparent;
-margin-left:160px;   
+margin-left:95px;   
  	
 }
 
@@ -61,10 +61,14 @@ h1{
  height:35px;
  width:138px;
  border-radius:20px;
- background-color:#56CE94;
+ background-color:#F35050;
   border: none;
  text-align:center;
-                     
+ margin-left:176px;
+ margin-top:100px;
+ margin-bottom:50px;
+                    color:white; 
+
   
 						
 	
@@ -104,10 +108,11 @@ h1{
 					width:200px;
 					
 					margin-left:20px;
-					margin-top:0px;
+					
 				   border-radius:20px;
 				   border: none;
 				   text-align:center;
+				   margin-top:100px;
                      
            
                }
@@ -119,12 +124,14 @@ h1{
                           width:130px;
                           
 						  color:#FFF5F3;
-						  margin-left:46px;
+						  margin-left:6px;
 						   border-radius:20px;
                            
-                           background-color:#F3506D;
+						   background-color:#F35050;
 						   border: none;
 						   cursor:pointer;
+						   margin-top:100px;
+						   margin-bottom:50px;
 						   
 				            
 				  

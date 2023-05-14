@@ -3,12 +3,6 @@ session_start();
 
 ?>
 
-
- 
-<?php
-
-include 'see.php';
-?>
 <html>
 
 <head>
@@ -50,7 +44,7 @@ include 'see.php';
 <?php
 
 
-require 'conection.php';
+require 'conp.php';
     
 $sql= "select * from pre_medical" ;
 $result = $conn->query($sql);

@@ -2,6 +2,20 @@
 session_start();
 include "config.php";
 
+if (isset($_SESSION["ID"])) {
+  include "config.php";
+  $m = $_SESSION["Name"];
+  $date = date("Y/m/d");
+  $query = "SELECT * FROM mlt WHERE UserName ='$m'";
+  $result1 = $conn->query($query);
+
+  if ($result1->num_rows > 0) {
+    while ($row = $result1->fetch_assoc()) {
+      $x = $row["MLT_ID"];
+      $y = $row["Hospital_ID"];
+    }
+  }
+}
 $sql = "SELECT * FROM blood_testing_result";
 $result = $conn->query($sql);
 
@@ -131,13 +145,27 @@ $result = $conn->query($sql);
                 </div>
               </li>
 
-              <li class="menu-item">
-                <a href="Report.php">
+              <li class="menu-item sub-menu">
+                <a href="#">
                   <span class="menu-icon">
-                    <i class="ri-file-chart-line"></i>
+                    <i class="ri-file-edit-fill"></i>
                   </span>
                   <span class="menu-title">Reports</span>
                 </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Report.php">
+                        <span class="menu-title">Blood Testing Report</span>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="Report1.php">
+                        <span class="menu-title">Cross Matching Report</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
 
 
@@ -151,14 +179,86 @@ $result = $conn->query($sql);
 
                 </a>
               </li>
-              <li class="menu-item">
+              <li class="menu-item sub-menu">
                 <a href="#">
                   <span class="menu-icon">
                     <i class="ri-notification-line"></i>
                   </span>
-                  <span class="menu-title">Notification</span>
+                  <?php
 
+                  $sql = "SELECT COUNT(countS) AS total_count FROM (
+                    SELECT COUNT(*) AS countS FROM donation_records WHERE Hospital_ID='$y' and End_donation ='1' and AddStatus='0' GROUP by Batch,Donation_date) AS subquery";
+
+                  $results = $conn->query($sql);
+
+                  if ($results->num_rows > 0) {
+                    $row = $results->fetch_assoc();
+                    $status = $row["total_count"];
+                    if ($status > 0) {
+                      echo '<span class="icon-button__badge">' . $status . '</span>';
+                    }
+                  }
+
+                  ?>
+
+
+
+
+                  <?php
+                  $rql = "SELECT COUNT(*) AS countS FROM blood_request WHERE Hospital_ID = '$y' AND status='Available' and CrossMatching_Add='0'";
+                  $result1 = $conn->query($rql);
+                  if ($result1->num_rows > 0) {
+                    $row = $result1->fetch_assoc();
+                    $status = $row["countS"];
+                    if ($status > 0) {
+                      echo '<span class="icon-button__badge2">' . $status . '</span>';
+                    }
+                  }
+                  ?>
+                  <span class="menu-title">Notifications</span>
                 </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Notifications.php">
+                        <span class="menu-title"> <?php
+
+                                                  $sql = "SELECT COUNT(countS) AS total_count FROM (
+                                                 SELECT COUNT(*) AS countS FROM donation_records WHERE Hospital_ID='$y' and End_donation ='1' and AddStatus='0' GROUP by Batch,Donation_date) AS subquery";
+
+                                                  $results = $conn->query($sql);
+
+                                                  if ($results->num_rows > 0) {
+                                                    $row = $results->fetch_assoc();
+                                                    $status = $row["total_count"];
+                                                    if ($status > 0) {
+                                                      echo '<span class="icon-button__badge3">' . $status . '</span>';
+                                                    }
+                                                  }
+
+                                                  ?>
+
+                          <span>Donation</span>
+                      </a>
+
+                    <li class="menu-item">
+                      <a href="Notifications1.php">
+                        <span class="menu-title">
+                          <?php
+                          $rql = "SELECT COUNT(*) AS countS FROM blood_request WHERE Hospital_ID = '$y' AND status='Available' and CrossMatching_Add='0'";
+                          $result1 = $conn->query($rql);
+                          if ($result1->num_rows > 0) {
+                            $row = $result1->fetch_assoc();
+                            $status = $row["countS"];
+                            if ($status > 0) {
+                              echo '<span class="icon-button__badge5">' . $status . '</span>';
+                            }
+                          }
+                          ?>Cross Matching Testing</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
               <li class="menu-item">
                 <a href="logout.php">
@@ -179,262 +279,327 @@ $result = $conn->query($sql);
       <main class="content">
         <div>
           <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
-          <h1>Send blood test results for approval</h1>
-
-          <form method="post" action="Send test results for approval1Search.php">
-
-            <div class="midiv">
-
-
-              <font size=3> Search by </font></b> <br /> <br /><select name="search" class="select">
-                <option value="test_result_id"><b>Test result ID</b></option>
-                <option value="donar_id"><b> Donar ID</b></option>
-                <option value="blood_group"><b>Blood group</b></option>
-                <option value="malaria_result" selected><b>Malaria result</b></option>
-                <option value="hiv_result"><b> HIV result</b></option>
-                <option value="hbv_result"><b>HBV result</b></option>
-                <option value="hcv_result"><b>HCV result</b></option>
-                <option value="vdrl_result"><b>VDRL result</b></option>
-                <option value="process_date" selected><b>Processed Date</b></option>
-                <option value="batch_number" selected><b>Batch number</b></option>
-              </select>
+          <h1> Send Blood Test Results for Approval</h1>
 
 
 
-              <input type="text" placeholder="type here" name="data" id="data" class="box">
 
-              <button type="submit" name="BtnSubmit" id="search" class="b1"><b>Search</b></button>
-            </div>
 
-        </div>
+          </form>
+          <?php
+          if (isset($_SESSION["ID"])) {
+            include "config.php";
+            $m = $_SESSION["Name"];
+            $query = "SELECT * FROM mlt WHERE UserName ='$m'";
+            $result1 = $conn->query($query);
 
-        </form>
-        <?php
-        if (isset($_SESSION["ID"])) {
-          include "config.php";
-          $m = $_SESSION["Name"];
-          $query = "SELECT * FROM mlt WHERE UserName ='$m'";
-          $result1 = $conn->query($query);
-
-          if ($result1->num_rows > 0) {
-            while ($row = $result1->fetch_assoc()) {
-              $x = $row["MLT_ID"];
-              $y = $row["Hospital_ID"];
+            if ($result1->num_rows > 0) {
+              while ($row = $result1->fetch_assoc()) {
+                $x = $row["MLT_ID"];
+                $y = $row["Hospital_ID"];
+              }
             }
           }
-        }
 
 
 
-        if (isset($_POST['view'])) {
+          if (isset($_POST['view'])) {
 
-          $did = $_POST['RequestID'];
-          $batchid = $_POST['Requestbatch'];
-          $sql = "SELECT * FROM blood_testing_result where process_date ='$did' AND MLT_ID='$x' AND batch_number='$batchid'";
-          $result = $conn->query($sql);
-
-
-          echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;width:200px;'>" . "Test result ID" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Donar ID" . "</th>" . "<th style='text-align:center;width:100px;'>" . "Blood group" . "</th>" . "<th>" . "Malaria result" . "</th>" . "<th>" . " HIV result" . "</th>" . "<th>" . "HBV result" . "</th>" . "<th>" . "HCV result" . "</th>" . "<th>" . "VDRL result" . "</th>" . "<th>" . "Processed Date" . "</th>" . "<th>" . "Batch number" . "</th>" . "</tr>";
-          echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
-          while ($row = $result->fetch_assoc()) {
-            echo  "<tr>" . "<td>" . $row["test_result_id"] . "</td>" . "<td>" . $row["Donor_Id"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "<td>" . $row["malaria_result"] . "</td>" . "<td>" . $row["hiv_result"] . "</td>" . "<td>" . $row["hbv_result"] . "</td>" . "<td>" . $row["hcv_result"] . "</td>" . "<td>" . $row["vdrl_result"] . "</td>" . "<td>" . $row["process_date"] . "</td>" . "<td>" . $row["batch_number"] . "</td>" ;
-
-            echo "</tr>";
-
-            echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
-          }
-          echo  "</font>";
-          echo  "</font>";
-          echo "</table>";
-        } else {
-          echo "Error in " . $sql . "<br>" . $conn->error;
-
-          echo "no results";
-        }
-
-        $conn->close();
-        ?>
-
-        <style>
-          table {
+            $did = $_POST['RequestID'];
+            $batchid = $_POST['Requestbatch'];
+            $sql = "SELECT * FROM blood_testing_result where process_date ='$did' AND MLT_ID='$x' AND batch_number='$batchid'";
+            $result = $conn->query($sql);
 
 
+            echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;width:200px;'>" . "Test result ID" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Donar ID" . "</th>" . "<th style='text-align:center;width:100px;'>" . "Blood group" . "</th>" . "<th>" . "Malaria result" . "</th>" . "<th>" . " HIV result" . "</th>" . "<th>" . "HBV result" . "</th>" . "<th>" . "HCV result" . "</th>" . "<th>" . "VDRL result" . "</th>"  . "</tr>";
+            echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=10'>" . "</td>" . "</tr>";
+            while ($row = $result->fetch_assoc()) {
+              echo  "<tr>" . "<td>" . $row["test_result_id"] . "</td>" . "<td>" . $row["Donor_Id"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "<td>" . $row["malaria_result"] . "</td>" . "<td>" . $row["hiv_result"] . "</td>" . "<td>" . $row["hbv_result"] . "</td>" . "<td>" . $row["hcv_result"] . "</td>" . "<td>" . $row["vdrl_result"] . "</td>" . "<td>";
 
-            width: 750px;
-            height: 15px;
-            border-collapse: collapse;
-            margin-top: 40px;
-            margin-left: 80px;
-            border: 0px transparent;
+              echo "</tr>";
 
+              echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=10'>" . "</td>" . "</tr>";
+            }
+            echo  "</font>";
+            echo  "</font>";
+            echo "</table>";
+          } else {
+            echo "Error in " . $sql . "<br>" . $conn->error;
+
+            echo "no results";
           }
 
-          h1 {
+          $conn->close();
+          ?>
+          <button class="b2" name="back" value="back">
+            <font size="2px"><a href="Send test results for approval.php">Back</font size></a>
+          </button>
+          <style>
+            table {
 
-            margin-top: 70px;
-            margin-left: 200px;
-            margin-bottom: 100px;
-          }
+              width: 750px;
+              height: 15px;
+              border-collapse: collapse;
+              margin-top: -60px;
+              margin-left: 20px;
+              border: 0px transparent;
 
-          .select {
+            }
 
-            height: 30px;
-            width: 120px;
-            border-radius: 20px;
-            background-color: #56CE94;
-            border: none;
-            text-align: center;
-            margin-left: 30px;
-
-          }
-
-          .box {
-
-            height: 30px;
-            width: 130px;
-            margin-left: 20px;
-            margin-top: 0px;
-            border-radius: 20px;
-            border: none;
-            text-align: center;
-
-          }
-
-          .b1 {
-            height: 30px;
-            width: 100px;
-            color: #FFF5F3;
-            margin-left: 20px;
-            border-radius: 20px;
-            background-color: #F3506D;
-            border: none;
-            cursor: pointer;
-
-          }
-
-          th {
-
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            text-align: center;
-            padding-top: 25px;
-            padding-bottom: 25px;
-            padding-left: 20px;
-            padding-right: 10px;
-            border: 0px transparent;
-
-          }
+            .b2 {
 
 
-
-          td {
-            text-align: center;
-            padding: 1px;
-
-
-          }
-
-
-          .midiv {
-
-            margin-left: 150px;
-            margin-bottom: -50px;
-            padding: 15px 10px 30px 20px;
-            margin-top: -100px;
-            outline: none;
-            width: 774.5px;
-          }
-
-
-
-
+              border: none;
+              cursor: pointer;
+              margin-top: 20px;
+              margin-bottom: 30px;
+              margin-left: 770px;
+              margin-right: 10px;
+              width: 130px;
+              height: 40px;
+              border-radius: 30px;
+              background: #4082f5;
+              text-transform: uppercase;
+              box-shadow: 0px 10px 40px 0px rgba(17, 97, 237, 0.4);
+              font-weight: 700;
+              font-size: 14px;
+            }
+            a {
+                text-decoration: none;
+                color: white;
+                cursor: pointer;
+              }
 
 
+            h1 {
 
+              margin-top: 70px;
+              margin-left: 200px;
+              margin-bottom: 100px;
+            }
 
-          .f2 {
+            .select {
 
-            margin-left: 50px;
-            margin-top: -100px;
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-            margin-bottom: 0px;
+              height: 30px;
+              width: 120px;
+              border-radius: 20px;
+              background-color: #56CE94;
+              border: none;
+              text-align: center;
+              margin-left: 30px;
 
+            }
 
-          }
+            .box {
 
+              height: 30px;
+              width: 130px;
+              margin-left: 20px;
+              margin-top: 0px;
+              border-radius: 20px;
+              border: none;
+              text-align: center;
 
-          .f1 {
+            }
 
-            background-color: transparent;
-            margin-left: 10px;
-            margin-right: 20px;
-            margin-bottom: 10px;
-            margin-top: 10px;
-            border: none;
-            cursor: pointer;
+            .b1 {
+              height: 30px;
+              width: 100px;
+              color: #FFF5F3;
+              margin-left: 20px;
+              border-radius: 20px;
+              background-color: #F3506D;
+              border: none;
+              cursor: pointer;
 
+            }
 
-          }
+            th {
 
-          .fp {
-            margin-top: 0px;
-            margin-left: 30px;
-            margin-bottom: -100px;
-            background-color: transparent;
-            border: none;
-            cursor: pointer;
-          }
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              text-align: center;
+              padding-top: 25px;
+              padding-bottom: 25px;
+              padding-left: 20px;
+              padding-right: 10px;
+              border: 0px transparent;
 
-          .tb {
-            display: inline-flex;
-            justify-content: space-evenly;
-            flex-wrap: nowrap;
-            align-items: baseline;
-            flex-direction: row;
-          }
+            }
+
+            .icon-button__badge {
+              position: absolute;
+              top: 7px;
+              right: 220px;
+              width: 15px;
+              height: 18px;
+              background: red;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
 
 
 
+            .icon-button__badge1 {
+              position: absolute;
+              top: 0;
+              right: 228;
+              width: 15px;
+              height: 18px;
+              background: green;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
 
-          .ta {
+            .icon-button__badge2 {
+              position: absolute;
+              top: 4px;
+              right: 239;
+              width: 15px;
+              height: 18px;
+              background: purple;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
 
-            background-color: #F5F5F5;
-            margin-top: 60px;
-            margin-bottom: 0px;
-            margin-left: 370px;
-            margin-right: 119px;
-            padding-left: 20px;
-
-          }
-
-
-
-          tr {
-
-            background-color: white;
-
-
-          }
-
-          .visible {
-            cursor: pointer;
+            .icon-button__badge3 {
+              position: absolute;
+              top: 15;
+              right: 235px;
+              width: 15px;
+              height: 18px;
+              background: red;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
 
 
-          }
+            .icon-button__badge5 {
+              position: absolute;
+              top: 115;
+              right: 235px;
+              width: 15px;
+              height: 18px;
+              background: purple;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
 
-          .layout {
-            background-color: #d9dbdb;
-          }
-        </style>
 
+            td {
+              text-align: center;
+              padding: 1px;
+
+
+            }
+
+
+
+
+
+
+
+
+
+
+            .f2 {
+
+              margin-left: 50px;
+              margin-top: -100px;
+              background-color: transparent;
+              border: none;
+              cursor: pointer;
+              margin-bottom: 0px;
+
+
+            }
+
+
+            .f1 {
+
+              background-color: transparent;
+              margin-left: 10px;
+              margin-right: 20px;
+              margin-bottom: 10px;
+              margin-top: 10px;
+              border: none;
+              cursor: pointer;
+
+
+            }
+
+            .fp {
+              margin-top: 0px;
+              margin-left: 30px;
+              margin-bottom: -100px;
+              background-color: transparent;
+              border: none;
+              cursor: pointer;
+            }
+
+            .tb {
+              display: inline-flex;
+              justify-content: space-evenly;
+              flex-wrap: nowrap;
+              align-items: baseline;
+              flex-direction: row;
+            }
+
+
+
+
+            .ta {
+
+              background-color: #F5F5F5;
+              margin-top: 60px;
+              margin-bottom: 0px;
+              margin-left: 370px;
+              margin-right: 119px;
+              padding-left: 20px;
+
+            }
+
+
+
+            tr {
+
+              background-color: white;
+
+
+            }
+
+            .visible {
+              cursor: pointer;
+
+
+            }
+
+            .layout {
+              background-color: #d9dbdb;
+            }
+          </style>
+
+
+        </div>
+      </main>
 
     </div>
-    </main>
-
-  </div>
   </div>
   <!-- partial -->
   <script src='https://unpkg.com/@popperjs/core@2'></script>
