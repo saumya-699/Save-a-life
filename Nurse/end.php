@@ -414,13 +414,13 @@ $y=null;
       <?php } ?>
     </table>
   <?php } else { ?>
-    <p>Donation details are sent.</p>
+    <p><center>Donation details are sent.<center></p>
   <?php } ?>
   <?php
 echo "
      <form method='POST' action =''>  	
     
-    <button type=submit value=Send name='send'  class='button2'>End blood <br> collection</button>
+    <button type=submit value=Send name='send'  class='button2' onclick='return confirmEndCollection()' >End blood <br> collection</button>
 
      </form>
 
@@ -433,11 +433,21 @@ echo "
       
       $updateSqlSend= "UPDATE donation_records SET End_donation	='1'";
       $send=mysqli_query($conn,$updateSqlSend);
-        // var_dump($bdate,$bnum);
-        // <input type='submit' name='$bnum' value='Send'>
+       
 
 
     }?>
+<script>
+function confirmEndCollection() {
+    var confirmResult = confirm("Are you sure you want to start the blood collection?");
+    if (confirmResult) {
+        window.location.href = "Home.php";
+    }
+    return false;
+}
+</script>
+
+
     </div>
 
        </main>

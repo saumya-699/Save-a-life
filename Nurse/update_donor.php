@@ -171,7 +171,7 @@ session_start();
 <?php
 
 
-require 'conection.php';
+require 'conp.php';
 if(isset($_POST['update']))  
 
 {	
@@ -213,10 +213,13 @@ echo "
                               <label for='exampleFormControlInput1' class='form-label lbl star'>NIC Number</label>
                                <input type='text' value=".$row["NIC_Number"]." name='NIC' id='slmc' class='form-control txt-input'>
 
-                               <label for='exampleFormControlInput1' class='form-label lbl star'>DOB</label>
+                               <label for='exampleFormControlInput1' class='form-label lbl star'>Date of Birth</label>
                                <input type='text' value=".$row["DOB"]." name='NIC' id='slmc' class='form-control txt-input' >
+
+                               <label for='exampleFormControlInput1' class='form-label lbl star'>Blood Group</label>
+                               <input type='text' value=".$row["blood_group"]." name='blood group' id='slmc' class='form-control txt-input' >
 							   
-							    <label for='exampleFormControlInput1' class='form-label lbl star'>E-mail</label>
+							                <label for='exampleFormControlInput1' class='form-label lbl star'>E-mail</label>
                                <input type='text' value=".$row["Email"]." name='Address' class='form-control txt-input'  >
           
                                 
