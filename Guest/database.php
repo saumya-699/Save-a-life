@@ -7,9 +7,9 @@ class Database {
     private $connection = null;
 
     private function __construct() {
-        $db = 'testdb';
-        $username = 'admin';
-        $password = '1234';
+        $db = 'ci';
+        $username = 'root';
+        $password = '';
         $server = 'localhost:3306';
 
         $this->connection = mysqli_connect($server, $username, $password, $db) or die('Database error');
@@ -18,7 +18,7 @@ class Database {
         }
     }
 
-    public static function getInstance() {
+	public static function getInstance() {
         if (!isset(self::$instance)) {
             self::$instance = new Database();
         }
@@ -32,10 +32,10 @@ class Database {
         }
     }
 
-    public function checkUserExists($username, $password) {
+	public function checkDonorExists($username, $password) {
         $this->validate();
 
-        $query = "SELECT * FROM user_nbts WHERE user_name='$username' AND password='$password'";
+        $query = "SELECT * FROM donors WHERE username='$username' AND password='$password'";
         if ($rSet = mysqli_query(self::$instance->connection, $query)) {
             $cnt = mysqli_num_rows($rSet);
             if ($cnt > 0) {
@@ -52,13 +52,15 @@ class Database {
         $rSet = mysqli_query(self::$instance->connection, $query);
         if ($rSet) {
             return $rSet;
-        }
+	} else {
+		return mysqli_error(self::$instance->connection);
+	}
 
-        return null;
+		return null;
     }
 
     public function getUserData($username) {
-        $query = "SELECT * FROM user_nbts WHERE user_name='$username'";
+        $query = "SELECT * FROM donors WHERE username='$username'";
         $rSet = self::executeQuery($query);
         $firstrow = mysqli_fetch_assoc($rSet);
 

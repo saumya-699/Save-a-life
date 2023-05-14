@@ -1,36 +1,116 @@
 <?php
 session_start();
+include "config.php";
 if (isset($_SESSION["ID"])) {
   include "config.php";
   $m = $_SESSION["Name"];
-  $date = date("Y/m/d");
   $query = "SELECT * FROM mlt WHERE UserName ='$m'";
   $result1 = $conn->query($query);
 
   if ($result1->num_rows > 0) {
     while ($row = $result1->fetch_assoc()) {
-      $x = $row["MLT_ID"];
-      $y=$row["Hospital_ID"];
-
+      $x = $row["Name_With_Initials"];
+      $y = $row["Hospital_ID"];
     }
   }
-}?>
-<!DOCTYPE html>
-<html lang="en">
+}
 
+?>
+
+
+<html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>side-MLT</title>
+  <title>Side bar</title>
   <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
-  <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
-  <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'>
-  <link rel="stylesheet" href="./style.css">
-  <link rel="stylesheet" href="./stylek2.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
+<link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./style.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script><link rel="stylesheet" href="./update_profile.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<style>
+  input[type="text"]:read-only, input[type="date"]:read-only{
+    background-color:rgba(255, 255, 255, 0.5);
+    color:rgba(0, 0, 0, 0.7);
+  }
+  .icon-button__badge {
+      position: absolute;
+      top: 7px;
+      right: 220px;
+      width: 15px;
+      height: 18px;
+      background: red;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
+
+
+
+    .icon-button__badge1 {
+      position: absolute;
+      top: 0;
+      right: 228;
+      width: 15px;
+      height: 18px;
+      background: green;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
+
+    .icon-button__badge2 {
+      position: absolute;
+      top: 4px;
+      right: 239;
+      width: 15px;
+      height: 18px;
+      background: purple;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
+
+    .icon-button__badge3 {
+      position: absolute;
+      top: 15;
+      right: 235px;
+      width: 15px;
+      height: 18px;
+      background: red;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
+
+
+    .icon-button__badge5 {
+      position: absolute;
+      top: 115;
+      right: 235px;
+      width: 15px;
+      height: 18px;
+      background: purple;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-radius: 50%;
+    }
+  </style>
+
 
 </head>
+
 
 <body>
   <!-- partial:index.partial.html -->
@@ -64,11 +144,10 @@ if (isset($_SESSION["ID"])) {
                   </span>
                   <span class="menu-title">View donated blood</span>
                 </a>
-              </li>
               <li class="menu-item sub-menu">
                 <a href="#">
                   <span class="menu-icon">
-                    <i class="ri-file-edit-fill"></i>
+                    <i class="ri-article-fill"></i>
                   </span>
                   <span class="menu-title">Enter test results</span>
                 </a>
@@ -173,9 +252,9 @@ if (isset($_SESSION["ID"])) {
               </li>
 
 
-              <li class="menu-header" style="padding-top: 40px"><span> | </span></li>
+              <li class="menu-header" style="padding-top: 40px"><span> </span></li>
               <li class="menu-item">
-              <a href="Profile.php">
+                <a href="Profile.php">
                   <span class="menu-icon">
                     <i class="ri-user-line"></i>
                   </span>
@@ -284,175 +363,67 @@ if (isset($_SESSION["ID"])) {
         <div>
           <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
         </div>
+            <?php include('get_info.php') ?>
+            <?php 
+                if(isset($_SESSION['update-user'])){
+                    echo $_SESSION['update-user'];
+                    unset($_SESSION['update-user']);
 
-        <div class="container-shadow">
-          <div class="container">
-            <div class="wrap">
-              <div class="headings">
-                <center>
-                  <h1> Cross Matching Test Result</h1>
-                  <center>
-              </div>
-              <?php
-              include "config.php";
-              if (isset($_POST['view'])) {
+                }
+                if(isset($_SESSION['change-pwd']))
+                {
+                    echo $_SESSION['change-pwd'];
+                    unset($_SESSION['change-pwd']);
 
-                $did = $_POST['RID'];
-                $id = $_POST['ID'];
+                }
+            ?> 
 
-
-              ?>
-                <form action="Create_Cross matching test result1.php" method="POST">
-
-                  <label for="exampleFormControlInput1" class="form-label lbl star"> Request ID</label>
-                  <input type="text" class="form-control txt-input" name="request_id" value="<?php echo $did ?>">
-
-                  <label for="exampleFormControlInput1" class="form-label lbl star">Blood Group</label>
-                  <input type="text" class="form-control txt-input" name="blood_group" value="<?php echo $id ?>">
-
-                  <label for="exampleFormControlInput1" class="form-label lbl star" >Blood Group test result</label>
-                  <select name="blood_group" id="blood_group" class="form-control txt-input" required>
-                    <option value="" disabled selected > Select group </option>
-                    <option value="O-">O-</option>
-                    <option value="O+">O+</option>
-                    <option value="A-">A-</option>
-                    <option value="A+">A+</option>
-                    <option value="B-">B-</option>
-                    <option value="B+">B+</option>
-                    <option value="AB-">AB-</option>
-                    <option value="AB+">AB+</option>
-                  </select>
-
-                  <label for="exampleFormControlInput1" class="form-label lbl star" >Cross matching result</label>
-                  <select name="Cross_matching_test_result" id="Cross_matching_test_result" class="form-control txt-input " required>
-                    <option value="" disabled selected>Select test result </option>
-                    <option value="Matched">Matched</option>
-                    <option value="Unmatched">Unmatched</option>
-
-                  </select>
-
-                  <label for="exampleFormControlInput1 " class="form-label lbl star ">Special Note</label>
-                  <textarea name="Note" id=" " cols="30 " rows="10 " class="input " placeholder="Type note "></textarea>
-
-
-                  <div class="buttons ">
-                    <button class="b1" name="submit" value="submit" value="submit">
-                      <font size="2px">Add</font>
-                    </button>
-                </form> &nbsp; &nbsp; &nbsp; &nbsp;
-                &nbsp; &nbsp; &nbsp; &nbsp;<button class="b1" name="cancel" value="cancel"><a href="Cross matching test result.php">
-                    <font size="2px">Cancel</font>
-                  </a></button>
+            <div class="container-shadow">
             </div>
+            <div class="container">
+              <div class="wrap">
+                <div class="headings">
+                  <center><span><h1>Profile</h1></span><center>
+                
+                </div>
+                    
+                    <label for="exampleFormControlInput1" class="form-label lbl star">Name with Initials</label>
+                   <input type="text" class="form-control txt-input" value="<?php echo $name; ?>" readonly>
+                           
+                    <label for="exampleFormControlInput1" class="form-label lbl star">SLMC Number</label>
+                    <input type="text" class="form-control txt-input" value="<?php echo $slmc; ?>" readonly>
 
+                    <label for="exampleFormControlInput1" class="form-label lbl star">Hospital Name</label>
+                    <input type="text" class="form-control txt-input" value="<?php echo $hospital; ?>" readonly>
 
-          <?php } ?>
+                    <label for="exampleFormControlInput1" class="form-label lbl star">Email</label>
+                    <input type="text" class="form-control txt-input" value="<?php echo $email;?> " readonly>
 
-          </div>
-        </div>
+                    <label for="exampleFormControlInput1" class="form-label lbl star">Contact Number</label>
+                    <input type="text" class="datepicker_input form-control txt-input" value="<?php echo $contact; ?>" readonly>
+
+                    <label for="exampleFormControlInput1" class="form-label lbl star">Date of Appointment</label>
+                    <input type="text" class="form-control txt-input" value="<?php echo $apponitmentdate;?> " readonly>
+
+                    <label for="exampleFormControlInput1" class="form-label lbl star">Username</label>
+                    <input type="text" class="form-control txt-input" value="<?php echo $username; ?>" readonly>
+                                      <br><br><br><br>
+                         
+                            <div class='row btn-buttons'>
+                                  
+                            <a href="update_profile.php"><input type='submit' name='BtnSubmit' value='Edit' class='b1'></a>
+                            <input type='submit' name='BtnSubmit' value='Cancel' class='b1' onclick='history.back()'>
+                            
+                              </div>
+               </form>
+</div>
+</div>
+          
+        </main>
+      </div>
     </div>
-  </div>
-  </div>
-  <div class="col " width="10 "></div>
-  </div>
-  
-  </main>
-  </div>
-  </div>
-  <!-- partial -->
-  <script src='https://unpkg.com/@popperjs/core@2'></script>
-  <script src="./script.js"></script>
-  <style>
-    .container-shadow {
-      position: absolute;
-      height: 540px;
+<!-- partial -->
+<script src='https://unpkg.com/@popperjs/core@2'></script><script  src="./script.js"></script>
 
-    }
-
-    .container {
-      position: absolute;
-      height: 700px;
-
-      box-shadow: 0px 0px 50px -20px #000;
-    }
-
-    .buttons {
-      margin-top: 20px;
-    }
-    .icon-button__badge {
-              position: absolute;
-              top: 7px;
-              right: 220px;
-              width: 15px;
-              height: 18px;
-              background: red;
-              color: #ffffff;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              border-radius: 50%;
-            }
-
-
-
-            .icon-button__badge1 {
-              position: absolute;
-              top: 0;
-              right: 228;
-              width: 15px;
-              height: 18px;
-              background: green;
-              color: #ffffff;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              border-radius: 50%;
-            }
-
-            .icon-button__badge2 {
-              position: absolute;
-              top: 4px;
-              right: 239;
-              width: 15px;
-              height: 18px;
-              background: purple;
-              color: #ffffff;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              border-radius: 50%;
-            }
-
-            .icon-button__badge3 {
-              position: absolute;
-              top: 15;
-              right: 235px;
-              width: 15px;
-              height: 18px;
-              background: red;
-              color: #ffffff;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              border-radius: 50%;
-            }
-
-
-            .icon-button__badge5 {
-              position: absolute;
-              top: 115;
-              right: 235px;
-              width: 15px;
-              height: 18px;
-              background: purple;
-              color: #ffffff;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              border-radius: 50%;
-            }
-
-  </style>
 </body>
-
 </html>
