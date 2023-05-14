@@ -140,7 +140,7 @@ color: #fff !important;}
 	  <ul>
 		<li class="menu-header"></li>
 		<li class="menu-item">
-		  <a href="#">
+		  <a href="../home/home.php">
 			<span class="menu-icon">
 			  <i class="ri-home-fill"></i>
 			</span>
@@ -150,7 +150,7 @@ color: #fff !important;}
 		  </div>
 		</li>
 		<li class="menu-item">
-		  <a href="#">
+		  <a href="../donar/doner_information.php">
 			<span class="menu-icon">
 			  <i class="ri-folder-user-fill"></i>
 			</span>
@@ -161,7 +161,7 @@ color: #fff !important;}
 		  </div>
 		</li>
 		<li class="menu-item">
-		  <a href="#">
+		  <a href="../donation_history/donation_history.html">
 			<span class="menu-icon">
 			  <i class="ri-history-line"></i>
 			</span>
@@ -172,7 +172,7 @@ color: #fff !important;}
 		  </div>
 		</li>
 		<li class="menu-item">
-		  <a href="#">
+		  <a href="../filldeclaration/filldecleration.php">
 			<span class="menu-icon">
 			  <i class="ri-file-edit-fill"></i>
 			</span>
@@ -183,7 +183,7 @@ color: #fff !important;}
 	  
 		<li class="menu-header" style="padding-top: 40px"><span>|</span></li>
 		<li class="menu-item">
-		  <a href="#">
+		  <a href="../donar/doner_information.php">
 			<span class="menu-icon">
 			  <i class="ri-user-line"></i>
 			</span>

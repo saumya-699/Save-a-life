@@ -70,7 +70,7 @@ if (isset($_SESSION['username'])) {
             <ul>
                 <li class="menu-header"></li>
                 <li class="menu-item">
-                  <a href="/Save-a-life/Guest/home/home.php">
+                  <a href="/Save-a-life/Guest/home/home.php" class="active">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -146,15 +146,17 @@ if (isset($_SESSION['username'])) {
       <div class="layout">
         <main class="content">
           <!-- add your content from here -->
-         
-          <div class="frm-login ">
-                    <div class="card frm-form ">
-                        <div class="card-body frm-body ">
+          <div class="frm-login" style="margin-top:60px!important;width:100px;">
+                    <div class="card frm-form" style="">
+                        <div class="card-body frm-body" style="margin-left: 10%;
+                       text-align: center !important;
+                       width: auto !important;
+                        margin-top: 30%;line-height: 4rem">
                             
 
-                                <h1 class="txt-l ">Welcome back to NBTS</h1>
-			<h1 class="txt-l ">Dear <?php echo $display_name ?></h1>
-			<h2 class="txt-l ">You have sucessfully accessed to your Donor Account</h1>
+                                <h1>Welcome back to NBTS</h1>
+			<h1>Dear <?php echo $display_name ?></h1>
+			<h2>You have sucessfully accessed to your Donor Account</h1>
                                 
 
                         </div>

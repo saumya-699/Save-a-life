@@ -9,6 +9,9 @@
     padding: 0 1.5rem;
     height: 180px;
 }
+.active{
+color:#ffffff !important;
+}
 
 .header-m {
   background-color: #0c1e35;
