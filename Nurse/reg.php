@@ -196,7 +196,7 @@ session_start();
                            <input type="text" name="fullname" class="form-control txt-input" placeholder="Type your Full Name" pattern="[A-Za-z\s]+" required>
                     
                             <label for="exampleFormControlInput1" class="form-label lbl star">Name with Initials</label>
-                            <input type="text" class="form-control txt-input" placeholder="Type your Name with Initials" name="Initials" pattern="[A-Za-z\s]+" required>
+                            <input type="text" class="form-control txt-input" placeholder="Type your Name with Initials" name="Initials" pattern="[A-Z](\.{1-200})+\s[A-Z][a-zA-Z]+" required>
                     
                             <label for="exampleFormControlInput1" class="form-label lbl star">NIC No</label>
                             <input type="text" class="form-control txt-input" placeholder="Type NIC Number" name="NIC" pattern="[0-9]{9}[Vv0-9]{1,3}" required>
@@ -217,7 +217,7 @@ session_start();
                             </select>
                     
                             <label for="exampleFormControlInput1" class="form-label lbl star">Address</label>
-                            <input type="text" textarea name="address" id="" cols="40" rows="10" class="form-control txt-input" placeholder="Type your Address" pattern="[0-9a-zA-Z\s,.-]+" required></textarea>
+                            <input type="text"  class="form-control txt-input" placeholder="Type your Address" name="address" required>
                     
                             <label for="exampleFormControlInput1" class="form-label lbl star">Province</label>
                             <select name="province" id="" class="form-control txt-input" required>Province
@@ -234,7 +234,7 @@ session_start();
                             </select>
                     
                             <label for="exampleFormControlInput1" class="form-label lbl star">Postal Code</label>
-                            <input type="text" class="form-control txt-input" placeholder="Type the Postal Code of your Area" name="postal" pattern="[0-9]{5}" required>
+                            <input type="text" class="form-control txt-input" placeholder="Type the Postal Code of your Area" name="postal" pattern="[0-9]{6}" required>
                     
                             <label for="exampleFormControlInput1" class="form-label lbl star">Telephone Number (Mobile)</label>
                             <input type="tel" class="form-control txt-input" placeholder="eg:0777123456" name="mobile" pattern="[0-9]{10}" required>

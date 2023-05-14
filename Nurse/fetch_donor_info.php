@@ -6,7 +6,7 @@ session_start();
 <?php
 
 //make connection here
-require 'conection.php'; 
+require 'conp.php'; 
 
 // Check connection
 if ($conn->connect_error) {

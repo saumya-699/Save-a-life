@@ -177,7 +177,7 @@ if ($result->num_rows > 0) {
      </h4>";
 		echo '<form method="POST" action="end.php">';
     echo"<div class='center'>";
-		echo "<button class='button' name='BtnSubmit'> Start Blood Collection";
+		echo "<button class='button' name='BtnSubmit' onclick='return confirmStartCollection()'> Start Blood Collection";
         echo "</button>";
         echo "</div>";
 		echo "<form/>";
@@ -187,6 +187,11 @@ if ($result->num_rows > 0) {
 	 
 $conn->close();
 ?>
+<script>
+function confirmStartCollection() {
+    return confirm("Are you sure you want to start the blood collection?");
+}
+</script>
           
         </main>
       </div>
