@@ -41,7 +41,7 @@ if (isset($_POST['submit'])) {
 
 
   if ($_POST['Red_Cells'] == '1') {
-    $expiry_date = date("Y/m/d", strtotime("+120 days"));
+    $expiry_date = date("Y/m/d", strtotime("+42 days"));
     $blood_component = "Red Cells";
 
 
@@ -50,13 +50,15 @@ if (isset($_POST['submit'])) {
     $result = $conn->query($sql);
 
     if ($result == TRUE) {
-      header('location:successbc.php');
-    } else {
+      echo '<script type="text/javascript">';
+      echo 'alert("Added Successfully");';
+      echo 'window.location.href="Add blood components.php";';
+      echo'</script>';     } else {
       echo "Error:" . $sql . "<br>" . $conn->error;
     }
   }
   if ($_POST['White_Cells'] == '1') {
-    $expiry_date = date("Y/m/d", strtotime("+20 days"));
+    $expiry_date = date("Y/m/d", strtotime("+3 days"));
     $blood_component = "White Cells";
 
 
@@ -65,14 +67,16 @@ if (isset($_POST['submit'])) {
     $result = $conn->query($sql);
 
     if ($result == TRUE) {
-      header('location:successbc.php');
-    } else {
+      echo '<script type="text/javascript">';
+      echo 'alert("Added Successfully");';
+      echo 'window.location.href="Add blood components.php";';
+      echo'</script>';    } else {
       echo "Error:" . $sql . "<br>" . $conn->error;
     }
   }
 
   if ($_POST['Platelets'] == '1') {
-    $expiry_date = date("Y/m/d", strtotime("+90 days"));
+    $expiry_date = date("Y/m/d", strtotime("+5 days"));
     $blood_component = "Platelets";
 
 
@@ -81,13 +85,15 @@ if (isset($_POST['submit'])) {
     $result = $conn->query($sql);
 
     if ($result == TRUE) {
-      header('location:successbc.php');
-    } else {
+      echo '<script type="text/javascript">';
+      echo 'alert("Added Successfully");';
+      echo 'window.location.href="Add blood components.php";';
+      echo'</script>';    } else {
       echo "Error:" . $sql . "<br>" . $conn->error;
     }
   }
   if ($_POST['Plasma'] == '1') {
-    $expiry_date = date("Y/m/d", strtotime("+60 days"));
+    $expiry_date = date("Y/m/d", strtotime("+365 days"));
     $blood_component = "Plasma";
 
 
@@ -96,8 +102,10 @@ if (isset($_POST['submit'])) {
     $result = $conn->query($sql);
 
     if ($result == TRUE) {
-      header('location:successbc.php');
-    } else {
+      echo '<script type="text/javascript">';
+      echo 'alert("Added Successfully");';
+      echo 'window.location.href="Add blood components.php";';
+      echo'</script>';    } else {
       echo "Error:" . $sql . "<br>" . $conn->error;
     }
   }

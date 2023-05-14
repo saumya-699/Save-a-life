@@ -1,4 +1,20 @@
 <?php
+session_start();
+include "config.php";
+if (isset($_SESSION["ID"])) {
+  include "config.php";
+  $m = $_SESSION["Name"];
+  $query = "SELECT * FROM warddoctor WHERE UserName ='$m'";
+  $result1 = $conn->query($query);
+
+  if ($result1->num_rows > 0) {
+    while ($row = $result1->fetch_assoc()) {
+      $y = $row["Hospital_ID"];
+    }
+  }
+}
+?>
+<?php
 include "config.php";
 if (isset($_POST['view'])) {
 
@@ -20,8 +36,8 @@ if (isset($_POST['view'])) {
   <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'>
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
   <link rel="stylesheet" href="./stylek2.css">
 
 </head>
@@ -89,14 +105,57 @@ if (isset($_POST['view'])) {
 
                 </a>
               </li>
-              <li class="menu-item">
+              <li class="menu-item sub-menu">
                 <a href="#">
                   <span class="menu-icon">
                     <i class="ri-notification-line"></i>
                   </span>
-                  <span class="menu-title">Notification</span>
+                  <?php
+
+                  $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$y' AND notifyView='0' AND (status='Available' OR status='Not Available')";
+
+                  $results = $conn->query($sql);
+
+                  if ($results->num_rows > 0) {
+                    $row = $results->fetch_assoc();
+                    $status = $row["countS"];
+                    if ($status > 0) {
+                      echo '<span class="icon-button__badge">' . $status . '</span>';
+                    }
+                  }
+
+                  ?>
+
+
+
+                  <span class="menu-title">Notifications</span>
                 </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Notifications.php">
+                        <span class="menu-title"> <?php
+
+                                                  $sql = "SELECT Count(*) AS countS from blood_request where Hospital_ID='$y' AND notifyView='0' AND (status='Available' OR status='Not Available')";
+
+                                                  $results = $conn->query($sql);
+
+                                                  if ($results->num_rows > 0) {
+                                                    $row = $results->fetch_assoc();
+                                                    $status = $row["countS"];
+                                                    if ($status > 0) {
+                                                      echo '<span class="icon-button__badge3">' . $status . '</span>';
+                                                    }
+                                                  }
+
+                                                  ?>Request Results</span>
+                      </a>
+
+                    </li>
+                  </ul>
+                </div>
               </li>
+
               <li class="menu-item">
                 <a href="logout.php">
                   <span class="menu-icon">
@@ -114,6 +173,7 @@ if (isset($_POST['view'])) {
     <div class="layout">
       <main class="content">
         <!-- add your content from here -->
+        <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
 
 
         <div class="container-shadow">
@@ -212,19 +272,51 @@ if (isset($_POST['view'])) {
 </html>
 
 <style>
-  
-  .container-shadow {
-      position: absolute;
-      height: 1530px;
-      box-shadow: 0px 80px 50px -20px #000;
-    }
+  .icon-button__badge {
+    position: absolute;
+    top: 9px;
+    right: 226px;
+    width: 15px;
+    height: 18px;
+    background: red;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
 
-    .container {
-      position: absolute;
-      height: 1530px;
-      
-      box-shadow: 0px 0px 50px -20px #000;
-    }
+  .icon-button__badge3 {
+    position: absolute;
+    top: 15px;
+    right: 245px;
+    width: 15px;
+    height: 18px;
+    background: red;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+
+  .container-shadow {
+    position: absolute;
+    height: 1530px;
+    box-shadow: 0px 80px 50px -20px #000;
+  }
+
+  .b1 {
+    margin-left: 244px;
+  }
+
+  .container {
+    position: absolute;
+    height: 1530px;
+
+    box-shadow: 0px 0px 50px -20px #000;
+  }
+
   .buttons {
     margin-top: 20px;
   }

@@ -405,7 +405,7 @@ require "conp.php";
      } 
 
      $date =date("Y-m-d");
-    $query="select * from blood_testing_result,donors where donors.Donor_Id =blood_testing_result.Donor_Id and blood_testing_result.status='Checked'  and  blood_testing_result.Email_sent =0 and(blood_testing_result.BloodBank_doctor_ID='$x' and (blood_testing_result.Hospital_ID = '$hid' and (blood_testing_result.process_date ='$date' and(malaria_result='positive' or hiv_result='positive' or hbv_result='positive' or hcv_result='positive' or vdrl_result='positive'))))"; //where BloodBank_doctor_ID='$x' and malaria_result='positive' or hiv_result='positive' or hbv_result='positive' or hbv_result='positive' or hbv_result='positive'
+    $query="select * from blood_testing_result,donors where donors.Donor_Id =blood_testing_result.Donor_Id and blood_testing_result.status='Checked'  and  blood_testing_result.Email_sent =0 and(blood_testing_result.BloodBank_doctor_ID='$x' and (blood_testing_result.Hospital_ID = '$hid' and (blood_testing_result.process_date ='$date' and(malaria_result='Positive' or hiv_result='Positive' or hbv_result='Positive' or hcv_result='Positive' or vdrl_result='Positive'))))"; //where BloodBank_doctor_ID='$x' and malaria_result='positive' or hiv_result='positive' or hbv_result='positive' or hbv_result='positive' or hbv_result='positive'
     $result= $conn->query($query);
     
    if($result->num_rows>0)

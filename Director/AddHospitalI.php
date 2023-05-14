@@ -247,13 +247,13 @@ session_start();
 							 <label for="exampleFormControlInput1" class="form-label lbl star"> Type </label>
                              <select name="Type" class="form-control txt-input" required>
 							   <option value="Not Provided"> None</option>
-                             <option value="general">District General</option>
+                           
                              
                              <option value="Teaching">Teaching </option>
-							 <option value="Teaching">Base Hospital A </option>
-						     <option value="Teaching">Base Hospital B </option>
-							 <option value="Teaching">Primary Medical Care </option>
-							 <option value="Teaching"> </option>
+							 <option value="General">General</option>
+						     <option value="Base">Base</option>
+							 <option value="Specialized"> Specialized</option>
+				
                               </select>
 
 							 
@@ -268,13 +268,13 @@ session_start();
 							 <option value="Kalutara">Kalutara</option>
 							 <option value="Colombo">Colombo</option>
 							  <option value="Gampaha">Gampaha</option>
-							   <option value="Kandy">Kandy</option>
+							   <option value="Ampara">Ampara</option>
 							     <option value="Badulla">Badulla</option>
 								  <option value="Monaragala">Monaragala</option>
 								  <option value="Hambantota">Hambantota</option>
-								  <option value="Hambantota">Hambantota</option>
-								 <option value="Hambantota">Puttalam</option>
-									  <option value="Hambantota">Kurunegala</option>
+								  <option value="Jaffna">Jaffna</option>
+								 <option value="Puttalam">Puttalam</option>
+									  <option value="Kurunegala">Kurunegala</option>
 									  
                           </select>
 

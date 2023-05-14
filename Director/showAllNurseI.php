@@ -259,7 +259,7 @@ session_start();
 
                               <input type='hidden' value=" . $row["Nurse_ID"] . " name='Nurse_ID' id='Nurse_ID' class='box'>
                               <label for='exampleFormControlInput1' class='form-label lbl star'>Name with initials</label>
-                             <input type='text' value=" . $row["Name_With_Initials"] . " name='Name' id='name'  class='form-control txt-input'>
+                             <input type='text' value= '$row[Name_With_Initials]' name='Name' id='name'  class='form-control txt-input'>
 
 						   	    
                              

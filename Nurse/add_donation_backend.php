@@ -47,7 +47,7 @@ if(isset($_POST['BtnSubmit']))
     
     
      // insert new donation record
-     $sql = "INSERT INTO donation (Donation_date, Batch, Donor_Id, packet_no, Nurse_ID,Hospital_ID)
+     $sql = "INSERT INTO donation_records(Donation_date, Batch, Donor_Id, packet_no, Nurse_ID,Hospital_ID)
      VALUES ('$Donation_Date', '$batch_no', '$Donor_Id', '$Packet_Id', '$Nurse_ID','$Hospital_ID')";
  if($conn->query($sql)){
      echo '<script type="text/javascript">';

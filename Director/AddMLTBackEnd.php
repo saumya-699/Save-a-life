@@ -37,6 +37,30 @@ if(isset($_POST['BtnSubmit']))
   $DOA=$_POST["DOA"];
 $m= $_SESSION["Name"];
 
+
+$check1= "select * from system_users where UserName ='$Email'";
+$resultc1 = $conn->query($check1);
+if(!empty($resultc1) && $resultc1->num_rows>0)
+
+{
+
+
+ echo '<script type="text/javascript">';
+ echo 'alert("Email already exists");';
+ 
+  echo 'window.location.href="AddMLTI.php";';
+ echo '</script>';
+
+
+
+}
+
+ 
+   
+      else
+      {
+
+
 	$query = "select * from director where UserName ='$m'";
 
 
@@ -433,7 +457,7 @@ textarea {
  
 	
 }
- 
+}
 $conn->close();
 
 ?>

@@ -87,6 +87,7 @@ if (isset($_SESSION["ID"])) {
                   </ul>
                 </div>
               </li>
+
               <li class="menu-item">
                 <a href="Send test results for approval.php">
                   <span class="menu-icon">
@@ -163,9 +164,15 @@ if (isset($_SESSION["ID"])) {
                         <span class="menu-title">Cross Matching Report</span>
                       </a>
                     </li>
+                    <li class="menu-item">
+                      <a href="ReportGenerationStock.php">
+                        <span class="menu-title">Blood Stock Report</span>
+                      </a>
+                    </li>
                   </ul>
                 </div>
               </li>
+
 
 
               <li class="menu-header" style="padding-top: 40px"><span> | </span></li>
@@ -178,14 +185,86 @@ if (isset($_SESSION["ID"])) {
 
                 </a>
               </li>
-              <li class="menu-item">
+              <li class="menu-item sub-menu">
                 <a href="#">
                   <span class="menu-icon">
                     <i class="ri-notification-line"></i>
                   </span>
-                  <span class="menu-title">Notification</span>
+                  <?php
 
+                  $sql = "SELECT COUNT(countS) AS total_count FROM (
+                    SELECT COUNT(*) AS countS FROM donation_records WHERE Hospital_ID='$y' and End_donation ='1' and AddStatus='0' GROUP by Batch,Donation_date) AS subquery";
+
+                  $results = $conn->query($sql);
+
+                  if ($results->num_rows > 0) {
+                    $row = $results->fetch_assoc();
+                    $status = $row["total_count"];
+                    if ($status > 0) {
+                      echo '<span class="icon-button__badge">' . $status . '</span>';
+                    }
+                  }
+
+                  ?>
+
+
+
+
+                  <?php
+                  $rql = "SELECT COUNT(*) AS countS FROM blood_request WHERE Hospital_ID = '$y' AND status='Available' and CrossMatching_Add='0'";
+                  $result1 = $conn->query($rql);
+                  if ($result1->num_rows > 0) {
+                    $row = $result1->fetch_assoc();
+                    $status = $row["countS"];
+                    if ($status > 0) {
+                      echo '<span class="icon-button__badge2">' . $status . '</span>';
+                    }
+                  }
+                  ?>
+                  <span class="menu-title">Notifications</span>
                 </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Notifications.php">
+                        <span class="menu-title"> <?php
+
+                                                  $sql = "SELECT COUNT(countS) AS total_count FROM (
+                                                 SELECT COUNT(*) AS countS FROM donation_records WHERE Hospital_ID='$y' and End_donation ='1' and AddStatus='0' GROUP by Batch,Donation_date) AS subquery";
+
+                                                  $results = $conn->query($sql);
+
+                                                  if ($results->num_rows > 0) {
+                                                    $row = $results->fetch_assoc();
+                                                    $status = $row["total_count"];
+                                                    if ($status > 0) {
+                                                      echo '<span class="icon-button__badge3">' . $status . '</span>';
+                                                    }
+                                                  }
+
+                                                  ?>
+
+                          <span>Donation</span>
+                      </a>
+
+                    <li class="menu-item">
+                      <a href="Notifications1.php">
+                        <span class="menu-title">
+                          <?php
+                          $rql = "SELECT COUNT(*) AS countS FROM blood_request WHERE Hospital_ID = '$y' AND status='Available' and CrossMatching_Add='0'";
+                          $result1 = $conn->query($rql);
+                          if ($result1->num_rows > 0) {
+                            $row = $result1->fetch_assoc();
+                            $status = $row["countS"];
+                            if ($status > 0) {
+                              echo '<span class="icon-button__badge5">' . $status . '</span>';
+                            }
+                          }
+                          ?>Cross Matching Testing</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
               </li>
               <li class="menu-item">
                 <a href="logout.php">
@@ -210,100 +289,83 @@ if (isset($_SESSION["ID"])) {
         <h1></h1>
 
 
+        <h1>Enter Cross Matching Test Result</h1>
 
-        <form method="post" action="Cross matching test result.php">
-
-          <div class="midiv">
-
-
-            <font size=3> Search by </font></b> <br /> <br /><select name="search" class="select">
-              <option value="requeste_id"><b> Request ID</b></option>
-            </select>
-
-
-            <input type="text" placeholder="type here" name="data" id="data" class="box">
-
-            <button type="submit" name="BtnSubmit" id="search" class="b1"><b>Search</b></button>
-
-
-        </form>
 
         <div class="box1">
 
           <?php
-          if (isset($_POST['BtnSubmit'])) {
-            $search = $_POST["search"];
-            $data = $_POST["data"];
-            $sql = "SELECT * FROM blood_request WHERE $search = '$data' AND Hospital_ID = '$y'";
-            $result = $conn->query($sql);
+
+          $sql = "SELECT * FROM blood_request WHERE status='Available' and CrossMatching_Add='0' AND Hospital_ID = '$y'";
+          $result = $conn->query($sql);
 
 
-            if ($result->num_rows > 0) {
-              echo  "<div class='tab'>";
-              echo "<font color=black>";
-              echo "<font size=3>";
+          if ($result->num_rows > 0) {
+            echo  "<div class='tab'>";
+            echo "<font color=black>";
+            echo "<font size=3>";
 
 
-              echo  "<table >" . "<tr>" . "<th>" . "Requested Date" . "</th>" . "<th>" . "Receive date" . "</th>" . "<th>" . "Request ID" . "</th>" . "<th>" . "Blood Group" . "</th>" . "<th>" . "Status" . "</th>" . "<th>" . "Action" . "</th>" . "</tr>";
-              echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=6'>" . "</td>" . "</tr>";
+            echo  "<table >" . "<tr>" . "<th>" . "Requested Date" . "</th>" . "<th>" . "Receive date" . "</th>" . "<th>" . "Request ID" . "</th>" . "<th>" . "Blood Group" . "</th>" . "<th>" . "Status" . "</th>" . "<th>" . "Action" . "</th>" . "</tr>";
+            echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=6'>" . "</td>" . "</tr>";
 
-              // while ($row = $result->fetch_assoc()) {
+            // while ($row = $result->fetch_assoc()) {
 
-              //   echo  "<tr style='height:60px'>" . "<td>" . $row["requested_date"] . "</td>" . "<td>" . $row["expected_date"] . "</td>" . "<td>" . $row["requeste_id"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "<td>" . $row["status"] . "</td>";
+            //   echo  "<tr style='height:60px'>" . "<td>" . $row["requested_date"] . "</td>" . "<td>" . $row["expected_date"] . "</td>" . "<td>" . $row["requeste_id"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "<td>" . $row["status"] . "</td>";
 
-              //   echo "<td class='tb'><form method='POST' action ='Cross matching test result1.php'>
-              // <input type=hidden name=RequestID value=" . $row["requeste_id"] . " >
-              // <button type=submit value=add name=add  class='fp'><i class='fa-solid fa-plus'></i></button>
-              // </form>  
+            //   echo "<td class='tb'><form method='POST' action ='Cross matching test result1.php'>
+            // <input type=hidden name=RequestID value=" . $row["requeste_id"] . " >
+            // <button type=submit value=add name=add  class='fp'><i class='fa-solid fa-plus'></i></button>
+            // </form>  
 
-              //   </td>";
-              //   echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=6'>" . "</td>" . "</tr>";
-              // }
-              while ($row = $result->fetch_assoc()) {
-                // Retrieve the status value from the current row
-                $status = $row["status"];
-                $Add = $row["CrossMatching_Add"];
-                // Set the disabled flag based on the status value
+            //   </td>";
+            //   echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=6'>" . "</td>" . "</tr>";
+            // }
+            while ($row = $result->fetch_assoc()) {
+              // Retrieve the status value from the current row
+              $status = $row["status"];
+              $Add = $row["CrossMatching_Add"];
+              // Set the disabled flag based on the status value
 
-                $disabled = (($status !== ' checked') || ($Add == '1')) ? 'disabled' : '';
-
-
-                // Generate the button HTML with the disabled flag
-                $button_html = "<button type='submit' value='add' name='add' class='fp' $disabled><i class='fa-solid fa-pen-to-square'></i></button>";
-
-                // Generate the table row HTML with the button included
-                echo "<tr style='height:60px'>" .
-                  "<td>" . $row["requested_date"] . "</td>" .
-                  "<td>" . $row["expected_date"] . "</td>" .
-                  "<td>" . $row["requeste_id"] . "</td>" .
-                  "<td>" . $row["blood_group"] . "</td>" .
-                  "<td>" . $row["status"] . "</td>" .
-                  "<td class='tb'>" .
-                  "<form method='POST' action='Cross matching test result1.php'>" .
-                  "<input type='hidden' name='RequestID' value='" . $row["requeste_id"] . "'>" .
-                  $button_html .
-
-                  "</form>" .
-                  "</td>" .
-                  "</tr>" .
-                  "<tr>" .
-                  "<td style='height:20px;background-color:#F5F5F5;' colspan='6'></td>" .
-                  "</tr>";
-              }
+              $disabled = (($status !== 'Available') || ($Add == '1')) ? 'disabled' : '';
 
 
+              // Generate the button HTML with the disabled flag
+              $button_html = "<button type='submit' value='add' name='add' class='fp' $disabled><i class='fa-solid fa-pen-to-square'></i></button>";
 
-              echo "</font>";
-              echo  "</font>";
+              // Generate the table row HTML with the button included
+              echo "<tr style='height:60px'>" .
+                "<td>" . $row["requested_date"] . "</td>" .
+                "<td>" . $row["expected_date"] . "</td>" .
+                "<td>" . $row["requeste_id"] . "</td>" .
+                "<td>" . $row["blood_group"] . "</td>" .
+                "<td>" . $row["status"] . "</td>" .
+                "<td class='tb'>" .
+                "<form method='POST' action='Cross matching test result1.php'>" .
+                "<input type='hidden' name='RequestID' value='" . $row["requeste_id"] . "'>" .
+                $button_html .
 
-              echo  "</div>";
-
-              echo "</table>";
-            } else {
-              ///printf("Query failed: %s\n", $conn->error);
-              echo "no results";
+                "</form>" .
+                "</td>" .
+                "</tr>" .
+                "<tr>" .
+                "<td style='height:20px;background-color:#F5F5F5;' colspan='6'></td>" .
+                "</tr>";
             }
+
+
+
+            echo "</font>";
+            echo  "</font>";
+
+            echo  "</div>";
+
+            echo "</table>";
+          } else {
+            ///printf("Query failed: %s\n", $conn->error);
+            echo "no results";
           }
+
 
           $conn->close();
           ?>
@@ -321,9 +383,8 @@ if (isset($_SESSION["ID"])) {
             }
 
             h1 {
-
-              margin-top: 70px;
-              margin-left: 300px;
+              margin-top: -10px;
+              margin-left: 200px;
               margin-bottom: 100px;
             }
 
@@ -378,8 +439,8 @@ if (isset($_SESSION["ID"])) {
 
             .box {
 
-              width:130px;
-						  height:40px;
+              width: 130px;
+              height: 40px;
               margin-left: 20px;
               margin-top: 10px;
               border-radius: 30px;
@@ -389,16 +450,88 @@ if (isset($_SESSION["ID"])) {
 
             }
 
-            	  
-				
+            .icon-button__badge {
+              position: absolute;
+              top: 7px;
+              right: 220px;
+              width: 15px;
+              height: 18px;
+              background: red;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
+
+
+
+            .icon-button__badge1 {
+              position: absolute;
+              top: 0;
+              right: 228;
+              width: 15px;
+              height: 18px;
+              background: green;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
+
+            .icon-button__badge2 {
+              position: absolute;
+              top: 4px;
+              right: 239;
+              width: 15px;
+              height: 18px;
+              background: purple;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
+
+            .icon-button__badge3 {
+              position: absolute;
+              top: 15;
+              right: 235px;
+              width: 15px;
+              height: 18px;
+              background: red;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
+
+
+            .icon-button__badge5 {
+              position: absolute;
+              top: 115;
+              right: 235px;
+              width: 15px;
+              height: 18px;
+              background: purple;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
+
+
 
             .b1 {
               height: 40px;
               width: 130px;
-              color: #FFF5F3;
+              color: #d9dbdb;
               margin-left: 6px;
               border-radius: 20px;
-              background-color: #F35050;
+              background-color: #d9dbdb;
               border: none;
               cursor: pointer;
               margin-top: 10px;
@@ -450,12 +583,14 @@ if (isset($_SESSION["ID"])) {
             }
 
             .fp {
-              margin-top: 20px;
+              margin-top: 6px;
               margin-left: 30px;
               margin-bottom: -100px;
               background-color: transparent;
               border: none;
               cursor: pointer;
+              font-size: 25px;
+              padding: 10px 20px;
             }
 
             .tb {
@@ -467,15 +602,10 @@ if (isset($_SESSION["ID"])) {
             }
 
             .tab {
-
               background-color: #F5F5F5;
-              margin-top: -40px;
-              margin-left: 60px;
+              margin-top: -160px;
+              margin-left: 250px;
               margin-right: 265px;
-
-
-
-
             }
 
 

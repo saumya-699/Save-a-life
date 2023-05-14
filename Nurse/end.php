@@ -431,7 +431,7 @@ echo "
     if(isset($_POST['send'])){
     
       
-      $updateSqlSend= "UPDATE donation SET End_donation	='1'";
+      $updateSqlSend= "UPDATE donation_records SET End_donation	='1'";
       $send=mysqli_query($conn,$updateSqlSend);
         // var_dump($bdate,$bnum);
         // <input type='submit' name='$bnum' value='Send'>

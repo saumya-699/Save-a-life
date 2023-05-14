@@ -97,14 +97,14 @@ if (isset($_SESSION["ID"])) {
 
                       <li class="menu-item">
                         <a href="LessStockComponentsI.php">
-                          <span class="menu-title">Low stock blood components</span>
+                          <span class="menu-title">Low Stock Blood Components</span>
                         </a>
                       </li>
 
 
                       <li class="menu-item">
                         <a href="ExpiredComponentsI.php">
-                          <span class="menu-title">Blood expiry Information</span>
+                          <span class="menu-title">Blood Expiry Information</span>
                         </a>
                       </li>
                     </ul>
@@ -131,7 +131,7 @@ if (isset($_SESSION["ID"])) {
                       </li>
                       <li class="menu-item">
                         <a href="sendRequestI.php">
-                          <span class="menu-title">Send requests</span>
+                          <span class="menu-title">Send Requests</span>
                         </a>
                       </li>
                       <li class="menu-item">
@@ -164,21 +164,65 @@ if (isset($_SESSION["ID"])) {
                     </ul>
                   </div>
                 </li>
-                <li class="menu-item">
-                  <a href="View_Donors_BI.php">
+                <li class="menu-item sub-menu">
+                  <a href="#">
                     <span class="menu-icon">
-                      <i class="ri-user-heart-fill"></i>
+                      <i class="ri-article-fill"></i>
                     </span>
                     <span class="menu-title">Donors</span>
                   </a>
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="View_Donors_BI.php">
+                          <span class="menu-title">View</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="donorEmail.php">
+                          <span class="menu-title">Send Non -Emergency Email</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
                 </li>
-                <li class="menu-item">
-                  <a href="ReportGeneration_BI.php">
+                
+                 <li class="menu-item sub-menu">
+                  <a href="#">
                     <span class="menu-icon">
-                      <i class="ri-file-chart-line"></i>
+                      <i class="ri-message-2-fill"></i>
                     </span>
                     <span class="menu-title">Reports</span>
                   </a>
+                  <div class="sub-menu-list">
+                    <ul>
+                      <li class="menu-item">
+                        <a href="ReportGenerationStock.php">
+                          <span class="menu-title">Stock Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGenerationCrossMatching.php">
+                          <span class="menu-title">Cross Matching Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGenerationBlood.php">
+                          <span class="menu-title">Blood Request Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGeneration_BI.php">
+                          <span class="menu-title">Donation Details Reports</span>
+                        </a>
+                      </li>
+                      <li class="menu-item">
+                        <a href="ReportGeneration_Request.php">
+                          <span class="menu-title">External Requests Reports</span>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
                 </li>
                 <li class="menu-header" style="padding-top: 40px"><span> </span></li>
                 <li class="menu-item">

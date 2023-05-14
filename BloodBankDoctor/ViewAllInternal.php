@@ -7,6 +7,10 @@ require "conp.php";
  <?php
    if(isset($_SESSION["ID"]))   {
     $m = $_SESSION["Name"];
+    $x=null;
+    $hid=null;
+    $ID=null;
+
     $query = "SELECT * FROM bloodbank_doctor WHERE UserName ='$m'";
     $result1 = $conn->query($query);
     $ID =null;
@@ -88,14 +92,14 @@ require "conp.php";
 					  
 					    <li class="menu-item">
                         <a href="LessStockComponentsI.php">
-                          <span class="menu-title">Low stock blood components</span>
+                          <span class="menu-title">Low Stock Blood Components</span>
                         </a>
                       </li>
 	
 					  
 					     <li class="menu-item">
                         <a href="ExpiredComponentsI.php">
-                          <span class="menu-title">Blood expiry Information</span>
+                          <span class="menu-title">Blood Expiry Information</span>
                         </a>
                       </li>
                     </ul>
@@ -122,7 +126,7 @@ require "conp.php";
                       </li>
                       <li class="menu-item">
                         <a href="sendRequestI.php">
-                          <span class="menu-title">Send requests</span>
+                          <span class="menu-title">Send Requests</span>
                         </a>
                       </li>
                       <li class="menu-item">
@@ -376,6 +380,8 @@ require "conp.php";
 
 
 require 'conp.php';
+//-----------------------------------------------------------data is passed to this page by ViewInternalRequestI page 
+//-----------------------------------------------------------it will first check whether the  view button is clicked and the get the Request_ID from post method and select the relevant Request_ID from blood request table
 if(isset($_POST['view']))  
 
 {	 
@@ -398,7 +404,7 @@ if(isset($_POST['view']))
 	   
 echo "
 
-     <form action='ViewAllInternal.php' method='POST'>
+     <form action='ViewInternalRequestI.php' method='POST'>
 	                <input type='hidden' value=".$row["requeste_id"]." name='requeste_id' id='requeste_id' class='box'>
 
                                 <label >Patient Name</label>

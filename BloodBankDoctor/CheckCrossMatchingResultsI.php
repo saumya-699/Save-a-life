@@ -109,14 +109,14 @@ session_start();
 					  
 					    <li class="menu-item">
                         <a href="LessStockComponentsI.php">
-                          <span class="menu-title">Low stock blood components</span>
+                          <span class="menu-title">Low Stock Blood Components</span>
                         </a>
                       </li>
 	
 					  
 					     <li class="menu-item">
                         <a href="ExpiredComponentsI.php">
-                          <span class="menu-title">Blood expiry Information</span>
+                          <span class="menu-title">Blood Expiry Information</span>
                         </a>
                       </li>
                     </ul>
@@ -143,7 +143,7 @@ session_start();
                       </li>
                       <li class="menu-item">
                         <a href="sendRequestI.php">
-                          <span class="menu-title">Send requests</span>
+                          <span class="menu-title">Send Requests</span>
                         </a>
                       </li>
                       <li class="menu-item">
@@ -330,7 +330,7 @@ if($resultr->num_rows>0)
       
 	
   
-
+///---------------------------------get the relavant hospital id and select cross matching results relavant to that hospital id and arrange them in descending order
 
 $sql= "select * 
 from cross_matching_testing_result where Hospital_ID=$y 
@@ -388,7 +388,8 @@ else
 }
 
 
-
+//------------------------------when the button named update is clicked the request id will be passed to the same page and then it will select the record which have that request id and then update the cross matching table status
+//and blood bank doctor id of the doctor who checked the result
 if(isset($_POST['update']))  
 
 {	

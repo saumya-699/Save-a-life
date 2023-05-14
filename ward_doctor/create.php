@@ -76,7 +76,10 @@ if($resultr->num_rows>0)
 
    $conn->close(); 
    if ($result == TRUE) {
-    header('location:success.php');       
+    echo '<script type="text/javascript">';
+    echo 'alert("Requested Successfully");';
+    echo 'window.location.href="Make blood request.php";';
+    echo'</script>';
   } 
   else{
       echo "Error:". $sql . "<br>". $conn->error;

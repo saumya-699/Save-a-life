@@ -93,14 +93,14 @@ require "conp.php";
 					  
 					    <li class="menu-item">
                         <a href="LessStockComponentsI.php">
-                          <span class="menu-title">Low stock blood components</span>
+                          <span class="menu-title">Low Stock Blood Components</span>
                         </a>
                       </li>
 	
 					  
 					     <li class="menu-item">
                         <a href="ExpiredComponentsI.php">
-                          <span class="menu-title">Blood expiry Information</span>
+                          <span class="menu-title">Blood Expiry Information</span>
                         </a>
                       </li>
                     </ul>

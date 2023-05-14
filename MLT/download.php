@@ -162,6 +162,11 @@ if (isset($_SESSION["ID"])) {
                                                     <span class="menu-title">Cross Matching Report</span>
                                                 </a>
                                             </li>
+                                            <li class="menu-item">
+                                                <a href="ReportGenerationStock.php">
+                                                    <span class="menu-title">Blood Stock Report</span>
+                                                </a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </li>
@@ -176,15 +181,87 @@ if (isset($_SESSION["ID"])) {
 
                                     </a>
                                 </li>
-                                <li class="menu-item">
-                                    <a href="#">
-                                        <span class="menu-icon">
-                                            <i class="ri-notification-line"></i>
-                                        </span>
-                                        <span class="menu-title">Notification</span>
+                                <li class="menu-item sub-menu">
+                <a href="#">
+                  <span class="menu-icon">
+                    <i class="ri-notification-line"></i>
+                  </span>
+                  <?php
 
-                                    </a>
-                                </li>
+                  $sql = "SELECT COUNT(countS) AS total_count FROM (
+                    SELECT COUNT(*) AS countS FROM donation_records WHERE Hospital_ID='$y' and End_donation ='1' and AddStatus='0' GROUP by Batch,Donation_date) AS subquery";
+
+                  $results = $conn->query($sql);
+
+                  if ($results->num_rows > 0) {
+                    $row = $results->fetch_assoc();
+                    $status = $row["total_count"];
+                    if ($status > 0) {
+                      echo '<span class="icon-button__badge">' . $status . '</span>';
+                    }
+                  }
+
+                  ?>
+
+
+
+
+                  <?php
+                  $rql = "SELECT COUNT(*) AS countS FROM blood_request WHERE Hospital_ID = '$y' AND status='Available' and CrossMatching_Add='0'";
+                  $result1 = $conn->query($rql);
+                  if ($result1->num_rows > 0) {
+                    $row = $result1->fetch_assoc();
+                    $status = $row["countS"];
+                    if ($status > 0) {
+                      echo '<span class="icon-button__badge2">' . $status . '</span>';
+                    }
+                  }
+                  ?>
+                  <span class="menu-title">Notifications</span>
+                </a>
+                <div class="sub-menu-list">
+                  <ul>
+                    <li class="menu-item">
+                      <a href="Notifications.php">
+                        <span class="menu-title"> <?php
+
+                                                  $sql = "SELECT COUNT(countS) AS total_count FROM (
+                                                 SELECT COUNT(*) AS countS FROM donation_records WHERE Hospital_ID='$y' and End_donation ='1' and AddStatus='0' GROUP by Batch,Donation_date) AS subquery";
+
+                                                  $results = $conn->query($sql);
+
+                                                  if ($results->num_rows > 0) {
+                                                    $row = $results->fetch_assoc();
+                                                    $status = $row["total_count"];
+                                                    if ($status > 0) {
+                                                      echo '<span class="icon-button__badge3">' . $status . '</span>';
+                                                    }
+                                                  }
+
+                                                  ?>
+
+                          <span>Donation</span>
+                      </a>
+
+                    <li class="menu-item">
+                      <a href="Notifications1.php">
+                        <span class="menu-title">
+                          <?php
+                          $rql = "SELECT COUNT(*) AS countS FROM blood_request WHERE Hospital_ID = '$y' AND status='Available' and CrossMatching_Add='0'";
+                          $result1 = $conn->query($rql);
+                          if ($result1->num_rows > 0) {
+                            $row = $result1->fetch_assoc();
+                            $status = $row["countS"];
+                            if ($status > 0) {
+                              echo '<span class="icon-button__badge5">' . $status . '</span>';
+                            }
+                          }
+                          ?>Cross Matching Testing</span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </li>
                                 <li class="menu-item">
                                     <a href="logout.php">
                                         <span class="menu-icon">
@@ -199,20 +276,26 @@ if (isset($_SESSION["ID"])) {
 
                 </div>
             </aside>
+            <div id="overlay" class="overlay"></div>
+    <div class="layout">
+      <main class="content">
+        <!-- add your content from here -->
+        <div>
+          <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
+        </div>
 
+        <?php
 
-            <?php
+        include "config.php";
+        if (isset($_POST['submit'])) {
+            $blood_group = $_POST["blood_group"];
+            //$HID=$_POST["hid"];
+            $From = $_POST["From"];
+            $To = $_POST["To"];
 
-            include "config.php";
-            if (isset($_POST['submit'])) {
-                $blood_group = $_POST["blood_group"];
-                //$HID=$_POST["hid"];
-                $From = $_POST["From"];
-                $To = $_POST["To"];
-
-                $date = date("Y/m/d");
-                //    var_dump($blood_group,$From,);
-                if($blood_group == "A-" || $blood_group == "A+" || $blood_group == "B-" || $blood_group == "B+" || $blood_group == "O-" || $blood_group == "O+" || $blood_group == "AB-" || $blood_group == "AB+"){
+            $date = date("Y/m/d");
+            //    var_dump($blood_group,$From,);
+            if ($blood_group == "A-" || $blood_group == "A+" || $blood_group == "B-" || $blood_group == "B+" || $blood_group == "O-" || $blood_group == "O+" || $blood_group == "AB-" || $blood_group == "AB+") {
                 $sql = "SELECT * FROM blood_testing_result where Hospital_ID ='$y' and blood_group='$blood_group' and process_date between '$From' and '$To'";
                 $result = $conn->query($sql);
 
@@ -244,147 +327,215 @@ if (isset($_SESSION["ID"])) {
                     echo  "</font>";
                     echo "</table>";
                     echo "</div>";
-                }} else {
-                    $sql = "SELECT * FROM blood_testing_result where Hospital_ID ='$y' and process_date between '$From' and '$To'";
-                    $result = $conn->query($sql);
-        
-                    if ($result->num_rows > 0) {
-        
-        
-                        //echo "<font color=red>";
-                        //echo "<font size=6>";
-        
-                        echo  "<div class='container_content' id='container_content'>";
-                        echo "<h2><center>Blood Testing Details Report of $HospitalName</center> </h2>";
-                        echo "<h5><center>Save a Life</center> </h5>";
-                        echo "<h5><center>printed on $date</center> </h5><br><br>";
-        
-        
-        
-        
-                        echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;width:200px;'>" . "Test result ID" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Donar ID" . "</th>" . "<th style='text-align:center;width:100px;'>" . "Blood group" . "</th>" . "<th>" . "Malaria result" . "</th>" . "<th>" . " HIV result" . "</th>" . "<th>" . "HBV result" . "</th>" . "<th>" . "HCV result" . "</th>" . "<th>" . "VDRL result" . "</th>" . "<th>" . "Processed Date" . "</th>" . "<th>" . "Batch number" . "</th>" . "</tr>";
+                }
+            } else {
+                $sql = "SELECT * FROM blood_testing_result where Hospital_ID ='$y' and process_date between '$From' and '$To'";
+                $result = $conn->query($sql);
+
+                if ($result->num_rows > 0) {
+
+
+                    //echo "<font color=red>";
+                    //echo "<font size=6>";
+
+                    echo  "<div class='container_content' id='container_content'>";
+                    echo "<h2><center>Blood Testing Details Report of $HospitalName</center> </h2>";
+                    echo "<h5><center>Save a Life</center> </h5>";
+                    echo "<h5><center>printed on $date</center> </h5><br><br>";
+
+
+
+
+                    echo  "<table border=1>" . "<tr>" . "<th style='text-align:center;width:200px;'>" . "Test result ID" . "</th>" . "<th style='text-align:center;width:120px;'>" . "Donar ID" . "</th>" . "<th style='text-align:center;width:100px;'>" . "Blood group" . "</th>" . "<th>" . "Malaria result" . "</th>" . "<th>" . " HIV result" . "</th>" . "<th>" . "HBV result" . "</th>" . "<th>" . "HCV result" . "</th>" . "<th>" . "VDRL result" . "</th>" . "<th>" . "Processed Date" . "</th>" . "<th>" . "Batch number" . "</th>" . "</tr>";
+                    echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
+                    while ($row = $result->fetch_assoc()) {
+                        echo  "<tr>" . "<td>" . $row["test_result_id"] . "</td>" . "<td>" . $row["Donor_Id"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "<td>" . $row["malaria_result"] . "</td>" . "<td>" . $row["hiv_result"] . "</td>" . "<td>" . $row["hbv_result"] . "</td>" . "<td>" . $row["hcv_result"] . "</td>" . "<td>" . $row["vdrl_result"] . "</td>" . "<td>" . $row["process_date"] . "</td>" . "<td>" . $row["batch_number"] . "</td>";
+
+                        echo "</tr>";
+
                         echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
-                        while ($row = $result->fetch_assoc()) {
-                            echo  "<tr>" . "<td>" . $row["test_result_id"] . "</td>" . "<td>" . $row["Donor_Id"] . "</td>" . "<td>" . $row["blood_group"] . "</td>" . "<td>" . $row["malaria_result"] . "</td>" . "<td>" . $row["hiv_result"] . "</td>" . "<td>" . $row["hbv_result"] . "</td>" . "<td>" . $row["hcv_result"] . "</td>" . "<td>" . $row["vdrl_result"] . "</td>" . "<td>" . $row["process_date"] . "</td>" . "<td>" . $row["batch_number"] . "</td>";
-        
-                            echo "</tr>";
-        
-                            echo "<tr>" . "<td style='height:20px;background-color:#F5F5F5;'colspan=12'>" . "</td>" . "</tr>";
-                        }
-        
-                        echo "</font>";
-                        echo  "</font>";
-                        echo "</table>";
-                        echo "</div>";
-                    } else {
-                        //echo "Error in ".$sql."<br>".$conn->error;
-        
-                        echo "no results";
                     }
-               
-                    
-                }}
+
+                    echo "</font>";
+                    echo  "</font>";
+                    echo "</table>";
+                    echo "</div>";
+                } else {
+                    //echo "Error in ".$sql."<br>".$conn->error;
+
+                    echo "no results";
+                }
+            }
         }
-            $conn->close();
-            ?>
-<br>    
-            <button onclick="generatePDF()" class="z">Download</button>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.2/pdfmake.min.js"></script>
+    }
+    $conn->close();
+        ?>
+        <br>
+        <button onclick="generatePDF()" class="z">Download</button>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.2/pdfmake.min.js"></script>
 
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-            <script>
-                function generatePDF() {
-                    const element = document.getElementById('container_content');
-                    var opt = {
-                        margin: 0,
-                        filename: 'Blood testing Report.pdf',
-                        image: {
-                            type: 'jpeg',
-                            quality: 0.98
-                        },
-                        html2canvas: {
-                            scale: 2
-                        },
-                        jsPDF: {
-                            unit: 'in',
-                            format: [15, 8.5],
-                            orientation: 'landscape'
-                        },
-                        width: 1524,
-                         height: 768
-                    };
-                    // Choose the element that our invoice is rendered in.
-                    html2pdf().set(opt).from(element).save();
-                }
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+        <script>
+            function generatePDF() {
+                const element = document.getElementById('container_content');
+                var opt = {
+                    margin: 0,
+                    filename: 'Blood testing Report.pdf',
+                    image: {
+                        type: 'jpeg',
+                        quality: 0.98
+                    },
+                    html2canvas: {
+                        scale: 2
+                    },
+                    jsPDF: {
+                        unit: 'in',
+                        format: [15, 8.5],
+                        orientation: 'landscape'
+                    },
+                    width: 1524,
+                    height: 768
+                };
+                // Choose the element that our invoice is rendered in.
+                html2pdf().set(opt).from(element).save();
+            }
+        </script>
 
+        </main>
+        </div>
 
-
-            
-
-            </script>
-
-            </main>
-            </div>
-
-            <!-- partial -->
-            <script src='https://unpkg.com/@popperjs/core@2'></script>
-            <script src="./script.js"></script>
+        <!-- partial -->
+        <script src='https://unpkg.com/@popperjs/core@2'></script>
+        <script src="./script.js"></script>
 
 
-            <style>
-                table {
-                    width: 700px;
-                    height: 15px;
-                    border-collapse: collapse;
-                    margin-top: 40px;
-                    border: 0px transparent;
+        <style>
+            table {
+                width: 700px;
+                height: 15px;
+                border-collapse: collapse;
+                margin-top: 40px;
+                border: 0px transparent;
 
-                }
+            }
 
-                th {
-
-
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    text-align: center;
-                    padding-top: 25px;
-                    padding-bottom: 25px;
-                    padding-left: 20px;
-                    padding-right: 10px;
-                    border: 0px transparent;
-
-                }
-
-                td {
-                    text-align: center;
-                    padding: 1px;
+            th {
 
 
-                }
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                text-align: center;
+                padding-top: 25px;
+                padding-bottom: 25px;
+                padding-left: 20px;
+                padding-right: 10px;
+                border: 0px transparent;
 
-                tr {
+            }
 
-                    background-color: white;
+            td {
+                text-align: center;
+                padding: 1px;
 
 
-                }
+            }
 
-                .z {
-                    font-size: 20px;
-                    margin-top: auto;
-                    margin-left: auto;
-                    margin-right: auto;
-                    height: 47px;
-                    border: none;
-                    background: #4082f5;
-                    cursor: pointer;
-                    box-shadow: 0px 10px 40px 0px rgba(17, 97, 237, 0.4);
-                    font-weight: 700;
-                    font-size: 20px;
-                    border-radius: 30px;
-                }
-            </style>
+            tr {
+
+                background-color: white;
+
+
+            }
+
+            .z {
+                font-size: 20px;
+                margin-top: auto;
+                margin-left: auto;
+                margin-right: auto;
+                height: 47px;
+                border: none;
+                background: #4082f5;
+                cursor: pointer;
+                box-shadow: 0px 10px 40px 0px rgba(17, 97, 237, 0.4);
+                font-weight: 700;
+                font-size: 20px;
+                border-radius: 30px;
+            }
+            .icon-button__badge {
+              position: absolute;
+              top: 7px;
+              right: 220px;
+              width: 15px;
+              height: 18px;
+              background: red;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
+
+
+
+            .icon-button__badge1 {
+              position: absolute;
+              top: 0;
+              right: 228;
+              width: 15px;
+              height: 18px;
+              background: green;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
+
+            .icon-button__badge2 {
+              position: absolute;
+              top: 4px;
+              right: 239;
+              width: 15px;
+              height: 18px;
+              background: purple;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
+
+            .icon-button__badge3 {
+              position: absolute;
+              top: 15;
+              right: 235px;
+              width: 15px;
+              height: 18px;
+              background: red;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
+
+
+            .icon-button__badge5 {
+              position: absolute;
+              top: 115;
+              right: 235px;
+              width: 15px;
+              height: 18px;
+              background: purple;
+              color: #ffffff;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border-radius: 50%;
+            }
+
+        </style>
 
     </body>
 

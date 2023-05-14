@@ -5,3 +5,13 @@ Stack trace:
 #2 C:\xampp\htdocs\Save-a-life\BloodBankDoctor\EmailDeBackEnd.php(41): PHPMailer\PHPMailer\PHPMailer->send()
 #3 {main}
   thrown in C:\xampp\htdocs\Save-a-life\BloodBankDoctor\phpmailer\src\PHPMailer.php on line 2051
+[13-May-2023 12:56:03 Europe/Berlin] PHP Notice:  Undefined variable: conn in C:\xampp\htdocs\Save-a-life\BloodBankDoctor\EmailDeBackEnd.php on line 50
+[13-May-2023 12:56:03 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in C:\xampp\htdocs\Save-a-life\BloodBankDoctor\EmailDeBackEnd.php:50
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\Save-a-life\BloodBankDoctor\EmailDeBackEnd.php on line 50
+[13-May-2023 12:56:03 Europe/Berlin] PHP Notice:  Undefined variable: conn in C:\xampp\htdocs\Save-a-life\BloodBankDoctor\EmailDeBackEnd.php on line 50
+[13-May-2023 12:56:03 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function query() on null in C:\xampp\htdocs\Save-a-life\BloodBankDoctor\EmailDeBackEnd.php:50
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\Save-a-life\BloodBankDoctor\EmailDeBackEnd.php on line 50
