@@ -168,9 +168,6 @@ require 'conp.php';
 
 $m= $_SESSION["Name"];
     $query = "select * from nurse where UserName ='$m'";
-    
-    
-           
     $resultd = $conn->query($query);
     
     //echo "Error in ".$vql."<br>".$conn->error;
@@ -182,16 +179,7 @@ $m= $_SESSION["Name"];
     while($row = $resultd->fetch_assoc())
     
     {
-    
-    
-    
-    
     $x= $row["Nurse_ID"];
-    
-    
-    
-    
-    
     }
     
     
@@ -204,11 +192,7 @@ $y=null;
    {     
      
 	  $y=$row["Hospital_ID"];
-   
-	 
-	  
-	  
-	}
+   }
     
 $sql= "select * from pre_medical where Hospital_ID=$y" ;
 $result = $conn->query($sql);
