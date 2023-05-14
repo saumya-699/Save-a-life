@@ -161,7 +161,7 @@ session_start();
             <!-- add your content from here -->
            
 
-            <select id="filterDropdown" class="b1">
+    <select id="filterDropdown" class="b1">
     <option value="All">Gender</option>
     <option value="Female">Female</option>
     <option value="Male">Male</option>
