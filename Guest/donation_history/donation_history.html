@@ -1,47 +1,8 @@
-<?php
-
-session_start();
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-require_once '../database.php';
-
-if (isset($_GET['logout']) && $_GET['logout'] == true) {
-    session_destroy();
-    header("Location: /Save-a-life/Guest/login/login.php");
-}
-
-$display_name = "Invalid user";
-$userdata = null;
-$db = Database::getInstance();
-
-if (isset($_SESSION['username'])) {
-    $userdata = $db->getUserData($_SESSION['username']);
-
-    switch ($userdata['Gender'])
-    {
-        case 'M':
-            $display_name = "Mr. ".$userdata['Full_Name'];
-            break;
-        case 'F':
-            $display_name = "Miss. ".$userdata['Full_Name'];
-            break;
-        default:
-            $display_name = $userdata['Full_Name'];
-    }
-} else {
-	header("Location: /Save-a-life/Guest/login/login.php");
-}
-
-?>
-
 <!DOCTYPE html>
 <html lang="en" >
 <head>
   <meta charset="UTF-8">
-  <title>Home</title>
+  <title>donation_history</title>
   <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
 <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
 <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./style.css">
@@ -49,11 +10,6 @@ if (isset($_SESSION['username'])) {
 <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-<?php if (isset($_GET['success']) && $_GET['success']) {?>
-	<script>
-		alert("Login Successful");
-	</script>
-<?php } ?>
 <!-- partial:index.partial.html -->
 <div class="layout has-sidebar fixed-sidebar fixed-header">
       <aside id="sidebar" class="sidebar break-point-sm has-bg-image">
@@ -67,10 +23,10 @@ if (isset($_SESSION['username'])) {
           </div>
           <div class="sidebar-content">
             <nav class="menu open-current-submenu">
-            <ul>
+              <ul>
                 <li class="menu-header"></li>
                 <li class="menu-item">
-                  <a href="/Save-a-life/Guest/home/home.php">
+                  <a href="../index.html">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -91,7 +47,7 @@ if (isset($_SESSION['username'])) {
                   </div>
                 </li>
                 <li class="menu-item">
-                  <a href="../donation_history/donation_history.html">
+                  <a href="#">
                     <span class="menu-icon">
                       <i class="ri-history-line"></i>
                     </span>
@@ -130,7 +86,7 @@ if (isset($_SESSION['username'])) {
                 </li>
 
                 <li class="menu-item">
-                  <a href="/Save-a-life/Guest/home/home.php?logout=true">
+                  <a href="#">
                     <span class="menu-icon">
                       <i class="ri-logout-box-r-line"></i>
                     </span>
@@ -146,20 +102,36 @@ if (isset($_SESSION['username'])) {
       <div class="layout">
         <main class="content">
           <!-- add your content from here -->
-         
-          <div class="frm-login ">
-                    <div class="card frm-form ">
-                        <div class="card-body frm-body ">
-                            
-
-                                <h1 class="txt-l ">Welcome back to NBTS</h1>
-			<h1 class="txt-l ">Dear <?php echo $display_name ?></h1>
-			<h2 class="txt-l ">You have sucessfully accessed to your Donor Account</h1>
-                                
-
-                        </div>
-                    </div>
-</div>
+          <div class="row" style="width:100%;padding-left:5px;padding-top:60px;">
+            <div class="col-12">
+                <h1 style="text-align: center;font-weight: 800;font-size: 36px;">Blood Donation History</h1>
+            </div>
+        </div>
+        <form method="post" action=" ">
+ 
+          <div class="midiv">
+          
+           
+          
+           <font size=3> Search by </font></b>  <br/> <br/><select name= "search" class="select">
+                                       <option value="requested_date"><b> Date of Donation</b></option>
+                                       <option value="requeste_id"><b> Donation ID</b></option>
+                                       <option value="patient_name"><b>Number of Packets</b></option>
+                                       <option value="blood_group" selected><b>Center of Donation</b></option>
+                                      <option value="status" selected><b>Collector ID</b></option>
+                                       </select>
+          
+          
+          <input type="text" placeholder="type here" name="data" id="data" class="box">
+          
+           <button type="submit"  name="BtnSubmit" id="search" class="b1" ><b>Search</b></button>
+          </div>
+          
+          </div>
+          
+          </form>
+        </div>
+        
         </main>
       </div>
     </div>
