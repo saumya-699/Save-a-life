@@ -64,7 +64,7 @@ if (isset($_POST['submit'])) {
         } else {
             // Old password does not match
             $_SESSION['old-pwd-not-match'] = true;
-            echo "<script>alert('Old password does not match.'); window.location.href = 'password_change.php';</script>";
+            echo "<script>alert('Current password does not match.'); window.location.href = 'password_change.php';</script>";
             exit();
         }
     } else {
