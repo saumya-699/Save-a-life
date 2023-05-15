@@ -266,6 +266,7 @@ h3 {
     background-color: white;
     border-radius: 20px;
     margin-top: -50px;
+    margin-left:180px;
 }
 
     .layout {
