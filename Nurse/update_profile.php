@@ -44,7 +44,7 @@ session_start();
               <ul>
                 <li class="menu-header"></li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="Home.php">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -91,7 +91,7 @@ session_start();
                   </div>
                 </li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="declaration.php">
                     <span class="menu-icon">
                       <i class="ri-file-text-fill"></i>
                     </span>
@@ -120,7 +120,7 @@ session_start();
 
                 <li class="menu-header" style="padding-top: 40px"><span>| </span></li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="profile.php">
                     <span class="menu-icon">
                       <i class="ri-user-line"></i>
                     </span>
@@ -136,7 +136,7 @@ session_start();
                 </li>
                 </li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="logout.php">
                     <span class="menu-icon">
                       <i class="ri-logout-box-r-line"></i>
                     </span>
@@ -178,7 +178,7 @@ session_start();
                   </div>
                     
                   <label for="exampleFormControlInput1" class="form-label lbl star">Name with Initials</label>
-                   <input type="text" class="form-control txt-input" name="Name"value="<?php echo $name; ?>">
+                   <input type="text" class="form-control txt-input" name="Name"value="<?php echo $name; ?>" pattern="[A-Z](\.{1-200})+\s[A-Z][a-zA-Z]+" required>
                            
                     <label for="exampleFormControlInput1" class="form-label lbl star">SLMC Number</label>
                     <input type="text" class="form-control txt-input" name="SLMC"value="<?php echo $slmc; ?>" readonly>
@@ -187,10 +187,10 @@ session_start();
                     <input type="text" class="form-control txt-input" name="Hospital"value="<?php echo $hospital; ?>" readonly>
 
                     <label for="exampleFormControlInput1" class="form-label lbl star">Email</label>
-                    <input type="text" class="form-control txt-input" name="Email"value="<?php echo $email;?> ">
+                    <input type="text" class="form-control txt-input" name="Email"value="<?php echo $email;?> " pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required>
 
                     <label for="exampleFormControlInput1" class="form-label lbl star">Contact Number</label>
-                    <input type="text" class="datepicker_input form-control txt-input" name="Contact"value="<?php echo $contact; ?>">
+                    <input type="text" class="datepicker_input form-control txt-input" name="Contact"value="<?php echo $contact; ?>" pattern="[0-9]{10}" required >
 
                     <label for="exampleFormControlInput1" class="form-label lbl star">Date of Appointment</label>
                     <input type="text" class="form-control txt-input" name="Appointment"value="<?php echo $apponitmentdate;?> " readonly>
