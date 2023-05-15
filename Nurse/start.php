@@ -170,7 +170,7 @@ if ($result->num_rows > 0) {
 			echo  "<div class='tab'>";
      echo " <h1>Daily Blood Collection </h1>";
      echo " <h4>Everyday blood collecting process Start at 8.00am and end at 4.00pm .<br>
-     There has a batch in every 15 doations.<br>
+     There has a batch in every 2 donations.<br>
      <br>
      <br>
      Current Batch Number: $current_batch
