@@ -28,6 +28,34 @@ session_start();
 <!-- partial:index.partial.html -->
 <?php
 require 'conp.php';
+$m= $_SESSION["Name"];
+    $query = "select * from nurse where UserName ='$m'";
+    $resultd = $conn->query($query);
+    
+    //echo "Error in ".$vql."<br>".$conn->error;
+    $x=null;
+    if($resultd->num_rows>0)
+    
+    {        
+    
+    while($row = $resultd->fetch_assoc())
+    
+    {
+    $x= $row["Nurse_ID"];
+    }
+    
+    
+    }
+ $vql ="select * from nurse where Nurse_ID ='$x'";
+$resultx = $conn->query($vql);
+$y=null;
+ while($row = $resultx->fetch_assoc())
+   
+   {     
+     
+	  $y=$row["Hospital_ID"];
+   }
+
 
 // Check if the form is submitted
 if (isset($_POST['BtnSubmit'])) {
@@ -35,7 +63,7 @@ if (isset($_POST['BtnSubmit'])) {
     $donorId = $_POST['Donor_Id'];
 
     // Query to check if the donor ID exists in the registered donors table
-    $sql = "SELECT * FROM donors WHERE Donor_Id = '$donorId'";
+    $sql = "SELECT * FROM donors WHERE Donor_Id = '$donorId' and Hospital_ID='$y'";
     $result = $conn->query($sql);
 
     // Check if the donor ID is registered
@@ -64,10 +92,9 @@ if (isset($_POST['BtnSubmit'])) {
       <label for="exampleFormControlInput1" class="form-label lbl star">Donor ID</label>
       <input type="text" name="Donor_Id" class="form-control txt-input" placeholder="Type Donor ID" required>
 
-      <label for="exampleFormControlInput1" class="form-label lbl star">Blood Packet Number</label>
-      <input type="text" name="Packet_Id" class="form-control txt-input" placeholder="Blood Packet Number" required>
 
-      <label for="exampleFormControlInput1" class="form-label lbl star">Nurse ID</label>
+
+      <label for="exampleFormControlInput1" class="form-label lbl star">Nurse ID(Incharge)</label>
       <input type="text" class="form-control txt-input" placeholder="Nurse ID" name="Nurse_ID" required>
 
       <br><br><br><br>
