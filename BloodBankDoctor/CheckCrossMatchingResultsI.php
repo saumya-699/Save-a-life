@@ -289,8 +289,8 @@ session_start();
 
 <select id="StatusDropdown" class="selectx">
   <option value="All">Status</option>
-  <option value="pending"> Pending</option>
-  <option value="checked">Checked</option>
+  <option value="Pending"> Pending</option>
+  <option value="Checked">Checked</option>
   
 </select>
 

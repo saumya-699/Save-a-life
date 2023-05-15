@@ -75,17 +75,17 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
     </div>
 
-    <div class="nav-bar" style="background: #5a96ff;">
+    <div class="nav-bar" style="background: #b2c0e0;">
         <div class="container">
             <div class="nav">
-                <ul>
-                    <li style="padding-top: 10px;">
+                <ul class="nav-itmes">
+                    <li style="padding-top: 17.5px;">
                         <a href="../index.html">HOME</a>
                     </li>
-                    <li style="padding-top: 10px;">
+                    <li style="padding-top: 17.5px;">
                         <a href="../contactus/contactus.html">CONTACT  US</a>
                     </li>
-                    <li class="btn btn-primary btn-h-login" style="margin-top:5px;background-color: #ff722d !important;height: 40px;">
+                    <li class="btn btn-primary btn-h-login" style="margin-top:15px;background-color: #ff722d !important;padding-top: 3.5px;">
                         <a href="/Save-a-life/Guest/login/login.php" style=" color: #fff;">LOGIN</a>
                     </li>
                 </ul>
