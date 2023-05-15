@@ -49,8 +49,8 @@ if($resultd->num_rows>0)
 
 
 $Dql ="select Count(*) AS countD
-    from donors
-    where Hospital_ID =$hid";
+    from pre_medical
+    where Hospital_ID =$hid GROUP BY Donor_Id";
 
 
 $resultD = $conn->query($Dql);
