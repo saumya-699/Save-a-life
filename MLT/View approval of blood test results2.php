@@ -182,7 +182,7 @@ $result = $conn->query($sql);
 
               <li class="menu-header" style="padding-top: 40px"><span> | </span></li>
               <li class="menu-item">
-              <a href="Profile.php">
+                <a href="Profile.php">
                   <span class="menu-icon">
                     <i class="ri-user-line"></i>
                   </span>
@@ -357,6 +357,9 @@ $result = $conn->query($sql);
           }
           $conn->close();
           ?>
+          <button class="b2" name="back" value="back">
+            <font size="2px"><a href="View approval of blood test results1.php">Back</font size></a>
+          </button>
           <script>
             function filterTable() {
               const input = document.getElementById('searchInput');
@@ -424,6 +427,35 @@ $result = $conn->query($sql);
               margin-left: 200px;
               margin-bottom: 100px;
             }
+
+            .b2 {
+
+
+              border: none;
+              cursor: pointer;
+              margin-top: 20px;
+              margin-bottom: 30px;
+              margin-left: 800px;
+              margin-right: 10px;
+              width: 130px;
+              height: 40px;
+              border-radius: 30px;
+              background: #4082f5;
+              text-transform: uppercase;
+              box-shadow: 0px 10px 40px 0px rgba(17, 97, 237, 0.4);
+              font-weight: 700;
+              font-size: 14px;
+
+
+            }
+
+
+            a {
+              text-decoration: none;
+              color: white;
+              cursor: pointer;
+            }
+
 
             .b1 {
               height: 40px;
@@ -549,6 +581,7 @@ $result = $conn->query($sql);
             .layout {
               background-color: #d8d8d8;
             }
+
             .icon-button__badge {
               position: absolute;
               top: 7px;
@@ -621,7 +654,6 @@ $result = $conn->query($sql);
               align-items: center;
               border-radius: 50%;
             }
-
           </style>
 
 

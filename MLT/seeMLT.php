@@ -11,6 +11,7 @@ if (isset($_SESSION["ID"])) {
     while ($row = $result1->fetch_assoc()) {
       $x = $row["Name_With_Initials"];
       $y = $row["Hospital_ID"];
+      $z=$row["MLT_ID"];
     }
   }
 }
@@ -288,17 +289,16 @@ if (isset($_SESSION["ID"])) {
           <div class="form">
             <div class="card frm-form ">
               <div class="form-body ">
-                <h3>Pending Blood Test Results of approval</h3>
-                <p style="color:#0D5C75; font-size: 70px; font-weight: 700; margin-top:-20px;">
+                <h3>Send test results for approval</h3>
+                <p style="color:#0D5C75; font-size: 70px; font-weight: 700; margin-top:40px;">
                   <?php
-                  $vql = "SELECT COUNT(countS) AS total_count FROM (
-                    SELECT COUNT(*) AS countS FROM blood_testing_result WHERE status = 'Pending' and MLT_ID='$x' GROUP by process_date,batch_number) AS subquery";
+                  $vql = "SELECT COUNT(*) AS countS FROM blood_testing_result Where MLT_ID ='$z' AND send_status	<> '1' GROUP BY process_date, batch_number ";
 
                   $result = $conn->query($vql);
 
                   if ($result->num_rows > 0) {
                     $row = $result->fetch_assoc();
-                    $status = $row["total_count"];
+                    $status = $row["countS"];
                     echo $status;
                   }
 
@@ -310,7 +310,22 @@ if (isset($_SESSION["ID"])) {
           </div>
 
           <div class="form-right">
+          <center><h3>Pending Add blood compnents</h3></center>
 
+          <p style="color:#0D5C75; font-size: 70px; font-weight: 700; margin-top:-10px; margin-left:100px">
+                  <?php
+                  $vql = "SELECT COUNT(*) AS countS FROM blood_testing_result WHERE  MLT_ID ='$z' AND hbv_result <> 'Positive' AND hcv_result <> 'Positive' AND malaria_result <> 'Positive' AND hiv_result <> 'Positive' AND vdrl_result <> 'Positive' AND AddStatus	<> '1' AND status <> 'Pending'";
+
+                  $result = $conn->query($vql);
+
+                  if ($result->num_rows > 0) {
+                    $row = $result->fetch_assoc();
+                    $status = $row["countS"];
+                    echo $status;
+                  }
+
+                  ?>
+                </p>
 
 
 
@@ -412,24 +427,23 @@ if (isset($_SESSION["ID"])) {
     }
 
     .form-body {
-      padding: 10px 30px;
-      width: 300px;
-      height: 200px;
-      background-color: white;
-      border-radius: 20px;
-      margin-top: -50px;
-    }
+    padding: 10px 30px;
+    width: 321px;
+    height: 245px;
+    background-color: white;
+    border-radius: 20px;
+    margin-top: -50px;
+}
 
-    .form-right {
-      padding: 10px 30px;
-      width: 300px;
-      height: 200px;
-      background-color: white;
-      border-radius: 20px;
-      margin-top: -199px;
-      margin-left: 533px;
-    }
-
+.form-right {
+    padding: 10px 30px;
+    width: 321px;
+    height: 245px;
+    background-color: white;
+    border-radius: 20px;
+    margin-top: -243px;
+    margin-left: 533px;
+}
     .layout {
       background-color: #B2C0E0;
     }

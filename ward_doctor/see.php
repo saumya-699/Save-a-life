@@ -172,7 +172,7 @@ if (isset($_SESSION["ID"])) {
             <div class="form">
               <div class="card frm-form ">
                 <div class="form-body ">
-                  <h3>Pending Requests</h3>
+                  <h3>Sended Blood Requests which are Pending </h3>
                  
                   <p style="color:#0D5C75; font-size: 70px; font-weight: 700; margin-top:30px;">
                     <?php
@@ -246,14 +246,13 @@ if (isset($_SESSION["ID"])) {
     }
 
     .form-body {
-      padding: 10px 30px;
-      width: 300px;
-      height: 200px;
-      background-color: white;
-      border-radius: 20px;
-      margin-top: -50px;
-    }
-
+    padding: 10px 30px;
+    width: 315px;
+    height: 248px;
+    background-color: white;
+    border-radius: 20px;
+    margin-top: -50px;
+}
     .layout {
       background-color: #B2C0E0;
     }
