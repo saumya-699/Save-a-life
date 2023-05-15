@@ -47,7 +47,7 @@ session_start();
               <ul>
                 <li class="menu-header"></li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="Home.php">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -56,7 +56,7 @@ session_start();
                   </a>
                  </li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="reg.php">
                     <span class="menu-icon">
                       <i class="ri-user-add-fill"></i>
                     </span>
@@ -64,7 +64,7 @@ session_start();
                   </a>
                   </li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="add_medical.php">
                     <span class="menu-icon">
                       <i class="ri-heart-add-fill"></i>
                     </span>
@@ -81,12 +81,12 @@ session_start();
                   <div class="sub-menu-list">
                     <ul>
                       <li class="menu-item">
-                        <a href="#">
+                        <a href="View_Personal.php">
                           <span class="menu-title">Personal</span>
                         </a>
                       </li>
                       <li class="menu-item">
-                        <a href="#">
+                        <a href="View_med.php">
                           <span class="menu-title">Medical</span>
                         </a>
                       </li>
@@ -94,7 +94,7 @@ session_start();
                   </div>
                 </li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="declaration.php">
                     <span class="menu-icon">
                       <i class="ri-file-text-fill"></i>
                     </span>
@@ -103,7 +103,7 @@ session_start();
                 </li>
 
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="start.php">
                     <span class="menu-icon">
                       <i class="ri-drop-fill"></i>
                     </span>
@@ -112,7 +112,7 @@ session_start();
                   </li>
 
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="donation_history.php">
                     <span class="menu-icon">
                       <i class="ri-history-line"></i>
                     </span>
@@ -123,7 +123,7 @@ session_start();
 
                 <li class="menu-header" style="padding-top: 40px"><span>| </span></li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="profile.php">
                     <span class="menu-icon">
                       <i class="ri-user-line"></i>
                     </span>
@@ -139,7 +139,7 @@ session_start();
                 </li>
                 </li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="logout.php">
                     <span class="menu-icon">
                       <i class="ri-logout-box-r-line"></i>
                     </span>
