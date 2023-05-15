@@ -165,14 +165,14 @@ if (isset($_SESSION["ID"])) {
         <div>
           <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
           <div class="col-9 ">
-            <center style='margin-top:50px;'>
-              <h2 class="txt-l ">Welcome Dr.<?php echo " " . $x;
-                                              ?> </h2>
-            </center>
+          <center style='margin-top:50px;' >
+            <h2 class="t">Welcome <div class="username" >.<?php echo " " . $x;
+                                            ?> </div></h2>
+          </center>
             <div class="form">
               <div class="card frm-form ">
                 <div class="form-body ">
-                  <h3>Sended Blood Requests which are Pending </h3>
+                  <h3>Pending Requests</h3>
                  
                   <p style="color:#0D5C75; font-size: 70px; font-weight: 700; margin-top:30px;">
                     <?php
@@ -212,6 +212,20 @@ if (isset($_SESSION["ID"])) {
 
 
   <style>
+    .t{
+   font-size: 32px;
+   font-weight: 600px;
+   margin-left: -250px;
+   
+}
+.username{
+  color:#0D5C75;
+  margin-top: -48px;
+  margin-left:390px;
+}
+h3 {
+    font-size: 25px;
+}
   .icon-button__badge {
     position: absolute;
     top: 9px;
@@ -247,12 +261,13 @@ if (isset($_SESSION["ID"])) {
 
     .form-body {
     padding: 10px 30px;
-    width: 315px;
-    height: 248px;
+    width: 400px;
+    height: 300px;
     background-color: white;
     border-radius: 20px;
     margin-top: -50px;
 }
+
     .layout {
       background-color: #B2C0E0;
     }
