@@ -34,7 +34,6 @@ if (isset($_POST['cancel'])) {
 
 if (isset($_POST['submit'])) {
 
-  if (!empty($_POST['BloodComponent'])) {
 
   // $Blood_bagID=$_POST['Blood_bagID'];
 
@@ -126,15 +125,8 @@ if (isset($_POST['submit'])) {
   // else{
   //      echo "Error:". $sql . "<br>". $conn->error;
   //    }    
-  }
-  else {
-    // No checkbox is checked, display an error message
-    echo '<script type="text/javascript">';
-    echo 'alert("Please enter at least one Blood Component Type.");';
-    echo 'window.location.href="Add blood components.php";';
-    echo'</script>';    
-  }
-
+  
+  
   $conn->close();
 }
 
