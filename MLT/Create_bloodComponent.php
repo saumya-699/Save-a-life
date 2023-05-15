@@ -26,9 +26,15 @@ if ($resultr->num_rows > 0) {
     $y = $rowx["Hospital_ID"];
   }
 }
+if (isset($_POST['cancel'])) {
+  header('location:Add blood components.php');
+}
+
 
 
 if (isset($_POST['submit'])) {
+
+  if (!empty($_POST['BloodComponent'])) {
 
   // $Blood_bagID=$_POST['Blood_bagID'];
 
@@ -120,11 +126,15 @@ if (isset($_POST['submit'])) {
   // else{
   //      echo "Error:". $sql . "<br>". $conn->error;
   //    }    
-
+  }
+  else {
+    // No checkbox is checked, display an error message
+    echo '<script type="text/javascript">';
+    echo 'alert("Please enter at least one Blood Component Type.");';
+    echo 'window.location.href="Add blood components.php";';
+    echo'</script>';    
+  }
 
   $conn->close();
 }
 
-if (isset($_POST['cancel'])) {
-  header('location:Add blood components.php');
-}

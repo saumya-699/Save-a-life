@@ -220,7 +220,7 @@ if (isset($_SESSION["ID"])) {
                   </div>
                     
                   <label for="exampleFormControlInput1" class="form-label lbl star">Name with Initials</label>
-                   <input type="text" class="form-control txt-input" name="Name"value="<?php echo $name; ?>">
+                   <input type="text" class="form-control txt-input" name="Name"value="<?php echo $name; ?>" required="">
                            
                     <label for="exampleFormControlInput1" class="form-label lbl star">SLMC Number</label>
                     <input type="text" class="form-control txt-input" name="SLMC"value="<?php echo $slmc; ?>" readonly>
