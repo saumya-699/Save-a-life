@@ -289,7 +289,7 @@ if (isset($_SESSION["ID"])) {
           <div class="form">
             <div class="card frm-form ">
               <div class="form-body ">
-                <h3>Send test results for approval</h3>
+                <h3>Pending Test results to send</h3>
                 <p style="color:#0D5C75; font-size: 70px; font-weight: 700; margin-top:40px;">
                   <?php
                   $vql = "SELECT COUNT(*) AS countS FROM blood_testing_result Where MLT_ID ='$z' AND send_status	<> '1' GROUP BY process_date, batch_number ";
