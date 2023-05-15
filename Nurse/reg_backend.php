@@ -58,7 +58,7 @@ if (isset($_POST['BtnSubmit'])) {
     // insert the user into the database.
     $jql = "INSERT INTO system_users(User_ID, UserName, Password, Type) VALUES('', '$username', '$password', 6)";
     if ($conn->query($jql)) {
-        $sql = "INSERT INTO donors (Prefix, Full_Name, Initials, NIC_Number, DOB, Email, Gender, Address, province, postal, mobile_number, land_number, username, password, date, Remark,) 
+        $sql = "INSERT INTO donors (Prefix, Full_Name, Initials, NIC_Number, DOB, Email, Gender, Address, province, postal, mobile_number, land_number, username, password, date, Remark) 
                 VALUES ('$Prefix', '$Fullname', '$Initial', '$NIC', '$DOB', '$Email', '$Gender', '$Address', '$province', '$postal', '$mobile_number', '$land_number', '$username', '$password', '$date', 'Added')";
         if ($conn->query($sql)) {
             echo '<script type="text/javascript">';
