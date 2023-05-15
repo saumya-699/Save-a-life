@@ -74,18 +74,37 @@ if (isset($_POST['save']) && $_POST['save'] === "success") {
 <head>
   <meta charset="UTF-8">
   <title>doner_information</title>
+<<<<<<< Updated upstream
+  <!--Start-->
+  <link href=https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css rel="stylesheet">
+=======
   <link rel="stylesheet" href="../css/style2.css">
   <link rel="stylesheet" href="../style.css">
+  <link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
+>>>>>>> Stashed changes
   <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css'>
-<link rel='stylesheet' href='https://unpkg.com/css-pro-layout@1.1.0/dist/css/css-pro-layout.css'>
+
 <link rel='stylesheet' href='https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&amp;display=swap'><link rel="stylesheet" href="./style.css">
+<<<<<<< Updated upstream
+<link rel="stylesheet" href="../css/style2.css">
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="../css/fontawesome-free-5.15.4/css/all.css">
+
+    <!-- Vanilla Datepicker CSS -->
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css'>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+   
+<!--End--->
+=======
  <!-- Vanilla Datepicker CSS -->
  <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/vanillajs-datepicker@1.1.4/dist/css/datepicker.min.css'>
-
+ 
  
  <link rel="stylesheet" href="../css/nbtssl/nbtssl.min.css">
  <link rel="stylesheet" href="../css/fontawesome-free-5.15.4/css/all.css">
  <link rel="stylesheet" href="../css/mediaquery.css">
+>>>>>>> Stashed changes
 
 
 
@@ -129,7 +148,7 @@ if (isset($_POST['save']) && $_POST['save'] === "success") {
             <ul>
                 <li class="menu-header"></li>
                 <li class="menu-item">
-                  <a href="/Save-a-life/Guest/">
+                  <a href="../home/home.php">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>

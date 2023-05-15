@@ -56,7 +56,7 @@ session_start();
  table{
 	
 	
-	margin-left:120px;
+	margin-left:220px;
 	width:800px;
 	height:20px;
 	border-collapse: collapse;	
@@ -95,7 +95,7 @@ session_start();
 					        width:130px;
                             height:40px;					   
 						    color:#FFF5F3;
-							 margin:-141px 6px -27px 530px;
+							 margin:-141px 6px -27px 610px;
 							 border-radius:30px;
                              border: none;
                              background-color:#F35050;
@@ -111,7 +111,7 @@ session_start();
 					        width:130px;
                             height:40px;					   
 						    color:#FFF5F3;
-						      margin:10px 20px 100px 360px;
+						      margin:10px 20px 100px 434px;
 							 border-radius:30px;
                              border: none;
                            background-color:#F35050;
@@ -522,7 +522,7 @@ session_start();
 <div class="midiv"> 
    <div class="passwordDiv">
 
-    <center><h1>Check External Stock Availability</h1></center>
+    <center><h1>&nbsp;&nbsp;&nbsp;&nbsp;Check External Stock Availability</h1></center>
        
     
      <form method="post" action="checkExternalStockI.php">
@@ -546,9 +546,10 @@ session_start();
 							 
 							 <td> <select name= "Component_type" class="select"> 
 							 <option value='None'>None</option>							 
-                             <option value="Red Blood Cells">Red Blood Cells</option>    
-                             <option value="White Blood Cells">White Blood Cells</option>
+                             <option value="Red Cells">Red Cells</option>    
+                             <option value="White Cells">White Cells</option>
                              <option value="Plasma">Plasma</option>
+                             <option value="Platelets">Platelets</option>
                              </select></td>
 							 
                              <?php

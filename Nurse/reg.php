@@ -91,7 +91,7 @@ session_start();
                   </div>
                 </li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="declaration.php">
                     <span class="menu-icon">
                       <i class="ri-file-text-fill"></i>
                     </span>
@@ -136,7 +136,7 @@ session_start();
                 </li>
                 </li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="logout.php">
                     <span class="menu-icon">
                       <i class="ri-logout-box-r-line"></i>
                     </span>
@@ -234,7 +234,7 @@ session_start();
                             </select>
                     
                             <label for="exampleFormControlInput1" class="form-label lbl star">Postal Code</label>
-                            <input type="text" class="form-control txt-input" placeholder="Type the Postal Code of your Area" name="postal" pattern="[0-9]{6}" required>
+                            <input type="text" class="form-control txt-input" placeholder="Type the Postal Code of your Area" name="postal" pattern="[0-9]{5}" required>
                     
                             <label for="exampleFormControlInput1" class="form-label lbl star">Telephone Number (Mobile)</label>
                             <input type="tel" class="form-control txt-input" placeholder="eg:0777123456" name="mobile" pattern="[0-9]{10}" required>
@@ -249,12 +249,8 @@ session_start();
                     
                             <label for="exampleFormControlInput1" class="form-label lbl star"> Password</label>
                             <input type='hidden'  name='subject' value=''>
-                            <input type="password" class="form-control txt-input" placeholder="Enter a password" name="password" value='$pass' required>
+                            <input type="password" class="form-control txt-input" placeholder="Enter a password" name="password" value='$pss' required>
                                     
-                    
-                            <label for="exampleFormControlInput1" class="form-label lbl star">Confirm Password</label>
-                            <input type="password" class="form-control txt-input" placeholder="Re-enter the password" name="confirm_password" value='$pass' required>
-                                        
                             <br><br><br><br>
                          
                             <div class='row btn-buttons'>

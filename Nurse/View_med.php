@@ -24,8 +24,14 @@ session_start();
 <script src="https://kit.fontawesome.com/327346c9f3.js" crossorigin="anonymous"></script>
  <link rel="stylesheet" href="StyleIcons.css"> 
  <link rel="stylesheet" href="StyleSearch.css"> 
-
-
+<style>
+  table{
+    margin-left: 50px;
+  }
+  .b1{
+    width: 157px;
+  }
+</style>
 </head>
 <body>
 <!-- partial:index.partial.html -->
@@ -158,9 +164,22 @@ session_start();
 
             <a id="btn-toggle" href="#" class="sidebar-toggler break-point-sm"></a>
             <!-- add your content from here -->
-           
+            <select id="filterDropdown" class="b1">
+    <option value="All">Blood Group</option>
+    <option value="A+">A+</option>
+    <option value="B+">B+</option>
+    <option value="O+">O+</option>
+    <option value="AB+">AB+</option>
+    <option value="A-">A-</option>
+    <option value="B-">B-</option>
+    <option value="O-">O-</option>
+    <option value="AB-">AB-</option>
+    
+  </select>        
+ 
 
-</form>
+<input type="text" id="searchInput" class="box">
+           
 <?php
 
 
@@ -168,9 +187,6 @@ require 'conp.php';
 
 $m= $_SESSION["Name"];
     $query = "select * from nurse where UserName ='$m'";
-    
-    
-           
     $resultd = $conn->query($query);
     
     //echo "Error in ".$vql."<br>".$conn->error;
@@ -182,16 +198,7 @@ $m= $_SESSION["Name"];
     while($row = $resultd->fetch_assoc())
     
     {
-    
-    
-    
-    
     $x= $row["Nurse_ID"];
-    
-    
-    
-    
-    
     }
     
     
@@ -204,13 +211,12 @@ $y=null;
    {     
      
 	  $y=$row["Hospital_ID"];
-   
-	 
-	  
-	  
-	}
-    
-$sql= "select * from pre_medical where Hospital_ID=$y" ;
+   }
+
+
+
+$sql= "select donors.blood_group,pre_medical.Donor_Id, pre_medical.Weight, Pre_medical.Height, pre_medical.Blood_Pressure,pre_medical.Hemoglobine
+From donors INNER JOIN pre_medical ON donors.Donor_Id = pre_medical.Donor_Id where pre_medical.Hospital_ID=$y";
 $result = $conn->query($sql);
 
 if($result->num_rows>0)
@@ -224,7 +230,8 @@ if($result->num_rows>0)
 	      //echo "<font size=6>";
 	   
 	   //echo  "<div class='tab'>"
-	   echo  "<table border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Donor ID"."</th>"."
+	   echo  "<table id='dataTable' border=1>"."<tr>"."<th style='text-align:center;width:120px;'>"."Donor ID"."</th>"."
+     <th style='text-align:center;width:120px;'>"."Blood Group"."
        <th style='text-align:center;width:120px;'>"."Weight(Kg)"."
        <th style='text-align:center;width:120px;'>"."Height(cm)"."</th>"."
        <th>"."Blood Pressure(mm Hg)"."</th>"."
@@ -235,8 +242,9 @@ if($result->num_rows>0)
    while($row = $result->fetch_assoc())
    
    {     
-     
-	  echo  "<tr>"."<td>".$row["Donor_Id"]."</td>"."<td>".$row["Weight"]."</td>"."<td>".$row["Height"]."</td>"."<td>".$row["Blood_Pressure"]."</td>"."<td>".$row["Hemoglobine"]."</td>";
+    $position_class = strtolower(str_replace(' ', '-', $row['blood_group']));
+    echo '<tr class="' . $position_class . '">'; 
+	  echo  "<td>".$row["Donor_Id"]."</td>"."<td>".$row["blood_group"]."</td>"."<td>".$row["Weight"]."</td>"."<td>".$row["Height"]."</td>"."<td>".$row["Blood_Pressure"]."</td>"."<td>".$row["Hemoglobine"]."</td>";
 	  echo"<td><form method='POST' action ='Delete_Donor.php'  onsubmit='return myConfirm()'>
     <input type=hidden  name=Donor_Id value=".$row['Donor_Id']." >
     <button type=submit value=Delete name=delete id=btn><i class='fa-solid fa-trash'></i></i></button>
@@ -271,7 +279,43 @@ $conn->close();
         return confirm("Are you sure you want to delete this record?");
     }
 </script>
+<script>
+  // Filter the table based on the selected color and search query
+  function filterTable() {
+    const input = document.getElementById('searchInput');
+    const filter = input.value.toUpperCase();
+    const select = document.getElementById('filterDropdown');
+    const filterValue = select.options[select.selectedIndex].value;
 
+    const table = document.getElementById('dataTable');
+    const rows = table.getElementsByTagName('tr');
+
+    for (let i = 1; i < rows.length; i++) {
+        const row = rows[i];
+        const cells = row.getElementsByTagName('td');
+        const positionClass = row.className;
+
+        if ((filterValue === 'All' || positionClass === filterValue.toLowerCase())
+            && Array.from(cells).some(cell => cell.textContent.toUpperCase().includes(filter))) {
+            row.style.display = '';
+        } else {
+            row.style.display = 'none';
+        }
+    }
+}
+
+// Attach filterTable function to events (e.g. button click, input change)
+const searchInput = document.getElementById('searchInput');
+searchInput.addEventListener('input', filterTable);
+
+const filterDropdown = document.getElementById('filterDropdown');
+filterDropdown.addEventListener('change', filterTable);
+
+  
+
+  // Attach filterTable function to events (e.g. button click, input change)
+  
+</script>
           
         </main>
       </div>

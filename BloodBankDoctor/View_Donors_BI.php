@@ -423,7 +423,10 @@ if (isset($_SESSION["ID"])) {
 
         //-----------------------------------------get  the user name of the blood bank doctor using session and then take the hospital id using blood bank docotr table
         //----------------------------------------then find the donors who have that hospital id in donor table
-          $sql = "select * from donors where username!='Removed' and Hospital_ID=$hid";
+          $sql = "select * from donation_records,donors where donors.Donor_Id =donation_records.Donor_Id and
+           donors.username!='Removed' and donation_records.Hospital_ID=$hid
+          group by donation_records.Donor_Id"
+           ;
           $result = $conn->query($sql);
 
           if ($result->num_rows > 0) {

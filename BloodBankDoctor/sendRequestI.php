@@ -472,9 +472,10 @@ $sql= "select *from hospital where Remark != 'Non-functioning'" ;
                              <label for='exampleFormControlInput1' class='form-label lbl star'> Required blood component</label>	 
 	                         <select id='component' name='RBC'  class='form-control txt-input' required>
                             <option value='None'>None</option>							 
-                             <option value='Red Blood Cells'>Red Blood Cells</option>    
-                             <option value='White Blood Cells'>White Blood Cells</option>
+                             <option value='Red Cells'>Red Cells</option>    
+                             <option value='White Cells'>White Cells</option>
                              <option value='Plasma'>Plasma</option>
+                             <option value='Plateletes'>Plateletes</option>
                             </select>
                           
                              

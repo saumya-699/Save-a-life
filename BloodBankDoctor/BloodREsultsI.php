@@ -439,7 +439,7 @@ else
 {
   //echo "Error in ".$vql."<br>".$conn->error;
 
- echo "no results";
+ echo "<center><b>No Results<b></center>";
 
 }
 

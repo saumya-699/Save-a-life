@@ -55,7 +55,7 @@ session_start();
  table{
 	
 	
-	margin-left:120px;
+	margin-left:220px;
 	width:800px;
 	height:20px;
 	border-collapse: collapse;	
@@ -520,7 +520,7 @@ session_start();
 <div class="midiv"> 
    <div class="passwordDiv">
    <br><br><br><br>
-    <center><h1>Check Internal Stock Availability</h1></center>
+    <center><h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Check Internal Stock Availability</h1></center>
        
     <br><br>
      <form method="post" action="checkInternalStockI.php">
@@ -544,9 +544,10 @@ session_start();
 							 
 							 <td> <select name= "Component_type" class="select">
                              <option value='None'>None</option>							 
-                             <option value="Red Blood Cells">Red Blood Cells</option>    
-                             <option value="White Blood Cells">White Blood Cells</option>
+                             <option value="Red Cells">Red Cells</option>    
+                             <option value="White Cells">White Cells</option>
                              <option value="Plasma">Plasma</option>
+                             <option value="Platelets">Platelets</option>
                              </select></td>
 							 
 						<?php

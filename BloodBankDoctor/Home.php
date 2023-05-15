@@ -49,8 +49,8 @@ if($resultd->num_rows>0)
 
 
 $Dql ="select Count(*) AS countD
-    from donors
-    where Remark != 'Remove' && Hospital_ID =$hid";
+    from donation_records
+    where Hospital_ID =$hid";
 
 
 $resultD = $conn->query($Dql);
@@ -460,7 +460,7 @@ if($results->num_rows>0)
                 <tr>
                     <td>
                         <p id="rcorners">
-                           Donors
+                           Donations
                             </br>
                             <span style="color:#0D5C75; font-size: 70px; font-weight: 700;">
                             <?php echo $Donor; ?>

@@ -180,7 +180,7 @@ h1{
 					      height:50px;
                           width:100px;
 						  color:#FFF;
-						  margin-left:700px;
+						  margin-left:800px;
 						   border-radius:5px;
                            margin-top:20px;
                            margin-bottom: 10PX;
@@ -220,7 +220,7 @@ h1{
               <ul>
                 <li class="menu-header"></li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="Home.php">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -267,7 +267,7 @@ h1{
                   </div>
                 </li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="declaration.php">
                     <span class="menu-icon">
                       <i class="ri-file-text-fill"></i>
                     </span>
@@ -296,7 +296,7 @@ h1{
 
                 <li class="menu-header" style="padding-top: 40px"><span>| </span></li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="profile.php">
                     <span class="menu-icon">
                       <i class="ri-user-line"></i>
                     </span>
@@ -312,7 +312,7 @@ h1{
                 </li>
                 </li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="logout.php">
                     <span class="menu-icon">
                       <i class="ri-logout-box-r-line"></i>
                     </span>
@@ -414,7 +414,7 @@ $y=null;
       <?php } ?>
     </table>
   <?php } else { ?>
-    <p><center>Donation details are sent.<center></p>
+    <p>Donation details are sent.</p>
   <?php } ?>
   <?php
 echo "
@@ -433,13 +433,14 @@ echo "
       
       $updateSqlSend= "UPDATE donation_records SET End_donation	='1'";
       $send=mysqli_query($conn,$updateSqlSend);
-       
+        // var_dump($bdate,$bnum);
+        // <input type='submit' name='$bnum' value='Send'>
 
 
     }?>
 <script>
 function confirmEndCollection() {
-    var confirmResult = confirm("Are you sure you want to start the blood collection?");
+    var confirmResult = confirm("Are you sure you want to end the blood collection?");
     if (confirmResult) {
         window.location.href = "Home.php";
     }

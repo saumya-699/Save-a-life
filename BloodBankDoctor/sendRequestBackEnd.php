@@ -58,7 +58,7 @@ if(isset($_POST['BtnSubmit']))
 			
 
 //insert the user into the database.
-    $sql="insert into sent_request(Request_ID,Requesting_hospital_name,Requested_hospital_name,Requested_by,Requeired_blood_group,Requeired_blood_component,Requeired_no_of_packs,Date)VALUES(' ','$H1Name','$H2Name','$RBDN','$RBC','$RBG','$RBP','$Date')";
+    $sql="insert into sent_request(Request_ID,Requesting_hospital_name,Requested_hospital_name,Requested_by,Requeired_blood_group,Requeired_blood_component,Requeired_no_of_packs,Date)VALUES(' ','$H1Name','$H2Name','$RBDN','$RBG','$RBC','$RBP','$Date')";
     
 	if($conn->query($sql))
      {

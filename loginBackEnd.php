@@ -61,13 +61,13 @@ if(isset($_POST["BtnSubmit"]))
 					header("Location:ward_doctor/see.php");}
 			 
 			   else if($_SESSION["Type"]   == '4'){
-			   header("Location:Nurse/add_medical.php");}
+			   header("Location:Nurse/Home.php");}
 			 
 			 else if($_SESSION["Type"]   == '5'){
 			 header("Location:Director/Home.php");}
 			 
 			 else {
-			 header("Location:Guestx/donar/doner_Information.php");}
+			 header("Location:Guest/donar/doner_Information.php");}
 			 
 			 
     }	 
