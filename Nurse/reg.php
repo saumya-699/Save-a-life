@@ -234,7 +234,7 @@ session_start();
                             </select>
                     
                             <label for="exampleFormControlInput1" class="form-label lbl star">Postal Code</label>
-                            <input type="text" class="form-control txt-input" placeholder="Type the Postal Code of your Area" name="postal" pattern="[0-9]{6}" required>
+                            <input type="text" class="form-control txt-input" placeholder="Type the Postal Code of your Area" name="postal" pattern="[0-9]{5}" required>
                     
                             <label for="exampleFormControlInput1" class="form-label lbl star">Telephone Number (Mobile)</label>
                             <input type="tel" class="form-control txt-input" placeholder="eg:0777123456" name="mobile" pattern="[0-9]{10}" required>
@@ -251,11 +251,6 @@ session_start();
                             <input type='hidden'  name='subject' value=''>
                             <input type="password" class="form-control txt-input" placeholder="Enter a password" name="password" value='$pss' required>
                                     
-                    
-                            <label for="exampleFormControlInput1" class="form-label lbl star">Confirm Password</label>
-                            <input type='hidden'  name='subject' value=''>
-                            <input type="password" class="form-control txt-input" placeholder="Re-enter the password" name="confirm_password" value='$pss' required>
-                                        
                             <br><br><br><br>
                          
                             <div class='row btn-buttons'>

@@ -9,13 +9,29 @@ if (isset($_POST['BtnSubmit'])) {
         $NIC = $_POST["NIC"];
     
         // Check if the NIC number already exists in the donors table
-        $nicCheckQuery = "SELECT * FROM donors WHERE NIC_Number = '$NIC'";
-        $nicCheckResult = $conn->query($nicCheckQuery);
+        $nsql = "SELECT * FROM donors WHERE NIC_Number = '$NIC'";
+        $nsql = $conn->query($nsql);
         
-        if ($nicCheckResult->num_rows > 0) {
+        if ($nsql->num_rows > 0) {
             // Display an alert message if the NIC number already exists
             echo '<script type="text/javascript">';
             echo 'alert("This donor already exists!");';
+            echo 'window.location.href="reg.php";';
+            echo '</script>';
+            exit; // Stop execution if the NIC number exists
+        }
+
+
+        $username = $_POST["username"];
+    
+        // Check if the NIC number already exists in the donors table
+        $esql = "SELECT * FROM donors WHERE Email = '$username'";
+        $esql = $conn->query($esql);
+        
+        if ($esql->num_rows > 0) {
+            // Display an alert message if the NIC number already exists
+            echo '<script type="text/javascript">';
+            echo 'alert("This username already exists!");';
             echo 'window.location.href="reg.php";';
             echo '</script>';
             exit; // Stop execution if the NIC number exists
