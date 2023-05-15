@@ -5,31 +5,21 @@ session_start();
 require 'conp.php';
 if (isset($_POST['BtnSubmit'])) {
 
-    $m= $_SESSION["Name"];
-    $query = "select * from nurse where UserName ='$m'";
-    $resultd = $conn->query($query);
     
-    //echo "Error in ".$vql."<br>".$conn->error;
-    $x=null;
-    if($resultd->num_rows>0)
+        $NIC = $_POST["NIC"];
     
-    {        
-    
-    while($row = $resultd->fetch_assoc())
-    
-    {
-    $x= $row["Nurse_ID"];
-    }
-}
- $vql ="select * from nurse where Nurse_ID ='$x'";
-$resultx = $conn->query($vql);
-$y=null;
- while($row = $resultx->fetch_assoc())
-   
-   {     
-     
-	  $y=$row["Hospital_ID"];
-    }
+        // Check if the NIC number already exists in the donors table
+        $nicCheckQuery = "SELECT * FROM donors WHERE NIC_Number = '$NIC'";
+        $nicCheckResult = $conn->query($nicCheckQuery);
+        
+        if ($nicCheckResult->num_rows > 0) {
+            // Display an alert message if the NIC number already exists
+            echo '<script type="text/javascript">';
+            echo 'alert("This donor already exists!");';
+            echo 'window.location.href="reg.php";';
+            echo '</script>';
+            exit; // Stop execution if the NIC number exists
+        }
     
 
     $date = date("Y/m/d");
@@ -47,15 +37,13 @@ $y=null;
     $land_number = $_POST["land"];
     $username = $_POST["username"];
     $password = $_POST["password"];
-    $Hospital_ID = $y;
     $Type = 6;
-    $Nurse_ID= $x;
 
     // insert the user into the database.
     $jql = "INSERT INTO system_users(User_ID, UserName, Password, Type) VALUES('', '$username', '$password', 6)";
     if ($conn->query($jql)) {
-        $sql = "INSERT INTO donors (Prefix, Full_Name, Initials, NIC_Number, DOB, Email, Gender, Address, province, postal, mobile_number, land_number, username, password, date, Hospital_ID, Remark,Nurse_ID) 
-                VALUES ('$Prefix', '$Fullname', '$Initial', '$NIC', '$DOB', '$Email', '$Gender', '$Address', '$province', '$postal', '$mobile_number', '$land_number', '$username', '$password', '$date', '$Hospital_ID', 'Added','$Nurse_ID')";
+        $sql = "INSERT INTO donors (Prefix, Full_Name, Initials, NIC_Number, DOB, Email, Gender, Address, province, postal, mobile_number, land_number, username, password, date, Remark,) 
+                VALUES ('$Prefix', '$Fullname', '$Initial', '$NIC', '$DOB', '$Email', '$Gender', '$Address', '$province', '$postal', '$mobile_number', '$land_number', '$username', '$password', '$date', 'Added')";
         if ($conn->query($sql)) {
             echo '<script type="text/javascript">';
             echo 'alert("Registration is successful");';

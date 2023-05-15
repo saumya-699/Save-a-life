@@ -91,7 +91,7 @@ session_start();
                   </div>
                 </li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="declaration.php">
                     <span class="menu-icon">
                       <i class="ri-file-text-fill"></i>
                     </span>
@@ -136,7 +136,7 @@ session_start();
                 </li>
                 </li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="logout.php">
                     <span class="menu-icon">
                       <i class="ri-logout-box-r-line"></i>
                     </span>
@@ -249,11 +249,12 @@ session_start();
                     
                             <label for="exampleFormControlInput1" class="form-label lbl star"> Password</label>
                             <input type='hidden'  name='subject' value=''>
-                            <input type="password" class="form-control txt-input" placeholder="Enter a password" name="password" value='$pass' required>
+                            <input type="password" class="form-control txt-input" placeholder="Enter a password" name="password" value='$pss' required>
                                     
                     
                             <label for="exampleFormControlInput1" class="form-label lbl star">Confirm Password</label>
-                            <input type="password" class="form-control txt-input" placeholder="Re-enter the password" name="confirm_password" value='$pass' required>
+                            <input type='hidden'  name='subject' value=''>
+                            <input type="password" class="form-control txt-input" placeholder="Re-enter the password" name="confirm_password" value='$pss' required>
                                         
                             <br><br><br><br>
                          
