@@ -175,7 +175,7 @@ session_start();
 
 require 'conp.php';
 
-$m= $_SESSION["Name"];
+/*$m= $_SESSION["Name"];
     $query = "select * from nurse where UserName ='$m'";
     
     
@@ -218,10 +218,10 @@ $y=null;
 	  
 	  
 	}
-  
+  */
   
 
-$sql= "select * from donors where  Hospital_ID=$y" ;
+$sql= "select * from donors" ;
 $result = $conn->query($sql);
 
 if($result->num_rows>0)
