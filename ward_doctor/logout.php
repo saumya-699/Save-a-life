@@ -3,5 +3,5 @@ session_start();
 session_unset();
 session_destroy();
 
-header('Location: ../loginT.php');
+header("Location:../Guest/login/login.php");
 ?>
