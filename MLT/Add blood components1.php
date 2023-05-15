@@ -326,7 +326,6 @@ if (isset($_SESSION["ID"])) {
                                     <input type="checkbox" id="Plasma" name="Plasma" value="1" style="display: inline-block;">
                                     <label for="Plasma" style="display: inline-block;">Plasma</label>
 
-                                    <p style="color:red;"><?php echo isset($errorMessage) ? $errorMessage : ''; ?></p>
 
                                     <!-- <label for="exampleFormControlInput1 " class="form-label lbl star " name="Expiry date">Expiry date (MM/DD/YYYY)</label>
                                     <div class="input-group mb-4 ">

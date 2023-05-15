@@ -26,14 +26,9 @@ if ($resultr->num_rows > 0) {
     $y = $rowx["Hospital_ID"];
   }
 }
-if (isset($_POST['cancel'])) {
-  header('location:Add blood components.php');
-}
-
 
 
 if (isset($_POST['submit'])) {
-
 
   // $Blood_bagID=$_POST['Blood_bagID'];
 
@@ -125,8 +120,11 @@ if (isset($_POST['submit'])) {
   // else{
   //      echo "Error:". $sql . "<br>". $conn->error;
   //    }    
-  
-  
+
+
   $conn->close();
 }
 
+if (isset($_POST['cancel'])) {
+  header('location:Add blood components.php');
+}
