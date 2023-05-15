@@ -438,15 +438,7 @@ echo "
 
 
     }?>
-<script>
-function confirmEndCollection() {
-    var confirmResult = confirm("Are you sure you want to end the blood collection?");
-    if (confirmResult) {
-        window.location.href = "Home.php";
-    }
-    return false;
-}
-</script>
+
 
 
     </div>
