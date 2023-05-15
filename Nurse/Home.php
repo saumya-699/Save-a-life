@@ -113,7 +113,7 @@ if ($resultDonations->num_rows > 0) {
               <ul>
                 <li class="menu-header"></li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="Home.php">
                     <span class="menu-icon">
                       <i class="ri-home-fill"></i>
                     </span>
@@ -160,7 +160,7 @@ if ($resultDonations->num_rows > 0) {
                   </div>
                 </li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="declaration.php">
                     <span class="menu-icon">
                       <i class="ri-file-text-fill"></i>
                     </span>
@@ -189,7 +189,7 @@ if ($resultDonations->num_rows > 0) {
 
                 <li class="menu-header" style="padding-top: 40px"><span>| </span></li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="profile.php">
                     <span class="menu-icon">
                       <i class="ri-user-line"></i>
                     </span>
@@ -205,7 +205,7 @@ if ($resultDonations->num_rows > 0) {
                 </li>
                 </li>
                 <li class="menu-item">
-                  <a href="#">
+                  <a href="logout.php">
                     <span class="menu-icon">
                       <i class="ri-logout-box-r-line"></i>
                     </span>
