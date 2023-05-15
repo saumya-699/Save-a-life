@@ -3,7 +3,7 @@
 session_start();
 
 include '../database.php';
-
+require 'conp.php';
 $invalid_login = false;
 
 if (isset($_GET['invalid'])) {
@@ -19,17 +19,98 @@ if(isset($_GET['register'])) {
 if (isset($_POST['username']) && isset($_POST['password'])) {
     $db = Database::getInstance();
 
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    if ($db->checkDonorExists($username, $password)) {
-        $_SESSION['username'] = $_POST['username'];
-		$rSet = $db->executeQuery("SELECT Donor_Id FROM donors WHERE username='$_POST[username]'");
-		$res = mysqli_fetch_assoc($rSet);
-		$_SESSION['Donor_ID'] = $res['Donor_Id'];
-        header('Location: /Save-a-life/Guest/home/home.php?success=true');
-    } else {
-        header('Location: /Save-a-life/Guest/login/login.php?invalid=true');
+    $UserName = $_POST['username'];
+    $Password = $_POST['password'];
+   
+    $sql= "select * from system_users where UserName='$UserName' and Password='$Password'";
+	  
+    $result= $conn->query($sql);
+
+   if($result->num_rows >0) 
+
+   {
+          
+       
+        while($row = $result->fetch_assoc())
+             { 
+
+             $Name = $row['UserName'];
+                  $_SESSION["Name"] = $Name; 
+                 $ID = $row['User_ID']; 
+               $_SESSION["ID"] = $ID; 
+               $_SESSION["Type"] =$row['Type'];
+    
+     
+         }
+         
+    
+    if(isset($_SESSION["ID"]))
+        {
+
+              if( $_SESSION["Type"]   == '1')
+              {
+             header("Location:../../BloodBankDoctor/Home.php");
+             //printf("Query failed: %s\n", $conn->error);
+              }
+             
+             
+              else if($_SESSION["Type"]   == '2'){
+                header("Location:../../MLT/seeMLT.php");
+            }
+             else if($_SESSION["Type"]   == '3'){
+                header("Location:../../ward_doctor/see.php");}
+         
+           else if($_SESSION["Type"]   == '4'){
+           header("Location:../../Nurse/Home.php");}
+         
+         else if($_SESSION["Type"]   == '5'){
+         header("Location:../../Director/Home.php");}
+         
+         else {
+			  
+			  $u=$_POST['username'];
+			  
+			  $rql="select * from donors where username =  '$u'";
+			  
+			   $result= $conn->query($rql);
+
+   if($result->num_rows >0) 
+
+   {
+	   
+	    $_SESSION['username'] = $u;
+        while($row = $result->fetch_assoc())
+             { 
+
+              
+                $_SESSION['username'] = $_POST['username'];
+                   $_SESSION['Donor_ID']        =    $row['Donor_Id'];
+    
+     
+         }
+         
+	 
+	 
+	    header("Location:../home/home.php");
+
+   }	 
+			  
+      
+		 
+		 }
+         
+         
+}	 
+      
     }
+
+
+
+
+
+
+
+
 }
 
 ?>

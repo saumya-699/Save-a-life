@@ -8,8 +8,8 @@ require 'phpmailer/src/PHPMailer.php';
 require 'phpmailer/src/SMTP.php';
 
 if (isset($_POST["send"])) {
-    ini_set('log_errors', 1);
-    ini_set('error_log', 'smtp_error.log');
+    //ini_set('log_errors', 1);
+   // ini_set('error_log', 'smtp_error.log');
 
     try {
         $mail = new PHPMailer(true);

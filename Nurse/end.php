@@ -414,7 +414,7 @@ $y=null;
       <?php } ?>
     </table>
   <?php } else { ?>
-    <p>Donation details are sent.</p>
+    <center><p>Donation details are sent.</p></center>
   <?php } ?>
   <?php
 echo "
