@@ -6,7 +6,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 include '../database.php';
-
+//include 'conp.php';
 $db = Database::getInstance();
 $query = "SELECT * FROM donors WHERE username='$_SESSION[username]'";
 $data = [];
@@ -248,7 +248,7 @@ color: #fff !important;}
                    <select class="form-select" aria-label="Default select example" style="font-size: 18px;font-weight: 600; border: 1px solid #FF0303;" name="PartA_a" disabled>
 			  
 <?php
-	$query = "SELECT * FROM donation_records WHERE Donor_Id=$_SESSION[Donor_ID] ORDER BY Donation_Date DESC";
+	$query = "SELECT * FROM donation_records WHERE Donor_Id=$_SESSION[Donor_ID] ORDER BY Donation_date DESC";
 	$rSet = $db->executeQuery($query);
 	$donation_records = []; 
 	$donation_times = mysqli_num_rows($rSet);
@@ -296,8 +296,16 @@ color: #fff !important;}
 		 </div><div class="col-2">  
 			
 <?php
-	$sql_date = $donation_records['Donation_Date']; 
+
+if (isset($_POST['Donation_date'])) {
+    $donationDate = $_POST['Donation_date'];
+    // Rest of your code...
+	$sql_date = $donation_records['Donation_date']; 
 	$html_date = date("d-m-Y", strtotime($sql_date));
+} else {
+    // Handle the case when the index is not set
+}
+	
 ?>
 		 <input type="datetime" value="<?php echo $html_date; ?>" name="dob" class="datepicker_input form-control txt-input input-wrapper" placeholder="Select Date" style="width: 100%;" name="PartA_c" disabled>
 		  <i class="fas fa-calendar-alt input-group-text errspan"></i>

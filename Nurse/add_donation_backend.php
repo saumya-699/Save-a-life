@@ -39,7 +39,7 @@ if(isset($_POST['BtnSubmit']))
     }
     
     // increment the batch number if 10 donations have been added to the current batch
-    if (($last_donation_id % 15) == 0) {
+    if (($last_donation_id % 2) == 0) {
         $batch_no = $last_batch + 1;
     } else {
         $batch_no = $last_batch;

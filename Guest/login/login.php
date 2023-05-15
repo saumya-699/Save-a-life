@@ -49,26 +49,55 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
               if( $_SESSION["Type"]   == '1')
               {
-             header("Location:BloodBankDoctor/Home.php");
+             header("Location:../../BloodBankDoctor/Home.php");
              //printf("Query failed: %s\n", $conn->error);
               }
              
              
               else if($_SESSION["Type"]   == '2'){
-                header("Location:MLT/seeMLT.php");
+                header("Location:../../MLT/seeMLT.php");
             }
              else if($_SESSION["Type"]   == '3'){
-                header("Location:ward_doctor/see.php");}
+                header("Location:../../ward_doctor/see.php");}
          
            else if($_SESSION["Type"]   == '4'){
-           header("Location:Nurse/Home.php");}
+           header("Location:../../Nurse/Home.php");}
          
          else if($_SESSION["Type"]   == '5'){
-         header("Location:Director/Home.php");}
+         header("Location:../../Director/Home.php");}
          
          else {
-			  $_SESSION['username'] = $_POST['username'];
-         header("Location:../donar/doner_Information.php");}
+			  
+			  $u=$_POST['username'];
+			  
+			  $rql="select * from donors where username =  '$u'";
+			  
+			   $result= $conn->query($rql);
+
+   if($result->num_rows >0) 
+
+   {
+	   
+	    $_SESSION['username'] = $u;
+        while($row = $result->fetch_assoc())
+             { 
+
+              
+                $_SESSION['username'] = $_POST['username'];
+                   $_SESSION['Donor_ID']        =    $row['Donor_Id'];
+    
+     
+         }
+         
+	 
+	 
+	    header("Location:../home/home.php");
+
+   }	 
+			  
+      
+		 
+		 }
          
          
 }	 
