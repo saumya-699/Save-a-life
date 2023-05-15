@@ -165,7 +165,7 @@ session_start();
             <div class="container">
               <div class="wrap">
                 <div class="headings">
-                  <center><span><h1>Add medical details</h1></span><center>
+                  <center><span><h1>Add Medical Details</h1></span><center>
                 
                 </div>
                
