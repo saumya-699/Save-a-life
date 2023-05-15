@@ -104,7 +104,7 @@ if (isset($_POST['submit'])) {
     if ($result == TRUE) {
       echo '<script type="text/javascript">';
       echo 'alert("Added Successfully");';
-      echo 'window.location.href="Add blood components.php";';
+    //  echo 'window.location.href="Add blood components.php";';
       echo'</script>';    } else {
       echo "Error:" . $sql . "<br>" . $conn->error;
     }
